@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./navbar-right.component.scss']
 })
 export class NavbarRightComponent {
+  
 
 }
