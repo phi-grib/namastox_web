@@ -1,0 +1,8 @@
+.app-base {
+    padding-left: 0px;
+    padding-right: 0px; /* prevents horizontal scrollbar*/
+    overflow-x: hidden;
+}
+::ng-deep .as-split-gutter-icon {
+    background-color: #BDE1C5;
+}
