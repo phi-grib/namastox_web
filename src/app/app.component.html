@@ -1,5 +1,10 @@
 
-<div style="height: 99vh;" class="container-fluid app-base">
+
+<div *ngIf="!this.global.interfaceVisible">
+  <app-selector-ra></app-selector-ra>
+</div>
+
+<div *ngIf="this.global.interfaceVisible" style="height: 99vh;" class="container-fluid app-base">
   <as-split direction="horizontal">
     <as-split-area [size]="this.navbarleft">
       <app-navbar-left></app-navbar-left>

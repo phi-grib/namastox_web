@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { SplitComponent } from 'angular-split';
+import { Global } from './globals';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,7 +8,7 @@ import { SplitComponent } from 'angular-split';
 })
 export class AppComponent {
   title = 'namastox_web';
-  constructor() {}
+  constructor(public global: Global) {}
   navbarleft = 60;
   navbarright = 40;
 
