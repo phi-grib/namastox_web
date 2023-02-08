@@ -24,7 +24,7 @@
           <strong>Endpoint</strong>
         </div>
         <div class="col border">
-            {{this.ra.general_information.endpoint}}
+            {{this.ra.general_information.general.endpoint}}
         </div>
       </div>
       <div class="row">
@@ -32,7 +32,7 @@
           <strong>Administration route</strong>
         </div>
         <div class="col border">
-            {{this.ra.general_information.administration_route}}
+            {{this.ra.general_information.general.administration_route}}
         </div>
       </div>
       <div class="row">
@@ -40,7 +40,7 @@
           <strong>Species</strong>
         </div>
         <div class="col border">
-            {{this.ra.general_information.species}}
+            {{this.ra.general_information.general.species}}
         </div>
       </div>
       <div class="row">
@@ -48,7 +48,7 @@
           <strong>Regulatory framework</strong>
         </div>
         <div class="col border">
-            {{this.ra.general_information.regulatory_framework}}
+            {{this.ra.general_information.general.regulatory_framework}}
         </div>
       </div>
       <div class="row">
@@ -56,7 +56,18 @@
           <strong>Substances</strong>
         </div>
         <div class="col border">
-          {{this.ra.general_information.substances}}
+       <div class="row">
+        <div class="col border text"><strong>Name</strong></div>
+        <div class="col border">{{this.ra.general_information.general.substances.name}}</div>
+       </div>
+       <div class="row">
+        <div class="col border text"><strong>CASRN</strong></div>
+        <div class="col border">{{this.ra.general_information.general.substances.CASRN}}</div>
+       </div>
+       <div class="row">
+        <div class="col border text"><strong>SMILES</strong></div>
+        <div class="col border">{{this.ra.general_information.general.substances.SMILES}}</div>
+       </div>
         </div>
       </div>
       <div class="row">
