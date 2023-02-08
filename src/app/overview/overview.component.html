@@ -1,0 +1,87 @@
+
+
+<div class="container-fluid">
+<div class="title">Overview</div>
+
+
+<div class="card-body">
+    <div class="row" style="background-color: #59AD2B;color:white">
+        <div class="col-1 border">
+          ID
+        </div>
+        <div class="col-2 border">
+         {{this.ra.status.ID}}
+        </div>
+        <div class="col border">
+          Name
+        </div>
+        <div class="col border">
+          {{this.ra.name}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col text border">
+          <strong>Endpoint</strong>
+        </div>
+        <div class="col border">
+            {{this.ra.general_information.endpoint}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col text border">
+          <strong>Administration route</strong>
+        </div>
+        <div class="col border">
+            {{this.ra.general_information.administration_route}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col text border">
+          <strong>Species</strong>
+        </div>
+        <div class="col border">
+            {{this.ra.general_information.species}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col text border">
+          <strong>Regulatory framework</strong>
+        </div>
+        <div class="col border">
+            {{this.ra.general_information.regulatory_framework}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col text border">
+          <strong>Substances</strong>
+        </div>
+        <div class="col border">
+          {{this.ra.general_information.substances}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col text border">
+          <strong>Workflow</strong>
+        </div>
+        <div class="col border">
+          {{this.ra.status.workflow_name}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col text border">
+          <strong>Step</strong>
+        </div>
+        <div class="col border">
+          {{this.ra.status.step}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col text border">
+          <strong>Active nodes</strong>
+        </div>
+        <div class="col border">
+          {{this.ra.status.active_nodes_id}}
+        </div>
+      </div>
+</div>
+</div>

@@ -10,6 +10,9 @@ import { NotesComponent } from './notes/notes.component';
 import { SelectorRaComponent } from './selector-ra/selector-ra.component';
 import { OptionsRasComponent } from './options-ras/options-ras.component';
 import { RA,Global } from './globals';
+import { OverviewComponent } from './overview/overview.component';
+import { GeneralInfomrationComponent } from './general-infomration/general-infomration.component';
+import { GeneralInformationComponent } from './general-information/general-information.component';
 
 
 @NgModule({
@@ -19,7 +22,10 @@ import { RA,Global } from './globals';
     NavbarRightComponent,
     NotesComponent,
     SelectorRaComponent,
-    OptionsRasComponent
+    OptionsRasComponent,
+    OverviewComponent,
+    GeneralInfomrationComponent,
+    GeneralInformationComponent
   ],
   imports: [
     BrowserModule,

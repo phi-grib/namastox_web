@@ -1,14 +1,52 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { SplitComponent } from 'angular-split';
-import { Global } from './globals';
+import { CommonService } from './common.service';
+import { Global,RA } from './globals';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'namastox_web';
-  constructor(public global: Global) {}
+  listRAs:any[] = []
+  constructor(public global: Global,private ra:RA,private commonService : CommonService) {}
+  ngOnInit(): void {
+    this.commonService.getRaList().subscribe((result:any) => {
+      this.listRAs = [...result]
+      this.ra.name = this.listRAs[this.listRAs.length-1]
+
+    /**Get step of default RA */
+    this.commonService.getSteps(this.ra.name).subscribe(result => {
+      console.log("STEP")
+      console.log(result)
+    },
+    error=> {
+      console.log(error)
+    })
+    /**Get general info ra */
+    this.commonService.getGeneralInfo(this.ra.name).subscribe(result => {
+      this.ra.general_information = result
+      console.log("General Information")
+      console.log(this.ra.general_information)
+    },error=> {
+      console.log(error)
+    })
+    /**Get status of RA */
+    this.commonService.getStatus(this.ra.name).subscribe(result => {
+      console.log("STATUS")
+      this.ra.status = result.ra
+      console.log(this.ra.status)
+    }, error => {
+      console.log(error)
+    })
+
+    })
+
+    setTimeout(() => {
+      this.global.interfaceVisible = true;
+    }, 500);
+  }
   navbarleft = 60;
   navbarright = 40;
 

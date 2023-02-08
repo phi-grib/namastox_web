@@ -1,9 +1,13 @@
 import { Injectable } from "@angular/core";
 
-
 @Injectable()
 export class RA {
-    name: string | undefined = undefined;
+    ID:string = "";
+    name: string  = ""; 
+    general_information:any;
+    step:number = 0;
+    workflow_name:string = "";
+    status:any  = undefined
 }
 
 @Injectable()
