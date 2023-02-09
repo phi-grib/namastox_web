@@ -14,11 +14,10 @@ export class AppComponent implements OnInit{
   ngOnInit(): void {
     this.commonService.getRaList().subscribe((result:any) => {
       this.listRAs = [...result]
-      this.ra.name = this.listRAs[this.listRAs.length-1]
+      this.ra.name = this.listRAs[this.listRAs.length-3]
 
     /**Get step of default RA */
     this.commonService.getSteps(this.ra.name).subscribe(result => {
-      console.log("STEP")
       console.log(result)
     },
     error=> {
@@ -27,16 +26,12 @@ export class AppComponent implements OnInit{
     /**Get general info ra */
     this.commonService.getGeneralInfo(this.ra.name).subscribe(result => {
       this.ra.general_information = result
-      console.log("General Information")
-      console.log(this.ra.general_information)
     },error=> {
       console.log(error)
     })
     /**Get status of RA */
     this.commonService.getStatus(this.ra.name).subscribe(result => {
-      console.log("STATUS")
       this.ra.status = result.ra
-      console.log(this.ra.status)
     }, error => {
       console.log(error)
     })

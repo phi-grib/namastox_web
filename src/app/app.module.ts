@@ -13,8 +13,9 @@ import { RA,Global } from './globals';
 import { OverviewComponent } from './overview/overview.component';
 import { GeneralInfomrationComponent } from './general-infomration/general-infomration.component';
 import { GeneralInformationComponent } from './general-information/general-information.component';
-
-
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormlyModule } from '@ngx-formly/core';
+import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +32,11 @@ import { GeneralInformationComponent } from './general-information/general-infor
     BrowserModule,
     DataTablesModule,
     AngularSplitModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    ReactiveFormsModule,
+    FormlyModule.forRoot(),
+    FormlyBootstrapModule
   ],
   providers: [RA,Global],
   bootstrap: [AppComponent]
