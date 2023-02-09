@@ -14,7 +14,7 @@ export class AppComponent implements OnInit{
   ngOnInit(): void {
     this.commonService.getRaList().subscribe((result:any) => {
       this.listRAs = [...result]
-      this.ra.name = this.listRAs[this.listRAs.length-3]
+      this.ra.name = this.listRAs[this.listRAs.length-1]
 
     /**Get step of default RA */
     this.commonService.getSteps(this.ra.name).subscribe(result => {
