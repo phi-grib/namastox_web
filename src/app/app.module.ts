@@ -16,6 +16,8 @@ import { GeneralInformationComponent } from './general-information/general-infor
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormlyModule } from '@ngx-formly/core';
 import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
+import { FormlyFieldFile } from './general-information/file-type.component';
+import { FileValueAccessor } from './general-information/file-value-accessor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +28,9 @@ import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
     OptionsRasComponent,
     OverviewComponent,
     GeneralInfomrationComponent,
-    GeneralInformationComponent
+    GeneralInformationComponent,
+    FileValueAccessor,
+    FormlyFieldFile
   ],
   imports: [
     BrowserModule,
@@ -35,7 +39,11 @@ import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
     HttpClientModule,
     ReactiveFormsModule,
     ReactiveFormsModule,
-    FormlyModule.forRoot(),
+    FormlyModule.forRoot(
+      {
+        types: [{ name: 'file', component: FormlyFieldFile, wrappers: ['form-field'] }],
+      }
+    ),
     FormlyBootstrapModule
   ],
   providers: [RA,Global],

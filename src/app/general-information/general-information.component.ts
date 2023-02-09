@@ -9,7 +9,7 @@ import { RA } from '../globals';
 })
 export class GeneralInformationComponent implements OnInit {
 
-  loadForm:boolean = false
+  loadForm:boolean = false;
   form = new FormGroup({});
   model:any;
   fields: FormlyFieldConfig[] = [];
@@ -18,23 +18,18 @@ export class GeneralInformationComponent implements OnInit {
     // console.log(model);
   }
 
-  constructor(public ra: RA){
-    
-  }
+  constructor(public ra: RA){}
 
   ngOnInit(): void {
     setTimeout(() => {
       this.generateForm();
       this.loadForm = true;
-      // console.log(Object.keys(this.ra.general_information.general))
     }, 600);
-   
   }
   generateForm(){
     this.model = this.ra.general_information.general;
-    var templateObject:any
+    var templateObject:any;
     for (const property in this.ra.general_information.general) {
-
       if(property != 'substances'){
       templateObject = {};
       templateObject['key'] = property
@@ -43,6 +38,16 @@ export class GeneralInformationComponent implements OnInit {
         label: property,
         required: true,
       };
+      this.fields.push(templateObject)
+    }else{
+      templateObject = {};
+      templateObject['key'] = 'file'
+      templateObject['type'] = 'file';
+      templateObject['props'] = {
+        label: property,
+        required: true,
+      };
+      console.log(templateObject)
       this.fields.push(templateObject)
     }
     }
