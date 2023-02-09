@@ -34,8 +34,12 @@ export class CommonService {
     /**change any type to correct interface, good practice  */
     return this.http.get<any>(url)
   }
-
-
   /**get results */
+  getResults(ra_name:string){
+    const url: string = environment.baseUrl + "results/"+ra_name;
+    return this.http.get(url)
+
+  }
+  
   
 }

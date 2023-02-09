@@ -30,8 +30,8 @@ export class GeneralInformationComponent implements OnInit {
     this.model = this.ra.general_information.general;
     var templateObject:any;
     for (const property in this.ra.general_information.general) {
-      if(property != 'substances'){
       templateObject = {};
+      if(property != 'substances'){
       templateObject['key'] = property
       templateObject['type'] = 'input';
       templateObject['props'] = {
@@ -40,14 +40,12 @@ export class GeneralInformationComponent implements OnInit {
       };
       this.fields.push(templateObject)
     }else{
-      templateObject = {};
       templateObject['key'] = 'file'
       templateObject['type'] = 'file';
       templateObject['props'] = {
         label: property,
         // required: false,
       };
-      console.log(templateObject)
       this.fields.push(templateObject)
     }
     }

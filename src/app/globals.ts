@@ -7,7 +7,8 @@ export class RA {
     general_information:any;
     step:number = 0;
     workflow_name:string = "";
-    status:any  = undefined
+    status:any  = undefined;
+    results:any = undefined;
 }
 
 @Injectable()

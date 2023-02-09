@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Global } from '../globals';
+import { Global, RA } from '../globals';
 @Component({
   selector: 'app-navbar-left',
   templateUrl: './navbar-left.component.html',
@@ -7,6 +7,6 @@ import { Global } from '../globals';
 })
 export class NavbarLeftComponent {
 
-  constructor(public global: Global){}
+  constructor(public global: Global,public ra:RA){}
 
 }

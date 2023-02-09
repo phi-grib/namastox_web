@@ -36,9 +36,16 @@ export class AppComponent implements OnInit{
     }, error => {
       console.log(error)
     })
-
+       /**Get results of RA */
+        this.commonService.getResults(this.ra.name).subscribe(result => {
+         this.ra.results = result
+         console.log("RESULTS")
+         console.log(this.ra.results)
+       }, error => {
+        console.log("error")
+         console.log(error)
+       })
     })
-
     setTimeout(() => {
       this.global.interfaceVisible = true;
     }, 500);

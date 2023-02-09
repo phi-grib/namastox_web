@@ -1,0 +1,30 @@
+
+
+<div class="container-fluid">
+    <div class="title">Results</div>
+
+    <div  class="row">
+        <div style="min-height: 300px;" class="col">
+            <div class="mb-3">
+                <label for="formFile" class="form-label">File input</label>
+                <input class="form-control" type="file" id="formFile">
+              </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <table  id="dtResults" class="table table-borderless">
+                <thead>
+                  <tr>
+                    <th class="header">Results</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr (click)="selectTask()" *ngFor="let task of this.ra.results">
+                    <td>{{task}}</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+</div>
