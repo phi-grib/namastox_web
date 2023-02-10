@@ -1,7 +1,34 @@
-<div class="container-fluid">
-    <div class="title">
-            Decisions
-    </div>
 
-    
+
+<div class="container-fluid">
+    <div class="title">Decisions</div>
+
+    <div  class="row">
+        <div style="min-height: 300px;" class="col">
+            <div class="mb-3">
+                <label for="formFile" class="form-label">File input</label>
+                <input class="form-control" type="file" id="formFile">
+              </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <table  id="dtDecisions" class="table display compact">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>summary</th>
+                    <th>decision</th> 
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr (click)="selectDecision()" *ngFor="let result of this.listDecisions">
+                    <td>{{result.id}}</td>
+                    <td>{{result.summary}}</td>
+                    <td>{{result.decision}}</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
 </div>

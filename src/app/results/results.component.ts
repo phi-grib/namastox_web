@@ -8,7 +8,6 @@ import { RA } from '../globals';
 })
 export class ResultsComponent implements OnInit {
   dtTable: any;
-  idtask:string = "";
   // dtOptions: any = {
   //   select: true,
   // };
@@ -28,8 +27,7 @@ export class ResultsComponent implements OnInit {
     }, 30);
   }
 
-  selectTask(task_id:string){
-    var me = this;
+  selectTask(){
 
   }
 }

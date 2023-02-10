@@ -18,11 +18,11 @@
                   <tr>
                     <th>ID</th>
                     <th>summary</th>
-                    <th>decision</th> 
+                    <th>value</th> 
                   </tr>
                 </thead>
                 <tbody>
-                    <tr (click)="selectTask(result)" *ngFor="let result of this.listResults">
+                    <tr (click)="selectTask()" *ngFor="let result of this.listResults">
                     <td>{{result.id}}</td>
                     <td>{{result.summary}}</td>
                     <td>{{result.value}}</td>
