@@ -19,6 +19,7 @@ import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
 import { FormlyFieldFile } from './general-information/file-type.component';
 import { FileValueAccessor } from './general-information/file-value-accessor';
 import { ResultsComponent } from './results/results.component';
+import { DecisionsComponent } from './decisions/decisions.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +33,8 @@ import { ResultsComponent } from './results/results.component';
     GeneralInformationComponent,
     FileValueAccessor,
     FormlyFieldFile,
-    ResultsComponent
+    ResultsComponent,
+    DecisionsComponent
   ],
   imports: [
     BrowserModule,

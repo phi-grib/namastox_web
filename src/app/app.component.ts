@@ -19,7 +19,6 @@ export class AppComponent implements OnInit{
 
     /**Get step of default RA */
     this.commonService.getSteps(this.ra.name).subscribe(result => {
-      console.log(result)
     },
     error=> {
       console.log(error)
@@ -39,8 +38,6 @@ export class AppComponent implements OnInit{
        /**Get results of RA */
         this.commonService.getResults(this.ra.name).subscribe(result => {
          this.ra.results = result
-         console.log("RESULTS")
-         console.log(this.ra.results)
        }, error => {
         console.log("error")
          console.log(error)

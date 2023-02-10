@@ -13,15 +13,19 @@
     </div>
     <div class="row">
         <div class="col">
-            <table  id="dtResults" class="table table-borderless">
+            <table  id="dtResults" class="table display compact">
                 <thead>
                   <tr>
-                    <th class="header">Results</th>
+                    <th>ID</th>
+                    <th>summary</th>
+                    <th>decision</th> 
                   </tr>
                 </thead>
                 <tbody>
-                    <tr (click)="selectTask()" *ngFor="let task of this.ra.results">
-                    <td>{{task}}</td>
+                    <tr (click)="selectTask(result)" *ngFor="let result of this.listResults">
+                    <td>{{result.id}}</td>
+                    <td>{{result.summary}}</td>
+                    <td>{{result.value}}</td>
                   </tr>
                 </tbody>
               </table>
