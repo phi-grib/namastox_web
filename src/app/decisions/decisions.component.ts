@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonService } from '../common.service';
 import { RA } from '../globals';
 
 @Component({
@@ -9,8 +10,8 @@ import { RA } from '../globals';
 export class DecisionsComponent implements OnInit {
   dtTable: any;
   listDecisions:any = [];
-
-  constructor(public ra: RA){
+  decisionSelected:any;
+  constructor(public ra: RA,private commonService: CommonService){
 
 
   }
@@ -27,8 +28,9 @@ export class DecisionsComponent implements OnInit {
 
   }
 
-  selectDecision(){
-
+  selectDecision(id:string){
+    this.commonService.getResult(this.ra.name,id).subscribe(result => {
+      this.decisionSelected = result  
+    })
   }
-
 }

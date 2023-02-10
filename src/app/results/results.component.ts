@@ -30,10 +30,8 @@ export class ResultsComponent implements OnInit {
   }
 
   selectResult(id:string){
-    
     this.commonService.getResult(this.ra.name,id).subscribe(result => {
       this.resultSelected = result  
-      console.log(this.resultSelected)  
     })
   }
 }

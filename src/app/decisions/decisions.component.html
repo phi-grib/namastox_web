@@ -22,13 +22,98 @@
                   </tr>
                 </thead>
                 <tbody>
-                    <tr (click)="selectDecision()" *ngFor="let result of this.listDecisions">
-                    <td>{{result.id}}</td>
-                    <td>{{result.summary}}</td>
-                    <td>{{result.decision}}</td>
+                    <tr (click)="selectDecision(decision.id)" *ngFor="let decision of this.listDecisions">
+                    <td>{{decision.id}}</td>
+                    <td>{{decision.summary}}</td>
+                    <td>{{decision.decision}}</td>
                   </tr>
                 </tbody>
               </table>
         </div>
     </div>
+    <div class="mt-2" *ngIf="this.decisionSelected">
+      <hr>
+      <div class="card-body">
+        <div class="row">
+            <div class="col text border-end border-bottom">
+              <strong>ID</strong>
+            </div>
+            <div class="col  border-bottom">
+             {{this.decisionSelected.id}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col text border-end border-bottom">
+              <strong>Resul description</strong>
+            </div>
+            <div class="col border-bottom">
+                {{this.decisionSelected.result_description}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col text border-end border-bottom">
+              <strong>Resul type</strong>
+            </div>
+            <div class="col border-bottom">
+                {{this.decisionSelected.result_type}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col text border-end border-bottom">
+              <strong>Result link</strong>
+            </div>
+            <div class="col border-bottom">
+                {{this.decisionSelected.result_link}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col text border-end border-bottom">
+              <strong>Substance</strong>
+            </div>
+            <div class="col border-bottom">
+                {{this.decisionSelected.substance}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col text border-end border-bottom">
+              <strong>Summary</strong>
+            </div>
+            <div class="col border-bottom">
+              {{this.decisionSelected.summary}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col text border-end border-bottom">
+              <strong>Summary type</strong>
+            </div>
+            <div class="col border-bottom">
+              {{this.decisionSelected.summary_type}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col text border-end border-bottom">
+              <strong>Uncertainty</strong>
+            </div>
+            <div class="col border-bottom">
+              {{this.decisionSelected.uncertainty}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col text border-end border-bottom">
+              <strong>Unit</strong>
+            </div>
+            <div class="col border-bottom">
+              {{this.decisionSelected.unit}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col text border-end border-bottom">
+              <strong>Decision</strong>
+            </div>
+            <div class="col border-bottom">
+              {{this.decisionSelected.decision}}
+            </div>
+          </div>
+    </div>
+  </div>
 </div>
