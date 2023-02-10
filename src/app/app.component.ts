@@ -42,6 +42,13 @@ export class AppComponent implements OnInit{
         console.log("error")
          console.log(error)
        })
+       /** Get pending tasks */
+       this.commonService.getPendingTasks(this.ra.name).subscribe(result => {
+        this.ra.pending_tasks = result
+        console.log(this.ra.pending_tasks)
+      })
+
+
     })
     setTimeout(() => {
       this.global.interfaceVisible = true;

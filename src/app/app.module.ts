@@ -1,6 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 import { DataTablesModule } from 'angular-datatables';
 import { AngularSplitModule } from 'angular-split';
 import { AppComponent } from './app.component';
@@ -43,6 +44,7 @@ import { DecisionsComponent } from './decisions/decisions.component';
     HttpClientModule,
     ReactiveFormsModule,
     ReactiveFormsModule,
+    FormsModule,
     FormlyModule.forRoot(
       {
         types: [{ name: 'file', component: FormlyFieldFile, wrappers: ['form-field'] }],

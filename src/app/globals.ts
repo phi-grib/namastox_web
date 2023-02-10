@@ -9,6 +9,7 @@ export class RA {
     workflow_name:string = "";
     status:any  = undefined;
     results:any = undefined;
+    pending_tasks:any = [];
 }
 
 @Injectable()

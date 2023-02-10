@@ -40,13 +40,22 @@ export class CommonService {
     return this.http.get(url)
 
   }
-  /**getResult */
+  /**get result */
   getResult(ra_name:string,id:string){
     const url: string = environment.baseUrl + "result/"+ra_name+"/"+id;
     return this.http.get(url)
 
 
   }
-  
-  
+  /** get Pending tasks */
+  getPendingTasks(ra_name:string){
+    const url: string = environment.baseUrl + "pending_tasks/"+ra_name;
+    return this.http.get(url)
+  }
+  /**get pending task */
+  getPendingTask(ra_name:string,id:String){
+    const url: string = environment.baseUrl + "pending_task/"+ra_name+"/"+id;
+    return this.http.get(url)
+  }
+
 }
