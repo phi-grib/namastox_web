@@ -1,7 +1,7 @@
 
 
 <div class="container-fluid">
-    <div class="title">Results</div>
+    <!-- <div class="title">Results</div> -->
 
     <div  class="row">
         <div style="min-height: 300px;" class="col">
@@ -22,7 +22,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                    <tr (click)="selectTask()" *ngFor="let result of this.listResults">
+                    <tr (click)="selectResult(result.id)" *ngFor="let result of this.listResults">
                     <td>{{result.id}}</td>
                     <td>{{result.summary}}</td>
                     <td>{{result.value}}</td>
@@ -31,4 +31,89 @@
               </table>
         </div>
     </div>
+    <div class="mt-2" *ngIf="this.resultSelected">
+      <hr>
+      <div class="card-body">
+        <div class="row">
+            <div class="col text border-end border-bottom">
+              <strong>ID</strong>
+            </div>
+            <div class="col  border-bottom">
+             {{this.resultSelected.id}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col text border-end border-bottom">
+              <strong>Resul description</strong>
+            </div>
+            <div class="col border-bottom">
+                {{this.resultSelected.result_description}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col text border-end border-bottom">
+              <strong>Resul type</strong>
+            </div>
+            <div class="col border-bottom">
+                {{this.resultSelected.result_type}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col text border-end border-bottom">
+              <strong>Result link</strong>
+            </div>
+            <div class="col border-bottom">
+                {{this.resultSelected.result_link}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col text border-end border-bottom">
+              <strong>Substance</strong>
+            </div>
+            <div class="col border-bottom">
+                {{this.resultSelected.substance}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col text border-end border-bottom">
+              <strong>Summary</strong>
+            </div>
+            <div class="col border-bottom">
+              {{this.resultSelected.summary}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col text border-end border-bottom">
+              <strong>Summary type</strong>
+            </div>
+            <div class="col border-bottom">
+              {{this.resultSelected.summary_type}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col text border-end border-bottom">
+              <strong>Uncertainty</strong>
+            </div>
+            <div class="col border-bottom">
+              {{this.resultSelected.uncertainty}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col text border-end border-bottom">
+              <strong>Unit</strong>
+            </div>
+            <div class="col border-bottom">
+              {{this.resultSelected.unit}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col text border-end border-bottom">
+              <strong>Value</strong>
+            </div>
+            <div class="col border-bottom">
+              {{this.resultSelected.value}}
+            </div>
+          </div>
+    </div>
+  </div>
 </div>

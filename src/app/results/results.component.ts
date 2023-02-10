@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonService } from '../common.service';
 import { RA } from '../globals';
 
 @Component({
@@ -12,8 +13,9 @@ export class ResultsComponent implements OnInit {
   //   select: true,
   // };
 
+  resultSelected:any;
   listResults:any = []
-  constructor(public ra: RA){
+  constructor(public ra: RA, private commonService: CommonService){
   }
 
   ngOnInit(): void {
@@ -27,7 +29,11 @@ export class ResultsComponent implements OnInit {
     }, 30);
   }
 
-  selectTask(){
-
+  selectResult(id:string){
+    
+    this.commonService.getResult(this.ra.name,id).subscribe(result => {
+      this.resultSelected = result  
+      console.log(this.resultSelected)  
+    })
   }
 }

@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <div class="title">General Information</div>
+    <!-- <div class="title">General Information</div> -->
     <div class="container-form p-3">
         <form *ngIf="this.loadForm" [formGroup]="form" (ngSubmit)="onSubmit(model)">
             <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>

@@ -40,6 +40,13 @@ export class CommonService {
     return this.http.get(url)
 
   }
+  /**getResult */
+  getResult(ra_name:string,id:string){
+    const url: string = environment.baseUrl + "result/"+ra_name+"/"+id;
+    return this.http.get(url)
+
+
+  }
   
   
 }

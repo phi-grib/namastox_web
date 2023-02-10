@@ -6,5 +6,16 @@
     thead {
         background-color: #59AD2B;
         color: white;
+       
     }
 }
+
+hr{
+    height: 3px;
+    background-color: $tertiary-color;
+    border: None;
+}
+
+.text {
+    color: $secondary-color;
+  }
