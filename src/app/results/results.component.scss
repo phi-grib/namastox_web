@@ -26,3 +26,16 @@ hr{
     color: $secondary-color;
     border: 1px solid $tertiary-color;
 }
+::ng-deep formly-wrapper-form-field { 
+    div{
+        display: flex;
+        label {
+            span {
+                display: none !important;
+            }
+        }
+        input{
+            margin-left: 10px;
+        }
+    } 
+}
