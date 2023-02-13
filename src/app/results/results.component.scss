@@ -26,3 +26,8 @@ hr{
     color: $secondary-color;
     border: 1px solid $tertiary-color;
 }
+
+.scrolltable{
+    max-height: 90vh;
+    overflow: auto;
+}
