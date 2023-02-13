@@ -31,13 +31,10 @@ export class ResultsComponent implements OnInit {
           this.listResults.push(this.ra.results[idx])
         }
       }
-
-  
     setTimeout(() => {
     this.dtTable = $("#dtResults").DataTable()
     }, 30);
   }
-
   selectResult(id:string){
     this.commonService.getResult(this.ra.name,id).subscribe(result => {
       this.resultSelected = result  
@@ -45,6 +42,7 @@ export class ResultsComponent implements OnInit {
   }
 
   show_form(){
+    this.fields = [];
     this.commonService.getPendingTask(this.ra.name,this.pending_task_selected).subscribe(result => {
     this.pending_task = result;
     this.model = this.pending_task.result;
@@ -57,10 +55,10 @@ export class ResultsComponent implements OnInit {
         label: property,
         required: true,
       };
-      if(property == "id"){
+      if(property == "id" || property == 'result_description' || property == 'result_type'){
         templateObject['props'] = {
           label: property,
-          readonly: true
+          readonly: true,
         };
       }
       this.fields.push(templateObject)
