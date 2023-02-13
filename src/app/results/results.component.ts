@@ -47,20 +47,16 @@ export class ResultsComponent implements OnInit {
     this.model = this.pending_task.result;
     var templateObject:any;
     for (const property in this.pending_task.result) {
-      templateObject = {};
-      templateObject['key'] = property
-      templateObject['type'] = 'input';
-      templateObject['props'] = {
-        label: property,
-        required: true,
-      };
-      if(property == "id" || property == 'result_description' || property == 'result_type'){
+      if(!(property == "id" || property == 'result_description' || property == 'result_type')){
+        templateObject = {};
+        templateObject['key'] = property
+        templateObject['type'] = 'input';
         templateObject['props'] = {
           label: property,
-          readonly: true,
+          required: true,
         };
+        this.fields.push(templateObject)
       }
-      this.fields.push(templateObject)
   }
   this.loadForm = true;
     })

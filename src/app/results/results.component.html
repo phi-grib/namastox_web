@@ -10,6 +10,28 @@
             <option *ngFor="let idx of objectKeys(this.ra.pending_tasks)" [value]='this.ra.pending_tasks[idx].id'>{{this.ra.pending_tasks[idx].id}}</option>
           </select>
 
+          <div *ngIf="this.pending_task?.result" class="container-information mt-2">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col text">
+                    <strong>Result type</strong>
+                  </div>
+                  <div class="col">
+                   {{this.pending_task.result.result_type}}
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col text">
+                    <strong>Resul description</strong>
+                  </div>
+                  <div class="col">
+                      {{this.pending_task.result.result_description}}
+                  </div>
+                </div>
+
+              </div>
+
+          </div>
           <div class="container-form p-3 mt-3">
             <form *ngIf="this.loadForm" [formGroup]="form" (ngSubmit)="onSubmit(model)">
                 <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
