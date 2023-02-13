@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonService } from '../common.service';
-import { RA } from '../globals';
+import { PendingTasks, RA } from '../globals';
 import {FormGroup} from '@angular/forms';
 import {FormlyFieldConfig} from '@ngx-formly/core';
+import { CommonFunctions } from '../common.functions';
 
 @Component({
   selector: 'app-results',
@@ -10,7 +11,6 @@ import {FormlyFieldConfig} from '@ngx-formly/core';
   styleUrls: ['./results.component.scss']
 })
 export class ResultsComponent implements OnInit {
-  dtTable: any;
   loadForm:boolean = false;
   form = new FormGroup({});
   model:any;
@@ -20,20 +20,19 @@ export class ResultsComponent implements OnInit {
   objectKeys = Object.keys;
   resultSelected:any;
   listResults:any = []
-  constructor(public ra: RA, private commonService: CommonService){
+  constructor(public ra: RA, private commonService: CommonService, public pendingTasks:PendingTasks, private func: CommonFunctions){
   }
 
   ngOnInit(): void {
     this.pending_task_selected = this.ra.pending_tasks[0].id;
     this.show_form();
-      for (const idx in this.ra.results) {
-        if((Object.keys(this.ra.results[idx])[2]) == "value"){
-          this.listResults.push(this.ra.results[idx])
-        }
-      }
-    setTimeout(() => {
-    this.dtTable = $("#dtResults").DataTable()
-    }, 30);
+    this.func.separatePendingTasks();
+    /**servicio */
+    this.commonService.generateForms$.subscribe( () => {
+      this.func.separatePendingTasks();
+      this.show_form();
+    })
+
   }
   selectResult(id:string){
     this.commonService.getResult(this.ra.name,id).subscribe(result => {

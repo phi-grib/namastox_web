@@ -23,7 +23,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                    <tr (click)="selectDecision(decision.id)" *ngFor="let decision of this.listDecisions">
+                    <tr (click)="selectDecision(decision.id)" *ngFor="let decision of this.pendingTasks.decisions">
                     <td>{{decision.id}}</td>
                     <td>{{decision.summary}}</td>
                     <td>{{decision.decision}}</td>

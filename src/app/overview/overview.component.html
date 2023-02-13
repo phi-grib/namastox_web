@@ -75,7 +75,7 @@
           {{this.ra.status.active_nodes_id}}
         </div>
       </div>
-      <div class="row">
+      <div class="row" *ngIf="this.ra.general_information.general.substances">
         <div class="col text border">
           <div style="padding-top: 5%;"><strong >Substances</strong></div>
         </div>

@@ -13,6 +13,12 @@ import { environment } from "../environments/environment";
 })
 export class CommonService {
   constructor(private http: HttpClient) {}
+
+  private generateForms = new Subject<boolean>();
+  generateForms$ = this.generateForms.asObservable();
+  AutoGenerateForm(){
+    this.generateForms.next(true)
+  }
   /**Get list of RAs */
   getRaList(){
     const url: string = environment.baseUrl + "list";
@@ -34,6 +40,12 @@ export class CommonService {
     /**change any type to correct interface, good practice  */
     return this.http.get<any>(url)
   }
+  /**Get status with  specific step of RA */
+  getStatusWithStep(ra_name:string,step:number){
+    const url: string = environment.baseUrl + "status/"+ra_name+"/"+step;
+    return this.http.get<any>(url)
+    
+  }
   /**get results */
   getResults(ra_name:string){
     const url: string = environment.baseUrl + "results/"+ra_name;
@@ -44,8 +56,12 @@ export class CommonService {
   getResult(ra_name:string,id:string){
     const url: string = environment.baseUrl + "result/"+ra_name+"/"+id;
     return this.http.get(url)
+  }
 
-
+  /**get results with specific step of RA */
+  getResultsWithStep(ra_name:string,step:number){
+    const url: string = environment.baseUrl + "results/"+ra_name+"/"+step;
+    return this.http.get(url)
   }
   /** get Pending tasks */
   getPendingTasks(ra_name:string){

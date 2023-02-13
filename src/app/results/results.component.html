@@ -30,7 +30,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                    <tr (click)="selectResult(result.id)" *ngFor="let result of this.listResults">
+                    <tr (click)="selectResult(result.id)" *ngFor="let result of this.pendingTasks.results">
                     <td>{{result.id}}</td>
                     <td>{{result.summary}}</td>
                     <td>{{result.value}}</td>

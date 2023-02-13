@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 
 @Injectable()
 export class RA {
+    listRA:any[] = [];
     ID:string = "";
     name: string  = ""; 
     general_information:any;
@@ -10,6 +11,12 @@ export class RA {
     status:any  = undefined;
     results:any = undefined;
     pending_tasks:any = [];
+    listSteps:any[] = [];
+}
+
+export class PendingTasks{
+    decisions:any = [];
+    results:any = [];
 }
 
 @Injectable()

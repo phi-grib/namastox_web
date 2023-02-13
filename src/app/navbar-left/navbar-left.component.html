@@ -20,6 +20,7 @@
   </ul>
   
 <div class="tab-content container-fluid" id="pills-tabContent">
+  <app-select-ra></app-select-ra>
   <div class="tab-pane fade show active " id="pills-overview" role="tabpanel" aria-labelledby="pills-overview-tab"><app-overview *ngIf="this.global.interfaceVisible"></app-overview></div>
   <div class="tab-pane fade" id="pills-gen-information" role="tabpanel" aria-labelledby="pills-gen-information-tab"><app-general-information *ngIf="this.ra.general_information"></app-general-information></div>
   <div class="tab-pane fade" id="pills-results" role="tabpanel" aria-labelledby="pills-results-tab"><app-results *ngIf="this.ra.results"></app-results></div>

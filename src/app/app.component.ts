@@ -9,16 +9,17 @@ import { Global,RA } from './globals';
 })
 export class AppComponent implements OnInit{
   title = 'namastox_web';
-  listRAs:any[] = []
   constructor(public global: Global,private ra:RA,private commonService : CommonService) {}
   ngOnInit(): void {
     this.commonService.getRaList().subscribe((result:any) => {
-      this.listRAs = [...result]
+      this.ra.listRA = [...result]
       // this.ra.name = this.listRAs[this.listRAs.length-2]
       this.ra.name = 'CCC'
 
     /**Get step of default RA */
-    this.commonService.getSteps(this.ra.name).subscribe(result => {
+    this.commonService.getSteps(this.ra.name).subscribe((result:any) => {
+      console.log("STEPS")
+      this.ra.listSteps = [...result];
     },
     error=> {
       console.log(error)

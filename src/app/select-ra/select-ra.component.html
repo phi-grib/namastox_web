@@ -1,0 +1,17 @@
+
+
+<div *ngIf="this.global.interfaceVisible" class="mb-2">
+      <div class="form-inline d-inline-block mr-2">
+        <label for="">RA:</label>
+        <select  (change)="loadRA()" [(ngModel)]="this.ra.name"   aria-label="Default select example">
+            <option *ngFor="let ra of this.ra.listRA" [value]='ra'>{{ra}}</option>
+          </select>
+    </div>
+
+    <div class="form-inline d-inline-block">
+        <label class="ml-3" for="">Step:</label>
+        <select  (change)="loadStep()" [(ngModel)]="this.ra.status.step"   aria-label="Default select example">
+            <option *ngFor="let step of this.ra.listSteps" [value]='step'>{{step}}</option>
+          </select>
+</div>
+</div>

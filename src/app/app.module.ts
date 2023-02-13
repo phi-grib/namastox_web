@@ -10,7 +10,7 @@ import { NavbarRightComponent } from './navbar-right/navbar-right.component';
 import { NotesComponent } from './notes/notes.component';
 import { SelectorRaComponent } from './selector-ra/selector-ra.component';
 import { OptionsRasComponent } from './options-ras/options-ras.component';
-import { RA,Global } from './globals';
+import { RA,Global, PendingTasks } from './globals';
 import { OverviewComponent } from './overview/overview.component';
 import { GeneralInfomrationComponent } from './general-infomration/general-infomration.component';
 import { GeneralInformationComponent } from './general-information/general-information.component';
@@ -21,6 +21,7 @@ import { FormlyFieldFile } from './general-information/file-type.component';
 import { FileValueAccessor } from './general-information/file-value-accessor';
 import { ResultsComponent } from './results/results.component';
 import { DecisionsComponent } from './decisions/decisions.component';
+import { SelectRaComponent } from './select-ra/select-ra.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +36,8 @@ import { DecisionsComponent } from './decisions/decisions.component';
     FileValueAccessor,
     FormlyFieldFile,
     ResultsComponent,
-    DecisionsComponent
+    DecisionsComponent,
+    SelectRaComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +54,7 @@ import { DecisionsComponent } from './decisions/decisions.component';
     ),
     FormlyBootstrapModule
   ],
-  providers: [RA,Global],
+  providers: [RA,Global,PendingTasks],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
