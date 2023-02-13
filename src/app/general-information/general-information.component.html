@@ -3,7 +3,7 @@
     <div class="container-form p-3">
         <form *ngIf="this.loadForm" [formGroup]="form" (ngSubmit)="onSubmit(model)">
             <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
-            <button type="submit" [disabled]="!this.form.valid" class="btn btn-primary submit-button">Submit</button>
+            <button type="submit" [disabled]="!this.form.valid" class="btn btn-ets-do submit-button">Submit</button>
           </form>
     </div>
 </div>
