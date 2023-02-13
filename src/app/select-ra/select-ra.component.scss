@@ -1,3 +1,6 @@
+@import '../../assets/scss/colors.scss';
+
+
 /* Add some margins for each label */
 .form-inline label {
     margin: 5px 10px 5px 0;
@@ -11,4 +14,10 @@
     background-color: #fff;
     border: 1px solid #ddd;
   }
-   
+
+select {
+  border: 0.5px solid whitesmoke;
+  background-color: white !important;
+  color: $secondary-color;
+}
+  

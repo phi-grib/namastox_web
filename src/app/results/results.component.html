@@ -9,7 +9,6 @@
           <select (change)="show_form()" [(ngModel)]="this.pending_task_selected"  class="form-select" aria-label="Default select example">
             <option *ngFor="let idx of objectKeys(this.ra.pending_tasks)" [value]='this.ra.pending_tasks[idx].id'>{{this.ra.pending_tasks[idx].id}}</option>
           </select>
-
           <div *ngIf="this.pending_task?.result" class="container-information mt-2">
               <div class="card-body">
                 <div class="row">
