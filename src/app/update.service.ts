@@ -23,6 +23,7 @@ export class UpdateService {
 
   updateResult(ra_name:string,info:any){
     console.log("UPDATE RESULT")
+    console.log("INFO:")
     console.log(info)
     const formData = new FormData();
     formData.append("result",info)
