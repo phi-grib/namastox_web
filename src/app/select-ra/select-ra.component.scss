@@ -20,4 +20,36 @@ select {
   background-color: white !important;
   color: $secondary-color;
 }
+
+.btn-nam-bad {
+  background-color: #fa1750;
+  color: #ffffff;
+  border-width: 0;
+  // font-family: 'Barlow Semi Condensed', 'Arial', 'Helvetica';
+  letter-spacing: 0.05em;
+  border-radius: 0;
+}
+
+.btn-nam-bad:hover,
+.btn-nam-bad:focus,
+.btn-nam-bad.active {
+  background-color:#b41147 ;
+  color: #ffffff;
+}
+
+.btn-nam-good {
+  background: #28328A;
+  color: #ffffff;
+  border-width: 0;
+  // font-family: 'Barlow Semi Condensed', 'Arial', 'Helvetica';
+  letter-spacing: 0.05em;
+  border-radius: 0;
+}
+.btn-nam-good:hover,
+.btn-nam-good:focus,
+.btn-nam-good.active {
+  background:#22577a ;
+  color: #ffffff;
+}
+
   

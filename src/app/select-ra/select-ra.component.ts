@@ -71,4 +71,17 @@ export class SelectRaComponent {
       this.commonService.AutoGenerateForm();
     }, 500);
   }
+  deleteRA(){
+    console.log('DELETE RA');
+  }
+  deleteStep(){
+    console.log('DELETE STEP');
+
+  }
+  newRA(){
+    console.log("NEW RA");
+  }
+
+
+  
 }
