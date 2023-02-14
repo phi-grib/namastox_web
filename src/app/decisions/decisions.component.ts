@@ -29,8 +29,11 @@ export class DecisionsComponent implements OnInit {
     }  
     /**servicio */
     this.commonService.generateForms$.subscribe( () => {
-          this.func.separatePendingTasks();
-          this.show_form();
+        this.func.separatePendingTasks();
+        if(this.pendingTasks.decisions[0]) {
+          this.pending_task_selected = this.pendingTasks.decisions[0].id;
+          this.show_form(); 
+        }
     })
 
   }

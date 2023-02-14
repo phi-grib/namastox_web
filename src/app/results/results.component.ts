@@ -31,9 +31,11 @@ export class ResultsComponent implements OnInit {
     /**servicio */
     this.commonService.generateForms$.subscribe( () => {
       this.func.separatePendingTasks();
-      this.show_form();
+      if(this.pendingTasks.results[0])  {
+        this.pending_task_selected = this.pendingTasks.results[0].id;
+        this.show_form();
+      }
     })
-
   }
   selectResult(id:string){
     this.commonService.getResult(this.ra.name,id).subscribe(result => {

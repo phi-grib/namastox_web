@@ -36,6 +36,6 @@ export class CommonFunctions {
     setTimeout(() => {
       $("#dtResults").DataTable();
       $("#dtDecisions").DataTable();
-  }, 30);
+  }, 300);
   }
 }
