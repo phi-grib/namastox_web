@@ -19,7 +19,6 @@ export class ResultsComponent implements OnInit {
   pending_task:any;
   objectKeys = Object.keys;
   resultSelected:any;
-  listResults:any = []
   constructor(public ra: RA, private commonService: CommonService, public pendingTasks:PendingTasks, private func: CommonFunctions, public results:Results){
   }
 

@@ -1,17 +1,56 @@
 
 
-<div class="container-fluid">
-    <!-- <div class="title">Decisions</div> -->
 
+
+
+  <div class="container-fluid"  style="overflow-y:scroll;height: 400px;">
     <div  class="row">
         <div style="min-height: 300px;" class="col">
-            <div class="mb-3">
-                <label for="formFile" class="form-label">File input</label>
-                <input class="form-control" type="file" id="formFile">
+          <select (change)="show_form()" [(ngModel)]="this.pending_task_selected"  class="form-select" aria-label="Default select example">
+            <option *ngFor="let idx of objectKeys(this.pendingTasks.decisions)" [value]='this.pendingTasks.decisions[idx].id'>{{this.pendingTasks.decisions[idx].id}}</option>
+          </select>
+          <div *ngIf="this.pending_task?.result" class="container-information mt-2">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col text">
+                    <strong>Result id</strong>
+                  </div>
+                  <div class="col">
+                   {{this.pending_task.result.id}}
+                  </div>
+                </div>
+                <!-- <div class="row">
+                  <div class="col text">
+                    <strong>Result type</strong>
+                  </div>
+                  <div class="col">
+                   {{this.pending_task.result.result_type}}
+                  </div>
+                </div> -->
+                <div class="row">
+                  <div class="col text">
+                    <strong>Resul description</strong>
+                  </div>
+                  <div class="col">
+                      {{this.pending_task.result.result_description}}
+                  </div>
+                </div>
+
               </div>
+
+          </div>
+          <div class="container-form p-3 mt-3">
+            <form *ngIf="this.loadForm" [formGroup]="form" (ngSubmit)="onSubmit(model)">
+                <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
+                <button type="submit" [disabled]="!this.form.valid" class="btn btn-ets-do submit-button">Submit</button>
+              </form>
+        </div> 
         </div>
     </div>
-    <hr>
+  </div>  
+  <hr>
+<div class="container-fluid">
+
     <div class="row">
         <div class="col">
             <table  id="dtDecisions" class="display compact">
@@ -23,7 +62,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                    <tr (click)="selectDecision(decision.id)" *ngFor="let decision of this.pendingTasks.decisions">
+                    <tr (click)="selectDecision(decision.id)" *ngFor="let decision of this.results.decisions">
                     <td>{{decision.id}}</td>
                     <td>{{decision.summary}}</td>
                     <td>{{decision.decision}}</td>
