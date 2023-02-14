@@ -16,17 +16,15 @@ export class UpdateService {
   constructor(private http: HttpClient) { }
   
   updateGeneralInformation(ra_name:string,info:any){
-    // const formData = new FormData();
+    const formData = new FormData();
+    formData.append("general",JSON.stringify(info))
     const url: string = environment.baseUrl + "general_info/"+ra_name;
-    return this.http.put(url,{"general":info})
+    return this.http.put(url,formData)
   }
 
   updateResult(ra_name:string,info:any){
-    console.log("UPDATE RESULT")
-    console.log("INFO:")
-    console.log(info)
     const formData = new FormData();
-    formData.append("result",info)
+    formData.append("result",JSON.stringify(info))
     const url: string = environment.baseUrl + "result/"+ra_name;
     return this.http.put(url,formData);
 
