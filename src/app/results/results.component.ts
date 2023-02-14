@@ -4,6 +4,7 @@ import { PendingTasks, RA, Results } from '../globals';
 import {FormGroup} from '@angular/forms';
 import {FormlyFieldConfig} from '@ngx-formly/core';
 import { CommonFunctions } from '../common.functions';
+import { UpdateService } from '../update.service';
 
 @Component({
   selector: 'app-results',
@@ -19,12 +20,14 @@ export class ResultsComponent implements OnInit {
   pending_task:any;
   objectKeys = Object.keys;
   resultSelected:any;
-  constructor(public ra: RA, private commonService: CommonService, public pendingTasks:PendingTasks, private func: CommonFunctions, public results:Results){
+  constructor(public ra: RA, private commonService: CommonService, public pendingTasks:PendingTasks, private func: CommonFunctions, public results:Results,private updateService:UpdateService){
   }
 
   ngOnInit(): void {
-    this.pending_task_selected = this.pendingTasks.results[0].id;
-    this.show_form();
+    if(this.pendingTasks.results[0]){
+      this.pending_task_selected = this.pendingTasks.results[0].id;
+      this.show_form();
+    }
     /**servicio */
     this.commonService.generateForms$.subscribe( () => {
       this.func.separatePendingTasks();
@@ -61,6 +64,10 @@ export class ResultsComponent implements OnInit {
     })
   }
   onSubmit(model: any) {
-    // console.log(model);
+      this.updateService.updateResult(this.ra.name,model).subscribe(result => {
+        console.log(result)
+      },error => {
+        console.log(error)
+      })
   }
 }

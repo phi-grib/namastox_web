@@ -21,5 +21,15 @@ export class UpdateService {
     return this.http.put(url,{"general":info})
   }
 
+  updateResult(ra_name:string,info:any){
+    console.log("UPDATE RESULT")
+    console.log(info)
+    const formData = new FormData();
+    formData.append("result",info)
+    const url: string = environment.baseUrl + "result/"+ra_name;
+    return this.http.put(url,formData);
+
+  }
+
 
 }

@@ -24,9 +24,9 @@ export class DecisionsComponent implements OnInit {
   ngOnInit(): void {
     if(this.pendingTasks.decisions[0]){
       this.pending_task_selected = this.pendingTasks.decisions[0].id;
+      console.log(this.pending_task_selected)
       this.show_form()
     }  
-    
     /**servicio */
     this.commonService.generateForms$.subscribe( () => {
           this.func.separatePendingTasks();
