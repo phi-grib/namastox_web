@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CommonFunctions } from '../common.functions';
 import { CommonService } from '../common.service';
 import { Global, RA } from '../globals';
 
@@ -8,7 +9,7 @@ import { Global, RA } from '../globals';
   styleUrls: ['./select-ra.component.scss']
 })
 export class SelectRaComponent {
-  constructor(public global:Global,public ra: RA, private commonService: CommonService){
+  constructor(public global:Global,public ra: RA, private commonService: CommonService, private func: CommonFunctions){
 
   }
 
@@ -37,6 +38,8 @@ export class SelectRaComponent {
        /**Get results of RA */
         this.commonService.getResults(this.ra.name).subscribe(result => {
          this.ra.results = result
+
+         this.func.separateResults();
        }, error => {
         console.log("error")
          console.log(error)
