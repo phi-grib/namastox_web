@@ -38,7 +38,6 @@ export class SelectRaComponent {
        /**Get results of RA */
         this.commonService.getResults(this.ra.name).subscribe(result => {
          this.ra.results = result
-
          this.func.separateResults();
        }, error => {
         console.log("error")

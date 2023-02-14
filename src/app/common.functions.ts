@@ -24,6 +24,8 @@ export class CommonFunctions {
   }
 
   separateResults(){
+    $('#dtResults').DataTable().destroy();
+    $('#dtDecisions').DataTable().destroy();
     this.results.results = [];
     this.results.decisions = [];
     for(const idx in this.ra.results){
@@ -36,6 +38,6 @@ export class CommonFunctions {
     setTimeout(() => {
       $("#dtResults").DataTable();
       $("#dtDecisions").DataTable();
-  }, 30);
+  }, 300);
   }
 }
