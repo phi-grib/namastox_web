@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonService } from '../common.service';
-import { PendingTasks, RA } from '../globals';
+import { PendingTasks, RA, Results } from '../globals';
 import {FormGroup} from '@angular/forms';
 import {FormlyFieldConfig} from '@ngx-formly/core';
 import { CommonFunctions } from '../common.functions';
@@ -20,13 +20,12 @@ export class ResultsComponent implements OnInit {
   objectKeys = Object.keys;
   resultSelected:any;
   listResults:any = []
-  constructor(public ra: RA, private commonService: CommonService, public pendingTasks:PendingTasks, private func: CommonFunctions){
+  constructor(public ra: RA, private commonService: CommonService, public pendingTasks:PendingTasks, private func: CommonFunctions, public results:Results){
   }
 
   ngOnInit(): void {
-    this.pending_task_selected = this.ra.pending_tasks[0].id;
+    this.pending_task_selected = this.pendingTasks.results[0].id;
     this.show_form();
-    this.func.separatePendingTasks();
     /**servicio */
     this.commonService.generateForms$.subscribe( () => {
       this.func.separatePendingTasks();

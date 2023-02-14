@@ -14,6 +14,11 @@ export class RA {
     listSteps:any[] = [];
 }
 
+export class Results {
+    decisions:any[] = []
+    results:any[] = [];
+}
+
 export class PendingTasks{
     decisions:any = [];
     results:any = [];

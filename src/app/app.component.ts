@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { SplitComponent } from 'angular-split';
+import { CommonFunctions } from './common.functions';
 import { CommonService } from './common.service';
 import { Global,RA } from './globals';
 @Component({
@@ -9,12 +10,11 @@ import { Global,RA } from './globals';
 })
 export class AppComponent implements OnInit{
   title = 'namastox_web';
-  constructor(public global: Global,private ra:RA,private commonService : CommonService) {}
+  constructor(public global: Global,private ra:RA,private commonService : CommonService, private func: CommonFunctions) {}
   ngOnInit(): void {
     this.commonService.getRaList().subscribe((result:any) => {
       this.ra.listRA = [...result]
-      // this.ra.name = this.listRAs[this.listRAs.length-2]
-      this.ra.name = 'CCC'
+      this.ra.name = this.ra.listRA[this.ra.listRA.length-1]
 
     /**Get step of default RA */
     this.commonService.getSteps(this.ra.name).subscribe((result:any) => {
@@ -27,6 +27,8 @@ export class AppComponent implements OnInit{
     /**Get general info ra */
     this.commonService.getGeneralInfo(this.ra.name).subscribe(result => {
       this.ra.general_information = result
+      console.log("general information")
+      console.log(this.ra.general_information)
     },error=> {
       console.log(error)
     })
@@ -39,6 +41,8 @@ export class AppComponent implements OnInit{
        /**Get results of RA */
         this.commonService.getResults(this.ra.name).subscribe(result => {
          this.ra.results = result
+         this.func.separateResults();
+         
        }, error => {
         console.log("error")
          console.log(error)
@@ -46,10 +50,9 @@ export class AppComponent implements OnInit{
        /** Get pending tasks */
        this.commonService.getPendingTasks(this.ra.name).subscribe(result => {
         this.ra.pending_tasks = result
-        console.log(this.ra.pending_tasks)
+        this.func.separatePendingTasks();
+
       })
-
-
     })
     setTimeout(() => {
       this.global.interfaceVisible = true;

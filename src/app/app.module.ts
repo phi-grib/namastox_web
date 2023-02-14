@@ -10,7 +10,7 @@ import { NavbarRightComponent } from './navbar-right/navbar-right.component';
 import { NotesComponent } from './notes/notes.component';
 import { SelectorRaComponent } from './selector-ra/selector-ra.component';
 import { OptionsRasComponent } from './options-ras/options-ras.component';
-import { RA,Global, PendingTasks } from './globals';
+import { RA,Global, PendingTasks, Results } from './globals';
 import { OverviewComponent } from './overview/overview.component';
 import { GeneralInfomrationComponent } from './general-infomration/general-infomration.component';
 import { GeneralInformationComponent } from './general-information/general-information.component';
@@ -54,7 +54,7 @@ import { SelectRaComponent } from './select-ra/select-ra.component';
     ),
     FormlyBootstrapModule
   ],
-  providers: [RA,Global,PendingTasks],
+  providers: [RA,Global,PendingTasks,Results],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

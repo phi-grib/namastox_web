@@ -3,6 +3,7 @@ import {FormGroup} from '@angular/forms';
 import {FormlyFieldConfig} from '@ngx-formly/core';
 import { CommonService } from '../common.service';
 import { RA } from '../globals';
+import { UpdateService } from '../update.service';
 @Component({
   selector: 'app-general-information',
   templateUrl: './general-information.component.html',
@@ -16,10 +17,16 @@ export class GeneralInformationComponent implements OnInit {
   fields: FormlyFieldConfig[] = [];
 
   onSubmit(model: any) {
-    // console.log(model);
+
+    this.updateService.updateGeneralInformation(this.ra.name,model).subscribe(result => {
+      console.log(result)
+    },error => {
+      console.log("peto la vaina")
+      console.log(error)
+    })
   }
 
-  constructor(public ra: RA, private commonService:CommonService){}
+  constructor(public ra: RA, private commonService:CommonService, private updateService: UpdateService){}
 
   ngOnInit(): void {
     setTimeout(() => {
