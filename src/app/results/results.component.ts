@@ -87,7 +87,17 @@ export class ResultsComponent implements OnInit {
         console.log("error")
          console.log(error)
        })
-
+       /**get steps */
+       this.commonService.getSteps(this.ra.name).subscribe((result:any) => {
+        console.log("STEPS")
+        this.ra.listSteps = [...result];
+              /**Get status of RA */
+    this.commonService.getStatus(this.ra.name).subscribe(result => {
+      this.ra.status = result.ra
+    }, error => {
+      console.log(error)
+    })
+      })
         console.log(error)
       })
       
