@@ -75,36 +75,53 @@ export class SelectRaComponent {
   }
 
   deleteRA(){
-    console.log('DELETE RA');
-  }
-  
-  deleteStep(){
-    console.log('DELETE STEP');
-  }
-
-  newRA(){
-     
-    this.commonService.putNewRa(this.newRAname).subscribe(result => {
-      
+    this.commonService.deleteRA(this.ra.name).subscribe(result => {
       this.global.interfaceVisible = false;
       this.commonService.getRaList().subscribe((result:any) => {
         this.ra.listRA = [...result];
         this.ra.name = this.ra.listRA[this.ra.listRA.length-1];
         /**Get general info ra */
         this.commonService.getGeneralInfo(this.ra.name).subscribe(result => {
-          this.ra.general_information = result
-           },error=> {
-              console.log(error)
-            })
-            this.func.refreshRA();
-          })
-          setTimeout(() => {
-            this.global.interfaceVisible = true;
-          }, 500);
-        },error =>{
-          
-          console.log('error')
-     
+        this.ra.general_information = result
+      },error=> {
+        console.log(error)
+      })
+        this.func.refreshRA();
+      })
+      setTimeout(() => {
+        this.global.interfaceVisible = true;
+      }, 500);
+    },error => {
+      console.log(error)
     })
+  }
+
+  
+  deleteStep(){
+    console.log('DELETE STEP');
+  }
+
+  newRA(){
+     this.commonService.createRA(this.newRAname).subscribe(result=>{
+      this.global.interfaceVisible = false;
+      this.commonService.getRaList().subscribe((result:any) => {
+        this.ra.listRA = [...result];
+        this.ra.name = this.ra.listRA[this.ra.listRA.length-1];
+        /**Get general info ra */
+        this.commonService.getGeneralInfo(this.ra.name).subscribe(result => {
+        this.ra.general_information = result
+      },error=> {
+        console.log(error)
+      })
+        this.func.refreshRA();
+      })
+      setTimeout(() => {
+        this.global.interfaceVisible = true;
+      }, 500);
+     },error =>{
+      console.log("error:")
+      console.log(error)
+    })
+    this.newRAname = '';
   }
 }
