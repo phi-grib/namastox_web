@@ -79,4 +79,13 @@ export class CommonService {
     return this.http.put(url, formData)
   }
 
+  // create new RA
+  createRA(ra_name:string){
+    console.log(ra_name)
+    const url: string = environment.baseUrl + "new/"+ra_name
+    return this.http.get(url)
+  }
+
+
+
 }

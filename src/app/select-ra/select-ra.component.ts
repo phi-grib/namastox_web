@@ -9,11 +9,10 @@ import { Global, RA } from '../globals';
   styleUrls: ['./select-ra.component.scss']
 })
 export class SelectRaComponent {
+  newRAname:string = "";
   constructor(public global:Global,public ra: RA, private commonService: CommonService, private func: CommonFunctions){
 
   }
-
-  public newName = ''; 
 
   loadRA(){
     this.global.interfaceVisible = false;
@@ -84,15 +83,26 @@ export class SelectRaComponent {
   }
 
   newRA(){
-    this.commonService.putNewRa(this.newName).subscribe(result => {
-      console.log("NEW RA", this.newName);
-      // console.log(result);
-
-    }, error => {
-      console.log(error)
+     this.commonService.createRA(this.newRAname).subscribe(result=>{
+        console.log("done")
+       console.log(result)
+     },error =>{
+      this.global.interfaceVisible = false;
+      this.commonService.getRaList().subscribe((result:any) => {
+        this.ra.listRA = [...result];
+        this.ra.name = this.ra.listRA[this.ra.listRA.length-1];
+        /**Get general info ra */
+        this.commonService.getGeneralInfo(this.ra.name).subscribe(result => {
+        this.ra.general_information = result
+      },error=> {
+        console.log(error)
+      })
+        this.func.refreshRA();
+      })
+      setTimeout(() => {
+        this.global.interfaceVisible = true;
+      }, 500);
+     
     })
   }
-
-
-  
 }
