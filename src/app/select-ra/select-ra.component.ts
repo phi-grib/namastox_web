@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonFunctions } from '../common.functions';
 import { CommonService } from '../common.service';
-import { Global, RA } from '../globals';
+import { Global, PendingTasks, RA } from '../globals';
 
 @Component({
   selector: 'app-select-ra',
@@ -10,11 +10,12 @@ import { Global, RA } from '../globals';
 })
 export class SelectRaComponent {
   newRAname:string = "";
-  constructor(public global:Global,public ra: RA, private commonService: CommonService, private func: CommonFunctions){
+  constructor(public global:Global,public ra: RA, private commonService: CommonService, private func: CommonFunctions,private pendingTasks:PendingTasks){
 
   }
 
   loadRA(){
+    this.ra.pending_tasks = [];
     this.global.interfaceVisible = false;
      /**Get step of default RA */
      this.commonService.getSteps(this.ra.name).subscribe((result:any) => {
@@ -47,13 +48,12 @@ export class SelectRaComponent {
        /** Get pending tasks */
        this.commonService.getPendingTasks(this.ra.name).subscribe(result => {
         this.ra.pending_tasks = result;
-        console.log(this.ra.pending_tasks)
       },error => {
         console.log("error in pending tasks");
       })
       setTimeout(() => {
         this.global.interfaceVisible = true;
-        this.commonService.AutoGenerateForm()
+        this.commonService.AutoGenerateForm();
       }, 500);
   }
   
@@ -69,9 +69,6 @@ export class SelectRaComponent {
      console.log("error")
       console.log(error)
     })
-    setTimeout(() => {
-      this.commonService.AutoGenerateForm();
-    }, 500);
   }
 
   deleteRA(){
