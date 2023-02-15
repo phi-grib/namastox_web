@@ -13,6 +13,8 @@ export class SelectRaComponent {
 
   }
 
+  public newName = ''; 
+
   loadRA(){
     this.global.interfaceVisible = false;
      /**Get step of default RA */
@@ -55,6 +57,7 @@ export class SelectRaComponent {
         this.commonService.AutoGenerateForm()
       }, 500);
   }
+  
   loadStep(){
     this.commonService.getStatusWithStep(this.ra.name,this.ra.status.step).subscribe(result => {
       this.ra.status = result.ra
@@ -81,7 +84,13 @@ export class SelectRaComponent {
   }
 
   newRA(){
-    console.log("NEW RA");
+    this.commonService.putNewRa(this.newName).subscribe(result => {
+      console.log("NEW RA", this.newName);
+      // console.log(result);
+
+    }, error => {
+      console.log(error)
+    })
   }
 
 

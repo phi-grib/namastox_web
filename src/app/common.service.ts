@@ -73,5 +73,10 @@ export class CommonService {
     const url: string = environment.baseUrl + "pending_task/"+ra_name+"/"+id;
     return this.http.get(url)
   }
+  putNewRa(ra_name:string){
+    const formData = new FormData();
+    const url: string = environment.baseUrl + "new/"+ra_name;
+    return this.http.put(url, formData)
+  }
 
 }
