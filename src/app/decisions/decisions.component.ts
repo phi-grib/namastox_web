@@ -4,6 +4,7 @@ import { CommonService } from '../common.service';
 import { PendingTasks, RA, Results } from '../globals';
 import {FormGroup} from '@angular/forms';
 import {FormlyFieldConfig} from '@ngx-formly/core';
+import { UpdateService } from '../update.service';
 
 @Component({
   selector: 'app-decisions',
@@ -19,7 +20,7 @@ export class DecisionsComponent implements OnInit {
   objectKeys = Object.keys;
   model:any;
   decisionSelected:any;
-  constructor(public ra: RA,private commonService: CommonService, private func: CommonFunctions, public pendingTasks:PendingTasks, public results:Results){
+  constructor(public ra: RA,private commonService: CommonService, private func: CommonFunctions, public pendingTasks:PendingTasks, public results:Results,private updateService:UpdateService){
   }
   ngOnInit(): void {
     if(this.pendingTasks.decisions[0]){
@@ -66,6 +67,39 @@ export class DecisionsComponent implements OnInit {
     })
   }
   onSubmit(model: any) {
-    // console.log(model);
+    this.loadForm  = false;
+      this.updateService.updateResult(this.ra.name,model).subscribe(result => {
+        console.log(result)
+      },error => {
+        /** Get pending tasks */
+       this.commonService.getPendingTasks(this.ra.name).subscribe(result => {
+        this.ra.pending_tasks = result
+        this.func.separatePendingTasks();
+        this.pending_task_selected = this.pendingTasks.results[0].id;
+        this.show_form();
+      })
+        this.pendingTasks.decisions = [];// auxiliar
+        /**Get results of RA */
+        this.commonService.getResults(this.ra.name).subscribe(result => {
+         this.ra.results = result;
+         this.func.separateResults();    
+       }, error => {
+        console.log("error")
+         console.log(error)
+       })
+       /**get steps */
+       this.commonService.getSteps(this.ra.name).subscribe((result:any) => {
+        console.log("STEPS")
+        this.ra.listSteps = [...result];
+              /**Get status of RA */
+    this.commonService.getStatus(this.ra.name).subscribe(result => {
+      this.ra.status = result.ra
+    }, error => {
+      console.log(error)
+    })
+      })
+        console.log(error)
+      })
+      
   }
 }
