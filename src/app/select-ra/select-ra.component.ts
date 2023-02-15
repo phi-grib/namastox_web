@@ -83,25 +83,27 @@ export class SelectRaComponent {
   }
 
   newRA(){
-     this.commonService.createRA(this.newRAname).subscribe(result=>{
-        console.log("done")
-       console.log(result)
-     },error =>{
+     
+    this.commonService.putNewRa(this.newRAname).subscribe(result => {
+      
       this.global.interfaceVisible = false;
       this.commonService.getRaList().subscribe((result:any) => {
         this.ra.listRA = [...result];
         this.ra.name = this.ra.listRA[this.ra.listRA.length-1];
         /**Get general info ra */
         this.commonService.getGeneralInfo(this.ra.name).subscribe(result => {
-        this.ra.general_information = result
-      },error=> {
-        console.log(error)
-      })
-        this.func.refreshRA();
-      })
-      setTimeout(() => {
-        this.global.interfaceVisible = true;
-      }, 500);
+          this.ra.general_information = result
+           },error=> {
+              console.log(error)
+            })
+            this.func.refreshRA();
+          })
+          setTimeout(() => {
+            this.global.interfaceVisible = true;
+          }, 500);
+        },error =>{
+          
+          console.log('error')
      
     })
   }
