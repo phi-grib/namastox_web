@@ -56,6 +56,7 @@ export class SelectRaComponent {
         this.commonService.AutoGenerateForm()
       }, 500);
   }
+  
   loadStep(){
     this.commonService.getStatusWithStep(this.ra.name,this.ra.status.step).subscribe(result => {
       this.ra.status = result.ra
