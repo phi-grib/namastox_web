@@ -85,6 +85,11 @@ export class CommonService {
     const url: string = environment.baseUrl + "new/"+ra_name
     return this.http.put(url,null)
   }
+  // delete RA
+  deleteRA(ra_name: string){
+    const url: string = environment.baseUrl +"delete/"+ra_name
+    return this.http.put(url,null)
+  }
 
 
 
