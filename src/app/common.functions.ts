@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { CommonService } from './common.service';
 import { PendingTasks, RA, Results } from './globals';
 declare var $: any;
 @Injectable({
@@ -6,9 +7,42 @@ declare var $: any;
 })
 export class CommonFunctions {
 
-    constructor(private ra: RA,private pendingTasks:PendingTasks,private results: Results){
+    constructor(private ra: RA,private pendingTasks:PendingTasks,private results: Results,private commonService : CommonService){
 
     }
+
+  refreshRA(){
+    /** Get pending tasks */
+         this.commonService.getPendingTasks(this.ra.name).subscribe(result => {
+          this.ra.pending_tasks = result
+          this.separatePendingTasks();
+  
+    })
+    /**Get step of default RA */
+    this.commonService.getSteps(this.ra.name).subscribe((result:any) => {
+      console.log("STEPS")
+      this.ra.listSteps = [...result];
+    },
+    error=> {
+      console.log(error)
+    })
+    /**Get status of RA */
+    this.commonService.getStatus(this.ra.name).subscribe(result => {
+      this.ra.status = result.ra
+    }, error => {
+      console.log(error)
+    })
+       /**Get results of RA */
+        this.commonService.getResults(this.ra.name).subscribe(result => {
+         this.ra.results = result
+         this.separateResults();
+         
+       }, error => {
+        console.log("error")
+         console.log(error)
+       })
+  }
+
   /**separates tasks into different lists  */
   separatePendingTasks(){
     this.pendingTasks.results = [];

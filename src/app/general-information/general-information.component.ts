@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {FormlyFieldConfig} from '@ngx-formly/core';
+import { CommonFunctions } from '../common.functions';
 import { CommonService } from '../common.service';
 import { RA } from '../globals';
 import { UpdateService } from '../update.service';
@@ -20,13 +21,13 @@ export class GeneralInformationComponent implements OnInit {
 
     this.updateService.updateGeneralInformation(this.ra.name,model).subscribe(result => {
       console.log(result)
+      this.func.refreshRA();
     },error => {
-      console.log("peto la vaina")
       console.log(error)
     })
   }
 
-  constructor(public ra: RA, private commonService:CommonService, private updateService: UpdateService){}
+  constructor(public ra: RA, private commonService:CommonService, private updateService: UpdateService,private func: CommonFunctions){}
 
   ngOnInit(): void {
     setTimeout(() => {

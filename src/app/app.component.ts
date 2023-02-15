@@ -13,46 +13,15 @@ export class AppComponent implements OnInit{
   constructor(public global: Global,private ra:RA,private commonService : CommonService, private func: CommonFunctions) {}
   ngOnInit(): void {
     this.commonService.getRaList().subscribe((result:any) => {
-      this.ra.listRA = [...result]
-      this.ra.name = this.ra.listRA[this.ra.listRA.length-1]
-
-    /**Get step of default RA */
-    this.commonService.getSteps(this.ra.name).subscribe((result:any) => {
-      console.log("STEPS")
-      this.ra.listSteps = [...result];
-    },
-    error=> {
-      console.log(error)
-    })
-    /**Get general info ra */
-    this.commonService.getGeneralInfo(this.ra.name).subscribe(result => {
+      this.ra.listRA = [...result];
+      this.ra.name = this.ra.listRA[this.ra.listRA.length-1];
+      /**Get general info ra */
+      this.commonService.getGeneralInfo(this.ra.name).subscribe(result => {
       this.ra.general_information = result
-      console.log("general information")
-      console.log(this.ra.general_information)
     },error=> {
       console.log(error)
     })
-    /**Get status of RA */
-    this.commonService.getStatus(this.ra.name).subscribe(result => {
-      this.ra.status = result.ra
-    }, error => {
-      console.log(error)
-    })
-       /**Get results of RA */
-        this.commonService.getResults(this.ra.name).subscribe(result => {
-         this.ra.results = result
-         this.func.separateResults();
-         
-       }, error => {
-        console.log("error")
-         console.log(error)
-       })
-       /** Get pending tasks */
-       this.commonService.getPendingTasks(this.ra.name).subscribe(result => {
-        this.ra.pending_tasks = result
-        this.func.separatePendingTasks();
-
-      })
+      this.func.refreshRA();
     })
     setTimeout(() => {
       this.global.interfaceVisible = true;
