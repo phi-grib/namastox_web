@@ -49,7 +49,7 @@ export class GeneralInformationComponent implements OnInit {
       templateObject['type'] = 'input';
       templateObject['props'] = {
         label: property,
-        required: true,
+        required: false,
       };
       this.fields.push(templateObject)
     }else{
