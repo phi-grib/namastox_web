@@ -83,9 +83,6 @@ export class SelectRaComponent {
 
   newRA(){
      this.commonService.createRA(this.newRAname).subscribe(result=>{
-        console.log("done")
-       console.log(result)
-     },error =>{
       this.global.interfaceVisible = false;
       this.commonService.getRaList().subscribe((result:any) => {
         this.ra.listRA = [...result];
@@ -101,7 +98,9 @@ export class SelectRaComponent {
       setTimeout(() => {
         this.global.interfaceVisible = true;
       }, 500);
-     
+     },error =>{
+      console.log("error:")
+      console.log(error)
     })
   }
 }
