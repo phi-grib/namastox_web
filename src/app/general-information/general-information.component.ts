@@ -57,7 +57,7 @@ export class GeneralInformationComponent implements OnInit {
       templateObject['type'] = 'file';
       templateObject['props'] = {
         label: property,
-        // required: false,
+        required: false,
       };
       this.fields.push(templateObject)
     }
