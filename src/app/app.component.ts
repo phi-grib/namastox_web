@@ -12,6 +12,7 @@ export class AppComponent implements OnInit{
   title = 'namastox_web';
   constructor(public global: Global,private ra:RA,private commonService : CommonService, private func: CommonFunctions) {}
   ngOnInit(): void {
+
     this.commonService.getRaList().subscribe((result:any) => {
       this.ra.listRA = [...result];
       this.ra.name = this.ra.listRA[this.ra.listRA.length-1];
