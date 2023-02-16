@@ -1,15 +1,11 @@
 import { Component } from '@angular/core';
 import mermaid from 'mermaid';
 
-var exampleCallback = function() {
-  alert('A callback was triggered');
-}
 @Component({
   selector: 'app-navbar-right',
   templateUrl: './navbar-right.component.html',
   styleUrls: ['./navbar-right.component.scss']
 })
-
 
 export class NavbarRightComponent {
   
@@ -25,20 +21,16 @@ export class NavbarRightComponent {
         startOnLoad: true,
         securityLevel: 'loose'
       });
+
+      // ugly method to pass callback
       setInterval(() => {
         let nodeId = sessionStorage.getItem("ClickedNode");
         if (nodeId) {
           alert('node '+nodeId+' clicked');
-           if (nodeId == "a1") {
-           }
         }
         sessionStorage.removeItem("ClickedNode");
       });
       
-    };
-
-    mycallback (a:string) {
-      console.log(a);
     };
 
     createFlowchart() {
@@ -52,7 +44,6 @@ export class NavbarRightComponent {
        "id6 --> id2",
        'click id1 call sessionStorage.setItem(ClickedNode,a1)',
        'click id2 call sessionStorage.setItem(ClickedNode,a2)'
-      //  'click id1 exampleCallback'
       ];   
       this.stringFlowChart = this.flowChart.join("\n");
      }
