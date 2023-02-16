@@ -9,8 +9,7 @@ import mermaid from 'mermaid';
 
 export class NavbarRightComponent {
   
-  private flowChart: any;
-  public stringFlowChart: any = "";
+  public stringFlowChart: any = '';
 
     constructor() {
       this.createFlowchart();
@@ -24,28 +23,28 @@ export class NavbarRightComponent {
 
       // ugly method to pass callback
       setInterval(() => {
-        let nodeId = sessionStorage.getItem("ClickedNode");
+        let nodeId = sessionStorage.getItem('ClickedNode');
         if (nodeId) {
           alert('node '+nodeId+' clicked');
         }
-        sessionStorage.removeItem("ClickedNode");
+        sessionStorage.removeItem('ClickedNode');
       });
       
     };
 
     createFlowchart() {
-      this.flowChart = [
-      "graph TD",
-       "id1[Start] --> id2[Ques 1]",
-       "id2 --> id3[Ques 2] & id4[Ques 3]",
-       "id3 & id4 --> id5[Ques 4]",
-       "id5 --> id6",
-       "id6[Ques 5] --> id7[End]",
-       "id6 --> id2",
+      let flowChart = [
+       'graph TD',
+       'id1[Start] --> id2[Ques 1]',
+       'id2 --> id3[Ques 2] & id4[Ques 3]',
+       'id3 & id4 --> id5[Ques 4]',
+       'id5 --> id6',
+       'id6[Ques 5] --> id7[End]',
+       'id6 --> id2',
        'click id1 call sessionStorage.setItem(ClickedNode,a1)',
        'click id2 call sessionStorage.setItem(ClickedNode,a2)'
       ];   
-      this.stringFlowChart = this.flowChart.join("\n");
+      this.stringFlowChart = flowChart.join('\n');
      }
   }
 
