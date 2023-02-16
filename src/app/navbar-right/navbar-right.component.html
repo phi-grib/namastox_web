@@ -8,6 +8,17 @@
       <img [src]="'../assets/img/riskhunterlogo.png'" alt="logo riskhunter">
   </ul>
 <div class="tab-content" id="pills-tabContent">
-  <div class="tab-pane fade show active container-fluid" id="pills-pending-tasks" role="tabpanel" aria-labelledby="pills-pending-tasks-tab">Pending tasks</div>
-  <div class="tab-pane fade container-fluid" id="pills-workflow" role="tabpanel" aria-labelledby="pills-workflow-tab">Workflow</div>
+
+  <div class="tab-pane fade show active container-fluid" id="pills-pending-tasks" role="tabpanel" aria-labelledby="pills-pending-tasks-tab">
+    <div class="row">
+      <div class="col" >
+          <pre class="mermaid">
+              {{stringFlowChart}}
+          </pre>
+      </div>
+   </div>
+  </div>
+
+  <div class="tab-pane fade container-fluid" id="pills-workflow" role="tabpanel" aria-labelledby="pills-workflow-tab">
+  </div>
 </div> 
