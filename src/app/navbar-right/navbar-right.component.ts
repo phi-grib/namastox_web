@@ -1,70 +1,64 @@
-import { Component, ViewChild, ElementRef, OnInit, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  ViewChild,
+  ElementRef,
+  OnInit,
+  AfterViewInit,
+} from '@angular/core';
 import mermaid from 'mermaid';
-
 @Component({
   selector: 'app-navbar-right',
   templateUrl: './navbar-right.component.html',
   styleUrls: ['./navbar-right.component.scss']
 })
 
-export class NavbarRightComponent implements OnInit, AfterViewInit {
-  
-  public stringFlowChart: string = `graph TD
-  A[Christmas] --> |Get money| B(Go shopping)
-  B --> C(Let me think)
-  C --> |One| D[Laptop]
-  C --> |Two| E[iPhone]
-  C --> |Three| F[fa:fa-car Car]
-  A[Christmas] --> |Get money| D[Laptop]
-  B --> E
-  click A call sessionStorage.setItem(ClickedNode,A)
-  click B call sessionStorage.setItem(ClickedNode,B)
-  `;
+export class NavbarRightComponent implements OnInit, AfterViewInit { 
+  @ViewChild('mermaidDiv', { static: false }) mermaidDiv: ElementRef;
 
-  config = {
-    startOnLoad: true,
-    flowchart: {
-      useMaxWidth: true,
-      htmlLabels: true,
-    },
-    securityLevel: 'loose',
-  };
-
-  constructor() {}
+  public graphDefinition = 
+     `graph TD;
+      A[DEV]-->C[TRY];
+      A-->D[TEST];
+      C-->E[LOAD];
+      D-->E;
   
+      click A onA
+      click E onA
+      click C onA
+      click D onA
+      `;
+
+  flowchartRefresh() {
+    const element: any = this.mermaidDiv.nativeElement;
+    mermaid.render(
+      'graphDiv',
+      this.graphDefinition,
+      (svgCode, bindFunctions) => {
+        element.innerHTML = svgCode;
+        bindFunctions(element);
+      }
+    );
+  }
+
   ngAfterViewInit(): void {
-    mermaid.initialize(this.config);
+    this.flowchartRefresh();
   }
 
   ngOnInit(): void {
-    // ugly method to pass callback
-    setInterval( () => {
-      let nodeId = sessionStorage.getItem('ClickedNode');
-      if (nodeId) {
-        alert('node '+nodeId+' clicked');
-        this.stringFlowChart+='E --> F(new one)\n';
-        // mermaid.init(undefined, 'E --> F(new one)\n');
-        console.log(this.stringFlowChart);
-      }
-      sessionStorage.removeItem('ClickedNode');
-    });
-    this.createFlowchart()
-    
-  };
-  
-  createFlowchart() {
-    this.stringFlowChart = `graph TD
-        A[Christmas] --> |Get money| B(Go shopping)
-        B --> C(Let me think)
-        C --> |One| D[Laptop]
-        C --> |Two| E[iPhone]
-        C --> |Three| F[fa:fa-car Car]
-        A[Christmas] --> |Get money| D[Laptop]
-        B --> E
-        click A call sessionStorage.setItem(ClickedNode,A)
-        click B call sessionStorage.setItem(ClickedNode,B)
-        `;
-    }
-}
+    (window as any).onA = (nodeName) => {
+      this.graphDefinition += 'E-->F[NEW ELEMENT]\n';
+      this.flowchartRefresh();
+    };
 
+    mermaid.initialize({
+      securityLevel: 'loose',
+      flowchart: {
+        useMaxWidth: true,
+        htmlLabels: true,
+      },
+    });
+
+    mermaid.init();
+  }
+}
 
