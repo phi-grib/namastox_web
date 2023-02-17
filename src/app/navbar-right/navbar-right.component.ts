@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit, AfterViewInit } from '@angular/core';
 import mermaid from 'mermaid';
 
 @Component({
@@ -7,45 +7,64 @@ import mermaid from 'mermaid';
   styleUrls: ['./navbar-right.component.scss']
 })
 
-export class NavbarRightComponent {
+export class NavbarRightComponent implements OnInit, AfterViewInit {
   
-  public stringFlowChart: any = '';
+  public stringFlowChart: string = `graph TD
+  A[Christmas] --> |Get money| B(Go shopping)
+  B --> C(Let me think)
+  C --> |One| D[Laptop]
+  C --> |Two| E[iPhone]
+  C --> |Three| F[fa:fa-car Car]
+  A[Christmas] --> |Get money| D[Laptop]
+  B --> E
+  click A call sessionStorage.setItem(ClickedNode,A)
+  click B call sessionStorage.setItem(ClickedNode,B)
+  `;
 
-    constructor() {
-      this.createFlowchart();
-    }
-    
-    ngOnInit(): void {
-      mermaid.initialize({	
-        startOnLoad: true,
-        securityLevel: 'loose'
-      });
+  config = {
+    startOnLoad: true,
+    flowchart: {
+      useMaxWidth: true,
+      htmlLabels: true,
+    },
+    securityLevel: 'loose',
+  };
 
-      // ugly method to pass callback
-      setInterval(() => {
-        let nodeId = sessionStorage.getItem('ClickedNode');
-        if (nodeId) {
-          alert('node '+nodeId+' clicked');
-        }
-        sessionStorage.removeItem('ClickedNode');
-      });
-      
-    };
-
-    createFlowchart() {
-      let flowChart = [
-       'graph TD',
-       'id1[Start] --> id2[Ques 1]',
-       'id2 --> id3[Ques 2] & id4[Ques 3]',
-       'id3 & id4 --> id5[Ques 4]',
-       'id5 --> id6',
-       'id6[Ques 5] --> id7[End]',
-       'id6 --> id2',
-       'click id1 call sessionStorage.setItem(ClickedNode,a1)',
-       'click id2 call sessionStorage.setItem(ClickedNode,a2)'
-      ];   
-      this.stringFlowChart = flowChart.join('\n');
-     }
+  constructor() {}
+  
+  ngAfterViewInit(): void {
+    mermaid.initialize(this.config);
   }
+
+  ngOnInit(): void {
+    // ugly method to pass callback
+    setInterval( () => {
+      let nodeId = sessionStorage.getItem('ClickedNode');
+      if (nodeId) {
+        alert('node '+nodeId+' clicked');
+        this.stringFlowChart+='E --> F(new one)\n';
+        // mermaid.init(undefined, 'E --> F(new one)\n');
+        console.log(this.stringFlowChart);
+      }
+      sessionStorage.removeItem('ClickedNode');
+    });
+    this.createFlowchart()
+    
+  };
+  
+  createFlowchart() {
+    this.stringFlowChart = `graph TD
+        A[Christmas] --> |Get money| B(Go shopping)
+        B --> C(Let me think)
+        C --> |One| D[Laptop]
+        C --> |Two| E[iPhone]
+        C --> |Three| F[fa:fa-car Car]
+        A[Christmas] --> |Get money| D[Laptop]
+        B --> E
+        click A call sessionStorage.setItem(ClickedNode,A)
+        click B call sessionStorage.setItem(ClickedNode,B)
+        `;
+    }
+}
 
 
