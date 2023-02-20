@@ -18,4 +18,25 @@
     background: #3a721b ;
     color: #ffffff;
 }
-
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    padding: 6px 0px;
+    border-radius: 15px;
+    text-align: center !important;
+    font-size: 12px;
+    line-height: 1.42857;
+    background: $primary-color;
+    color: white;
+  
+  }
+  
+  .btn-circle:hover,
+  .btn-circle:active,
+  .btn-circle:focus,
+  .btn-circle.active {
+      background: #3a721b ;
+      color: #ffffff;
+  }
+  
+  

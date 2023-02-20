@@ -1,4 +1,6 @@
 @import '../../assets/scss/colors.scss';
+@import '../../assets/scss/buttons.scss';
+
 
 
 /* Add some margins for each label */
@@ -52,4 +54,11 @@ select {
   color: #ffffff;
 }
 
-  
+
+span {
+  &:hover{
+    background-color: red !important;
+  }
+}
+
+

@@ -1,28 +1,33 @@
 
 
-<div *ngIf="this.global.interfaceVisible" class="mb-2">
+<div style="display:flex;"  *ngIf="this.global.interfaceVisible" class="mb-2">
 
-  <div class="form-inline d-inline-block mr-5">
+  <div class="form-inline d-inline-block position-relative">
     <label for="ra1">RA </label>
     <select id="ra1" (change)="loadRA()" [(ngModel)]="this.ra.name" aria-label="Default select example">
       <option *ngFor="let ra of this.ra.listRA" [value]='ra'>{{ra}}</option>
     </select>
+    <span (click)="deleteRA()" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">
+      x
+    </span>
   </div>
-
-  <div class="form-inline d-inline-block mr-5">
+  <div class="m-2 d-inline-block"></div>
+  <div class="form-inline d-inline-block position-relative">
     <label for="ra2">step </label>
       <select id="ra2" (change)="loadStep()" [(ngModel)]="this.ra.status.step" aria-label="Default select example">
         <option *ngFor="let step of this.ra.listSteps" [value]='step'>{{step}}</option>
       </select>
+      <span (click)="deleteStep()" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">
+        x
+      </span>
   </div>
-
-  <div class="btn-group ml-2" role="group" aria-label="ra group">
-    <button type="button" class="btn btn-nam-good" data-bs-toggle="modal" data-bs-target="#newRA">New RA</button>
-    <button type="button" class="btn btn-nam-bad" (click)="deleteRA()">Delete RA</button>
-    <button type="button" class="btn btn-nam-bad" (click)="deleteStep()">Delete Step</button>
-  </div>
-
+    <div  class="d-inline-block" style='margin-left: auto;'>
+  <button type="button" class="btn  btn-circle" data-bs-toggle="modal" data-bs-target="#newRA"><i class="fa-solid fa-plus"></i></button> 
+      
+    </div>
 </div>
+
+
 
 <div class="modal fade" id="newRA" tabindex="-1" role="dialog" aria-labelledby="newModalLabel" aria-hidden="false">
   <div class="modal-dialog" role="document">
