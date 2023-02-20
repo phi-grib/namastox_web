@@ -19,7 +19,6 @@ export class ResultsComponent implements OnInit {
   pending_task_selected:string = '';
   pending_task:any;
   objectKeys = Object.keys;
-  resultSelected:any;
   constructor(public ra: RA, private commonService: CommonService, public pendingTasks:PendingTasks, private func: CommonFunctions, public results:Results,private updateService:UpdateService){
   }
 
@@ -39,7 +38,7 @@ export class ResultsComponent implements OnInit {
   }
   selectResult(id:string){
     this.commonService.getResult(this.ra.name,id).subscribe(result => {
-      this.resultSelected = result  
+      this.results.resultSelected = result  
     })
   }
 

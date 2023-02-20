@@ -67,7 +67,7 @@
               </table>
         </div>
     </div>
-    <div class="mt-2" *ngIf="this.resultSelected">
+    <div class="mt-2" *ngIf="this.results.resultSelected">
       <hr>
       <div class="card-body">
         <div class="row">
@@ -75,7 +75,7 @@
               <strong>ID</strong>
             </div>
             <div class="col  border-bottom">
-             {{this.resultSelected.id}}
+             {{this.results.resultSelected.id}}
             </div>
           </div>
           <div class="row">
@@ -83,7 +83,7 @@
               <strong>Resul description</strong>
             </div>
             <div class="col border-bottom">
-                {{this.resultSelected.result_description}}
+                {{this.results.resultSelected.result_description}}
             </div>
           </div>
           <div class="row">
@@ -91,7 +91,7 @@
               <strong>Resul type</strong>
             </div>
             <div class="col border-bottom">
-                {{this.resultSelected.result_type}}
+                {{this.results.resultSelected.result_type}}
             </div>
           </div>
           <div class="row">
@@ -99,7 +99,7 @@
               <strong>Result link</strong>
             </div>
             <div class="col border-bottom">
-                {{this.resultSelected.result_link}}
+                {{this.results.resultSelected.result_link}}
             </div>
           </div>
           <div class="row">
@@ -107,7 +107,7 @@
               <strong>Substance</strong>
             </div>
             <div class="col border-bottom">
-                {{this.resultSelected.substance}}
+                {{this.results.resultSelected.substance}}
             </div>
           </div>
           <div class="row">
@@ -115,7 +115,7 @@
               <strong>Summary</strong>
             </div>
             <div class="col border-bottom">
-              {{this.resultSelected.summary}}
+              {{this.results.resultSelected.summary}}
             </div>
           </div>
           <div class="row">
@@ -123,7 +123,7 @@
               <strong>Summary type</strong>
             </div>
             <div class="col border-bottom">
-              {{this.resultSelected.summary_type}}
+              {{this.results.resultSelected.summary_type}}
             </div>
           </div>
           <div class="row">
@@ -131,7 +131,7 @@
               <strong>Uncertainty</strong>
             </div>
             <div class="col border-bottom">
-              {{this.resultSelected.uncertainty}}
+              {{this.results.resultSelected.uncertainty}}
             </div>
           </div>
           <div class="row">
@@ -139,7 +139,7 @@
               <strong>Unit</strong>
             </div>
             <div class="col border-bottom">
-              {{this.resultSelected.unit}}
+              {{this.results.resultSelected.unit}}
             </div>
           </div>
           <div class="row">
@@ -147,7 +147,7 @@
               <strong>Value</strong>
             </div>
             <div class="col">
-              {{this.resultSelected.value}}
+              {{this.results.resultSelected.value}}
             </div>
           </div>
     </div>
