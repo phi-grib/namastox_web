@@ -17,6 +17,8 @@ export class RA {
 export class Results {
     decisions:any[] = []
     results:any[] = [];
+    resultSelected:any;
+    decisionSelected:any;
 }
 
 export class PendingTasks{

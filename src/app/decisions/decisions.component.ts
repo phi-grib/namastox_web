@@ -19,7 +19,6 @@ export class DecisionsComponent implements OnInit {
   pending_task:any;
   objectKeys = Object.keys;
   model:any;
-  decisionSelected:any;
   constructor(public ra: RA,private commonService: CommonService, private func: CommonFunctions, public pendingTasks:PendingTasks, public results:Results,private updateService:UpdateService){
   }
   ngOnInit(): void {
@@ -40,7 +39,7 @@ export class DecisionsComponent implements OnInit {
   }
   selectDecision(id:string){
     this.commonService.getResult(this.ra.name,id).subscribe(result => {
-      this.decisionSelected = result  
+      this.results.decisionSelected = result  
     })
   }
 

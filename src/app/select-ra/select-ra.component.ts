@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonFunctions } from '../common.functions';
 import { CommonService } from '../common.service';
-import { Global, PendingTasks, RA } from '../globals';
+import { Global, PendingTasks, RA, Results } from '../globals';
 
 @Component({
   selector: 'app-select-ra',
@@ -10,13 +10,14 @@ import { Global, PendingTasks, RA } from '../globals';
 })
 export class SelectRaComponent {
   newRAname:string = "";
-  constructor(public global:Global,public ra: RA, private commonService: CommonService, private func: CommonFunctions,private pendingTasks:PendingTasks){
+  constructor(public global:Global,public ra: RA, private commonService: CommonService, private func: CommonFunctions,private pendingTasks:PendingTasks,private results:Results){
 
   }
 
   loadRA(){
     this.ra.pending_tasks = [];
-    this.global.interfaceVisible = false;
+    this.results.resultSelected = '';
+    this.results.decisionSelected = '';
      /**Get step of default RA */
      this.commonService.getSteps(this.ra.name).subscribe((result:any) => {
       console.log("STEPS")
