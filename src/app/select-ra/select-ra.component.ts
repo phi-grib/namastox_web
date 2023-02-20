@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonFunctions } from '../common.functions';
 import { CommonService } from '../common.service';
 import { Global, PendingTasks, RA, Results } from '../globals';
@@ -8,7 +8,7 @@ import { Global, PendingTasks, RA, Results } from '../globals';
   templateUrl: './select-ra.component.html',
   styleUrls: ['./select-ra.component.scss']
 })
-export class SelectRaComponent {
+export class SelectRaComponent  {
   newRAname:string = "";
   constructor(public global:Global,public ra: RA, private commonService: CommonService, private func: CommonFunctions,private pendingTasks:PendingTasks,private results:Results){
 
@@ -93,14 +93,17 @@ export class SelectRaComponent {
       console.log(error)
     })
   }
-
-  
   deleteStep(){
     this.commonService.deleteStep(this.ra.name,this.ra.status.step).subscribe(result =>{
       this.func.refreshRA();
     },error => {
       console.log(error)
     })
+  }
+  displayOptions(){
+
+  // $("#menu").css("display", "block");
+  $("#menu").animate({width:"auto"},"slow");
   }
 
   newRA(){
@@ -118,6 +121,7 @@ export class SelectRaComponent {
         this.func.refreshRA();
       })
       setTimeout(() => {
+       $('#closeMenubtn').click();
         this.global.interfaceVisible = true;
       }, 500);
      },error =>{

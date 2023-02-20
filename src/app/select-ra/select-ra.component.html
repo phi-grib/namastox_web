@@ -2,14 +2,17 @@
 
 <div style="display:flex;"  *ngIf="this.global.interfaceVisible" class="mb-2">
 
+
+  <div  class="d-inline-block" style=''>
+    <a style="color: green;" class="btn" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+  <i class="fa-solid fa-bars"></i>
+    </a>
+  </div>
   <div class="form-inline d-inline-block position-relative">
     <label for="ra1">RA </label>
     <select id="ra1" (change)="loadRA()" [(ngModel)]="this.ra.name" aria-label="Default select example">
       <option *ngFor="let ra of this.ra.listRA" [value]='ra'>{{ra}}</option>
     </select>
-    <span (click)="deleteRA()" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">
-      x
-    </span>
   </div>
   <div class="m-2 d-inline-block"></div>
   <div class="form-inline d-inline-block position-relative">
@@ -17,17 +20,15 @@
       <select id="ra2" (change)="loadStep()" [(ngModel)]="this.ra.status.step" aria-label="Default select example">
         <option *ngFor="let step of this.ra.listSteps" [value]='step'>{{step}}</option>
       </select>
-      <span (click)="deleteStep()" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">
-        x
-      </span>
   </div>
-    <div  class="d-inline-block" style='margin-left: auto;'>
-  <button type="button" class="btn  btn-circle" data-bs-toggle="modal" data-bs-target="#newRA"><i class="fa-solid fa-plus"></i></button> 
-      
-    </div>
 </div>
-
-
+<div class="offcanvas offcanvas-start" tabindex="-1"  id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div class="d-grid gap-2">
+      <button type="button" class="btn btn-ets-do" data-bs-toggle="modal" data-bs-target="#newRA">New RA</button>
+      <button (click)="deleteRA()" type="button" class="btn btn-ets-delete">Delete RA</button>
+      <button (click)="deleteStep()" type="button" class="btn btn-ets-delete">Delete Step</button>
+</div>
+</div>
 
 <div class="modal fade" id="newRA" tabindex="-1" role="dialog" aria-labelledby="newModalLabel" aria-hidden="false">
   <div class="modal-dialog" role="document">
