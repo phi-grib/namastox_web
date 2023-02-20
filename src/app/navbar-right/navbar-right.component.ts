@@ -17,15 +17,22 @@ export class NavbarRightComponent implements OnInit, AfterViewInit {
 
   public graphDefinition = 
      `graph TD;
-      A[DEV]-->C[TRY];
-      A-->D[TEST];
-      C-->E[LOAD];
-      D-->E;
+      A[Problem formulation]-->B[Relevant existing data];
+      B-->C{"Is the information\n sufficient?"};
+      C--Y-->D[/Risk assesment report/];
+      C--N-->E{"Is exposure scenario\n well-defined?"};
+      D-->F([Exit]);
   
+      style A fill:#548BD4,stroke:#548BD4
+      style B fill:#548BD4,stroke:#548BD4
+      style C fill:#F2DCDA,stroke:#C32E2D
+      style E fill:#F2DCDA,stroke:#C32E2D
+      style F fill:#D7E3BF,stroke:#A3B77E
       click A onA
-      click E onA
+      click B onA
       click C onA
       click D onA
+      click E onA
       `;
 
   flowchartRefresh() {
@@ -55,6 +62,7 @@ export class NavbarRightComponent implements OnInit, AfterViewInit {
       flowchart: {
         useMaxWidth: true,
         htmlLabels: true,
+        curve: 'stepAfter'
       },
     });
 
