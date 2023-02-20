@@ -1,4 +1,5 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { MarkdownModule, MarkedOptions, MarkedRenderer } from 'ngx-markdown';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
@@ -52,9 +53,36 @@ import { SelectRaComponent } from './select-ra/select-ra.component';
         types: [{ name: 'file', component: FormlyFieldFile, wrappers: ['form-field'] }],
       }
     ),
-    FormlyBootstrapModule
+    FormlyBootstrapModule,
+    MarkdownModule.forRoot({
+      loader: HttpClient,
+      markedOptions: {
+        provide: MarkedOptions,
+        useFactory: markedOptionsFactory,
+      },
+    })
   ],
   providers: [RA,Global,PendingTasks,Results],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+// function that returns `MarkedOptions` with renderer override
+export function markedOptionsFactory(): MarkedOptions {
+  const renderer = new MarkedRenderer();
+  renderer.code = function (code, language) {
+    if (language.match(/^mermaid/)) {
+      return '<div class="mermaid">' + code + '</div>';
+    } else {
+      return '<pre><code>' + code + '</code></pre>';
+    }
+  };
+  return {
+    renderer: renderer,
+    gfm: true,
+    breaks: false,
+    pedantic: false,
+    smartLists: true,
+    smartypants: false,
+  };
+}
