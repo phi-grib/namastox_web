@@ -1,36 +1,33 @@
 
-    <as-split style="height: 45px;" (gutterClick)="gutterClick($event)" [gutterSize]="8" [useTransition]="true" [gutterDblClickDuration]="0" direction="horizontal">
-      <as-split-area [size]="this.size1">
-        <div class="btn-group" role="group" aria-label="Basic example">
-          <button type="button" class="btn btn-ets-do" data-bs-toggle="modal" data-bs-target="#newRA">New RA</button>
-          <button (click)="deleteRA()" type="button" class="btn btn-ets-delete">Delete RA</button>
-          <button (click)="deleteStep()" type="button" class="btn btn-ets-delete">Delete Step</button>
-    </div>
-      </as-split-area>
-      <as-split-area [size]="this.size2">
-        <div class="form-inline d-inline-block position-relative">
-          <label for="ra1">RA </label>
-          <select id="ra1" (change)="loadRA()" [(ngModel)]="this.ra.name" aria-label="Default select example">
-            <option *ngFor="let ra of this.ra.listRA" [value]='ra'>{{ra}}</option>
-          </select>
-        </div>
-        <div class="m-2 d-inline-block"></div>
-        <div class="form-inline d-inline-block position-relative">
-          <label for="ra2">step </label>
-            <select id="ra2" (change)="loadStep()" [(ngModel)]="this.ra.status.step" aria-label="Default select example">
-              <option *ngFor="let step of this.ra.listSteps" [value]='step'>{{step}}</option>
-            </select>
-        </div>
-      </as-split-area>
-    </as-split>
-  
 
-  <!-- <div  class="d-inline-block" style=''>
-    <a style="color: green;" class="btn" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+<div style="display:flex;"  *ngIf="this.global.interfaceVisible" class="mb-2">
+  <div class="collapse" id="navbarToggleExternalContent">
+    <div class="btn-group" role="group" aria-label="Basic example">
+
+      <button type="button" class="btn btn-ets-do" data-bs-toggle="modal" data-bs-target="#newRA">New RA</button>
+      <button (click)="deleteRA()" type="button" class="btn btn-ets-delete">Delete RA</button>
+      <button (click)="deleteStep()" type="button" class="btn btn-ets-delete">Delete Step</button>
+</div>
+  </div>
+  <div  class="d-inline-block" style=''>
+    <a style="color: green;" class="btn" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation" role="button">
   <i class="fa-solid fa-bars"></i>
     </a>
-  </div> -->
-
+  </div>
+  <div class="form-inline d-inline-block position-relative">
+    <label for="ra1">RA </label>
+    <select id="ra1" (change)="loadRA()" [(ngModel)]="this.ra.name" aria-label="Default select example">
+      <option *ngFor="let ra of this.ra.listRA" [value]='ra'>{{ra}}</option>
+    </select>
+  </div>
+  <div class="m-2 d-inline-block"></div>
+  <div class="form-inline d-inline-block position-relative">
+    <label for="ra2">step </label>
+      <select id="ra2" (change)="loadStep()" [(ngModel)]="this.ra.status.step" aria-label="Default select example">
+        <option *ngFor="let step of this.ra.listSteps" [value]='step'>{{step}}</option>
+      </select>
+  </div>
+</div>
 
 <div class="modal fade" id="newRA" tabindex="-1" role="dialog" aria-labelledby="newModalLabel" aria-hidden="false">
   <div class="modal-dialog" role="document">
