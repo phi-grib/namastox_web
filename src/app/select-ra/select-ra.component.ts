@@ -96,7 +96,11 @@ export class SelectRaComponent {
 
   
   deleteStep(){
-    console.log('DELETE STEP');
+    this.commonService.deleteStep(this.ra.name,this.ra.status.step).subscribe(result =>{
+      this.func.refreshRA();
+    },error => {
+      console.log(error)
+    })
   }
 
   newRA(){
