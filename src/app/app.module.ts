@@ -20,6 +20,10 @@ import { FileValueAccessor } from './general-information/file-value-accessor';
 import { ResultsComponent } from './results/results.component';
 import { DecisionsComponent } from './decisions/decisions.component';
 import { SelectRaComponent } from './select-ra/select-ra.component';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,6 +46,8 @@ import { SelectRaComponent } from './select-ra/select-ra.component';
     ReactiveFormsModule,
     ReactiveFormsModule,
     FormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     FormlyModule.forRoot(
       {
         types: [{ name: 'file', component: FormlyFieldFile, wrappers: ['form-field'] }],

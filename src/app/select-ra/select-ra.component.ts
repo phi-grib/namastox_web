@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { SplitComponent } from 'angular-split';
 import { CommonFunctions } from '../common.functions';
 import { CommonService } from '../common.service';
@@ -11,7 +12,8 @@ import { Global, PendingTasks, RA, Results } from '../globals';
 })
 export class SelectRaComponent  {
   newRAname:string = "";
-  constructor(public global:Global,public ra: RA, private commonService: CommonService, private func: CommonFunctions,private pendingTasks:PendingTasks,private results:Results){
+    
+    constructor(private toastr: ToastrService,public global:Global,public ra: RA, private commonService: CommonService, private func: CommonFunctions,private pendingTasks:PendingTasks,private results:Results){
 
   }
 
@@ -36,6 +38,11 @@ export class SelectRaComponent  {
 
   deleteRA(){
     this.commonService.deleteRA(this.ra.name).subscribe(result => {
+      if(result['success']){
+        this.toastr.success('RA ' + this.ra.name ,'SUCCESSFULLY DELETED', {
+          timeOut: 5000, positionClass: 'toast-top-right'});
+
+      }
       this.commonService.getRaList().subscribe((result:any) => {
         this.ra.listRA = [...result];
         this.ra.name = this.ra.listRA[this.ra.listRA.length-1];
@@ -48,6 +55,11 @@ export class SelectRaComponent  {
   }
   deleteStep(){
     this.commonService.deleteStep(this.ra.name,this.ra.status.step).subscribe(result =>{
+
+      if(result['success']){
+        this.toastr.success('STEP ' + this.ra.status.step ,'SUCCESSFULLY DELETED', {
+          timeOut: 5000, positionClass: 'toast-top-right'});
+      }
       this.func.refreshRA();
       document.getElementById('menubtn').click();
     },error => {
