@@ -18,9 +18,10 @@ export class WorkflowComponent implements OnInit, AfterViewInit {
   public graphDefinition = 
      `graph TD;
       A[Problem formulation]-->B[Relevant existing data];
-      B-->C{"Is the information\n sufficient?"};
+      B-->C{"Is the information\nsufficient?"};
       C--Y-->D[/Risk assesment report/];
-      C--N-->E{"Is exposure scenario\n well-defined?"};
+      C--N-->E{"Is exposure scenario\nwell-defined?"};
+      E---G[...];
       D-->F([Exit]);
   
       style A fill:#548BD4,stroke:#548BD4
@@ -28,6 +29,8 @@ export class WorkflowComponent implements OnInit, AfterViewInit {
       style C fill:#F2DCDA,stroke:#C32E2D
       style E fill:#F2DCDA,stroke:#C32E2D
       style F fill:#D7E3BF,stroke:#A3B77E
+      style G fill:#FFFFFF,stroke:#000000
+      
       click A onA
       click B onA
       click C onA
