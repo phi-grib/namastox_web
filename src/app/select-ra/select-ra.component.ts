@@ -39,6 +39,7 @@ export class SelectRaComponent  {
         this.ra.listRA = [...result];
         this.ra.name = this.ra.listRA[this.ra.listRA.length-1];
         this.func.refreshRA();
+        document.getElementById('menubtn').click();
       })
     },error => {
       console.log(error)
@@ -47,16 +48,16 @@ export class SelectRaComponent  {
   deleteStep(){
     this.commonService.deleteStep(this.ra.name,this.ra.status.step).subscribe(result =>{
       this.func.refreshRA();
+      document.getElementById('menubtn').click();
     },error => {
       console.log(error)
     })
+    
   }
   displayOptions(){
-
   // $("#menu").css("display", "block");
   $("#menu").animate({width:"auto"},"slow");
   }
-
   newRA(){
      this.commonService.createRA(this.newRAname).subscribe(result=>{
       this.commonService.getRaList().subscribe((result:any) => {
