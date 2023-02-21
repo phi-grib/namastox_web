@@ -27,6 +27,7 @@ export class SelectRaComponent  {
     })
     this.commonService.getResultsWithStep(this.ra.name,this.ra.status.step).subscribe(result => {
       this.ra.results = result
+      this.func.separateResults();
     }, error => {
      console.log("error")
       console.log(error)
