@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { DataTablesModule } from 'angular-datatables';
 import { AngularSplitModule } from 'angular-split';
 import { AppComponent } from './app.component';
-import { NavbarLeftComponent } from './navbar-left/navbar-left.component';
+import { NavbarComponent } from './navbar/navbar.component';
 import { NavbarRightComponent } from './navbar-right/navbar-right.component';
 import { NotesComponent } from './notes/notes.component';
 import { OptionsRasComponent } from './options-ras/options-ras.component';
@@ -24,7 +24,7 @@ import { SelectRaComponent } from './select-ra/select-ra.component';
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarLeftComponent,
+    NavbarComponent,
     NavbarRightComponent,
     NotesComponent,
     OptionsRasComponent,
