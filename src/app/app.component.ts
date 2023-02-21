@@ -8,9 +8,10 @@ import { Global,RA } from './globals';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
+
 export class AppComponent implements OnInit{
   title = 'namastox_web';
-  constructor(public global: Global,private ra:RA,private commonService : CommonService, private func: CommonFunctions) {}
+  constructor(public global: Global,public ra:RA,private commonService : CommonService, private func: CommonFunctions) {}
   ngOnInit(): void {
 
     this.commonService.getRaList().subscribe((result:any) => {

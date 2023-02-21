@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import mermaid from 'mermaid';
 @Component({
-  selector: 'app-navbar-right',
+  selector: 'app-workflow',
   templateUrl: './workflow.component.html',
   styleUrls: ['./workflow.component.scss']
 })
