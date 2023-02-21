@@ -3,9 +3,9 @@
 
 
 
-  <div *ngIf="this.pendingTasks.decisions.length > 0" class="container-fluid"  style="overflow-y:scroll;height: 400px;">
+  <div *ngIf="this.pendingTasks.decisions.length > 0" class="container-fluid">
     <div  class="row">
-        <div style="min-height: 300px;" class="col">
+        <div  class="col">
           <select (change)="show_form()" [(ngModel)]="this.pending_task_selected"  class="form-select" aria-label="Default select example">
             <option *ngFor="let idx of objectKeys(this.pendingTasks.decisions)" [value]='this.pendingTasks.decisions[idx].id'>{{this.pendingTasks.decisions[idx].id}}</option>
           </select>

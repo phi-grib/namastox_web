@@ -1,8 +1,8 @@
 
 
-  <div *ngIf="this.pendingTasks.results.length > 0" class="container-fluid"  style="overflow-y:scroll;height: 400px;">
+  <div *ngIf="this.pendingTasks.results.length > 0" class="container-fluid">
     <div  class="row">
-        <div style="min-height: 300px;" class="col">
+        <div  class="col">
           <select (change)="show_form()" [(ngModel)]="this.pending_task_selected"  class="form-select" aria-label="Default select example">
             <option *ngFor="let idx of objectKeys(this.pendingTasks.results)" [value]='this.pendingTasks.results[idx].id'>{{this.pendingTasks.results[idx].id}}</option>
           </select>
@@ -32,9 +32,7 @@
                       {{this.pending_task.result.result_description}}
                   </div>
                 </div>
-
               </div>
-
           </div>
           <div class="container-form p-3 mt-3">
             <form *ngIf="this.loadForm" [formGroup]="form" (ngSubmit)="onSubmit(model)">
