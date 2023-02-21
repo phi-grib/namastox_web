@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NavbarRightComponent } from './navbar-right.component';
+import { WorkflowComponent } from './workflow.component';
 
 describe('NavbarRightComponent', () => {
-  let component: NavbarRightComponent;
-  let fixture: ComponentFixture<NavbarRightComponent>;
+  let component: WorkflowComponent;
+  let fixture: ComponentFixture<WorkflowComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NavbarRightComponent ]
+      declarations: [ WorkflowComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(NavbarRightComponent);
+    fixture = TestBed.createComponent(WorkflowComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

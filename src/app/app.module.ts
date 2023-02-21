@@ -7,7 +7,7 @@ import { DataTablesModule } from 'angular-datatables';
 import { AngularSplitModule } from 'angular-split';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { NavbarRightComponent } from './navbar-right/navbar-right.component';
+import { WorkflowComponent } from './workflow/workflow.component';
 import { NotesComponent } from './notes/notes.component';
 import { OptionsRasComponent } from './options-ras/options-ras.component';
 import { RA,Global, PendingTasks, Results } from './globals';
@@ -25,7 +25,7 @@ import { SelectRaComponent } from './select-ra/select-ra.component';
   declarations: [
     AppComponent,
     NavbarComponent,
-    NavbarRightComponent,
+    WorkflowComponent,
     NotesComponent,
     OptionsRasComponent,
     OverviewComponent,
