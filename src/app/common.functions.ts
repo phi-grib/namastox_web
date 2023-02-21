@@ -12,6 +12,15 @@ export class CommonFunctions {
     }
 
   refreshRA(){
+    this.ra.pending_tasks = [];
+    this.results.resultSelected = '';
+    this.results.decisionSelected = '';
+        /**Get general info ra */
+        this.commonService.getGeneralInfo(this.ra.name).subscribe(result => {
+          this.ra.general_information = result
+        },error=> {
+          console.log(error)
+        })
     /** Get pending tasks */
          this.commonService.getPendingTasks(this.ra.name).subscribe(result => {
           this.ra.pending_tasks = result
@@ -41,6 +50,10 @@ export class CommonFunctions {
         console.log("error")
          console.log(error)
        })
+       setTimeout(() => {
+        this.commonService.AutoGenerateForm();
+       }, 500);
+       
   }
 
   /**separates tasks into different lists  */

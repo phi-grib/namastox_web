@@ -7,12 +7,12 @@ import {
 } from '@angular/core';
 import mermaid from 'mermaid';
 @Component({
-  selector: 'app-navbar-right',
-  templateUrl: './navbar-right.component.html',
-  styleUrls: ['./navbar-right.component.scss']
+  selector: 'app-workflow',
+  templateUrl: './workflow.component.html',
+  styleUrls: ['./workflow.component.scss']
 })
 
-export class NavbarRightComponent implements OnInit, AfterViewInit { 
+export class WorkflowComponent implements OnInit, AfterViewInit { 
   @ViewChild('mermaidDiv', { static: false }) mermaidDiv: ElementRef;
 
   public graphDefinition = 

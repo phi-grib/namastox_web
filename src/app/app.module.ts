@@ -6,14 +6,11 @@ import { FormsModule } from '@angular/forms';
 import { DataTablesModule } from 'angular-datatables';
 import { AngularSplitModule } from 'angular-split';
 import { AppComponent } from './app.component';
-import { NavbarLeftComponent } from './navbar-left/navbar-left.component';
-import { NavbarRightComponent } from './navbar-right/navbar-right.component';
+import { WorkflowComponent } from './workflow/workflow.component';
 import { NotesComponent } from './notes/notes.component';
-import { SelectorRaComponent } from './selector-ra/selector-ra.component';
 import { OptionsRasComponent } from './options-ras/options-ras.component';
 import { RA,Global, PendingTasks, Results } from './globals';
 import { OverviewComponent } from './overview/overview.component';
-import { GeneralInfomrationComponent } from './general-infomration/general-infomration.component';
 import { GeneralInformationComponent } from './general-information/general-information.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormlyModule } from '@ngx-formly/core';
@@ -26,13 +23,10 @@ import { SelectRaComponent } from './select-ra/select-ra.component';
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarLeftComponent,
-    NavbarRightComponent,
+    WorkflowComponent,
     NotesComponent,
-    SelectorRaComponent,
     OptionsRasComponent,
     OverviewComponent,
-    GeneralInfomrationComponent,
     GeneralInformationComponent,
     FileValueAccessor,
     FormlyFieldFile,

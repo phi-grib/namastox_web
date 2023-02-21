@@ -1,10 +1,38 @@
-<div style="height: 99vh;" class="container-fluid app-base">
-  <as-split direction="horizontal">
-    <as-split-area [size]="this.navbarleft">
-      <app-navbar-left></app-navbar-left>
-    </as-split-area>
-    <as-split-area [size]="this.navbarright">
-      <app-navbar-right></app-navbar-right>
-    </as-split-area>
-  </as-split>
-</div>
+<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="pills-overview-tab" data-bs-toggle="pill" data-bs-target="#pills-overview" type="button" role="tab" aria-controls="pills-overview" aria-selected="True">Overview</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="pills-gen-information-tab" data-bs-toggle="pill" data-bs-target="#pills-gen-information" type="button" role="tab" aria-controls="pills-gen-information" aria-selected="false">General information</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="pills-results-tab" data-bs-toggle="pill" data-bs-target="#pills-results" type="button" role="tab" aria-controls="pills-results" aria-selected="false">Results</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="pills-decisions-tab" data-bs-toggle="pill" data-bs-target="#pills-decisions" type="button" role="tab" aria-controls="pills-decisions" aria-selected="false">Decisions</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="pills-notes-tab" data-bs-toggle="pill" data-bs-target="#pills-notes" type="button" role="tab" aria-controls="pills-notes" aria-selected="false">Notes</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="pills-assesment-tab" data-bs-toggle="pill" data-bs-target="#pills-assesment" type="button" role="tab" aria-controls="pills-assesment" aria-selected="false">Assesment</button>
+  </li>
+</ul>
+
+<as-split style="height: 93vh;" class="" direction="horizontal">
+  <as-split-area [size]="this.navbarleft">
+
+<div class="tab-content container-fluid" id="pills-tabContent">
+<app-select-ra></app-select-ra>
+<div class="tab-pane fade show active mt-2" id="pills-overview" role="tabpanel" aria-labelledby="pills-overview-tab"><app-overview *ngIf="this.global.interfaceVisible"></app-overview></div>
+<div class="tab-pane fade mt-2" id="pills-gen-information" role="tabpanel" aria-labelledby="pills-gen-information-tab"><app-general-information *ngIf="this.ra.general_information"></app-general-information></div>
+<div class="tab-pane fade mt-2" id="pills-results" role="tabpanel" aria-labelledby="pills-results-tab"><app-results *ngIf="this.ra.results"></app-results></div>
+<div class="tab-pane fade mt-2" id="pills-decisions" role="tabpanel" aria-labelledby="pills-decisions-tab"><app-decisions *ngIf="this.ra.results"></app-decisions></div>
+<div class="tab-pane fade mt-2" id="pills-notes" role="tabpanel" aria-labelledby="pills-notes-tab"> <app-notes></app-notes> </div>
+<div class="tab-pane fade mt-2" id="pills-assesment" role="tabpanel" aria-labelledby="pills-assesment-tab">Assesment</div>
+</div> 
+</as-split-area>
+<as-split-area [size]="this.navbarright">
+  <app-workflow></app-workflow>
+</as-split-area>
+</as-split>
