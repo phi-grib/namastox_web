@@ -43,10 +43,13 @@ export class ResultsComponent implements OnInit {
     })
   }
 
+
+
   show_form(){
     this.fields = [];
     this.form =  new FormGroup({});
     this.commonService.getPendingTask(this.ra.name,this.pending_task_selected).subscribe(result => {
+
     this.pending_task = result;
     this.model = this.pending_task.result;
     var templateObject:any;
@@ -68,23 +71,24 @@ export class ResultsComponent implements OnInit {
   }
   onSubmit(model: any) {
       this.loadForm  = false;
-      this.updateService.updateResult(this.ra.name,model).subscribe(result => {
-        if(result['success']){
-          this.pendingTasks.results = [];
-          this.func.refreshRA();
-          setTimeout(() => {
-            this.pending_task_selected = this.pendingTasks.results[0].id;
-            this.show_form();
-          }, 200);
-          this.toastr.success('RA ' + this.ra.name ,'SUCCESSFULLY UPDATED', {
+      this.updateService.updateResult(this.ra.name,model).subscribe({
+        next: (result) => {
+          if(result['success']){
+            this.pendingTasks.results = [];
+            this.func.refreshRA();
+            setTimeout(() => {
+              this.pending_task_selected = this.pendingTasks.results[0].id;
+              this.show_form();
+            }, 200);
+            this.toastr.success('RA ' + this.ra.name ,'SUCCESSFULLY UPDATED', {
+              timeOut: 5000, positionClass: 'toast-top-right'});
+          }
+        },
+        error: (e) => {
+          this.toastr.error('Check the console to see more information','Unexpected Error', {
             timeOut: 5000, positionClass: 'toast-top-right'});
-        }
-   
-      },error => {
-        this.toastr.error('Check the console to see more information','Unexpected Error', {
-          timeOut: 5000, positionClass: 'toast-top-right'});
-        console.log(error)
-      })
-      
+            console.error(e)
+        },
+      });
   }
 }
