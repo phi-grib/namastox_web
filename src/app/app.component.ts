@@ -14,20 +14,29 @@ export class AppComponent implements OnInit{
   constructor(public global: Global,public ra:RA,private commonService : CommonService, private func: CommonFunctions) {}
   ngOnInit(): void {
 
-    this.commonService.getRaList().subscribe((result:any) => {
-      this.ra.listRA = [...result];
-      this.ra.name = this.ra.listRA[this.ra.listRA.length-1];
-      /**Get general info ra */
-      this.commonService.getGeneralInfo(this.ra.name).subscribe(result => {
-      this.ra.general_information = result
-    },error=> {
-      console.log(error)
+    this.commonService.getRaList().subscribe({
+
+      next: (result:any) => {
+        this.ra.listRA = [...result];
+        this.ra.name = this.ra.listRA[this.ra.listRA.length-1];
+        /**Get general info ra */
+      this.commonService.getGeneralInfo(this.ra.name).subscribe({
+         next: (result) => this.ra.general_information = result,
+         error: (e) => {
+          console.log(e)
+         }
+      })
+    },
+    error: (e) => {
+      console.error(e)
+    },
+    complete: () => {
+      this.func.refreshRA()
+      setTimeout(() => {
+        this.global.interfaceVisible = true;
+      }, 500);
+    }
     })
-      this.func.refreshRA();
-    })
-    setTimeout(() => {
-      this.global.interfaceVisible = true;
-    }, 500);
   }
   navbarleft = 60;
   navbarright = 40;

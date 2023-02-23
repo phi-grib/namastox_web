@@ -29,7 +29,6 @@ export class CommonFunctions {
     })
     /**Get step of default RA */
     this.commonService.getSteps(this.ra.name).subscribe((result:any) => {
-      console.log("STEPS")
       this.ra.listSteps = [...result];
     },
     error=> {
