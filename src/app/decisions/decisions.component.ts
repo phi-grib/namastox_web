@@ -69,7 +69,8 @@ export class DecisionsComponent implements OnInit {
   }
   onSubmit(model: any) {
     this.loadForm  = false;
-      this.updateService.updateResult(this.ra.name,model).subscribe(result => {
+    this.updateService.updateResult(this.ra.name,model).subscribe({
+      next: (result) => {
         if(result['success']){
           this.pendingTasks.decisions = [];
           this.func.refreshRA();
@@ -80,10 +81,12 @@ export class DecisionsComponent implements OnInit {
           this.toastr.success('RA ' + this.ra.name ,'SUCCESSFULLY UPDATED', {
             timeOut: 5000, positionClass: 'toast-top-right'});
         }
-      },error => {
+      },
+      error: (e) => {
         this.toastr.error('Check the console to see more information','Unexpected Error', {
           timeOut: 5000, positionClass: 'toast-top-right'});
-        console.log("error")
-      })
+          console.error(e)
+      },
+    });
   }
 }
