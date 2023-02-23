@@ -16,16 +16,18 @@ export class CommonFunctions {
     this.results.resultSelected = '';
     this.results.decisionSelected = '';
         /**Get general info ra */
-        this.commonService.getGeneralInfo(this.ra.name).subscribe(result => {
-          this.ra.general_information = result
-        },error=> {
-          console.log(error)
+        this.commonService.getGeneralInfo(this.ra.name).subscribe({
+          next: (result )=> this.ra.general_information = result,
+          error: (e)=> console.log(e)
+        
         })
     /** Get pending tasks */
-         this.commonService.getPendingTasks(this.ra.name).subscribe(result => {
-          this.ra.pending_tasks = result
-          this.separatePendingTasks();
-  
+         this.commonService.getPendingTasks(this.ra.name).subscribe({
+          next: (result)=> {
+            this.ra.pending_tasks = result
+            this.separatePendingTasks();
+          },
+          error: (e)=> console.log(e) 
     })
     /**Get step of default RA */
     this.commonService.getSteps(this.ra.name).subscribe((result:any) => {
@@ -35,19 +37,19 @@ export class CommonFunctions {
       console.log(error)
     })
     /**Get status of RA */
-    this.commonService.getStatus(this.ra.name).subscribe(result => {
-      this.ra.status = result.ra
-    }, error => {
-      console.log(error)
+    this.commonService.getStatus(this.ra.name).subscribe({
+      next: (result) => this.ra.status = result.ra,
+      error: (e) => console.error(e)
     })
+    
        /**Get results of RA */
-        this.commonService.getResults(this.ra.name).subscribe(result => {
-         this.ra.results = result
-         this.separateResults();
-         
-       }, error => {
-        console.log("error")
-         console.log(error)
+        this.commonService.getResults(this.ra.name).subscribe({
+
+         next: (result)=> {
+          this.ra.results = result
+          this.separateResults();
+         },
+         error: (e)=> console.error(e)
        })
        setTimeout(() => {
         this.commonService.AutoGenerateForm();

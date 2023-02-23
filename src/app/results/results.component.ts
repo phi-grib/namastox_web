@@ -48,8 +48,9 @@ export class ResultsComponent implements OnInit {
   show_form(){
     this.fields = [];
     this.form =  new FormGroup({});
-    this.commonService.getPendingTask(this.ra.name,this.pending_task_selected).subscribe(result => {
+    this.commonService.getPendingTask(this.ra.name,this.pending_task_selected).subscribe({
 
+    next:(result)=>{
     this.pending_task = result;
     this.model = this.pending_task.result;
     var templateObject:any;
@@ -67,6 +68,8 @@ export class ResultsComponent implements OnInit {
       }
   }
   this.loadForm = true;
+},
+error: (e)=> console.log(e)
     })
   }
   onSubmit(model: any) {

@@ -40,8 +40,9 @@ export class DecisionsComponent implements OnInit {
 
   }
   selectDecision(id:string){
-    this.commonService.getResult(this.ra.name,id).subscribe(result => {
-      this.results.decisionSelected = result  
+    this.commonService.getResult(this.ra.name,id).subscribe({
+      next: (result) =>  this.results.decisionSelected = result,
+      error: (e) => console.log(e)  
     })
   }
 
