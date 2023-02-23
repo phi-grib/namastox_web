@@ -5,6 +5,7 @@ import { CommonFunctions } from '../common.functions';
 import { CommonService } from '../common.service';
 import { RA } from '../globals';
 import { UpdateService } from '../update.service';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-general-information',
   templateUrl: './general-information.component.html',
@@ -18,16 +19,21 @@ export class GeneralInformationComponent implements OnInit {
   fields: FormlyFieldConfig[] = [];
 
   onSubmit(model: any) {
-
     this.updateService.updateGeneralInformation(this.ra.name,model).subscribe(result => {
-      console.log(result)
+      if(result['success']){
       this.func.refreshRA();
+      this.toastr.success('RA ' + this.ra.name ,'SUCCESSFULLY UPDATED', {
+        timeOut: 5000, positionClass: 'toast-top-right'});
+      }
     },error => {
+      this.toastr.error('Check the console log to see more information','Unexpected ERROR', {
+        timeOut: 5000, positionClass: 'toast-top-right'});
+
       console.log(error)
     })
   }
 
-  constructor(public ra: RA, private commonService:CommonService, private updateService: UpdateService,private func: CommonFunctions){}
+  constructor(public ra: RA, private commonService:CommonService, private updateService: UpdateService,private func: CommonFunctions,private toastr: ToastrService){}
 
   ngOnInit(): void {
     setTimeout(() => {

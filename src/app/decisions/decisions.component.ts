@@ -5,6 +5,8 @@ import { PendingTasks, RA, Results } from '../globals';
 import {FormGroup} from '@angular/forms';
 import {FormlyFieldConfig} from '@ngx-formly/core';
 import { UpdateService } from '../update.service';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-decisions',
@@ -19,7 +21,7 @@ export class DecisionsComponent implements OnInit {
   pending_task:any;
   objectKeys = Object.keys;
   model:any;
-  constructor(public ra: RA,private commonService: CommonService, private func: CommonFunctions, public pendingTasks:PendingTasks, public results:Results,private updateService:UpdateService){
+  constructor(private toastr:ToastrService,public ra: RA,private commonService: CommonService, private func: CommonFunctions, public pendingTasks:PendingTasks, public results:Results,private updateService:UpdateService){
   }
   ngOnInit(): void {
     if(this.pendingTasks.decisions[0]){
@@ -68,9 +70,19 @@ export class DecisionsComponent implements OnInit {
   onSubmit(model: any) {
     this.loadForm  = false;
       this.updateService.updateResult(this.ra.name,model).subscribe(result => {
-        console.log("update done")
-        console.log(result)
+        if(result['success']){
+          this.pendingTasks.decisions = [];
+          this.func.refreshRA();
+          setTimeout(() => {
+            this.pending_task_selected = this.pendingTasks.decisions[0].id;
+            this.show_form();
+          }, 200);
+          this.toastr.success('RA ' + this.ra.name ,'SUCCESSFULLY UPDATED', {
+            timeOut: 5000, positionClass: 'toast-top-right'});
+        }
       },error => {
+        this.toastr.error('Check the console to see more information','Unexpected Error', {
+          timeOut: 5000, positionClass: 'toast-top-right'});
         console.log("error")
       })
   }
