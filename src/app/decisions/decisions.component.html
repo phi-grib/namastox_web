@@ -37,14 +37,11 @@
                 </div>
 
               </div>
-
-          </div>
-          <div class="container-form p-3 mt-3">
-            <form *ngIf="this.loadForm" [formGroup]="form" (ngSubmit)="onSubmit(model)">
-                <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
-                <button type="submit" [disabled]="!this.form.valid" class="btn btn-ets-do submit-button">Submit</button>
-              </form>
-        </div> 
+            <form class="container-form mt-3" *ngIf="this.loadForm" [formGroup]="form" (ngSubmit)="onSubmit(model)">
+              <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
+              <button type="submit" [disabled]="!this.form.valid" class="btn btn-ets-do submit-button">Submit</button>
+            </form>
+          </div>  
         </div>
     </div>
   </div>  
