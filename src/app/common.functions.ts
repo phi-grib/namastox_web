@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CommonService } from './common.service';
 import { PendingTasks, RA, Results } from './globals';
+import { forkJoin } from 'rxjs';
 declare var $: any;
 @Injectable({
     providedIn: 'root'
@@ -15,48 +16,26 @@ export class CommonFunctions {
     this.ra.pending_tasks = [];
     this.results.resultSelected = '';
     this.results.decisionSelected = '';
-        /**Get general info ra */
-        this.commonService.getGeneralInfo(this.ra.name).subscribe({
-          next: (result )=> this.ra.general_information = result,
-          error: (e)=> console.log(e)
-        
-        })
-    /** Get pending tasks */
-         this.commonService.getPendingTasks(this.ra.name).subscribe({
-          next: (result)=> {
-            this.ra.pending_tasks = result
-            this.separatePendingTasks();
-          },
-          error: (e)=> console.log(e) 
-    })
-    /**Get step of default RA */
-    this.commonService.getSteps(this.ra.name).subscribe((result:any) => {
-      this.ra.listSteps = [...result];
-    },
-    error=> {
-      console.log(error)
-    })
-    /**Get status of RA */
-    this.commonService.getStatus(this.ra.name).subscribe({
-      next: (result) => this.ra.status = result.ra,
-      error: (e) => console.error(e)
-    })
-    
-       /**Get results of RA */
-        this.commonService.getResults(this.ra.name).subscribe({
+    let generalInfo$ = this.commonService.getGeneralInfo(this.ra.name);
+    let pendingTasks$ = this.commonService.getPendingTasks(this.ra.name)
+    let listSteps$ = this.commonService.getSteps(this.ra.name)
+    let status$ =   this.commonService.getStatus(this.ra.name)
+    let results$ = this.commonService.getResults(this.ra.name)
+    let observables = [generalInfo$,pendingTasks$,listSteps$,status$,results$]
 
-         next: (result)=> {
-          this.ra.results = result
-          this.separateResults();
-         },
-         error: (e)=> console.error(e)
-       })
-       setTimeout(() => {
+    forkJoin(observables).subscribe( values => {
+      this.ra.general_information = values[0]
+      this.ra.pending_tasks = values[1]
+      this.separatePendingTasks();
+      this.ra.listSteps = [...values[2]];
+      this.ra.status = values[3].ra;
+      this.ra.results = values[4]
+      this.separateResults();
+      setTimeout(() => {
         this.commonService.AutoGenerateForm();
        }, 500);
-       
+    })   
   }
-
   /**separates tasks into different lists  */
   separatePendingTasks(){
     this.pendingTasks.results = [];
