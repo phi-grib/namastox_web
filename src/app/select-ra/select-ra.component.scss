@@ -23,21 +23,7 @@ select {
   color: $secondary-color;
 }
 
-.btn-nam-bad {
-  background-color: #646363;
-  color: #ffffff;
-  border-width: 0;
-  // font-family: 'Barlow Semi Condensed', 'Arial', 'Helvetica';
-  letter-spacing: 0.05em;
-  border-radius: 0;
-}
 
-.btn-nam-bad:hover,
-.btn-nam-bad:focus,
-.btn-nam-bad.active {
-  background-color:#9e9d9d ;
-  color: #ffffff;
-}
 
 .btn-nam-good {
   background: #28328A;
