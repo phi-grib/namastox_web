@@ -68,20 +68,22 @@ export class SelectRaComponent  {
 
   }
   newRA(){
-     this.commonService.createRA(this.newRAname).subscribe(result=>{
-      this.commonService.getRaList().subscribe((result:any) => {
-        this.ra.listRA = [...result];
-        this.ra.name = this.ra.listRA[this.ra.listRA.length-1];
-        this.func.refreshRA();
-      })
-      setTimeout(() => {
-        document.getElementById('menubtn').click();
-      }, 500);
-     },error =>{
-      console.log("error:")
-      console.log(error)
+    this.commonService.createRA(this.newRAname).subscribe({
+      next:(result)=> {
+        if(result['success']){
+          this.commonService.getRaList().subscribe((result:any) => {
+            this.ra.listRA = [...result];
+            this.ra.name = this.ra.listRA[this.ra.listRA.length-1];
+            this.func.refreshRA();
+          })
+          setTimeout(() => {
+            document.getElementById('menubtn').click();
+          }, 500);
+        }
+      },
+      error: (e) => { console.log(e)},
+      complete: () =>  this.newRAname = ''
     })
-    this.newRAname = '';
   }
     // angular-split function
     @ViewChild('mySplit') mySplitEl: SplitComponent
