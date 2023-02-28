@@ -48,24 +48,27 @@ export class DecisionsComponent implements OnInit {
 
   show_form(){
     this.fields = [];
-    this.commonService.getPendingTask(this.ra.name,this.pending_task_selected).subscribe(result => {
-    this.pending_task = result;
-    this.model = this.pending_task.result;
-    var templateObject:any;
-    for (const property in this.pending_task.result) {
-      if(!(property == "id" || property == 'result_description' 
-         || property == 'result_type' || property == 'summary_type')){
-        templateObject = {};
-        templateObject['key'] = property
-        templateObject['type'] = 'input';
-        templateObject['props'] = {
-          label: property,
-          required: false,
-        };
-        this.fields.push(templateObject)
+    this.commonService.getPendingTask(this.ra.name,this.pending_task_selected).subscribe({
+      next:(result)=> {
+        this.pending_task = result;
+        this.model = this.pending_task.result;
+        var templateObject:any;
+        for (const property in this.pending_task.result) {
+          if(!(property == "id" || property == 'result_description' 
+             || property == 'result_type' || property == 'summary_type')){
+            templateObject = {};
+            templateObject['key'] = property
+            templateObject['type'] = 'input';
+            templateObject['props'] = {
+              label: property,
+              required: false,
+            };
+            this.fields.push(templateObject)
+          }
       }
-  }
-  this.loadForm = true;
+      this.loadForm = true;
+      },
+      error: (e)=> console.log(e)
     })
   }
   onSubmit(model: any) {

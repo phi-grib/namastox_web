@@ -19,17 +19,20 @@ export class GeneralInformationComponent implements OnInit {
   fields: FormlyFieldConfig[] = [];
 
   onSubmit(model: any) {
-    this.updateService.updateGeneralInformation(this.ra.name,model).subscribe(result => {
-      if(result['success']){
-      this.func.refreshRA();
-      this.toastr.success('RA ' + this.ra.name ,'SUCCESSFULLY UPDATED', {
-        timeOut: 5000, positionClass: 'toast-top-right'});
-      }
-    },error => {
-      this.toastr.error('Check the console log to see more information','Unexpected ERROR', {
-        timeOut: 5000, positionClass: 'toast-top-right'});
 
-      console.log(error)
+    this.updateService.updateGeneralInformation(this.ra.name,model).subscribe({
+      next: (result) =>{
+        if(result['success']){
+          this.func.refreshRA();
+          this.toastr.success('RA ' + this.ra.name ,'SUCCESSFULLY UPDATED', {
+            timeOut: 5000, positionClass: 'toast-top-right'});
+          }
+      },
+      error: (e) => {
+        this.toastr.error('Check the console log to see more information','Unexpected ERROR', {
+          timeOut: 5000, positionClass: 'toast-top-right'});
+          console.log(e)
+      }
     })
   }
 
@@ -38,7 +41,7 @@ export class GeneralInformationComponent implements OnInit {
   ngOnInit(): void {
     setTimeout(() => {
       this.generateForm();
-    }, 600);
+    }, 500);
     this.commonService.generateForms$.subscribe( () => {
       this.generateForm();
     })

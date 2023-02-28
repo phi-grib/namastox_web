@@ -22,17 +22,16 @@ export class SelectRaComponent  {
   }
   
   loadStep(){
-    this.commonService.getStatusWithStep(this.ra.name,this.ra.status.step).subscribe(result => {
-      this.ra.status = result.ra
-    }, error => {
-      console.log(error)
+    this.commonService.getStatusWithStep(this.ra.name,this.ra.status.step).subscribe({
+      next:(result) => this.ra.status = result.ra,
+      error: (e) => console.log(e)
     })
-    this.commonService.getResultsWithStep(this.ra.name,this.ra.status.step).subscribe(result => {
-      this.ra.results = result
-      this.func.separateResults();
-    }, error => {
-     console.log("error")
-      console.log(error)
+    this.commonService.getResultsWithStep(this.ra.name,this.ra.status.step).subscribe({
+      next:(result) => {
+        this.ra.results = result
+        this.func.separateResults();
+      },
+      error: (e) => console.log(e)
     })
   }
 
@@ -54,22 +53,19 @@ export class SelectRaComponent  {
     })
   }
   deleteStep(){
-    this.commonService.deleteStep(this.ra.name,this.ra.status.step).subscribe(result =>{
 
-      if(result['success']){
-        this.toastr.success('STEP ' + this.ra.status.step ,'SUCCESSFULLY DELETED', {
-          timeOut: 5000, positionClass: 'toast-top-right'});
-      }
-      this.func.refreshRA();
-      document.getElementById('menubtn').click();
-    },error => {
-      console.log(error)
+    this.commonService.deleteStep(this.ra.name,this.ra.status.step).subscribe({
+      next:(result) => {
+        if(result['success']){
+          this.toastr.success('STEP ' + this.ra.status.step ,'SUCCESSFULLY DELETED', {
+            timeOut: 5000, positionClass: 'toast-top-right'});
+        }
+        this.func.refreshRA();
+        document.getElementById('menubtn').click();
+      },
+      error: (e) => console.log(e)
     })
-    
-  }
-  displayOptions(){
-  // $("#menu").css("display", "block");
-  $("#menu").animate({width:"auto"},"slow");
+
   }
   newRA(){
      this.commonService.createRA(this.newRAname).subscribe(result=>{
