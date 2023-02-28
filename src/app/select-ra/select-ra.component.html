@@ -38,16 +38,18 @@
               </button>
           </div>
           <div class="modal-body">
-              <div class="row form-inline">
-                  <div class="form-group mx-sm-3 mb-2">
-                      <label for="model_name">RA name: </label>
-                      <input type="text" class="form-control ml-2" [(ngModel)]="this.newRAname" placeholder="name">
-                  </div>
+            <div class="row g-3 align-items-center">
+              <div class="col-auto">
+                <label for="model_name" class="col-form-label label_name">RA name:</label>
               </div>
+              <div class="col-auto">
+                <input type="text" class="form-control ml-2" [(ngModel)]="this.newRAname" placeholder="name">
+              </div>
+            </div>
           </div>
           <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-              <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="newRA()">Create</button>
+              <button type="button" class="btn btn-nam-bad" data-bs-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-ets-do" data-bs-dismiss="modal" (click)="newRA()">Create</button>
           </div>
       </div>
   </div>
