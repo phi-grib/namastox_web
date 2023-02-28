@@ -1,0 +1,15 @@
+@import './colors.scss';
+
+.nav{
+    background-color: none !important;
+    &-link {
+        color:  $secondary-color;
+        font-size: 1rem;
+        &.active{
+            background: none !important;
+            color: $secondary-color;
+            font-weight: bold;
+            font-size: 1rem;
+            border-bottom: 3px solid $tertiary-color;
+            border-radius: 0;
+        }}}

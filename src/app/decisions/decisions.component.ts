@@ -27,7 +27,7 @@ export class DecisionsComponent implements OnInit {
     if(this.pendingTasks.decisions[0]){
       this.pending_task_selected = this.pendingTasks.decisions[0].id;
       console.log(this.pending_task_selected)
-      this.show_form()
+      this.show_form();
     }  
     /**servicio */
     this.commonService.generateForms$.subscribe( () => {
@@ -36,7 +36,6 @@ export class DecisionsComponent implements OnInit {
           this.show_form(); 
         }
     })
-
   }
   selectDecision(id:string){
     this.commonService.getResult(this.ra.name,id).subscribe({

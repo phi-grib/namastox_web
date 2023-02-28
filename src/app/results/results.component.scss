@@ -1,17 +1,13 @@
 @import '../../assets/scss/title.scss';
 @import '../../assets/scss/buttons.scss';
-
-
+@import '../../assets/scss/submenu.scss';
 
 #dtResults {
     padding-top:10px;
     thead {
         background-color: #59AD2B;
         color: white;
-       
-    }
-}
-
+       }}
 hr{
     height: 3px;
     background-color: $tertiary-color;

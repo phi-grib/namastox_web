@@ -1,53 +1,60 @@
-
-
-
-
-
-  <div *ngIf="this.pendingTasks.decisions.length > 0" class="container-fluid">
-    <div  class="row">
-        <div  class="col">
-          <select (change)="show_form()" [(ngModel)]="this.pending_task_selected"  class="form-select" aria-label="Default select example">
-            <option *ngFor="let idx of objectKeys(this.pendingTasks.decisions)" [value]='this.pendingTasks.decisions[idx].id'>{{this.pendingTasks.decisions[idx].id}}</option>
-          </select>
-          <div *ngIf="this.pending_task?.result" class="container-information mt-2">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-2 text">
-                    <strong>Result id</strong>
+  
+  
+  <ul class="nav nav-pills mb-3 " id="results-tab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="pills-pendingdecisions-tab" data-bs-toggle="pill" data-bs-target="#pills-pendingdecisions" type="button" role="tab" aria-controls="pills-pendingdecisions" aria-selected="True">Pending Decisions</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="pills-pastdecisions-tab" data-bs-toggle="pill" data-bs-target="#pills-pastdecisions" type="button" role="tab" aria-controls="pills-pastdecisions" aria-selected="false">Past Decisions</button>
+    </li>
+  </ul>
+  
+<div class="tab-content container-fluid" id="pills-tabContent">
+  <div class="tab-pane fade show active mt-2" id="pills-pendingdecisions" role="tabpanel" aria-labelledby="pills-pendingdecisions-tab">
+    <div *ngIf="this.pendingTasks.decisions.length > 0; else noDecisions">
+      <div  class="row">
+          <div  class="col">
+            <select (change)="show_form()" [(ngModel)]="this.pending_task_selected"  class="form-select" aria-label="Default select example">
+              <option *ngFor="let idx of objectKeys(this.pendingTasks.decisions)" [value]='this.pendingTasks.decisions[idx].id'>{{this.pendingTasks.decisions[idx].id}}</option>
+            </select>
+            <div *ngIf="this.pending_task?.result" class="container-information mt-2">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-2 text">
+                      <strong>Result id</strong>
+                    </div>
+                    <div class="col-10">
+                     {{this.pending_task.result.id}}
+                    </div>
                   </div>
-                  <div class="col-10">
-                   {{this.pending_task.result.id}}
+                  <!-- <div class="row">
+                    <div class="col text">
+                      <strong>Result type</strong>
+                    </div>
+                    <div class="col">
+                     {{this.pending_task.result.result_type}}
+                    </div>
+                  </div> -->
+                  <div class="row">
+                    <div class="col-2 text">
+                      <strong>Resul description</strong>
+                    </div>
+                    <div class="col-10">
+                        {{this.pending_task.result.result_description}}
+                    </div>
                   </div>
                 </div>
-                <!-- <div class="row">
-                  <div class="col text">
-                    <strong>Result type</strong>
-                  </div>
-                  <div class="col">
-                   {{this.pending_task.result.result_type}}
-                  </div>
-                </div> -->
-                <div class="row">
-                  <div class="col-2 text">
-                    <strong>Resul description</strong>
-                  </div>
-                  <div class="col-10">
-                      {{this.pending_task.result.result_description}}
-                  </div>
-                </div>
-
-              </div>
-            <form class="container-form mt-3" *ngIf="this.loadForm" [formGroup]="form" (ngSubmit)="onSubmit(model)">
-              <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
-              <button type="submit" [disabled]="!this.form.valid" class="btn btn-ets-do submit-button">Submit</button>
-            </form>
-          </div>  
-        </div>
-    </div>
-  </div>  
-  <hr>
-<div class="container-fluid">
-
+              <form class="container-form mt-3" *ngIf="this.loadForm" [formGroup]="form" (ngSubmit)="onSubmit(model)">
+                <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
+                <button type="submit" [disabled]="!this.form.valid" class="btn btn-ets-do submit-button">Submit</button>
+              </form>
+            </div>  
+          </div>
+      </div>
+    </div>  
+    <ng-template #noDecisions>No pending decisions</ng-template>
+  </div>
+<div class="tab-pane fade" id="pills-pastdecisions" role="tabpanel" aria-labelledby="pills-pastdecisions-tab">
     <div class="row">
         <div class="col">
             <table  id="dtDecisions" class="display compact">
@@ -154,3 +161,9 @@
     </div>
   </div>
 </div>
+</div>
+  
+  
+
+  
+
