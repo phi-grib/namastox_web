@@ -35,13 +35,18 @@ export class CommonFunctions {
             next:(result)=> {
               this.ra.pending_tasks = result
               this.separatePendingTasks();
+              this.commonService.AutoGenerateForm();
+
             },
             error: (e) =>{
               console.log(e)
             }
           })
+        }else{
+          this.pendingTasks.results = [];
+          this.pendingTasks.decisions = [];
+          this.commonService.AutoGenerateForm();
         }
-        this.commonService.AutoGenerateForm();
        }, 500);
     })   
   }
