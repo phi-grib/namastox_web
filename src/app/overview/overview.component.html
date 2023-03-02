@@ -74,18 +74,22 @@
           <div style="padding-top: 5%;"><strong >Substances</strong></div>
         </div>
         <div class="col border">
-       <div class="row">
-        <div class="col border text"><strong>Name</strong></div>
-        <div class="col border">{{this.ra.general_information.general.substances.name}}</div>
-       </div>
-       <div class="row">
-        <div class="col border text"><strong>CASRN</strong></div>
-        <div class="col border">{{this.ra.general_information.general.substances.CASRN}}</div>
-       </div>
-       <div class="row">
-        <div class="col border text"><strong>SMILES</strong></div>
-        <div class="col border">{{this.ra.general_information.general.substances.SMILES}}</div>
-       </div>
+      <table class="table">
+        <thead style="color: purple;">
+            <tr>
+              <th>Name</th>
+              <th>CASRN</th>
+              <th>SMILES</th>
+            </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let key of this.objectKeys(this.ra.general_information.general.substances)">
+            <td>{{this.ra.general_information.general.substances[key].name}}</td>
+            <td>{{this.ra.general_information.general.substances[key].CASRN}}</td>
+            <td>{{this.ra.general_information.general.substances[key].SMILES}}</td>
+          </tr>
+        </tbody>
+      </table>
         </div>
       </div>
 </div>

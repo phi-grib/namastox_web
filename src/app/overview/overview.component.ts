@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RA } from '../globals';
 
 @Component({
@@ -6,10 +6,10 @@ import { RA } from '../globals';
   templateUrl: './overview.component.html',
   styleUrls: ['./overview.component.scss']
 })
-export class OverviewComponent {
+export class OverviewComponent{
+  objectKeys = Object.keys;
 
   constructor(public ra: RA){
 
   }
-
 }
