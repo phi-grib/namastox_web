@@ -56,8 +56,14 @@ export class WorkflowComponent implements OnInit, AfterViewInit {
   }
 
   redirectToTask(){
-    $('#pills-results-tab').click();
-    $('#pills-pendingtask-tab').click();
+    var task = 'result'
+    if(task == 'result'){
+      $('#pills-results-tab').click();
+      $('#pills-pendingtask-tab').click();
+    }{
+      $('#pills-decisions-tab').click();
+      $('#pills-pendingdecisions-tab').click();
+    }
   }
 
   ngAfterViewInit(): void {
