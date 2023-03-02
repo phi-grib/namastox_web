@@ -60,10 +60,11 @@ export class WorkflowComponent implements OnInit, AfterViewInit {
     if(task == 'result'){
       $('#pills-results-tab').click();
       $('#pills-pendingtask-tab').click();
-    }{
+    }else{
       $('#pills-decisions-tab').click();
       $('#pills-pendingdecisions-tab').click();
     }
+
   }
 
   ngAfterViewInit(): void {
