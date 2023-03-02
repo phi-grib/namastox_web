@@ -22,6 +22,8 @@ export class SelectRaComponent  {
   }
   
   loadStep(){
+    this.results.resultSelected = '';
+    this.results.decisionSelected = '';
     this.commonService.getStatusWithStep(this.ra.name,this.ra.status.step).subscribe({
       next:(result) => this.ra.status = result.ra,
       error: (e) => console.log(e)
