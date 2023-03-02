@@ -6,6 +6,7 @@ import {
   AfterViewInit,
 } from '@angular/core';
 import mermaid from 'mermaid';
+import { RA } from '../globals';
 @Component({
   selector: 'app-workflow',
   templateUrl: './workflow.component.html',
@@ -13,6 +14,10 @@ import mermaid from 'mermaid';
 })
 
 export class WorkflowComponent implements OnInit, AfterViewInit { 
+
+  constructor(private ra: RA){
+
+  }
   @ViewChild('mermaidDiv', { static: false }) mermaidDiv: ElementRef;
 
   public graphDefinition = 
@@ -50,13 +55,20 @@ export class WorkflowComponent implements OnInit, AfterViewInit {
     );
   }
 
+  redirectToTask(){
+    $('#pills-results-tab').click();
+    $('#pills-pendingtask-tab').click();
+  }
+
   ngAfterViewInit(): void {
     this.flowchartRefresh();
   }
 
   ngOnInit(): void {
     (window as any).onA = (nodeName) => {
-      this.graphDefinition += 'E-->F[NEW ELEMENT]\n';
+      if(nodeName === 'A' && this.ra.status.step == 1){
+        this.redirectToTask();
+      }
       this.flowchartRefresh();
     };
 
