@@ -95,4 +95,10 @@ export class CommonService {
     const url:string = environment.baseUrl + "delete/"+ra_name+"/"+step;
     return this.http.put(url,null)
   }
+
+  getLink(ra_name:string,file_name:string){
+    const url: string = environment.baseUrl + "link/"+ra_name+"/"+file_name;
+    return this.http.get(url,{ responseType: 'text' })
+
+  }
 }

@@ -30,5 +30,12 @@ export class UpdateService {
 
   }
 
+  updateLink(ra_name:string,file:any){
+    const formData = new FormData();
+    formData.append("file",file)
+    const url:string = environment.baseUrl + "link/"+ra_name;
+    return this.http.post(url,formData);
+  }
+
 
 }

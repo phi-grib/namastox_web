@@ -43,7 +43,8 @@
                 </div>
               </div>
               <form class="container-form mt-3" *ngIf="this.loadForm" [formGroup]="form" (ngSubmit)="onSubmit(model)">
-                <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
+                <formly-form [form]="form" [fields]="fields" [model]="model">
+                </formly-form>
                 <button type="submit" [disabled]="!this.form.valid" class="btn btn-ets-do submit-button">Submit</button>
               </form>
   
@@ -80,7 +81,7 @@
       <hr>
       <div class="card-body">
         <div class="row">
-            <div class="col text border-end border-bottom">
+            <div class="col-2 text border-end border-bottom">
               <strong>ID</strong>
             </div>
             <div class="col  border-bottom">
@@ -88,7 +89,7 @@
             </div>
           </div>
           <div class="row">
-            <div class="col text border-end border-bottom">
+            <div class="col-2 text border-end border-bottom">
               <strong>Resul description</strong>
             </div>
             <div class="col border-bottom">
@@ -96,7 +97,7 @@
             </div>
           </div>
           <div class="row">
-            <div class="col text border-end border-bottom">
+            <div class="col-2 text border-end border-bottom">
               <strong>Resul type</strong>
             </div>
             <div class="col border-bottom">
@@ -104,15 +105,16 @@
             </div>
           </div>
           <div class="row">
-            <div class="col text border-end border-bottom">
+            <div class="col-2 text border-end border-bottom d-flex  align-items-center">
               <strong>Result link</strong>
             </div>
             <div class="col border-bottom">
-                {{this.results.resultSelected.result_link}}
+              {{this.results.resultSelected.result_link}}
+              <a [href]="link" target="_blank" class="btn btn-outline-success m-2" role="button">Open Link</a>
             </div>
           </div>
           <div class="row">
-            <div class="col text border-end border-bottom">
+            <div class="col-2 text border-end border-bottom">
               <strong>Substance</strong>
             </div>
             <div class="col border-bottom">
@@ -120,7 +122,7 @@
             </div>
           </div>
           <div class="row">
-            <div class="col text border-end border-bottom">
+            <div class="col-2 text border-end border-bottom">
               <strong>Summary</strong>
             </div>
             <div class="col border-bottom">
@@ -128,7 +130,7 @@
             </div>
           </div>
           <div class="row">
-            <div class="col text border-end border-bottom">
+            <div class="col-2 text border-end border-bottom">
               <strong>Summary type</strong>
             </div>
             <div class="col border-bottom">
@@ -136,7 +138,7 @@
             </div>
           </div>
           <div class="row">
-            <div class="col text border-end border-bottom">
+            <div class="col-2 text border-end border-bottom">
               <strong>Uncertainty</strong>
             </div>
             <div class="col border-bottom">
@@ -144,7 +146,7 @@
             </div>
           </div>
           <div class="row">
-            <div class="col text border-end border-bottom">
+            <div class="col-2 text border-end border-bottom">
               <strong>Unit</strong>
             </div>
             <div class="col border-bottom">
@@ -152,7 +154,7 @@
             </div>
           </div>
           <div class="row">
-            <div class="col text border-end">
+            <div class="col-2 text border-end">
               <strong>Value</strong>
             </div>
             <div class="col">

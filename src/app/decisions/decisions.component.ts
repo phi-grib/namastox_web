@@ -77,6 +77,7 @@ export class DecisionsComponent implements OnInit {
           this.pendingTasks.decisions = [];
           this.func.refreshRA();
           setTimeout(() => {
+            console.log(this.pendingTasks.decisions)
             this.pending_task_selected = this.pendingTasks.decisions[0].id;
             this.show_form();
           }, 200);
