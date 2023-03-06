@@ -21,6 +21,7 @@ export class DecisionsComponent implements OnInit {
   pending_task:any;
   objectKeys = Object.keys;
   model:any;
+  link:string = "";
   constructor(private toastr:ToastrService,public ra: RA,private commonService: CommonService, private func: CommonFunctions, public pendingTasks:PendingTasks, public results:Results,private updateService:UpdateService){
   }
   ngOnInit(): void {
@@ -39,7 +40,21 @@ export class DecisionsComponent implements OnInit {
   }
   selectDecision(id:string){
     this.commonService.getResult(this.ra.name,id).subscribe({
-      next: (result) =>  this.results.decisionSelected = result,
+      next: (result) => {
+        this.results.decisionSelected = result;
+        if(this.results.decisionSelected.result_link){
+          this.commonService.getLink(this.ra.name,this.results.decisionSelected.result_link,).subscribe({
+            next:(result)=> {
+              console.log(result)
+              this.link = result
+              console.log(this.link)
+            },
+            error: (e)=> console.log(e)
+          })
+
+        }
+
+      },
       error: (e) => console.log(e)  
     })
   }
@@ -56,7 +71,11 @@ export class DecisionsComponent implements OnInit {
              || property == 'result_type' || property == 'summary_type')){
             templateObject = {};
             templateObject['key'] = property
+            if(property != 'result_link'){
             templateObject['type'] = 'input';
+            }else{
+            templateObject['type'] = 'file';
+            }
             templateObject['props'] = {
               label: property,
               required: false,
@@ -71,6 +90,8 @@ export class DecisionsComponent implements OnInit {
   }
   onSubmit(model: any) {
     this.loadForm  = false;
+    this.sendlink(model['result_link'])
+    model['result_link'] = model['result_link'][0].name;
     this.updateService.updateResult(this.ra.name,model).subscribe({
       next: (result) => {
         if(result['success']){
@@ -92,4 +113,19 @@ export class DecisionsComponent implements OnInit {
       },
     });
   }
+  sendlink(link){
+    if(link){
+      this.updateService.updateLink(this.ra.name,link[0]).subscribe({
+        next: (result)=> {
+          console.log(result);
+        },
+        error: (e) => {
+          this.toastr.error('Check the console to see more information','Failed uploaded result link', {
+            timeOut: 5000, positionClass: 'toast-top-right'});
+          console.log(e);
+        }
+      })
+    }
+  }
 }
+
