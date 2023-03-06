@@ -21,7 +21,8 @@ export class CommonFunctions {
     let listSteps$ = this.commonService.getSteps(this.ra.name)
     let status$ =   this.commonService.getStatus(this.ra.name)
     let results$ = this.commonService.getResults(this.ra.name)
-    let observables = [generalInfo$,listSteps$,status$,results$]
+    let workflow$ = this.commonService.getWorkflow(this.ra.name)
+    let observables = [generalInfo$,listSteps$,status$,results$,workflow$]
 
     forkJoin(observables).subscribe( values => {
       this.ra.general_information = values[0]
@@ -29,6 +30,7 @@ export class CommonFunctions {
       this.ra.status = values[2].ra;
       this.ra.results = values[3]
       this.separateResults();
+      this.ra.workflow = values[4]['result']
       setTimeout(() => {
         if(this.ra.status.step > 0){
           pendingTasks$.subscribe({

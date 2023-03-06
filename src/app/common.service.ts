@@ -101,4 +101,9 @@ export class CommonService {
     return this.http.get(url,{ responseType: 'text' })
 
   }
+
+  getWorkflow(ra_name:string){
+    const url: string = environment.baseUrl + "workflow/"+ra_name;
+    return this.http.get(url)
+  }
 }

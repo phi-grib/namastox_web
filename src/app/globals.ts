@@ -7,11 +7,11 @@ export class RA {
     name: string  = ""; 
     general_information:any;
     step:number = 0;
-    workflow_name:string = "";
     status:any  = undefined;
     results:any = undefined;
     pending_tasks:any = [];
     listSteps:any[] = [];
+    workflow:any = undefined;
 }
 
 export class Results {
