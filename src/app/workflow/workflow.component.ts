@@ -6,6 +6,7 @@ import {
   AfterViewInit,
 } from '@angular/core';
 import mermaid from 'mermaid';
+import { CommonService } from '../common.service';
 import { RA } from '../globals';
 @Component({
   selector: 'app-workflow',
@@ -15,7 +16,7 @@ import { RA } from '../globals';
 
 export class WorkflowComponent implements OnInit, AfterViewInit { 
 
-  constructor(private ra: RA){
+  constructor(private ra: RA,private commonService:CommonService){
 
   }
   @ViewChild('mermaidDiv', { static: false }) mermaidDiv: ElementRef;
@@ -46,11 +47,11 @@ export class WorkflowComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    setTimeout(() => {
-      if(this.ra.listRA.length > 0 ){
-            this.flowchartRefresh();
-      }
-    }, 300);
+    // setTimeout(() => {
+    //   if(this.ra.listRA.length > 0 ){
+    //         this.flowchartRefresh();
+    //   }
+    // }, 300);
   }
 
   ngOnInit(): void {
@@ -58,7 +59,6 @@ export class WorkflowComponent implements OnInit, AfterViewInit {
       if(nodeName === 'A' && this.ra.status.step == 1){
         this.redirectToTask();
       }
-      this.flowchartRefresh();
     };
 
     mermaid.initialize({
@@ -71,6 +71,10 @@ export class WorkflowComponent implements OnInit, AfterViewInit {
     });
 
     mermaid.init();
+
+    this.commonService.refreshWorklfow$.subscribe(()=>{
+      this.flowchartRefresh();
+    })
   }
 }
 

@@ -19,6 +19,14 @@ export class CommonService {
   AutoGenerateForm(){
     this.generateForms.next(true)
   }
+  /* update workflow */
+  private refreshWorkflow = new Subject<boolean>();
+  refreshWorklfow$ = this.refreshWorkflow.asObservable();
+  updateWorkflow(){
+    this.refreshWorkflow.next(true);
+  }
+  
+
   /**Get list of RAs */
   getRaList(){
     const url: string = environment.baseUrl + "list";

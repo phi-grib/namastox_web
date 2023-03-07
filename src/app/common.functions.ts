@@ -31,6 +31,7 @@ export class CommonFunctions {
       this.ra.results = values[3]
       this.separateResults();
       this.ra.workflow = values[4]['result']
+      this.commonService.updateWorkflow();
       setTimeout(() => {
         if(this.ra.status.step > 0){
           pendingTasks$.subscribe({
@@ -38,7 +39,6 @@ export class CommonFunctions {
               this.ra.pending_tasks = result
               this.separatePendingTasks();
               this.commonService.AutoGenerateForm();
-
             },
             error: (e) =>{
               console.log(e)
