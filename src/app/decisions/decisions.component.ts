@@ -27,7 +27,6 @@ export class DecisionsComponent implements OnInit {
   ngOnInit(): void {
     if(this.pendingTasks.decisions[0]){
       this.pending_task_selected = this.pendingTasks.decisions[0].id;
-      console.log(this.pending_task_selected)
       this.show_form();
     }  
     /**servicio */
@@ -91,17 +90,18 @@ export class DecisionsComponent implements OnInit {
   onSubmit(model: any) {
     this.loadForm  = false;
     this.sendlink(model['result_link'])
-    model['result_link'] = model['result_link'][0].name;
+    if(model['result_link']) model['result_link'] = model['result_link'][0].name;
     this.updateService.updateResult(this.ra.name,model).subscribe({
       next: (result) => {
         if(result['success']){
           this.pendingTasks.decisions = [];
           this.func.refreshRA();
           setTimeout(() => {
-            console.log(this.pendingTasks.decisions)
-            this.pending_task_selected = this.pendingTasks.decisions[0].id;
-            this.show_form();
-          }, 200);
+            if(this.pendingTasks.decisions.length){
+              this.pending_task_selected = this.pendingTasks.decisions[0].id;
+              this.show_form();
+            }
+          },1000);
           this.toastr.success('RA ' + this.ra.name ,'SUCCESSFULLY UPDATED', {
             timeOut: 5000, positionClass: 'toast-top-right'});
         }

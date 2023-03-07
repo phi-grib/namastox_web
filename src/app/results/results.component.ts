@@ -37,18 +37,13 @@ export class ResultsComponent implements OnInit {
       }
     })
   }
-
-
-
   selectResult(id:string){
     this.commonService.getResult(this.ra.name,id).subscribe(result => {
       this.results.resultSelected = result 
       if(this.results.resultSelected.result_link){
         this.commonService.getLink(this.ra.name,this.results.resultSelected.result_link,).subscribe({
           next:(result)=> {
-            console.log(result)
             this.link = result
-            console.log(this.link)
           },
           error: (e)=> console.log(e)
         })
@@ -93,17 +88,18 @@ error: (e)=> console.log(e)
   onSubmit(model: any) {
       this.loadForm  = false;
       this.sendlink(model['result_link'])
-      model['result_link'] = model['result_link'][0].name;
+      if (model['result_link']) model['result_link'] = model['result_link'][0].name;
       this.updateService.updateResult(this.ra.name,model).subscribe({
         next: (result) => {
           if(result['success']){
             this.pendingTasks.results = [];
             this.func.refreshRA();
             setTimeout(() => {
-            console.log(this.pendingTasks.results)
-              this.pending_task_selected = this.pendingTasks.results[0].id;
-              this.show_form();
-            }, 500);
+              if(this.pendingTasks.results.length){
+                this.pending_task_selected = this.pendingTasks.results[0].id;
+                this.show_form();
+              } 
+            }, 1000);
             this.toastr.success('RA ' + this.ra.name ,'SUCCESSFULLY UPDATED', {
               timeOut: 5000, positionClass: 'toast-top-right'});
           }

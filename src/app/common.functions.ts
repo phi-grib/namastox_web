@@ -14,6 +14,12 @@ export class CommonFunctions {
 
   refreshRA(){
     this.ra.pending_tasks = [];
+
+
+    this.pendingTasks.results = [];
+    this.pendingTasks.decisions = [];
+
+
     this.results.resultSelected = '';
     this.results.decisionSelected = '';
     let generalInfo$ = this.commonService.getGeneralInfo(this.ra.name);
@@ -45,10 +51,8 @@ export class CommonFunctions {
             }
           })
         }else{
-          this.pendingTasks.results = [];
-          this.pendingTasks.decisions = [];
           this.commonService.AutoGenerateForm();
-        }
+        }        
        }, 500);
     })   
   }
@@ -63,7 +67,6 @@ export class CommonFunctions {
         this.pendingTasks.decisions.push(this.ra.pending_tasks[idx])
        }
     }
-
   }
 
   separateResults(){
