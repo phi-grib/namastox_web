@@ -6,6 +6,7 @@ import {FormlyFieldConfig} from '@ngx-formly/core';
 import { CommonFunctions } from '../common.functions';
 import { UpdateService } from '../update.service';
 import { ToastrService } from 'ngx-toastr';
+import {saveAs} from 'file-saver';
 
 @Component({
   selector: 'app-results',
@@ -40,23 +41,11 @@ export class ResultsComponent implements OnInit {
 
   downloadFile(){
 
-
+    console.log(this.link)
     const contenido = this.link
     // create object Blob
-    const archivoBlob = new Blob([contenido], { type: 'application/octet-stream' });
-  
-    // create URL of file
-    const urlArchivo = URL.createObjectURL(archivoBlob);
-
-    // create download link
-    const enlaceDescarga = document.createElement('a');
-    enlaceDescarga.href = urlArchivo;
-    enlaceDescarga.download = this.results.resultSelected.result_link;
-  
-    // simulate click
-    enlaceDescarga.click();
-
-
+    const blob = new Blob([contenido], { type: 'application/octet-stream' });
+    saveAs(blob,this.results.resultSelected.result_link)
   }
 
   selectResult(id:string){
