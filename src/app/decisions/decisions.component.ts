@@ -51,7 +51,9 @@ export class DecisionsComponent implements OnInit {
     } else {
       this.link = '';
       this.results.decisionSelected.result_link = null;
-      console.log("La cadena de texto no es un enlace válido.");
+      this.toastr.warning('Check the console to see more information','Result link Error', {
+        timeOut: 5000, positionClass: 'toast-top-right'});
+      console.log("The link introduced is a invalid link.");
     }              
             },
             error: (e)=> console.log(e)
