@@ -84,6 +84,6 @@ export class CommonFunctions {
     setTimeout(() => {
       $("#dtResults").DataTable();
       $("#dtDecisions").DataTable();
-  }, 300);
+  }, 500);
   }
 }

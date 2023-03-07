@@ -38,8 +38,10 @@ export class ResultsComponent implements OnInit {
     })
   }
   selectResult(id:string){
+
     this.commonService.getResult(this.ra.name,id).subscribe(result => {
-      this.results.resultSelected = result 
+      this.results.resultSelected = result
+
       if(this.results.resultSelected.result_link){
         this.commonService.getLink(this.ra.name,this.results.resultSelected.result_link,).subscribe({
           next:(result)=> {
@@ -52,6 +54,7 @@ export class ResultsComponent implements OnInit {
   }
 
   show_form(){
+
     this.fields = [];
     this.form =  new FormGroup({});
     this.commonService.getPendingTask(this.ra.name,this.pending_task_selected).subscribe({

@@ -109,7 +109,7 @@
               <strong>Result link</strong>
             </div>
             <div class="col border-bottom">
-              <a [href]="link" target="_blank" class="btn btn-outline-success mt-2 mb-2" role="button">{{this.results.resultSelected.result_link}}</a>
+              <a *ngIf="this.results.resultSelected.result_link" [href]="link" target="_blank" class="btn btn-outline-success mt-2 mb-2" role="button">{{this.results.resultSelected.result_link}}</a>
             </div>
           </div>
           <div class="row">
