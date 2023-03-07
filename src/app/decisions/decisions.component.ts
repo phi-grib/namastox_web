@@ -44,17 +44,7 @@ export class DecisionsComponent implements OnInit {
         if(this.results.decisionSelected.result_link){
           this.commonService.getLink(this.ra.name,this.results.decisionSelected.result_link,).subscribe({
             next:(result)=> {
-  const regex = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/;
-    if (regex.test(result)) {
-      console.log("La cadena de texto es un enlace válido.");
-     this.link = result
-    } else {
-      this.link = '';
-      this.results.decisionSelected.result_link = null;
-      this.toastr.warning('Check the console to see more information','Result link Error', {
-        timeOut: 5000, positionClass: 'toast-top-right'});
-      console.log("The link introduced is a invalid link.");
-    }              
+              this.link = result
             },
             error: (e)=> console.log(e)
           })

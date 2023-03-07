@@ -37,25 +37,35 @@ export class ResultsComponent implements OnInit {
       }
     })
   }
-  selectResult(id:string){
 
+  downloadFile(){
+
+
+    const contenido = this.link
+    // create object Blob
+    const archivoBlob = new Blob([contenido], { type: 'text/plain' });
+  
+    // create URL of file
+    const urlArchivo = URL.createObjectURL(archivoBlob);
+
+    // create download link
+    const enlaceDescarga = document.createElement('a');
+    enlaceDescarga.href = urlArchivo;
+    enlaceDescarga.download = this.results.resultSelected.result_link;
+  
+    // simulate click
+    enlaceDescarga.click();
+
+
+  }
+
+  selectResult(id:string){
     this.commonService.getResult(this.ra.name,id).subscribe(result => {
       this.results.resultSelected = result
       if(this.results.resultSelected.result_link){
         this.commonService.getLink(this.ra.name,this.results.resultSelected.result_link,).subscribe({
           next:(result)=> {
-            const regex = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/;
-  if (regex.test(result)) {
-    console.log("La cadena de texto es un enlace válido.");
-    this.link = result
-  } else {
-    this.link = '';
-    this.results.resultSelected.result_link = null;
-    this.toastr.warning('Check the console to see more information','Result link Error', {
-      timeOut: 5000, positionClass: 'toast-top-right'});
-      console.log("The link introduced is a invalid link.");
-
-  }    
+               this.link = result
           },
           error: (e)=> console.log(e)
         })
