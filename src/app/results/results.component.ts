@@ -41,11 +41,18 @@ export class ResultsComponent implements OnInit {
 
     this.commonService.getResult(this.ra.name,id).subscribe(result => {
       this.results.resultSelected = result
-
       if(this.results.resultSelected.result_link){
         this.commonService.getLink(this.ra.name,this.results.resultSelected.result_link,).subscribe({
           next:(result)=> {
-            this.link = result
+            const regex = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/;
+  if (regex.test(result)) {
+    console.log("La cadena de texto es un enlace válido.");
+    this.link = result
+  } else {
+    this.link = '';
+    this.results.resultSelected.result_link = null;
+    console.log("La cadena de texto no es un enlace válido.");
+  }    
           },
           error: (e)=> console.log(e)
         })
