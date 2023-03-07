@@ -21,6 +21,7 @@ import { DecisionsComponent } from './decisions/decisions.component';
 import { SelectRaComponent } from './select-ra/select-ra.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ManageRaComponent } from './manage-ra/manage-ra.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormlyFieldFile,
     ResultsComponent,
     DecisionsComponent,
-    SelectRaComponent
+    SelectRaComponent,
+    ManageRaComponent
   ],
   imports: [
     BrowserModule,
