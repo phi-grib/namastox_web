@@ -43,7 +43,7 @@ export class ResultsComponent implements OnInit {
 
     const contenido = this.link
     // create object Blob
-    const archivoBlob = new Blob([contenido], { type: 'text/plain' });
+    const archivoBlob = new Blob([contenido], { type: 'application/octet-stream' });
   
     // create URL of file
     const urlArchivo = URL.createObjectURL(archivoBlob);
