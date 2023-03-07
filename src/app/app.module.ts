@@ -8,7 +8,6 @@ import { AngularSplitModule } from 'angular-split';
 import { AppComponent } from './app.component';
 import { WorkflowComponent } from './workflow/workflow.component';
 import { NotesComponent } from './notes/notes.component';
-import { OptionsRasComponent } from './options-ras/options-ras.component';
 import { RA,Global, PendingTasks, Results } from './globals';
 import { OverviewComponent } from './overview/overview.component';
 import { GeneralInformationComponent } from './general-information/general-information.component';
@@ -29,7 +28,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppComponent,
     WorkflowComponent,
     NotesComponent,
-    OptionsRasComponent,
     OverviewComponent,
     GeneralInformationComponent,
     FileValueAccessor,
