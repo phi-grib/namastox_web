@@ -47,7 +47,9 @@ export class WorkflowComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     setTimeout(() => {
-    this.flowchartRefresh();
+      if(this.ra.listRA.length > 0 ){
+            this.flowchartRefresh();
+      }
     }, 300);
   }
 

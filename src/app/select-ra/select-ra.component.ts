@@ -11,7 +11,6 @@ import { Global, PendingTasks, RA, Results } from '../globals';
   styleUrls: ['./select-ra.component.scss']
 })
 export class SelectRaComponent  {
-  newRAname:string = "";
     
     constructor(private toastr: ToastrService,public global:Global,public ra: RA, private commonService: CommonService, private func: CommonFunctions,private pendingTasks:PendingTasks,private results:Results){
 
@@ -34,57 +33,6 @@ export class SelectRaComponent  {
         this.func.separateResults();
       },
       error: (e) => console.log(e)
-    })
-  }
-
-  deleteRA(){
-    this.commonService.deleteRA(this.ra.name).subscribe(result => {
-      if(result['success']){
-        this.toastr.success('RA ' + this.ra.name ,'SUCCESSFULLY DELETED', {
-          timeOut: 5000, positionClass: 'toast-top-right'});
-
-      }
-      this.commonService.getRaList().subscribe((result:any) => {
-        this.ra.listRA = [...result];
-        this.ra.name = this.ra.listRA[this.ra.listRA.length-1];
-        this.func.refreshRA();
-        document.getElementById('menubtn').click();
-      })
-    },error => {
-      console.log(error)
-    })
-  }
-  deleteStep(){
-
-    this.commonService.deleteStep(this.ra.name,this.ra.status.step).subscribe({
-      next:(result) => {
-        if(result['success']){
-          this.toastr.success('STEP ' + this.ra.status.step ,'SUCCESSFULLY DELETED', {
-            timeOut: 5000, positionClass: 'toast-top-right'});
-        }
-        this.func.refreshRA();
-        document.getElementById('menubtn').click();
-      },
-      error: (e) => console.log(e)
-    })
-
-  }
-  newRA(){
-    this.commonService.createRA(this.newRAname).subscribe({
-      next:(result)=> {
-        if(result['success']){
-          this.commonService.getRaList().subscribe((result:any) => {
-            this.ra.listRA = [...result];
-            this.ra.name = this.ra.listRA[this.ra.listRA.length-1];
-            this.func.refreshRA();
-          })
-          setTimeout(() => {
-            document.getElementById('menubtn').click();
-          }, 500);
-        }
-      },
-      error: (e) => { console.log(e)},
-      complete: () =>  this.newRAname = ''
     })
   }
     // angular-split function
