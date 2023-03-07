@@ -107,7 +107,7 @@
               <strong>Result link</strong>
             </div>
             <div class="col border-bottom">
-              <a [href]="link" target="_blank" class="btn btn-outline-success mt-2 mb-2" role="button">{{this.results.decisionSelected.result_link}}</a>
+              <button (click)="downloadFile()" *ngIf="this.results.decisionSelected.result_link"  class="btn btn-outline-success mt-2 mb-2">{{this.results.decisionSelected.result_link}}</button>
             </div>
           </div>
           <div class="row">

@@ -6,6 +6,7 @@ import {FormGroup} from '@angular/forms';
 import {FormlyFieldConfig} from '@ngx-formly/core';
 import { UpdateService } from '../update.service';
 import { ToastrService } from 'ngx-toastr';
+import {saveAs} from 'file-saver';
 
 
 @Component({
@@ -36,6 +37,11 @@ export class DecisionsComponent implements OnInit {
           this.show_form(); 
         }
     })
+  }
+  downloadFile(){
+        // create object Blob
+        const blob = new Blob([this.link], { type: 'application/octet-stream' });
+        saveAs(blob,this.results.decisionSelected.result_link)
   }
   selectDecision(id:string){
     this.commonService.getResult(this.ra.name,id).subscribe({
