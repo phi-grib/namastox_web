@@ -40,11 +40,8 @@ export class ResultsComponent implements OnInit {
   }
 
   downloadFile(){
-
-    console.log(this.link)
-    const contenido = this.link
     // create object Blob
-    const blob = new Blob([contenido], { type: 'application/octet-stream' });
+    const blob = new Blob([this.link], { type: 'application/octet-stream' });
     saveAs(blob,this.results.resultSelected.result_link)
   }
 
