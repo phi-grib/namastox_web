@@ -62,6 +62,7 @@ export class WorkflowComponent implements OnInit {
       $('#pills-decisions-tab').click();
       if(pending){
         $('#pills-pendingdecisions-tab').click();
+        // TO DO
       }else{
         $('#pills-pastdecisions-tab').click();
         this.selectPastTask(typeTask,taskname)
