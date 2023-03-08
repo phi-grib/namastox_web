@@ -85,7 +85,6 @@ export class WorkflowComponent implements OnInit {
 
   ngOnInit(): void {
     (window as any).onA = (nodeName) => {
-      console.log("cuantas veces")
       this.checkType(nodeName);
     };
 
