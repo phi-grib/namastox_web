@@ -12,7 +12,7 @@
   <div *ngIf="this.pendingTasks.results.length > 0 else noTasks">
     <div  class="row">
         <div  class="col">
-          <select (change)="show_form()" [(ngModel)]="this.pending_task_selected"  class="form-select" aria-label="Default select example">
+          <select (change)="show_form()" id="selectPendingResult" [(ngModel)]="this.pending_task_selected"  class="form-select" aria-label="Default select example">
             <option *ngFor="let idx of objectKeys(this.pendingTasks.results)" [value]='this.pendingTasks.results[idx].id'>{{this.pendingTasks.results[idx].id}}</option>
           </select>
           <div *ngIf="this.pending_task?.result" class="container-information mt-2 ml-2">
@@ -109,7 +109,7 @@
               <strong>Result link</strong>
             </div>
             <div class="col border-bottom">
-              <button (click)="downloadFile()" *ngIf="this.results.resultSelected.result_link"  class="btn btn-outline-success mt-2 mb-2">{{this.results.resultSelected.result_link}}</button>
+              <button (click)="downloadFile()" *ngIf="this.results.resultSelected.result_link"  class="btn btn-link">{{this.results.resultSelected.result_link}}</button>
             </div>
           </div>
           <div class="row">
