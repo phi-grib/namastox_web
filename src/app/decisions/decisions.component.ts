@@ -22,7 +22,7 @@ export class DecisionsComponent implements OnInit {
   pending_task:any;
   objectKeys = Object.keys;
   model:any;
-  link:string = "";
+  link:Blob;
   constructor(private toastr:ToastrService,public ra: RA,private commonService: CommonService, private func: CommonFunctions, public pendingTasks:PendingTasks, public results:Results,private updateService:UpdateService){
   }
   ngOnInit(): void {

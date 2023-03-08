@@ -20,7 +20,7 @@ export class ResultsComponent implements OnInit {
   fields: FormlyFieldConfig[] = [];
   pending_task_selected:string = '';
   pending_task:any;
-  link: string;
+  link:Blob;
   objectKeys = Object.keys;
   constructor(public ra: RA, private commonService: CommonService, public pendingTasks:PendingTasks, private func: CommonFunctions, public results:Results,private updateService:UpdateService,private toastr: ToastrService){
   }
@@ -93,7 +93,6 @@ export class ResultsComponent implements OnInit {
 error: (e)=> console.log(e)
     })
   }
-  
   onSubmit(model: any) {
       this.loadForm  = false;
       this.sendlink(model['result_link'])

@@ -106,8 +106,7 @@ export class CommonService {
 
   getLink(ra_name:string,file_name:string){
     const url: string = environment.baseUrl + "link/"+ra_name+"/"+file_name;
-    return this.http.get(url,{ responseType: 'text' })
-
+    return this.http.get(url,{ responseType: 'blob' })
   }
 
   getWorkflow(ra_name:string){
