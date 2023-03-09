@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 import mermaid from 'mermaid';
 import { CommonService } from '../common.service';
-import { PendingTasks, RA, Results } from '../globals';
+import { PendingTasks, RA, Results} from '../globals';
 @Component({
   selector: 'app-workflow',
   templateUrl: './workflow.component.html',
@@ -15,7 +15,7 @@ import { PendingTasks, RA, Results } from '../globals';
 
 export class WorkflowComponent implements OnInit { 
 
-  constructor(private ra: RA,private commonService:CommonService,private pendingTasks:PendingTasks,private results:Results){
+  constructor(public ra: RA,private commonService:CommonService,private pendingTasks:PendingTasks,private results:Results){
 
   }
   @ViewChild('mermaidDiv', { static: false }) mermaidDiv: ElementRef;

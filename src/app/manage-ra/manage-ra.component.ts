@@ -67,6 +67,7 @@ export class ManageRaComponent {
           this.global.interfaceVisible = true;
 
         }else{
+          this.ra.name = '';
           this.global.interfaceVisible = false;
         }
         document.getElementById('menubtn').click();
