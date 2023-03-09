@@ -1,7 +1,7 @@
 
   <div class="collapse" id="navbarToggleExternalContent">
     <div class="btn-group" role="group" aria-label="Basic example">
-      <button type="button" class="btn btn-ets-do" data-bs-toggle="modal" data-bs-target="#newRA">New RA</button>
+      <button (click)="focus()" type="button" class="btn btn-ets-do" data-bs-toggle="modal" data-bs-target="#newRA">New RA</button>
       <button (click)="deleteRA()" [disabled]="this.ra.listRA.length < 1" type="button" class="btn btn-ets-delete">Delete RA</button>
       <button (click)="deleteStep()" [disabled]="this.ra.listRA.length < 1" type="button" class="btn btn-ets-delete">Delete Step</button>
 </div>
@@ -21,7 +21,7 @@
                   <label for="model_name" class="col-form-label label_name">RA name:</label>
                 </div>
                 <div class="col-auto">
-                  <input type="text" class="form-control ml-2" [(ngModel)]="this.newRAname" placeholder="name">
+                  <input #myInput   type="text" class="form-control ml-2" [(ngModel)]="this.newRAname" placeholder="name">
                 </div>
               </div>
             </div>

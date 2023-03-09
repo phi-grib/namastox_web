@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,ElementRef,ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { CommonFunctions } from '../common.functions';
 import { CommonService } from '../common.service';
@@ -17,7 +17,7 @@ export class ManageRaComponent {
 
   }
 
-
+  @ViewChild('myInput') myInput: ElementRef;
   newRA(){
     this.commonService.createRA(this.newRAname).subscribe({
       next:(result)=> {
@@ -36,6 +36,11 @@ export class ManageRaComponent {
       error: (e) => { console.log(e)},
       complete: () =>  this.newRAname = ''
     })
+  }
+  focus():void{
+    setTimeout(() => {
+    this.myInput.nativeElement.focus();
+    }, 500);
   }
 
   deleteStep(){
