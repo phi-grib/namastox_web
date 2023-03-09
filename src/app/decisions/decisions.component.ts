@@ -3,7 +3,7 @@ import { CommonFunctions } from '../common.functions';
 import { CommonService } from '../common.service';
 import { PendingTasks, RA, Results } from '../globals';
 import {FormGroup} from '@angular/forms';
-import {FormlyFieldConfig} from '@ngx-formly/core';
+import {FormlyFieldConfig,FormlyFormOptions} from '@ngx-formly/core';
 import { UpdateService } from '../update.service';
 import { ToastrService } from 'ngx-toastr';
 import {saveAs} from 'file-saver';
@@ -64,6 +64,7 @@ export class DecisionsComponent implements OnInit {
 
   createform(){
     this.fields = [];
+    var options: FormlyFormOptions = {};
     this.commonService.getPendingTask(this.ra.name,this.pending_task_selected).subscribe({
       next:(result)=> {
         this.pending_task = result;
@@ -74,15 +75,33 @@ export class DecisionsComponent implements OnInit {
              || property == 'result_type' || property == 'summary_type')){
             templateObject = {};
             templateObject['key'] = property
-            if(property != 'result_link'){
-            templateObject['type'] = 'input';
-            }else{
-            templateObject['type'] = 'file';
-            }
             templateObject['props'] = {
               label: property,
               required: false,
+              
             };
+            if(property == 'result_link'){
+            templateObject['type'] = 'file';
+
+            }else if(property == 'decision'){
+              templateObject['type'] = 'radio';
+              templateObject['props'] = {
+                label: property,
+                required: false,
+                options: [
+                  {
+                      value: true,
+                      label: 'Yes'
+                  },
+                  {
+                      value: false,
+                      label: 'No'
+                  }
+                ]
+              };
+            }else{
+              templateObject['type'] = 'input';
+            }
             this.fields.push(templateObject)
           }
       }
@@ -92,6 +111,7 @@ export class DecisionsComponent implements OnInit {
     })
   }
   onSubmit(model: any) {
+    console.log(model)
     this.loadForm  = false;
     this.sendlink(model['result_link'])
     if(model['result_link']) model['result_link'] = model['result_link'][0].name;
