@@ -17,7 +17,7 @@ export class ManageRaComponent {
 
   }
 
-  @ViewChild('myInput') myInput: ElementRef;
+  @ViewChild('nameRAinput') nameRAinput: ElementRef;
   newRA(){
     this.commonService.createRA(this.newRAname).subscribe({
       next:(result)=> {
@@ -39,7 +39,7 @@ export class ManageRaComponent {
   }
   focus():void{
     setTimeout(() => {
-    this.myInput.nativeElement.focus();
+    this.nameRAinput.nativeElement.focus();
     }, 500);
   }
 
