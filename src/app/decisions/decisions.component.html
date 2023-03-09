@@ -78,81 +78,81 @@
     <div class="mt-2" *ngIf="this.results.decisionSelected">
       <hr>
       <div class="card-body">
-        <div class="row">
-            <div class="col text border-end border-bottom">
-              <strong>ID</strong>
+        <div class="row pt-1 pb-1">
+            <div class="col-2 text border-bottom">
+              ID
             </div>
             <div class="col  border-bottom">
              {{this.results.decisionSelected.id}}
             </div>
           </div>
-          <div class="row">
-            <div class="col text border-end border-bottom">
-              <strong>Resul description</strong>
+          <div class="row pt-1 pb-1">
+            <div class="col-2  text border-bottom">
+              Result description
             </div>
             <div class="col border-bottom">
                 {{this.results.decisionSelected.result_description}}
             </div>
           </div>
-          <div class="row">
-            <div class="col text border-end border-bottom">
-              <strong>Resul type</strong>
+          <div class="row pt-1 pb-1">
+            <div class="col-2 text border-bottom">
+              Result type
             </div>
             <div class="col border-bottom">
                 {{this.results.decisionSelected.result_type}}
             </div>
           </div>
-          <div class="row">
-            <div class="col text border-end border-bottom d-flex  align-items-center">
-              <strong>Result link</strong>
+          <div class="row pt-1 pb-1">
+            <div class="col-2 text  border-bottom d-flex  align-items-center">
+              Result link
             </div>
             <div class="col border-bottom">
               <button (click)="downloadFile()" *ngIf="this.results.decisionSelected.result_link"  class="btn btn-outline-success mt-2 mb-2">{{this.results.decisionSelected.result_link}}</button>
             </div>
           </div>
-          <div class="row">
-            <div class="col text border-end border-bottom">
-              <strong>Substance</strong>
+          <div class="row pt-1 pb-1">
+            <div class="col-2 text  border-bottom">
+              Substance
             </div>
             <div class="col border-bottom">
                 {{this.results.decisionSelected.substance}}
             </div>
           </div>
-          <div class="row">
-            <div class="col text border-end border-bottom">
-              <strong>Summary</strong>
+          <div class="row pt-1 pb-1">
+            <div class="col-2 text  border-bottom">
+              Summary
             </div>
             <div class="col border-bottom">
               {{this.results.decisionSelected.summary}}
             </div>
           </div>
-          <div class="row">
-            <div class="col text border-end border-bottom">
-              <strong>Summary type</strong>
+          <div class="row pt-1 pb-1">
+            <div class="col-2 text  border-bottom">
+              Summary type
             </div>
             <div class="col border-bottom">
               {{this.results.decisionSelected.summary_type}}
             </div>
           </div>
-          <div class="row">
-            <div class="col text border-end border-bottom">
-              <strong>Uncertainty</strong>
+          <div class="row pt-1 pb-1">
+            <div class="col-2 text  border-bottom">
+              Uncertainty
             </div>
             <div class="col border-bottom">
               {{this.results.decisionSelected.uncertainty}}
             </div>
           </div>
-          <div class="row">
-            <div class="col text border-end border-bottom">
-              <strong>Unit</strong>
+          <div class="row pt-1 pb-1">
+            <div class="col-2 text  border-bottom">
+              Unit
             </div>
             <div class="col border-bottom">
               {{this.results.decisionSelected.unit}}
             </div>
           </div>
-          <div class="row">
-            <div class="col text border-end">
-              <strong>Decision</strong>
+          <div class="row pt-1 pb-1">
+            <div class="col-2 text">
+              Decision
             </div>
             <div class="col">
               {{this.results.decisionSelected.decision}}
