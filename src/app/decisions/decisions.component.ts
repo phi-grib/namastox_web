@@ -64,7 +64,6 @@ export class DecisionsComponent implements OnInit {
 
   createform(){
     this.fields = [];
-    var options: FormlyFormOptions = {};
     this.commonService.getPendingTask(this.ra.name,this.pending_task_selected).subscribe({
       next:(result)=> {
         this.pending_task = result;

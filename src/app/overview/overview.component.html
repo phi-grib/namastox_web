@@ -3,75 +3,72 @@
 <div  class="container-fluid">
 
 <div class="card-body">
-    <div class="row" style="background-color: #59AD2B;color:white">
-        <div class="col-3 border">
-          {{this.ra.name}} 
-        </div>
-        <div class="col border">
-          {{this.ra.status.ID}}
+    <div class="row border-bottom" style="background-color: #59AD2B;color:white">
+        <div class="col ">
+          {{this.ra.name | titlecase}} ({{this.ra.status.ID}})
         </div>
     </div>
-      <div class="row">
-        <div class="col-3 text border">
-          <strong>Endpoint</strong>
+      <div class="row pt-1 pb-1 border-bottom">
+        <div class="col-3 text ">
+          Endpoint
         </div>
-        <div class="col border">
+        <div class="col ">
             {{this.ra.general_information.general.endpoint}}
         </div>
       </div>
-      <div class="row">
-        <div class="col-3 text border">
-          <strong>Administration route</strong>
+      <div class="row pt-1 pb-1 border-bottom">
+        <div class="col-3 text ">
+          Administration route
         </div>
-        <div class="col border">
+        <div class="col ">
             {{this.ra.general_information.general.administration_route}}
         </div>
       </div>
-      <div class="row">
-        <div class="col-3 text border">
-          <strong>Species</strong>
+      <div class="row pt-1 pb-1 border-bottom">
+        <div class="col-3 text ">
+          Species
         </div>
-        <div class="col border">
+        <div class="col ">
             {{this.ra.general_information.general.species}}
         </div>
       </div>
-      <div class="row">
-        <div class="col-3 text border">
-          <strong>Regulatory framework</strong>
+      <div class="row pt-1 pb-1 border-bottom">
+        <div class="col-3 text ">
+          Regulatory framework
         </div>
-        <div class="col border">
+        <div class="col ">
             {{this.ra.general_information.general.regulatory_framework}}
         </div>
       </div>
-      <div class="row">
-        <div class="col-3 text border">
-          <strong>Workflow</strong>
+      <div class="row pt-1 pb-1 border-bottom">
+        <div class="col-3 text ">
+          Workflow
         </div>
-        <div class="col border">
+        <div class="col ">
           {{this.ra.status.workflow_name}}
         </div>
       </div>
-      <div class="row">
-        <div class="col-3 text border">
-          <strong>Step</strong>
+      <div class="row pt-1 pb-1 border-bottom">
+        <div class="col-3 text ">
+          Step
         </div>
-        <div class="col border">
+        <div class="col ">
           {{this.ra.status.step}}
         </div>
       </div>
-      <div class="row">
-        <div class="col-3 text border">
-          <strong>Active nodes</strong>
+      <div class="row pt-1 pb-1 border-bottom">
+        <div class="col-3 text ">
+          Active nodes
         </div>
-        <div class="col border">
+        <div class="col ">
           {{this.ra.status.active_nodes_id}}
         </div>
       </div>
       <div class="row" *ngIf="this.ra.general_information.general.substances">
-        <div class="col text border d-flex align-items-center">
-          <div style="padding-top: auto !important"><strong >Substances</strong></div>
+        <div class="col-3 text  d-flex align-items-center">
+          <div style="padding-top: auto !important">Substances</div>
         </div>
-        <div class="col border">
+        <div class="col ">
       <table class="table table-borderless">
         <thead style="color: purple;">
             <tr>
