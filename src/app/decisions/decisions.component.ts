@@ -28,13 +28,13 @@ export class DecisionsComponent implements OnInit {
   ngOnInit(): void {
     if(this.pendingTasks.decisions[0]){
       this.pending_task_selected = this.pendingTasks.decisions[0].id;
-      this.show_form();
+      this.createform();
     }  
     /**servicio */
     this.commonService.generateForms$.subscribe( () => {
         if(this.pendingTasks.decisions[0]) {
           this.pending_task_selected = this.pendingTasks.decisions[0].id;
-          this.show_form(); 
+          this.createform(); 
         }
     })
   }
@@ -62,7 +62,7 @@ export class DecisionsComponent implements OnInit {
     })
   }
 
-  show_form(){
+  createform(){
     this.fields = [];
     this.commonService.getPendingTask(this.ra.name,this.pending_task_selected).subscribe({
       next:(result)=> {
@@ -103,7 +103,7 @@ export class DecisionsComponent implements OnInit {
           setTimeout(() => {
             if(this.pendingTasks.decisions.length){
               this.pending_task_selected = this.pendingTasks.decisions[0].id;
-              this.show_form();
+              this.createform();
             }
           },1000);
           this.toastr.success('RA ' + this.ra.name ,'SUCCESSFULLY UPDATED', {

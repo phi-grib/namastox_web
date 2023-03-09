@@ -28,13 +28,13 @@ export class ResultsComponent implements OnInit {
   ngOnInit(): void {
     if(this.pendingTasks.results[0]){
       this.pending_task_selected = this.pendingTasks.results[0].id;
-      this.show_form();
+      this.createform();
     }
     /**servicio */
     this.commonService.generateForms$.subscribe( () => {
       if(this.pendingTasks.results[0])  {
         this.pending_task_selected = this.pendingTasks.results[0].id;
-        this.show_form();
+        this.createform();
       }
     })
   }
@@ -59,7 +59,7 @@ export class ResultsComponent implements OnInit {
     })
   }
 
-  show_form(){
+  createform(){
 
     this.fields = [];
     this.form =  new FormGroup({});
@@ -105,7 +105,7 @@ error: (e)=> console.log(e)
             setTimeout(() => {
               if(this.pendingTasks.results.length){
                 this.pending_task_selected = this.pendingTasks.results[0].id;
-                this.show_form();
+                this.createform();
               } 
             }, 1000);
             this.toastr.success('RA ' + this.ra.name ,'SUCCESSFULLY UPDATED', {
