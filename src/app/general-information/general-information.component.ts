@@ -24,6 +24,7 @@ export class GeneralInformationComponent implements OnInit {
       next: (result) =>{
         if(result['success']){
           this.func.refreshRA();
+          this.uploadSubstances();
           this.toastr.success('RA ' + this.ra.name ,'SUCCESSFULLY UPDATED', {
             timeOut: 5000, positionClass: 'toast-top-right'});
           }
@@ -72,5 +73,10 @@ export class GeneralInformationComponent implements OnInit {
     }
     }
     this.loadForm = true;
+  }
+  // TO DO
+  uploadSubstances(){
+
+
   }
 }
