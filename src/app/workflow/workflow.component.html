@@ -1,10 +1,8 @@
-<div *ngIf="(this.ra.name && this.ra.step == 0); else elseBlock"  #mermaidDiv></div>
+<div [hidden]="!(this.ra.name && this.ra?.status?.step > 0)"  #mermaidDiv></div>
 
 
 
-<ng-template #elseBlock>
-<div class="container mt-2">
+<div *ngIf="this.ra.name && this.ra?.status?.step == 0" class="container mt-2">
     <span class="text">Enter a General Information</span>
 </div>
 
-</ng-template>

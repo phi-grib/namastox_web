@@ -34,6 +34,7 @@ export class CommonFunctions {
       this.ra.general_information = values[0]
       this.ra.listSteps = [...values[1]];
       this.ra.status = values[2].ra;
+      console.log(this.ra.status.step)
       this.ra.results = values[3]
       this.separateResults();
       this.ra.workflow = values[4]['result']
