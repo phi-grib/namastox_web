@@ -46,7 +46,7 @@ export class WorkflowComponent implements OnInit {
 
   redirectToTask(typeTask,pending,taskname){
     if(typeTask == 'results'){
-      $('#pills-results-tab').click();
+      $('#pills-tasks-tab').click();
       if(pending){
         $('#pills-pendingtask-tab').click();
         // TO DO

@@ -9,11 +9,11 @@ import { ToastrService } from 'ngx-toastr';
 import {saveAs} from 'file-saver';
 
 @Component({
-  selector: 'app-results',
-  templateUrl: './results.component.html',
-  styleUrls: ['./results.component.scss']
+  selector: 'app-tasks',
+  templateUrl: './tasks.component.html',
+  styleUrls: ['./tasks.component.scss']
 })
-export class ResultsComponent implements OnInit {
+export class TasksComponent implements OnInit {
   loadForm:boolean = false;
   form = new FormGroup({});
   model:any;
