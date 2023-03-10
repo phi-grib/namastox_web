@@ -22,6 +22,7 @@ export class ManageRaComponent {
     this.commonService.createRA(this.newRAname).subscribe({
       next:(result)=> {
         if(result['success']){
+          $("#pills-overview-tab").click();
           this.commonService.getRaList().subscribe((result:any) => {
             this.ra.listRA = [...result];
             this.ra.name = this.ra.listRA[this.ra.listRA.length-1];
