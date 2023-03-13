@@ -54,23 +54,22 @@ export class GeneralInformationComponent implements OnInit {
     var templateObject:any;
     for (const property in this.ra.general_information.general) {
       templateObject = {};
-      if(property != 'substances'){
-      templateObject['key'] = property
-      templateObject['type'] = 'input';
-      templateObject['props'] = {
-        label: property,
-        required: false,
-      };
+      if(['substances','workflow_custom'].includes(property)){
+        templateObject['key'] = 'file'
+        templateObject['type'] = 'file';
+        templateObject['props'] = {
+          label: property,
+          required: false,
+        };
+      }else{
+        templateObject['key'] = property
+        templateObject['type'] = 'input';
+        templateObject['props'] = {
+          label: property,
+          required: false,
+        };
+      }
       this.fields.push(templateObject)
-    }else{
-      templateObject['key'] = 'file'
-      templateObject['type'] = 'file';
-      templateObject['props'] = {
-        label: property,
-        required: false,
-      };
-      this.fields.push(templateObject)
-    }
     }
     this.loadForm = true;
   }
