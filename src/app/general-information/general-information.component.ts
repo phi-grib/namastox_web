@@ -47,7 +47,6 @@ export class GeneralInformationComponent implements OnInit {
       this.generateForm();
     })
   }
-
   generateForm(){
     this.fields = [];
     this.loadForm = false;
@@ -55,20 +54,18 @@ export class GeneralInformationComponent implements OnInit {
     var templateObject:any;
     for (const property in this.ra.general_information.general) {
       templateObject = {};
-      var  labelFormated =  property.replace('_',' ')
-
-      if(['substances','workflow custom'].includes(labelFormated)){
+      if(['substances','workflow_custom'].includes(property)){
         templateObject['key'] = 'file'
         templateObject['type'] = 'file';
         templateObject['props'] = {
-          label: labelFormated,
+          label: property,
           required: false,
         };
       }else{
-        templateObject['key'] = labelFormated
+        templateObject['key'] = property
         templateObject['type'] = 'input';
         templateObject['props'] = {
-          label: labelFormated,
+          label: property,
           required: false,
         };
       }
