@@ -70,17 +70,18 @@ export class TasksComponent implements OnInit {
     this.model = this.pending_task.result;
     var templateObject:any;
     for (const property in this.pending_task.result) {
-      if(!(property == "id" || property == 'result_description' 
-         || property == 'result_type' || property == 'summary_type')){
+      var  labelFormated =  property.replace('_',' ')
+      if(!(labelFormated == "id" || labelFormated == 'result description' 
+         || labelFormated == 'result type' || labelFormated == 'summary type')){
         templateObject = {};
-        templateObject['key'] = property
-        if(property != 'result_link'){
+        templateObject['key'] = labelFormated
+        if(labelFormated != 'result_link'){
         templateObject['type'] = 'input';
         }else{
         templateObject['type'] = 'file';
         }
         templateObject['props'] = {
-          label: property,
+          label: labelFormated,
           required: false,
         };
 

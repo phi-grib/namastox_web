@@ -70,22 +70,24 @@ export class DecisionsComponent implements OnInit {
         this.model = this.pending_task.result;
         var templateObject:any;
         for (const property in this.pending_task.result) {
-          if(!(property == "id" || property == 'result_description' 
-             || property == 'result_type' || property == 'summary_type')){
+          var  labelFormated =  property.replace('_',' ')
+          
+          if(!(labelFormated == "id" || labelFormated == 'result_description' 
+             || labelFormated == 'result_type' || labelFormated == 'summary_type')){
             templateObject = {};
-            templateObject['key'] = property
+            templateObject['key'] = labelFormated
             templateObject['props'] = {
-              label: property,
+              label: labelFormated,
               required: false,
               
             };
-            if(property == 'result_link'){
+            if(labelFormated == 'result_link'){
             templateObject['type'] = 'file';
 
-            }else if(property == 'decision'){
+            }else if(labelFormated == 'decision'){
               templateObject['type'] = 'radio';
               templateObject['props'] = {
-                label: property,
+                label: labelFormated,
                 required: false,
                 options: [
                   {
