@@ -23,7 +23,7 @@ export class GeneralInformationComponent implements OnInit {
       next: (result) => {
         if (result['success']) {
           this.func.refreshRA();
-          // this.loadSubstances();
+          this.loadSubstances(model['substances'][0]);
           this.toastr.success('RA ' + this.ra.name, 'SUCCESSFULLY UPDATED', {
             timeOut: 5000, positionClass: 'toast-top-right'
           });
@@ -82,12 +82,16 @@ export class GeneralInformationComponent implements OnInit {
     this.loadForm = true;
   }
   // TO DO
-  loadSubstances() {
-    // this.commonService.getSubstances().subscribe({
-    //   next: (result) => {
-    //     console.log(result)
-    //   }
-    // })
+  loadSubstances(file) {
+   this.updateService.uploadSubstances(file).subscribe({
+     next: (result) => {
+       console.log(result)
+     }
+   })
+
+  }
+  // TO DO
+  loadWorkflow(){
 
   }
 }
