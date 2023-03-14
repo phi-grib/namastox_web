@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {FormGroup} from '@angular/forms';
-import {FormlyFieldConfig, FormlyFormOptions} from '@ngx-formly/core';
+import { FormGroup } from '@angular/forms';
+import { FormlyFieldConfig, FormlyFormOptions } from '@ngx-formly/core';
 import { CommonFunctions } from '../common.functions';
 import { CommonService } from '../common.service';
 import { RA } from '../globals';
@@ -13,77 +13,81 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class GeneralInformationComponent implements OnInit {
 
-  loadForm:boolean = false;
+  loadForm: boolean = false;
   form = new FormGroup({});
-  model:any;
+  model: any;
   fields: FormlyFieldConfig[] = [];
 
   onSubmit(model: any) {
-
-    this.updateService.updateGeneralInformation(this.ra.name,model).subscribe({
-      next: (result) =>{
-        if(result['success']){
+    this.updateService.updateGeneralInformation(this.ra.name, model).subscribe({
+      next: (result) => {
+        if (result['success']) {
           this.func.refreshRA();
-          this.uploadSubstances();
-          this.toastr.success('RA ' + this.ra.name ,'SUCCESSFULLY UPDATED', {
-            timeOut: 5000, positionClass: 'toast-top-right'});
-          }
+          // this.loadSubstances();
+          this.toastr.success('RA ' + this.ra.name, 'SUCCESSFULLY UPDATED', {
+            timeOut: 5000, positionClass: 'toast-top-right'
+          });
+        }
       },
       error: (e) => {
-        this.toastr.error('Check the console log to see more information','Unexpected ERROR', {
-          timeOut: 5000, positionClass: 'toast-top-right'});
-          console.log(e)
+        this.toastr.error('Check the console log to see more information', 'Unexpected ERROR', {
+          timeOut: 5000, positionClass: 'toast-top-right'
+        });
+        console.log(e)
       }
     })
   }
 
-  constructor(public ra: RA, private commonService:CommonService, private updateService: UpdateService,private func: CommonFunctions,private toastr: ToastrService){}
+  constructor(public ra: RA, private commonService: CommonService, private updateService: UpdateService, private func: CommonFunctions, private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this.commonService.generateForms$.subscribe( () => {
+    this.commonService.generateForms$.subscribe(() => {
       this.generateForm();
     })
   }
-  generateForm(){
+  generateForm() {
     this.fields = [];
     this.loadForm = false;
     this.model = this.ra.general_information.general;
-    var templateObject:any;
+    var templateObject: any;
     for (const property in this.ra.general_information.general) {
       templateObject = {};
 
-      var formatedLabel = property.replace('_',' ')
-      if(['substances','workflow_custom'].includes(property)){
+      var formatedLabel = property.replace('_', ' ')
+      if (['substances', 'workflow_custom'].includes(property)) {
         templateObject['key'] = property
         templateObject['type'] = 'file';
         templateObject['templateOptions'] = {
-          label:formatedLabel,
+          label: formatedLabel,
         }
-        if(property == 'substances'){
+        if (property == 'substances') {
           templateObject['templateOptions'] = {
-            label:formatedLabel,
+            label: formatedLabel,
             multiple: true
           }
         }
         ;
-      }else{
+      } else {
         templateObject['key'] = property
         templateObject['type'] = 'input';
         templateObject['props'] = {
           label: formatedLabel,
           required: false,
-         
+
         };
       }
-      
+
       this.fields.push(templateObject)
     }
-    console.log(this.fields)
     this.loadForm = true;
   }
   // TO DO
-  uploadSubstances(){
-
+  loadSubstances() {
+    // this.commonService.getSubstances().subscribe({
+    //   next: (result) => {
+    //     console.log(result)
+    //   }
+    // })
 
   }
 }

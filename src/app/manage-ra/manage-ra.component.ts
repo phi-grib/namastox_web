@@ -1,8 +1,8 @@
-import { Component,ElementRef,ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { CommonFunctions } from '../common.functions';
 import { CommonService } from '../common.service';
-import { Global,PendingTasks, RA, Results } from '../globals';
+import { Global, PendingTasks, RA, Results } from '../globals';
 
 @Component({
   selector: 'app-manage-ra',
@@ -10,22 +10,22 @@ import { Global,PendingTasks, RA, Results } from '../globals';
   styleUrls: ['./manage-ra.component.scss']
 })
 export class ManageRaComponent {
-  newRAname:string = "";
+  newRAname: string = "";
 
 
-  constructor(private toastr: ToastrService,public global:Global,public ra: RA, private commonService: CommonService, private func: CommonFunctions,private pendingTasks:PendingTasks,private results:Results){
+  constructor(private toastr: ToastrService, public global: Global, public ra: RA, private commonService: CommonService, private func: CommonFunctions, private pendingTasks: PendingTasks, private results: Results) {
 
   }
 
   @ViewChild('nameRAinput') nameRAinput: ElementRef;
-  newRA(){
+  newRA() {
     this.commonService.createRA(this.newRAname).subscribe({
-      next:(result)=> {
-        if(result['success']){
+      next: (result) => {
+        if (result['success']) {
           $("#pills-overview-tab").click();
-          this.commonService.getRaList().subscribe((result:any) => {
+          this.commonService.getRaList().subscribe((result: any) => {
             this.ra.listRA = [...result];
-            this.ra.name = this.ra.listRA[this.ra.listRA.length-1];
+            this.ra.name = this.ra.listRA[this.ra.listRA.length - 1];
             this.func.refreshRA();
           })
           setTimeout(() => {
@@ -34,23 +34,24 @@ export class ManageRaComponent {
           }, 500);
         }
       },
-      error: (e) => { console.log(e)},
-      complete: () =>  this.newRAname = ''
+      error: (e) => { console.log(e) },
+      complete: () => this.newRAname = ''
     })
   }
-  focus():void{
+  focus(): void {
     setTimeout(() => {
-    this.nameRAinput.nativeElement.focus();
+      this.nameRAinput.nativeElement.focus();
     }, 500);
   }
 
-  deleteStep(){
+  deleteStep() {
 
-    this.commonService.deleteStep(this.ra.name,this.ra.status.step).subscribe({
-      next:(result) => {
-        if(result['success']){
-          this.toastr.success('STEP ' + this.ra.status.step ,'SUCCESSFULLY DELETED', {
-            timeOut: 5000, positionClass: 'toast-top-right'});
+    this.commonService.deleteStep(this.ra.name, this.ra.status.step).subscribe({
+      next: (result) => {
+        if (result['success']) {
+          this.toastr.success('STEP ' + this.ra.status.step, 'SUCCESSFULLY DELETED', {
+            timeOut: 5000, positionClass: 'toast-top-right'
+          });
         }
         this.func.refreshRA();
         document.getElementById('menubtn').click();
@@ -59,26 +60,27 @@ export class ManageRaComponent {
     })
 
   }
-  deleteRA(){
+  deleteRA() {
     this.commonService.deleteRA(this.ra.name).subscribe(result => {
-      if(result['success']){
-        this.toastr.success('RA ' + this.ra.name ,'SUCCESSFULLY DELETED', {
-          timeOut: 5000, positionClass: 'toast-top-right'});
+      if (result['success']) {
+        this.toastr.success('RA ' + this.ra.name, 'SUCCESSFULLY DELETED', {
+          timeOut: 5000, positionClass: 'toast-top-right'
+        });
       }
-      this.commonService.getRaList().subscribe((result:any) => {
+      this.commonService.getRaList().subscribe((result: any) => {
         this.ra.listRA = [...result];
-        if(this.ra.listRA.length > 0 ){
-          this.ra.name = this.ra.listRA[this.ra.listRA.length-1];
+        if (this.ra.listRA.length > 0) {
+          this.ra.name = this.ra.listRA[this.ra.listRA.length - 1];
           this.func.refreshRA();
           this.global.interfaceVisible = true;
 
-        }else{
+        } else {
           this.ra.name = '';
           this.global.interfaceVisible = false;
         }
         document.getElementById('menubtn').click();
       })
-    },error => {
+    }, error => {
       console.log(error)
     })
   }
