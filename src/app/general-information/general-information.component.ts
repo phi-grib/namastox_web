@@ -17,7 +17,6 @@ export class GeneralInformationComponent implements OnInit {
   form = new FormGroup({});
   model:any;
   fields: FormlyFieldConfig[] = [];
-  options: FormlyFormOptions = {};
 
   onSubmit(model: any) {
 
