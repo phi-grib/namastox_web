@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup} from '@angular/forms';
-import {FormlyFieldConfig} from '@ngx-formly/core';
+import {FormlyFieldConfig, FormlyFormOptions} from '@ngx-formly/core';
 import { CommonFunctions } from '../common.functions';
 import { CommonService } from '../common.service';
 import { RA } from '../globals';
@@ -17,6 +17,7 @@ export class GeneralInformationComponent implements OnInit {
   form = new FormGroup({});
   model:any;
   fields: FormlyFieldConfig[] = [];
+  options: FormlyFormOptions = {};
 
   onSubmit(model: any) {
 
@@ -51,23 +52,29 @@ export class GeneralInformationComponent implements OnInit {
     var templateObject:any;
     for (const property in this.ra.general_information.general) {
       templateObject = {};
+
+      var formatedLabel = property.replace('_',' ')
       if(['substances','workflow_custom'].includes(property)){
-        templateObject['key'] = 'file'
+        templateObject['key'] = property
         templateObject['type'] = 'file';
-        templateObject['props'] = {
-          label: property,
-          required: false,
-        };
+        templateObject['templateOptions'] = {
+          label: formatedLabel,
+          multiple: true,
+        }
+        ;
       }else{
         templateObject['key'] = property
         templateObject['type'] = 'input';
         templateObject['props'] = {
-          label: property,
+          label: formatedLabel,
           required: false,
+         
         };
       }
+      
       this.fields.push(templateObject)
     }
+    console.log(this.fields)
     this.loadForm = true;
   }
   // TO DO

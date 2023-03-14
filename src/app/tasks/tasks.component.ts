@@ -64,12 +64,12 @@ export class TasksComponent implements OnInit {
     this.fields = [];
     this.form =  new FormGroup({});
     this.commonService.getPendingTask(this.ra.name,this.pending_task_selected).subscribe({
-
     next:(result)=>{
     this.pending_task = result;
     this.model = this.pending_task.result;
     var templateObject:any;
     for (const property in this.pending_task.result) {
+      var formatedLabel = property.replace('_',' ')
       if(!['id','result_description','result_type','summary_type'].includes(property)){
         templateObject = {};
         templateObject['key'] = property
@@ -79,7 +79,7 @@ export class TasksComponent implements OnInit {
         templateObject['type'] = 'file';
         }
         templateObject['props'] = {
-          label: property,
+          label: formatedLabel,
           required: false,
         };
 
