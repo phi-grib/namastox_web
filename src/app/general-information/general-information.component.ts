@@ -58,8 +58,13 @@ export class GeneralInformationComponent implements OnInit {
         templateObject['key'] = property
         templateObject['type'] = 'file';
         templateObject['templateOptions'] = {
-          label: formatedLabel,
-          multiple: true,
+          label:formatedLabel,
+        }
+        if(property == 'substances'){
+          templateObject['templateOptions'] = {
+            label:formatedLabel,
+            multiple: true
+          }
         }
         ;
       }else{
