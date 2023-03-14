@@ -37,11 +37,11 @@ export class UpdateService {
     return this.http.post(url,formData);
   }
 
-  uploadSubstances(ra_name:string,file:any){
+  uploadSubstances(file:any){
     const formData = new FormData();
     formData.append("file",file)
-    const url:string = environment.baseUrl + "substances/"+ra_name;
-    return this.http.post(url,formData);
+    const url:string = environment.baseUrl + "substances";
+    return this.http.put(url,formData);
   }
 
 }

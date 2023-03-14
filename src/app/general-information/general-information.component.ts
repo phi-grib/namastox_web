@@ -19,23 +19,30 @@ export class GeneralInformationComponent implements OnInit {
   fields: FormlyFieldConfig[] = [];
 
   onSubmit(model: any) {
-    this.updateService.updateGeneralInformation(this.ra.name, model).subscribe({
-      next: (result) => {
-        if (result['success']) {
-          this.func.refreshRA();
-          this.loadSubstances(model['substances'][0]);
-          this.toastr.success('RA ' + this.ra.name, 'SUCCESSFULLY UPDATED', {
+    this.updateService.uploadSubstances(model['substances'][0]).subscribe(result =>{
+      if(result['success']){
+       model['substances'] = [...result['result']]
+        }
+     })
+     setTimeout(() => {
+      this.updateService.updateGeneralInformation(this.ra.name, model).subscribe({
+        next: (result) => {
+          if (result['success']) {
+            this.func.refreshRA();
+            this.toastr.success('RA ' + this.ra.name, 'SUCCESSFULLY UPDATED', {
+              timeOut: 5000, positionClass: 'toast-top-right'
+            });
+          }
+        },
+        error: (e) => {
+          this.toastr.error('Check the console log to see more information', 'Unexpected ERROR', {
             timeOut: 5000, positionClass: 'toast-top-right'
           });
+          console.log(e)
         }
-      },
-      error: (e) => {
-        this.toastr.error('Check the console log to see more information', 'Unexpected ERROR', {
-          timeOut: 5000, positionClass: 'toast-top-right'
-        });
-        console.log(e)
-      }
-    })
+      })
+     }, 200);
+
   }
 
   constructor(public ra: RA, private commonService: CommonService, private updateService: UpdateService, private func: CommonFunctions, private toastr: ToastrService) { }
@@ -82,14 +89,10 @@ export class GeneralInformationComponent implements OnInit {
     this.loadForm = true;
   }
   // TO DO
-  loadSubstances(file) {
-   this.updateService.uploadSubstances(file).subscribe({
-     next: (result) => {
-       console.log(result)
-     }
-   })
+  loadSubstances(file):any {
+    var substances = []
 
-  }
+}
   // TO DO
   loadWorkflow(){
 

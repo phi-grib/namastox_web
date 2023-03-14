@@ -32,6 +32,7 @@ export class CommonFunctions {
 
     forkJoin(observables).subscribe( values => {
       this.ra.general_information = values[0]
+      console.log(this.ra.general_information)
       this.ra.listSteps = [...values[1]];
       this.ra.status = values[2].ra;
       console.log(this.ra.status.step)

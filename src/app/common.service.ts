@@ -113,10 +113,4 @@ export class CommonService {
     const url: string = environment.baseUrl + "workflow/"+ra_name;
     return this.http.get(url)
   }
-
-  getSubstances(ra_name:string){
-  const url: string = environment.baseUrl + 'substances/'+ra_name
-  return this.http.get(url)
-  }
-
 }
