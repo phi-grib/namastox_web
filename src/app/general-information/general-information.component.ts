@@ -40,9 +40,6 @@ export class GeneralInformationComponent implements OnInit {
   constructor(public ra: RA, private commonService:CommonService, private updateService: UpdateService,private func: CommonFunctions,private toastr: ToastrService){}
 
   ngOnInit(): void {
-    setTimeout(() => {
-      this.generateForm();
-    }, 500);
     this.commonService.generateForms$.subscribe( () => {
       this.generateForm();
     })
