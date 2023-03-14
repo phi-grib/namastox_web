@@ -1,91 +1,89 @@
+<div class="container-fluid">
 
-
-<div  class="container-fluid">
-
-<div class="card-body">
+  <div class="card-body">
     <div class="row border-bottom" style="background-color: #59AD2B;color:white">
-        <div class="col ">
-          {{this.ra.name | titlecase}} ({{this.ra.status.ID}})
-        </div>
+      <div class="col ">
+        {{this.ra.name | titlecase}} ({{this.ra.status.ID}})
+      </div>
     </div>
-      <div class="row pt-1 pb-1 border-bottom">
-        <div class="col-3 text ">
-          Endpoint
-        </div>
-        <div class="col ">
-            {{this.ra.general_information.general.endpoint}}
-        </div>
+    <div class="row pt-1 pb-1 border-bottom">
+      <div class="col-3 text ">
+        Endpoint
       </div>
-      <div class="row pt-1 pb-1 border-bottom">
-        <div class="col-3 text ">
-          Administration route
-        </div>
-        <div class="col ">
-            {{this.ra.general_information.general.administration_route}}
-        </div>
+      <div class="col ">
+        {{this.ra.general_information.general.endpoint}}
       </div>
-      <div class="row pt-1 pb-1 border-bottom">
-        <div class="col-3 text ">
-          Species
-        </div>
-        <div class="col ">
-            {{this.ra.general_information.general.species}}
-        </div>
+    </div>
+    <div class="row pt-1 pb-1 border-bottom">
+      <div class="col-3 text ">
+        Administration route
       </div>
-      <div class="row pt-1 pb-1 border-bottom">
-        <div class="col-3 text ">
-          Regulatory framework
-        </div>
-        <div class="col ">
-            {{this.ra.general_information.general.regulatory_framework}}
-        </div>
+      <div class="col ">
+        {{this.ra.general_information.general.administration_route}}
       </div>
-      <div class="row pt-1 pb-1 border-bottom">
-        <div class="col-3 text ">
-          Workflow
-        </div>
-        <div class="col ">
-          {{this.ra.status.workflow_name}}
-        </div>
+    </div>
+    <div class="row pt-1 pb-1 border-bottom">
+      <div class="col-3 text ">
+        Species
       </div>
-      <div class="row pt-1 pb-1 border-bottom">
-        <div class="col-3 text ">
-          Step
-        </div>
-        <div class="col ">
-          {{this.ra.status.step}}
-        </div>
+      <div class="col ">
+        {{this.ra.general_information.general.species}}
       </div>
-      <div class="row pt-1 pb-1 border-bottom">
-        <div class="col-3 text ">
-          Active nodes
-        </div>
-        <div class="col ">
-          {{this.ra.status.active_nodes_id}}
-        </div>
+    </div>
+    <div class="row pt-1 pb-1 border-bottom">
+      <div class="col-3 text ">
+        Regulatory framework
       </div>
-      <div class="row" *ngIf="this.ra.general_information.general.substances">
-        <div class="col-3 text  d-flex align-items-center">
-          <div style="padding-top: auto !important">Substances</div>
-        </div>
-        <div class="col ">
-      <table class="table table-borderless">
-        <thead class="text">
+      <div class="col ">
+        {{this.ra.general_information.general.regulatory_framework}}
+      </div>
+    </div>
+    <div class="row pt-1 pb-1 border-bottom">
+      <div class="col-3 text ">
+        Workflow
+      </div>
+      <div class="col ">
+        {{this.ra.status.workflow_name}}
+      </div>
+    </div>
+    <div class="row pt-1 pb-1 border-bottom">
+      <div class="col-3 text ">
+        Step
+      </div>
+      <div class="col ">
+        {{this.ra.status.step}}
+      </div>
+    </div>
+    <div class="row pt-1 pb-1 border-bottom">
+      <div class="col-3 text ">
+        Active nodes
+      </div>
+      <div class="col ">
+        {{this.ra.status.active_nodes_id}}
+      </div>
+    </div>
+    <div class="row" *ngIf="this.ra.general_information.general.substances">
+      <div class="col-3 text  d-flex align-items-center">
+        <div style="padding-top: auto !important">Substances</div>
+      </div>
+      <div class="col ">
+        <table class="table table-borderless">
+          <thead class="text">
             <tr>
               <th>Name</th>
               <th>CASRN</th>
               <th>SMILES</th>
             </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let key of this.objectKeys(this.ra.general_information.general.substances)">
-            <td>{{this.ra.general_information.general.substances[key].name}}</td>
-            <td>{{this.ra.general_information.general.substances[key].CASRN}}</td>
-            <td>{{this.ra.general_information.general.substances[key].SMILES}}</td>
-          </tr>
-        </tbody>
-      </table>
-        </div>
+          </thead>
+          <tbody>
+            <tr *ngFor="let key of this.objectKeys(this.ra.general_information.general.substances)">
+              <td>{{this.ra.general_information.general.substances[key].name}}</td>
+              <td>{{this.ra.general_information.general.substances[key].CASRN}}</td>
+              <td>{{this.ra.general_information.general.substances[key].SMILES}}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-</div>
+    </div>
+  </div>
 </div>

@@ -1,158 +1,163 @@
-
 <ul class="nav nav-pills" id="results-tab" role="tablist">
   <li class="nav-item" role="presentation">
-    <button class="nav-link active" id="pills-pendingtask-tab" data-bs-toggle="pill" data-bs-target="#pills-pendingtask" type="button" role="tab" aria-controls="pills-pendingtask" aria-selected="True">Pending Tasks</button>
+    <button class="nav-link active" id="pills-pendingtask-tab" data-bs-toggle="pill" data-bs-target="#pills-pendingtask"
+      type="button" role="tab" aria-controls="pills-pendingtask" aria-selected="True">Pending Tasks</button>
   </li>
   <li class="nav-item" role="presentation">
-    <button class="nav-link" id="pills-pasttasks-tab" data-bs-toggle="pill" data-bs-target="#pills-pasttasks" type="button" role="tab" aria-controls="pills-pasttasks" aria-selected="false">Past Tasks</button>
+    <button class="nav-link" id="pills-pasttasks-tab" data-bs-toggle="pill" data-bs-target="#pills-pasttasks"
+      type="button" role="tab" aria-controls="pills-pasttasks" aria-selected="false">Past Tasks</button>
   </li>
 </ul>
 <div class="tab-content container-fluid" id="pills-tabContent">
-<div class="tab-pane fade show active mt-2" id="pills-pendingtask" role="tabpanel" aria-labelledby="pills-pendingtask-tab">
-  <div *ngIf="this.pendingTasks.results.length > 0 else noTasks">
-    <div  class="row">
-        <div  class="col">
-          <select (change)="createform()" id="selectPendingResult" [(ngModel)]="this.pending_task_selected"  class="form-select" aria-label="Default select example">
-            <option *ngFor="let idx of objectKeys(this.pendingTasks.results)" [value]='this.pendingTasks.results[idx].id'>{{this.pendingTasks.results[idx].id}}</option>
+  <div class="tab-pane fade show active mt-2" id="pills-pendingtask" role="tabpanel"
+    aria-labelledby="pills-pendingtask-tab">
+    <div *ngIf="this.pendingTasks.results.length > 0 else noTasks">
+      <div class="row">
+        <div class="col">
+          <select (change)="createform()" id="selectPendingResult" [(ngModel)]="this.pending_task_selected"
+            class="form-select" aria-label="Default select example">
+            <option *ngFor="let idx of objectKeys(this.pendingTasks.results)"
+              [value]='this.pendingTasks.results[idx].id'>{{this.pendingTasks.results[idx].id}}</option>
           </select>
           <div *ngIf="this.pending_task?.result" class="container-information mt-2 ml-2">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-2 text">
-                    <strong>Result id</strong>
-                  </div>
-                  <div class="col-10">
-                   {{this.pending_task.result.id}}
-                  </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-2 text">
+                  <strong>Result id</strong>
                 </div>
-                <div class="row">
-                  <div class="col-2 text">
-                    <strong>Resul description</strong>
-                  </div>
-                  <div class="col-10">
-                      {{this.pending_task.result.result_description}}
-                  </div>
+                <div class="col-10">
+                  {{this.pending_task.result.id}}
                 </div>
               </div>
-              <form class="container-form mt-3" *ngIf="this.loadForm" [formGroup]="form" (ngSubmit)="onSubmit(model)">
-                <formly-form [form]="form" [fields]="fields" [model]="model">
-                </formly-form>
-                <button type="submit" [disabled]="!this.form.valid" class="btn btn-ets-do submit-button">Submit</button>
-              </form>
-  
+              <div class="row">
+                <div class="col-2 text">
+                  <strong>Resul description</strong>
+                </div>
+                <div class="col-10">
+                  {{this.pending_task.result.result_description}}
+                </div>
+              </div>
+            </div>
+            <form class="container-form mt-3" *ngIf="this.loadForm" [formGroup]="form" (ngSubmit)="onSubmit(model)">
+              <formly-form [form]="form" [fields]="fields" [model]="model">
+              </formly-form>
+              <button type="submit" [disabled]="!this.form.valid" class="btn btn-ets-do submit-button">Submit</button>
+            </form>
+
           </div>
-          
-         
+
+
         </div>
+      </div>
     </div>
+    <ng-template #noTasks>No pending Tasks</ng-template>
   </div>
-  <ng-template #noTasks>No pending Tasks</ng-template>
-</div>
-<div class="tab-pane fade" id="pills-pasttasks" role="tabpanel" aria-labelledby="pills-pasttasks-tab">
+  <div class="tab-pane fade" id="pills-pasttasks" role="tabpanel" aria-labelledby="pills-pasttasks-tab">
     <div class="row">
-        <div class="col">
-            <table  id="dtResults" class="display compact">
-                <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>summary</th>
-                    <th>value</th> 
-                  </tr>
-                </thead>
-                <tbody>
-                    <tr (click)="selectResult(result.id)" *ngFor="let result of this.results.results">
-                    <td>{{result.id}}</td>
-                    <td>{{result.summary}}</td>
-                    <td>{{result.value}}</td>
-                  </tr>
-                </tbody>
-              </table>
-        </div>
+      <div class="col">
+        <table id="dtResults" class="display compact">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>summary</th>
+              <th>value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr (click)="selectResult(result.id)" *ngFor="let result of this.results.results">
+              <td>{{result.id}}</td>
+              <td>{{result.summary}}</td>
+              <td>{{result.value}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
     <div class="mt-2" *ngIf="this.results.resultSelected">
       <hr>
       <div class="card-body">
         <div class="row pt-1 pb-1">
-            <div class="col-2 text border-bottom">
-              ID
-            </div>
-            <div class="col  border-bottom">
-             {{this.results.resultSelected.id}}
-            </div>
+          <div class="col-2 text border-bottom">
+            ID
           </div>
-          <div class="row pt-1 pb-1">
-            <div class="col-2 text  border-bottom">
-              Resul description
-            </div>
-            <div class="col border-bottom">
-                {{this.results.resultSelected.result_description}}
-            </div>
+          <div class="col  border-bottom">
+            {{this.results.resultSelected.id}}
           </div>
-          <div class="row pt-1 pb-1">
-            <div class="col-2 text  border-bottom">
-              Resul type
-            </div>
-            <div class="col border-bottom">
-                {{this.results.resultSelected.result_type}}
-            </div>
+        </div>
+        <div class="row pt-1 pb-1">
+          <div class="col-2 text  border-bottom">
+            Resul description
           </div>
-          <div class="row pt-1 pb-1">
-            <div class="col-2 text  border-bottom d-flex  align-items-center">
-              Result link
-            </div>
-            <div class="col border-bottom">
-              <button (click)="downloadFile()" *ngIf="this.results.resultSelected.result_link"  class="btn btn-link">{{this.results.resultSelected.result_link}}</button>
-            </div>
+          <div class="col border-bottom">
+            {{this.results.resultSelected.result_description}}
           </div>
-          <div class="row pt-1 pb-1">
-            <div class="col-2 text  border-bottom">
-              Substance
-            </div>
-            <div class="col border-bottom">
-                {{this.results.resultSelected.substance}}
-            </div>
+        </div>
+        <div class="row pt-1 pb-1">
+          <div class="col-2 text  border-bottom">
+            Resul type
           </div>
-          <div class="row pt-1 pb-1">
-            <div class="col-2 text  border-bottom">
-              Summary
-            </div>
-            <div class="col border-bottom">
-              {{this.results.resultSelected.summary}}
-            </div>
+          <div class="col border-bottom">
+            {{this.results.resultSelected.result_type}}
           </div>
-          <div class="row pt-1 pb-1">
-            <div class="col-2 text  border-bottom">
-              Summary type
-            </div>
-            <div class="col border-bottom">
-              {{this.results.resultSelected.summary_type}}
-            </div>
+        </div>
+        <div class="row pt-1 pb-1">
+          <div class="col-2 text  border-bottom d-flex  align-items-center">
+            Result link
           </div>
-          <div class="row pt-1 pb-1">
-            <div class="col-2 text  border-bottom">
-              Uncertainty
-            </div>
-            <div class="col border-bottom">
-              {{this.results.resultSelected.uncertainty}}
-            </div>
+          <div class="col border-bottom">
+            <button (click)="downloadFile()" *ngIf="this.results.resultSelected.result_link"
+              class="btn btn-link">{{this.results.resultSelected.result_link}}</button>
           </div>
-          <div class="row pt-1 pb-1">
-            <div class="col-2 text  border-bottom">
-              Unit
-            </div>
-            <div class="col border-bottom">
-              {{this.results.resultSelected.unit}}
-            </div>
+        </div>
+        <div class="row pt-1 pb-1">
+          <div class="col-2 text  border-bottom">
+            Substance
           </div>
-          <div class="row pt-1 pb-1">
-            <div class="col-2 text ">
-              Value
-            </div>
-            <div class="col">
-              {{this.results.resultSelected.value}}
-            </div>
+          <div class="col border-bottom">
+            {{this.results.resultSelected.substance}}
           </div>
+        </div>
+        <div class="row pt-1 pb-1">
+          <div class="col-2 text  border-bottom">
+            Summary
+          </div>
+          <div class="col border-bottom">
+            {{this.results.resultSelected.summary}}
+          </div>
+        </div>
+        <div class="row pt-1 pb-1">
+          <div class="col-2 text  border-bottom">
+            Summary type
+          </div>
+          <div class="col border-bottom">
+            {{this.results.resultSelected.summary_type}}
+          </div>
+        </div>
+        <div class="row pt-1 pb-1">
+          <div class="col-2 text  border-bottom">
+            Uncertainty
+          </div>
+          <div class="col border-bottom">
+            {{this.results.resultSelected.uncertainty}}
+          </div>
+        </div>
+        <div class="row pt-1 pb-1">
+          <div class="col-2 text  border-bottom">
+            Unit
+          </div>
+          <div class="col border-bottom">
+            {{this.results.resultSelected.unit}}
+          </div>
+        </div>
+        <div class="row pt-1 pb-1">
+          <div class="col-2 text ">
+            Value
+          </div>
+          <div class="col">
+            {{this.results.resultSelected.value}}
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
 </div>

@@ -1,33 +1,37 @@
-  
-  
-  <ul class="nav nav-pills" id="results-tab" role="tablist">
-    <li class="nav-item" role="presentation">
-      <button class="nav-link active" id="pills-pendingdecisions-tab" data-bs-toggle="pill" data-bs-target="#pills-pendingdecisions" type="button" role="tab" aria-controls="pills-pendingdecisions" aria-selected="True">Pending Decisions</button>
-    </li>
-    <li class="nav-item" role="presentation">
-      <button class="nav-link" id="pills-pastdecisions-tab" data-bs-toggle="pill" data-bs-target="#pills-pastdecisions" type="button" role="tab" aria-controls="pills-pastdecisions" aria-selected="false">Past Decisions</button>
-    </li>
-  </ul>
-  
+<ul class="nav nav-pills" id="results-tab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="pills-pendingdecisions-tab" data-bs-toggle="pill"
+      data-bs-target="#pills-pendingdecisions" type="button" role="tab" aria-controls="pills-pendingdecisions"
+      aria-selected="True">Pending Decisions</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="pills-pastdecisions-tab" data-bs-toggle="pill" data-bs-target="#pills-pastdecisions"
+      type="button" role="tab" aria-controls="pills-pastdecisions" aria-selected="false">Past Decisions</button>
+  </li>
+</ul>
+
 <div class="tab-content container-fluid" id="pills-tabContent">
-  <div class="tab-pane fade show active mt-2" id="pills-pendingdecisions" role="tabpanel" aria-labelledby="pills-pendingdecisions-tab">
+  <div class="tab-pane fade show active mt-2" id="pills-pendingdecisions" role="tabpanel"
+    aria-labelledby="pills-pendingdecisions-tab">
     <div *ngIf="this.pendingTasks.decisions.length > 0; else noDecisions">
-      <div  class="row">
-          <div  class="col">
-            <select (change)="createform()" [(ngModel)]="this.pending_task_selected"  class="form-select" aria-label="Default select example">
-              <option *ngFor="let idx of objectKeys(this.pendingTasks.decisions)" [value]='this.pendingTasks.decisions[idx].id'>{{this.pendingTasks.decisions[idx].id}}</option>
-            </select>
-            <div *ngIf="this.pending_task?.result" class="container-information mt-2">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-2 text">
-                      <strong>Result id</strong>
-                    </div>
-                    <div class="col-10">
-                     {{this.pending_task.result.id}}
-                    </div>
-                  </div>
-                  <!-- <div class="row">
+      <div class="row">
+        <div class="col">
+          <select (change)="createform()" [(ngModel)]="this.pending_task_selected" class="form-select"
+            aria-label="Default select example">
+            <option *ngFor="let idx of objectKeys(this.pendingTasks.decisions)"
+              [value]='this.pendingTasks.decisions[idx].id'>{{this.pendingTasks.decisions[idx].id}}</option>
+          </select>
+          <div *ngIf="this.pending_task?.result" class="container-information mt-2">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-2 text">
+                  <strong>Result id</strong>
+                </div>
+                <div class="col-10">
+                  {{this.pending_task.result.id}}
+                </div>
+              </div>
+              <!-- <div class="row">
                     <div class="col text">
                       <strong>Result type</strong>
                     </div>
@@ -35,135 +39,131 @@
                      {{this.pending_task.result.result_type}}
                     </div>
                   </div> -->
-                  <div class="row">
-                    <div class="col-2 text">
-                      <strong>Resul description</strong>
-                    </div>
-                    <div class="col-10">
-                        {{this.pending_task.result.result_description}}
-                    </div>
-                  </div>
+              <div class="row">
+                <div class="col-2 text">
+                  <strong>Resul description</strong>
                 </div>
-              <form class="container-form mt-3" *ngIf="this.loadForm" [formGroup]="form" (ngSubmit)="onSubmit(model)">
-                <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
-                <button type="submit" [disabled]="!this.form.valid" class="btn btn-ets-do submit-button">Submit</button>
-              </form>
-            </div>  
+                <div class="col-10">
+                  {{this.pending_task.result.result_description}}
+                </div>
+              </div>
+            </div>
+            <form class="container-form mt-3" *ngIf="this.loadForm" [formGroup]="form" (ngSubmit)="onSubmit(model)">
+              <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
+              <button type="submit" [disabled]="!this.form.valid" class="btn btn-ets-do submit-button">Submit</button>
+            </form>
           </div>
+        </div>
       </div>
-    </div>  
+    </div>
     <ng-template #noDecisions>No pending decisions</ng-template>
   </div>
-<div class="tab-pane fade" id="pills-pastdecisions" role="tabpanel" aria-labelledby="pills-pastdecisions-tab">
+  <div class="tab-pane fade" id="pills-pastdecisions" role="tabpanel" aria-labelledby="pills-pastdecisions-tab">
     <div class="row">
-        <div class="col">
-            <table  id="dtDecisions" class="display compact">
-                <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>summary</th>
-                    <th>decision</th> 
-                  </tr>
-                </thead>
-                <tbody>
-                    <tr (click)="selectDecision(decision.id)" *ngFor="let decision of this.results.decisions">
-                    <td>{{decision.id}}</td>
-                    <td>{{decision.summary}}</td>
-                    <td>{{decision.decision}}</td>
-                  </tr>
-                </tbody>
-              </table>
-        </div>
+      <div class="col">
+        <table id="dtDecisions" class="display compact">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>summary</th>
+              <th>decision</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr (click)="selectDecision(decision.id)" *ngFor="let decision of this.results.decisions">
+              <td>{{decision.id}}</td>
+              <td>{{decision.summary}}</td>
+              <td>{{decision.decision}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
     <div class="mt-2" *ngIf="this.results.decisionSelected">
       <hr>
       <div class="card-body">
         <div class="row pt-1 pb-1">
-            <div class="col-2 text border-bottom">
-              ID
-            </div>
-            <div class="col  border-bottom">
-             {{this.results.decisionSelected.id}}
-            </div>
+          <div class="col-2 text border-bottom">
+            ID
           </div>
-          <div class="row pt-1 pb-1">
-            <div class="col-2  text border-bottom">
-              Result description
-            </div>
-            <div class="col border-bottom">
-                {{this.results.decisionSelected.result_description}}
-            </div>
+          <div class="col  border-bottom">
+            {{this.results.decisionSelected.id}}
           </div>
-          <div class="row pt-1 pb-1">
-            <div class="col-2 text border-bottom">
-              Result type
-            </div>
-            <div class="col border-bottom">
-                {{this.results.decisionSelected.result_type}}
-            </div>
+        </div>
+        <div class="row pt-1 pb-1">
+          <div class="col-2  text border-bottom">
+            Result description
           </div>
-          <div class="row pt-1 pb-1">
-            <div class="col-2 text  border-bottom d-flex  align-items-center">
-              Result link
-            </div>
-            <div class="col border-bottom">
-              <button (click)="downloadFile()" *ngIf="this.results.decisionSelected.result_link"  class="btn btn-outline-success mt-2 mb-2">{{this.results.decisionSelected.result_link}}</button>
-            </div>
+          <div class="col border-bottom">
+            {{this.results.decisionSelected.result_description}}
           </div>
-          <div class="row pt-1 pb-1">
-            <div class="col-2 text  border-bottom">
-              Substance
-            </div>
-            <div class="col border-bottom">
-                {{this.results.decisionSelected.substance}}
-            </div>
+        </div>
+        <div class="row pt-1 pb-1">
+          <div class="col-2 text border-bottom">
+            Result type
           </div>
-          <div class="row pt-1 pb-1">
-            <div class="col-2 text  border-bottom">
-              Summary
-            </div>
-            <div class="col border-bottom">
-              {{this.results.decisionSelected.summary}}
-            </div>
+          <div class="col border-bottom">
+            {{this.results.decisionSelected.result_type}}
           </div>
-          <div class="row pt-1 pb-1">
-            <div class="col-2 text  border-bottom">
-              Summary type
-            </div>
-            <div class="col border-bottom">
-              {{this.results.decisionSelected.summary_type}}
-            </div>
+        </div>
+        <div class="row pt-1 pb-1">
+          <div class="col-2 text  border-bottom d-flex  align-items-center">
+            Result link
           </div>
-          <div class="row pt-1 pb-1">
-            <div class="col-2 text  border-bottom">
-              Uncertainty
-            </div>
-            <div class="col border-bottom">
-              {{this.results.decisionSelected.uncertainty}}
-            </div>
+          <div class="col border-bottom">
+            <button (click)="downloadFile()" *ngIf="this.results.decisionSelected.result_link"
+              class="btn btn-outline-success mt-2 mb-2">{{this.results.decisionSelected.result_link}}</button>
           </div>
-          <div class="row pt-1 pb-1">
-            <div class="col-2 text  border-bottom">
-              Unit
-            </div>
-            <div class="col border-bottom">
-              {{this.results.decisionSelected.unit}}
-            </div>
+        </div>
+        <div class="row pt-1 pb-1">
+          <div class="col-2 text  border-bottom">
+            Substance
           </div>
-          <div class="row pt-1 pb-1">
-            <div class="col-2 text">
-              Decision
-            </div>
-            <div class="col">
-              {{this.results.decisionSelected.decision}}
-            </div>
+          <div class="col border-bottom">
+            {{this.results.decisionSelected.substance}}
           </div>
+        </div>
+        <div class="row pt-1 pb-1">
+          <div class="col-2 text  border-bottom">
+            Summary
+          </div>
+          <div class="col border-bottom">
+            {{this.results.decisionSelected.summary}}
+          </div>
+        </div>
+        <div class="row pt-1 pb-1">
+          <div class="col-2 text  border-bottom">
+            Summary type
+          </div>
+          <div class="col border-bottom">
+            {{this.results.decisionSelected.summary_type}}
+          </div>
+        </div>
+        <div class="row pt-1 pb-1">
+          <div class="col-2 text  border-bottom">
+            Uncertainty
+          </div>
+          <div class="col border-bottom">
+            {{this.results.decisionSelected.uncertainty}}
+          </div>
+        </div>
+        <div class="row pt-1 pb-1">
+          <div class="col-2 text  border-bottom">
+            Unit
+          </div>
+          <div class="col border-bottom">
+            {{this.results.decisionSelected.unit}}
+          </div>
+        </div>
+        <div class="row pt-1 pb-1">
+          <div class="col-2 text">
+            Decision
+          </div>
+          <div class="col">
+            {{this.results.decisionSelected.decision}}
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-</div>
-  
-  
-
-  
-
