@@ -60,6 +60,12 @@ export class TasksComponent implements OnInit {
   }
 
   createform() {
+    var arraySubstances = []
+    var substanceFormated  = {};
+    this.ra.general_information.general.substances.forEach(substance => {
+      substanceFormated = {'label':substance['name'],'value':substance}
+      arraySubstances.push(substanceFormated)
+    });
 
     this.fields = [];
     this.form = new FormGroup({});
@@ -72,18 +78,28 @@ export class TasksComponent implements OnInit {
           var formatedLabel = property.replace('_', ' ')
           if (!['id', 'result_description', 'result_type', 'summary_type'].includes(property)) {
             templateObject = {};
-            templateObject['key'] = property
+            templateObject['key'] = property;
+
             if (property != 'result_link') {
               templateObject['type'] = 'input';
+              templateObject['props'] = {
+                label: formatedLabel
+              };
             } else {
               templateObject['type'] = 'file';
+              templateObject['props'] = {
+                label: formatedLabel
+              };
             }
-            templateObject['props'] = {
-              label: formatedLabel,
-              required: false,
-            };
-
-
+            if(property == 'substance'){
+              templateObject['type'] = 'select';
+              templateObject['props'] = {
+                  label: formatedLabel,
+                  defaultValue: this.ra.general_information.general.substances[0].name,
+                  options: [...arraySubstances],
+                  required: true
+              }
+            }
             this.fields.push(templateObject)
           }
         }
@@ -93,6 +109,8 @@ export class TasksComponent implements OnInit {
     })
   }
   onSubmit(model: any) {
+    console.log("Model:")
+    console.log(model)
     this.loadForm = false;
     this.sendlink(model['result_link'])
     if (model['result_link']) model['result_link'] = model['result_link'][0].name;
