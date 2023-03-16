@@ -60,12 +60,7 @@ export class TasksComponent implements OnInit {
   }
 
   createform() {
-    var arraySubstances = []
-    var substanceFormated  = {};
-    this.ra.general_information.general.substances.forEach(substance => {
-      substanceFormated = {'label':substance['name'],'value':substance}
-      arraySubstances.push(substanceFormated)
-    });
+
 
     this.fields = [];
     this.form = new FormGroup({});
@@ -92,10 +87,10 @@ export class TasksComponent implements OnInit {
               };
             }
             if(property == 'substance'){
+              var arraySubstances = this.func.formatSubstancesData();
               templateObject['type'] = 'select';
               templateObject['props'] = {
                   label: formatedLabel,
-                  defaultValue: this.ra.general_information.general.substances[0].name,
                   options: [...arraySubstances],
                   required: true
               }

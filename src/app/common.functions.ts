@@ -88,4 +88,16 @@ export class CommonFunctions {
       $("#dtDecisions").DataTable();
   }, 500);
   }
+
+  formatSubstancesData(): any[]{
+     var arraySubstances = []
+    var substanceFormated  = {};
+    this.ra.general_information.general.substances.forEach(substance => {
+      substanceFormated = {'label':substance['name'],'value':substance}
+      arraySubstances.push(substanceFormated)
+    });
+    return arraySubstances
+  }
+
+
 }
