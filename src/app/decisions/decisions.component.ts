@@ -108,7 +108,7 @@ export class DecisionsComponent implements OnInit {
                   label: formatedLabel,
                   // defaultValue: arraySubstances[0].name,
                   options: [...arraySubstances],
-                  required: true
+                  // required: 
               }
             }
             this.fields.push(templateObject)

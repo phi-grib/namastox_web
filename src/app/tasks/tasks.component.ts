@@ -92,7 +92,7 @@ export class TasksComponent implements OnInit {
               templateObject['props'] = {
                   label: formatedLabel,
                   options: [...arraySubstances],
-                  required: true
+                  // required: true
               }
             }
             this.fields.push(templateObject)
