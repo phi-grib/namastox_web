@@ -63,6 +63,12 @@ export class DecisionsComponent implements OnInit {
   }
 
   createform() {
+    var arraySubstances = []
+    var substanceFormated  = {};
+    this.ra.general_information.general.substances.forEach(substance => {
+      substanceFormated = {'label':substance['name'],'value':substance}
+      arraySubstances.push(substanceFormated)
+    });
     this.fields = [];
     this.commonService.getPendingTask(this.ra.name, this.pending_task_selected).subscribe({
       next: (result) => {
@@ -100,6 +106,15 @@ export class DecisionsComponent implements OnInit {
               };
             } else {
               templateObject['type'] = 'input';
+            }
+            if(property == 'substance'){
+              templateObject['type'] = 'select';
+              templateObject['props'] = {
+                  label: formatedLabel,
+                  defaultValue: this.ra.general_information.general.substances[0].name,
+                  options: [...arraySubstances],
+                  required: true
+              }
             }
             this.fields.push(templateObject)
           }
