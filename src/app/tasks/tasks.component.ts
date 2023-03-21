@@ -49,7 +49,7 @@ export class TasksComponent implements OnInit {
   drawMol(){
       let smilesDrawer = new SmilesDrawer.Drawer({ width: 50, height: 50 });
     SmilesDrawer.parse(this.results.resultSelected.substance.SMILES, function (tree) {
-      smilesDrawer.draw(tree, 'taskSmile', 'light', false);
+      smilesDrawer.draw(tree, 'taskCanvas', 'light', false);
   },  function (err) {
     console.log(err);
   });
