@@ -64,7 +64,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr (click)="selectResult(result.id)" *ngFor="let result of this.results.results">
+            <tr (click)="selectTask(result.id)" *ngFor="let result of this.results.results">
               <td>{{result.id}}</td>
               <td>{{result.summary}}</td>
               <td>{{result.value}}</td>
@@ -166,7 +166,7 @@
                 <tr>
                   <td>{{this.results.resultSelected.substance.name}}</td>
                   <td>{{this.results.resultSelected.substance.CASRN}}</td>
-                  <td>{{this.results.resultSelected.substance.SMILES}}</td>
+                  <td><canvas id="taskSmile"></canvas></td>
                 </tr>
               </tbody>
             </table>

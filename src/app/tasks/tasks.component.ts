@@ -7,7 +7,7 @@ import { CommonFunctions } from '../common.functions';
 import { UpdateService } from '../update.service';
 import { ToastrService } from 'ngx-toastr';
 import { saveAs } from 'file-saver';
-
+import * as SmilesDrawer from 'smiles-drawer';
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
@@ -45,9 +45,23 @@ export class TasksComponent implements OnInit {
     saveAs(blob, this.results.resultSelected.result_link)
   }
 
-  selectResult(id: string) {
+
+  drawMol(){
+      let smilesDrawer = new SmilesDrawer.Drawer({ width: 50, height: 50 });
+    SmilesDrawer.parse(this.results.resultSelected.substance.SMILES, function (tree) {
+      smilesDrawer.draw(tree, 'taskSmile', 'light', false);
+  },  function (err) {
+    console.log(err);
+  });
+}
+
+  selectTask(id: string) {
     this.commonService.getResult(this.ra.name, id).subscribe(result => {
-      this.results.resultSelected = result
+      this.results.resultSelected = result;
+setTimeout(() => {
+  if(this.results.resultSelected.substance.SMILES) this.drawMol();
+  
+}, 200);
       if (this.results.resultSelected.result_link) {
         this.commonService.getLink(this.ra.name, this.results.resultSelected.result_link,).subscribe({
           next: (result) => {

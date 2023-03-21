@@ -117,14 +117,6 @@
         </div>
         <div class="row pt-1 pb-1">
           <div class="col-2 text  border-bottom">
-            Substance
-          </div>
-          <div class="col border-bottom">
-            {{this.results.decisionSelected.substance.name}}
-          </div>
-        </div>
-        <div class="row pt-1 pb-1">
-          <div class="col-2 text  border-bottom">
             Summary
           </div>
           <div class="col border-bottom">
@@ -156,11 +148,34 @@
           </div>
         </div>
         <div class="row pt-1 pb-1">
-          <div class="col-2 text">
+          <div class="col-2 border-bottom text">
             Decision
           </div>
-          <div class="col">
+          <div class="col border-bottom">
             {{this.results.decisionSelected.decision}}
+          </div>
+        </div>
+        <div class="row pt-1 pb-1">
+          <div class="col-2 text d-flex align-items-center">
+        <div style="padding-top: auto !important">Substance</div>
+          </div>
+          <div class="col">
+            <table class="table table-borderless">
+              <thead class="text">
+                <tr>
+                  <th>Name</th>
+                  <th>CASRN</th>
+                  <th>SMILES</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{{this.results.decisionSelected.substance.name}}</td>
+                  <td>{{this.results.decisionSelected.substance.CASRN}}</td>
+                  <td>{{this.results.decisionSelected.substance.SMILES}}</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
