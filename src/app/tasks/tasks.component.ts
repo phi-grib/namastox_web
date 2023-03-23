@@ -96,7 +96,7 @@ setTimeout(() => {
           
             property == 'substance' &&
               ((templateObject['type'] = 'select'),
-              (templateObject.props['options'] = [...this.func.formatSubstancesData()]));
+              (templateObject.props['options'] = this.ra.general_information.general.substances.length > 0  ? [...this.func.formatSubstancesData()] : []));
           
             this.fields.push(templateObject);
           }

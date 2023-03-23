@@ -56,7 +56,6 @@ export class DecisionsComponent implements OnInit {
     this.commonService.getResult(this.ra.name, id).subscribe({
       next: (result) => {
         this.results.decisionSelected = result;
-
         setTimeout(() => {
           if(this.results.decisionSelected.substance.SMILES) this.drawMol();
         }, 200);
@@ -68,9 +67,7 @@ export class DecisionsComponent implements OnInit {
             },
             error: (e) => console.log(e)
           })
-
         }
-
       },
       error: (e) => console.log(e)
     })
@@ -115,12 +112,11 @@ export class DecisionsComponent implements OnInit {
               templateObject['type'] = 'input';
             }
             if(property == 'substance'){
-              var arraySubstances = this.func.formatSubstancesData();
               templateObject['type'] = 'select';
               templateObject['props'] = {
                   label: property.replace('_', ' '),
                   // defaultValue: arraySubstances[0].name,
-                  options: [...arraySubstances],
+                  options: this.ra.general_information.general.substances.length > 0  ? [...this.func.formatSubstancesData()] : [],
                   // required: 
               }
             }

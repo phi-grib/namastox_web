@@ -88,14 +88,14 @@ export class CommonFunctions {
   }
 
   formatSubstancesData(): any[]{
-     var arraySubstances = []
+    var arraySubstances = []
     var substanceFormated  = {};
     this.ra.general_information.general.substances.forEach(substance => {
       substanceFormated = {'label':substance['name'],'value':substance}
       arraySubstances.push(substanceFormated)
     });
-    return arraySubstances
-  }
-
-
+    substanceFormated = {'label':'All substances','value':this.ra.general_information.general.substances}
+    arraySubstances.push(substanceFormated)
+    return arraySubstances;
 }
+  }
