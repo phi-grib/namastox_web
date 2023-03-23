@@ -82,34 +82,23 @@ setTimeout(() => {
       next: (result) => {
         this.pending_task = result;
         this.model = this.pending_task.result;
-        var templateObject: any;
         for (const property in this.pending_task.result) {
-          var formatedLabel = property.replace('_', ' ')
           if (!['id', 'result_description', 'result_type', 'summary_type'].includes(property)) {
-            templateObject = {};
-            templateObject['key'] = property;
-
-            if (property != 'result_link') {
-              templateObject['type'] = 'input';
-              templateObject['props'] = {
-                label: formatedLabel
-              };
-            } else {
-              templateObject['type'] = 'file';
-              templateObject['props'] = {
-                label: formatedLabel
-              };
-            }
-            if(property == 'substance'){
-              var arraySubstances = this.func.formatSubstancesData();
-              templateObject['type'] = 'select';
-              templateObject['props'] = {
-                  label: formatedLabel,
-                  options: [...arraySubstances],
-                  // required: true
+            const templateObject = {
+              key: property,
+              props: {
+                label: property.replace('_', ' ')
               }
-            }
-            this.fields.push(templateObject)
+            };
+            property != 'result_link'
+              ? (templateObject['type'] = 'input')
+              : (templateObject['type'] = 'file');
+          
+            property == 'substance' &&
+              ((templateObject['type'] = 'select'),
+              (templateObject.props['options'] = [...this.func.formatSubstancesData()]));
+          
+            this.fields.push(templateObject);
           }
         }
         this.loadForm = true;
