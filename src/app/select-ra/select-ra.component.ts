@@ -56,7 +56,6 @@ export class SelectRaComponent {
   }
   gutterClick(e) {
     if (e.gutterNum === 1) {
-      console.log(e.sizes[1])
       if (e.sizes[0] == 0) {
         this.size1 = 30;
         this.size2 = 70;

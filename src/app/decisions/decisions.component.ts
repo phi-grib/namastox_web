@@ -133,7 +133,6 @@ export class DecisionsComponent implements OnInit {
     })
   }
   onSubmit(model: any) {
-    console.log(model)
     this.loadForm = false;
     this.sendlink(model['result_link'])
     if (model['result_link']) model['result_link'] = model['result_link'][0].name;
@@ -165,7 +164,6 @@ export class DecisionsComponent implements OnInit {
     if (link) {
       this.updateService.updateLink(this.ra.name, link[0]).subscribe({
         next: (result) => {
-          console.log(result);
         },
         error: (e) => {
           this.toastr.error('Check the console to see more information', 'Failed uploaded result link', {
