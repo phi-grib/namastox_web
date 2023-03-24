@@ -19,7 +19,7 @@ export class GeneralInformationComponent implements OnInit {
   fields: FormlyFieldConfig[] = [];
 
   onSubmit(model: any) {
-    if(model['substances']){
+    if(model['substances'].length > 0){
       this.updateService.uploadSubstances(model['substances'][0]).subscribe(result =>{
         if(result['success']){
          model['substances'] = [...result['result']]
