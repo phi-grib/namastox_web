@@ -59,7 +59,7 @@ export class TasksComponent implements OnInit {
     this.commonService.getResult(this.ra.name, id).subscribe(result => {
       this.results.resultSelected = result;
 setTimeout(() => {
-  if(this.results.resultSelected.substance.SMILES) this.drawMol();
+  if(this.results.resultSelected?.substance?.SMILES) this.drawMol();
   
 }, 200);
       if (this.results.resultSelected.result_link) {

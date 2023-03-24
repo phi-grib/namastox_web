@@ -57,7 +57,7 @@ export class DecisionsComponent implements OnInit {
       next: (result) => {
         this.results.decisionSelected = result;
         setTimeout(() => {
-          if(this.results.decisionSelected.substance.SMILES) this.drawMol();
+          if(this.results.decisionSelected?.substance?.SMILES) this.drawMol();
         }, 200);
 
         if (this.results.decisionSelected.result_link) {

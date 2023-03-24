@@ -159,7 +159,7 @@
           <div class="col-2 text d-flex align-items-center">
         <div style="padding-top: auto !important">Substance</div>
           </div>
-          <div class="col">
+          <div class="col" *ngIf="this.results.decisionSelected.substance">
             <table class="table table-borderless">
               <thead class="text">
                 <tr>
