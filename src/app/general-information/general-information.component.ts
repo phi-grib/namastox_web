@@ -19,11 +19,13 @@ export class GeneralInformationComponent implements OnInit {
   fields: FormlyFieldConfig[] = [];
 
   onSubmit(model: any) {
-    this.updateService.uploadSubstances(model['substances'][0]).subscribe(result =>{
-      if(result['success']){
-       model['substances'] = [...result['result']]
-        }
-     })
+    if(model['substances']){
+      this.updateService.uploadSubstances(model['substances'][0]).subscribe(result =>{
+        if(result['success']){
+         model['substances'] = [...result['result']]
+          }
+       })
+    }
      setTimeout(() => {
       this.updateService.updateGeneralInformation(this.ra.name, model).subscribe({
         next: (result) => {
@@ -56,24 +58,19 @@ export class GeneralInformationComponent implements OnInit {
     this.fields = [];
     this.loadForm = false;
     this.model = this.ra.general_information.general;
-    var templateObject: any;
-    for (const property in this.ra.general_information.general) {
-      templateObject = {};
-      templateObject['key'] = property
-      if(['substances','workflow_custom'].includes(property)){
-        templateObject['type'] = 'file';
-        templateObject['templateOptions'] = {
-          label: property.replace('_',' '),
-          multiple: property == 'substances'
-        }
-      }else {
-        templateObject['type'] = 'input';
-        templateObject['props'] = {
-          label: property.replace('_', ' '),
-        };
+
+    this.fields = Object.keys(this.ra.general_information.general).map((property) => {
+      const templateObject: any = {};
+      templateObject.key = property;
+      if (['substances', 'workflow_custom'].includes(property)) {
+        templateObject.type = 'file';
+        templateObject.templateOptions = { label: property.replace('_', ' ') };
+      } else {
+        templateObject.type = 'input';
+        templateObject.props = { label: property.replace('_', ' ') };
       }
-      this.fields.push(templateObject)
-    }
+      return templateObject;
+    });
     this.loadForm = true;
   }
   // TO DO

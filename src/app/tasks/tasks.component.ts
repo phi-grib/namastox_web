@@ -108,8 +108,11 @@ setTimeout(() => {
   }
   onSubmit(model: any) {
     this.loadForm = false;
-    this.sendlink(model['result_link'])
-    if (model['result_link']) model['result_link'] = model['result_link'][0].name;
+
+    if (model['result_link']){
+      this.sendlink(model['result_link'])
+      model['result_link'] = model['result_link'][0].name;
+    }
     this.updateService.updateResult(this.ra.name, model).subscribe({
       next: (result) => {
         if (result['success']) {
