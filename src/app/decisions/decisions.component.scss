@@ -9,6 +9,14 @@
     thead {
         background-color: #59AD2B;
         color: white;
+        tr{
+            th:nth-child(1){
+                width: 10% !important;
+            }
+            th:nth-child(3){
+                width: 10% !important;
+            }
+        }
     }
     td{
         vertical-align: top;
@@ -30,12 +38,12 @@ hr{
   .container-form {
     color: $secondary-color;
 }
-::ng-deep th:nth-child(1){
-    width: 10% !important;
+// ::ng-deep th:nth-child(1){
+//    
 
-}
-::ng-deep th:nth-child(3){
-    width: 10% !important;
+// }
+// ::ng-deep th:nth-child(3){
+//     width: 10% !important;
 
-}
+// }
 
