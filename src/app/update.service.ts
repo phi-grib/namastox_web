@@ -44,4 +44,10 @@ export class UpdateService {
     return this.http.put(url,formData);
   }
 
+  uploadCustomWorkflow(ra_name:string,file:any){
+    const formData = new FormData();
+    formData.append("file",file)
+    const url:string = environment.baseUrl + "custom_workflow/"+ra_name;
+    return this.http.put(url,formData);
+  }
 }

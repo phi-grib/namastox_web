@@ -19,13 +19,31 @@ export class GeneralInformationComponent implements OnInit {
   fields: FormlyFieldConfig[] = [];
 
   onSubmit(model: any) {
-    if(model['substances'].length > 0){
+    if(model['substances'].length > 0 && model['substances'][0] instanceof File){
       this.updateService.uploadSubstances(model['substances'][0]).subscribe(result =>{
         if(result['success']){
          model['substances'] = [...result['result']]
           }
        })
-    }
+    } 
+      if(model['workflow_custom'] instanceof File){
+        this.updateService.uploadCustomWorkflow(this.ra.name,model['workflow_custom'][0]).subscribe({
+          next: (result)=> {
+            console.log("workflow_Call")
+            console.log(result)
+           model['workflow_custom'] = model['workflow_custom'][0].name;
+          },
+          error: (e) => {
+            console.log("entra en este error")
+          }
+        })
+
+
+    console.log(model)
+      }
+ 
+
+
      setTimeout(() => {
       this.updateService.updateGeneralInformation(this.ra.name, model).subscribe({
         next: (result) => {
