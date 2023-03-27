@@ -9,7 +9,6 @@ import { ToastrService } from 'ngx-toastr';
 import { saveAs } from 'file-saver';
 import * as SmilesDrawer from 'smiles-drawer';
 
-
 @Component({
   selector: 'app-decisions',
   templateUrl: './decisions.component.html',
@@ -44,21 +43,30 @@ export class DecisionsComponent implements OnInit {
     const blob = new Blob([this.link], { type: 'application/octet-stream' });
     saveAs(blob, this.results.decisionSelected.result_link)
   }
+
+
   drawMol(){
-    let smilesDrawer = new SmilesDrawer.Drawer({ width: 50, height: 50 });
-  SmilesDrawer.parse(this.results.decisionSelected.substance.SMILES, function (tree) {
-    smilesDrawer.draw(tree, 'decisionCanvas', 'light', false);
-},  function (err) {
-  console.log(err);
-});
+    if(this.results.decisionSelected.substance.length > 0 ){
+     for (let index = 0; index < this.results.decisionSelected.substance.length; index++) {
+      let smilesDrawer = new SmilesDrawer.Drawer({ width: 100, height: 150 });
+      SmilesDrawer.parse(this.results.decisionSelected.substance[index].SMILES, function (tree) {
+        smilesDrawer.draw(tree, 'decisionCanvas'+index, 'light', false);
+    },  function (err) {
+      console.log(err);
+    });
+     }
+    }
 }
   selectDecision(id: string) {
     this.commonService.getResult(this.ra.name, id).subscribe({
       next: (result) => {
         this.results.decisionSelected = result;
+        if(!Array.isArray(this.results.decisionSelected.substance)) {
+          this.results.decisionSelected.substance = [this.results.decisionSelected.substance]
+      }
         setTimeout(() => {
-          if(this.results.decisionSelected?.substance?.SMILES) this.drawMol();
-        }, 200);
+          if(this.results.decisionSelected?.substance) this.drawMol();
+        }, 300);
 
         if (this.results.decisionSelected.result_link) {
           this.commonService.getLink(this.ra.name, this.results.decisionSelected.result_link,).subscribe({

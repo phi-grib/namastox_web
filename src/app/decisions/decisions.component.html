@@ -169,10 +169,10 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>{{this.results.decisionSelected.substance.name}}</td>
-                  <td>{{this.results.decisionSelected.substance.CASRN}}</td>
-                  <td><canvas id="decisionCanvas"></canvas></td>
+                <tr *ngFor="let idx of objectKeys(this.results.decisionSelected.substance)">
+                  <td>{{this.results.decisionSelected.substance[idx].name}}</td>
+                  <td>{{this.results.decisionSelected.substance[idx].CASRN}}</td>
+                  <td><canvas [id]="'decisionCanvas'+idx"></canvas></td>
                 </tr>
               </tbody>
             </table>

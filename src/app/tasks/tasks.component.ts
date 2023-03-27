@@ -44,12 +44,9 @@ export class TasksComponent implements OnInit {
     const blob = new Blob([this.link], { type: 'application/octet-stream' });
     saveAs(blob, this.results.resultSelected.result_link)
   }
-
-
   drawMol(){
     if(this.results.resultSelected.substance.length > 0 ){
      for (let index = 0; index < this.results.resultSelected.substance.length; index++) {
-      console.log(index)
       let smilesDrawer = new SmilesDrawer.Drawer({ width: 100, height: 150 });
       SmilesDrawer.parse(this.results.resultSelected.substance[index].SMILES, function (tree) {
         smilesDrawer.draw(tree, 'taskCanvas'+index, 'light', false);
@@ -57,32 +54,16 @@ export class TasksComponent implements OnInit {
       console.log(err);
     });
      }
-    }else{
-      let smilesDrawer = new SmilesDrawer.Drawer({ width: 50, height: 50 });
-      SmilesDrawer.parse(this.results.resultSelected.substance.SMILES, function (tree) {
-        smilesDrawer.draw(tree, 'taskCanvas'+0, 'light', false);
-    },  function (err) {
-      console.log(err);
-    });
-
     }
 }
-
   selectTask(id: string) {
     this.commonService.getResult(this.ra.name, id).subscribe(result => {
       this.results.resultSelected = result;
       if(!Array.isArray(this.results.resultSelected.substance)) {
-        console.log("NO ES UN ARRAY")
           this.results.resultSelected.substance = [this.results.resultSelected.substance]
       }
-
-      if(Array.isArray(this.results.resultSelected.substance)){
-        console.log("ahora si es un array")
-      }
-
 setTimeout(() => {
   if(this.results.resultSelected?.substance) this.drawMol();
-  
 }, 300);
       if (this.results.resultSelected.result_link) {
         this.commonService.getLink(this.ra.name, this.results.resultSelected.result_link,).subscribe({
@@ -96,8 +77,6 @@ setTimeout(() => {
   }
 
   createform() {
-
-
     this.fields = [];
     this.form = new FormGroup({});
     this.commonService.getPendingTask(this.ra.name, this.pending_task_selected).subscribe({
