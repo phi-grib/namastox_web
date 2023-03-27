@@ -150,8 +150,8 @@
           </div>
         </div>
         <div class="row pt-1 pb-1">
-          <div class="col-2 text d-flex align-items-center">
-        <div style="padding-top: auto !important">Substance</div>
+          <div class="col-2 text">
+          Substance
           </div>
           <div  *ngIf="this.results.resultSelected.substance" class="col">
             <table class="table table-borderless">
@@ -163,12 +163,17 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>{{this.results.resultSelected.substance.name}}</td>
-                  <td>{{this.results.resultSelected.substance.CASRN}}</td>
-                  <td><canvas id="taskCanvas"></canvas></td>
+                <tr  *ngFor="let idx of objectKeys(this.results.resultSelected.substance)">
+                  <td>{{this.results.resultSelected.substance[idx].name}}</td>
+                  <td>{{this.results.resultSelected.substance[idx].CASRN}}</td>
+                  <td><canvas [id]="'taskCanvas'+idx"></canvas></td>
                 </tr>
               </tbody>
+              <!-- <tbody *ngIf="this.results.resultSelected.substance instanceof Object">
+                <td>{{this.results.resultSelected.substance.name}}</td>
+                <td>{{this.results.resultSelected.substance.CASRN}}</td>
+                <td><canvas [id]="'taskCanvas'+0"></canvas></td>
+              </tbody> -->
             </table>
           </div>
         </div>

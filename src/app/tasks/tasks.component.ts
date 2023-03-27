@@ -47,21 +47,43 @@ export class TasksComponent implements OnInit {
 
 
   drawMol(){
+    if(this.results.resultSelected.substance.length > 0 ){
+     for (let index = 0; index < this.results.resultSelected.substance.length; index++) {
+      console.log(index)
+      let smilesDrawer = new SmilesDrawer.Drawer({ width: 100, height: 150 });
+      SmilesDrawer.parse(this.results.resultSelected.substance[index].SMILES, function (tree) {
+        smilesDrawer.draw(tree, 'taskCanvas'+index, 'light', false);
+    },  function (err) {
+      console.log(err);
+    });
+     }
+    }else{
       let smilesDrawer = new SmilesDrawer.Drawer({ width: 50, height: 50 });
-    SmilesDrawer.parse(this.results.resultSelected.substance.SMILES, function (tree) {
-      smilesDrawer.draw(tree, 'taskCanvas', 'light', false);
-  },  function (err) {
-    console.log(err);
-  });
+      SmilesDrawer.parse(this.results.resultSelected.substance.SMILES, function (tree) {
+        smilesDrawer.draw(tree, 'taskCanvas'+0, 'light', false);
+    },  function (err) {
+      console.log(err);
+    });
+
+    }
 }
 
   selectTask(id: string) {
     this.commonService.getResult(this.ra.name, id).subscribe(result => {
       this.results.resultSelected = result;
+      if(!Array.isArray(this.results.resultSelected.substance)) {
+        console.log("NO ES UN ARRAY")
+          this.results.resultSelected.substance = [this.results.resultSelected.substance]
+      }
+
+      if(Array.isArray(this.results.resultSelected.substance)){
+        console.log("ahora si es un array")
+      }
+
 setTimeout(() => {
-  if(this.results.resultSelected?.substance?.SMILES) this.drawMol();
+  if(this.results.resultSelected?.substance) this.drawMol();
   
-}, 200);
+}, 300);
       if (this.results.resultSelected.result_link) {
         this.commonService.getLink(this.ra.name, this.results.resultSelected.result_link,).subscribe({
           next: (result) => {
@@ -87,12 +109,15 @@ setTimeout(() => {
             const templateObject = {
               key: property,
               props: {
-                label: property.replace('_', ' ')
+                label: property.replace('_', ' '),
+                required: false
               }
             };
             property != 'result_link'
               ? (templateObject['type'] = 'input')
               : (templateObject['type'] = 'file');
+
+              if(property == 'value') templateObject.props['required'] = true;
           
             property == 'substance' &&
               ((templateObject['type'] = 'select'),
