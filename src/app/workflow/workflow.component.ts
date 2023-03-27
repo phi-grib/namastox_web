@@ -34,7 +34,7 @@ export class WorkflowComponent implements OnInit {
   }
 
   selectPastTask(typeTask, taskName) {
-    let tableID = typeTask === 'results' ? '#dtResults' : '#dtDecisions'
+    let tableID = typeTask === 'results' ? '#dtTasks' : '#dtDecisions'
     const table = document.querySelector(tableID);
     table.querySelectorAll('tr').forEach((row) => {
       const cells = row.querySelectorAll('td');

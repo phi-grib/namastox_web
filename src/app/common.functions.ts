@@ -71,7 +71,7 @@ export class CommonFunctions {
   }
 
   separateResults(){
-    $('#dtResults').DataTable().destroy();
+    $('#dtTasks').DataTable().destroy();
     $('#dtDecisions').DataTable().destroy();
     this.results.results = [];
     this.results.decisions = [];
@@ -83,7 +83,7 @@ export class CommonFunctions {
       }
     }
     setTimeout(() => {
-      $("#dtResults").DataTable();
+      $("#dtTasks").DataTable();
       $("#dtDecisions").DataTable();
   }, 500);
   }

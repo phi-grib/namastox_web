@@ -2,12 +2,17 @@
 @import '../../assets/scss/buttons.scss';
 @import '../../assets/scss/submenu.scss';
 
-#dtResults {
+#dtTasks {
+    width: 100%;
     padding-top:10px;
     thead {
         background-color: #59AD2B;
         color: white;
-       }}
+       }
+    td{
+        vertical-align: top;
+    }
+    }
 hr{
     height: 3px;
     background-color: $tertiary-color;
@@ -35,13 +40,3 @@ hr{
         }
     } 
 }
-table {
-    table-layout: fixed;
-    width: 100%;
-  
-  td {
-    width: 150px; 
-  }
-  
-  }
-  
