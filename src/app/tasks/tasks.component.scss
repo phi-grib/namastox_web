@@ -2,15 +2,21 @@
 @import '../../assets/scss/buttons.scss';
 @import '../../assets/scss/submenu.scss';
 
+
+
+
 #dtTasks {
-    width: 100%;
     padding-top:10px;
     thead {
         background-color: #59AD2B;
         color: white;
+
+    
        }
     td{
         vertical-align: top;
+        text-align: justify;
+        padding: 0px 10px !important;
     }
     }
 hr{
@@ -25,6 +31,14 @@ hr{
   
 .container-form {
     color: $secondary-color;
+}
+::ng-deep th:nth-child(1){
+        width: 10% !important;
+    
+}
+::ng-deep th:nth-child(2){
+    width: 30% !important;
+
 }
 ::ng-deep formly-wrapper-form-field { 
     div{
