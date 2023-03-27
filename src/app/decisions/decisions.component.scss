@@ -12,6 +12,8 @@
     }
     td{
         vertical-align: top;
+        text-align: justify;
+        padding: 0px 10px !important;
     }
 }
 
@@ -27,5 +29,13 @@ hr{
 
   .container-form {
     color: $secondary-color;
+}
+::ng-deep th:nth-child(1){
+    width: 10% !important;
+
+}
+::ng-deep th:nth-child(3){
+    width: 10% !important;
+
 }
 
