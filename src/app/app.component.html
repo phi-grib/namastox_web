@@ -4,7 +4,7 @@
       type="button" (click)="loadOverviewCanvas()" role="tab" aria-controls="pills-overview" aria-selected="True">Overview</button>
   </li>
   <li class="nav-item" role="presentation">
-    <button  class="nav-link" id="pills-gen-information-tab" data-bs-toggle="pill"
+    <button [disabled]="this.ra?.status?.step > 1" class="nav-link" id="pills-gen-information-tab" data-bs-toggle="pill"
       data-bs-target="#pills-gen-information" type="button" role="tab" aria-controls="pills-gen-information"
       aria-selected="false">General information</button>
   </li>

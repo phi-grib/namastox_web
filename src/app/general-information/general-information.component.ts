@@ -57,7 +57,6 @@ export class GeneralInformationComponent implements OnInit {
         }
       })
      }, 500);
-
   }
 
   constructor(public ra: RA, private commonService: CommonService, private updateService: UpdateService, private func: CommonFunctions, private toastr: ToastrService) { }
