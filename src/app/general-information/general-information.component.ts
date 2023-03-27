@@ -26,25 +26,20 @@ export class GeneralInformationComponent implements OnInit {
           }
        })
     } 
-      if(model['workflow_custom'] instanceof File){
+      if(model['workflow_custom'][0] instanceof File){
         this.updateService.uploadCustomWorkflow(this.ra.name,model['workflow_custom'][0]).subscribe({
           next: (result)=> {
-            console.log("workflow_Call")
             console.log(result)
-           model['workflow_custom'] = model['workflow_custom'][0].name;
+            model['workflow_custom'] = model['workflow_custom'][0].name;
           },
           error: (e) => {
-            console.log("entra en este error")
+            console.log(e)
           }
         })
-
-
-    console.log(model)
       }
  
-
-
      setTimeout(() => {
+      console.log(model)
       this.updateService.updateGeneralInformation(this.ra.name, model).subscribe({
         next: (result) => {
           if (result['success']) {
@@ -61,7 +56,7 @@ export class GeneralInformationComponent implements OnInit {
           console.log(e)
         }
       })
-     }, 200);
+     }, 500);
 
   }
 
