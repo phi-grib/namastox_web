@@ -40,6 +40,9 @@ export class AppComponent implements OnInit {
       }
     })
   }
+  loadOverviewCanvas(){
+    this.commonService.drawOverviewCanvas(false);
+  }
   navbarleft = 60;
   navbarright = 40;
 

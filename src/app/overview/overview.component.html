@@ -75,11 +75,11 @@
               <th>SMILES</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody *ngIf="this.ra.general_information.general.substances.length > 0">
             <tr *ngFor="let key of this.objectKeys(this.ra.general_information.general.substances)">
               <td>{{this.ra.general_information.general.substances[key].name}}</td>
               <td>{{this.ra.general_information.general.substances[key].CASRN}}</td>
-              <td>{{this.ra.general_information.general.substances[key].SMILES}}</td>
+              <td><canvas [id]="'genInformationCanvas'+key"></canvas></td>
             </tr>
           </tbody>
         </table>

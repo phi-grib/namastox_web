@@ -32,6 +32,7 @@ export class CommonFunctions {
 
     forkJoin(observables).subscribe( values => {
       this.ra.general_information = values[0]
+      this.commonService.drawOverviewCanvas(false);
       this.ra.listSteps = [...values[1]];
       this.ra.status = values[2].ra;
       this.ra.results = values[3]

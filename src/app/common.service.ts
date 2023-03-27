@@ -25,8 +25,12 @@ export class CommonService {
   updateWorkflow(){
     this.refreshWorkflow.next(true);
   }
-  
-
+  /* update canvas in Overview */
+  private updateOverviewCanvas = new BehaviorSubject<boolean>(false);
+  updateOverviewCanvas$ = this.updateOverviewCanvas.asObservable();
+  drawOverviewCanvas(status:boolean){
+    this.updateOverviewCanvas.next(status);
+  }
   /**Get list of RAs */
   getRaList(){
     const url: string = environment.baseUrl + "list";
