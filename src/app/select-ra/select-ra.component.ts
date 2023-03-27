@@ -34,6 +34,15 @@ export class SelectRaComponent {
       },
       error: (e) => console.log(e)
     })
+    this.commonService.getWorkflowByStep(this.ra.name,this.ra.status.step).subscribe({
+      next: (result) => {
+        this.ra.workflow = result['result'];
+        this.commonService.updateWorkflow();
+
+      }
+    })
+
+    
   }
   // angular-split function
   @ViewChild('mySplit') mySplitEl: SplitComponent

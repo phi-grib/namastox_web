@@ -75,6 +75,10 @@ export class CommonService {
     const url: string = environment.baseUrl + "results/"+ra_name+"/"+step;
     return this.http.get(url)
   }
+  getWorkflowByStep(ra_name:string,step:number){
+    const url: string = environment.baseUrl + "workflow/"+ra_name+"/"+step;
+    return this.http.get(url)
+  }
   /** get Pending tasks */
   getPendingTasks(ra_name:string){
     const url: string = environment.baseUrl + "pending_tasks/"+ra_name;
