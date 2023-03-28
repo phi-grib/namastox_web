@@ -121,12 +121,13 @@ export class DecisionsComponent implements OnInit {
             }
             if(property == 'substance'){
               templateObject['type'] = 'select';
-              templateObject['props'] = {
-                  label: property.replace('_', ' '),
-                  // defaultValue: arraySubstances[0].name,
-                  options: this.ra.general_information.general.substances.length > 0  ? [...this.func.formatSubstancesData()] : [],
-                  // required: 
+              if(this.ra.general_information.general.substances.length > 0){
+              var arraySubstances = [...this.func.formatSubstancesData()];
+              this.model['substance'] =  arraySubstances[arraySubstances.length-1].value;
+               } else{
+                arraySubstances =  []
               }
+              templateObject.props['options'] = arraySubstances
             }
             this.fields.push(templateObject)
           }

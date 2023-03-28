@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { FormlyFieldConfig, FormlyFormOptions } from '@ngx-formly/core';
+import { FormlyFieldConfig } from '@ngx-formly/core';
 import { CommonFunctions } from '../common.functions';
 import { CommonService } from '../common.service';
 import { RA } from '../globals';
@@ -39,7 +39,6 @@ export class GeneralInformationComponent implements OnInit {
       }
  
      setTimeout(() => {
-      console.log(model)
       this.updateService.updateGeneralInformation(this.ra.name, model).subscribe({
         next: (result) => {
           if (result['success']) {

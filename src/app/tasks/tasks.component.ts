@@ -97,11 +97,17 @@ setTimeout(() => {
               : (templateObject['type'] = 'file');
 
               if(property == 'value') templateObject.props['required'] = true;
-          
-            property == 'substance' &&
-              ((templateObject['type'] = 'select'),
-              (templateObject.props['options'] = this.ra.general_information.general.substances.length > 0  ? [...this.func.formatSubstancesData()] : []));
-          
+
+              if(property == 'substance'){
+                templateObject['type'] = 'select';
+                if(this.ra.general_information.general.substances.length > 0){
+                var arraySubstances = [...this.func.formatSubstancesData()];
+                this.model['substance'] =  arraySubstances[arraySubstances.length-1].value;
+                 } else{
+                  arraySubstances =  []
+                }
+                templateObject.props['options'] = arraySubstances
+              }
             this.fields.push(templateObject);
           }
         }
@@ -111,6 +117,8 @@ setTimeout(() => {
     })
   }
   onSubmit(model: any) {
+    console.log("Model:")
+    console.log(model)
     this.loadForm = false;
     if (model['result_link']){
       this.sendlink(model['result_link'])
