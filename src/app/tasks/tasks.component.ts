@@ -47,7 +47,7 @@ export class TasksComponent implements OnInit {
   drawMol(){
     if(this.results.resultSelected.substance.length > 0 ){
      for (let index = 0; index < this.results.resultSelected.substance.length; index++) {
-      let smilesDrawer = new SmilesDrawer.Drawer({ width: 100, height: 150 });
+      let smilesDrawer = new SmilesDrawer.Drawer({ width: 200, height: 150 });
       SmilesDrawer.parse(this.results.resultSelected.substance[index].SMILES, function (tree) {
         smilesDrawer.draw(tree, 'taskCanvas'+index, 'light', false);
     },  function (err) {

@@ -26,7 +26,7 @@ export class OverviewComponent implements OnInit{
   drawMol(){
     if(this.ra.general_information.general.substances.length > 0 ){
      for (let index = 0; index < this.ra.general_information.general.substances.length; index++) {
-      let smilesDrawer = new SmilesDrawer.Drawer({ width: 150, height: 100 });
+      let smilesDrawer = new SmilesDrawer.Drawer({ width: 200, height: 150 });
       SmilesDrawer.parse(this.ra.general_information.general.substances[index].SMILES, function (tree) {
         smilesDrawer.draw(tree, 'genInformationCanvas'+index, 'light', false);
     },  function (err) {

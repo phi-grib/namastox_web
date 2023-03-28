@@ -15,6 +15,20 @@
 table {
   table-layout: fixed;
   width: 100%;
+  thead{
+    tr{
+      th:nth-child(1){
+          width: 30% !important;
+  }
+  th:nth-child(2){
+      width: 20% !important;
+  }
+  th:nth-child(3){
+    width: 50% !important;
+}
+  }
+ 
+}
 
 td {
   width: 150px; 
