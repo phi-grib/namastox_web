@@ -72,14 +72,14 @@
             <tr>
               <th>Name</th>
               <th>CASRN</th>
-              <th>SMILES</th>
+              <th style="text-align: center;">SMILES</th>
             </tr>
           </thead>
           <tbody *ngIf="this.ra.general_information.general.substances.length > 0">
             <tr *ngFor="let key of this.objectKeys(this.ra.general_information.general.substances)">
               <td>{{this.ra.general_information.general.substances[key].name}}</td>
               <td>{{this.ra.general_information.general.substances[key].CASRN}}</td>
-              <td><canvas [id]="'genInformationCanvas'+key"></canvas></td>
+              <td style="text-align: center;"><canvas [id]="'genInformationCanvas'+key"></canvas></td>
             </tr>
           </tbody>
         </table>
