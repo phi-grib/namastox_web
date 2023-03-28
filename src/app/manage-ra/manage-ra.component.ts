@@ -3,6 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CommonFunctions } from '../common.functions';
 import { CommonService } from '../common.service';
 import { Global, PendingTasks, RA, Results } from '../globals';
+import { ManageRAsService } from '../manage-ras.service';
 
 @Component({
   selector: 'app-manage-ra',
@@ -13,13 +14,13 @@ export class ManageRaComponent {
   newRAname: string = "";
 
 
-  constructor(private toastr: ToastrService, public global: Global, public ra: RA, private commonService: CommonService, private func: CommonFunctions, private pendingTasks: PendingTasks, private results: Results) {
+  constructor(private toastr: ToastrService, public global: Global, public ra: RA, private commonService: CommonService, private func: CommonFunctions, private pendingTasks: PendingTasks, private results: Results,private manageRA:ManageRAsService) {
 
   }
 
   @ViewChild('nameRAinput') nameRAinput: ElementRef;
   newRA() {
-    this.commonService.createRA(this.newRAname).subscribe({
+    this.manageRA.createRA(this.newRAname).subscribe({
       next: (result) => {
         if (result['success']) {
           $("#pills-overview-tab").click();
@@ -46,7 +47,7 @@ export class ManageRaComponent {
 
   deleteStep() {
 
-    this.commonService.deleteStep(this.ra.name, this.ra.status.step).subscribe({
+    this.manageRA.deleteStep(this.ra.name, this.ra.status.step).subscribe({
       next: (result) => {
         if (result['success']) {
           this.toastr.success('STEP ' + this.ra.status.step, 'SUCCESSFULLY DELETED', {
@@ -61,7 +62,7 @@ export class ManageRaComponent {
 
   }
   deleteRA() {
-    this.commonService.deleteRA(this.ra.name).subscribe(result => {
+    this.manageRA.deleteRA(this.ra.name).subscribe(result => {
       if (result['success']) {
         this.toastr.success('RA ' + this.ra.name, 'SUCCESSFULLY DELETED', {
           timeOut: 5000, positionClass: 'toast-top-right'

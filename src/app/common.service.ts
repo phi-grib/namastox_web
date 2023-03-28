@@ -5,7 +5,7 @@ import {
   HttpErrorResponse,
   HttpHeaders,
 } from "@angular/common/http";
-import { BehaviorSubject, Observable, Subject } from "rxjs";
+import { BehaviorSubject,Subject } from "rxjs";
 import { environment } from "../environments/environment";
 
 @Injectable({
@@ -89,28 +89,6 @@ export class CommonService {
     const url: string = environment.baseUrl + "pending_task/"+ra_name+"/"+id;
     return this.http.get(url)
   }
-  putNewRa(ra_name:string){
-    const formData = new FormData();
-    const url: string = environment.baseUrl + "new/"+ra_name;
-    return this.http.put(url, formData)
-  }
-
-  // create new RA
-  createRA(ra_name:string){
-    const url: string = environment.baseUrl + "new/"+ra_name
-    return this.http.put(url,null)
-  }
-  // delete RA
-  deleteRA(ra_name: string){
-    const url: string = environment.baseUrl +"delete/"+ra_name
-    return this.http.put(url,null)
-  }
-  // delete Step
-  deleteStep(ra_name:string,step:number){
-    const url:string = environment.baseUrl + "delete/"+ra_name+"/"+step;
-    return this.http.put(url,null)
-  }
-
   getLink(ra_name:string,file_name:string){
     const url: string = environment.baseUrl + "link/"+ra_name+"/"+file_name;
     return this.http.get(url,{ responseType: 'blob' })

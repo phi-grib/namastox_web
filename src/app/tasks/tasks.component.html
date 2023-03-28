@@ -157,15 +157,15 @@
             <table id="dtSubstancesTasks" class="table table-borderless">
               <thead class="text">
                 <tr>
-                  <th>Name</th>
-                  <th>CASRN</th>
+                  <th  style="text-align: center;">Name</th>
+                  <th  style="text-align: center;">CASRN</th>
                   <th style="text-align: center;">SMILES</th>
                 </tr>
               </thead>
               <tbody>
                 <tr  *ngFor="let idx of objectKeys(this.results.resultSelected.substance)">
-                  <td>{{this.results.resultSelected.substance[idx].name}}</td>
-                  <td>{{this.results.resultSelected.substance[idx].CASRN}}</td>
+                  <td style="vertical-align: middle;text-align: center;">{{this.results.resultSelected.substance[idx].name}}</td>
+                  <td style="vertical-align: middle;text-align: center;">{{this.results.resultSelected.substance[idx].CASRN}}</td>
                   <td style="text-align: center;"><canvas [id]="'taskCanvas'+idx"></canvas></td>
                 </tr>
               </tbody>

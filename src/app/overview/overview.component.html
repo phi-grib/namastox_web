@@ -70,15 +70,15 @@
         <table class="table table-borderless">
           <thead class="text">
             <tr>
-              <th>Name</th>
-              <th>CASRN</th>
+              <th style="text-align: center;">Name</th>
+              <th style="text-align: center;">CASRN</th>
               <th style="text-align: center;">SMILES</th>
             </tr>
           </thead>
           <tbody *ngIf="this.ra.general_information.general.substances.length > 0">
             <tr *ngFor="let key of this.objectKeys(this.ra.general_information.general.substances)">
-              <td>{{this.ra.general_information.general.substances[key].name}}</td>
-              <td>{{this.ra.general_information.general.substances[key].CASRN}}</td>
+              <td style="vertical-align: middle;text-align: center;">{{this.ra.general_information.general.substances[key].name}}</td>
+              <td style="vertical-align: middle;text-align: center;">{{this.ra.general_information.general.substances[key].CASRN}}</td>
               <td style="text-align: center;"><canvas [id]="'genInformationCanvas'+key"></canvas></td>
             </tr>
           </tbody>

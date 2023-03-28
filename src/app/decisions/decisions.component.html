@@ -156,22 +156,22 @@
           </div>
         </div>
         <div class="row pt-1 pb-1">
-          <div class="col-2 text d-flex align-items-center">
-        <div style="padding-top: auto !important">Substance</div>
+          <div class="col-2 text">
+        Substance
           </div>
           <div class="col" *ngIf="this.results.decisionSelected.substance">
             <table id="dtSubstancesDecisions"class="table table-borderless">
               <thead class="text">
                 <tr>
-                  <th>Name</th>
-                  <th>CASRN</th>
+                  <th style="text-align: center;">Name</th>
+                  <th style="text-align: center;">CASRN</th>
                   <th style="text-align: center;">SMILES</th>
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let idx of objectKeys(this.results.decisionSelected.substance)">
-                  <td>{{this.results.decisionSelected.substance[idx].name}}</td>
-                  <td>{{this.results.decisionSelected.substance[idx].CASRN}}</td>
+                  <td style="vertical-align: middle;text-align: center;">{{this.results.decisionSelected.substance[idx].name}}</td>
+                  <td style="vertical-align: middle;text-align: center;">{{this.results.decisionSelected.substance[idx].CASRN}}</td>
                   <td style="text-align: center;"><canvas [id]="'decisionCanvas'+idx"></canvas></td>
                 </tr>
               </tbody>
