@@ -13,15 +13,7 @@ export class CommonFunctions {
     }
 
   refreshRA(){
-    this.ra.pending_tasks = [];
-
-
-    this.pendingTasks.results = [];
-    this.pendingTasks.decisions = [];
-
-
-    this.results.resultSelected = '';
-    this.results.decisionSelected = '';
+    this.clearRA();
     let generalInfo$ = this.commonService.getGeneralInfo(this.ra.name);
     let pendingTasks$ = this.commonService.getPendingTasks(this.ra.name)
     let listSteps$ = this.commonService.getSteps(this.ra.name)
@@ -57,6 +49,14 @@ export class CommonFunctions {
        }, 500);
     })   
   }
+
+  clearRA(){
+    this.ra.pending_tasks = [];
+    this.pendingTasks.results = [];
+    this.pendingTasks.decisions = [];
+    this.results.resultSelected = '';
+    this.results.decisionSelected = '';
+  }
   /**separates tasks into different lists  */
   separatePendingTasks(){
     this.pendingTasks.results = [];
@@ -75,13 +75,14 @@ export class CommonFunctions {
     $('#dtDecisions').DataTable().destroy();
     this.results.results = [];
     this.results.decisions = [];
-    for(const idx in this.ra.results){
-      if(Object.keys(this.ra.results[idx])[2] == "value"){
-        this.results.results.push(this.ra.results[idx])
-      }else{
-        this.results.decisions.push(this.ra.results[idx])
-      }
+
+for (const result of this.ra.results) {
+    if ("value" in result) {
+      this.results.results.push(result);
+    } else {
+      this.results.decisions.push(result);
     }
+  }
     setTimeout(() => {
       $("#dtTasks").DataTable();
       $("#dtDecisions").DataTable();
