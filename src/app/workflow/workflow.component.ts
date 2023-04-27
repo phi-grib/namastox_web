@@ -33,15 +33,20 @@ export class WorkflowComponent implements OnInit {
     );
   }
 
-  selectPastTask(typeTask, taskName) {
-    let tableID = typeTask === 'results' ? '#dtTasks' : '#dtDecisions'
+
+  selectTableRowByValue(tableID: string, column: number, value: string) {
     const table = document.querySelector(tableID);
     table.querySelectorAll('tr').forEach((row) => {
       const cells = row.querySelectorAll('td');
-      if (cells[0] != undefined && cells[0].textContent === taskName) {
+      if (cells[column] != undefined && cells[column].textContent === value) {
         row.click();
       }
     });
+  }
+
+  selectPastTask(typeTask, taskName) {
+    const tableID = typeTask === 'results' ? '#dtTasks' : '#dtDecisions';
+    this.selectTableRowByValue(tableID, 0, taskName);
   }
 
   redirectToTask(typeTask, pending, taskname) {
@@ -49,11 +54,6 @@ export class WorkflowComponent implements OnInit {
       $('#pills-tasks-tab').click();
       if (pending) {
         $('#pills-pendingtask-tab').click();
-        // TO DO
-        // console.log(this.pendingTasks.results)
-        // let selector:any = document.getElementById("selectPendingResult");
-        // const option = selector.options[1]
-        // option.click();
       } else {
         $('#pills-pasttasks-tab').click();
         this.selectPastTask(typeTask, taskname)

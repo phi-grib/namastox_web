@@ -117,8 +117,6 @@ setTimeout(() => {
     })
   }
   onSubmit(model: any) {
-    console.log("Model:")
-    console.log(model)
     this.loadForm = false;
     if (model['result_link']){
       this.sendlink(model['result_link'])
