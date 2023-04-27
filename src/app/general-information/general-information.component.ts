@@ -65,23 +65,22 @@ export class GeneralInformationComponent implements OnInit {
       this.generateForm();
     })
   }
-  generateForm() {
-    this.fields = [];
-    this.loadForm = false;
-    this.model = this.ra.general_information.general;
 
-    this.fields = Object.keys(this.ra.general_information.general).map((property) => {
-      const templateObject: any = {};
-      templateObject.key = property;
-      if (['substances', 'workflow_custom'].includes(property)) {
-        templateObject.type = 'file';
-        templateObject.templateOptions = { label: property.replace('_', ' ') };
-      } else {
-        templateObject.type = 'input';
-        templateObject.props = { label: property.replace('_', ' ') };
-      }
-      return templateObject;
+  generateForm() {
+    const generalInfo = this.ra.general_information.general;
+    const FILE_FIELDS = ['substances', 'workflow_custom'];
+  
+    this.fields = Object.keys(generalInfo).map((property) => {
+      const isFile = FILE_FIELDS.includes(property);
+      const label = property.replace('_', ' ');
+      const key = property;
+      const type = isFile ? 'file' : 'input';
+      const props = { label };
+  
+      return { key, type, props, templateOptions: isFile ? { label } : null };
     });
+  
+    this.model = generalInfo;
     this.loadForm = true;
   }
   // TO DO
