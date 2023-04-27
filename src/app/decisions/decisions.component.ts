@@ -48,9 +48,10 @@ export class DecisionsComponent implements OnInit {
   drawMol(){
     if(this.results.decisionSelected.substance.length > 0 ){
      for (let index = 0; index < this.results.decisionSelected.substance.length; index++) {
-      let smilesDrawer = new SmilesDrawer.Drawer({ width: 200, height: 150 });
+      const smilesDrawer = new SmilesDrawer.Drawer({ width: 200, height: 150 });
+      const canvasId = 'decisionCanvas' + index;
       SmilesDrawer.parse(this.results.decisionSelected.substance[index].SMILES, function (tree) {
-        smilesDrawer.draw(tree, 'decisionCanvas'+index, 'light', false);
+        smilesDrawer.draw(tree, canvasId, 'light', false);
     },  function (err) {
       console.log(err);
     });
