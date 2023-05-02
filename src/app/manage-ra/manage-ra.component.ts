@@ -89,5 +89,9 @@ export class ManageRaComponent {
  exportRA(){
   // to do
  }
+ importRA(){
+  // to do
+  
+ }
 
 }
