@@ -45,7 +45,6 @@ export class TasksComponent implements OnInit {
     saveAs(blob, this.results.resultSelected.result_link)
   }
   drawMol(){
-    if(this.results.resultSelected.substance.length > 0 ){
      for (let index = 0; index < this.results.resultSelected.substance.length; index++) {
       let smilesDrawer = new SmilesDrawer.Drawer({ width: 200, height: 150 });
       SmilesDrawer.parse(this.results.resultSelected.substance[index].SMILES, function (tree) {
@@ -53,8 +52,7 @@ export class TasksComponent implements OnInit {
     },  function (err) {
       console.log(err);
     });
-     }
-    }
+     } 
 }
   selectTask(id: string) {
     this.commonService.getResult(this.ra.name, id).subscribe(result => {
@@ -63,7 +61,7 @@ export class TasksComponent implements OnInit {
           this.results.resultSelected.substance = [this.results.resultSelected.substance]
       }
 setTimeout(() => {
-  if(this.results.resultSelected?.substance) this.drawMol();
+  if(this.results.resultSelected?.substance.length > 1) this.drawMol();
 }, 300);
       if (this.results.resultSelected.result_link) {
         this.commonService.getLink(this.ra.name, this.results.resultSelected.result_link,).subscribe({

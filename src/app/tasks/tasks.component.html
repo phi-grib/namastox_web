@@ -149,11 +149,11 @@
             {{this.results.resultSelected.value}}
           </div>
         </div>
-        <div class="row pt-1 pb-1">
+        <div  *ngIf="this.results.resultSelected.substance.length > 1" class="row pt-1 pb-1">
           <div class="col-2 text">
           Substance
           </div>
-          <div  *ngIf="this.results.resultSelected.substance" class="col">
+          <div   class="col">
             <table id="dtSubstancesTasks" class="table table-borderless">
               <thead class="text">
                 <tr>
