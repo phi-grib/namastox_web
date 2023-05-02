@@ -96,8 +96,8 @@ for (const result of this.ra.results) {
       substanceFormated = {'label':substance['name'],'value':substance}
       arraySubstances.push(substanceFormated)
     });
-    substanceFormated = {'label':'All substances','value':this.ra.general_information.general.substances}
-    arraySubstances.push(substanceFormated)
+    // substanceFormated = {'label':'All substances','value':this.ra.general_information.general.substances}
+    // arraySubstances.push(substanceFormated)
     return arraySubstances;
 }
   }
