@@ -86,4 +86,8 @@ export class ManageRaComponent {
     })
   }
 
+ exportRA(){
+  // to do
+ }
+
 }

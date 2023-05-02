@@ -6,6 +6,8 @@
       RA</button>
     <button (click)="deleteStep()" [disabled]="this.ra.listRA.length < 1" type="button"
       class="btn btn-ets-delete">Delete Step</button>
+      <button (click)="exportRA()" [disabled]="this.ra.listRA.length < 1" type="button"
+      class="btn btn-ets-bad">Export RA</button>
   </div>
 </div>
 <div class="modal fade" id="newRA" tabindex="-1" role="dialog" aria-labelledby="newModalLabel" aria-hidden="false">
