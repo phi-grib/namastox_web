@@ -69,8 +69,21 @@ export class GeneralInformationComponent implements OnInit {
   generateForm() {
     const generalInfo = this.ra.general_information.general;
     const FILE_FIELDS = ['substances', 'workflow_custom'];
-  
-    this.fields = Object.keys(generalInfo).map((property) => {
+    
+    const template_keys = ["title", "general_description", "background", "endpoint", 
+                           "administration_route", "regulatory_framework", "species",
+                           "uncertainty", "substances", "workflow_custom" ];
+
+    const object_keys = Object.keys(generalInfo);
+    let item_keys = [];
+    template_keys.forEach((key) => {
+      if (object_keys.includes(key)) {
+        item_keys.push(key);
+      }
+    });
+
+    // this.fields = Object.keys(generalInfo).map((property) => {
+    this.fields = item_keys.map((property) => {
       const isFile = FILE_FIELDS.includes(property);
       const label = property.replace('_', ' ');
       const key = property;
