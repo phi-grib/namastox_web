@@ -75,6 +75,7 @@ setTimeout(() => {
   }
 
   createform() {
+    this.fields = [];
     const FILE_FIELDS = ['result_link','documentation'];
     const REQUIRED = ['value','report']
     const EXPERIMENT = ['idem','value','unit','uncertainty','documentation','summary']
@@ -86,6 +87,7 @@ setTimeout(() => {
         let template_keys = []
         this.pending_task = result;
         this.model = this.pending_task.result;
+        
         if(this.pending_task.result.result_type == 'text'){
           template_keys = templates_keys[1]
         }else{

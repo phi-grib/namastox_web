@@ -84,55 +84,40 @@ export class DecisionsComponent implements OnInit {
 
   createform() {
     this.fields = [];
+    const FILE_FIELDS = ['documentation'];
+    const template_keys = ['decision','justification','documentation','summary']
     this.commonService.getPendingTask(this.ra.name, this.pending_task_selected).subscribe({
       next: (result) => {
         this.pending_task = result;
         this.model = this.pending_task.result;
-        var templateObject: any;
-        for (const property in this.pending_task.result) {
-          if (!['id', 'result_description', 'result_type', 'summary_type'].includes(property)) {
-            templateObject = {};
-            templateObject['key'] = property
-            templateObject['props'] = {
-              label: property.replace('_', ' '),
-              required: false,
 
-            };
-            if (property == 'result_link') {
-              templateObject['type'] = 'file';
-
-            } else if (property == 'decision') {
-              templateObject['type'] = 'radio';
-              templateObject['props'] = {
-                label: property.replace('_', ' '),
-                required: false,
-                options: [
-                  {
-                    value: true,
-                    label: 'Yes'
-                  },
-                  {
-                    value: false,
-                    label: 'No'
-                  }
-                ]
-              };
-            } else {
-              templateObject['type'] = 'input';
-            }
-            if(property == 'substance'){
-              templateObject['type'] = 'select';
-              if(this.ra.general_information.general.substances.length > 0){
-              var arraySubstances = [...this.func.formatSubstancesData()];
-              this.model['substance'] =  arraySubstances[arraySubstances.length-1].value;
-               } else{
-                arraySubstances =  []
-              }
-              templateObject.props['options'] = arraySubstances
-            }
-            this.fields.push(templateObject)
+    const object_keys = Object.keys(this.pending_task.result);
+    let item_keys = [];
+    template_keys.forEach((key)=> {
+      if(object_keys.includes(key)){
+      item_keys.push(key)
+      }
+    }) 
+      this.fields = item_keys.map((property)=> {
+        const isFile = FILE_FIELDS.includes(property);
+        const isSelect = (property == 'decision')
+        const label = property.replace('_', ' ');
+        const key = property;
+        const type = isFile ? 'file': isSelect ? 'radio' : 'input';
+        const props = { label };
+        props['options'] =  [
+          {
+            value: true,
+            label: 'Yes'
+          },
+          {
+            value: false,
+            label: 'No'
           }
-        }
+        ]
+        return { key, type, props, templateOptions: isFile ? { label } : null };
+      })
+    
         this.loadForm = true;
       },
       error: (e) => console.log(e)
