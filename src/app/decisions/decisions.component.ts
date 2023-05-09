@@ -94,8 +94,8 @@ export class DecisionsComponent implements OnInit {
 
   createform() {
     this.fields = [];
-    const FILE_FIELDS = ['documentation'];
-    const template_keys = ['decision','justification','documentation','summary']
+    const FILE_FIELDS = ['result_link'];
+    const template_keys = ['decision','justification','result_link','summary']
     this.commonService.getPendingTask(this.ra.name, this.pending_task_selected).subscribe({
       next: (result) => {
         this.pending_task = result;
@@ -112,7 +112,7 @@ export class DecisionsComponent implements OnInit {
         const isFile = FILE_FIELDS.includes(property);
         const isSelect = (property == 'decision')
         const isTextArea = (property == 'summary')
-        const label = property.replace('_', ' ');
+        const label = isFile ? 'documentation' : property.replace('_', ' ');
         const key = property;
         const type = isFile ? 'file': isSelect ? 'radio' : isTextArea ? 'textarea' : 'input';
         const props = { label };

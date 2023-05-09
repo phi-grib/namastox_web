@@ -76,10 +76,10 @@ setTimeout(() => {
 
   createform() {
     this.fields = [];
-    const FILE_FIELDS = ['result_link','documentation'];
-    const REQUIRED = ['value','report']
-    const EXPERIMENT = ['idem','value','unit','uncertainty','documentation','summary']
-    const REPORT = ['report','documentation','summary']
+    const FILE_FIELDS = ['result_link'];
+    const REQUIRED = ['value','report'];
+    const EXPERIMENT = ['idem','value','unit','uncertainty','result_link','summary'];
+    const REPORT = ['report','result_link','summary'];
     const templates_keys = [REPORT,EXPERIMENT]
     this.form = new FormGroup({});
     this.commonService.getPendingTask(this.ra.name, this.pending_task_selected).subscribe({
@@ -87,13 +87,11 @@ setTimeout(() => {
         let template_keys = []
         this.pending_task = result;
         this.model = this.pending_task.result;
-        
         if(this.pending_task.result.result_type == 'text'){
           template_keys = templates_keys[1]
         }else{
           template_keys = templates_keys[0]
         }
-
         const object_keys = Object.keys(this.pending_task.result);
         let item_keys = [];
         template_keys.forEach((key)=> {
@@ -105,7 +103,7 @@ setTimeout(() => {
         this.fields = item_keys.map((property) => {
           const isFile = FILE_FIELDS.includes(property);
           const isTextArea = (property == 'summary')
-          const label = property.replace('_', ' ');
+          const label = isFile ? 'documentation' : property.replace('_', ' ');
           const key = property;
           const type = isFile ? 'file' : isTextArea ? 'textarea': 'input';
           const props = { label };
