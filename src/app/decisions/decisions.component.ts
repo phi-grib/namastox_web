@@ -23,6 +23,16 @@ export class DecisionsComponent implements OnInit {
   objectKeys = Object.keys;
   model: any;
   link: Blob;
+   optSelect = [
+    {
+      value: true,
+      label: 'Yes'
+    },
+    {
+      value: false,
+      label: 'No'
+    }
+  ]
   constructor(private toastr: ToastrService, public ra: RA, private commonService: CommonService, private func: CommonFunctions, public pendingTasks: PendingTasks, public results: Results, private updateService: UpdateService) {
   }
   ngOnInit(): void {
@@ -101,20 +111,13 @@ export class DecisionsComponent implements OnInit {
       this.fields = item_keys.map((property)=> {
         const isFile = FILE_FIELDS.includes(property);
         const isSelect = (property == 'decision')
+        const isTextArea = (property == 'summary')
         const label = property.replace('_', ' ');
         const key = property;
-        const type = isFile ? 'file': isSelect ? 'radio' : 'input';
+        const type = isFile ? 'file': isSelect ? 'radio' : isTextArea ? 'textarea' : 'input';
         const props = { label };
-        props['options'] =  [
-          {
-            value: true,
-            label: 'Yes'
-          },
-          {
-            value: false,
-            label: 'No'
-          }
-        ]
+        if(isSelect)  props['options'] =this.optSelect; else props['rows'] = 5;
+         
         return { key, type, props, templateOptions: isFile ? { label } : null };
       })
     

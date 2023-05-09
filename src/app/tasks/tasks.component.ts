@@ -104,10 +104,12 @@ setTimeout(() => {
 
         this.fields = item_keys.map((property) => {
           const isFile = FILE_FIELDS.includes(property);
+          const isTextArea = (property == 'summary')
           const label = property.replace('_', ' ');
           const key = property;
-          const type = isFile ? 'file' : 'input';
+          const type = isFile ? 'file' : isTextArea ? 'textarea': 'input';
           const props = { label };
+          if(isTextArea) props['rows'] = 5;
           props['required'] = REQUIRED.includes(property)
           return { key, type, props, templateOptions: isFile ? { label } : null };
         });
