@@ -95,7 +95,9 @@ setTimeout(() => {
         const object_keys = Object.keys(this.pending_task.result);
         let item_keys = [];
         template_keys.forEach((key)=> {
+          if(object_keys.includes(key)){
           item_keys.push(key)
+          }
         })
 
         this.fields = item_keys.map((property) => {
