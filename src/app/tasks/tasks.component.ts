@@ -75,40 +75,38 @@ setTimeout(() => {
   }
 
   createform() {
-    this.fields = [];
+    const FILE_FIELDS = ['result_link','documentation'];
+    const REQUIRED = ['value','report']
+    const EXPERIMENT = ['idem','value','unit','uncertainty','documentation','summary']
+    const REPORT = ['report','documentation','summary']
+    const templates_keys = [REPORT,EXPERIMENT]
     this.form = new FormGroup({});
     this.commonService.getPendingTask(this.ra.name, this.pending_task_selected).subscribe({
       next: (result) => {
+        let template_keys = []
         this.pending_task = result;
         this.model = this.pending_task.result;
-        for (const property in this.pending_task.result) {
-          if (!['id', 'result_description', 'result_type', 'summary_type'].includes(property)) {
-            const templateObject = {
-              key: property,
-              props: {
-                label: property.replace('_', ' '),
-                required: false
-              }
-            };
-            property != 'result_link'
-              ? (templateObject['type'] = 'input')
-              : (templateObject['type'] = 'file');
-
-              if(property == 'value') templateObject.props['required'] = true;
-
-              if(property == 'substance'){
-                templateObject['type'] = 'select';
-                if(this.ra.general_information.general.substances.length > 0){
-                var arraySubstances = [...this.func.formatSubstancesData()];
-                this.model['substance'] =  arraySubstances[arraySubstances.length-1].value;
-                 } else{
-                  arraySubstances =  []
-                }
-                templateObject.props['options'] = arraySubstances
-              }
-            this.fields.push(templateObject);
-          }
+        if(this.pending_task.result.result_type == 'text'){
+          template_keys = templates_keys[1]
+        }else{
+          template_keys = templates_keys[0]
         }
+
+        const object_keys = Object.keys(this.pending_task.result);
+        let item_keys = [];
+        template_keys.forEach((key)=> {
+          item_keys.push(key)
+        })
+
+        this.fields = item_keys.map((property) => {
+          const isFile = FILE_FIELDS.includes(property);
+          const label = property.replace('_', ' ');
+          const key = property;
+          const type = isFile ? 'file' : 'input';
+          const props = { label };
+          props['required'] = REQUIRED.includes(property)
+          return { key, type, props, templateOptions: isFile ? { label } : null };
+        });
         this.loadForm = true;
       },
       error: (e) => console.log(e)
