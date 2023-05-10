@@ -111,7 +111,7 @@ setTimeout(() => {
         let template_keys = []
         this.pending_task = result;
         this.model = this.pending_task.result;
-        if(this.pending_task.result.result_type == 'text'){
+        if(this.pending_task.result.result_type === 'text'){
           template_keys = templates_keys[1]
         }else{
           template_keys = templates_keys[0]
@@ -127,7 +127,7 @@ setTimeout(() => {
         this.fields = item_keys.map((property) => {
           const isFile = FILE_FIELDS.includes(property);
           const isTextArea = (property == 'summary')
-          const label = isFile ? 'documentation' : property.replace('_', ' ');
+          const label = isFile ? 'documentation' : property == "report" ? "value":property.replace('_', ' ');
           const key = property;
           const type = isFile ? 'file' : isTextArea ? 'textarea': 'input';
           const props = { label };
