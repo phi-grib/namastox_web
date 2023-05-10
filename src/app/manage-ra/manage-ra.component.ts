@@ -87,11 +87,18 @@ export class ManageRaComponent {
   }
 
  exportRA(){
-  // to do
+  this.manageRA.exportRA(this.ra.name).subscribe( {
+   
+  })
  }
  importRA(){
-  // to do
-  
+  document.getElementById('fileinput')?.click();
  }
+ handleFile($event) {
+  const file = $event.target.files[0];
+  this.manageRA.importRA(file).subscribe(result =>{
+    console.log(result)
+  })  
 
+}
 }

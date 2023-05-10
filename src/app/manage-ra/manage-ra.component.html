@@ -8,6 +8,7 @@
       class="btn btn-ets-delete">Delete Step</button>
       <button (click)="importRA()" [disabled]="this.ra.listRA.length < 1" type="button"
       class="btn btn-ets-bad">Import RA</button>
+      <input type="file" id="fileinput" style="display: none" (change)="handleFile($event)">
       <button (click)="exportRA()" [disabled]="this.ra.listRA.length < 1" type="button"
       class="btn btn-ets-bad">Export RA</button>
   </div>

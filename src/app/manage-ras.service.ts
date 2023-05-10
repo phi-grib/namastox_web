@@ -29,10 +29,11 @@ export class ManageRAsService {
     return this.http.get(url);
   }
 
-  importRA(){
-    const url: string = environment.baseUrl + 'ra/import';
-
-
+  importRA(file){
+    const formData = new FormData();
+    formData.append('file', file);
+    const url: string = environment.baseUrl + 'import';
+    return this.http.post(url,formData)
   }
   
 }
