@@ -73,7 +73,7 @@
         </table>
       </div>
     </div>
-    <div class="mt-2" *ngIf="this.results.resultSelected">
+    <div class="mt-2" *ngIf="this.results.resultSelected.result">
       <hr>
       <div class="card-body">
         <div class="row pt-1 pb-1">
@@ -81,7 +81,7 @@
             ID
           </div>
           <div class="col  border-bottom">
-            {{this.results.resultSelected.id}}
+            {{this.results.resultSelected.result.id}}
           </div>
         </div>
         <div class="row pt-1 pb-1">
@@ -89,7 +89,7 @@
             Resul description
           </div>
           <div class="col border-bottom">
-            {{this.results.resultSelected.result_description}}
+            {{this.results.resultSelected.result.result_description}}
           </div>
         </div>
         <div class="row pt-1 pb-1">
@@ -97,7 +97,7 @@
             Resul type
           </div>
           <div class="col border-bottom">
-            {{this.results.resultSelected.result_type}}
+            {{this.results.resultSelected.result.result_type}}
           </div>
         </div>
         <div class="row pt-1 pb-1">
@@ -105,8 +105,8 @@
             Result link
           </div>
           <div class="col border-bottom">
-            <button (click)="downloadFile()" *ngIf="this.results.resultSelected.result_link"
-              class="btn btn-outline-success mt-2 mb-2">{{this.results.resultSelected.result_link}}</button>
+            <button (click)="downloadFile()" *ngIf="this.results.resultSelected.result.result_link"
+              class="btn btn-outline-success mt-2 mb-2">{{this.results.resultSelected.result.result_link}}</button>
           </div>
         </div>
         <div class="row pt-1 pb-1">
@@ -114,7 +114,7 @@
             Summary
           </div>
           <div class="col border-bottom">
-            {{this.results.resultSelected.summary}}
+            {{this.results.resultSelected.result.summary}}
           </div>
         </div>
         <div class="row pt-1 pb-1">
@@ -122,7 +122,7 @@
             Summary type
           </div>
           <div class="col border-bottom">
-            {{this.results.resultSelected.summary_type}}
+            {{this.results.resultSelected.result.summary_type}}
           </div>
         </div>
         <div class="row pt-1 pb-1">
@@ -130,7 +130,7 @@
             Uncertainty
           </div>
           <div class="col border-bottom">
-            {{this.results.resultSelected.uncertainty}}
+            {{this.results.resultSelected.result.uncertainty}}
           </div>
         </div>
         <div class="row pt-1 pb-1">
@@ -138,7 +138,7 @@
             Unit
           </div>
           <div class="col border-bottom">
-            {{this.results.resultSelected.unit}}
+            {{this.results.resultSelected.result.unit}}
           </div>
         </div>
         <div class="row pt-1 pb-1">
@@ -146,10 +146,10 @@
             Value
           </div>
           <div class="col border-bottom">
-            {{this.results.resultSelected.value}}
+            {{this.results.resultSelected.result.value}}
           </div>
         </div>
-        <div  *ngIf="this.results.resultSelected.substance.length > 1" class="row pt-1 pb-1">
+        <div  *ngIf="this.results.resultSelected?.result?.substance?.length > 1" class="row pt-1 pb-1">
           <div class="col-2 text">
           Substance
           </div>
@@ -163,9 +163,9 @@
                 </tr>
               </thead>
               <tbody>
-                <tr  *ngFor="let idx of objectKeys(this.results.resultSelected.substance)">
-                  <td style="vertical-align: middle;text-align: center;">{{this.results.resultSelected.substance[idx].name}}</td>
-                  <td style="vertical-align: middle;text-align: center;">{{this.results.resultSelected.substance[idx].CASRN}}</td>
+                <tr  *ngFor="let idx of objectKeys(this.results.resultSelected.result.substance)">
+                  <td style="vertical-align: middle;text-align: center;">{{this.results.resultSelected.result.substance[idx].name}}</td>
+                  <td style="vertical-align: middle;text-align: center;">{{this.results.resultSelected.result.substance[idx].CASRN}}</td>
                   <td style="text-align: center;"><canvas [id]="'taskCanvas'+idx"></canvas></td>
                 </tr>
               </tbody>
