@@ -106,6 +106,7 @@ setTimeout(() => {
     this.form = new FormGroup({});
     this.commonService.getPendingTask(this.ra.name, this.pending_task_selected).subscribe({
       next: (result) => {
+        console.log("PendingTask endpoint:")
         console.log(result)
         let template_keys = []
         this.pending_task = result;
