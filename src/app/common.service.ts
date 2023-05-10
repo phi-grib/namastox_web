@@ -64,9 +64,15 @@ export class CommonService {
     return this.http.get(url)
 
   }
+  
   /**get result */
   getResult(ra_name:string,id:string){
     const url: string = environment.baseUrl + "result/"+ra_name+"/"+id;
+    return this.http.get(url)
+  }
+
+  getTask(ra_name:string,id:string){
+    const url: string = environment.baseUrl + "task/"+ra_name+"/"+id;
     return this.http.get(url)
   }
 

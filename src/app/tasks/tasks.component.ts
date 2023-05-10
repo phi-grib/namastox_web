@@ -55,6 +55,11 @@ export class TasksComponent implements OnInit {
      } 
 }
   selectTask(id: string) {
+    this.commonService.getTask(this.ra.name,id).subscribe(result => {
+      console.log("endpoint getTask:")
+      console.log(result)
+    })
+
     this.commonService.getResult(this.ra.name, id).subscribe(result => {
       this.results.resultSelected = result;
       if(!Array.isArray(this.results.resultSelected.substance)) {
@@ -79,11 +84,12 @@ setTimeout(() => {
     const FILE_FIELDS = ['result_link'];
     const REQUIRED = ['value','report'];
     const EXPERIMENT = ['idem','value','unit','uncertainty','result_link','summary'];
-    const REPORT = ['value','result_link','summary'];
+    const REPORT = ['report','result_link','summary'];
     const templates_keys = [REPORT,EXPERIMENT]
     this.form = new FormGroup({});
     this.commonService.getPendingTask(this.ra.name, this.pending_task_selected).subscribe({
       next: (result) => {
+        console.log(result)
         let template_keys = []
         this.pending_task = result;
         this.model = this.pending_task.result;
