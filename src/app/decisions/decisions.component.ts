@@ -69,7 +69,7 @@ export class DecisionsComponent implements OnInit {
     }
 }
   selectDecision(id: string) {
-    this.commonService.getResult(this.ra.name, id).subscribe({
+    this.commonService.getTask(this.ra.name, id).subscribe({
       next: (result) => {
         this.results.decisionSelected = result;
         if(!Array.isArray(this.results.decisionSelected.substance)) {

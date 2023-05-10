@@ -58,9 +58,6 @@ export class TasksComponent implements OnInit {
     this.commonService.getTask(this.ra.name,id).subscribe(result => {
       console.log("endpoint getTask:")
       console.log(result)
-    })
-
-    this.commonService.getResult(this.ra.name, id).subscribe(result => {
       this.results.resultSelected = result;
       if(!Array.isArray(this.results.resultSelected.substance)) {
           this.results.resultSelected.substance = [this.results.resultSelected.substance]
@@ -76,7 +73,27 @@ setTimeout(() => {
           error: (e) => console.log(e)
         })
       }
+
     })
+//     this.commonService.getResult(this.ra.name, id).subscribe(result => {
+//       console.log("endpoint getResult")
+//       console.log(result)
+//       this.results.resultSelected = result;
+//       if(!Array.isArray(this.results.resultSelected.substance)) {
+//           this.results.resultSelected.substance = [this.results.resultSelected.substance]
+//       }
+// setTimeout(() => {
+//   if(this.results.resultSelected?.substance.length > 1) this.drawMol();
+// }, 300);
+//       if (this.results.resultSelected.result_link) {
+//         this.commonService.getLink(this.ra.name, this.results.resultSelected.result_link,).subscribe({
+//           next: (result) => {
+//             this.link = result
+//           },
+//           error: (e) => console.log(e)
+//         })
+//       }
+//     })
   }
 
   createform() {
