@@ -87,8 +87,8 @@ export class ManageRaComponent {
   }
 
  exportRA(){
-  this.manageRA.exportRA(this.ra.name).subscribe( {
-   
+  this.manageRA.exportRA(this.ra.name).subscribe(result => {
+
   })
  }
  importRA(){
@@ -99,6 +99,5 @@ export class ManageRaComponent {
   this.manageRA.importRA(file).subscribe(result =>{
     console.log(result)
   })  
-
 }
 }

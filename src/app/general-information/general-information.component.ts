@@ -29,7 +29,6 @@ export class GeneralInformationComponent implements OnInit {
       if(model['workflow_custom'] && model['workflow_custom'][0] instanceof File){
         this.updateService.uploadCustomWorkflow(this.ra.name,model['workflow_custom'][0]).subscribe({
           next: (result)=> {
-            console.log(result)
             model['workflow_custom'] = model['workflow_custom'][0].name;
           },
           error: (e) => {

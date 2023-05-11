@@ -30,7 +30,7 @@ export class TasksComponent implements OnInit {
       this.pending_task_selected = this.pendingTasks.results[0].id;
       this.createform();
     }
-    /**servicio */
+    /**servicio*/
     this.commonService.generateForms$.subscribe((taskID) => {
       //Check select is not empty 
       if (this.pendingTasks.results[0]) {
@@ -61,9 +61,7 @@ export class TasksComponent implements OnInit {
 }
   selectTask(id: string) {
     this.commonService.getTask(this.ra.name,id).subscribe(result => {
-      console.log("endpoint getTask:")
       this.results.resultSelected = result;
-      console.log(this.results.resultSelected)
       if(!Array.isArray(this.results.resultSelected.substance)) {
           this.results.resultSelected.substance = [this.results.resultSelected.substance]
       }
@@ -110,8 +108,6 @@ setTimeout(() => {
     this.form = new FormGroup({});
     this.commonService.getPendingTask(this.ra.name, this.pending_task_selected).subscribe({
       next: (result) => {
-        console.log("PendingTask endpoint:")
-        console.log(result)
         let template_keys = []
         this.pending_task = result;
         this.model = this.pending_task.result;

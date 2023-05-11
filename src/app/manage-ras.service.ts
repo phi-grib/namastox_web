@@ -26,7 +26,7 @@ export class ManageRAsService {
 
   exportRA(ra_name:string){
     const url: string = environment.baseUrl + "export/"+ra_name;
-    return this.http.get(url);
+    return this.http.get(url,{ responseType: 'blob' });
   }
 
   importRA(file){
