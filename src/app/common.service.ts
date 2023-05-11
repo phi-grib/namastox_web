@@ -14,10 +14,10 @@ import { environment } from "../environments/environment";
 export class CommonService {
   constructor(private http: HttpClient) {}
 
-  private generateForms = new Subject<boolean>();
+  private generateForms = new Subject<String>();
   generateForms$ = this.generateForms.asObservable();
-  AutoGenerateForm(){
-    this.generateForms.next(true)
+  AutoGenerateForm(taskID?: string){
+    this.generateForms.next(taskID)
   }
   /* update workflow */
   private refreshWorkflow = new Subject<boolean>();

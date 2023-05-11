@@ -43,7 +43,19 @@ export class WorkflowComponent implements OnInit {
       }
     });
   }
-
+  selectOptionBytaskID(selectorID,taskID){
+    const selector = document.getElementById(selectorID);
+       selector.querySelectorAll('option').forEach((option)=> {
+          if(option.textContent === taskID){
+            option.selected = true;
+            this.commonService.AutoGenerateForm(taskID);
+          } 
+       })
+  }
+  selectTask(typeTask,taskID){
+    const selectorID = typeTask === 'results' ?'selectPendingResult' :'#selectPendingDecision';
+    this.selectOptionBytaskID(selectorID,taskID);
+  }
   selectPastTask(typeTask, taskName) {
     const tableID = typeTask === 'results' ? '#dtTasks' : '#dtDecisions';
     this.selectTableRowByValue(tableID, 0, taskName);
@@ -54,6 +66,7 @@ export class WorkflowComponent implements OnInit {
       $('#pills-tasks-tab').click();
       if (pending) {
         $('#pills-pendingtask-tab').click();
+        this.selectTask(typeTask,taskname);
       } else {
         $('#pills-pasttasks-tab').click();
         this.selectPastTask(typeTask, taskname)
@@ -62,7 +75,7 @@ export class WorkflowComponent implements OnInit {
       $('#pills-decisions-tab').click();
       if (pending) {
         $('#pills-pendingdecisions-tab').click();
-        // TO DO
+        // this.selectTask(typeTask,taskname);
       } else {
         $('#pills-pastdecisions-tab').click();
         this.selectPastTask(typeTask, taskname)

@@ -18,7 +18,7 @@ export class TasksComponent implements OnInit {
   form = new FormGroup({});
   model: any;
   fields: FormlyFieldConfig[] = [];
-  pending_task_selected: string = '';
+  pending_task_selected: String = '';
   pending_task: any;
   link: Blob;
   objectKeys = Object.keys;
@@ -31,9 +31,14 @@ export class TasksComponent implements OnInit {
       this.createform();
     }
     /**servicio */
-    this.commonService.generateForms$.subscribe(() => {
+    this.commonService.generateForms$.subscribe((taskID) => {
+      //Check select is not empty 
       if (this.pendingTasks.results[0]) {
+        if(taskID){
+          this.pending_task_selected = taskID
+        }else{
         this.pending_task_selected = this.pendingTasks.results[0].id;
+        }
         this.createform();
       }
     })

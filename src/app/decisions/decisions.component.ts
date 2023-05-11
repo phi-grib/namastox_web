@@ -18,7 +18,7 @@ export class DecisionsComponent implements OnInit {
   loadForm: boolean = false;
   form = new FormGroup({});
   fields: FormlyFieldConfig[] = [];
-  pending_task_selected: string = '';
+  pending_task_selected: String = '';
   pending_task: any;
   objectKeys = Object.keys;
   model: any;
@@ -41,9 +41,13 @@ export class DecisionsComponent implements OnInit {
       this.createform();
     }
     /**servicio */
-    this.commonService.generateForms$.subscribe(() => {
+    this.commonService.generateForms$.subscribe((taskID) => {
       if (this.pendingTasks.decisions[0]) {
+        if(taskID){
+          this.pending_task_selected = taskID
+        }else{
         this.pending_task_selected = this.pendingTasks.decisions[0].id;
+        }
         this.createform();
       }
     })

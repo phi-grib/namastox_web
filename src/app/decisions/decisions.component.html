@@ -16,7 +16,7 @@
     <div *ngIf="this.pendingTasks.decisions.length > 0; else noDecisions">
       <div class="row">
         <div class="col">
-          <select (change)="createform()" [(ngModel)]="this.pending_task_selected" class="form-select"
+          <select (change)="createform()" id="selectPendingDecision" [(ngModel)]="this.pending_task_selected" class="form-select"
             aria-label="Default select example">
             <option *ngFor="let idx of objectKeys(this.pendingTasks.decisions)"
               [value]='this.pendingTasks.decisions[idx].id'>{{this.pendingTasks.decisions[idx].id}}</option>
