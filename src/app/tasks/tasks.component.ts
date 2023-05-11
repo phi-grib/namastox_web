@@ -39,7 +39,7 @@ export class TasksComponent implements OnInit {
         }else{
         this.pending_task_selected = this.pendingTasks.results[0].id;
         }
-        this.createform();
+         this.createform();
       }
     })
   }
@@ -99,6 +99,46 @@ setTimeout(() => {
 //     })
   }
 
+  insertDescription(){
+  // let form =  document.getElementsByTagName('formly-wrapper-form-field');
+  // container description
+  // mover el input al nuevo div para alinearlo con la descripcion
+  // var input = document.getElementsByClassName('form-control')[1]
+  // var containerInputAndDesc = document.createElement("div");
+  // containerInputAndDesc.append(input)
+  // var description = document.createElement("small");
+  // description.innerText = "Lorem ipsum";
+  // description.style.color = "gray"
+  // containerInputAndDesc.appendChild(description)
+  // containerInputAndDesc.style.display = "block"
+  // containerInputAndDesc.style.width = "100%"
+  // form[0].children[0].appendChild(containerInputAndDesc)
+  // let forms = document.getElementsByTagName('formly-wrapper-form-field');
+  let forms = document.getElementsByTagName('formly-wrapper-form-field');
+  for (var i = 0; i < forms.length; i++) {
+
+    var form = forms[i];
+    // Mover el input al nuevo div para alinearlo con la descripción
+    var input = form.getElementsByClassName('form-control')[0] != undefined ? form.getElementsByClassName('form-control')[0] : form.querySelector('input[type="file"]');
+    var containerInputAndDesc = document.createElement("div");
+    containerInputAndDesc.append(input);
+  
+    var description = document.createElement("small");
+    
+
+    description.innerText = this.pending_task['task description']['summary']
+  
+    description.style.color = "gray";
+
+    containerInputAndDesc.appendChild(description);
+  
+    containerInputAndDesc.style.display = "block";
+    containerInputAndDesc.style.width = "100%";
+  
+    form.children[0].appendChild(containerInputAndDesc);
+  }
+
+  }
   createform() {
     this.fields = [];
     const FILE_FIELDS = ['result_link'];
@@ -133,12 +173,19 @@ setTimeout(() => {
           const props = { label };
           if(isTextArea) props['rows'] = 5;
           props['required'] = REQUIRED.includes(property)
-          return { key, type, props, templateOptions: isFile ? { label } : null };
+          
+          // props['description'] = "lorem ipsum"
+          return { key, type, props, templateOptions: isFile ? { label} : null };
         });
         this.loadForm = true;
+        setTimeout(() => {
+        this.insertDescription();
+        }, 200);
       },
       error: (e) => console.log(e)
     })
+
+
   }
   onSubmit(model: any) {
     this.loadForm = false;
