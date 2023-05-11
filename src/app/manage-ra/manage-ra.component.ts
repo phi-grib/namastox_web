@@ -96,8 +96,12 @@ export class ManageRaComponent {
  }
  handleFile($event) {
   const file = $event.target.files[0];
+  const ra_name = file.name.split(".")[0]
   this.manageRA.importRA(file).subscribe(result =>{
-    console.log(result)
+    if(result['success']){
+      this.toastr.success('RA \'' + ra_name + '\' imported' , 'IMPORTED SUCCESFULLY', {
+        timeOut: 5000, positionClass: 'toast-top-right'});
+    }
   })  
 }
 }
