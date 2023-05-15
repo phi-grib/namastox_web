@@ -55,3 +55,9 @@ hr{
 .container-form {
     color: $secondary-color;
 }
+
+ ::ng-deep formly-horizontal-wrapper div div { 
+ 
+            min-width: 80%;
+   
+ }
