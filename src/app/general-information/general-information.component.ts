@@ -89,7 +89,7 @@ export class GeneralInformationComponent implements OnInit {
       const type = isFile ? 'file' : 'input';
       const props = { label };
   
-      return { key, type, props, templateOptions: isFile ? { label } : null };
+      return { key, type,wrappers: ['form-field-horizontal'], props, templateOptions: isFile ? { label } : null };
     });
   
     this.model = generalInfo;

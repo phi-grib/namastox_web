@@ -26,13 +26,9 @@ export class TasksComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.pendingTasks.results[0]) {
-      this.pending_task_selected = this.pendingTasks.results[0].id;
-      this.createform();
-    }
-    /**servicio*/
     this.commonService.generateForms$.subscribe((taskID) => {
       //Check select is not empty 
+      console.log("SERVICE GENERATE FORM")
       if (this.pendingTasks.results[0]) {
         if(taskID){
           this.pending_task_selected = taskID
@@ -78,42 +74,9 @@ setTimeout(() => {
       }
 
     })
-//     this.commonService.getResult(this.ra.name, id).subscribe(result => {
-//       console.log("endpoint getResult")
-//       console.log(result)
-//       this.results.resultSelected = result;
-//       if(!Array.isArray(this.results.resultSelected.substance)) {
-//           this.results.resultSelected.substance = [this.results.resultSelected.substance]
-//       }
-// setTimeout(() => {
-//   if(this.results.resultSelected?.substance.length > 1) this.drawMol();
-// }, 300);
-//       if (this.results.resultSelected.result_link) {
-//         this.commonService.getLink(this.ra.name, this.results.resultSelected.result_link,).subscribe({
-//           next: (result) => {
-//             this.link = result
-//           },
-//           error: (e) => console.log(e)
-//         })
-//       }
-//     })
   }
 
   insertDescription(){
-  // let form =  document.getElementsByTagName('formly-wrapper-form-field');
-  // container description
-  // mover el input al nuevo div para alinearlo con la descripcion
-  // var input = document.getElementsByClassName('form-control')[1]
-  // var containerInputAndDesc = document.createElement("div");
-  // containerInputAndDesc.append(input)
-  // var description = document.createElement("small");
-  // description.innerText = "Lorem ipsum";
-  // description.style.color = "gray"
-  // containerInputAndDesc.appendChild(description)
-  // containerInputAndDesc.style.display = "block"
-  // containerInputAndDesc.style.width = "100%"
-  // form[0].children[0].appendChild(containerInputAndDesc)
-  // let forms = document.getElementsByTagName('formly-wrapper-form-field');
   let forms = document.getElementsByTagName('formly-wrapper-form-field');
   for (var i = 0; i < forms.length; i++) {
 
@@ -124,9 +87,11 @@ setTimeout(() => {
     containerInputAndDesc.append(input);
   
     var description = document.createElement("small");
-    
 
-    description.innerText = this.pending_task['task description']['summary']
+    var key = form.getElementsByClassName('form-label')[0]
+    var descText = this.pending_task['task description'][key.textContent.split(" ")[1]]
+
+    description.innerText = descText != undefined ? descText : "";
   
     description.style.color = "gray";
 
@@ -173,14 +138,10 @@ setTimeout(() => {
           const props = { label };
           if(isTextArea) props['rows'] = 5;
           props['required'] = REQUIRED.includes(property)
-          
-          // props['description'] = "lorem ipsum"
-          return { key, type, props, templateOptions: isFile ? { label} : null };
+          props['placeholder'] = this.pending_task['task description'][property]
+          return { key, type, wrappers: ['form-field-horizontal'], props, templateOptions: isFile ? { label} : null };
         });
         this.loadForm = true;
-        setTimeout(() => {
-        this.insertDescription();
-        }, 200);
       },
       error: (e) => console.log(e)
     })

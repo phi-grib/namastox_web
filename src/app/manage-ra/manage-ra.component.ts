@@ -46,7 +46,6 @@ export class ManageRaComponent {
   }
 
   deleteStep() {
-
     this.manageRA.deleteStep(this.ra.name, this.ra.status.step).subscribe({
       next: (result) => {
         if (result['success']) {
@@ -85,10 +84,8 @@ export class ManageRaComponent {
       console.log(error)
     })
   }
-
  exportRA(){
   this.manageRA.exportRA(this.ra.name).subscribe(result => {
-
   })
  }
  importRA(){

@@ -121,9 +121,10 @@ export class DecisionsComponent implements OnInit {
         const key = property;
         const type = isFile ? 'file': isSelect ? 'radio' : isTextArea ? 'textarea' : 'input';
         const props = { label };
+        props['placeholder'] = this.pending_task['task description'][property]
         if(isSelect)  props['options'] =this.optSelect; else props['rows'] = 5;
          
-        return { key, type, props, templateOptions: isFile ? { label } : null };
+        return { key, type,wrappers: ['form-field-horizontal'], props, templateOptions: isFile ? { label } : null };
       })
     
         this.loadForm = true;

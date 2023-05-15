@@ -55,15 +55,3 @@ hr{
 .container-form {
     color: $secondary-color;
 }
-
- ::ng-deep formly-wrapper-form-field { 
-     div{
-         display: flex;
-         label {
-             width: 120px !important;
-             span {
-                 display: none !important;
-             }
-         }
-     } 
- }

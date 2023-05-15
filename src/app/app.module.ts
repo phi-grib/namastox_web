@@ -22,6 +22,7 @@ import { SelectRaComponent } from './select-ra/select-ra.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ManageRaComponent } from './manage-ra/manage-ra.component';
+import { FormlyHorizontalWrapper } from './general-information/horizontal-wrapper';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { ManageRaComponent } from './manage-ra/manage-ra.component';
     TasksComponent,
     DecisionsComponent,
     SelectRaComponent,
-    ManageRaComponent
+    ManageRaComponent,
+    FormlyHorizontalWrapper
   ],
   imports: [
     BrowserModule,
@@ -50,7 +52,9 @@ import { ManageRaComponent } from './manage-ra/manage-ra.component';
     ToastrModule.forRoot(),
     FormlyModule.forRoot(
       {
-        types: [{ name: 'file', component: FormlyFieldFile, wrappers: ['form-field'] }],
+        wrappers: [{ name: 'form-field-horizontal', component: FormlyHorizontalWrapper }],
+      validationMessages: [{ name: 'required', message: 'This field is required' }],
+        types: [{ name: 'file', component: FormlyFieldFile, wrappers: ['form-field-horizontal'] }],
       }
     ),
     FormlyBootstrapModule,
