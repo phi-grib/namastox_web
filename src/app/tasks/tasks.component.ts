@@ -57,7 +57,6 @@ export class TasksComponent implements OnInit {
   selectTask(id: string) {
     this.commonService.getTask(this.ra.name,id).subscribe(result => {
       this.results.resultSelected = result;
-      console.log(this.results.resultSelected)
       if(!Array.isArray(this.results.resultSelected.substance)) {
           this.results.resultSelected.substance = [this.results.resultSelected.substance]
       }
