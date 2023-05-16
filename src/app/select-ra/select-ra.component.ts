@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
 import { SplitComponent } from 'angular-split';
 import { CommonFunctions } from '../common.functions';
 import { CommonService } from '../common.service';
@@ -12,7 +11,7 @@ import { Global, PendingTasks, RA, Results } from '../globals';
 })
 export class SelectRaComponent {
 
-  constructor(private toastr: ToastrService, public global: Global, public ra: RA, private commonService: CommonService, private func: CommonFunctions, private pendingTasks: PendingTasks, private results: Results) {
+  constructor(public global: Global, public ra: RA, private commonService: CommonService, private func: CommonFunctions, private pendingTasks: PendingTasks, private results: Results) {
 
   }
 

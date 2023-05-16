@@ -28,7 +28,6 @@ export class TasksComponent implements OnInit {
   ngOnInit(): void {
     this.commonService.generateForms$.subscribe((taskID) => {
       //Check select is not empty 
-      console.log("SERVICE GENERATE FORM")
       if (this.pendingTasks.results[0]) {
         if(taskID){
           this.pending_task_selected = taskID
@@ -58,6 +57,7 @@ export class TasksComponent implements OnInit {
   selectTask(id: string) {
     this.commonService.getTask(this.ra.name,id).subscribe(result => {
       this.results.resultSelected = result;
+      console.log(this.results.resultSelected)
       if(!Array.isArray(this.results.resultSelected.substance)) {
           this.results.resultSelected.substance = [this.results.resultSelected.substance]
       }
