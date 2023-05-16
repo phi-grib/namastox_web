@@ -7,7 +7,7 @@ export class RA {
     name: string  = ""; 
     general_information:any;
     step:number = 0;
-    status:any  = undefined;
+    status:any = '';
     results:any = undefined;
     pending_tasks:any = [];
     listSteps:any[] = [];

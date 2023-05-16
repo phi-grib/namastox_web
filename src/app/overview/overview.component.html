@@ -3,7 +3,7 @@
   <div class="card-body">
     <div class="row border-bottom" style="background-color: #59AD2B;color:white">
       <div class="col ">
-        {{this.ra.name}} ({{this.ra.status.ID}})
+        {{this.ra?.name}} ({{this.ra?.status?.ID}})
       </div>
     </div>
     <div class="row pt-1 pb-1 border-bottom">
@@ -11,7 +11,7 @@
         Endpoint
       </div>
       <div class="col ">
-        {{this.ra.general_information.general.endpoint}}
+        {{this.ra?.general_information?.general?.endpoint}}
       </div>
     </div>
     <div class="row pt-1 pb-1 border-bottom">
@@ -19,7 +19,7 @@
         Administration route
       </div>
       <div class="col ">
-        {{this.ra.general_information.general.administration_route}}
+        {{this.ra?.general_information.general?.administration_route}}
       </div>
     </div>
     <div class="row pt-1 pb-1 border-bottom">
@@ -27,7 +27,7 @@
         Species
       </div>
       <div class="col ">
-        {{this.ra.general_information.general.species}}
+        {{this.ra?.general_information.general?.species}}
       </div>
     </div>
     <div class="row pt-1 pb-1 border-bottom">
@@ -35,7 +35,7 @@
         Regulatory framework
       </div>
       <div class="col ">
-        {{this.ra.general_information.general.regulatory_framework}}
+        {{this.ra?.general_information.general.regulatory_framework}}
       </div>
     </div>
     <div class="row pt-1 pb-1 border-bottom">
@@ -43,7 +43,7 @@
         Workflow
       </div>
       <div class="col ">
-        {{this.ra.status.workflow_name}}
+        {{this.ra?.status?.workflow_name}}
       </div>
     </div>
     <div class="row pt-1 pb-1 border-bottom">
@@ -51,7 +51,7 @@
         Step
       </div>
       <div class="col ">
-        {{this.ra.status.step}}
+        {{this.ra?.status?.step}}
       </div>
     </div>
     <div class="row pt-1 pb-1 border-bottom">
@@ -59,10 +59,10 @@
         Active nodes
       </div>
       <div class="col ">
-        {{this.ra.status.active_nodes_id}}
+        {{this.ra?.status?.active_nodes_id}}
       </div>
     </div>
-    <div class="row" *ngIf="this.ra.general_information.general.substances">
+    <div class="row" *ngIf="this.ra?.general_information?.general?.substances">
       <div class="col-3 text">
         Substances
       </div>
@@ -75,7 +75,7 @@
               <th style="text-align: center;">SMILES</th>
             </tr>
           </thead>
-          <tbody *ngIf="this.ra.general_information.general.substances.length > 0">
+          <tbody *ngIf="this.ra?.general_information?.general?.substances.length > 0">
             <tr *ngFor="let key of this.objectKeys(this.ra.general_information.general.substances)">
               <td style="vertical-align: middle;text-align: center;">{{this.ra.general_information.general.substances[key].name}}</td>
               <td style="vertical-align: middle;text-align: center;">{{this.ra.general_information.general.substances[key].CASRN}}</td>
