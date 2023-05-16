@@ -1,11 +1,11 @@
 <ul class="nav nav-pills" id="results-tab" role="tablist">
   <li class="nav-item" role="presentation">
     <button class="nav-link active" id="pills-pendingtask-tab" data-bs-toggle="pill" data-bs-target="#pills-pendingtask"
-      type="button" role="tab" aria-controls="pills-pendingtask" aria-selected="True">Pending Tasks</button>
+      type="button" role="tab" aria-controls="pills-pendingtask" aria-selected="True">Pending</button>
   </li>
   <li class="nav-item" role="presentation">
     <button class="nav-link" id="pills-pasttasks-tab" data-bs-toggle="pill" data-bs-target="#pills-pasttasks"
-      type="button" role="tab" aria-controls="pills-pasttasks" aria-selected="false">Past Tasks</button>
+      type="button" role="tab" aria-controls="pills-pasttasks" aria-selected="false">Past</button>
   </li>
 </ul>
 <div class="tab-content container-fluid" id="pills-tabContent">
@@ -75,34 +75,56 @@
     </div>
     <div class="mt-2" *ngIf="this.results.resultSelected.result">
       <hr>
-      <div class="card-body">
-        <div class="row pt-1 pb-1">
-          <div class="col-2 text border-bottom">
-            ID
+      <div class="card-body mb-3">
+        <div class="row">
+          <div class="col-2 text">
+            <strong>Name</strong>
           </div>
-          <div class="col  border-bottom">
-            {{this.results.resultSelected.result.id}}
-          </div>
-        </div>
-        <div class="row pt-1 pb-1">
-          <div class="col-2 text  border-bottom">
-            Resul description
-          </div>
-          <div class="col border-bottom">
-            {{this.results.resultSelected.result.result_description}}
+          <div class="col-10">
+            {{this.results.resultSelected['task description'].name}}
           </div>
         </div>
-        <div class="row pt-1 pb-1">
-          <div class="col-2 text  border-bottom">
-            Resul type
+        <div class="row">
+          <div class="col-2 text">
+            <strong>Description</strong>
+          </div>
+          <div class="col-10">
+            {{this.results.resultSelected['task description'].description}}
+          </div>
+        </div>
+      </div>
+      <div
+       class="card-body">
+        <div class="row pt-1 pb-1" *ngIf="this.results.resultSelected.result.value">
+          <div *ngIf="this.results.resultSelected.result.result_type === 'text'" class="col-2 text  border-bottom">
+            Report
+          </div>
+          <div *ngIf="this.results.resultSelected.result.result_type === 'value'" class="col-2 text  border-bottom">
+            Value
           </div>
           <div class="col border-bottom">
-            {{this.results.resultSelected.result.result_type}}
+            {{this.results.resultSelected.result.value}}
+          </div>
+        </div>
+        <div class="row pt-1 pb-1" *ngIf="this.results.resultSelected.result.unit">
+          <div class="col-2 text  border-bottom">
+            Unit
+          </div>
+          <div class="col border-bottom">
+            {{this.results.resultSelected.result.unit}}
+          </div>
+        </div>
+        <div class="row pt-1 pb-1" *ngIf="this.results.resultSelected.result.uncertainty">
+          <div class="col-2 text  border-bottom">
+            Uncertainty
+          </div>
+          <div class="col border-bottom">
+            {{this.results.resultSelected.result.uncertainty}}
           </div>
         </div>
         <div class="row pt-1 pb-1">
           <div class="col-2 text  border-bottom d-flex  align-items-center">
-            Result link
+            Documentation
           </div>
           <div class="col border-bottom">
             <button (click)="downloadFile()" *ngIf="this.results.resultSelected.result.result_link"
@@ -115,38 +137,6 @@
           </div>
           <div class="col border-bottom">
             {{this.results.resultSelected.result.summary}}
-          </div>
-        </div>
-        <div class="row pt-1 pb-1">
-          <div class="col-2 text  border-bottom">
-            Summary type
-          </div>
-          <div class="col border-bottom">
-            {{this.results.resultSelected.result.summary_type}}
-          </div>
-        </div>
-        <div class="row pt-1 pb-1">
-          <div class="col-2 text  border-bottom">
-            Uncertainty
-          </div>
-          <div class="col border-bottom">
-            {{this.results.resultSelected.result.uncertainty}}
-          </div>
-        </div>
-        <div class="row pt-1 pb-1">
-          <div class="col-2 text  border-bottom">
-            Unit
-          </div>
-          <div class="col border-bottom">
-            {{this.results.resultSelected.result.unit}}
-          </div>
-        </div>
-        <div class="row pt-1 pb-1">
-          <div class="col-2 text border-bottom">
-            Value
-          </div>
-          <div class="col border-bottom">
-            {{this.results.resultSelected.result.value}}
           </div>
         </div>
         <div  *ngIf="this.results.resultSelected?.result?.substance?.length > 1" class="row pt-1 pb-1">

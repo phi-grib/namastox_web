@@ -2,11 +2,11 @@
   <li class="nav-item" role="presentation">
     <button class="nav-link active" id="pills-pendingdecisions-tab" data-bs-toggle="pill"
       data-bs-target="#pills-pendingdecisions" type="button" role="tab" aria-controls="pills-pendingdecisions"
-      aria-selected="True">Pending Decisions</button>
+      aria-selected="True">Pending</button>
   </li>
   <li class="nav-item" role="presentation">
     <button class="nav-link" id="pills-pastdecisions-tab" data-bs-toggle="pill" data-bs-target="#pills-pastdecisions"
-      type="button" role="tab" aria-controls="pills-pastdecisions" aria-selected="false">Past Decisions</button>
+      type="button" role="tab" aria-controls="pills-pastdecisions" aria-selected="false">Past</button>
   </li>
 </ul>
 
@@ -25,20 +25,12 @@
             <div class="card-body">
               <div class="row">
                 <div class="col-2 text">
-                  <strong>ID</strong>
+                  <strong>Name</strong>
                 </div>
                 <div class="col-10">
-                  {{this.pending_task.result.id}}
+                  {{this.pending_task['task description'].name}}
                 </div>
               </div>
-              <!-- <div class="row">
-                    <div class="col text">
-                      <strong>Result type</strong>
-                    </div>
-                    <div class="col">
-                     {{this.pending_task.result.result_type}}
-                    </div>
-                  </div> -->
               <div class="row">
                 <div class="col-2 text">
                   <strong>Description</strong>
@@ -81,34 +73,41 @@
     </div>
     <div class="mt-2" *ngIf="this.results.decisionSelected">
       <hr>
+      <div class="card-body mb-3">
+        <div class="row">
+          <div class="col-2 text">
+            <strong>Name</strong>
+          </div>
+          <div class="col-10">
+            {{this.results.decisionSelected['task description'].name}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-2 text">
+            <strong>Description</strong>
+          </div>
+          <div class="col-10">
+            {{this.results.decisionSelected['task description'].description}}
+          </div>
+        </div>
+      </div>
       <div class="card-body">
         <div class="row pt-1 pb-1">
           <div class="col-2 text border-bottom">
-            ID
+            Decision
           </div>
           <div class="col  border-bottom">
-            {{this.results.decisionSelected.id}}
-          </div>
-        </div>
-        <div class="row pt-1 pb-1">
-          <div class="col-2  text border-bottom">
-            Result description
-          </div>
-          <div class="col border-bottom">
-            {{this.results.decisionSelected.result_description}}
-          </div>
-        </div>
-        <div class="row pt-1 pb-1">
-          <div class="col-2 text border-bottom">
-            Result type
-          </div>
-          <div class="col border-bottom">
-            {{this.results.decisionSelected.result_type}}
+            <span *ngIf="this.results.decisionSelected.result.decision; else elseBlock">
+              Yes
+            </span>
+            <ng-template #elseBlock>
+              No
+            </ng-template>
           </div>
         </div>
         <div class="row pt-1 pb-1">
           <div class="col-2 text  border-bottom d-flex  align-items-center">
-            Result link
+            Documentation
           </div>
           <div class="col border-bottom">
             <button (click)="downloadFile()" *ngIf="this.results.decisionSelected.result_link"
@@ -120,46 +119,14 @@
             Summary
           </div>
           <div class="col border-bottom">
-            {{this.results.decisionSelected.summary}}
+            {{this.results.decisionSelected.result.summary}}
           </div>
         </div>
-        <div class="row pt-1 pb-1">
-          <div class="col-2 text  border-bottom">
-            Summary type
-          </div>
-          <div class="col border-bottom">
-            {{this.results.decisionSelected.summary_type}}
-          </div>
-        </div>
-        <div class="row pt-1 pb-1">
-          <div class="col-2 text  border-bottom">
-            Uncertainty
-          </div>
-          <div class="col border-bottom">
-            {{this.results.decisionSelected.uncertainty}}
-          </div>
-        </div>
-        <div class="row pt-1 pb-1">
-          <div class="col-2 text  border-bottom">
-            Unit
-          </div>
-          <div class="col border-bottom">
-            {{this.results.decisionSelected.unit}}
-          </div>
-        </div>
-        <div class="row pt-1 pb-1">
-          <div class="col-2 border-bottom text">
-            Decision
-          </div>
-          <div class="col border-bottom">
-            {{this.results.decisionSelected.decision}}
-          </div>
-        </div>
-        <div class="row pt-1 pb-1">
+        <div class="row pt-1 pb-1" *ngIf="this.results.decisionSelected.substance">
          <div class="col-2 text">
         Substance
           </div>
-          <div class="col" *ngIf="this.results.decisionSelected.substance">
+          <div class="col" >
             <table id="dtSubstancesDecisions"class="table table-borderless">
               <thead class="text">
                 <tr>

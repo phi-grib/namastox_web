@@ -76,10 +76,6 @@ export class DecisionsComponent implements OnInit {
     this.commonService.getTask(this.ra.name, id).subscribe({
       next: (result) => {
         this.results.decisionSelected = result;
-      //   if(!Array.isArray(this.results.decisionSelected.substance)) {
-      //     this.results.decisionSelected.substance = [this.results.decisionSelected.substance]
-      // }
-
         setTimeout(() => {
           if(this.results.decisionSelected?.substance) this.drawMol();
         }, 300);

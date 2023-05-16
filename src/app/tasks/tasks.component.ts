@@ -75,35 +75,6 @@ setTimeout(() => {
 
     })
   }
-
-  insertDescription(){
-  let forms = document.getElementsByTagName('formly-wrapper-form-field');
-  for (var i = 0; i < forms.length; i++) {
-
-    var form = forms[i];
-    // Mover el input al nuevo div para alinearlo con la descripción
-    var input = form.getElementsByClassName('form-control')[0] != undefined ? form.getElementsByClassName('form-control')[0] : form.querySelector('input[type="file"]');
-    var containerInputAndDesc = document.createElement("div");
-    containerInputAndDesc.append(input);
-  
-    var description = document.createElement("small");
-
-    var key = form.getElementsByClassName('form-label')[0]
-    var descText = this.pending_task['task description'][key.textContent.split(" ")[1]]
-
-    description.innerText = descText != undefined ? descText : "";
-  
-    description.style.color = "gray";
-
-    containerInputAndDesc.appendChild(description);
-  
-    containerInputAndDesc.style.display = "block";
-    containerInputAndDesc.style.width = "100%";
-  
-    form.children[0].appendChild(containerInputAndDesc);
-  }
-
-  }
   createform() {
     this.fields = [];
     const FILE_FIELDS = ['result_link'];
