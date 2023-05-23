@@ -45,7 +45,7 @@ export class TasksComponent implements OnInit {
         }else{
         this.pending_task_selected = this.pendingTasks.results[0].id;
         }
-         this.createform();
+         this.getPendingTask();
       }
     })
   }
@@ -84,45 +84,29 @@ setTimeout(() => {
 
     })
   }
-  createform() {
-    this.fields = [];
-    const FILE_FIELDS = ['result_link'];
-    const REQUIRED = ['value','report'];
-    const EXPERIMENT = ['idem','value','unit','uncertainty','result_link','summary'];
-    const REPORT = ['report','result_link','summary'];
-    this.form = new FormGroup({});
-    
+
+  insertDescription(){
+   var descriptions = this.pending_task['task description']
+   var taskForm =  document.getElementById('taskForm');
+   var elements = taskForm.querySelectorAll("input, select, textarea");
+   for (var i = 0; i < elements.length; i++) {
+    var elemento = elements[i];
+    elemento['placeholder'] = descriptions[elemento['name']] != undefined ? descriptions[elemento['name']] : '';
+  }
+  }
+  //TO DO
+  addNewParameter(){
+console.log(this.parameter)
+console.log(this.value)
+console.log(this.unit)
+  }
+
+  getPendingTask() {
     this.commonService.getPendingTask(this.ra.name, this.pending_task_selected).subscribe({
       next: (result) => {
-       
-        let template_keys = []
         this.pending_task = result;
         this.model = this.pending_task.result;
-        if(this.pending_task.result.result_type === 'text'){
-          template_keys = REPORT
-        }else{
-          template_keys = EXPERIMENT
-        }
-        const object_keys = Object.keys(this.pending_task.result);
-        let item_keys = [];
-        template_keys.forEach((key)=> {
-          if(object_keys.includes(key)){
-          item_keys.push(key)
-          }
-        })
-
-        this.fields = item_keys.map((property) => {
-          const isFile = FILE_FIELDS.includes(property);
-          const isTextArea = (property == 'summary')
-          const label = isFile ? 'documentation' : property.replace('_', ' ');
-          const key = property == 'report' ? "value" : property;
-          const type = isFile ? 'file' : isTextArea ? 'textarea': 'input';
-          const props = { label };
-          if(isTextArea) props['rows'] = 5;
-          props['required'] = REQUIRED.includes(property)
-          props['placeholder'] = this.pending_task['task description'][property]
-          return { key, type, wrappers: ['form-field-horizontal'], props, templateOptions: isFile ? { label} : null };
-        });
+        this.insertDescription();
         this.loadForm = true;
       },
       error: (e) => console.log(e)
@@ -151,7 +135,7 @@ setTimeout(() => {
            setTimeout(() => {
              if (this.pendingTasks.results.length) {
                this.pending_task_selected = this.pendingTasks.results[0].id;
-               this.createform();
+               this.getPendingTask();
              }
            }, 1000);
            this.toastr.success('RA ' + this.ra.name, 'SUCCESSFULLY UPDATED', {
@@ -166,8 +150,18 @@ setTimeout(() => {
          console.error(e)
        },
      });
+
+     this.refreshForm();
   }
 
+  refreshForm(){
+    this.parameter = ""; 
+    this.value = "";
+    this.unit = "";
+    this.uncertainty = "";
+    this.result_link = undefined;
+    this.summary = "";
+  }
 
   sendlink(link) {
     if (link) {

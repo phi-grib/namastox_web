@@ -14,7 +14,7 @@
     <div *ngIf="this.pendingTasks.results.length > 0 else noTasks">
       <div class="row">
         <div class="col">
-          <select (change)="createform()" id="selectPendingResult" [(ngModel)]="this.pending_task_selected"
+          <select (change)="getPendingTask()" id="selectPendingResult" [(ngModel)]="this.pending_task_selected"
             class="form-select" aria-label="Default select example">
             <option *ngFor="let idx of objectKeys(this.pendingTasks.results)"
               [value]='this.pendingTasks.results[idx].id'>{{this.pendingTasks.results[idx].id}}</option>
@@ -38,55 +38,50 @@
                 </div>
               </div>
             </div>   
-
-
-
-            <!-- <form class="container-form mt-3" *ngIf="this.loadForm" [formGroup]="form">
-              <formly-form [form]="form" [fields]="fields" [model]="model">
-              </formly-form>
-              <button type="submit" [disabled]="!this.form.valid" class="btn btn-ets-do submit-button">Submit</button>
-            </form> -->
-
-            <form class="container-form mt-3">
-              <div *ngIf="this.pending_task.result.result_type === 'value'" class="row mb-3 multiple-value">
+            
+            <form id="taskForm" class="container-form mt-3">
+              <div *ngIf="this.pending_task.result.result_type === 'value'" class="row mb-3">
                 <label for="inputPassword3" class="col-2 col-form-label">Parameter:</label>
                 <div class="col-10">
-                  <input name="parameter" [(ngModel)]="parameter" type="text" class="form-control" id="parameter">
+                  <input name="parameter" placeholder="" [(ngModel)]="parameter" type="text" class="form-control" id="parameter">
                 </div>
               </div>
               <div class="row mb-3">
                 <label *ngIf="this.pending_task.result.result_type === 'value'" for="inputPassword3"  class="col-2 col-form-label">Value:</label>
                 <label *ngIf="this.pending_task.result.result_type === 'text'" for="inputPassword3" class="col-2 col-form-label">Report:</label>
                 <div class="col-10">
-                  <input [(ngModel)]="value" type="text" class="form-control" name="value" id="value">
+                  <input placeholder="" [(ngModel)]="value" type="text" class="form-control" name="value" id="value">
                 </div>
               </div>
 
               <div   *ngIf="this.pending_task.result.result_type === 'value'" class="row mb-3">
                 <label for="inputPassword3" class="col-2 col-form-label">Unit:</label>
                 <div class="col-10">
-                  <input   [(ngModel)]="unit" type="text" class="form-control" name="unit" id="unit">
+                  <input  placeholder=""   [(ngModel)]="unit" type="text" class="form-control" name="unit" id="unit">
                 </div>
               </div>
-           
+              <div class="d-flex justify-content-end">
+              <a (click)="addNewParameter()" style="color: green;" class="btn ms-auto"  role="button"><i class="fa-solid fa-circle-plus fa-lg"></i></a>
+              </div>
               <div *ngIf="this.pending_task.result.result_type === 'value'" class="row mb-3">
                 <label for="inputPassword3" class="col-2 col-form-label">Uncertainty:</label>
                 <div class="col-10">
-                  <input [(ngModel)]="uncertainty" type="text" class="form-control" id="uncertainty" name="uncertainty">
+                  <input  placeholder="" [(ngModel)]="uncertainty" type="text" class="form-control" id="uncertainty" name="uncertainty">
                 </div>
               </div>
+            
             <div class="multiple-value">
               <div class="row mb-3">
                  <label for="inputPassword3" class="col-2 col-form-label">Documentation:</label>
                 <div class="col-10">
-                  <input [(ngModel)]="result_link" type="file" class="form-control" name="result_link" id="result_link">
+                  <input  placeholder="" [(ngModel)]="result_link" type="file" class="form-control" name="result_link" id="result_link">
                 </div>
               </div>
             </div>
               <div class="row mb-3">
                 <label for="inputPassword3" class="col-2 col-form-label">Summary:</label>
                <div class="col-10">
-                <textarea [(ngModel)]="summary" class="form-control" name="summary" id="summary" rows="4"></textarea>
+                <textarea  placeholder="" [(ngModel)]="summary" class="form-control" name="summary" id="summary" rows="4"></textarea>
                </div>
              </div>
               <button (click)="onSubmit()"  type="submit" class="btn btn-ets-do submit-button">Submit</button>
