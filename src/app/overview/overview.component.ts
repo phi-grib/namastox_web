@@ -17,22 +17,22 @@ export class OverviewComponent implements OnInit{
 
   }
   ngOnInit(): void {
-    this.commonService.updateOverviewCanvas$.subscribe( status => {
-      setTimeout(() => {
-      if(!status) this.drawMol();
-      }, 300);
-    })
+    // this.commonService.updateOverviewCanvas$.subscribe( status => {
+    //   setTimeout(() => {
+    //   if(!status) this.drawMol();
+    //   }, 300);
+    // })
   }
-  drawMol(){
-    if(this.ra.general_information.general.substances.length > 0 ){
-     for (let index = 0; index < this.ra.general_information.general.substances.length; index++) {
-      let smilesDrawer = new SmilesDrawer.Drawer({ width: 200, height: 150 });
-      SmilesDrawer.parse(this.ra.general_information.general.substances[index].SMILES, function (tree) {
-        smilesDrawer.draw(tree, 'genInformationCanvas'+index, 'light', false);
-    },  function (err) {
-      console.log(err);
-    });
-     }
-    }
-} 
+//   drawMol(){
+//     if(this.ra.general_information.general?.substances.length > 0 ){
+//      for (let index = 0; index < this.ra.general_information.general.substances.length; index++) {
+//       let smilesDrawer = new SmilesDrawer.Drawer({ width: 200, height: 150 });
+//       SmilesDrawer.parse(this.ra.general_information.general.substances[index].SMILES, function (tree) {
+//         smilesDrawer.draw(tree, 'genInformationCanvas'+index, 'light', false);
+//     },  function (err) {
+//       console.log(err);
+//     });
+//      }
+//     }
+// } 
 }

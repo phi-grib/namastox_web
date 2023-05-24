@@ -1,9 +1,97 @@
 <div *ngIf="this.ra?.status?.step <= 1" class="container-fluid">
-    <!-- <div class="title">General Information</div> -->
-    <div class="container-form p-3">
-        <form *ngIf="this.loadForm" [formGroup]="form" (ngSubmit)="onSubmit(model)">
-            <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
-            <button type="submit" [disabled]="!this.form.valid" class="btn btn-ets-do submit-button">Submit</button>
-        </form>
-    </div>
+<div class="container-form p-3">
+    <form id="generalInformationForm"  (ngSubmit)="onSubmit()"  [formGroup]="generalInformationForm">
+        <div class="row mb-3">
+            <label for="inputPassword3" class="col-2 col-form-label">Title:</label>
+            <div class="col-10">
+              <input name="title" placeholder="" formControlName="title" type="text" class="form-control" id="title">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="inputPassword3" class="col-2 col-form-label">General description:</label>
+            <div class="col-10">
+              <input name="general_description" placeholder="" formControlName="general_description" type="text" class="form-control" id="general_description">
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <label for="inputPassword3" class="col-2 col-form-label">Background:</label>
+            <div class="col-10">
+              <input name="background" placeholder="" formControlName="background" type="text" class="form-control" id="background">
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <label for="inputPassword3" class="col-2 col-form-label">Endpoint:</label>
+            <div class="col-10">
+              <input name="endpoint" placeholder="" formControlName="endpoint" type="text" class="form-control" id="endpoint">
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <label for="inputPassword3" class="col-2 col-form-label">Administration route:</label>
+            <div class="col-10">
+              <input name="administration_route" placeholder="" formControlName="administration_route" type="text" class="form-control" id="administration_route">
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <label for="inputPassword3" class="col-2 col-form-label">Regulatory framework:</label>
+            <div class="col-10">
+              <input name="regulatory_framework" placeholder="" formControlName="regulatory_framework" type="text" class="form-control" id="regulatory_framework">
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <label for="inputPassword3" class="col-2 col-form-label">Species:</label>
+            <div class="col-10">
+              <input name="species" placeholder="" formControlName="species" type="text" class="form-control" id="species">
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <label for="inputPassword3" class="col-2 col-form-label">Uncertainty:</label>
+            <div class="col-10">
+              <input name="uncertainty" placeholder="" formControlName="uncertainty" type="text" class="form-control" id="uncertainty">
+            </div>
+          </div>
+
+          <!-- <div class="row mb-3">
+            <label for="inputPassword3" class="col-2 col-form-label">Substances:</label>
+            <div class="col-10">
+              <input name="substances" placeholder="" formControlName="substances" type="text" class="form-control" id="substances">
+            </div>
+          </div> -->
+
+          <div class="row mb-3">
+            <label for="inputPassword3" class="col-2 col-form-label">ID:</label>
+            <div class="col">
+              <input name="substance_id" placeholder="" formControlName="substance_id" type="text" class="form-control" id="substance_id">
+            </div>
+              <label for="inputPassword3" class="col-1 col-form-label text-center">Name:</label>
+            <div class="col">
+              <input name="substance_name" placeholder="" formControlName="substance_name" type="text" class="form-control" id="substance_name">
+            </div>
+            <label for="inputPassword3" class="col-1 col-form-label">CASRN:</label>
+            <div class="col">
+              <input name="substance_CASRN" placeholder="" formControlName="substance_CASRN" type="text" class="form-control" id="substance_CASRN">
+            </div>
+            <label for="inputPassword3" class="col-1 col-form-label">SMILES:</label>
+            <div class="col">
+              <input name="substance_SMILES" placeholder="" formControlName="substance_SMILES" type="file" class="form-control text-start" id="substance_SMILES">
+            </div>
+          </div>
+
+
+
+          <div class="row mb-3">
+            <label for="inputPassword3" class="col-2 col-form-label">Workflow custom:</label>
+            <div class="col-10">
+              <input name="workflow_custom" placeholder="" formControlName="workflow_custom" type="file" class="form-control" id="workflow_custom">
+            </div>
+          </div>
+          <button  type="submit" class="btn btn-ets-do submit-button">Submit</button>
+    </form>
+</div>
+
 </div>

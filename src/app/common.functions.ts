@@ -89,15 +89,15 @@ for (const result of this.ra.results) {
   }, 500);
   }
 
-  formatSubstancesData(): any[]{
-    var arraySubstances = []
-    var substanceFormated  = {};
-    this.ra.general_information.general.substances.forEach(substance => {
-      substanceFormated = {'label':substance['name'],'value':substance}
-      arraySubstances.push(substanceFormated)
-    });
+  // formatSubstancesData(): any[]{
+  //   var arraySubstances = []
+  //   var substanceFormated  = {};
+  //   this.ra.general_information.general.substances.forEach(substance => {
+  //     substanceFormated = {'label':substance['name'],'value':substance}
+  //     arraySubstances.push(substanceFormated)
+  //   });
     // substanceFormated = {'label':'All substances','value':this.ra.general_information.general.substances}
     // arraySubstances.push(substanceFormated)
-    return arraySubstances;
-}
+    // return arraySubstances;
+// }
   }
