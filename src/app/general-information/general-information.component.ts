@@ -20,13 +20,15 @@ export class GeneralInformationComponent implements OnInit {
 
   generalInformationForm = new FormGroup({});
    onSubmit() {
-    //  if(this.generalInformationForm.value['substances'].length > 0 && model['substances'][0] instanceof File){
-    //    this.updateService.uploadSubstances(model['substances'][0]).subscribe(result =>{
-    //      if(result['success']){
-    //       model['substances'] = [...result['result']]
-    //        }
-    //     })
-    //  } 
+      if(this.generalInformationForm.value['substance_SMILES'][0] instanceof File){
+        console.log("ADENTRO")
+        console.log(this.generalInformationForm.value['substance_SMILES'][0])
+        this.updateService.uploadSubstances(this.generalInformationForm.value['substance_SMILES'][0]).subscribe(result =>{
+          if(result['success']){
+            this.generalInformationForm.value['substance_SMILES'] = [...result['result']]
+            }
+         })
+      } 
       //  if(model['workflow_custom'] && model['workflow_custom'][0] instanceof File){
       //    this.updateService.uploadCustomWorkflow(this.ra.name,model['workflow_custom'][0]).subscribe({
       //      next: (result)=> {
@@ -59,7 +61,6 @@ export class GeneralInformationComponent implements OnInit {
    }
 
   constructor(public ra: RA, private commonService: CommonService, private updateService: UpdateService, private func: CommonFunctions, private toastr: ToastrService,private formBuilder: FormBuilder) { }
-
   ngOnInit(): void {
     const generalInfo = this.ra.general_information.general;
     this.generalInformationForm = this.formBuilder.group(generalInfo);
