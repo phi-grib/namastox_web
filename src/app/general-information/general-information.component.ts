@@ -21,8 +21,6 @@ export class GeneralInformationComponent implements OnInit {
   generalInformationForm = new FormGroup({});
    onSubmit() {
       if(this.generalInformationForm.value['substance_SMILES'][0] instanceof File){
-        console.log("ADENTRO")
-        console.log(this.generalInformationForm.value['substance_SMILES'][0])
         this.updateService.uploadSubstances(this.generalInformationForm.value['substance_SMILES'][0]).subscribe(result =>{
           if(result['success']){
             this.generalInformationForm.value['substance_SMILES'] = [...result['result']]
