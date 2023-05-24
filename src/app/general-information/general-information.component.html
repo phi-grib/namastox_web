@@ -56,34 +56,35 @@
             </div>
           </div>
 
-          <!-- <div class="row mb-3">
-            <label for="inputPassword3" class="col-2 col-form-label">Substances:</label>
-            <div class="col-10">
-              <input name="substances" placeholder="" formControlName="substances" type="text" class="form-control" id="substances">
-            </div>
-          </div> -->
-
           <div class="row mb-3">
-            <label for="inputPassword3" class="col-2 col-form-label">ID:</label>
-            <div class="col">
-              <input name="substance_id" placeholder="" formControlName="substance_id" type="text" class="form-control" id="substance_id">
+            <label for="inputPassword3" class="col-2 col-form-label">Substance:</label>
+            <div class="col-10">
+                <div class="row mb-3">
+                  <label for="inputPassword3" class="col-2 col-form-label">Name(s)</label>
+                  <div class="col">
+                    <input name="substance_name" placeholder="Substance name or names separated by a colon" formControlName="substance_name" type="text" class="form-control" id="substance_name">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputPassword3" class="col-2 col-form-label">ID(s)</label>
+                  <div class="col">
+                    <input name="substance_id" placeholder="Substance id or IDs separated by a colon" formControlName="substance_id" type="text" class="form-control" id="substance_id">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputPassword3" class="col-2 col-form-label">CAS-RN(s)</label>
+                  <div class="col">
+                    <input name="substance_CASRN" placeholder="Substance CAS-RN or CAS-RNs separated by a colon" formControlName="substance_CASRN" type="text" class="form-control" id="substance_CASRN">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputPassword3" class="col-2 col-form-label">Structure</label>
+                  <div class="col">
+                    <input name="substance_SMILES" placeholder="" formControlName="substance_SMILES" type="file" class="form-control text-start" id="substance_SMILES">
+                  </div>
+                </div>
             </div>
-              <label for="inputPassword3" class="col-1 col-form-label text-center">Name:</label>
-            <div class="col">
-              <input name="substance_name" placeholder="" formControlName="substance_name" type="text" class="form-control" id="substance_name">
-            </div>
-            <label for="inputPassword3" class="col-1 col-form-label">CASRN:</label>
-            <div class="col">
-              <input name="substance_CASRN" placeholder="" formControlName="substance_CASRN" type="text" class="form-control" id="substance_CASRN">
-            </div>
-            <label for="inputPassword3" class="col-1 col-form-label">SMILES:</label>
-            <div class="col">
-              <input name="substance_SMILES" placeholder="" formControlName="substance_SMILES" type="file" class="form-control text-start" id="substance_SMILES">
-            </div>
-          </div>
-
-
-
+          </div> 
           <div class="row mb-3">
             <label for="inputPassword3" class="col-2 col-form-label">Workflow custom:</label>
             <div class="col-10">
