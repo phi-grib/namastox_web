@@ -8,15 +8,32 @@
     </div>
     <div class="row pt-1 pb-1 border-bottom">
       <div class="col-3 text ">
-        Endpoint
+        Substance
       </div>
-      <div class="col ">
-        {{this.ra?.general_information?.general?.endpoint}}
+      <div class="col-3 text">
+        <div class="row">Name</div>
+        <div class="row">ID</div>
+        <div class="row">CAS-RN</div>
+        <div class="row">Structure</div>
+      </div>
+      <div class="col-2">
+        <div class="row"> <span style="text-align:center">{{this.ra.general_information.general.substance_name}}</span></div>
+        <div class="row"> <span style="text-align:center">{{this.ra.general_information.general.substance_id}}</span></div>
+        <div class="row"><span style="text-align:center">{{this.ra.general_information.general.substance_CASRN}}</span></div>
+        <div class="row"> <div><canvas id="substanceCanvas"></canvas></div></div>
       </div>
     </div>
     <div class="row pt-1 pb-1 border-bottom">
       <div class="col-3 text ">
-        Administration route
+        Endpoint
+      </div>
+      <div class="col ">
+        {{this.ra?.general_information.general?.endpoint}}
+      </div>
+    </div>
+    <div class="row pt-1 pb-1 border-bottom">
+      <div class="col-3 text ">
+        AR
       </div>
       <div class="col ">
         {{this.ra?.general_information.general?.administration_route}}
@@ -27,12 +44,12 @@
         Species
       </div>
       <div class="col ">
-        {{this.ra?.general_information.general?.species}}
+        {{this.ra?.general_information.general.species}}
       </div>
     </div>
     <div class="row pt-1 pb-1 border-bottom">
       <div class="col-3 text ">
-        Regulatory framework
+        Framework
       </div>
       <div class="col ">
         {{this.ra?.general_information.general.regulatory_framework}}
@@ -40,50 +57,27 @@
     </div>
     <div class="row pt-1 pb-1 border-bottom">
       <div class="col-3 text ">
-        Workflow
+        Summary
       </div>
       <div class="col ">
-        {{this.ra?.status?.workflow_name}}
+        {{this.ra?.general_information.general.general_description}}
       </div>
     </div>
     <div class="row pt-1 pb-1 border-bottom">
       <div class="col-3 text ">
-        Step
+      Status
       </div>
-      <div class="col ">
-        {{this.ra?.status?.step}}
-      </div>
-    </div>
-    <div class="row pt-1 pb-1 border-bottom">
-      <div class="col-3 text ">
-        Active nodes
-      </div>
-      <div class="col ">
-        {{this.ra?.status?.active_nodes_id}}
-      </div>
-    </div>
-    <div class="row" *ngIf="this.ra?.general_information?.general?.substances">
       <div class="col-3 text">
-        Substances
+        <div class="row">Workflow</div>
+        <div class="row">Step</div>
+        <div class="row">Active nodes</div>
       </div>
-      <div class="col ">
-        <table class="table table-borderless">
-          <thead class="text">
-            <tr>
-              <th style="text-align: center;">Name</th>
-              <th style="text-align: center;">CASRN</th>
-              <th style="text-align: center;">SMILES</th>
-            </tr>
-          </thead>
-          <tbody *ngIf="this.ra?.general_information?.general?.substances.length > 0">
-            <tr *ngFor="let key of this.objectKeys(this.ra.general_information.general.substances)">
-              <td style="vertical-align: middle;text-align: center;">{{this.ra.general_information.general.substances[key].name}}</td>
-              <td style="vertical-align: middle;text-align: center;">{{this.ra.general_information.general.substances[key].CASRN}}</td>
-              <td style="text-align: center;"><canvas [id]="'genInformationCanvas'+key"></canvas></td>
-            </tr>
-          </tbody>
-        </table>
+     
+      <div class="col-2">
+        <div class="row"><span style="text-align:center">{{this.ra?.status?.workflow_name}}</span></div>
+        <div class="row"><span style="text-align:center">{{this.ra?.status?.step}}</span></div>
+        <div class="row"><span style="text-align:center" *ngFor="let node of this.ra?.status.active_nodes_id">{{node}}</span>  </div>
       </div>
+    </div>
     </div>
   </div>
-</div>

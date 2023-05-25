@@ -110,8 +110,6 @@ setTimeout(() => {
       },
       error: (e) => console.log(e)
     })
-
-
   }
   onSubmit() {
      this.loadForm = false;

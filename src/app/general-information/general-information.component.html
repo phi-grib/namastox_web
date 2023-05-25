@@ -13,7 +13,6 @@
               <input name="general_description" placeholder="" formControlName="general_description" type="text" class="form-control" id="general_description">
             </div>
           </div>
-
           <div class="row mb-3">
             <label for="inputPassword3" class="col-2 col-form-label">Background:</label>
             <div class="col-10">
@@ -62,25 +61,25 @@
                 <div class="row mb-3">
                   <label for="inputPassword3" class="col-2 col-form-label">Name(s)</label>
                   <div class="col">
-                    <input name="substance_name" placeholder="Substance name or names separated by a colon" formControlName="substance_name" type="text" class="form-control" id="substance_name">
+                    <input required name="substance_name" placeholder="Substance name or names separated by a colon" formControlName="substance_name" type="text" class="form-control" id="substance_name">
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputPassword3" class="col-2 col-form-label">ID(s)</label>
                   <div class="col">
-                    <input name="substance_id" placeholder="Substance id or IDs separated by a colon" formControlName="substance_id" type="text" class="form-control" id="substance_id">
+                    <input required name="substance_id" placeholder="Substance id or IDs separated by a colon" formControlName="substance_id" type="text" class="form-control" id="substance_id">
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputPassword3" class="col-2 col-form-label">CAS-RN(s)</label>
                   <div class="col">
-                    <input name="substance_CASRN" placeholder="Substance CAS-RN or CAS-RNs separated by a colon" formControlName="substance_CASRN" type="text" class="form-control" id="substance_CASRN">
+                    <input required name="substance_CASRN" placeholder="Substance CAS-RN or CAS-RNs separated by a colon" formControlName="substance_CASRN" type="text" class="form-control" id="substance_CASRN">
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputPassword3" class="col-2 col-form-label">Structure</label>
                   <div class="col">
-                    <input name="substance_SMILES" placeholder="" formControlName="substance_SMILES" type="file" class="form-control text-start" id="substance_SMILES">
+                    <input required name="substance_SMILES" placeholder="" formControlName="substance_SMILES" type="file" class="form-control text-start" id="substance_SMILES">
                   </div>
                 </div>
             </div>
@@ -91,7 +90,7 @@
               <input name="workflow_custom" placeholder="" formControlName="workflow_custom" type="file" class="form-control" id="workflow_custom">
             </div>
           </div>
-          <button  type="submit" class="btn btn-ets-do submit-button">Submit</button>
+          <button [disabled]="generalInformationForm.invalid"  type="submit" class="btn btn-ets-do submit-button">Submit</button>
     </form>
 </div>
 
