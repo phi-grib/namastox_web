@@ -32,6 +32,8 @@ export class TasksComponent implements OnInit {
   unit: string;
   label_file: string;
   result_link: File;
+  parameters = [];
+
   constructor(public ra: RA, private commonService: CommonService, public pendingTasks: PendingTasks, private func: CommonFunctions, public results: Results, private updateService: UpdateService, private toastr: ToastrService,private formBuilder: FormBuilder) {
   }
 
@@ -95,8 +97,18 @@ setTimeout(() => {
   }
   //TO DO
   addNewParameter(){
-    console.log("addNewParameter")
-    console.log(this.taskForm.value)
+    if(this.taskForm.value['value'] && this.taskForm.value['unit']){
+    this.parameters.push({parameter:'default',value:this.taskForm.value['value'],unit:this.taskForm.value['unit']})
+    this.resetFieldsParameter();
+    
+    }
+  }
+
+  resetFieldsParameter(){
+    this.taskForm.patchValue({
+      value: '',
+      unit: ''
+    })
   }
 
   getPendingTask() {
