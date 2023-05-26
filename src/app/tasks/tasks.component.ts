@@ -111,6 +111,10 @@ setTimeout(() => {
 
   }
 
+  addNewFile(){
+    
+  }
+
   resetFieldsParameter(){
     this.taskForm.patchValue({
       value: '',
@@ -122,6 +126,7 @@ setTimeout(() => {
     this.commonService.getPendingTask(this.ra.name, this.pending_task_selected).subscribe({
       next: (result) => {
         this.pending_task = result;
+        console.log(this.pending_task)
         this.model = this.pending_task.result;
         this.taskForm = this.formBuilder.group(this.model);
         this.insertDescription();
