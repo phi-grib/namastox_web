@@ -34,6 +34,8 @@ export class TasksComponent implements OnInit {
   result_link: File;
   parameters = [];
 
+  randomNumber:number = 0
+
   constructor(public ra: RA, private commonService: CommonService, public pendingTasks: PendingTasks, private func: CommonFunctions, public results: Results, private updateService: UpdateService, private toastr: ToastrService,private formBuilder: FormBuilder) {
   }
 
@@ -95,13 +97,18 @@ setTimeout(() => {
     elemento['placeholder'] = descriptions[elemento['name']] != undefined ? descriptions[elemento['name']] : '';
   }
   }
-  //TO DO
+
   addNewParameter(){
     if(this.taskForm.value['value'] && this.taskForm.value['unit']){
-    this.parameters.push({parameter:'default',value:this.taskForm.value['value'],unit:this.taskForm.value['unit']})
+    this.parameters.push({parameter:'default'+this.randomNumber,value:this.taskForm.value['value'],unit:this.taskForm.value['unit']})
     this.resetFieldsParameter();
-    
+    this.randomNumber++
     }
+  }
+
+  deleteParameter(param){
+    this.parameters = this.parameters.filter(parameter => parameter.parameter !== param)
+
   }
 
   resetFieldsParameter(){
