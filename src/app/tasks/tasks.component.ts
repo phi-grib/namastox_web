@@ -88,14 +88,17 @@ setTimeout(() => {
     })
   }
 
-  insertDescription(){
+  insertDescriptionTask(){
    var descriptions = this.pending_task['task description']
    var taskForm =  document.getElementById('taskForm');
-   var elements = taskForm.querySelectorAll("input, select, textarea");
-   for (var i = 0; i < elements.length; i++) {
-    var elemento = elements[i];
-    elemento['placeholder'] = descriptions[elemento['name']] != undefined ? descriptions[elemento['name']] : '';
-  }
+   if(taskForm != undefined){
+    var elements = taskForm.querySelectorAll("input, select, textarea");
+    for (var i = 0; i < elements.length; i++) {
+     var elemento = elements[i];
+     elemento['placeholder'] = descriptions[elemento['name']] != undefined ? descriptions[elemento['name']] : '';
+   }
+   }
+
   }
 
   addNewParameter(){
@@ -129,7 +132,7 @@ setTimeout(() => {
         console.log(this.pending_task)
         this.model = this.pending_task.result;
         this.taskForm = this.formBuilder.group(this.model);
-        this.insertDescription();
+        this.insertDescriptionTask();
         this.loadForm = true;
       },
       error: (e) => console.log(e)
