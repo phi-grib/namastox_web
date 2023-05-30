@@ -80,7 +80,6 @@
                   <input required placeholder=""[(ngModel)]="this.model.value"  type="text" class="form-control" name="value" id="value">
                 </div>
               </div>
-           
               <div *ngIf="this.pending_task.result.result_type === 'value'" class="row mb-3">
                 <label for="inputPassword3" class="col-2 col-form-label">Uncertainty:</label>
                 <div class="col-10">
@@ -98,8 +97,13 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col text-end"> 
-                  <a (click)="addNewFile()" style="color: green;" class="btn ms-auto"  role="button"><i class="fa-solid fa-circle-plus fa-lg"></i></a>
+                <div class="col text-end">
+                  <div class="d-inline" *ngFor="let idx of objectKeys(this.documents)">
+                    {{this.documents[idx].label}} <a (click)="deleteFile(this.documents[idx].label)" class="btn ms-auto" role="button"><i class="fa-solid fa-circle-minus fa-lg" style="color: #e01b24;"></i></a>
+                  </div>
+                </div>
+                <div class="col-1 text-end"> 
+                  <a (click)="sendlink()" style="color: green;" class="btn ms-auto"  role="button"><i class="fa-solid fa-circle-plus fa-lg"></i></a>
                 </div>
               </div>
             </div>

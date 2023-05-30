@@ -28,6 +28,7 @@ export class TasksComponent implements OnInit {
   parameters = [];
   files = [];
   labelFile = '';
+  documents = [];
   
   constructor(public ra: RA, private commonService: CommonService, public pendingTasks: PendingTasks, private func: CommonFunctions, public results: Results, private updateService: UpdateService, private toastr: ToastrService,private formBuilder: FormBuilder) {
   }
@@ -92,7 +93,6 @@ setTimeout(() => {
    }
    }
   }
-  // <div *ngIf="formulario.controls.nombre.errors.required">El nombre es requerido.</div>
   addNewParameter(){
     if(this.parameter && this.model.value && this.model['unit']){
     this.parameters.push({parameter:this.parameter,value:this.model.value,unit:this.model['unit']});
@@ -101,17 +101,18 @@ setTimeout(() => {
     }
 
   }
+  deleteFile(label){
+    this.documents = this.documents.filter(document => document.label !== label)
+    this.model.links = this.documents
+
+  }
+
   deleteParameter(param){
     this.parameters = this.parameters.filter(parameter => parameter.parameter !== param)
     this.model.values = this.parameters
   }
 
-  addNewFile(){
-    if(this.labelFile && this.model['result_link'][0]){
-      this.model['links'].push({label:this.labelFile,File:this.model['result_link'][0]})
-      this.labelFile = '';
-    }
-  }
+
   resetFieldsParameter(){
     this.model.unit = '';
     this.model.value = '';
@@ -132,11 +133,8 @@ setTimeout(() => {
   onSubmit() {
      this.loadForm = false;
 
-      this.addNewParameter()
-      if(this.model['result_link']){
-        this.sendlink(this.model['result_link']);
-        this.model['result_link'] = this.model['result_link'][0].name;
-      }
+      this.addNewParameter();
+      this.sendlink();
       this.updateService.updateResult(this.ra.name,this.model).subscribe({
         next: (result) => {
           if (result['success']) {
@@ -161,20 +159,30 @@ setTimeout(() => {
         },
       });
       this.parameters = [];
+      this.documents = [];
   }
-
-  sendlink(link) {
-    if (link) {
-      this.updateService.updateLink(this.ra.name, link[0]).subscribe({
+  sendlink() {
+    if(this.labelFile && this.model['result_link'][0]){
+      this.updateService.updateLink(this.ra.name, this.model['result_link'][0]).subscribe({
         next: (result) => {
+
+          this.toastr.success('Document ' + this.model['result_link'][0].name, 'SUCCESSFULLY UPDATED', {
+            timeOut: 5000, positionClass: 'toast-top-right'
+          });
+
+          this.documents.push({label:this.labelFile,File:this.model['result_link'][0].name})
+          this.model['links'] = this.documents
+          this.labelFile = '';
         },
         error: (e) => {
-          this.toastr.error('Check the console to see more information', 'Failed uploaded result link', {
+          this.toastr.error('Check the console to see more information', 'Failed uploaded document', {
             timeOut: 5000, positionClass: 'toast-top-right'
           });
           console.log(e);
+          return false;
         }
       })
     }
+    }
   }
-}
+
