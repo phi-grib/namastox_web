@@ -160,23 +160,31 @@
       </div>
       <div
        class="card-body">
-        <div class="row pt-1 pb-1" *ngIf="this.results.resultSelected.result.value">
+        <div class="row pt-1 pb-1">
           <div *ngIf="this.results.resultSelected.result.result_type === 'text'" class="col-2 text  border-bottom">
             Report
           </div>
-          <div *ngIf="this.results.resultSelected.result.result_type === 'value'" class="col-2 text  border-bottom">
-            Value
+          <div *ngIf='this.results.resultSelected.result.result_type === "value"' class="col-2 text  border-bottom">
+            Values
           </div>
           <div class="col border-bottom">
-            {{this.results.resultSelected.result.value}}
-          </div>
-        </div>
-        <div class="row pt-1 pb-1" *ngIf="this.results.resultSelected.result.unit">
-          <div class="col-2 text  border-bottom">
-            Unit
-          </div>
-          <div class="col border-bottom">
-            {{this.results.resultSelected.result.unit}}
+            <table class="table table-borderless">
+              <thead class="text">
+                <tr style="text-align: center;">
+                  <th >Parameter</th>
+                  <th >Unit</th>
+                  <th >Value</th>
+                </tr>
+              </thead>
+              <tbody *ngFor="let idx of objectKeys(this.results.resultSelected.result.values)">
+                <tr style="text-align: center;">
+                  <td>{{this.results.resultSelected.result.values[idx].parameter}}</td>
+                  <td>{{this.results.resultSelected.result.values[idx].unit}}</td>
+                  <td>{{this.results.resultSelected.result.values[idx].value}}</td>
+                </tr>
+              </tbody>
+              </table>
+
           </div>
         </div>
         <div class="row pt-1 pb-1" *ngIf="this.results.resultSelected.result.uncertainty">
