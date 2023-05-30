@@ -204,8 +204,9 @@
             Documentation
           </div>
           <div class="col border-bottom">
-            <button (click)="downloadFile()" *ngIf="this.results.resultSelected.result.result_link"
-              class="btn btn-outline-success mt-2 mb-2">{{this.results.resultSelected.result.result_link}}</button>
+            <div *ngFor="let idx of objectKeys(this.results.resultSelected.result.links)">
+              <button (click)="downloadFile(this.results.resultSelected.result.links[idx].File)" class="btn btn-outline-success mt-2 mb-2">{{this.results.resultSelected.result.links[idx].label}} </button>
+            </div>
           </div>
         </div>
         <div class="row pt-1 pb-1">

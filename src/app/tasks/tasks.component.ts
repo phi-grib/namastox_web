@@ -46,10 +46,17 @@ export class TasksComponent implements OnInit {
       }
     })
   }
-  downloadFile() {
-    // create object Blob
-    const blob = new Blob([this.link], { type: 'application/octet-stream' });
-    saveAs(blob, this.results.resultSelected.result_link)
+  downloadFile(File) {
+    if (File) {
+      this.commonService.getLink(this.ra.name,File).subscribe({
+        next: (link) => {
+          const blob = new Blob([link], { type: 'application/octet-stream' });
+          saveAs(blob,File);
+        },
+        error: (e) => console.log(e)
+      })
+    }
+
   }
   drawMol(){
      for (let index = 0; index < this.results.resultSelected.substance.length; index++) {
@@ -70,15 +77,6 @@ export class TasksComponent implements OnInit {
 setTimeout(() => {
   if(this.results.resultSelected?.substance.length > 1) this.drawMol();
 }, 300);
-      if (this.results.resultSelected.result_link) {
-        this.commonService.getLink(this.ra.name, this.results.resultSelected.result_link,).subscribe({
-          next: (result) => {
-            this.link = result
-          },
-          error: (e) => console.log(e)
-        })
-      }
-
     })
   }
 
