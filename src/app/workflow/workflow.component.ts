@@ -53,7 +53,7 @@ export class WorkflowComponent implements OnInit {
        })
   }
   selectTask(typeTask,taskID){
-    const selectorID = typeTask === 'results' ?'selectPendingResult' :'#selectPendingDecision';
+    const selectorID = typeTask === 'results' ?'selectPendingResult' :'selectPendingDecision';
     this.selectOptionBytaskID(selectorID,taskID);
   }
   selectPastTask(typeTask, taskName) {
@@ -75,7 +75,7 @@ export class WorkflowComponent implements OnInit {
       $('#pills-decisions-tab').click();
       if (pending) {
         $('#pills-pendingdecisions-tab').click();
-        // this.selectTask(typeTask,taskname);
+        this.selectTask(typeTask,taskname);
       } else {
         $('#pills-pastdecisions-tab').click();
         this.selectPastTask(typeTask, taskname)
