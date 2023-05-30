@@ -204,7 +204,7 @@
             Documentation
           </div>
           <div class="col border-bottom">
-            <div *ngFor="let idx of objectKeys(this.results.resultSelected.result.links)">
+            <div class="d-inline mx-1" *ngFor="let idx of objectKeys(this.results.resultSelected.result.links)">
               <button (click)="downloadFile(this.results.resultSelected.result.links[idx].File)" class="btn btn-outline-success mt-2 mb-2">{{this.results.resultSelected.result.links[idx].label}} </button>
             </div>
           </div>
