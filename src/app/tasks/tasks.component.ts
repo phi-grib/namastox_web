@@ -135,38 +135,42 @@ setTimeout(() => {
 
       this.addNewParameter();
       this.sendlink();
-      this.updateService.updateResult(this.ra.name,this.model).subscribe({
-        next: (result) => {
-          if (result['success']) {
-            this.pendingTasks.results = [];
-            this.func.refreshRA();
-            setTimeout(() => {
-              if (this.pendingTasks.results.length) {
-                this.pending_task_selected = this.pendingTasks.results[0].id;
-                this.getPendingTask();
-              }
-            }, 1000);
-            this.toastr.success('RA ' + this.ra.name, 'SUCCESSFULLY UPDATED', {
+
+      setTimeout(() => {
+        this.updateService.updateResult(this.ra.name,this.model).subscribe({
+          next: (result) => {
+            if (result['success']) {
+              this.pendingTasks.results = [];
+              this.func.refreshRA();
+              setTimeout(() => {
+                if (this.pendingTasks.results.length) {
+                  this.pending_task_selected = this.pendingTasks.results[0].id;
+                  this.getPendingTask();
+                }
+              }, 1000);
+              this.toastr.success('RA ' + this.ra.name, 'SUCCESSFULLY UPDATED', {
+                timeOut: 5000, positionClass: 'toast-top-right'
+              });
+            }
+          },
+          error: (e) => {
+            this.toastr.error('Check the console to see more information', 'Unexpected Error', {
               timeOut: 5000, positionClass: 'toast-top-right'
             });
-          }
-        },
-        error: (e) => {
-          this.toastr.error('Check the console to see more information', 'Unexpected Error', {
-            timeOut: 5000, positionClass: 'toast-top-right'
-          });
-          console.error(e)
-        },
-      });
+            console.error(e)
+          },
+        });
       this.parameters = [];
       this.documents = [];
+      }, 300);
+
   }
   sendlink() {
+    console.log(this.model['result_link'][0])
     if(this.labelFile && this.model['result_link'][0]){
       this.updateService.updateLink(this.ra.name, this.model['result_link'][0]).subscribe({
         next: (result) => {
-
-          this.toastr.success('Document ' + this.model['result_link'][0].name, 'SUCCESSFULLY UPDATED', {
+          this.toastr.success('Document ' + this.labelFile, 'SUCCESSFULLY UPDATED', {
             timeOut: 5000, positionClass: 'toast-top-right'
           });
 
@@ -179,7 +183,6 @@ setTimeout(() => {
             timeOut: 5000, positionClass: 'toast-top-right'
           });
           console.log(e);
-          return false;
         }
       })
     }
