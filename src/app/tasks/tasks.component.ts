@@ -18,24 +18,17 @@ import * as SmilesDrawer from 'smiles-drawer';
 export class TasksComponent implements OnInit {
   
 
-  taskForm = new FormGroup({});
   loadForm: boolean = false;
-  form = new FormGroup({});
   model: any;
-  fields: FormlyFieldConfig[] = [];
   pending_task_selected: String = '';
   pending_task: any;
   link: Blob;
   objectKeys = Object.keys;
   parameter: string;
-  value: string;
-  unit: string;
-  label_file: string;
-  result_link: File;
   parameters = [];
-
-  randomNumber:number = 0
-
+  files = [];
+  labelFile = '';
+  
   constructor(public ra: RA, private commonService: CommonService, public pendingTasks: PendingTasks, private func: CommonFunctions, public results: Results, private updateService: UpdateService, private toastr: ToastrService,private formBuilder: FormBuilder) {
   }
 
@@ -98,40 +91,38 @@ setTimeout(() => {
      elemento['placeholder'] = descriptions[elemento['name']] != undefined ? descriptions[elemento['name']] : '';
    }
    }
-
   }
-
+  // <div *ngIf="formulario.controls.nombre.errors.required">El nombre es requerido.</div>
   addNewParameter(){
-    if(this.taskForm.value['value'] && this.taskForm.value['unit']){
-    this.parameters.push({parameter:'default'+this.randomNumber,value:this.taskForm.value['value'],unit:this.taskForm.value['unit']})
+    if(this.parameter && this.model.value && this.model['unit']){
+    this.parameters.push({parameter:this.parameter,value:this.model.value,unit:this.model['unit']});
+    this.model.values = this.parameters
     this.resetFieldsParameter();
-    this.randomNumber++
     }
-  }
 
+  }
   deleteParameter(param){
     this.parameters = this.parameters.filter(parameter => parameter.parameter !== param)
-
+    this.model.values = this.parameters
   }
 
   addNewFile(){
-    
+    if(this.labelFile && this.model['result_link'][0]){
+      this.model['links'].push({label:this.labelFile,File:this.model['result_link'][0]})
+      this.labelFile = '';
+    }
   }
-
   resetFieldsParameter(){
-    this.taskForm.patchValue({
-      value: '',
-      unit: ''
-    })
+    this.model.unit = '';
+    this.model.value = '';
+    this.parameter = '';
   }
 
   getPendingTask() {
     this.commonService.getPendingTask(this.ra.name, this.pending_task_selected).subscribe({
       next: (result) => {
         this.pending_task = result;
-        console.log(this.pending_task)
         this.model = this.pending_task.result;
-        this.taskForm = this.formBuilder.group(this.model);
         this.insertDescriptionTask();
         this.loadForm = true;
       },
@@ -141,12 +132,12 @@ setTimeout(() => {
   onSubmit() {
      this.loadForm = false;
 
-      if(this.taskForm.value['result_link']){
-        this.sendlink(this.taskForm.value['result_link']);
-        this.taskForm.value['result_link'] = this.taskForm.value['result_link'][0].name;
+      this.addNewParameter()
+      if(this.model['result_link']){
+        this.sendlink(this.model['result_link']);
+        this.model['result_link'] = this.model['result_link'][0].name;
       }
-
-      this.updateService.updateResult(this.ra.name,this.taskForm.value).subscribe({
+      this.updateService.updateResult(this.ra.name,this.model).subscribe({
         next: (result) => {
           if (result['success']) {
             this.pendingTasks.results = [];
@@ -169,7 +160,7 @@ setTimeout(() => {
           console.error(e)
         },
       });
-      this.taskForm.reset();
+      this.parameters = [];
   }
 
   sendlink(link) {

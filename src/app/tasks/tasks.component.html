@@ -39,27 +39,26 @@
               </div>
             </div>   
             
-            <form id="taskForm"  (ngSubmit)="onSubmit()"  [formGroup]="taskForm" class="container-form mt-3">
+            <form id="taskForm"  #taskForm="ngForm" (ngSubmit)="onSubmit()" class="container-form mt-3">
 
               <div  *ngIf="this.pending_task.result.result_type === 'value'" class="mb-2">
               <div  class="row mt-2 mb-3">
                 <label for="inputPassword3" class="col-2 col-form-label">Parameter:</label>
                 <div class="col-10">
-                  <input required name="parameter" placeholder="" formControlName="parameter" type="text" class="form-control" id="parameter">
+                  <input  name="parameter" placeholder="" [(ngModel)]="this.parameter" type="text" class="form-control" id="parameter">
                 </div>
               </div>
               <div class="row mb-3">
                 <label *ngIf="this.pending_task.result.result_type === 'value'" for="inputPassword3"  class="col-2 col-form-label">Value:</label>
                 <label *ngIf="this.pending_task.result.result_type === 'text'" for="inputPassword3" class="col-2 col-form-label">Report:</label>
                 <div class="col-10">
-                  <input required placeholder="" formControlName="value"   type="text" class="form-control" name="value" id="value">
+                  <input required placeholder="" [(ngModel)]="this.model.value"   type="text" class="form-control" name="value" id="value">
                 </div>
               </div>
-
               <div class="row mb-3">
                 <label for="inputPassword3" class="col-2 col-form-label">Unit:</label>
                 <div class="col-10">
-                  <input required  placeholder=""   formControlName="unit" type="text" class="form-control" name="unit" id="unit">
+                  <input   placeholder=""   [(ngModel)]="this.model.unit" type="text" class="form-control" name="unit" id="unit">
                 </div>
               </div>
               <div>
@@ -78,14 +77,14 @@
               <div *ngIf="this.pending_task.result.result_type === 'text'" class="row mb-3">
                 <label  for="inputPassword3" class="col-2 col-form-label">Report:</label>
                 <div class="col-10">
-                  <input required placeholder="" formControlName="value"   type="text" class="form-control" name="value" id="value">
+                  <input required placeholder=""[(ngModel)]="this.model.value"  type="text" class="form-control" name="value" id="value">
                 </div>
               </div>
            
               <div *ngIf="this.pending_task.result.result_type === 'value'" class="row mb-3">
                 <label for="inputPassword3" class="col-2 col-form-label">Uncertainty:</label>
                 <div class="col-10">
-                  <input  placeholder=""  formControlName="uncertainty" type="text" class="form-control" id="uncertainty" name="uncertainty">
+                  <input  placeholder=""  [(ngModel)]="this.model.uncertainty" type="text" class="form-control" id="uncertainty" name="uncertainty">
                 </div>
               </div>
               <div>
@@ -93,8 +92,8 @@
                  <label for="inputPassword3" class="col-2 col-form-label">Documentation:</label>
                 <div class="col-10">
                   <div class="row">
-                    <div class="col-3"><input type="text" placeholder="label" class="form-control"></div>
-                    <div class="col"><input  placeholder="" formControlName="result_link" type="file" class="form-control" name="result_link" id="result_link"></div>
+                    <div class="col-3"><input type="text" [(ngModel)]="this.labelFile" name="labelFile" placeholder="label" class="form-control"></div>
+                    <div class="col"><input  placeholder="" [(ngModel)]="this.model.result_link" type="file" class="form-control" name="result_link" id="result_link"></div>
                   </div>
                 </div>
               </div>
@@ -107,10 +106,10 @@
               <div class="row mb-3">
                 <label for="inputPassword3" class="col-2 col-form-label">Summary:</label>
                <div class="col-10">
-                <textarea  placeholder="" formControlName="summary"  class="form-control" name="summary" id="summary" rows="4"></textarea>
+                <textarea  placeholder="" [(ngModel)]="this.model.summary"  class="form-control" name="summary" id="summary" rows="4"></textarea>
                </div>
              </div>
-              <button [disabled]="taskForm.invalid"  type="submit" class="btn btn-ets-do submit-button">Submit</button>
+              <button [disabled]="taskForm.invalid && this.model.values.length < 1"  type="submit" class="btn btn-ets-do submit-button">Submit</button>
             </form>
           </div>
         </div>
