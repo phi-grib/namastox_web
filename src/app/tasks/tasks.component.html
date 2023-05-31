@@ -113,7 +113,7 @@
                 <textarea  placeholder="" [(ngModel)]="this.model.summary"  class="form-control" name="summary" id="summary" rows="4"></textarea>
                </div>
              </div>
-              <button [disabled]="taskForm.invalid && this.model.values.length < 1"  type="submit" class="btn btn-ets-do submit-button">Submit</button>
+              <button [disabled]="taskForm.invalid && this.model?.values?.length < 1"  type="submit" class="btn btn-ets-do submit-button">Submit</button>
             </form>
           </div>
         </div>
