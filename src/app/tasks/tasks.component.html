@@ -172,7 +172,7 @@
             Values
           </div>
           <div class="col border-bottom">
-            <table class="table table-borderless">
+            <table *ngIf="this.results.resultSelected?.result?.values"  class="table table-borderless">
               <thead class="text">
                 <tr style="text-align: center;">
                   <th >Parameter</th>
@@ -199,7 +199,7 @@
             {{this.results.resultSelected.result.uncertainty}}
           </div>
         </div>
-        <div class="row pt-1 pb-1">
+        <div *ngIf="this.results.resultSelected.result.links" class="row pt-1 pb-1">
           <div class="col-2 text  border-bottom d-flex  align-items-center">
             Documentation
           </div>
