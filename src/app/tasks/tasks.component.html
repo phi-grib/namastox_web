@@ -176,15 +176,15 @@
               <thead class="text">
                 <tr style="text-align: center;">
                   <th >Parameter</th>
-                  <th >Unit</th>
                   <th >Value</th>
+                  <th >Unit</th>
                 </tr>
               </thead>
               <tbody *ngFor="let idx of objectKeys(this.results.resultSelected.result.values)">
                 <tr style="text-align: center;">
                   <td>{{this.results.resultSelected.result.values[idx].parameter}}</td>
-                  <td>{{this.results.resultSelected.result.values[idx].unit}}</td>
                   <td>{{this.results.resultSelected.result.values[idx].value}}</td>
+                  <td>{{this.results.resultSelected.result.values[idx].unit}}</td>
                 </tr>
               </tbody>
               </table>
