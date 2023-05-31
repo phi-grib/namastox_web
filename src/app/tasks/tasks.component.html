@@ -77,7 +77,7 @@
               <div *ngIf="this.pending_task.result.result_type === 'text'" class="row mb-3">
                 <label  for="inputPassword3" class="col-2 col-form-label">Report:</label>
                 <div class="col-10">
-                  <input required placeholder=""[(ngModel)]="this.model.value"  type="text" class="form-control" name="value" id="value">
+                  <input required placeholder=""[(ngModel)]="this.model.value"  type="text" class="form-control" name="report" id="report">
                 </div>
               </div>
               <div *ngIf="this.pending_task.result.result_type === 'value'" class="row mb-3">
