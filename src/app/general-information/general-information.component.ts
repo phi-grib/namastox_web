@@ -19,14 +19,23 @@ export class GeneralInformationComponent implements OnInit {
   fields: FormlyFieldConfig[] = [];
 
   generalInformationForm = new FormGroup({});
-   onSubmit() {
+
+
+  uploadSubstance(){
+    if(this.generalInformationForm.value['substance_name'] && this.generalInformationForm.value['substance_id'] && this.generalInformationForm.value['substance_CASRN']){
       if(this.generalInformationForm.value['substance_SMILES'][0] instanceof File){
         this.updateService.uploadSubstances(this.generalInformationForm.value['substance_SMILES'][0]).subscribe(result =>{
           if(result['success']){
             this.generalInformationForm.value['substance_SMILES'] = [...result['result']]
             }
          })
-      } 
+
+      }
+    }
+  }
+
+   onSubmit() {
+      this.uploadSubstance();
       //  if(model['workflow_custom'] && model['workflow_custom'][0] instanceof File){
       //    this.updateService.uploadCustomWorkflow(this.ra.name,model['workflow_custom'][0]).subscribe({
       //      next: (result)=> {
