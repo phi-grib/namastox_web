@@ -164,7 +164,6 @@ setTimeout(() => {
 
   }
   sendlink() {
-    console.log(this.model['result_link'][0])
     if(this.labelFile && this.model['result_link'][0]){
       this.updateService.updateLink(this.ra.name, this.model['result_link'][0]).subscribe({
         next: (result) => {
