@@ -43,8 +43,8 @@ export class AppComponent implements OnInit {
   loadOverviewCanvas(){
     this.commonService.drawOverviewCanvas(false);
   }
-  navbarleft = 60;
-  navbarright = 40;
+  navbarleft = 50;
+  navbarright = 50;
 
   @ViewChild('mySplit')
   mySplitEl!: SplitComponent;
