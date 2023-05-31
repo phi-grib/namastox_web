@@ -62,10 +62,10 @@ export class CommonFunctions {
     this.pendingTasks.results = [];
     this.pendingTasks.decisions = [];
     for(const idx in this.ra.pending_tasks){
-       if(this.ra.pending_tasks[idx].category == "TASK"){
-        this.pendingTasks.results.push(this.ra.pending_tasks[idx])
-       }else{
+       if(this.ra.pending_tasks[idx].category == "LOGICAL"){
         this.pendingTasks.decisions.push(this.ra.pending_tasks[idx])
+       }else{
+        this.pendingTasks.results.push(this.ra.pending_tasks[idx])
        }
     }
   }
