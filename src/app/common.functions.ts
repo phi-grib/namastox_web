@@ -28,7 +28,7 @@ export class CommonFunctions {
       this.ra.listSteps = [...values[1]];
       this.ra.status = values[2].ra;
       this.ra.results = values[3]
-      this.separateResults();
+      this.separatePastTasks();
       this.ra.workflow = values[4]['result']
       this.commonService.updateWorkflow();
       setTimeout(() => {
@@ -70,14 +70,17 @@ export class CommonFunctions {
     }
   }
 
-  separateResults(){
+  separatePastTasks(){
+
     $('#dtTasks').DataTable().destroy();
     $('#dtDecisions').DataTable().destroy();
     this.results.results = [];
     this.results.decisions = [];
-
+    
+    
+    
 for (const result of this.ra.results) {
-    if ("value" in result) {
+    if ("values" in result) {
       this.results.results.push(result);
     } else {
       this.results.decisions.push(result);

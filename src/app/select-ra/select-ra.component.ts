@@ -29,7 +29,7 @@ export class SelectRaComponent {
     this.commonService.getResultsWithStep(this.ra.name, this.ra.status.step).subscribe({
       next: (result) => {
         this.ra.results = result
-        this.func.separateResults();
+        this.func.separatePastTasks();
       },
       error: (e) => console.log(e)
     })

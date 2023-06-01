@@ -29,6 +29,7 @@ export class TasksComponent implements OnInit {
   files = [];
   labelFile = '';
   documents = [];
+  report: string = '';
   
   constructor(public ra: RA, private commonService: CommonService, public pendingTasks: PendingTasks, private func: CommonFunctions, public results: Results, private updateService: UpdateService, private toastr: ToastrService,private formBuilder: FormBuilder) {
   }
@@ -80,6 +81,10 @@ setTimeout(() => {
     })
   }
 
+  isObject(value): boolean{
+return typeof value === 'object'; 
+  }
+
   insertDescriptionTask(){
    var descriptions = this.pending_task['task description']
    var taskForm =  document.getElementById('taskForm');
@@ -129,8 +134,8 @@ setTimeout(() => {
     })
   }
   onSubmit() {
-     this.loadForm = false;
-
+      this.loadForm = false;
+      this.model.values.push(this.report)
       this.addNewParameter();
       this.sendlink();
 
@@ -160,6 +165,7 @@ setTimeout(() => {
         });
       this.parameters = [];
       this.documents = [];
+      this.report = '';
       }, 300);
 
   }
