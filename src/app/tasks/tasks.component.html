@@ -128,6 +128,7 @@
           <thead>
             <tr>
               <th>ID</th>
+              <!-- <th>Name</th> -->
               <th>summary</th>
               <th>value</th>
             </tr>
@@ -135,6 +136,7 @@
           <tbody>
             <tr (click)="selectTask(result.id)" *ngFor="let result of this.results.results">
               <td>{{result.id}}</td>
+              <!-- <td>{{this.results.resultSelected['task description']['name']}}</td>  -->
               <td>{{result.summary}}</td>
               <td>{{result.value}}</td>
             </tr>
@@ -172,7 +174,7 @@
             Values
           </div>
           <div class="col border-bottom">
-            <table *ngIf="this.results.resultSelected?.result?.values"  class="table table-borderless">
+            <table *ngIf="this.results.resultSelected.result.values.length > 0"  class="table table-borderless">
               <thead class="text">
                 <tr style="text-align: center;">
                   <th >Parameter</th>
