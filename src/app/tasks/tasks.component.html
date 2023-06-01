@@ -139,7 +139,7 @@
               <td>{{result.name}}</td>
               <td>{{result.summary}}</td>
               <td *ngIf="isObject(result.values[0]) else reportTD">{{result.values[0].parameter}},{{result.values[0].value}},{{result.values[0].unit}} <span *ngIf="result.values.length > 0">...</span></td>
-            <ng-template #reportTD><td>{{result.values[0]}}  </td></ng-template>
+            <ng-template #reportTD><td>{{result.values[0] | slice:0:20}}...  </td></ng-template>
             </tr>
           </tbody>
         </table>
