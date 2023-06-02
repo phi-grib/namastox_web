@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { RA } from '../globals';
 import * as SmilesDrawer from 'smiles-drawer';
 import { CommonService } from '../common.service';
@@ -9,8 +9,10 @@ import { CommonService } from '../common.service';
   templateUrl: './overview.component.html',
   styleUrls: ['./overview.component.scss']
 })
+
 export class OverviewComponent implements OnInit{
   objectKeys = Object.keys;
+  @ViewChild('OverviewCanvas', { static: true }) OverviewCanvas: ElementRef<HTMLCanvasElement>;
 
   constructor(public ra: RA,private commonService: CommonService){
     
@@ -24,6 +26,7 @@ export class OverviewComponent implements OnInit{
      })
   }
    drawMol(){
+
      if(this.ra.general_information.general?.substance_SMILES){
        let smilesDrawer = new SmilesDrawer.Drawer({ width: 175, height: 100 });
        SmilesDrawer.parse(this.ra.general_information.general.substance_SMILES[0].SMILES, function (tree) {
@@ -31,7 +34,10 @@ export class OverviewComponent implements OnInit{
      },  function (err) {
        console.log(err);
      });
-      
+     }else{
+      const canvas = this.OverviewCanvas.nativeElement;
+      const context = canvas.getContext('2d');
+      context.clearRect(0, 0, canvas.width, canvas.height);
      }
  } 
 }
