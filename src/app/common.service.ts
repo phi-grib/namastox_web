@@ -104,8 +104,8 @@ export class CommonService {
     const formData = new FormData();
     var models = ["AMPA","Kainate","NADH"]
     var versions = [1,1,1]
-    formData.append("models",JSON.stringify(models))
-    formData.append("versions",JSON.stringify(versions))
+    formData.append("models",'"AMPA","Kainate","NADH"')
+    formData.append("versions",'1,1,1')
     const url: string = environment.baseUrl + 'predict/'+ra_name;
     return this.http.put(url,formData)
   }
