@@ -21,6 +21,17 @@ export class GeneralInformationComponent implements OnInit {
   generalInformationForm = new FormGroup({});
 
 
+  insertDescriptionGeneralInformation(){
+    var descriptions = this.ra.general_information.placeholders
+    var taskForm =  document.getElementById('generalInformationForm');
+    if(taskForm != undefined){
+     var elements = taskForm.querySelectorAll("input, select, textarea");
+     for (var i = 0; i < elements.length; i++) {
+      var elemento = elements[i];
+      elemento['placeholder'] = descriptions[elemento['name']] != undefined ? descriptions[elemento['name']] : '';
+    }
+    }
+   }
   uploadSubstance(){
     if(this.generalInformationForm.value['substance_name'] && this.generalInformationForm.value['substance_id'] && this.generalInformationForm.value['substance_CASRN']){
       if(this.generalInformationForm.value['substance_SMILES'][0] instanceof File){
@@ -33,7 +44,6 @@ export class GeneralInformationComponent implements OnInit {
       }
     }
   }
-
    onSubmit() {
       this.uploadSubstance();
       //  if(model['workflow_custom'] && model['workflow_custom'][0] instanceof File){
@@ -71,9 +81,10 @@ export class GeneralInformationComponent implements OnInit {
   ngOnInit(): void {
     const generalInfo = this.ra.general_information.general;
     this.generalInformationForm = this.formBuilder.group(generalInfo);
+    console.log(this.ra.general_information.placeholders)
      this.commonService.generateForms$.subscribe(() => {
-      // const generalInfo = this.ra.general_information.general;
-      // this.generalInformationForm = this.formBuilder.group(generalInfo);
+       const generalInfo = this.ra.general_information.general;
+       this.generalInformationForm = this.formBuilder.group(generalInfo);
      })
   }
   // TO DO
