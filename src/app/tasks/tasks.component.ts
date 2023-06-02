@@ -82,18 +82,6 @@ setTimeout(() => {
   isObject(value): boolean{
 return typeof value === 'object'; 
   }
-
-  insertDescriptionTask(){
-   var descriptions = this.pending_task['task description']
-   var taskForm =  document.getElementById('taskForm');
-   if(taskForm != undefined){
-    var elements = taskForm.querySelectorAll("input, select, textarea");
-    for (var i = 0; i < elements.length; i++) {
-     var elemento = elements[i];
-     elemento['placeholder'] = descriptions[elemento['name']] != undefined ? descriptions[elemento['name']] : '';
-   }
-   }
-  }
   addNewParameter(){
     if(this.parameter && this.model.value && this.model['unit']){
     this.parameters.push({parameter:this.parameter,value:this.model.value,unit:this.model['unit']});
@@ -138,10 +126,8 @@ return typeof value === 'object';
   getPendingTask() {
     this.commonService.getPendingTask(this.ra.name, this.pending_task_selected).subscribe({
       next: (result) => {
-        console.log(result)
         this.pending_task = result;
         this.model = this.pending_task.result;
-        this.insertDescriptionTask();
         this.loadForm = true;
       },
       error: (e) => console.log(e)
