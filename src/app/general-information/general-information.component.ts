@@ -71,9 +71,10 @@ export class GeneralInformationComponent implements OnInit {
   ngOnInit(): void {
     const generalInfo = this.ra.general_information.general;
     this.generalInformationForm = this.formBuilder.group(generalInfo);
-    // this.commonService.generateForms$.subscribe(() => {
-    //   this.generateForm();
-    // })
+     this.commonService.generateForms$.subscribe(() => {
+      // const generalInfo = this.ra.general_information.general;
+      // this.generalInformationForm = this.formBuilder.group(generalInfo);
+     })
   }
   // TO DO
   loadSubstances(file):any {
