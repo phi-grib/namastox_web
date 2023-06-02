@@ -99,4 +99,15 @@ export class CommonService {
     const url: string = environment.baseUrl + "workflow/"+ra_name;
     return this.http.get(url)
   }
+
+  getPrediction(ra_name:string){
+    const formData = new FormData();
+    var models = ["AMPA","Kainate","NADH"]
+    var versions = [1,1,1]
+    formData.append("models",JSON.stringify(models))
+    formData.append("versions",JSON.stringify(versions))
+    const url: string = environment.baseUrl + 'predict/'+ra_name;
+    return this.http.put(url,formData)
+  }
+
 }

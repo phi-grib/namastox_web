@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonService } from '../common.service';
 import { PendingTasks, RA, Results } from '../globals';
-
 import { FormGroup, FormControl,FormBuilder } from '@angular/forms';
-
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { CommonFunctions } from '../common.functions';
 import { UpdateService } from '../update.service';
@@ -16,7 +14,6 @@ import * as SmilesDrawer from 'smiles-drawer';
   styleUrls: ['./tasks.component.scss']
 })
 export class TasksComponent implements OnInit {
-  
 
   loadForm: boolean = false;
   model: any;
@@ -56,9 +53,8 @@ export class TasksComponent implements OnInit {
         },
         error: (e) => console.log(e)
       })
-    }
+    }}
 
-  }
   drawMol(){
      for (let index = 0; index < this.results.resultSelected.substance.length; index++) {
       let smilesDrawer = new SmilesDrawer.Drawer({ width: 200, height: 150 });
@@ -122,9 +118,19 @@ return typeof value === 'object';
     this.parameter = '';
   }
 
+  executePredict(){
+    this.commonService.getPrediction(this.ra.name).subscribe({
+      next: (result)=>{
+        console.log(result)
+      },
+      error: (e) => console.log(e)
+    })
+  }
+
   getPendingTask() {
     this.commonService.getPendingTask(this.ra.name, this.pending_task_selected).subscribe({
       next: (result) => {
+        console.log(result)
         this.pending_task = result;
         this.model = this.pending_task.result;
         this.insertDescriptionTask();
