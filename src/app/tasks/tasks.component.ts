@@ -68,6 +68,8 @@ export class TasksComponent implements OnInit {
   selectTask(id: string) {
     this.commonService.getTask(this.ra.name,id).subscribe(result => {
       this.results.resultSelected = result;
+      console.log("select task")
+      console.log(this.results.resultSelected)
       if(!Array.isArray(this.results.resultSelected.substance)) {
           this.results.resultSelected.substance = [this.results.resultSelected.substance]
       }
@@ -121,7 +123,13 @@ return typeof value === 'object';
   executePredict(){
     this.commonService.getPrediction(this.ra.name).subscribe({
       next: (result)=>{
-        console.log(result)
+          for (let idx = 0; idx < result['models'].length; idx++) {
+            const name = result['models'][idx][0];
+            const val = result['results'][idx];
+            const param = {parameter:name,value:val,unit:null}
+            this.parameters.push(param);
+          }
+          this.model.values = this.parameters;
       },
       error: (e) => console.log(e)
     })
@@ -144,7 +152,6 @@ return typeof value === 'object';
       this.model.values.push(this.report)
       this.addNewParameter();
       this.sendlink();
-
       setTimeout(() => {
         this.updateService.updateResult(this.ra.name,this.model).subscribe({
           next: (result) => {
