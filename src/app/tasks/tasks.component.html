@@ -63,15 +63,15 @@
                 <div  *ngFor="let idx of objectKeys(this.parameters)" class="row mb-3">
                   <label for="Parameter" class="col-2 col-form-label">Parameter</label>
                   <div class="col">
-                    <input  readonly [value]="this.parameters[idx].parameter" type="text" class="form-control" id="parameter">
+                    <input  readonly [value]="this.parameters[idx].parameter" type="text" class="form-control-plaintext text-center" id="parameter">
                   </div>
                   <label for="value" class="col-1 col-form-label">Value</label>
                   <div class="col">
-                    <input  readonly  [value]="this.parameters[idx].value"   type="text" class="form-control" name="value" id="value">
+                    <input  readonly  [value]="this.parameters[idx].value.toString() | slice:0:4"   type="text" class="form-control-plaintext text-center" name="value" id="value">
                   </div>
                   <label for="unit" class="col-1 col-form-label">Unit</label>
                   <div class="col">
-                    <input  placeholder="" readonly  [value]="this.parameters[idx].unit" type="text" class="form-control" name="unit" id="unit">
+                    <input  placeholder="" readonly  [value]="this.parameters[idx].unit" type="text" class="form-control-plaintext text-center" name="unit" id="unit">
                   </div>
                   <div class="col-1">
                     <a (click)="deleteParameter(this.parameters[idx].parameter)" class="btn ms-auto" role="button"><i class="fa-solid fa-circle-minus fa-lg" style="color: #e01b24;"></i></a>
@@ -86,7 +86,7 @@
               <div *ngIf="this.pending_task.result.result_type === 'text'" class="row mb-3">
                 <label  for="inputPassword3" class="col-2 col-form-label">Report:</label>
                 <div class="col-10">
-                  <input required [placeholder]="this.pending_task['task description']['report']" [(ngModel)]="this.report"  type="text" class="form-control" name="report" id="report">
+                  <textarea rows="4" required [placeholder]="this.pending_task['task description']['report']" [(ngModel)]="this.report"  type="text" class="form-control" name="report" id="report"> </textarea>
                 </div>
               </div>
               <div *ngIf="this.pending_task.result.result_type === 'value'" class="row mb-3">
@@ -110,7 +110,7 @@
                 <label for="inputPassword3" class="col-2 col-form-label">Documentation:</label>
                <div class="col-10">
                  <div class="row">
-                   <div class="col-3"><input type="text" [value]="this.documents[idx].label" readonly class="form-control"></div>
+                   <div class="col-3"><input type="text" [value]="this.documents[idx].label" readonly class="form-control-plaintext"></div>
                    <div class="col"><input [value]="this.documents[idx].result_link" type="file" readonly class="form-control"></div>
                    <div class="col-1"><a (click)="deleteFile(this.documents[idx].label)" class="btn ms-auto" role="button"><i class="fa-solid fa-circle-minus fa-lg" style="color: #e01b24;"></i></a></div>
                  </div>
