@@ -28,8 +28,8 @@ export class TasksComponent implements OnInit {
   documents = [];
   report: string = '';
   modelSelected:any;
-  listModels:any;
-  
+  listAllModels:any;
+  listModelsSelected: any = [];  
   constructor(public ra: RA, private commonService: CommonService, public pendingTasks: PendingTasks, private func: CommonFunctions, public results: Results, private updateService: UpdateService, private toastr: ToastrService,private formBuilder: FormBuilder) {
   }
 
@@ -57,18 +57,25 @@ export class TasksComponent implements OnInit {
       })
     }}
 
-    onChange(name,version,event){
-      
-
+    onChange(model,event){
+    const isChecked = event.target.checked;
+      if(isChecked){
+      this.listModelsSelected.push(model)
+      }else{
+         for (let idx = 0; idx < this.listModelsSelected.length; idx++) {
+           const element = this.listModelsSelected[idx];
+           if(element[0] == model[0] && element[1] == model[1]){
+            this.listModelsSelected.splice(idx,1)
+           }
+         }
+      }
     }
 
     openModal(){
       //get models
       this.commonService.getModels().subscribe({
         next: (result)=> {
-          this.listModels =  result
-          console.log("modeels")
-          console.log(this.listModels)
+          this.listAllModels =  result
         },
         error: (err)=> {
           console.log(err)
@@ -90,8 +97,6 @@ export class TasksComponent implements OnInit {
   selectTask(id: string) {
     this.commonService.getTask(this.ra.name,id).subscribe(result => {
       this.results.resultSelected = result;
-      console.log("select task")
-      console.log(this.results.resultSelected)
       if(!Array.isArray(this.results.resultSelected.substance)) {
           this.results.resultSelected.substance = [this.results.resultSelected.substance]
       }
@@ -131,10 +136,20 @@ return typeof value === 'object';
   }
 
   executePredict(){
-    this.commonService.getPrediction(this.ra.name).subscribe({
+    var listNames:any = [];
+    var listVersions:any = [];
+
+    for (let idx = 0; idx < this.listModelsSelected.length; idx++) {
+      const element = this.listModelsSelected[idx];
+      listNames.push(element[0])
+      listVersions.push(element[1])
+    }
+
+    this.commonService.getPrediction(this.ra.name,listNames,listVersions).subscribe({
       next: (result)=>{
+        console.log(result)
           for (let idx = 0; idx < result['models'].length; idx++) {
-            const name = result['models'][idx][0];
+            const name = result['models'][idx][0]+"v"+result['models'][idx][1];
             const val = result['results'][idx];
             const param = {parameter:name,value:val,unit:null}
             this.parameters.push(param);
@@ -143,6 +158,7 @@ return typeof value === 'object';
       },
       error: (e) => console.log(e)
     })
+
   }
 
   getPendingTask() {

@@ -100,12 +100,10 @@ export class CommonService {
     return this.http.get(url)
   }
 
-  getPrediction(ra_name:string){
+  getPrediction(ra_name:string,names,versions){
     const formData = new FormData();
-    var models = ["AMPA","Kainate","NADH"]
-    var versions = [1,1,1]
-    formData.append("models",'"AMPA","Kainate","NADH"')
-    formData.append("versions",'1,1,1')
+     formData.append("models",names)
+     formData.append("versions",versions)
     const url: string = environment.baseUrl + 'predict/'+ra_name;
     return this.http.put(url,formData)
   }
