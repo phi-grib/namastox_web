@@ -112,4 +112,15 @@ export class CommonService {
     const url: string = environment.baseUrl + "models";
     return this.http.get(url)
   }
+
+  getInformBySubstanceName(substance_name:string){
+    const url: string = environment.baseUrl + "inform_name/"+substance_name;
+    return this.http.get(url);
+  }
+
+  getInformByCASRN(casrn:string){
+    const url: string = environment.baseUrl + "inform_casrn/"+casrn;
+    return this.http.get(url);
+  }
+  
 }

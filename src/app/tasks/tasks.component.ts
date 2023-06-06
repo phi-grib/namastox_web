@@ -160,7 +160,6 @@ return typeof value === 'object';
     })
 
   }
-
   getPendingTask() {
     this.commonService.getPendingTask(this.ra.name, this.pending_task_selected).subscribe({
       next: (result) => {

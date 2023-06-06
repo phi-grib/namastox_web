@@ -82,6 +82,11 @@
                     <input [readonly]="this.ra?.status?.step > 1"  name="substance_SMILES" placeholder="" formControlName="substance_SMILES" type="file" class="form-control text-start" id="substance_SMILES">
                   </div>
                 </div>
+                <div class="row mb-3">
+                  <div class="col text-end">
+                    <a  (click)="autocomplete(generalInformationForm.value)" class="btn btn-ets-do"  role="button" >Autocomplete</a>
+                  </div>
+                </div>
             </div>
           </div> 
           <div class="row mb-3">
