@@ -27,6 +27,8 @@ export class TasksComponent implements OnInit {
   labelFile = '';
   documents = [];
   report: string = '';
+  modelSelected:any;
+  listModels:any;
   
   constructor(public ra: RA, private commonService: CommonService, public pendingTasks: PendingTasks, private func: CommonFunctions, public results: Results, private updateService: UpdateService, private toastr: ToastrService,private formBuilder: FormBuilder) {
   }
@@ -54,6 +56,26 @@ export class TasksComponent implements OnInit {
         error: (e) => console.log(e)
       })
     }}
+
+    onChange(name,version,event){
+      
+
+    }
+
+    openModal(){
+      //get models
+      this.commonService.getModels().subscribe({
+        next: (result)=> {
+          this.listModels =  result
+          console.log("modeels")
+          console.log(this.listModels)
+        },
+        error: (err)=> {
+          console.log(err)
+        }
+      })
+     
+    }
 
   drawMol(){
      for (let index = 0; index < this.results.resultSelected.substance.length; index++) {
