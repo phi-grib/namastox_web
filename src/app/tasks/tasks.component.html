@@ -196,7 +196,7 @@
               <tbody *ngFor="let idx of objectKeys(this.results.resultSelected.result.values)">
                 <tr style="text-align: center;">
                   <td>{{this.results.resultSelected.result.values[idx].parameter}}</td>
-                  <td>{{this.results.resultSelected.result.values[idx].value.toString() | slice:0:4}}</td>
+                  <td>{{this.results.resultSelected.result.values[idx].value.toString() | slice:0:8}}</td>
                   <td>{{this.results.resultSelected.result.values[idx].unit}}</td>
                 </tr>
               </tbody>
