@@ -295,8 +295,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-
-        <table class="table">
+        <table id="modelsTable" class="table">
           <thead>
             <tr>
               <th class="col-1">
@@ -317,8 +316,8 @@
         </table>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button  class="btn btn-primary" (click)="executePredict()">Predict</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button  class="btn btn-ets-do" (click)="executePredict()">Predict</button>
       </div>
     </div>
   </div>
