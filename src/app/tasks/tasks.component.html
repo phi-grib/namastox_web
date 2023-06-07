@@ -71,7 +71,7 @@
                   </div>
                   <label for="unit" class="col-1 col-form-label">Unit</label>
                   <div class="col">
-                    <input  placeholder="" readonly  [value]="this.parameters[idx].unit" type="text" class="form-control-plaintext text-center" name="unit" id="unit">
+                    <input  placeholder="" readonly  [value]l="this.parameters[idx].unit" type="text" class="form-control-plaintext text-center" name="unit" id="unit">
                   </div>
                   <div class="col-1">
                     <a (click)="deleteParameter(this.parameters[idx].parameter)" class="btn ms-auto" role="button"><i class="fa-solid fa-circle-minus fa-lg" style="color: #e01b24;"></i></a>
@@ -167,7 +167,7 @@
             <tr (click)="selectTask(result.id)" *ngFor="let result of this.results.results">
               <td>{{result.id}}</td>
               <td>{{result.name}}</td>
-              <td>{{result.summary}}</td>
+              <td>{{result.summary | slice:0:150}}...</td>
               <td *ngIf="isObject(result.values[0]) else reportTD">{{result.values[0].parameter}},{{result.values[0].value}},{{result.values[0].unit}} <span *ngIf="result.values.length > 0">...</span></td>
             <ng-template #reportTD><td>{{result.values[0] | slice:0:20}}...  </td></ng-template>
             </tr>
