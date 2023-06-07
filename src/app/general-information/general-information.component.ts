@@ -24,7 +24,7 @@ export class GeneralInformationComponent implements OnInit {
   autocomplete(data){
     const substance_name = data['substance_name']
     const CASRN = data['substance_CASRN']
-
+    var ids = {};
     if(substance_name){
       console.log(substance_name)
       this.commonService.getInformBySubstanceName(substance_name).subscribe({
@@ -33,7 +33,12 @@ export class GeneralInformationComponent implements OnInit {
             this.toastr.success('Name ' + substance_name , 'AUTOCOMPLETE SUCCESSFULLY', {
               timeOut: 3000, positionClass: 'toast-top-right'
             });
-            data['substance_id'] = result[0]['pubchemCid']
+             ids = {
+              dtxcid: result[0]['dtxcid'],
+              dtxsid: result[0]['dtxsid'],
+              pubchemcid: result[0]['pubchemCid']
+            }
+            data['substance_id'] = ids
             data['substance_CASRN'] = result[0]['casrn']
             this.generalInformationForm = this.formBuilder.group(data);
           }else{
@@ -46,8 +51,13 @@ export class GeneralInformationComponent implements OnInit {
         this.commonService.getInformByCASRN(CASRN).subscribe({
           next: (result)=> {
             if(result[0]){
-              data['substance_id'] = result[0]['pubchemCid']
-              data['substance_name'] = result[0]['iupacName']
+               ids = {
+                dtxcid: result[0]['dtxcid'],
+                dtxsid: result[0]['dtxsid'],
+                pubchemcid: result[0]['pubchemCid']
+              }
+              data['substance_id'] = ids
+              data['substance_name'] = result[0]['preferredName']
               this.generalInformationForm = this.formBuilder.group(data);
               this.toastr.success('CASRN ' + CASRN , 'AUTOCOMPLETE SUCCESSFULLY', {
                 timeOut: 3000, positionClass: 'toast-top-right'
@@ -59,13 +69,9 @@ export class GeneralInformationComponent implements OnInit {
         })
       }
     }
-
-
-
-
-
   }
 
+  
   uploadSubstance(){
     if(this.generalInformationForm.value['substance_SMILES'] != undefined){
     // if(this.generalInformationForm.value['substance_name'] && this.generalInformationForm.value['substance_id'] && this.generalInformationForm.value['substance_CASRN']){
