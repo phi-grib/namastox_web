@@ -38,38 +38,45 @@ export class GeneralInformationComponent implements OnInit {
             this.generalInformationForm = this.formBuilder.group(data);
           }else{
             console.log("Not found by Name")
-            if(CASRN){
-              this.commonService.getInformByCASRN(CASRN).subscribe({
-                next: (result)=> {
-                  if(result[0]){
-                    data['substance_id'] = result[0]['pubchemCid']
-                    data['substance_name'] = result[0]['iupacName']
-                    this.generalInformationForm = this.formBuilder.group(data);
-                    this.toastr.success('CASRN ' + CASRN , 'AUTOCOMPLETE SUCCESSFULLY', {
-                      timeOut: 3000, positionClass: 'toast-top-right'
-                    });
-                  }else{
-                    console.log("Not found by CASRN")
-                  }
-                }
-              })
-            }
           }
         }
       })
+    }else{
+      if(CASRN){
+        this.commonService.getInformByCASRN(CASRN).subscribe({
+          next: (result)=> {
+            if(result[0]){
+              data['substance_id'] = result[0]['pubchemCid']
+              data['substance_name'] = result[0]['iupacName']
+              this.generalInformationForm = this.formBuilder.group(data);
+              this.toastr.success('CASRN ' + CASRN , 'AUTOCOMPLETE SUCCESSFULLY', {
+                timeOut: 3000, positionClass: 'toast-top-right'
+              });
+            }else{
+              console.log("Not found by CASRN")
+            }
+          }
+        })
+      }
     }
+
+
+
+
+
   }
 
   uploadSubstance(){
-    if(this.generalInformationForm.value['substance_name'] && this.generalInformationForm.value['substance_id'] && this.generalInformationForm.value['substance_CASRN']){
+    if(this.generalInformationForm.value['substance_SMILES'] != undefined){
+    // if(this.generalInformationForm.value['substance_name'] && this.generalInformationForm.value['substance_id'] && this.generalInformationForm.value['substance_CASRN']){
       if(this.generalInformationForm.value['substance_SMILES'][0] instanceof File){
         this.updateService.uploadSubstances(this.generalInformationForm.value['substance_SMILES'][0]).subscribe(result =>{
           if(result['success']){
             this.generalInformationForm.value['substance_SMILES'] = [...result['result']]
             }
          })
-
       }
+    // }
     }
   }
    onSubmit() {
