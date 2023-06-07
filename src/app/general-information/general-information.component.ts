@@ -26,6 +26,7 @@ export class GeneralInformationComponent implements OnInit {
     const CASRN = data['substance_CASRN']
 
     if(substance_name){
+      console.log(substance_name)
       this.commonService.getInformBySubstanceName(substance_name).subscribe({
         next: (result)=> {
           if(result[0]){
@@ -34,12 +35,16 @@ export class GeneralInformationComponent implements OnInit {
             });
             data['substance_id'] = result[0]['pubchemCid']
             data['substance_CASRN'] = result[0]['casrn']
+            this.generalInformationForm = this.formBuilder.group(data);
           }else{
             console.log("Not found by Name")
             if(CASRN){
               this.commonService.getInformByCASRN(CASRN).subscribe({
                 next: (result)=> {
                   if(result[0]){
+                    data['substance_id'] = result[0]['pubchemCid']
+                    data['substance_name'] = result[0]['iupacName']
+                    this.generalInformationForm = this.formBuilder.group(data);
                     this.toastr.success('CASRN ' + CASRN , 'AUTOCOMPLETE SUCCESSFULLY', {
                       timeOut: 3000, positionClass: 'toast-top-right'
                     });
@@ -104,7 +109,6 @@ export class GeneralInformationComponent implements OnInit {
   ngOnInit(): void {
     const generalInfo = this.ra.general_information.general;
     this.generalInformationForm = this.formBuilder.group(generalInfo);
-    console.log(this.ra.general_information.placeholders)
      this.commonService.generateForms$.subscribe(() => {
        const generalInfo = this.ra.general_information.general;
        this.generalInformationForm = this.formBuilder.group(generalInfo);
