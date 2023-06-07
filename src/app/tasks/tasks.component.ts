@@ -30,6 +30,8 @@ export class TasksComponent implements OnInit {
   modelSelected:any;
   listAllModels:any;
   listModelsSelected: any = [];  
+  
+
   constructor(public ra: RA, private commonService: CommonService, public pendingTasks: PendingTasks, private func: CommonFunctions, public results: Results, private updateService: UpdateService, private toastr: ToastrService,private formBuilder: FormBuilder) {
   }
 
@@ -104,6 +106,11 @@ setTimeout(() => {
   if(this.results.resultSelected?.substance.length > 1) this.drawMol();
 }, 300);
     })
+    $("#tableCollapse").click();
+    $("#pastCollapse").click(); 
+  }
+  showTablePastTasks(){
+    $("#tableCollapse").click();
   }
 
   isObject(value): boolean{
