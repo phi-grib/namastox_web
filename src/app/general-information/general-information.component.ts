@@ -21,6 +21,12 @@ export class GeneralInformationComponent implements OnInit {
 
   generalInformationForm = new FormGroup({});
 
+
+
+  isObject(value): boolean{
+    return typeof value === 'object'; 
+      }
+
   autocomplete(data){
     const substance_name = data['substance_name']
     const CASRN = data['substance_CASRN']
@@ -30,6 +36,7 @@ export class GeneralInformationComponent implements OnInit {
       this.commonService.getInformBySubstanceName(substance_name).subscribe({
         next: (result)=> {
           if(result[0]){
+            console.log(result[0])
             this.toastr.success('Name ' + substance_name , 'AUTOCOMPLETE SUCCESSFULLY', {
               timeOut: 3000, positionClass: 'toast-top-right'
             });
@@ -40,6 +47,7 @@ export class GeneralInformationComponent implements OnInit {
             }
             data['substance_id'] = ids
             data['substance_CASRN'] = result[0]['casrn']
+            data['substance_SMILES'] = result[0]['smiles']
             this.generalInformationForm = this.formBuilder.group(data);
           }else{
             console.log("Not found by Name")
@@ -58,6 +66,7 @@ export class GeneralInformationComponent implements OnInit {
               }
               data['substance_id'] = ids
               data['substance_name'] = result[0]['preferredName']
+              data['substance_SMILES'] = result[0]['smiles']
               this.generalInformationForm = this.formBuilder.group(data);
               this.toastr.success('CASRN ' + CASRN , 'AUTOCOMPLETE SUCCESSFULLY', {
                 timeOut: 3000, positionClass: 'toast-top-right'

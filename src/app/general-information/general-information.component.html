@@ -76,7 +76,13 @@
                     <input [readonly]="this.ra?.status?.step > 1"  name="substance_CASRN" [placeholder]="this.ra.general_information.placeholders['substances']['cas-rn']" formControlName="substance_CASRN" type="text" class="form-control" id="substance_CASRN">
                   </div>
                 </div>
-                <div class="row mb-3">
+                <div *ngIf="!isObject(this.generalInformationForm.value['substance_SMILES'])" class="row mb-3">
+                  <label for="inputPassword3" class="col-2 col-form-label">SMILES</label>
+                  <div class="col">
+                    <input readonly formControlName="substance_SMILES"   name="substance_SMILES" id="substance_SMILES"  type="text" class="form-control">
+                </div>
+                </div>
+                <div  class="row mb-3">
                   <label for="inputPassword3" class="col-2 col-form-label">Structure</label>
                   <div class="col">
                     <input [readonly]="this.ra?.status?.step > 1"  name="substance_SMILES" placeholder="" formControlName="substance_SMILES" type="file" class="form-control text-start" id="substance_SMILES">
