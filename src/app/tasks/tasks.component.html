@@ -152,8 +152,6 @@
 
 
   <div class="tab-pane fade" id="pills-pasttasks" role="tabpanel" aria-labelledby="pills-pasttasks-tab">
-
-  
     <div class="accordion accordion-flush" id="accordionFlushExample">
       <div class="accordion-item">
         <h2 class="accordion-header" id="flush-headingOne">
@@ -229,14 +227,14 @@
                   <div class="col border-bottom">
                     <table *ngIf="isObject(this.results.resultSelected.result.values[0])"  class="table table-borderless">
                       <thead class="text">
-                        <tr style="text-align: center;">
+                        <tr>
                           <th >Parameter</th>
                           <th >Value</th>
                           <th >Unit</th>
                         </tr>
                       </thead>
                       <tbody *ngFor="let idx of objectKeys(this.results.resultSelected.result.values)">
-                        <tr style="text-align: center;">
+                        <tr>
                           <td>{{this.results.resultSelected.result.values[idx].parameter}}</td>
                           <td>{{this.results.resultSelected.result.values[idx].value.toString() | slice:0:8}}</td>
                           <td>{{this.results.resultSelected.result.values[idx].unit}}</td>

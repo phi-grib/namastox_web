@@ -71,10 +71,8 @@ export class GeneralInformationComponent implements OnInit {
     }
   }
 
-  
   uploadSubstance(){
     if(this.generalInformationForm.value['substance_SMILES'] != undefined){
-    // if(this.generalInformationForm.value['substance_name'] && this.generalInformationForm.value['substance_id'] && this.generalInformationForm.value['substance_CASRN']){
       if(this.generalInformationForm.value['substance_SMILES'][0] instanceof File){
         this.updateService.uploadSubstances(this.generalInformationForm.value['substance_SMILES'][0]).subscribe(result =>{
           if(result['success']){
@@ -82,7 +80,6 @@ export class GeneralInformationComponent implements OnInit {
             }
          })
       }
-    // }
     }
   }
    onSubmit() {

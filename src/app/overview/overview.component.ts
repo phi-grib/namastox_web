@@ -26,10 +26,15 @@ export class OverviewComponent implements OnInit{
      })
   }
    drawMol(){
-
-     if(this.ra.general_information.general?.substance_SMILES){
+    var smile = "";
+    if(this.ra.general_information.general?.substance_SMILES[0].SMILES != undefined){
+      smile = this.ra.general_information.general?.substance_SMILES[0].SMILES
+    }else{
+      smile = this.ra.general_information.general?.substance_SMILES
+    }
+     if(smile){
        let smilesDrawer = new SmilesDrawer.Drawer({ width: 200, height: 150 });
-       SmilesDrawer.parse(this.ra.general_information.general.substance_SMILES[0].SMILES, function (tree) {
+       SmilesDrawer.parse(smile, function (tree) {
          smilesDrawer.draw(tree, 'substanceCanvas', 'light', false);
      },  function (err) {
        console.log(err);
