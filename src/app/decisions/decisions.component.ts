@@ -58,6 +58,10 @@ export class DecisionsComponent implements OnInit {
     saveAs(blob, this.results.decisionSelected.result_link)
   }
 
+  showTablePastDecisions(){
+    $("#tableCollapse").click();
+  }
+
 
   drawMol(){
     if(this.results.decisionSelected.substance.length > 0 ){
@@ -91,6 +95,8 @@ export class DecisionsComponent implements OnInit {
       },
       error: (e) => console.log(e)
     })
+    $("#tableCollapse").click();
+    $("#pastCollapse").click(); 
   }
 
   createform() {

@@ -51,6 +51,15 @@
     <ng-template #noDecisions>No pending decisions</ng-template>
   </div>
   <div class="tab-pane fade" id="pills-pastdecisions" role="tabpanel" aria-labelledby="pills-pastdecisions-tab">
+        <div class="accordion accordion-flush" id="accordionFlushExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="flush-headingOne">
+          <button id="tableCollapse" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+          Select Task
+          </button>
+        </h2>
+        <div id="flush-collapseOne" class="accordion-collapse collapse show"  aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+          <div class="accordion-body">        
     <div class="row">
       <div class="col">
         <table id="dtDecisions" class="display compact">
@@ -71,6 +80,19 @@
         </table>
       </div>
     </div>
+    </div>
+    </div>
+    </div>
+
+    <div class="accordion-item">
+    <h2 class="accordion-header" id="flush-headingTwo">
+      <button (click)="showTablePastDecisions()" id="pastCollapse" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="true" aria-controls="flush-collapseTwo">
+          {{this.results?.decisionSelected['task description']?.id}}
+        </button>
+      </h2>
+<div id="flush-collapseTwo" class="accordion-collapse collapse"  aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body">
+
     <div class="mt-2" *ngIf="this.results.decisionSelected">
       <hr>
       <div class="card-body mb-3">
@@ -148,4 +170,8 @@
       </div>
     </div>
   </div>
+  </div>
+</div>
+</div>
+</div>
 </div>

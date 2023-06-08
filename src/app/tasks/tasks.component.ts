@@ -106,11 +106,11 @@ setTimeout(() => {
   if(this.results.resultSelected?.substance.length > 1) this.drawMol();
 }, 300);
     })
-    $("#tableCollapse").click();
-    $("#pastCollapse").click(); 
+    $("#tableCollapseTasks").click();
+    $("#pastCollapseTasks").click(); 
   }
   showTablePastTasks(){
-    $("#tableCollapse").click();
+    $("#tableCollapseTasks").click();
   }
 
   isObject(value): boolean{
