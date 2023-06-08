@@ -30,9 +30,8 @@ export class GeneralInformationComponent implements OnInit {
   autocomplete(data){
     const substance_name = data['substance_name']
     const CASRN = data['substance_CASRN']
-    var ids = {};
+    var ids = "";
     if(substance_name){
-      console.log(substance_name)
       this.commonService.getInformBySubstanceName(substance_name).subscribe({
         next: (result)=> {
           if(result[0]){
@@ -40,11 +39,7 @@ export class GeneralInformationComponent implements OnInit {
             this.toastr.success('Name ' + substance_name , 'AUTOCOMPLETE SUCCESSFULLY', {
               timeOut: 3000, positionClass: 'toast-top-right'
             });
-             ids = {
-              dtxcid: result[0]['dtxcid'],
-              dtxsid: result[0]['dtxsid'],
-              pubchemcid: result[0]['pubchemCid']
-            }
+            ids = "dtxcid:"+result[0]['dtxcid']+","+"dtxsid:"+result[0]['dtxsid']+","+"pubchemcid:"+result[0]['pubchemCid']
             data['substance_id'] = ids
             data['substance_CASRN'] = result[0]['casrn']
             data['substance_SMILES'] = result[0]['smiles']
@@ -59,11 +54,7 @@ export class GeneralInformationComponent implements OnInit {
         this.commonService.getInformByCASRN(CASRN).subscribe({
           next: (result)=> {
             if(result[0]){
-               ids = {
-                dtxcid: result[0]['dtxcid'],
-                dtxsid: result[0]['dtxsid'],
-                pubchemcid: result[0]['pubchemCid']
-              }
+              ids = "dtxcid:"+result[0]['dtxcid']+","+"dtxsid:"+result[0]['dtxsid']+","+"pubchemcid:"+result[0]['pubchemCid']
               data['substance_id'] = ids
               data['substance_name'] = result[0]['preferredName']
               data['substance_SMILES'] = result[0]['smiles']
