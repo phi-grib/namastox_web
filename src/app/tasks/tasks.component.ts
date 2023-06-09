@@ -119,7 +119,7 @@ setTimeout(() => {
 return typeof value === 'object'; 
   }
   addNewParameter(){
-    if(this.parameter && this.model.value && this.model['unit']){
+    if(this.parameter && this.model.value){
     this.model.values.push({parameter:this.parameter,value:this.model.value,unit:this.model['unit']})
     this.resetFieldsParameter();
     }
