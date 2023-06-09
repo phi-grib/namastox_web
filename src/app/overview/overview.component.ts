@@ -27,11 +27,12 @@ export class OverviewComponent implements OnInit{
   }
    drawMol(){
     var smile = "";
-    const substanceSMILES = this.ra.general_information.general?.substance_SMILES;
-    smile = substanceSMILES && substanceSMILES[0]?.SMILES;
+    if(this.ra.general_information.general?.substance_SMILES[0].SMILES!= undefined){
+      smile = this.ra.general_information.general?.substance_SMILES[0].SMILES
 
-    console.log("smile:")
-    console.log(smile)
+    }else{
+      smile = this.ra.general_information.general?.substance_SMILES
+    }
 
      if(smile){
        let smilesDrawer = new SmilesDrawer.Drawer({ width: 200, height: 150 });
