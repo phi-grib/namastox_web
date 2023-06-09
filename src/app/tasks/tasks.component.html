@@ -71,7 +71,7 @@
                   </div>
                   <label for="unit" class="col-1 col-form-label">Unit</label>
                   <div class="col">
-                    <input  placeholder="" readonly  [value]l="this.parameters[idx].unit" type="text" class="form-control-plaintext text-center" name="unit" id="unit">
+                    <input  placeholder="" readonly  [value]="this.parameters[idx].unit" type="text" class="form-control-plaintext text-center" name="unit" id="unit">
                   </div>
                   <div class="col-1">
                     <a (click)="deleteParameter(this.parameters[idx].parameter)" class="btn ms-auto" role="button"><i class="fa-solid fa-circle-minus fa-lg" style="color: #e01b24;"></i></a>

@@ -165,6 +165,7 @@ return typeof value === 'object';
       },
       error: (e) => console.log(e)
     })
+    this.listModelsSelected = []
 
   }
   getPendingTask() {
