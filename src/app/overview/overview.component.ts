@@ -30,6 +30,9 @@ export class OverviewComponent implements OnInit{
     const substanceSMILES = this.ra.general_information.general?.substance_SMILES;
     smile = substanceSMILES && substanceSMILES[0]?.SMILES;
 
+    console.log("smile:")
+    console.log(smile)
+
      if(smile){
        let smilesDrawer = new SmilesDrawer.Drawer({ width: 200, height: 150 });
        SmilesDrawer.parse(smile, function (tree) {
