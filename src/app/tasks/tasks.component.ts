@@ -179,7 +179,9 @@ return typeof value === 'object';
   }
   onSubmit() {
       this.loadForm = false;
-      this.model.values.push(this.report)
+      if(this.report) this.model.values.push(this.report)
+      console.log('values:')
+      console.log(this.model.values)
       this.addNewParameter();
       this.sendlink();
       setTimeout(() => {
