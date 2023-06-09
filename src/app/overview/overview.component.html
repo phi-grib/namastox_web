@@ -78,15 +78,15 @@
       <div class="col-3 text">
       Status
       </div>
-      <div class="col-3 text">
+      <div class="col-2 text">
         <div class="row">Workflow</div>
         <div class="row">Step</div>
         <div class="row">Active nodes</div>
       </div>
-      <div class="col-2">
+      <div class="col">
         <div class="row"><span style="text-align:center">{{this.ra?.status?.workflow_name}}</span></div>
         <div class="row"><span style="text-align:center">{{this.ra?.status?.step}}</span></div>
-        <div class="row d-inline"><span style="text-align:center" *ngFor="let node of this.ra?.status.active_nodes_id">{{node}}</span></div>
+          <div *ngFor="let task of this.ra.pending_tasks" class="row mb-1"> <div class="col-2 text">{{task.id}}</div> <div class="col-10">{{task.description}}</div></div>
       </div>
     </div>
     </div>

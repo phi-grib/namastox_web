@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { RA } from '../globals';
+import { RA, Results } from '../globals';
 import * as SmilesDrawer from 'smiles-drawer';
 import { CommonService } from '../common.service';
 
@@ -14,7 +14,7 @@ export class OverviewComponent implements OnInit{
   objectKeys = Object.keys;
   @ViewChild('OverviewCanvas', { static: true }) OverviewCanvas: ElementRef<HTMLCanvasElement>;
 
-  constructor(public ra: RA,private commonService: CommonService){
+  constructor(public ra: RA,private commonService: CommonService,public results: Results){
     
 
   }

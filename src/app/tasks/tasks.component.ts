@@ -38,6 +38,8 @@ export class TasksComponent implements OnInit {
   ngOnInit(): void {
     this.commonService.generateForms$.subscribe((taskID) => {
       //Check select is not empty 
+      console.log("pendingtasks")
+      console.log(this.pendingTasks)
       if (this.pendingTasks.results[0]) {
         if(taskID){
           this.pending_task_selected = taskID
@@ -118,8 +120,7 @@ return typeof value === 'object';
   }
   addNewParameter(){
     if(this.parameter && this.model.value && this.model['unit']){
-    this.parameters.push({parameter:this.parameter,value:this.model.value,unit:this.model['unit']});
-    this.model.values = this.parameters
+    this.model.values.push({parameter:this.parameter,value:this.model.value,unit:this.model['unit']})
     this.resetFieldsParameter();
     }
 
@@ -131,8 +132,7 @@ return typeof value === 'object';
   }
 
   deleteParameter(param){
-    this.parameters = this.parameters.filter(parameter => parameter.parameter !== param)
-    this.model.values = this.parameters
+    this.model.values = this.model.values.filter(parameter => parameter.parameter !== param)
   }
 
 
@@ -159,13 +159,12 @@ return typeof value === 'object';
             const name = result['models'][idx][0]+"v"+result['models'][idx][1];
             const val = result['results'][idx];
             const param = {parameter:name,value:val,unit:null}
-            this.parameters.push(param);
+            this.model.values.push(param);
           }
-          this.model.values = this.parameters;
       },
       error: (e) => console.log(e)
     })
-    this.listModelsSelected = []
+    this.listModelsSelected = [];
 
   }
   getPendingTask() {
@@ -207,7 +206,7 @@ return typeof value === 'object';
             console.error(e)
           },
         });
-      this.parameters = [];
+      this.model.values = [];
       this.documents = [];
       this.report = '';
       }, 300);
