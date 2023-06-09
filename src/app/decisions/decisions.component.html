@@ -66,6 +66,7 @@
           <thead>
             <tr>
               <th>ID</th>
+              <th>Name</th>
               <th>summary</th>
               <th>decision</th>
             </tr>
@@ -73,7 +74,8 @@
           <tbody>
             <tr (click)="selectDecision(decision.id)" *ngFor="let decision of this.results.decisions">
               <td>{{decision.id}}</td>
-              <td>{{decision.summary}}</td>
+              <td>{{decision.name}}</td>
+              <td>{{decision.summary | slice:0:150}}...</td>
               <td>{{decision.decision}}</td>
             </tr>
           </tbody>

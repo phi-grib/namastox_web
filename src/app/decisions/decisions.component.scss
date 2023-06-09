@@ -13,8 +13,11 @@
             th:nth-child(1){
                 width: 10% !important;
             }
+            th:nth-child(2){
+                width: 30% !important;
+            }
             th:nth-child(3){
-                width: 10% !important;
+                width: 60% !important;
             }
         }
     }
