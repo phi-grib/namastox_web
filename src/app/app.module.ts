@@ -23,6 +23,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ManageRaComponent } from './manage-ra/manage-ra.component';
 import { FormlyHorizontalWrapper } from './formly-settings/horizontal-wrapper';
+import { TaskFormComponent } from './tasks/task-form/task-form.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { FormlyHorizontalWrapper } from './formly-settings/horizontal-wrapper';
     DecisionsComponent,
     SelectRaComponent,
     ManageRaComponent,
-    FormlyHorizontalWrapper
+    FormlyHorizontalWrapper,
+    TaskFormComponent
   ],
   imports: [
     BrowserModule,

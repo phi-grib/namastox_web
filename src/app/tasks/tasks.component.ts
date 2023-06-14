@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonService } from '../common.service';
-import { PendingTasks, RA, Results } from '../globals';
+import { PendingTasks, RA, Results,Global } from '../globals';
 import { FormGroup, FormControl,FormBuilder } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { CommonFunctions } from '../common.functions';
@@ -29,17 +29,16 @@ export class TasksComponent implements OnInit {
   report: string = '';
   modelSelected:any;
   listAllModels:any;
-  listModelsSelected: any = [];  
+  listModelsSelected: any = []; 
+  loadEditForm: boolean = false; 
   
 
-  constructor(public ra: RA, private commonService: CommonService, public pendingTasks: PendingTasks, private func: CommonFunctions, public results: Results, private updateService: UpdateService, private toastr: ToastrService,private formBuilder: FormBuilder) {
+  constructor(public ra: RA, private commonService: CommonService, public pendingTasks: PendingTasks, private func: CommonFunctions, public results: Results, private updateService: UpdateService, private toastr: ToastrService,private formBuilder: FormBuilder,public global:Global) {
   }
 
   ngOnInit(): void {
     this.commonService.generateForms$.subscribe((taskID) => {
       //Check select is not empty 
-      console.log("pendingtasks")
-      console.log(this.pendingTasks)
       if (this.pendingTasks.results[0]) {
         if(taskID){
           this.pending_task_selected = taskID
@@ -50,6 +49,10 @@ export class TasksComponent implements OnInit {
       }
     })
   }
+  editTask(){
+    this.global.editMode = !this.global.editMode;
+  }
+
   downloadFile(File) {
     if (File) {
       this.commonService.getLink(this.ra.name,File).subscribe({
@@ -74,20 +77,6 @@ export class TasksComponent implements OnInit {
          }
       }
     }
-
-    openModal(){
-      //get models
-      this.commonService.getModels().subscribe({
-        next: (result)=> {
-          this.listAllModels =  result
-        },
-        error: (err)=> {
-          console.log(err)
-        }
-      })
-     
-    }
-
   drawMol(){
      for (let index = 0; index < this.results.resultSelected.substance.length; index++) {
       let smilesDrawer = new SmilesDrawer.Drawer({ width: 200, height: 150 });
@@ -118,24 +107,10 @@ setTimeout(() => {
   isObject(value): boolean{
 return typeof value === 'object'; 
   }
-  addNewParameter(){
-    if(this.parameter && this.model.value){
-    this.model.values.push({parameter:this.parameter,value:this.model.value,unit:this.model['unit']})
-    this.resetFieldsParameter();
-    }
-
-  }
   deleteFile(label){
     this.documents = this.documents.filter(document => document.label !== label)
     this.model.links = this.documents
-
   }
-
-  deleteParameter(param){
-    this.model.values = this.model.values.filter(parameter => parameter.parameter !== param)
-  }
-
-
   resetFieldsParameter(){
     this.model.unit = '';
     this.model.value = '';
@@ -143,6 +118,7 @@ return typeof value === 'object';
   }
 
   executePredict(){
+    this.model.values = [];
     var listNames:any = [];
     var listVersions:any = [];
 
@@ -176,64 +152,5 @@ return typeof value === 'object';
       },
       error: (e) => console.log(e)
     })
-  }
-  onSubmit() {
-      this.loadForm = false;
-      if(this.report) this.model.values.push(this.report)
-      console.log('values:')
-      console.log(this.model.values)
-      this.addNewParameter();
-      this.sendlink();
-      setTimeout(() => {
-        this.updateService.updateResult(this.ra.name,this.model).subscribe({
-          next: (result) => {
-            if (result['success']) {
-              this.pendingTasks.results = [];
-              this.func.refreshRA();
-              setTimeout(() => {
-                if (this.pendingTasks.results.length) {
-                  this.pending_task_selected = this.pendingTasks.results[0].id;
-                  this.getPendingTask();
-                }
-              }, 1000);
-              this.toastr.success('RA ' + this.ra.name, 'SUCCESSFULLY UPDATED', {
-                timeOut: 5000, positionClass: 'toast-top-right'
-              });
-            }
-          },
-          error: (e) => {
-            this.toastr.error('Check the console to see more information', 'Unexpected Error', {
-              timeOut: 5000, positionClass: 'toast-top-right'
-            });
-            console.error(e)
-          },
-        });
-      this.model.values = [];
-      this.documents = [];
-      this.report = '';
-      }, 300);
-
-  }
-  sendlink() {
-    if(this.labelFile && this.model['result_link'][0]){
-      this.updateService.updateLink(this.ra.name, this.model['result_link'][0]).subscribe({
-        next: (result) => {
-          this.toastr.success('Document ' + this.labelFile, 'SUCCESSFULLY UPDATED', {
-            timeOut: 5000, positionClass: 'toast-top-right'
-          });
-
-          this.documents.push({label:this.labelFile,File:this.model['result_link'][0].name})
-          this.model['links'] = this.documents
-          this.labelFile = '';
-        },
-        error: (e) => {
-          this.toastr.error('Check the console to see more information', 'Failed uploaded document', {
-            timeOut: 5000, positionClass: 'toast-top-right'
-          });
-          console.log(e);
-        }
-      })
-    }
-    }
-  }
+  }}
 
