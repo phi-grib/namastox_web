@@ -26,13 +26,19 @@ export class TaskFormComponent {
   listModelsSelected: any = [];  
   
   @Input() task:any;
+  @Input() editMode: any;
 
   constructor(public ra: RA, private commonService: CommonService, public pendingTasks: PendingTasks, private func: CommonFunctions, public results: Results, private updateService: UpdateService, private toastr: ToastrService,private formBuilder: FormBuilder, public global:Global) {
   }
   
   ngOnInit(): void {
-     this.pending_task = this.task;
-     this.model = this.task.result;
+    setTimeout(() => {
+      this.pending_task = this.task;
+      this.model = this.task.result;
+      if(this.editMode){
+         this.report = this.model.values[0];
+      }
+    },100);
   }
 
   back(){
@@ -90,8 +96,6 @@ export class TaskFormComponent {
   onSubmit() {
     this.loadForm = false;
     if(this.report) this.model.values.push(this.report)
-    console.log('values:')
-    console.log(this.model.values)
     this.addNewParameter();
     this.sendlink();
     setTimeout(() => {
@@ -100,13 +104,16 @@ export class TaskFormComponent {
           if (result['success']) {
             this.pendingTasks.results = [];
             this.func.refreshRA();
-            // if editMOde ...
+            if(!this.editMode){
             setTimeout(() => {
               if (this.pendingTasks.results.length) {
                 this.pending_task_selected_id = this.pendingTasks.results[0].id;
                 this.getPendingTask();
               }
             }, 1000);
+          }else{
+            this.global.editMode = false;
+          }
             this.toastr.success('RA ' + this.ra.name, 'SUCCESSFULLY UPDATED', {
               timeOut: 5000, positionClass: 'toast-top-right'
             });

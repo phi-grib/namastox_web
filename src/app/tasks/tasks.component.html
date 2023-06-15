@@ -39,7 +39,7 @@
               </div>
             </div>   
               <!-- task form -->
-            <task-form [task]="this.pending_task"></task-form>
+            <task-form [editMode]="false" [task]="this.pending_task"></task-form>
           </div>
         </div>
       </div>
@@ -201,9 +201,7 @@
                 </div>
               </div>
             </div>
-            <div *ngIf="this.global.editMode">
-                <task-form [task]="this.pending_task"></task-form >
-            </div>
+                <task-form *ngIf="this.global.editMode" [editMode]="true" [task]="this.results.resultSelected"></task-form >
           </div>
         </div>
       </div>

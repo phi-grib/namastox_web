@@ -38,7 +38,7 @@ export class TasksComponent implements OnInit {
 
   ngOnInit(): void {
     this.commonService.generateForms$.subscribe((taskID) => {
-      //Check select is not empty 
+      //Check select is not empty
       if (this.pendingTasks.results[0]) {
         if(taskID){
           this.pending_task_selected = taskID
@@ -149,6 +149,8 @@ return typeof value === 'object';
         this.pending_task = result;
         this.model = this.pending_task.result;
         this.loadForm = true;
+        console.log("UPDATE")
+        console.log(this.pending_task)
       },
       error: (e) => console.log(e)
     })
