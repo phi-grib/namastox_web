@@ -27,7 +27,7 @@ export class OverviewComponent implements OnInit{
   }
    drawMol(){
     var smile = "";
-    if(this.ra.general_information.general?.substance_SMILES[0].SMILES!= undefined){
+    if(Array.isArray(this.ra.general_information.general?.substance_SMILES)){
       smile = this.ra.general_information.general?.substance_SMILES[0].SMILES
 
     }else{
