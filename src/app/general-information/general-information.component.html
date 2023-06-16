@@ -1,57 +1,57 @@
 <div  class="container-fluid">
 <div class="container-form p-3">
-    <form id="generalInformationForm"  (ngSubmit)="onSubmit()"  [formGroup]="generalInformationForm">
+    <form id="generalInformationForm" #generalInformationForm="ngForm" (ngSubmit)="onSubmit()">
         <div class="row mb-3">
             <label for="inputPassword3" class="col-3 col-form-label">Title:</label>
             <div class="col">
-              <input [readonly]="this.ra?.status?.step > 1" name="title" [placeholder]="this.ra.general_information.placeholders['title']" formControlName="title" type="text" class="form-control" id="title">
+              <input [readonly]="this.ra?.status?.step > 1" name="title" [placeholder]="this.ra.general_information.placeholders['title']" [(ngModel)]="this.ra.general_information.general.title"  type="text" class="form-control" id="title">
             </div>
           </div>
           <div class="row mb-3">
             <label for="inputPassword3" class="col-3 col-form-label">General description:</label>
             <div class="col">
-              <input [readonly]="this.ra?.status?.step > 1" name="general_description" [placeholder]="this.ra.general_information.placeholders['general_description']" formControlName="general_description" type="text" class="form-control" id="general_description">
+              <input [readonly]="this.ra?.status?.step > 1" name="general_description" [placeholder]="this.ra.general_information.placeholders['general_description']" [(ngModel)]="this.ra.general_information.general.general_description"  type="text" class="form-control" id="general_description">
             </div>
           </div>
           <div class="row mb-3">
             <label for="inputPassword3" class="col-3 col-form-label">Background:</label>
             <div class="col">
-              <input [readonly]="this.ra?.status?.step > 1" name="background" [placeholder]="this.ra.general_information.placeholders['background']" formControlName="background" type="text" class="form-control" id="background">
+              <input [readonly]="this.ra?.status?.step > 1" name="background" [placeholder]="this.ra.general_information.placeholders['background']" [(ngModel)]="this.ra.general_information.general.background" type="text" class="form-control" id="background">
             </div>
           </div>
 
           <div class="row mb-3">
             <label for="inputPassword3" class="col-3 col-form-label">Endpoint:</label>
             <div class="col">
-              <input [readonly]="this.ra?.status?.step > 1" name="endpoint" [placeholder]="this.ra.general_information.placeholders['endpoint']" formControlName="endpoint" type="text" class="form-control" id="endpoint">
+              <input [readonly]="this.ra?.status?.step > 1" name="endpoint" [placeholder]="this.ra.general_information.placeholders['endpoint']" [(ngModel)]="this.ra.general_information.general.endpoint" type="text" class="form-control" id="endpoint">
             </div>
           </div>
 
           <div class="row mb-3">
             <label for="inputPassword3" class="col-3 col-form-label">Administration route:</label>
             <div class="col">
-              <input [readonly]="this.ra?.status?.step > 1" name="administration_route" [placeholder]="this.ra.general_information.placeholders['administration_route']" formControlName="administration_route" type="text" class="form-control" id="administration_route">
+              <input [readonly]="this.ra?.status?.step > 1" name="administration_route" [placeholder]="this.ra.general_information.placeholders['administration_route']" [(ngModel)]="this.ra.general_information.general.administration_route" type="text" class="form-control" id="administration_route">
             </div>
           </div>
 
           <div class="row mb-3">
             <label for="inputPassword3" class="col-3 col-form-label">Regulatory framework:</label>
             <div class="col">
-              <input [readonly]="this.ra?.status?.step > 1" name="regulatory_framework" [placeholder]="this.ra.general_information.placeholders['regulatory_framework']" formControlName="regulatory_framework" type="text" class="form-control" id="regulatory_framework">
+              <input [readonly]="this.ra?.status?.step > 1" name="regulatory_framework" [placeholder]="this.ra.general_information.placeholders['regulatory_framework']" [(ngModel)]="this.ra.general_information.general.regulatory_framework" type="text" class="form-control" id="regulatory_framework">
             </div>
           </div>
 
           <div class="row mb-3">
             <label for="inputPassword3" class="col-3 col-form-label">Species:</label>
             <div class="col">
-              <input [readonly]="this.ra?.status?.step > 1" name="species" [placeholder]="this.ra.general_information.placeholders['species']" formControlName="species" type="text" class="form-control" id="species">
+              <input [readonly]="this.ra?.status?.step > 1" name="species" [placeholder]="this.ra.general_information.placeholders['species']" [(ngModel)]="this.ra.general_information.general.species" type="text" class="form-control" id="species">
             </div>
           </div>
 
           <div class="row mb-3">
             <label for="inputPassword3" class="col-3 col-form-label">Uncertainty:</label>
             <div class="col">
-              <input [readonly]="this.ra?.status?.step > 1" name="uncertainty" [placeholder]="this.ra.general_information.placeholders['uncertainty']" formControlName="uncertainty" type="text" class="form-control" id="uncertainty">
+              <input [readonly]="this.ra?.status?.step > 1" name="uncertainty" [placeholder]="this.ra.general_information.placeholders['uncertainty']" [(ngModel)]="this.ra.general_information.general.uncertainty" type="text" class="form-control" id="uncertainty">
             </div>
           </div>  
 
@@ -61,36 +61,36 @@
                 <div class="row mb-3">
                   <label for="inputPassword3" class="col-2 col-form-label">Name(s)</label>
                   <div class="col">
-                    <input [readonly]="this.ra?.status?.step > 1" name="substance_name" [placeholder]="this.ra.general_information.placeholders['substances'].name" formControlName="substance_name" type="text" class="form-control" id="substance_name">
+                    <input [readonly]="this.ra?.status?.step > 1" name="substance_name" [placeholder]="this.ra.general_information.placeholders['substances'].name" [(ngModel)]="this.substance_name" type="text" class="form-control" id="substance_name">
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputPassword3" class="col-2 col-form-label">ID(s)</label>
                   <div class="col">
-                    <input [readonly]="this.ra?.status?.step > 1" name="substance_id" [placeholder]="this.ra.general_information.placeholders['substances'].id" formControlName="substance_id" type="text" class="form-control" id="substance_id">
+                    <input [readonly]="this.ra?.status?.step > 1" name="substance_id" [placeholder]="this.ra.general_information.placeholders['substances'].id" [(ngModel)]="this.substance_id"  type="text" class="form-control" id="substance_id">
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputPassword3" class="col-2 col-form-label">CAS-RN(s)</label>
                   <div class="col">
-                    <input [readonly]="this.ra?.status?.step > 1"  name="substance_CASRN" [placeholder]="this.ra.general_information.placeholders['substances']['cas-rn']" formControlName="substance_CASRN" type="text" class="form-control" id="substance_CASRN">
+                    <input [readonly]="this.ra?.status?.step > 1"  name="substance_CASRN" [placeholder]="this.ra.general_information.placeholders['substances']['cas-rn']" [(ngModel)]="this.substance_CASRN" type="text" class="form-control" id="substance_CASRN">
                   </div>
                 </div>
-                <div *ngIf="!isObject(this.generalInformationForm.value['substance_SMILES'])" class="row mb-3">
+                <div *ngIf="this.substance_SMILES" class="row mb-3">
                   <label for="inputPassword3" class="col-2 col-form-label">SMILES</label>
                   <div class="col">
-                    <input readonly formControlName="substance_SMILES"   name="substance_SMILES" id="substance_SMILES"  type="text" class="form-control">
+                    <input readonly  [(ngModel)]="this.substance_SMILES"  name="substance_SMILES" id="substance_SMILES"  type="text" class="form-control">
                 </div>
                 </div>
                 <div  class="row mb-3">
                   <label for="inputPassword3" class="col-2 col-form-label">Structure</label>
                   <div class="col">
-                    <input [readonly]="this.ra?.status?.step > 1"  name="substance_SMILES" placeholder="" formControlName="substance_SMILES" type="file" class="form-control text-start" id="substance_SMILES">
+                    <input [readonly]="this.ra?.status?.step > 1"  name="substance_file" [(ngModel)]="this.substance_file" placeholder=""  type="file" class="form-control text-start" id="substance_file">
                   </div>
                 </div>
                 <div class="row mb-3">
                   <div class="col text-end">
-                    <a  (click)="autocomplete(generalInformationForm.value)" class="btn btn-ets-do"  role="button" >Autocomplete</a>
+                    <a  (click)="autocomplete()" class="btn btn-ets-do"  role="button" >Autocomplete</a>
                   </div>
                 </div>
             </div>
@@ -98,7 +98,7 @@
           <div class="row mb-3">
             <label for="inputPassword3" class="col-3 col-form-label">Workflow custom:</label>
             <div class="col">
-              <input [readonly]="this.ra?.status?.step > 1" name="workflow_custom" [placeholder]="this.ra.general_information.placeholders['workflow_custom']" formControlName="workflow_custom" type="file" class="form-control" id="workflow_custom">
+              <input [readonly]="this.ra?.status?.step > 1" [(ngModel)]="this.ra.general_information.general.workflow_custom" name="workflow_custom" [placeholder]="this.ra.general_information.placeholders['workflow_custom']" type="file" class="form-control" id="workflow_custom">
             </div>
           </div>
           <button [disabled]="this.ra?.status?.step > 1"    type="submit" class="btn btn-ets-do submit-button">Submit</button>

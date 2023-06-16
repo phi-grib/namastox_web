@@ -14,6 +14,11 @@ import { ToastrService } from 'ngx-toastr';
 export class GeneralInformationComponent implements OnInit {
 
   loadForm: boolean = false;
+  substance_name: string = '';
+  substance_CASRN: string = '';
+  substance_SMILES: string = '';
+  substance_id: string = '';
+  substance_file: any;
   form = new FormGroup({});
   model: any;
   fields: FormlyFieldConfig[] = [];
@@ -27,55 +32,35 @@ export class GeneralInformationComponent implements OnInit {
     return typeof value === 'object'; 
       }
 
-  autocomplete(data){
-    const substance_name = data['substance_name']
-    const CASRN = data['substance_CASRN']
+  autocomplete(){
     var ids = "";
     var substance = {}
-    if(substance_name){
-      this.commonService.getInformBySubstanceName(substance_name).subscribe({
+    if(this.substance_name){
+      this.commonService.getInformBySubstanceName(this.substance_name).subscribe({
         next: (result)=> {
           if(result[0]){
             console.log(result[0])
-            this.toastr.success('Name ' + substance_name , 'AUTOCOMPLETE SUCCESSFULLY', {
+            this.toastr.success('Name ' + this.substance_name , 'AUTOCOMPLETE SUCCESSFULLY', {
               timeOut: 3000, positionClass: 'toast-top-right'
             });
             ids = "dtxcid:"+result[0]['dtxcid']+","+"dtxsid:"+result[0]['dtxsid']+","+"pubchemcid:"+result[0]['pubchemCid'];
-
-            substance =  {
-              id: ids,
-              name: substance_name,
-              casrn:result[0]['casrn'],
-              smiles: result[0]['smiles'],     
-          }
-            this.generalInformationForm.value['substances'] = [substance]
-            // data['substance_id'] = ids
-            // data['substance_CASRN'] = result[0]['casrn']
-            // data['substance_SMILES'] = result[0]['smiles']
+          this.substance_CASRN = result[0]['casrn']
+          this.substance_id = ids
+          this.substance_SMILES = result[0]['smiles'];
           }else{
             console.log("Not found by Name")
           }
         }
       })
     }else{
-      if(CASRN){
-        this.commonService.getInformByCASRN(CASRN).subscribe({
+      if(this.substance_CASRN){
+        this.commonService.getInformByCASRN(this.substance_CASRN).subscribe({
           next: (result)=> {
             if(result[0]){
-              ids = "dtxcid:"+result[0]['dtxcid']+","+"dtxsid:"+result[0]['dtxsid']+","+"pubchemcid:"+result[0]['pubchemCid']
-
-              substance =  {
-                id: ids,
-                name: result[0]['preferredName'],
-                casrn: CASRN,
-                smiles: result[0]['smiles'],     
-            }  
-              this.generalInformationForm.value['substances'] = [substance]
-              // data['substance_id'] = ids
-              // data['substance_name'] = result[0]['preferredName']
-              // data['substance_SMILES'] = result[0]['smiles']
-              // this.generalInformationForm = this.formBuilder.group(data);
-              this.toastr.success('CASRN ' + CASRN , 'AUTOCOMPLETE SUCCESSFULLY', {
+              ids = "dtxcid:"+result[0]['dtxcid']+","+"dtxsid:"+result[0]['dtxsid']+","+"pubchemcid:"+result[0]['pubchemCid'] 
+              this.substance_id = ids
+              this.substance_SMILES = result[0]['smiles'];
+              this.toastr.success('CASRN ' + this.substance_CASRN , 'AUTOCOMPLETE SUCCESSFULLY', {
                 timeOut: 3000, positionClass: 'toast-top-right'
               });
             }else{
@@ -88,30 +73,30 @@ export class GeneralInformationComponent implements OnInit {
   }
 
   uploadSubstance(){
-    if(this.generalInformationForm.value['substance_SMILES'] != undefined){
-      if(this.generalInformationForm.value['substance_SMILES'][0] instanceof File){
-        this.updateService.uploadSubstances(this.generalInformationForm.value['substance_SMILES'][0]).subscribe(result =>{
+      if(this.substance_file){
+        this.updateService.uploadSubstances(this.substance_file[0]).subscribe(result =>{
           if(result['success']){
-            this.generalInformationForm.value['substances'] = [...result['result']]
+            var firstSubstance = result['result'][0]
+            this.ra.general_information.general.substances = [firstSubstance]
             }
          })
       }
-    }
+    
   }
    onSubmit() {
+      var substance = {}
       this.uploadSubstance();
-      //  if(model['workflow_custom'] && model['workflow_custom'][0] instanceof File){
-      //    this.updateService.uploadCustomWorkflow(this.ra.name,model['workflow_custom'][0]).subscribe({
-      //      next: (result)=> {
-      //        model['workflow_custom'] = model['workflow_custom'][0].name;
-      //      },
-      //      error: (e) => {
-      //        console.log(e)
-      //      }
-      //    })
-      //  }
+
+      substance =  {
+        id: this.substance_id,
+        name: this.substance_name,
+        casrn: this.substance_CASRN,
+        smiles: this.substance_SMILES,     
+    }
+
+    this.ra.general_information.general.substances.push(substance)
       setTimeout(() => {
-       this.updateService.updateGeneralInformation(this.ra.name, this.generalInformationForm.value).subscribe({
+       this.updateService.updateGeneralInformation(this.ra.name, this.ra.general_information.general).subscribe({
          next: (result) => {
            if (result['success']) {
              this.func.refreshRA();
@@ -133,12 +118,14 @@ export class GeneralInformationComponent implements OnInit {
 
   constructor(public ra: RA, private commonService: CommonService, private updateService: UpdateService, private func: CommonFunctions, private toastr: ToastrService,private formBuilder: FormBuilder) { }
   ngOnInit(): void {
-    const generalInfo = this.ra.general_information.general;
-    this.generalInformationForm = this.formBuilder.group(generalInfo);
-     this.commonService.generateForms$.subscribe(() => {
-       const generalInfo = this.ra.general_information.general;
-       this.generalInformationForm = this.formBuilder.group(generalInfo);
-     })
+      this.commonService.generateForms$.subscribe(() => {
+        this.substance_CASRN = '';
+        this.substance_id = ''
+        this.substance_SMILES = ''
+        this.substance_CASRN = this.ra.general_information.general.substances[0].casrn 
+        this.substance_id = this.ra.general_information.general.substances[0].id 
+        this.substance_SMILES = this.ra.general_information.general.substances[0].smiles
+      })
   }
   // TO DO
   loadSubstances(file):any {

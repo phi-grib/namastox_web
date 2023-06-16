@@ -16,9 +16,9 @@
         Substance
       </div>
       <div class="col">
-        <div class="row"> <div class="col-4 text">Name</div> <div class="col-8">{{this.ra.general_information.general.substance_name}}</div>  </div>
-        <div class="row"> <div class="col-4 text">ID</div> <div class="col-8">{{this.ra.general_information.general.substance_id}}</div>  </div>
-        <div class="row"> <div class="col-4 text">CAS-RN</div> <div class="col-8">{{this.ra.general_information.general.substance_CASRN}}</div>  </div>
+        <div class="row"> <div class="col-4 text">Name</div> <div class="col-8">{{this.ra.general_information.general.substances[0]?.name}}</div>  </div>
+        <div class="row"> <div class="col-4 text">ID</div> <div class="col-8">{{this.ra.general_information.general.substances[0]?.id}}</div>  </div>
+        <div class="row"> <div class="col-4 text">CAS-RN</div> <div class="col-8">{{this.ra.general_information.general.substances[0]?.casrn}}</div>  </div>
         <div class="row"> <div class="col-4 text">Structure</div> <div class="col-8"><canvas #OverviewCanvas id="substanceCanvas"></canvas></div>  </div>
       </div>
       <!-- <div class="col-3 text">
