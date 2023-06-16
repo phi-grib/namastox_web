@@ -95,7 +95,11 @@ export class TaskFormComponent {
 
   onSubmit() {
     this.loadForm = false;
+    console.log("report")
+    console.log(this.report)
+
     if(this.report) this.model.values.push(this.report)
+    console.log(this.model)
     this.addNewParameter();
     this.sendlink();
     setTimeout(() => {
