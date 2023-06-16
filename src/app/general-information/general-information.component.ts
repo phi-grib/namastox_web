@@ -31,6 +31,7 @@ export class GeneralInformationComponent implements OnInit {
     const substance_name = data['substance_name']
     const CASRN = data['substance_CASRN']
     var ids = "";
+    var substance = {}
     if(substance_name){
       this.commonService.getInformBySubstanceName(substance_name).subscribe({
         next: (result)=> {
@@ -39,11 +40,18 @@ export class GeneralInformationComponent implements OnInit {
             this.toastr.success('Name ' + substance_name , 'AUTOCOMPLETE SUCCESSFULLY', {
               timeOut: 3000, positionClass: 'toast-top-right'
             });
-            ids = "dtxcid:"+result[0]['dtxcid']+","+"dtxsid:"+result[0]['dtxsid']+","+"pubchemcid:"+result[0]['pubchemCid']
-            data['substance_id'] = ids
-            data['substance_CASRN'] = result[0]['casrn']
-            data['substance_SMILES'] = result[0]['smiles']
-            this.generalInformationForm = this.formBuilder.group(data);
+            ids = "dtxcid:"+result[0]['dtxcid']+","+"dtxsid:"+result[0]['dtxsid']+","+"pubchemcid:"+result[0]['pubchemCid'];
+
+            substance =  {
+              id: ids,
+              name: substance_name,
+              casrn:result[0]['casrn'],
+              smiles: result[0]['smiles'],     
+          }
+            this.generalInformationForm.value['substances'] = [substance]
+            // data['substance_id'] = ids
+            // data['substance_CASRN'] = result[0]['casrn']
+            // data['substance_SMILES'] = result[0]['smiles']
           }else{
             console.log("Not found by Name")
           }
@@ -55,10 +63,18 @@ export class GeneralInformationComponent implements OnInit {
           next: (result)=> {
             if(result[0]){
               ids = "dtxcid:"+result[0]['dtxcid']+","+"dtxsid:"+result[0]['dtxsid']+","+"pubchemcid:"+result[0]['pubchemCid']
-              data['substance_id'] = ids
-              data['substance_name'] = result[0]['preferredName']
-              data['substance_SMILES'] = result[0]['smiles']
-              this.generalInformationForm = this.formBuilder.group(data);
+
+              substance =  {
+                id: ids,
+                name: result[0]['preferredName'],
+                casrn: CASRN,
+                smiles: result[0]['smiles'],     
+            }  
+              this.generalInformationForm.value['substances'] = [substance]
+              // data['substance_id'] = ids
+              // data['substance_name'] = result[0]['preferredName']
+              // data['substance_SMILES'] = result[0]['smiles']
+              // this.generalInformationForm = this.formBuilder.group(data);
               this.toastr.success('CASRN ' + CASRN , 'AUTOCOMPLETE SUCCESSFULLY', {
                 timeOut: 3000, positionClass: 'toast-top-right'
               });
@@ -76,7 +92,7 @@ export class GeneralInformationComponent implements OnInit {
       if(this.generalInformationForm.value['substance_SMILES'][0] instanceof File){
         this.updateService.uploadSubstances(this.generalInformationForm.value['substance_SMILES'][0]).subscribe(result =>{
           if(result['success']){
-            this.generalInformationForm.value['substance_SMILES'] = [...result['result']]
+            this.generalInformationForm.value['substances'] = [...result['result']]
             }
          })
       }
