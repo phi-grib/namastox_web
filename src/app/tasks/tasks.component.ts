@@ -149,8 +149,6 @@ return typeof value === 'object';
         this.pending_task = result;
         this.model = this.pending_task.result;
         this.loadForm = true;
-        console.log("UPDATE")
-        console.log(this.pending_task)
       },
       error: (e) => console.log(e)
     })

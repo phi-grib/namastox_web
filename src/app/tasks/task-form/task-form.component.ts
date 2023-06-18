@@ -37,6 +37,7 @@ export class TaskFormComponent {
       this.model = this.task.result;
       if(this.editMode){
          this.report = this.model.values[0];
+         this.documents = this.model['links'];
       }
     },100);
   }
@@ -93,13 +94,11 @@ export class TaskFormComponent {
       }
     }
 
+
+
   onSubmit() {
     this.loadForm = false;
-    console.log("report")
-    console.log(this.report)
-
-    if(this.report) this.model.values.push(this.report)
-    console.log(this.model)
+    if(this.report) this.model.values[0] = this.report;
     this.addNewParameter();
     this.sendlink();
     setTimeout(() => {
@@ -134,7 +133,6 @@ export class TaskFormComponent {
     this.documents = [];
     this.report = '';
     }, 300);
-
 }
 addNewParameter(){
   if(this.parameter && this.model.value){

@@ -80,6 +80,7 @@ export class GeneralInformationComponent implements OnInit {
             this.ra.general_information.general.substances = [firstSubstance]
             }
          })
+         this.substance_file = undefined
       }
     
   }
