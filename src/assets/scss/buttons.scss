@@ -2,6 +2,28 @@
 // File to define buttons properties
 
 
+.btn-ets-edit {
+    background: #f6d268;
+    color: black;
+    border-width: 0;
+    font-family: 'Barlow Semi Condensed', 'Arial', 'Helvetica';
+    letter-spacing: 0.05em;
+    border-radius: 0;
+
+}
+
+.btn-ets-edit:hover,
+.btn-ets-edit:active,
+.btn-ets-edit:focus,
+.btn-ets-edit.active {
+    background: rgb(241, 191, 10) ;
+    color: black;
+}
+
+
+
+
+
 .btn-ets-do {
     background: $primary-color;
     color: #ffffff;
