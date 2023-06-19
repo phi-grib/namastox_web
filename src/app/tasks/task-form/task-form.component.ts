@@ -35,7 +35,7 @@ export class TaskFormComponent {
     setTimeout(() => {
       this.pending_task = this.task;
       this.model = this.task.result;
-      if(this.editMode){
+      if(this.editMode && this.pending_task.result['result_type'] == 'text'){
          this.report = this.model.values[0];
          this.documents = this.model['links'];
       }
