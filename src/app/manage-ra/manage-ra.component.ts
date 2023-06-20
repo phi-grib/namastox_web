@@ -106,6 +106,11 @@ export class ManageRaComponent {
   const ra_name = file.name.split(".")[0]
   this.manageRA.importRA(file).subscribe(result =>{
     if(result['success']){
+      this.commonService.getRaList().subscribe({
+        next: (result:any) => {
+        this.ra.listRA = [...result];
+        }
+      })
       this.toastr.success('RA \'' + ra_name + '\' imported' , 'IMPORTED SUCCESFULLY', {
         timeOut: 5000, positionClass: 'toast-top-right'});
     }
