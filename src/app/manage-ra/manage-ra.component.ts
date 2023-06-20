@@ -86,6 +86,16 @@ export class ManageRaComponent {
   }
  exportRA(){
   this.manageRA.exportRA(this.ra.name).subscribe(result => {
+    const url = window.URL.createObjectURL(result)
+    // Create download link
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = this.ra.name+'.tgz';
+    // Simulates a click on the link to start the download
+    link.click();
+    // Releases the resources used by the URL object
+    window.URL.revokeObjectURL(url);
+    
   })
  }
  importRA(){
