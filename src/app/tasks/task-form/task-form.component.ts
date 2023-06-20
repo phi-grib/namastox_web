@@ -44,7 +44,7 @@ export class TaskFormComponent {
   }
 
   back(){
-    this.global.editMode = !this.global.editMode;
+    this.global.editModeTasks = !this.global.editModeTasks;
   }
   getPendingTask() {
     this.commonService.getPendingTask(this.ra.name, this.pending_task_selected_id).subscribe({
@@ -103,8 +103,6 @@ export class TaskFormComponent {
     if(this.report) this.model.values[0] = this.report;
     this.addNewParameter();
     this.sendlink();
-    console.log("DOCUMENTS")
-    console.log(this.model.links)
     setTimeout(() => {
       this.updateService.updateResult(this.ra.name,this.model).subscribe({
         next: (result) => {
@@ -119,7 +117,7 @@ export class TaskFormComponent {
               }
             }, 1000);
           }else{
-            this.global.editMode = false;
+            this.global.editModeTasks = false;
           }
             this.toastr.success('RA ' + this.ra.name, 'SUCCESSFULLY UPDATED', {
               timeOut: 5000, positionClass: 'toast-top-right'

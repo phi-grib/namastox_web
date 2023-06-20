@@ -64,8 +64,9 @@
                     <tr>
                       <th>ID</th>
                       <th>Name</th>
-                      <th>summary</th>
-                      <th>value</th>
+                      <th>Summary</th>
+                      <th>Value</th>
+                      <th>Date</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -75,6 +76,7 @@
                       <td>{{result.summary | slice:0:150}}...</td>
                       <td *ngIf="isObject(result.values[0]) else reportTD">{{result.values[0].parameter}},{{result.values[0].value}},{{result.values[0].unit}} <span *ngIf="result.values.length > 0">...</span></td>
                     <ng-template #reportTD><td>{{result.values[0] | slice:0:20}}...  </td></ng-template>
+                    <td>{{result.date}}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -91,7 +93,7 @@
         </h2>
         <div id="flush-collapseTwoTasks" class="accordion-collapse collapse"  aria-labelledby="flush-headingTwoTasks" data-bs-parent="#accordionTasks">
           <div class="accordion-body">
-            <div class="mt-2" *ngIf="this.results.resultSelected.result && !this.global.editMode">
+            <div class="mt-2" *ngIf="this.results.resultSelected.result && !this.global.editModeTasks">
               <hr>
               <div class="card-body mb-3">
                 <div class="row">
@@ -201,7 +203,7 @@
                 </div>
               </div>
             </div>
-                <task-form *ngIf="this.global.editMode" [editMode]="true" [task]="this.results.resultSelected"></task-form >
+                <task-form *ngIf="this.global.editModeTasks" [editMode]="true" [task]="this.results.resultSelected"></task-form >
           </div>
         </div>
       </div>

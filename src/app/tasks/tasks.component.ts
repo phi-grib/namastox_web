@@ -50,7 +50,7 @@ export class TasksComponent implements OnInit {
     })
   }
   editTask(){
-    this.global.editMode = !this.global.editMode;
+    this.global.editModeTasks = !this.global.editModeTasks;
   }
 
   downloadFile(File) {

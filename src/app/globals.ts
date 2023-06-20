@@ -29,5 +29,6 @@ export class PendingTasks{
 @Injectable()
 export class Global {
     interfaceVisible: boolean  = false;
-    editMode: boolean = false;
+    editModeTasks: boolean = false;
+    editModeDecisions: boolean = false;
 }
