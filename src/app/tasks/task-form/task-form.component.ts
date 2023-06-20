@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { CommonFunctions } from 'src/app/common.functions';
@@ -12,6 +12,7 @@ import { UpdateService } from 'src/app/update.service';
   styleUrls: ['./task-form.component.scss']
 })
 export class TaskFormComponent {
+  @ViewChild('DocumentFileInput', { static: false }) DocumentFileInput: ElementRef;
 
   loadForm: boolean = false;
   pending_task: any;
@@ -37,8 +38,8 @@ export class TaskFormComponent {
       this.model = this.task.result;
       if(this.editMode && this.pending_task.result['result_type'] == 'text'){
          this.report = this.model.values[0];
-         this.documents = this.model['links'];
       }
+      this.documents = this.model['links'];
     },100);
   }
 
@@ -65,7 +66,6 @@ export class TaskFormComponent {
       listNames.push(element[0])
       listVersions.push(element[1])
     }
-
     this.commonService.getPrediction(this.ra.name,listNames,listVersions).subscribe({
       next: (result)=>{
         console.log(result)
@@ -75,6 +75,8 @@ export class TaskFormComponent {
             const param = {parameter:name,value:val,unit:null}
             this.model.values.push(param);
           }
+          console.log("modelos")
+          console.log(this.model.values)
       },
       error: (e) => console.log(e)
     })
@@ -101,6 +103,8 @@ export class TaskFormComponent {
     if(this.report) this.model.values[0] = this.report;
     this.addNewParameter();
     this.sendlink();
+    console.log("DOCUMENTS")
+    console.log(this.model.links)
     setTimeout(() => {
       this.updateService.updateResult(this.ra.name,this.model).subscribe({
         next: (result) => {
@@ -170,10 +174,11 @@ sendlink() {
         this.toastr.success('Document ' + this.labelFile, 'SUCCESSFULLY UPDATED', {
           timeOut: 5000, positionClass: 'toast-top-right'
         });
-
         this.documents.push({label:this.labelFile,File:this.model['result_link'][0].name})
         this.model['links'] = this.documents
         this.labelFile = '';
+        this.model.result_link = '';
+        this.DocumentFileInput.nativeElement.value = null
       },
       error: (e) => {
         this.toastr.error('Check the console to see more information', 'Failed uploaded document', {

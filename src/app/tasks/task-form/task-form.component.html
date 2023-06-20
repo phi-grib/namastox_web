@@ -60,7 +60,7 @@
           <div class="col-10">
             <div class="row">
               <div class="col-3"><input type="text" [(ngModel)]="this.labelFile" name="labelFile" placeholder="label" class="form-control"></div>
-              <div class="col"><input  placeholder="" [(ngModel)]="this.model.result_link" type="file" class="form-control" name="result_link" id="result_link"></div>
+              <div class="col"><input #DocumentFileInput  placeholder="" [(ngModel)]="this.model.result_link" type="file" class="form-control" name="result_link" id="result_link"></div>
               <div class="col-1"><a (click)="sendlink()" style="color: green;" class="btn ms-auto"  role="button"><i class="fa-solid fa-circle-plus fa-lg"></i></a></div>
             </div>
           </div>
@@ -70,7 +70,7 @@
          <div class="col-10">
            <div class="row">
              <div class="col-3"><input type="text" [value]="this.documents[idx].label" readonly class="form-control-plaintext"></div>
-             <div class="col"><input [value]="this.documents[idx].result_link" type="file" readonly class="form-control"></div>
+             <div class="col"><input [value]="this.documents[idx].File" type="text" readonly class="form-control"></div>
              <div class="col-1"><a (click)="deleteFile(this.documents[idx].label)" class="btn ms-auto" role="button"><i class="fa-solid fa-circle-minus fa-lg" style="color: #e01b24;"></i></a></div>
            </div>
          </div>
