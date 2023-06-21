@@ -65,6 +65,7 @@
         <table id="dtDecisions" class="display compact">
           <thead>
             <tr>
+              <th>Date</th>
               <th>ID</th>
               <th>Name</th>
               <th>summary</th>
@@ -73,6 +74,7 @@
           </thead>
           <tbody>
             <tr (click)="selectDecision(decision.id)" *ngFor="let decision of this.results.decisions">
+              <td>{{decision.date}}</td>
               <td>{{decision.id}}</td>
               <td>{{decision.name}}</td>
               <td>{{decision.summary | slice:0:150}}...</td>

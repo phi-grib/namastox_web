@@ -62,21 +62,21 @@
                 <table id="dtTasks" class="display compact">
                   <thead>
                     <tr>
+                      <th>Date</th>
                       <th>ID</th>
                       <th>Name</th>
                       <th>Summary</th>
                       <th>Value</th>
-                      <th>Date</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr (click)="selectTask(result.id)" *ngFor="let result of this.results.results">
+                    <td>{{result.date}}</td>
                       <td>{{result.id}}</td>
                       <td>{{result.name}}</td>
                       <td>{{result.summary | slice:0:150}}...</td>
                       <td *ngIf="isObject(result.values[0]) else reportTD">{{result.values[0].parameter}},{{result.values[0].value}},{{result.values[0].unit}} <span *ngIf="result.values.length > 0">...</span></td>
                     <ng-template #reportTD><td>{{result.values[0] | slice:0:20}}...  </td></ng-template>
-                    <td>{{result.date}}</td>
                     </tr>
                   </tbody>
                 </table>
