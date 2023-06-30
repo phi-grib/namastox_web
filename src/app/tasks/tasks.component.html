@@ -71,7 +71,7 @@
                   </thead>
                   <tbody>
                     <tr (click)="selectTask(result.id)" *ngFor="let result of this.results.results">
-                    <td>{{result.date}}</td>
+                    <td>{{result.date | formatDate}}</td>
                       <td>{{result.id}}</td>
                       <td>{{result.name}}</td>
                       <td>{{result.summary | slice:0:150}}...</td>
@@ -96,6 +96,14 @@
             <div class="mt-2" *ngIf="this.results.resultSelected.result && !this.global.editModeTasks">
               <hr>
               <div class="card-body mb-3">
+                <div class="row">
+                  <div class="col-2 text">
+                    <strong>Date</strong>
+                  </div>
+                  <div class="col-10">
+                    {{this.results.resultSelected.result['date']}}
+                  </div>
+                </div>
                 <div class="row">
                   <div class="col-2 text">
                     <strong>Name</strong>

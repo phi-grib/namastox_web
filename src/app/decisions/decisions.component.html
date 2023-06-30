@@ -74,7 +74,7 @@
           </thead>
           <tbody>
             <tr (click)="selectDecision(decision.id)" *ngFor="let decision of this.results.decisions">
-              <td>{{decision.date}}</td>
+              <td>{{decision.date  | formatDate}}</td>
               <td>{{decision.id}}</td>
               <td>{{decision.name}}</td>
               <td>{{decision.summary | slice:0:150}}...</td>
@@ -100,6 +100,14 @@
     <div class="mt-2" *ngIf="this.results.decisionSelected && !this.global.editModeDecisions">
       <hr>
       <div class="card-body mb-3">
+        <div class="row">
+          <div class="col-2 text">
+            <strong>Date</strong>
+          </div>
+          <div class="col-10">
+            {{this.results.decisionSelected['task description'].date}}
+          </div>
+        </div>
         <div class="row">
           <div class="col-2 text">
             <strong>Name</strong>

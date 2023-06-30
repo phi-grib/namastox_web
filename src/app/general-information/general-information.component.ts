@@ -32,45 +32,44 @@ export class GeneralInformationComponent implements OnInit {
     return typeof value === 'object'; 
       }
 
-  autocomplete(){
-    var ids = "";
-    var substance = {}
-    if(this.substance_name){
-      this.commonService.getInformBySubstanceName(this.substance_name).subscribe({
-        next: (result)=> {
-          if(result[0]){
-            console.log(result[0])
-            this.toastr.success('Name ' + this.substance_name , 'AUTOCOMPLETE SUCCESSFULLY', {
-              timeOut: 3000, positionClass: 'toast-top-right'
-            });
-            ids = "dtxcid:"+result[0]['dtxcid']+","+"dtxsid:"+result[0]['dtxsid']+","+"pubchemcid:"+result[0]['pubchemCid'];
-          this.substance_CASRN = result[0]['casrn']
-          this.substance_id = ids
-          this.substance_SMILES = result[0]['smiles'];
-          }else{
-            console.log("Not found by Name")
-          }
-        }
-      })
-    }else{
-      if(this.substance_CASRN){
-        this.commonService.getInformByCASRN(this.substance_CASRN).subscribe({
-          next: (result)=> {
-            if(result[0]){
-              ids = "dtxcid:"+result[0]['dtxcid']+","+"dtxsid:"+result[0]['dtxsid']+","+"pubchemcid:"+result[0]['pubchemCid'] 
-              this.substance_id = ids
-              this.substance_SMILES = result[0]['smiles'];
-              this.toastr.success('CASRN ' + this.substance_CASRN , 'AUTOCOMPLETE SUCCESSFULLY', {
-                timeOut: 3000, positionClass: 'toast-top-right'
+      async autocomplete() {
+        try {
+          if (this.substance_name) {
+            const result: any = await this.commonService.getInformBySubstanceName(this.substance_name).toPromise();
+            if (result && result.length > 0) {
+              const substanceData = result[0];
+              console.log(substanceData);
+              this.toastr.success('Name ' + this.substance_name, 'AUTOCOMPLETE SUCCESSFULLY', {
+                timeOut: 3000,
+                positionClass: 'toast-top-right'
               });
-            }else{
-              console.log("Not found by CASRN")
+              const ids = `dtxcid:${substanceData['dtxcid']},dtxsid:${substanceData['dtxsid']},pubchemcid:${substanceData['pubchemCid']}`;
+              this.substance_CASRN = substanceData['casrn'];
+              this.substance_id = ids;
+              this.substance_SMILES = substanceData['smiles'];
+            } else {
+              console.log("Not found by Name");
+            }
+          } else if (this.substance_CASRN) {
+            const result: any = await this.commonService.getInformByCASRN(this.substance_CASRN).toPromise();
+            if (result && result.length > 0) {
+              const substanceData = result[0];
+              const ids = `dtxcid:${substanceData['dtxcid']},dtxsid:${substanceData['dtxsid']},pubchemcid:${substanceData['pubchemCid']}`;
+              this.substance_id = ids;
+              this.substance_SMILES = substanceData['smiles'];
+              this.toastr.success('CASRN ' + this.substance_CASRN, 'AUTOCOMPLETE SUCCESSFULLY', {
+                timeOut: 3000,
+                positionClass: 'toast-top-right'
+              });
+            } else {
+              console.log("Not found by CASRN");
             }
           }
-        })
+        } catch (error) {
+          console.log("Error:", error);
+        }
       }
-    }
-  }
+      
 
   uploadSubstance(){
       if(this.substance_file){
