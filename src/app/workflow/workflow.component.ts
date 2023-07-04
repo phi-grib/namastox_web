@@ -38,6 +38,7 @@ export class WorkflowComponent implements OnInit {
     const table = document.querySelector(tableID);
     table.querySelectorAll('tr').forEach((row) => {
       const cells = row.querySelectorAll('td');
+      console.log(cells)
       if (cells[column] != undefined && cells[column].textContent === value) {
         row.click();
       }
@@ -58,7 +59,7 @@ export class WorkflowComponent implements OnInit {
   }
   selectPastTask(typeTask, taskName) {
     const tableID = typeTask === 'results' ? '#dtTasks' : '#dtDecisions';
-    this.selectTableRowByValue(tableID, 0, taskName);
+    this.selectTableRowByValue(tableID, 1, taskName);
   }
 
   redirectToTask(typeTask, pending, taskname) {
