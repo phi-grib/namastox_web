@@ -20,7 +20,7 @@
           </div>
     
           <div  *ngFor="let idx of objectKeys(this.model.values)" class="row mb-3">
-            <label for="Parameter" class="col-2 col-form-label">Parameter</label>
+            <label for="Parameter" class="col-2 col-form-label"></label>
             <div class="col">
               <input  readonly [value]="this.model.values[idx].parameter" type="text" class="form-control-plaintext text-center" id="parameter">
             </div>
@@ -66,11 +66,11 @@
           </div>
         </div>
         <div  *ngFor="let idx of objectKeys(this.documents)" class="row mt-2 mb-3">
-          <label for="inputPassword3" class="col-2 col-form-label">Documentation:</label>
+          <label for="inputPassword3" class="col-2 col-form-label"></label>
          <div class="col-10">
            <div class="row">
-             <div class="col-3"><input type="text" [value]="this.documents[idx].label" readonly class="form-control-plaintext"></div>
-             <div class="col"><input [value]="this.documents[idx].File" type="text" readonly class="form-control"></div>
+             <div class="col-3"><input type="text" [value]="this.documents[idx].label" readonly class="form-control-plaintext text-center"></div>
+             <div class="col"><input [value]="this.documents[idx].File" type="text" readonly class="form-control-plaintext text-center"></div>
              <div class="col-1"><a (click)="deleteFile(this.documents[idx].label)" class="btn ms-auto" role="button"><i class="fa-solid fa-circle-minus fa-lg" style="color: #e01b24;"></i></a></div>
            </div>
          </div>
