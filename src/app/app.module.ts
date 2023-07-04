@@ -26,6 +26,7 @@ import { FormlyHorizontalWrapper } from './formly-settings/horizontal-wrapper';
 import { TaskFormComponent } from './tasks/task-form/task-form.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CorsInterceptor } from './cors.interceptor';
+import { formatDatePipe } from './formatDatePipe';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { CorsInterceptor } from './cors.interceptor';
     SelectRaComponent,
     ManageRaComponent,
     FormlyHorizontalWrapper,
-    TaskFormComponent
+    TaskFormComponent,
+    formatDatePipe
   ],
   imports: [
     BrowserModule,

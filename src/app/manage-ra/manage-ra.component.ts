@@ -114,6 +114,9 @@ export class ManageRaComponent {
       this.toastr.success('RA \'' + ra_name + '\' imported' , 'IMPORTED SUCCESFULLY', {
         timeOut: 5000, positionClass: 'toast-top-right'});
     }
+  }, error => {
+    console.log("Error while importing:")
+    console.log(error)
   })  
 }
 }

@@ -2,6 +2,6 @@
 export const environment = {
     production: true,
     // read_only: false,
-    baseUrl: 'http://namastox.upf.edu/namastox/v1/',  
+    baseUrl: 'http://'+window.location.hostname+'/namastox/v1/',  
   };
   
