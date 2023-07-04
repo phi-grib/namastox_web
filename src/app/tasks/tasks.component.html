@@ -39,7 +39,7 @@
               </div>
             </div>   
               <!-- task form -->
-            <task-form [editMode]="false" [task]="this.pending_task"></task-form>
+            <task-form *ngIf="this.pending_task" [editMode]="false" [task]="this.pending_task"></task-form>
           </div>
         </div>
       </div>

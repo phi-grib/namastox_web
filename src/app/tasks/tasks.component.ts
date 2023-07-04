@@ -107,16 +107,7 @@ setTimeout(() => {
   isObject(value): boolean{
 return typeof value === 'object'; 
   }
-  deleteFile(label){
-    this.documents = this.documents.filter(document => document.label !== label)
-    this.model.links = this.documents
-  }
-  resetFieldsParameter(){
-    this.model.unit = '';
-    this.model.value = '';
-    this.parameter = '';
-  }
-
+  
   executePredict(){
     this.model.values = [];
     var listNames:any = [];
@@ -144,11 +135,10 @@ return typeof value === 'object';
 
   }
   getPendingTask() {
+    this.pending_task = false;
     this.commonService.getPendingTask(this.ra.name, this.pending_task_selected).subscribe({
       next: (result) => {
         this.pending_task = result;
-        this.model = this.pending_task.result;
-        this.loadForm = true;
       },
       error: (e) => console.log(e)
     })

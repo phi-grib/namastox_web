@@ -51,7 +51,7 @@ export class TaskFormComponent {
       next: (result) => {
         this.pending_task = result;
         this.model = this.pending_task.result;
-        this.loadForm = true;
+        this.documents = this.model['links'];
       },
       error: (e) => console.log(e)
     })
