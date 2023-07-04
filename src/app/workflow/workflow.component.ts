@@ -38,7 +38,6 @@ export class WorkflowComponent implements OnInit {
     const table = document.querySelector(tableID);
     table.querySelectorAll('tr').forEach((row) => {
       const cells = row.querySelectorAll('td');
-      console.log(cells)
       if (cells[column] != undefined && cells[column].textContent === value) {
         row.click();
       }
