@@ -35,13 +35,28 @@ export class WorkflowComponent implements OnInit {
 
 
   selectTableRowByValue(tableID: string, column: number, value: string) {
-    const table = document.querySelector(tableID);
-    table.querySelectorAll('tr').forEach((row) => {
-      const cells = row.querySelectorAll('td');
-      if (cells[column] != undefined && cells[column].textContent === value) {
-        row.click();
-      }
-    });
+
+    //first check if accordion is opened
+    const accTask = document.getElementById('pastCollapseTasks')
+    const accSelectTask = document.getElementById('tableCollapseTasks')
+    if(accSelectTask.classList.contains('collapsed')){
+      accSelectTask.click();
+     }
+    setTimeout(() => {
+      const table = document.querySelector(tableID);
+      table.querySelectorAll('tr').forEach((row) => {
+        const cells = row.querySelectorAll('td');
+        if (cells[column] != undefined && cells[column].textContent === value) {
+          row.click();
+          setTimeout(() => {
+            if(accTask.classList.contains('collapsed')){
+              accTask.click();
+             }
+          }, 300);
+        }
+      });
+      
+    }, 300);
   }
   selectOptionBytaskID(selectorID,taskID){
     const selector = document.getElementById(selectorID);
