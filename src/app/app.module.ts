@@ -25,7 +25,6 @@ import { ManageRaComponent } from './manage-ra/manage-ra.component';
 import { FormlyHorizontalWrapper } from './formly-settings/horizontal-wrapper';
 import { TaskFormComponent } from './tasks/task-form/task-form.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { CorsInterceptor } from './cors.interceptor';
 import { formatDatePipe } from './formatDatePipe';
 
 
@@ -72,11 +71,7 @@ import { formatDatePipe } from './formatDatePipe';
       },
     })
   ],
-  providers: [RA,Global,PendingTasks,Results, {
-    provide: HTTP_INTERCEPTORS,
-    useClass: CorsInterceptor,
-    multi: true
-  }],
+  providers: [RA,Global,PendingTasks,Results],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
