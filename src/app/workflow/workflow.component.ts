@@ -4,6 +4,7 @@ import {
   ElementRef,
   OnInit
 } from '@angular/core';
+import { type } from 'jquery';
 import mermaid from 'mermaid';
 import { CommonService } from '../common.service';
 import { PendingTasks, RA, Results } from '../globals';
@@ -34,9 +35,10 @@ export class WorkflowComponent implements OnInit {
   }
 
 
-  selectTableRowByValue(tableID: string, column: number, value: string) {
-
+  selectTableRowByValue(tableID: string, column: number, value: string,typeTask:string) {
     //first check if accordion is opened
+    console.log("edit here")
+    console.log(typeTask)
     const accTask = document.getElementById('pastCollapseTasks')
     const accSelectTask = document.getElementById('tableCollapseTasks')
     if(accSelectTask.classList.contains('collapsed')){
@@ -69,11 +71,11 @@ export class WorkflowComponent implements OnInit {
   }
   selectTask(typeTask,taskID){
     const selectorID = typeTask === 'results' ?'selectPendingResult' :'selectPendingDecision';
-    this.selectOptionBytaskID(selectorID,taskID);
+    this.selectOptionBytaskID(selectorID,taskID,);
   }
   selectPastTask(typeTask, taskName) {
     const tableID = typeTask === 'results' ? '#dtTasks' : '#dtDecisions';
-    this.selectTableRowByValue(tableID, 1, taskName);
+    this.selectTableRowByValue(tableID, 1, taskName,typeTask);
   }
 
   redirectToTask(typeTask, pending, taskname) {

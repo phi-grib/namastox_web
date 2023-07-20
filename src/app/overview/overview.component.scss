@@ -1,6 +1,12 @@
 @import '../../assets/scss/title.scss';
 
 
+
+#headerOverview{
+  background-color: $primary-color;
+  color: white;
+  
+}
 .card-body {
     /* overflow: auto; */
     border-width: 0px;
