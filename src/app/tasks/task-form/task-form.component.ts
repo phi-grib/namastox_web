@@ -154,10 +154,14 @@ deleteParameter(param){
 }
 
 openModal(){
+  $("#modelsTable").DataTable().destroy();
   //get models
   this.commonService.getModels().subscribe({
     next: (result)=> {
       this.listAllModels =  result
+      setTimeout(() => {
+        $("#modelsTable").DataTable();
+      }, 200);
     },
     error: (err)=> {
       console.log(err)
