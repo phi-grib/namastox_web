@@ -122,9 +122,9 @@ export class GeneralInformationComponent implements OnInit {
         this.substance_CASRN = '';
         this.substance_id = ''
         this.substance_SMILES = ''
-        this.substance_CASRN = this.ra.general_information.general.substances[0].casrn 
-        this.substance_id = this.ra.general_information.general.substances[0].id 
-        this.substance_SMILES = this.ra.general_information.general.substances[0].smiles
+        this.substance_CASRN = this.ra.general_information.general.substances[0]?.casrn 
+        this.substance_id = this.ra.general_information.general.substances[0]?.id 
+        this.substance_SMILES = this.ra.general_information.general.substances[0]?.smiles
       })
   }
   // TO DO
