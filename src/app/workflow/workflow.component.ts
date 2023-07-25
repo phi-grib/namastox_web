@@ -35,10 +35,8 @@ export class WorkflowComponent implements OnInit {
   }
 
 
-  selectTableRowByValue(tableID: string, column: number, value: string,typeTask:string) {
+  selectTableRowByValue(tableID: string, column: number, value: string) {
     //first check if accordion is opened
-    console.log("edit here")
-    console.log(typeTask)
     const accTask = document.getElementById('pastCollapseTasks')
     const accSelectTask = document.getElementById('tableCollapseTasks')
     if(accSelectTask.classList.contains('collapsed')){
@@ -75,7 +73,7 @@ export class WorkflowComponent implements OnInit {
   }
   selectPastTask(typeTask, taskName) {
     const tableID = typeTask === 'results' ? '#dtTasks' : '#dtDecisions';
-    this.selectTableRowByValue(tableID, 1, taskName,typeTask);
+    this.selectTableRowByValue(tableID, 1, taskName);
   }
 
   redirectToTask(typeTask, pending, taskname) {
