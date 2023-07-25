@@ -24,7 +24,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ManageRaComponent } from './manage-ra/manage-ra.component';
 import { FormlyHorizontalWrapper } from './formly-settings/horizontal-wrapper';
 import { TaskFormComponent } from './tasks/task-form/task-form.component';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { formatDatePipe } from './formatDatePipe';
 
 

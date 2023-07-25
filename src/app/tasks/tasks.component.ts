@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonService } from '../common.service';
 import { PendingTasks, RA, Results,Global } from '../globals';
-import { FormGroup, FormControl,FormBuilder } from '@angular/forms';
-import { FormlyFieldConfig } from '@ngx-formly/core';
+import { FormBuilder } from '@angular/forms';
 import { CommonFunctions } from '../common.functions';
 import { UpdateService } from '../update.service';
 import { ToastrService } from 'ngx-toastr';

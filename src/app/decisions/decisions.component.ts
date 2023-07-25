@@ -183,7 +183,6 @@ export class DecisionsComponent implements OnInit {
               this.pending_task_selected = this.pendingTasks.decisions[0].id;
                 this.createform();        
             }else{
-              console.log("entra aqui!")
               this.global.editModeDecisions = false;
             }
           }, 1000);

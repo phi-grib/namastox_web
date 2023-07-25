@@ -4,7 +4,6 @@ import {
   ElementRef,
   OnInit
 } from '@angular/core';
-import { type } from 'jquery';
 import mermaid from 'mermaid';
 import { CommonService } from '../common.service';
 import { PendingTasks, RA, Results } from '../globals';
