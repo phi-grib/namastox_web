@@ -12,17 +12,12 @@ import { RA,Global, PendingTasks, Results } from './globals';
 import { OverviewComponent } from './overview/overview.component';
 import { GeneralInformationComponent } from './general-information/general-information.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { FormlyModule } from '@ngx-formly/core';
-import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
-import { FormlyFieldFile } from './formly-settings/file-type.component';
-import { FileValueAccessor } from './formly-settings/file-value-accessor';
 import { TasksComponent } from './tasks/tasks.component';
 import { DecisionsComponent } from './decisions/decisions.component';
 import { SelectRaComponent } from './select-ra/select-ra.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ManageRaComponent } from './manage-ra/manage-ra.component';
-import { FormlyHorizontalWrapper } from './formly-settings/horizontal-wrapper';
 import { TaskFormComponent } from './tasks/task-form/task-form.component';
 import { formatDatePipe } from './formatDatePipe';
 import { DecisionsFormComponent } from './decisions/decisions-form/decisions-form.component';
@@ -35,13 +30,10 @@ import { DecisionsFormComponent } from './decisions/decisions-form/decisions-for
     NotesComponent,
     OverviewComponent,
     GeneralInformationComponent,
-    FileValueAccessor,
-    FormlyFieldFile,
     TasksComponent,
     DecisionsComponent,
     SelectRaComponent,
     ManageRaComponent,
-    FormlyHorizontalWrapper,
     TaskFormComponent,
     formatDatePipe,
     DecisionsFormComponent
@@ -56,14 +48,6 @@ import { DecisionsFormComponent } from './decisions/decisions-form/decisions-for
     FormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    FormlyModule.forRoot(
-      {
-        wrappers: [{ name: 'form-field-horizontal', component: FormlyHorizontalWrapper }],
-      validationMessages: [{ name: 'required', message: 'This field is required' }],
-        types: [{ name: 'file', component: FormlyFieldFile, wrappers: ['form-field-horizontal'] }],
-      }
-    ),
-    FormlyBootstrapModule,
     MarkdownModule.forRoot({
       loader: HttpClient,
       markedOptions: {

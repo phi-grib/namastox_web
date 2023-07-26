@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup,FormBuilder } from '@angular/forms';
-import { FormlyFieldConfig } from '@ngx-formly/core';
 import { CommonFunctions } from '../common.functions';
 import { CommonService } from '../common.service';
 import { RA } from '../globals';
@@ -21,7 +20,6 @@ export class GeneralInformationComponent implements OnInit {
   substance_file: any;
   form = new FormGroup({});
   model: any;
-  fields: FormlyFieldConfig[] = [];
   complete: boolean = false;
 
   generalInformationForm = new FormGroup({});

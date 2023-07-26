@@ -42,12 +42,6 @@
             </div>
              <decisions-form *ngIf="this.pending_task" [editMode]="false" [task]="this.pending_task">
             </decisions-form> 
-
-<!-- 
-             <form class="container-form mt-3" *ngIf="this.loadForm" [formGroup]="form" (ngSubmit)="onSubmit(model)">
-              <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
-              <button type="submit" [disabled]="!this.form.valid" class="btn btn-ets-do submit-button">Submit</button>
-            </form>  -->
           </div>
         </div>
       </div>
@@ -189,16 +183,8 @@
         </div>
       </div>
     </div>
-    
     <decisions-form *ngIf="this.global.editModeDecisions" [editMode]="true" [task]="this.results.decisionSelected">
     </decisions-form> 
-    <!-- <div *ngIf="this.global.editModeDecisions">
-      <form class="container-form mt-3"  [formGroup]="formEdit" (ngSubmit)="onSubmit(modelEdit)">
-        <formly-form [form]="formEdit" [fields]="fieldsEdit" [model]="modelEdit"></formly-form>
-        <button type="submit" [disabled]="!this.formEdit.valid" class="btn btn-ets-do submit-button">Submit</button>
-        <button type="button" (click)="back()" class="btn btn-ets-delete" >Back</button>
-      </form>
-    </div> -->
   </div>
   </div>
 </div>

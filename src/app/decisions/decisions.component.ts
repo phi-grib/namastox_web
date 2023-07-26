@@ -3,7 +3,6 @@ import { CommonFunctions } from '../common.functions';
 import { CommonService } from '../common.service';
 import { PendingTasks, RA, Results, Global } from '../globals';
 import { FormGroup } from '@angular/forms';
-import { FormlyFieldConfig } from '@ngx-formly/core';
 import { UpdateService } from '../update.service';
 import { ToastrService } from 'ngx-toastr';
 import { saveAs } from 'file-saver';
@@ -18,8 +17,6 @@ export class DecisionsComponent implements OnInit {
   loadForm: boolean = false;
   form = new FormGroup({});
   formEdit = new FormGroup({});
-  fields: FormlyFieldConfig[] = [];
-  fieldsEdit: FormlyFieldConfig[] = [];
   pending_task_selected: String = '';
   pending_task: any;
   objectKeys = Object.keys;
