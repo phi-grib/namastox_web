@@ -190,9 +190,9 @@ sendlink() {
     })
   }
   }
+
   deleteFile(label){
     this.documents = this.documents.filter(document => document.label !== label)
     this.model.links = this.documents
-
   }
 }

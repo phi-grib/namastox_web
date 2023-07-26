@@ -1,0 +1,61 @@
+<form *ngIf="this.pending_task" id="decisionForm"  #decisionForm="ngForm" (ngSubmit)="onSubmit()"  class="container-form mt-3">
+    <div class="row mb-3">
+        <label  for="inputPassword3" class="col-2 col-form-label">Decision:</label>
+        <div class="col-10">
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" [disabled]="this.editMode" type="radio" name="inlineRadioOptions" [(ngModel)]="this.model.decision" id="inlineRadio1" [value]="true">
+                <label class="form-check-label" for="inlineRadio1">Yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" [disabled]="this.editMode" type="radio" name="inlineRadioOptions" [(ngModel)]="this.model.decision" id="inlineRadio2" [value]="false">
+                <label class="form-check-label" for="inlineRadio2">No</label>
+              </div>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label for="inputPassword3" class="col-2 col-form-label">Summary:</label>
+       <div class="col-10">
+        <textarea  [placeholder]="this.pending_task['task description']['summary']" [(ngModel)]="this.model.summary"  class="form-control" name="summary" id="summary" rows="4"></textarea>
+       </div>
+     </div>
+     <div class="row mb-3">
+        <label for="inputPassword3" class="col-2 col-form-label">Justification:</label>
+       <div class="col-10">
+        <textarea required  [placeholder]="this.pending_task['task description']['justification']" [(ngModel)]="this.model.justification"  class="form-control" name="justification" id="justification" rows="4"></textarea>
+       </div>
+     </div>
+
+     <!-- documents -->
+     <div class="row mt-2 mb-3">
+        <label for="inputPassword3" class="col-2 col-form-label">Documentation:</label>
+       <div class="col-10">
+         <div class="row">
+           <div class="col-3"><input type="text" [(ngModel)]="this.labelFile" name="labelFile" placeholder="label" class="form-control"></div>
+           <div class="col"><input #DocumentFile  placeholder="" [(ngModel)]="this.model.result_link" type="file" class="form-control" name="result_link" id="result_link"></div>
+           <div class="col-1"><a (click)="sendlink()"  class="addbtn btn ms-auto"  role="button"><i class="fa-solid fa-circle-plus fa-lg"></i></a></div>
+         </div>
+       </div>
+     </div>
+
+
+     <div  *ngFor="let idx of objectKeys(this.documents)" class="row mt-2 mb-3">
+        <label for="inputPassword3" class="col-2 col-form-label"></label>
+       <div class="col-10">
+         <div class="row">
+           <div class="col-3"><input type="text" [value]="this.documents[idx].label" readonly class="form-control-plaintext text-center"></div>
+           <div class="col"><input [value]="this.documents[idx].File" type="text" readonly class="form-control-plaintext text-center"></div>
+           <div class="col-1"><a (click)="deleteFile(this.documents[idx].label)" class="btn ms-auto" role="button"><i class="fa-solid fa-circle-minus fa-lg" style="color: #e01b24;"></i></a></div>
+         </div>
+       </div>
+     </div>
+
+
+      <div class="row">
+        <div class="col-10">
+          <button  (click)="back()" *ngIf="this.editMode" type="submit" class="btn btn-ets-delete">Back</button>
+        </div>
+        <div class="col">
+            <button [disabled]="decisionForm.invalid"  type="submit" class="btn btn-ets-do submit-button">Submit</button>
+        </div>
+      </div>      
+</form>

@@ -16,7 +16,7 @@
     <div *ngIf="this.pendingTasks.decisions.length > 0; else noDecisions">
       <div class="row">
         <div class="col">
-          <select (change)="createform()" id="selectPendingDecision" [(ngModel)]="this.pending_task_selected" class="form-select"
+          <select (change)="getPendingTask()" id="selectPendingDecision" [(ngModel)]="this.pending_task_selected" class="form-select"
             aria-label="Default select example">
             <option *ngFor="let idx of objectKeys(this.pendingTasks.decisions)"
               [value]='this.pendingTasks.decisions[idx].id'>{{this.pendingTasks.decisions[idx].id}}</option>
@@ -40,10 +40,14 @@
                 </div>
               </div>
             </div>
-            <form class="container-form mt-3" *ngIf="this.loadForm" [formGroup]="form" (ngSubmit)="onSubmit(model)">
+             <decisions-form *ngIf="this.pending_task" [editMode]="false" [task]="this.pending_task">
+            </decisions-form> 
+
+<!-- 
+             <form class="container-form mt-3" *ngIf="this.loadForm" [formGroup]="form" (ngSubmit)="onSubmit(model)">
               <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
               <button type="submit" [disabled]="!this.form.valid" class="btn btn-ets-do submit-button">Submit</button>
-            </form>
+            </form>  -->
           </div>
         </div>
       </div>
@@ -144,8 +148,9 @@
             Documentation
           </div>
           <div class="col border-bottom">
-            <button (click)="downloadFile()" *ngIf="this.results.decisionSelected.result_link"
-              class="btn btn-outline-success mt-2 mb-2">{{this.results.decisionSelected.result_link}}</button>
+            <div class="d-inline mx-1" *ngFor="let idx of objectKeys(this.results.decisionSelected.result.links)">
+              <button (click)="downloadFile(this.results.decisionSelected.result.links[idx].File)" class="btn btn-outline-success mt-2 mb-2">{{this.results.decisionSelected.result.links[idx].label}} </button>
+            </div>
           </div>
         </div>
         <div class="row pt-1 pb-1">
@@ -184,13 +189,16 @@
         </div>
       </div>
     </div>
-    <div *ngIf="this.global.editModeDecisions">
+    
+    <decisions-form *ngIf="this.global.editModeDecisions" [editMode]="true" [task]="this.results.decisionSelected">
+    </decisions-form> 
+    <!-- <div *ngIf="this.global.editModeDecisions">
       <form class="container-form mt-3"  [formGroup]="formEdit" (ngSubmit)="onSubmit(modelEdit)">
         <formly-form [form]="formEdit" [fields]="fieldsEdit" [model]="modelEdit"></formly-form>
         <button type="submit" [disabled]="!this.formEdit.valid" class="btn btn-ets-do submit-button">Submit</button>
         <button type="button" (click)="back()" class="btn btn-ets-delete" >Back</button>
       </form>
-    </div>
+    </div> -->
   </div>
   </div>
 </div>

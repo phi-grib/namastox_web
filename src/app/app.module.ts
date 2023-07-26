@@ -25,6 +25,7 @@ import { ManageRaComponent } from './manage-ra/manage-ra.component';
 import { FormlyHorizontalWrapper } from './formly-settings/horizontal-wrapper';
 import { TaskFormComponent } from './tasks/task-form/task-form.component';
 import { formatDatePipe } from './formatDatePipe';
+import { DecisionsFormComponent } from './decisions/decisions-form/decisions-form.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { formatDatePipe } from './formatDatePipe';
     ManageRaComponent,
     FormlyHorizontalWrapper,
     TaskFormComponent,
-    formatDatePipe
+    formatDatePipe,
+    DecisionsFormComponent
   ],
   imports: [
     BrowserModule,

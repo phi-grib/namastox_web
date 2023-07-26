@@ -44,7 +44,7 @@ export class TasksComponent implements OnInit {
         }else{
         this.pending_task_selected = this.pendingTasks.results[0].id;
         }
-         this.getPendingTask();
+        this.getPendingTask();
       }
     })
   }
@@ -99,6 +99,7 @@ setTimeout(() => {
     $("#tableCollapseTasks").click();
     $("#pastCollapseTasks").click(); 
   }
+  
   showTablePastTasks(){
     $("#tableCollapseTasks").click();
   }
