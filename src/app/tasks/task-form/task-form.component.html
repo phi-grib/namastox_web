@@ -60,7 +60,7 @@
           <div class="col-10">
             <div class="row">
               <div class="col-3"><input type="text" [(ngModel)]="this.labelFile" name="labelFile" placeholder="label" class="form-control"></div>
-              <div class="col"><input #DocumentFileInput  (change)="sendlink($event)"  placeholder=""  type="file" class="form-control"></div>
+              <div class="col"><input #DocumentFileInput [disabled]="!this.labelFile" (change)="sendlink($event)"  placeholder=""  type="file" class="form-control"></div>
             </div>
           </div>
         </div>
