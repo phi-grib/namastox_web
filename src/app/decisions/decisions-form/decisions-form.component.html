@@ -31,13 +31,10 @@
        <div class="col-10">
          <div class="row">
            <div class="col-3"><input type="text" [(ngModel)]="this.labelFile" name="labelFile" placeholder="label" class="form-control"></div>
-           <div class="col"><input #DocumentFile  placeholder="" [(ngModel)]="this.model.result_link" type="file" class="form-control" name="result_link" id="result_link"></div>
-           <div class="col-1"><a (click)="sendlink()"  class="addbtn btn ms-auto"  role="button"><i class="fa-solid fa-circle-plus fa-lg"></i></a></div>
+           <div class="col"><input #DocumentFile (change)="sendlink($event)" placeholder="" type="file" class="form-control"></div>
          </div>
        </div>
      </div>
-
-
      <div  *ngFor="let idx of objectKeys(this.documents)" class="row mt-2 mb-3">
         <label for="inputPassword3" class="col-2 col-form-label"></label>
        <div class="col-10">

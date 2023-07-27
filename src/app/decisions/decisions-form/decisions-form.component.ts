@@ -44,14 +44,17 @@ ngOnInit(): void {
      this.documents = this.model['links'];
   },100);
 }
-sendlink() {
-  if(this.labelFile && this.model['result_link'][0]){
-    this.updateService.updateLink(this.ra.name, this.model['result_link'][0]).subscribe({
+
+sendlink(event) {
+  
+  this.model['result_link'] =  event.target.files[0];
+  if(this.labelFile && this.model['result_link']){
+    this.updateService.updateLink(this.ra.name, this.model['result_link']).subscribe({
       next: (result) => {
         this.toastr.success('Document ' + this.labelFile, 'SUCCESSFULLY UPDATED', {
           timeOut: 5000, positionClass: 'toast-top-right'
         });
-        this.documents.push({label:this.labelFile,File:this.model['result_link'][0].name})
+        this.documents.push({label:this.labelFile,File:this.model['result_link'].name})
         this.model['links'] = this.documents
         this.labelFile = '';
         this.model.result_link = '';
@@ -87,7 +90,6 @@ sendlink() {
   }
 
   onSubmit(){
-    this.sendlink();
     setTimeout(() => {
       this.updateService.updateResult(this.ra.name,this.model).subscribe({
         next: (result) => {

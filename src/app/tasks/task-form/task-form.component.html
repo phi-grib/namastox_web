@@ -60,8 +60,7 @@
           <div class="col-10">
             <div class="row">
               <div class="col-3"><input type="text" [(ngModel)]="this.labelFile" name="labelFile" placeholder="label" class="form-control"></div>
-              <div class="col"><input #DocumentFileInput  placeholder="" [(ngModel)]="this.model.result_link" type="file" class="form-control" name="result_link" id="result_link"></div>
-              <div class="col-1"><a (click)="sendlink()"  class="addbtn btn ms-auto"  role="button"><i class="fa-solid fa-circle-plus fa-lg"></i></a></div>
+              <div class="col"><input #DocumentFileInput  (change)="sendlink($event)"  placeholder=""  type="file" class="form-control"></div>
             </div>
           </div>
         </div>
