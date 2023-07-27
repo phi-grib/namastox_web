@@ -121,7 +121,6 @@ return typeof value === 'object';
 
     this.commonService.getPrediction(this.ra.name,listNames,listVersions).subscribe({
       next: (result)=>{
-        console.log(result)
           for (let idx = 0; idx < result['models'].length; idx++) {
             const name = result['models'][idx][0]+"v"+result['models'][idx][1];
             const val = result['results'][idx];

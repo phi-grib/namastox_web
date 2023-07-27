@@ -74,8 +74,6 @@ export class TaskFormComponent {
             const param = {parameter:name,value:val,unit:null}
             this.model.values.push(param);
           }
-          console.log("list models:")
-          console.log(this.model.values)
       },
       error: (e) => console.log(e)
     })
