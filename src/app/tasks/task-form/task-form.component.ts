@@ -14,6 +14,10 @@ import { UpdateService } from 'src/app/update.service';
 export class TaskFormComponent {
   @ViewChild('DocumentFileInput', { static: false }) DocumentFileInput: ElementRef;
 
+  uncertainty;
+  uncertainty_p;
+  uncertainty_term;
+
   loadForm: boolean = false;
   pending_task: any;
   parameter: string;
@@ -93,7 +97,21 @@ export class TaskFormComponent {
       }
     }
 
+    addNewUncertainty(){
+      this.model.uncertainty.push(this.uncertainty)
+      this.model.uncertainty_p.push(this.uncertainty_p)
+      this.model.uncertainty_term.push(this.uncertainty_term)
+    }
 
+    // deleteUncertainty(){
+    //   this.model.values = this.model.values.filter(parameter => parameter.parameter !== param)
+    // }
+    
+    resetFieldsUncertainty(){
+      this.model.uncertainty = '';
+      this.model.uncertainty_p = '';
+      this.model.uncertainty_term = '';
+    }
 
   onSubmit() {
     this.loadForm = false;

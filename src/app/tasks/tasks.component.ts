@@ -137,6 +137,7 @@ return typeof value === 'object';
     this.pending_task = false;
     this.commonService.getPendingTask(this.ra.name, this.pending_task_selected).subscribe({
       next: (result) => {
+        console.log(result)
         this.pending_task = result;
       },
       error: (e) => console.log(e)
