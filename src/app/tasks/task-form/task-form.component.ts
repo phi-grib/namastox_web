@@ -112,18 +112,17 @@ export class TaskFormComponent {
 
   
 
-  addNewUncertainty(){
-    this.model.uncertainty.push(this.uncertainty)
-    this.model.uncertainty_p.push(this.uncertainty_p)
-    this.model.uncertainty_term.push(this.uncertainty_term)
-   
-  }
 
-  deleteUncertainty(idx){
+
+  deleteParameter(idx){
     
     this.model.uncertainty.splice(idx, 1);
     this.model.uncertainty_p.splice(idx,1);
     this.model.uncertainty_term.splice(idx,1);
+
+
+    
+    this.model.values.splice(idx,1);
 
   }
   
@@ -173,6 +172,9 @@ export class TaskFormComponent {
 addNewParameter(){
   if(this.parameter && this.model.value){
   this.model.values.push({parameter:this.parameter,value:this.model.value,unit:this.model['unit']})
+  this.model.uncertainty.push(this.uncertainty)
+  this.model.uncertainty_p.push(this.uncertainty_p)
+  this.model.uncertainty_term.push(this.uncertainty_term)
   this.resetFieldsParameter();
   }
 
@@ -183,9 +185,6 @@ resetFieldsParameter(){
   this.parameter = '';
 }
 
-deleteParameter(param){
-  this.model.values = this.model.values.filter(parameter => parameter.parameter !== param)
-}
 
 openModal(){
   $("#modelsTable").DataTable().destroy();
