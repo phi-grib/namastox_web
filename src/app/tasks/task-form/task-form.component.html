@@ -1,62 +1,90 @@
 <div *ngIf="this.pending_task"> 
-    <form id="taskForm"  #taskForm="ngForm" (ngSubmit)="onSubmit()" class="container-form mt-3">
+  <form id="taskForm"  #taskForm="ngForm" (ngSubmit)="onSubmit()" class="container-form mt-3">
         <div  *ngIf="this.pending_task?.result.result_type === 'value'" class="mb-2">
-          <div class="row mb-3">
-            <label for="Parameter" class="col-2 col-form-label">Parameter</label>
+          <div class="row">
             <div class="col">
-              <input  name="parameter" placeholder="" [(ngModel)]="this.parameter" type="text" class="form-control" id="parameter">
+              <div class="row">
+              <div class="col">
+                <label for="Parameter" class="form-label">Parameter</label>
+                  <input  name="parameter" placeholder="" [(ngModel)]="this.parameter" type="text" class="form-control" id="parameter">
+                </div>
+                <div class="col-2">
+                <label for="value" class="form-label">Value</label>
+                  <input  required [placeholder]="" [(ngModel)]="this.model.value"   type="text" class="form-control" name="value" id="value">
+                </div>
+                <div class="col">
+                    <label for="unit" class="form-label">Unit</label>
+                   <div class="row">
+                    <div class="col"><input  placeholder=""   [(ngModel)]="this.model.unit" type="text" class="form-control" name="unit" id="unit"></div>
+                    <div class="col"><a (click)="addNewParameter()" class="addbtn btn ms-auto"  role="button"><i class="fa-solid fa-circle-plus fa-lg"></i></a></div>
+                   </div> 
+                </div>
+              </div>
+              <div  *ngFor="let idx of objectKeys(this.model.values)" class="row mb-3">
+                <div class="col">
+                  <input  readonly [value]="this.model.values[idx].parameter" type="text" class="form-control-plaintext text-center" id="parameter">
+                </div>
+                <div class="col-2">
+                <!-- <label for="value" class="col-1 form-label">Value</label> -->
+                  <input  readonly  [value]="this.model.values[idx].value.toString() | slice:0:4"   type="text" class="form-control-plaintext text-center" name="value" id="value">
+                </div>
+                <div class="col">
+                <!-- <label for="unit" class="col-1 form-label">Unit</label> -->
+                <div class="row">
+                  <div class="col"><input  placeholder="" readonly  [value]="this.model.values[idx].unit" type="text" class="form-control-plaintext text-center" name="unit" id="unit"></div>
+                  <div class="col"><a (click)="deleteParameter(this.model.values[idx].parameter)" class="btn ms-auto" role="button"><i class="fa-solid fa-circle-minus fa-lg" style="color: #e01b24;"></i></a></div>
+                </div>
+                </div>
+              </div>
             </div>
-            <label for="value" class="col-1 col-form-label">Value</label>
             <div class="col">
-              <input  required [placeholder]="" [(ngModel)]="this.model.value"   type="text" class="form-control" name="value" id="value">
-            </div>
-            <label for="unit" class="col-1 col-form-label">Unit</label>
-            <div class="col">
-              <input  placeholder=""   [(ngModel)]="this.model.unit" type="text" class="form-control" name="unit" id="unit">
-            </div>
-            <div class="col-1">
-              <a (click)="addNewParameter()" class="addbtn btn ms-auto"  role="button"><i class="fa-solid fa-circle-plus fa-lg"></i></a>
-            </div>
-          </div>
-
-          <div  *ngFor="let idx of objectKeys(this.model.values)" class="row mb-3">
-            <label for="Parameter" class="col-2 col-form-label"></label>
-            <div class="col">
-              <input  readonly [value]="this.model.values[idx].parameter" type="text" class="form-control-plaintext text-center" id="parameter">
-            </div>
-            <label for="value" class="col-1 col-form-label">Value</label>
-            <div class="col">
-              <input  readonly  [value]="this.model.values[idx].value.toString() | slice:0:4"   type="text" class="form-control-plaintext text-center" name="value" id="value">
-            </div>
-            <label for="unit" class="col-1 col-form-label">Unit</label>
-            <div class="col">
-              <input  placeholder="" readonly  [value]="this.model.values[idx].unit" type="text" class="form-control-plaintext text-center" name="unit" id="unit">
-            </div>
-            <div class="col-1">
-              <a (click)="deleteParameter(this.model.values[idx].parameter)" class="btn ms-auto" role="button"><i class="fa-solid fa-circle-minus fa-lg" style="color: #e01b24;"></i></a>
-            </div>
-          </div>
-
-          <div class="row mb-3">
-            <label for="Parameter" class="col-2 col-form-label">Uncertainty</label>
-            <div class="col">
-              <input  name="uncertainty" [placeholder]="this.pending_task['task description'].uncertainty" [(ngModel)]="this.uncertainty" type="text" class="form-control" id="uncertainty">
-            </div>
-            <label for="value" class="col-1 col-form-label">Uncertainty P</label>
-            <div class="col">
-              <select  [(ngModel)]="this.uncertainty_p" class="form-select" aria-label="Default select example">
-                <option value="0">0</option>
-                <option value="1">1</option>
-             </select>
-            </div>
-            <label for="unit" class="col-1 col-form-label">Uncertainty term</label>
-            <div class="col">
-              <select class="form-select" aria-label="Default select example">
-                <option *ngFor="let value of this.pending_task['task description'].uncertainty_term"  [(ngModel)]="this.uncertainty_term" [value]="value">{{value}}</option>
-             </select>
-            </div>
-            <div class="col-1">
-              <a (click)="addNewUncertainty()" class="addbtn btn ms-auto"  role="button"><i class="fa-solid fa-circle-plus fa-lg"></i></a>
+              <div class="row">
+                <div class="col-3">
+                <label for="Parameter" class="form-label">Uncertainty</label>
+                  <input  name="uncertainty" [placeholder]="this.pending_task['task description'].uncertainty" [(ngModel)]="this.uncertainty" type="text" class="form-control" id="uncertainty">
+                </div>
+                <div class="col-2">
+                <label for="value" class="form-label">Probability</label>
+                  <select  (change)="changeUncertaintyP($event.target)" class="form-select" aria-label="Default select example">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                </select>
+                </div>
+                <div class="col">
+                <label for="unit" class="form-label">Term</label>
+                    
+                      <div class="row">
+                        <div class="col">
+                          <select style="width: auto !important;"  (change)="selectedUncertaintyTerm($event.target)" id="uncertainty_term"  class="form-control">
+                            <option *ngFor="let value of this.pending_task['task description'].uncertainty_term"   [value]="value">
+                              {{value}}
+                            </option>
+                         </select>
+                        </div>
+                        <div class="col">
+                          <a (click)="addNewUncertainty()" class="addbtn btn ms-auto"  role="button"><i class="fa-solid fa-circle-plus fa-lg"></i></a>
+                        </div>
+                      </div>
+                </div>
+              </div>
+              <div  *ngFor="let value of this.model.uncertainty;let i = index;" class="row mb-3">
+                <div class="col-3">
+                  <input  readonly [value]="value" type="text" class="form-control-plaintext text-center" id="uncertainty">
+                </div>
+                <div class="col-2">
+                  <input  readonly  [value]="this.model.uncertainty_p[i]"   type="text" class="form-control-plaintext text-center" name="uncertainty_p" id="uncertainty_p">
+                </div>
+                <div class="col">
+                  <div class="row">
+                    <div class="col"> 
+                      <input style="width: auto !important; margin-left: 10px !important;"  placeholder="" readonly  [value]="this.model.uncertainty_term[i]" type="text" class="form-control-plaintext text-center" name="uncertainty_term" id="uncertainty_term">
+                    </div>
+                    <div class="col d-flex justify-content-end">
+                      <a  (click)="deleteUncertainty(i)" class="btn ms-auto" role="button"><i class="fa-solid fa-circle-minus fa-lg" style="color: #e01b24;margin-right: 8px !important;"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -108,7 +136,7 @@
         <button [disabled]="taskForm.invalid && this.model?.values?.length < 1" style="margin-left: 35px" type="submit" class="btn btn-ets-do submit-button">Submit</button>
         </div>
       </div>
-      </form>
+  </form>
        <!-- Modal -->
 <div class="modal fade" id="predModal" tabindex="-1" aria-labelledby="predModal" aria-hidden="true">
     <div class="modal-dialog modal-lg">

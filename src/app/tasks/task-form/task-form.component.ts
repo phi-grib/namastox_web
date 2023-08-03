@@ -15,8 +15,8 @@ export class TaskFormComponent {
   @ViewChild('DocumentFileInput', { static: false }) DocumentFileInput: ElementRef;
 
   uncertainty;
-  uncertainty_p;
-  uncertainty_term;
+  uncertainty_p:number;
+  uncertainty_term:string;
 
   loadForm: boolean = false;
   pending_task: any;
@@ -33,10 +33,11 @@ export class TaskFormComponent {
   @Input() task:any;
   @Input() editMode: any;
 
-  constructor(public ra: RA, private commonService: CommonService, public pendingTasks: PendingTasks, private func: CommonFunctions, public results: Results, private updateService: UpdateService, private toastr: ToastrService,private formBuilder: FormBuilder, public global:Global) {
+  constructor(public ra: RA, private commonService: CommonService, public pendingTasks: PendingTasks, private func: CommonFunctions, public results: Results, private updateService: UpdateService, private toastr: ToastrService,private formBuilder: FormBuilder, public global:Global) { 
   }
   
   ngOnInit(): void {
+  
     setTimeout(() => {
       this.pending_task = this.task;
       this.model = this.task.result;
@@ -44,12 +45,24 @@ export class TaskFormComponent {
          this.report = this.model.values[0];
       }
       this.documents = this.model['links'];
+      this.uncertainty_p = 0;
+      this.uncertainty_term = this.pending_task['task description'].uncertainty_term[0]
     },100);
+
+  }
+
+  changeUncertaintyP(target){ 
+  this.uncertainty_p = target.value;
+  }
+
+  selectedUncertaintyTerm(target){
+    this.uncertainty_term = target.value
   }
 
   back(){
     this.global.editModeTasks = !this.global.editModeTasks;
   }
+
   getPendingTask() {
     this.commonService.getPendingTask(this.ra.name, this.pending_task_selected_id).subscribe({
       next: (result) => {
@@ -97,21 +110,28 @@ export class TaskFormComponent {
       }
     }
 
-    addNewUncertainty(){
-      this.model.uncertainty.push(this.uncertainty)
-      this.model.uncertainty_p.push(this.uncertainty_p)
-      this.model.uncertainty_term.push(this.uncertainty_term)
-    }
+  
 
-    // deleteUncertainty(){
-    //   this.model.values = this.model.values.filter(parameter => parameter.parameter !== param)
-    // }
+  addNewUncertainty(){
+    this.model.uncertainty.push(this.uncertainty)
+    this.model.uncertainty_p.push(this.uncertainty_p)
+    this.model.uncertainty_term.push(this.uncertainty_term)
+   
+  }
+
+  deleteUncertainty(idx){
     
-    resetFieldsUncertainty(){
-      this.model.uncertainty = '';
-      this.model.uncertainty_p = '';
-      this.model.uncertainty_term = '';
-    }
+    this.model.uncertainty.splice(idx, 1);
+    this.model.uncertainty_p.splice(idx,1);
+    this.model.uncertainty_term.splice(idx,1);
+
+  }
+  
+  resetFieldsUncertainty(){
+    this.model.uncertainty = '';
+    this.model.uncertainty_p = '';
+    this.model.uncertainty_term = '';
+  }
 
   onSubmit() {
     this.loadForm = false;
