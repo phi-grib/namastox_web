@@ -51,11 +51,6 @@ export class TaskFormComponent {
     },100);
 
   }
-
-  changeUncertaintyP(target){ 
-  this.uncertainty_p = target.value;
-  }
-
   selectedUncertaintyTerm(target){
     this.uncertainty_term = target.value
   }
@@ -171,7 +166,7 @@ export class TaskFormComponent {
     }, 300);
 }
 addNewParameter(){
-  if(this.parameter && this.model.value){
+  if(this.parameter && this.model.value && this.uncertainty_p >= 0 && this.uncertainty_p <= 1){
   this.model.values.push({parameter:this.parameter,value:this.model.value,unit:this.model['unit']})
   this.model.uncertainty.push(this.uncertainty)
   this.model.uncertainty_p.push(this.uncertainty_p)
