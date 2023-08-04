@@ -22,21 +22,24 @@
             </div>
                 <div class="col-3">
                 <label for="Parameter" class="form-label">Uncertainty</label>
-                  <input  name="uncertainty" [placeholder]="this.pending_task['task description'].uncertainty" [(ngModel)]="this.uncertainty" type="text" class="form-control" id="uncertainty">
+                  <input   name="uncertainty" [placeholder]="this.pending_task['task description'].uncertainty" [(ngModel)]="this.uncertainty" type="text" class="form-control" id="uncertainty">
                 </div>
-                <div class="col-1">
+                <div class="col-auto">
                 <label for="value" class="form-label">Probability</label>
-                  <select  (change)="changeUncertaintyP($event.target)" class="form-select" aria-label="Default select example">
+
+                  <input [placeholder]="" [class.is-invalid]="valueInputRef.invalid && (valueInputRef.dirty || valueInputRef.touched)"  #valueInputRef="ngModel"  type="number" name="uncertainty_p" id="uncertainty_p" [(ngModel)]="this.uncertainty_p" class="form-control"step="0.001" min="0" max="1">
+
+                  <!-- <select  (change)="changeUncertaintyP($event.target)" class="form-select" aria-label="Default select example">
                     <option value="0">0</option>
                     <option value="1">1</option>
-                </select>
+                </select> -->
                 </div>
-                <div class="col">
+                <div class="col-auto">
                 <label for="unit" class="form-label">Term</label>
                     
                       <div class="row">
-                        <div class="col">
-                          <select style="width: auto !important;"  (change)="selectedUncertaintyTerm($event.target)" id="uncertainty_term"  class="form-control">
+                        <div class="col-auto">
+                          <select   (change)="selectedUncertaintyTerm($event.target)" id="uncertainty_term"  class="form-control">
                             <option *ngFor="let value of this.pending_task['task description'].uncertainty_term"   [value]="value">
                               {{value}}
                             </option>
@@ -55,21 +58,21 @@
                   <input  readonly [value]="this.model.values[i].parameter" type="text" class="form-control-plaintext text-center" id="parameter">
                 </div>
                 <div class="col-1">
-                  <input  readonly  [value]="this.model.values[i].value.toString() | slice:0:4"   type="text" class="form-control-plaintext" name="value" id="value">
+                  <input  readonly  [value]="this.model.values[i].value.toString() | slice:0:4"   type="text" class="form-control-plaintext text-center" name="value" id="value">
                 </div>
-                <div class="col"><input  placeholder="" readonly  [value]="this.model.values[i].unit" type="text" class="form-control-plaintext" name="unit" id="unit"></div>
+                <div class="col"><input  placeholder="" readonly  [value]="this.model.values[i].unit" type="text" class="form-control-plaintext text-center" name="unit" id="unit"></div>
                 
                 <div class="col-3">
-                  <input  readonly [value]="value" type="text" class="form-control-plaintext" id="uncertainty">
+                  <input  readonly [value]="value" type="text" class="form-control-plaintext text-center" id="uncertainty">
                 </div>
-                <div class="col">
-                  <input  readonly  [value]="this.model.uncertainty_p[i]"   type="text" class="form-control-plaintext" name="uncertainty_p" id="uncertainty_p">
+                <div class="col-2">
+                  <input  readonly  [value]="this.model.uncertainty_p[i]"   type="text" class="form-control-plaintext text-center" name="uncertainty_p" id="uncertainty_p">
                 </div> 
-                    <div class="col-2"> 
+                    <div class="col-auto"> 
                       <input  placeholder="" readonly  [value]="this.model.uncertainty_term[i]" type="text" class="form-control-plaintext" name="uncertainty_term" id="uncertainty_term">
                     </div>
-                    <div class="col-1 d-flex justify-content-end">
-                      <a  (click)="deleteParameter(i)" class="btn ms-auto" role="button"><i class="fa-solid fa-circle-minus fa-lg" style="color: #e01b24;margin-right: 30px !important;"></i></a>
+                    <div class="col-auto d-flex justify-content-end">
+                      <a  (click)="deleteParameter(i)" class="btn ms-auto" role="button"><i class="fa-solid fa-circle-minus fa-lg" style="color: #e01b24"></i></a>
                     </div>
               </div>
            
