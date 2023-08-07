@@ -152,6 +152,28 @@
                       </div>
                   </div>
                 </div>
+
+                <div *ngIf="this.results.resultSelected.result.result_type === 'text'"  class="row  pt-1 pb-1">
+                  <div  class="col-2 text  border-bottom">
+                  </div>
+                  <div class="col border-bottom">
+                    <table class="table table-borderless">
+                      <thead class="text">
+                        <th>Uncertainty</th>
+                        <th>Probability</th>
+                        <th>Term</th>
+                      </thead>
+                       <tbody>
+                        <tr>
+                          <td>{{this.results.resultSelected.result.uncertainty[0]}}</td>
+                          <td>{{this.results.resultSelected.result.uncertainty_p[0]}}</td>
+                          <td>{{this.results.resultSelected.result.uncertainty_term[0]}}</td>
+                        </tr>
+                      </tbody> 
+                    </table>
+
+                  </div>
+                </div>
                 <div class="row pt-1 pb-1" *ngIf="this.results.resultSelected.result.uncertainty">
                   <div class="col-2 text  border-bottom">
                     Uncertainty

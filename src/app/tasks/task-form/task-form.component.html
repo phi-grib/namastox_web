@@ -27,13 +27,7 @@
                 </div>
                 <div class="col-auto">
                 <label for="value" class="form-label">Probability</label>
-
                   <input [placeholder]="" [class.is-invalid]="valueInputRef.invalid && (valueInputRef.dirty || valueInputRef.touched)"  #valueInputRef="ngModel"  type="number" name="uncertainty_p" id="uncertainty_p" [(ngModel)]="this.uncertainty_p" class="form-control"step="0.001" min="0" max="1">
-
-                  <!-- <select  (change)="changeUncertaintyP($event.target)" class="form-select" aria-label="Default select example">
-                    <option value="0">0</option>
-                    <option value="1">1</option>
-                </select> -->
                 </div>
                 <div class="col-auto">
                 <label for="unit" class="form-label">Term</label>
@@ -83,6 +77,29 @@
           <div class="col-10">
             <textarea rows="4" required [placeholder]="this.pending_task['task description']['report']" [(ngModel)]="this.report"  type="text" class="form-control" name="report" id="report"> </textarea>
           </div>
+          <div class="row mt-3">
+            <label for="Parameter" class="col-2 col-form-label">Uncertainty</label>
+          <div class="col-4">
+              <input name="uncertainty" [placeholder]="this.pending_task['task description'].uncertainty" [(ngModel)]="this.uncertainty" type="text" class="form-control" id="uncertainty">
+            </div>
+            <label for="value" class="col-auto col-form-label">Probability</label>
+            <div class="col-auto">
+              <input  [placeholder]="" [class.is-invalid]="valueInputRef.invalid && (valueInputRef.dirty || valueInputRef.touched)"  #valueInputRef="ngModel"  type="number" name="uncertainty_p" id="uncertainty_p" [(ngModel)]="this.uncertainty_p" class="form-control"step="0.001" min="0" max="1">
+            </div>
+            <label for="unit" class="col-auto col-form-label">Term</label>
+            <div class="col-auto">
+                  <div class="row">
+                    <div class="col-auto">
+                      <select   (change)="selectedUncertaintyTerm($event.target)" id="uncertainty_term"  class="form-control">
+                        <option *ngFor="let value of this.pending_task['task description'].uncertainty_term"   [value]="value">
+                          {{value}}
+                        </option>
+                     </select>
+                    </div> 
+                  </div>
+          </div>
+        </div>
+        
         </div>
 
         <div>

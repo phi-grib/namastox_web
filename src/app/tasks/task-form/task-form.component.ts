@@ -106,10 +106,6 @@ export class TaskFormComponent {
       }
     }
 
-  
-
-
-
   deleteParameter(idx){
     
     this.model.uncertainty.splice(idx, 1);
@@ -166,13 +162,19 @@ export class TaskFormComponent {
     }, 300);
 }
 addNewParameter(){
-  if(this.parameter && this.model.value && this.uncertainty_p >= 0 && this.uncertainty_p <= 1){
-  this.model.values.push({parameter:this.parameter,value:this.model.value,unit:this.model['unit']})
-  this.model.uncertainty.push(this.uncertainty)
-  this.model.uncertainty_p.push(this.uncertainty_p)
-  this.model.uncertainty_term.push(this.uncertainty_term)
-  this.resetFieldsParameter();
-  }
+  if ((this.report || (this.parameter && this.model.value)) && this.uncertainty_p >= 0 && this.uncertainty_p <= 1) {
+    if (this.report) {
+        this.addNewUncertainty();
+    } else {
+        this.model.values.push({
+            parameter: this.parameter,
+            value: this.model.value,
+            unit: this.model['unit']
+        });
+        this.addNewUncertainty();
+        this.resetFieldsParameter();
+    }
+}
 
 }
 resetFieldsParameter(){
@@ -181,6 +183,12 @@ resetFieldsParameter(){
   this.parameter = '';
 }
 
+
+addNewUncertainty(){
+  this.model.uncertainty.push(this.uncertainty)
+  this.model.uncertainty_p.push(this.uncertainty_p)
+  this.model.uncertainty_term.push(this.uncertainty_term)
+}
 
 openModal(){
   $("#modelsTable").DataTable().destroy();
