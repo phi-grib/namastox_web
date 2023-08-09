@@ -22,6 +22,10 @@
               [value]='this.pendingTasks.decisions[idx].id'>{{this.pendingTasks.decisions[idx].id}}</option>
           </select>
           <div *ngIf="this.pending_task?.result" class="container-information mt-2">
+            <div class="col-auto d-flex justify-content-end">
+              <a  (click)="openModal()" class="btn ms-auto" role="button"><i class="fa-solid fa-circle-info fa-xl" style="color: #935277"></i></a>
+
+            </div>
             <div class="card-body">
               <div class="row">
                 <div class="col-2 text">
@@ -198,4 +202,9 @@
 </div>
 </div>
 </div>
+</div>
+<div *ngIf="this.isOpenModal" (mousedown)="onDragStart($event)" (mousemove)="onDrag($event)" class="popup-container" [style.left.px]="popupX" [style.top.px]="popupY">
+  <!-- Contenido del cuadro emergente -->
+  <p>Contenido del cuadro emergente</p>
+  <button (click)="closeModal()">Cerrar</button>
 </div>

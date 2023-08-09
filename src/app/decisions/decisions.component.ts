@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { CommonFunctions } from '../common.functions';
 import { CommonService } from '../common.service';
 import { PendingTasks, RA, Results, Global } from '../globals';
@@ -14,6 +14,15 @@ import * as SmilesDrawer from 'smiles-drawer';
   styleUrls: ['./decisions.component.scss']
 })
 export class DecisionsComponent implements OnInit {
+  popupX = 100;
+  popupY = 100;
+
+  isDragging = false;
+  dragOffsetX = 0;
+  dragOffsetY = 0;
+
+  isOpenModal = false;
+
   loadForm: boolean = false;
   form = new FormGroup({});
   formEdit = new FormGroup({});
@@ -52,6 +61,42 @@ export class DecisionsComponent implements OnInit {
         this.getPendingTask();
       }
     })
+  }
+
+  onDrag(event: MouseEvent) {
+    if (this.isDragging) {
+      this.popupX = event.clientX - this.dragOffsetX;
+      this.popupY = event.clientY - this.dragOffsetY;
+    }
+  }
+
+  onDragStart(event: MouseEvent) {
+    this.isDragging = true;
+    this.dragOffsetX = event.clientX - this.popupX;
+    this.dragOffsetY = event.clientY - this.popupY;
+  }
+
+  @HostListener('document:mousemove', ['$event'])
+  onMouseMove(event: MouseEvent) {
+    if (this.isDragging) {
+      this.popupX = event.clientX - this.dragOffsetX;
+      this.popupY = event.clientY - this.dragOffsetY;
+    }
+  }
+  @HostListener('document:mouseup')
+  onMouseUp() {
+    this.isDragging = false;
+  }
+
+
+  closeModal(){
+    this.isOpenModal = !this.isOpenModal;
+  }
+
+  openModal(){
+
+    this.isOpenModal = !this.isOpenModal;
+    
   }
 
   getPendingTask(){

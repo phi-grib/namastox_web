@@ -45,13 +45,12 @@
          </div>
        </div>
      </div>
-
-
+     
       <div class="row">
         <div class="col-10">
           <button  (click)="back()" *ngIf="this.editMode" type="submit" class="btn btn-ets-delete">Back</button>
         </div>
-        <div class="col">
+        <div class="col d-flex justify-content-end">
             <button [disabled]="decisionForm.invalid"  type="submit" class="btn btn-ets-do submit-button">Submit</button>
         </div>
       </div>      
