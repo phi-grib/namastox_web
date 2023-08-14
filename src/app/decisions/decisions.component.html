@@ -45,7 +45,7 @@
               </div>
             </div>
              <decisions-form *ngIf="this.pending_task" [editMode]="false" [task]="this.pending_task">
-            </decisions-form> 
+            </decisions-form>
           </div>
         </div>
       </div>
@@ -205,6 +205,20 @@
 </div>
 <div *ngIf="this.isOpenModal" (mousedown)="onDragStart($event)" (mousemove)="onDrag($event)" class="popup-container" [style.left.px]="popupX" [style.top.px]="popupY">
   <!-- Contenido del cuadro emergente -->
-  <p>Contenido del cuadro emergente</p>
-  <button (click)="closeModal()">Cerrar</button>
+  <div class="row border-bottom">
+    Title
+  </div>
+  <div class="row mb-3">
+    <div class="col">
+       Text asdasdasdasdasdas
+    </div>
+    <div class="col">
+      Text asdasdadadadasdsad
+    </div>
+  </div>
+  <div class="row">
+    <div class="col d-flex justify-content-end">
+      <button class="btn btn-ets-delete" (click)="closeModal()">Close</button>
+    </div>
+  </div>
 </div>

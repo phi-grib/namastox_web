@@ -6,9 +6,10 @@
 .popup-container {
     position: absolute;
     background-color: #fff;
-    border: 1px solid #ccc;
-    padding: 10px;
+    border: 3px solid $primary-color;
+    padding: 15px;
     cursor: move;
+    border-radius: 5px;
   }
 #dtDecisions {
     padding-top:10px;
