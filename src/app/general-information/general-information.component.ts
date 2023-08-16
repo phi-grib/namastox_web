@@ -30,45 +30,52 @@ export class GeneralInformationComponent implements OnInit {
     return typeof value === 'object'; 
       }
 
-      async autocomplete() {
-        try {
-          if (this.substance_name) {
-            const result: any = await this.commonService.getInformBySubstanceName(this.substance_name).toPromise();
-            if (result && result.length > 0) {
-              const substanceData = result[0];
-              console.log(substanceData);
+      autocomplete() {
+        if (!this.substance_name && !this.substance_CASRN) {
+          console.log("No input provided.");
+          return;
+        }
+      
+        let promise;
+      
+        if (this.substance_name) {
+          promise = this.commonService.getInformBySubstanceName(this.substance_name).toPromise();
+        } else {
+          promise = this.commonService.getInformByCASRN(this.substance_CASRN).toPromise();
+        }
+      
+        promise.then(result => {
+          if (result && result.length > 0) {
+            const substanceData = result[0];
+            const ids = `dtxcid:${substanceData['dtxcid']},dtxsid:${substanceData['dtxsid']},pubchemcid:${substanceData['pubchemCid']}`;
+      
+            if (this.substance_name) {
+              this.substance_CASRN = substanceData['casrn'];
               this.toastr.success('Name ' + this.substance_name, 'AUTOCOMPLETE SUCCESSFULLY', {
                 timeOut: 3000,
                 positionClass: 'toast-top-right'
               });
-              const ids = `dtxcid:${substanceData['dtxcid']},dtxsid:${substanceData['dtxsid']},pubchemcid:${substanceData['pubchemCid']}`;
-              this.substance_CASRN = substanceData['casrn'];
-              this.substance_id = ids;
-              this.substance_SMILES = substanceData['smiles'];
             } else {
-              console.log("Not found by Name");
-            }
-          } else if (this.substance_CASRN) {
-            const result: any = await this.commonService.getInformByCASRN(this.substance_CASRN).toPromise();
-            if (result && result.length > 0) {
-              const substanceData = result[0];
-              const ids = `dtxcid:${substanceData['dtxcid']},dtxsid:${substanceData['dtxsid']},pubchemcid:${substanceData['pubchemCid']}`;
-              this.substance_id = ids;
-              this.substance_SMILES = substanceData['smiles'];
               this.toastr.success('CASRN ' + this.substance_CASRN, 'AUTOCOMPLETE SUCCESSFULLY', {
                 timeOut: 3000,
                 positionClass: 'toast-top-right'
               });
-            } else {
-              console.log("Not found by CASRN");
             }
+      
+            this.substance_id = ids;
+            this.substance_SMILES = substanceData['smiles'];
+          } else {
+            console.log(this.substance_name ? "Not found by Name" : "Not found by CASRN");
           }
-        } catch (error) {
+        }).catch(error => {
+          this.toastr.error('Check the console to see more information', error.statusText, {
+            timeOut: 5000,
+            positionClass: 'toast-top-right'
+          });
           console.log("Error:", error);
-        }
+        });
       }
       
-
   uploadSubstance(){
       if(this.substance_file){
         this.updateService.uploadSubstances(this.substance_file[0]).subscribe(result =>{
