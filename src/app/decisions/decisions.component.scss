@@ -4,9 +4,17 @@
 
 
 
+.modal-content {
+    border: 2px solid $primary-color !important;
+}
+
 .modal-dialog {
     position: absolute;
     cursor: move;
+}
+
+.modal-header {
+    border-bottom: 2px solid  $secondary-color;
 }
 
 
