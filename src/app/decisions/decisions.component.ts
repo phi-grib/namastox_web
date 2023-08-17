@@ -14,7 +14,7 @@ import * as SmilesDrawer from 'smiles-drawer';
   styleUrls: ['./decisions.component.scss']
 })
 export class DecisionsComponent implements OnInit {
-  popupX = 100;
+  popupX = 1180;
   popupY = 100;
 
   isDragging = false;
