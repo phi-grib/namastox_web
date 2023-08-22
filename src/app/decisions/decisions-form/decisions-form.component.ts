@@ -25,7 +25,6 @@ pending_task_selected_id: String = '';
 labelFile = '';
 objectKeys = Object.keys;
 
-
 @Input() task:any;
 @Input() editMode: any;
 
@@ -93,8 +92,9 @@ sendlink(event) {
       this.updateService.updateResult(this.ra.name,this.model).subscribe({
         next: (result) => {
           if (result['success']) {
+            document.getElementById('closeBtnModal').click();// close modal with information
             this.pendingTasks.results = [];
-            this.func.refreshRA();
+            this.func.refreshRA(); // call next step in the workflow 
             if(!this.editMode){
             setTimeout(() => {
               if (this.pendingTasks.results.length) {
@@ -119,8 +119,5 @@ sendlink(event) {
       });
     this.documents = [];
     }, 300);
-  
   }
-
-
 }
