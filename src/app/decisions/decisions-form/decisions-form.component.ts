@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, Renderer2, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { CommonFunctions } from 'src/app/common.functions';
 import { CommonService } from 'src/app/common.service';
@@ -28,7 +28,7 @@ objectKeys = Object.keys;
 @Input() task:any;
 @Input() editMode: any;
 
- constructor(private commonService: CommonService,public ra: RA,private updateService: UpdateService,private toastr: ToastrService, public pendingTasks: PendingTasks,private func: CommonFunctions,public global:Global){
+ constructor(private commonService: CommonService,public ra: RA,private updateService: UpdateService,private toastr: ToastrService, public pendingTasks: PendingTasks,private func: CommonFunctions,public global:Global,private renderer: Renderer2, private el: ElementRef){
 
    }
 
@@ -39,8 +39,12 @@ ngOnInit(): void {
     // if(this.editMode && this.pending_task.result['result_type'] == 'text'){
     //    this.report = this.model.values[0];
     // }
-     this.documents = this.model['links'];
+    this.documents = this.model['links'];
+
   },100);
+  // info button animation
+  const button = document.querySelector('#infobutton') as HTMLElement;  
+  this.renderer.addClass(button, 'bounce');  
 }
 
 sendlink(event) {
