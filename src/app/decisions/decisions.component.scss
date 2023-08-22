@@ -5,16 +5,14 @@
 
 
 .modal-content {
-    border: 2px solid $primary-color !important;
+    border: 2px solid  $primary-color !important;
+    // background: linear-gradient(to right, $primary-color, #DE6168);
+    // opacity: 0.95;
 }
 
 .modal-dialog {
     position: absolute;
     cursor: move;
-}
-
-.modal-header {
-    border-bottom: 2px solid  $secondary-color;
 }
 
 
