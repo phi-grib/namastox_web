@@ -128,7 +128,7 @@ export class TaskFormComponent {
     if (event.key === 'ArrowLeft' || event.key === 'ArrowRight' || event.key === 'Delete' || event.key === 'Backspace') {
       return;
     }
-    if (/[^0-9.,]+$/.test(event.key)) {
+    if (/[^0-9.]+$/.test(event.key)) {
       event.preventDefault();
     }
   }
