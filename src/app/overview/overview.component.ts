@@ -27,9 +27,10 @@ export class OverviewComponent implements OnInit{
   }
    drawMol(){
       var smile = '';
-      if(this.ra.general_information.general.substances.length > 0){
-        smile = this.ra.general_information.general.substances[0].smiles;
-      }
+      //check if user insert a valid substance
+      const substances = this.ra.general_information?.general?.substances; 
+      smile = substances?.length > 0 ? substances[0].smiles : null;
+      
      if(smile){
        let smilesDrawer = new SmilesDrawer.Drawer({ width: 200, height: 150 });
        SmilesDrawer.parse(smile, function (tree) {
