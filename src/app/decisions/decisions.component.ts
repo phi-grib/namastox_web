@@ -14,14 +14,7 @@ import * as SmilesDrawer from 'smiles-drawer';
   styleUrls: ['./decisions.component.scss']
 })
 export class DecisionsComponent implements OnInit {
-  popupX = 1180;
-  popupY = 100;
 
-  isDragging = false;
-  dragOffsetX = 0;
-  dragOffsetY = 0;
-
-  isOpenModal = false;
 
   loadForm: boolean = false;
   form = new FormGroup({});
@@ -62,43 +55,6 @@ export class DecisionsComponent implements OnInit {
       }
     })
   }
-
-  onDrag(event: MouseEvent) {
-    if (this.isDragging) {
-      this.popupX = event.clientX - this.dragOffsetX;
-      this.popupY = event.clientY - this.dragOffsetY;
-    }
-  }
-
-  onDragStart(event: MouseEvent) {
-    this.isDragging = true;
-    this.dragOffsetX = event.clientX - this.popupX;
-    this.dragOffsetY = event.clientY - this.popupY;
-  }
-
-  @HostListener('document:mousemove', ['$event'])
-  onMouseMove(event: MouseEvent) {
-    if (this.isDragging) {
-      this.popupX = event.clientX - this.dragOffsetX;
-      this.popupY = event.clientY - this.dragOffsetY;
-    }
-  }
-  @HostListener('document:mouseup')
-  onMouseUp() {
-    this.isDragging = false;
-  }
-
-
-  closeModal(){
-    this.isOpenModal = !this.isOpenModal;
-  }
-
-  openModal(){
-
-    this.isOpenModal = !this.isOpenModal;
-    
-  }
-
   getPendingTask(){
     this.pending_task = false;
     this.commonService.getPendingTask(this.ra.name, this.pending_task_selected).subscribe({

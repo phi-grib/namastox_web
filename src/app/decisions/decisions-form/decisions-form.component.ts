@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, Renderer2, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { CommonFunctions } from 'src/app/common.functions';
 import { CommonService } from 'src/app/common.service';
@@ -25,6 +25,15 @@ pending_task_selected_id: String = '';
 labelFile = '';
 objectKeys = Object.keys;
 
+popupX = 1180;
+popupY = 100;
+
+isDragging = false;
+dragOffsetX = 0;
+dragOffsetY = 0;
+
+isOpenModal = false;
+
 @Input() task:any;
 @Input() editMode: any;
 
@@ -46,6 +55,33 @@ ngOnInit(): void {
   const button = document.querySelector('#infobutton') as HTMLElement;  
   this.renderer.addClass(button, 'bounce');  
 }
+
+
+onDrag(event: MouseEvent) {
+  if (this.isDragging) {
+    this.popupX = event.clientX - this.dragOffsetX;
+    this.popupY = event.clientY - this.dragOffsetY;
+  }
+}
+
+onDragStart(event: MouseEvent) {
+  this.isDragging = true;
+  this.dragOffsetX = event.clientX - this.popupX;
+  this.dragOffsetY = event.clientY - this.popupY;
+}
+
+@HostListener('document:mousemove', ['$event'])
+onMouseMove(event: MouseEvent) {
+  if (this.isDragging) {
+    this.popupX = event.clientX - this.dragOffsetX;
+    this.popupY = event.clientY - this.dragOffsetY;
+  }
+}
+@HostListener('document:mouseup')
+onMouseUp() {
+  this.isDragging = false;
+}
+
 
 sendlink(event) {
   
@@ -78,6 +114,16 @@ sendlink(event) {
 
   back(){
       this.global.editModeDecisions = !this.global.editModeDecisions;
+  }
+
+  closeModal(){
+    this.isOpenModal = !this.isOpenModal;
+  }
+
+  openModal(){
+
+    this.isOpenModal = !this.isOpenModal;
+    
   }
 
   getPendingTask() {

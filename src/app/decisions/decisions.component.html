@@ -22,10 +22,6 @@
               [value]='this.pendingTasks.decisions[idx].id'>{{this.pendingTasks.decisions[idx].id}}</option>
           </select>
           <div *ngIf="this.pending_task?.result" class="container-information mt-2">
-            <div class="col-auto d-flex justify-content-end">
-              <a id="infobutton"  data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn ms-auto" role="button"><i class="fa-solid fa-circle-info fa-xl" style="color: #935277"></i></a>
-
-            </div>
             <div class="card-body">
               <div class="row">
                 <div class="col-2 text">
@@ -203,40 +199,4 @@
 </div>
 </div>
 </div>
-<div *ngIf="this.isOpenModal" (mousedown)="onDragStart($event)" (mousemove)="onDrag($event)" class="popup-container" [style.left.px]="popupX" [style.top.px]="popupY">
-  <!-- Contenido del cuadro emergente -->
-  <div class="row border-bottom">
-    Title
-  </div>
-  <div class="row mb-3">
-    <div class="col">
-       Text asdasdasdasdasdas
-    </div>
-    <div class="col">
-      Text asdasdadadadasdsad
-    </div>
-  </div>
-  <div class="row">
-    <div class="col d-flex justify-content-end">
-      <button class="btn btn-ets-delete" (click)="closeModal()">Close</button>
-    </div>
-  </div>
-</div>
 
-<div class="modal fade" data-bs-focus="false" show="false" (mousedown)="onDragStart($event)" (mousemove)="onDrag($event)" [style.left.px]="popupX" [style.top.px]="popupY" id="exampleModal" tabindex="-1" data-bs-keyboard="false" data-bs-backdrop="false" aria-labelledby="exampleModalLabel" aria-hidden="false">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-        <button id="closeBtnModal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi luctus ligula vitae sodales iaculis. Curabitur sollicitudin sem non felis tristique vehicula. Fusce neque eros, sodales id elementum aliquam, viverra eget metus.
-Duis a velit non ex imperdiet vehicula ac in.
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>

@@ -10,6 +10,7 @@
                 <input class="form-check-input" [disabled]="this.editMode" type="radio" name="inlineRadioOptions" [(ngModel)]="this.model.decision" id="inlineRadio2" [value]="false">
                 <label class="form-check-label" for="inlineRadio2">No</label>
               </div>
+              <a id="infobutton"  data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn ms-auto btn-ets-do" role="button">support</a>
         </div>
       </div>
       <div class="row mb-3">
@@ -55,3 +56,21 @@
         </div>
       </div>      
 </form>
+
+<div class="modal fade" data-bs-focus="false" show="false" (mousedown)="onDragStart($event)" (mousemove)="onDrag($event)" [style.left.px]="popupX" [style.top.px]="popupY" id="exampleModal" tabindex="-1" data-bs-keyboard="false" data-bs-backdrop="false" aria-labelledby="exampleModalLabel" aria-hidden="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button id="closeBtnModal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi luctus ligula vitae sodales iaculis. Curabitur sollicitudin sem non felis tristique vehicula. Fusce neque eros, sodales id elementum aliquam, viverra eget metus.
+Duis a velit non ex imperdiet vehicula ac in.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -7,4 +7,16 @@
     color: $tertiary-color;
 }
 
+.modal-content {
+    border: 2px solid  $primary-color !important;
+    // background: linear-gradient(to right, $primary-color, #DE6168);
+    // opacity: 0.95;
+}
+
+.modal-dialog {
+    position: absolute;
+    cursor: move;
+}
+
+
 
