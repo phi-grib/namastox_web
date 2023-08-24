@@ -50,10 +50,7 @@ ngOnInit(): void {
     // }
     this.documents = this.model['links'];
 
-  },100);
-  // info button animation
-  const button = document.querySelector('#infobutton') as HTMLElement;  
-  this.renderer.addClass(button, 'bounce');  
+  },100); 
 }
 
 

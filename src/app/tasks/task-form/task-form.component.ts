@@ -15,7 +15,7 @@ export class TaskFormComponent {
   @ViewChild('DocumentFileInput', { static: false }) DocumentFileInput: ElementRef;
 
   uncertainty;
-  uncertainty_p:number;
+  uncertainty_p:any;
   uncertainty_term:string;
 
   loadForm: boolean = false;
@@ -122,6 +122,19 @@ export class TaskFormComponent {
     this.model.uncertainty = '';
     this.model.uncertainty_p = '';
     this.model.uncertainty_term = '';
+  }
+
+  onlyNumbers(event: KeyboardEvent){
+    if (event.key === 'ArrowLeft' || event.key === 'ArrowRight' || event.key === 'Delete' || event.key === 'Backspace') {
+      return;
+    }
+    if (/[^0-9.,]+$/.test(event.key)) {
+      event.preventDefault();
+    }
+  }
+  
+  invalidProbability(): boolean{
+     return this.uncertainty_p < 0 || this.uncertainty_p > 1;
   }
 
   onSubmit() {

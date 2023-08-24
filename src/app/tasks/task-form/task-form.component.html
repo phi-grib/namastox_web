@@ -27,7 +27,7 @@
                 </div>
                 <div class="col-auto">
                 <label for="value" class="form-label">Probability</label>
-                  <input [placeholder]="" [class.is-invalid]="valueInputRef.invalid && (valueInputRef.dirty || valueInputRef.touched)"  #valueInputRef="ngModel"  type="number" name="uncertainty_p" id="uncertainty_p" [(ngModel)]="this.uncertainty_p" class="form-control"step="0.001" min="0" max="1">
+                  <input [placeholder]="" (keydown)="onlyNumbers($event)" [ngClass]="{'is-invalid': invalidProbability() && (valueInputRef.dirty || valueInputRef.touched)}"  #valueInputRef="ngModel"  type="text" name="uncertainty_p" id="uncertainty_p" [(ngModel)]="this.uncertainty_p" class="form-control">
                 </div>
                 <div class="col-auto">
                 <label for="unit" class="form-label">Term</label>
