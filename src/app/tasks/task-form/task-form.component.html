@@ -27,7 +27,7 @@
                 </div>
                 <div class="col-1">
                 <label for="value" class="form-label">Probability</label>
-                  <input [placeholder]="" (keydown)="onlyNumbers($event)" [ngClass]="{'is-invalid': invalidProbability() && (valueInputRef.dirty || valueInputRef.touched)}"  #valueInputRef="ngModel"  type="text" name="uncertainty_p" id="uncertainty_p" [(ngModel)]="this.uncertainty_p" class="form-control">
+                  <input (blur)="syncWithTerm()" [placeholder]="" (keydown)="onlyNumbers($event)" [ngClass]="{'is-invalid': invalidProbability() && (valueInputRef.dirty || valueInputRef.touched)}"  #valueInputRef="ngModel"  type="text" name="uncertainty_p" id="uncertainty_p" [(ngModel)]="this.uncertainty_p" class="form-control">
                 </div>
                 <div class="col-auto">
                 <label for="unit" class="form-label">Term</label>
@@ -84,7 +84,7 @@
             </div>
             <label for="value" class="col-auto col-form-label">Probability</label>
             <div class="col-1">
-              <input [placeholder]="" (keydown)="onlyNumbers($event)" [ngClass]="{'is-invalid': invalidProbability() && (valueInputRef.dirty || valueInputRef.touched)}"  #valueInputRef="ngModel"  type="text" name="uncertainty_p" id="uncertainty_p" [(ngModel)]="this.uncertainty_p" class="form-control">
+              <input [placeholder]="" (blur)="syncWithTerm()" (keydown)="onlyNumbers($event)" [ngClass]="{'is-invalid': invalidProbability() && (valueInputRef.dirty || valueInputRef.touched)}"  #valueInputRef="ngModel"  type="text" name="uncertainty_p" id="uncertainty_p" [(ngModel)]="this.uncertainty_p" class="form-control">
             </div>
             <label for="unit" class="col-auto col-form-label">Term</label>
             <div  class="col-auto"> 

@@ -134,6 +134,7 @@ export class TaskFormComponent {
   }
   
   invalidProbability(): boolean{
+     if(this.uncertainty_p.length > 0) this.uncertainty_p = parseFloat(this.uncertainty_p)
      return this.uncertainty_p < 0 || this.uncertainty_p > 1;
   }
 
@@ -190,6 +191,50 @@ addNewParameter(){
 }
 
 }
+
+
+syncWithTerm(){
+  if(!this.uncertainty_p) this.uncertainty_p = 0; // default value, if you let this field empty.
+
+  if (this.uncertainty_p > 0.99 && this.uncertainty_p <= 1.00) {
+    this.uncertainty_term = this.pending_task['task description'].uncertainty_term[0]
+  } else if (this.uncertainty_p > 0.95 && this.uncertainty_p <= 0.99) {
+    this.uncertainty_term = this.pending_task['task description'].uncertainty_term[1]
+  } else if (this.uncertainty_p > 0.90 && this.uncertainty_p <= 0.95) {
+    this.uncertainty_term = this.pending_task['task description'].uncertainty_term[2]
+  } else if (this.uncertainty_p > 0.66 && this.uncertainty_p <= 0.90) {
+    this.uncertainty_term = this.pending_task['task description'].uncertainty_term[3]
+  } else if (this.uncertainty_p > 0.33 && this.uncertainty_p <= 0.66) {
+    this.uncertainty_term = this.pending_task['task description'].uncertainty_term[4]
+  } else if (this.uncertainty_p > 0.10 && this.uncertainty_p <= 0.33) {
+    this.uncertainty_term = this.pending_task['task description'].uncertainty_term[5]
+  } else if (this.uncertainty_p >= 0.05 && this.uncertainty_p <= 0.10) {
+    this.uncertainty_term = this.pending_task['task description'].uncertainty_term[6]
+  } else if (this.uncertainty_p > 0.01 && this.uncertainty_p <= 0.05) {
+    this.uncertainty_term = this.pending_task['task description'].uncertainty_term[7]
+  } else if (this.uncertainty_p >= 0.00 && this.uncertainty_p <= 0.01) {
+    this.uncertainty_term = this.pending_task['task description'].uncertainty_term[8]
+  } else {
+  }  
+ 
+this.changeSelectedOptionDOM(); 
+
+}
+
+/**
+ * change also the value in the DOM
+ */
+changeSelectedOptionDOM(){
+  var select_term = document.getElementById('uncertainty_term') as HTMLSelectElement;
+  const options = Array.from(select_term.options);
+  for(const option of options){
+    if(this.uncertainty_term == option.value){
+      option.selected = true
+      break;
+    }
+  }
+}
+
 resetFieldsParameter(){
   this.model.unit = '';
   this.model.value = '';
