@@ -1,7 +1,7 @@
 <form *ngIf="this.pending_task" id="decisionForm"  #decisionForm="ngForm" (ngSubmit)="onSubmit()"  class="container-form mt-3">
     <div class="row mb-3">
         <label  for="inputPassword3" class="col-2 col-form-label">Decision:</label>
-        <div class="col-10">
+        <div class="col-8">
             <div class="form-check form-check-inline">
                 <input class="form-check-input" [disabled]="this.editMode" type="radio" name="inlineRadioOptions" [(ngModel)]="this.model.decision" id="inlineRadio1" [value]="true">
                 <label class="form-check-label" for="inlineRadio1">Yes</label>
@@ -10,7 +10,9 @@
                 <input class="form-check-input" [disabled]="this.editMode" type="radio" name="inlineRadioOptions" [(ngModel)]="this.model.decision" id="inlineRadio2" [value]="false">
                 <label class="form-check-label" for="inlineRadio2">No</label>
               </div>
-              <a id="infobutton"  data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn ms-auto btn-ets-do" role="button">support</a>
+        </div>
+        <div class="col-2 d-flex justify-content-end">
+          <a id="infobutton"  data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn ms-auto btn-ets-do" role="button">support</a>
         </div>
       </div>
       <div class="row mb-3">
