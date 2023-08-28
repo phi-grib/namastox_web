@@ -21,10 +21,10 @@ export class DecisionsFormComponent {
 pending_task: any;
 model: any;
 documents = [];
-pending_task_selected_id: String = '';
+pending_task_selected_id: string = '';
 labelFile = '';
 objectKeys = Object.keys;
-
+upstream_tasks:any
 popupX = 1180;
 popupY = 100;
 
@@ -53,14 +53,22 @@ ngOnInit(): void {
   },100); 
 }
 
-
+openSupportModal(){
+  this.commonService.getUpstreamTasks(this.ra.name,this.pending_task.result.id).subscribe({
+    next:  (result) => {
+      this.upstream_tasks = result;
+    },
+    error: (e) => {
+      console.log(e)
+    }
+  })
+}
 onDrag(event: MouseEvent) {
   if (this.isDragging) {
     this.popupX = event.clientX - this.dragOffsetX;
     this.popupY = event.clientY - this.dragOffsetY;
   }
 }
-
 onDragStart(event: MouseEvent) {
   this.isDragging = true;
   this.dragOffsetX = event.clientX - this.popupX;
@@ -74,14 +82,13 @@ onMouseMove(event: MouseEvent) {
     this.popupY = event.clientY - this.dragOffsetY;
   }
 }
+
 @HostListener('document:mouseup')
 onMouseUp() {
   this.isDragging = false;
 }
 
-
 sendlink(event) {
-  
   this.model['result_link'] =  event.target.files[0];
   if(this.labelFile && this.model['result_link']){
     this.updateService.updateLink(this.ra.name, this.model['result_link']).subscribe({
@@ -118,9 +125,7 @@ sendlink(event) {
   }
 
   openModal(){
-
     this.isOpenModal = !this.isOpenModal;
-    
   }
 
   getPendingTask() {

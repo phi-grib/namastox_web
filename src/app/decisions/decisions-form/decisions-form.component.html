@@ -12,7 +12,7 @@
               </div>
         </div>
         <div class="col-2 d-flex justify-content-end">
-          <a id="infobutton"  data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn ms-auto btn-ets-do" role="button">support</a>
+          <a id="infobutton"  data-bs-toggle="modal" (click)="openSupportModal()" data-bs-target="#exampleModal" class="btn ms-auto btn-ets-do" role="button">support</a>
         </div>
       </div>
       <div class="row mb-3">
@@ -60,15 +60,48 @@
 </form>
 
 <div class="modal fade" data-bs-focus="false" show="false" (mousedown)="onDragStart($event)" (mousemove)="onDrag($event)" [style.left.px]="popupX" [style.top.px]="popupY" id="exampleModal" tabindex="-1" data-bs-keyboard="false" data-bs-backdrop="false" aria-labelledby="exampleModalLabel" aria-hidden="false">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <h1 class="modal-title fs-3" id="supportModalLabel">Support Information<span  id="suppIDText">({{this.pending_task.result.id}})</span> </h1>
         <button id="closeBtnModal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi luctus ligula vitae sodales iaculis. Curabitur sollicitudin sem non felis tristique vehicula. Fusce neque eros, sodales id elementum aliquam, viverra eget metus.
-Duis a velit non ex imperdiet vehicula ac in.
+        <div class="row">
+          <div class="col-2 primary-color">
+            Question
+          </div>
+          <div class="col-10">
+            {{this.pending_task['task description'].name}}
+          </div>
+        </div>
+
+        <div class="row">
+          <table class="table" *ngIf="this.upstream_tasks">
+            <thead>
+              <tr>
+                <th>Upstream task</th>
+                <th>Result</th>
+                <th>Variability / notes</th>
+                <th>Uncertainty(text)</th>
+                <th>Uncertainty(p)</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let idx of objectKeys(this.upstream_tasks)">
+                  <td>{{this.upstream_tasks[idx].name}}</td>
+                  <!-- Controlar si es un array de un elemento o de values(parameter,unit,value) -->
+                  <td>{{this.upstream_tasks[idx].values}}</td>
+                  <ng-container *ngFor="let value of this.upstream_tasks[idx].uncertainties;let i = index">
+                    <td>{{value.uncertainty}}</td>
+                    <td>{{value.term}}</td>
+                    <td>{{value.p}}</td>
+                  </ng-container> 
+                </tr>
+            </tbody>
+          </table>
+
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

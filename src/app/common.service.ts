@@ -117,5 +117,9 @@ export class CommonService {
     const url: string = environment.baseUrl + "inform_casrn/"+casrn;
     return this.http.get(url);
   }
-  
+
+  getUpstreamTasks(ra_name:string,task_id:string){
+    const url: string = environment.baseUrl + "upstream_tasks/"+ra_name+"/"+task_id
+    return this.http.get(url);
+  }
 }

@@ -17,6 +17,14 @@
     position: absolute;
     cursor: move;
 }
-
-
-
+#suppIDText{
+    color: rosybrown;
+    font-size: smaller;
+    margin-left: 5px !important;
+}
+#supportModalLabel {
+    color: $primary-color;
+}
+.primary-color{
+    color: $primary-color;
+}
