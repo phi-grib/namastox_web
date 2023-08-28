@@ -107,21 +107,14 @@ export class TaskFormComponent {
     }
 
   deleteParameter(idx){
-    
-    this.model.uncertainty.splice(idx, 1);
-    this.model.uncertainty_p.splice(idx,1);
-    this.model.uncertainty_term.splice(idx,1);
-
-
-    
+    this.model.uncertainties.splice(idx,1)
     this.model.values.splice(idx,1);
-
   }
   
   resetFieldsUncertainty(){
-    this.model.uncertainty = '';
-    this.model.uncertainty_p = '';
-    this.model.uncertainty_term = '';
+  this.uncertainty = ''
+  this.uncertainty_p = 0
+  this.uncertainty_term =  this.pending_task['task description'].uncertainty_term[0]
   }
 
   onlyNumbers(event: KeyboardEvent){
@@ -176,6 +169,7 @@ export class TaskFormComponent {
     }, 300);
 }
 addNewParameter(){
+ 
   if ((this.report || (this.parameter && this.model.value)) && this.uncertainty_p >= 0 && this.uncertainty_p <= 1) {
     if (this.report) {
         this.addNewUncertainty();
@@ -189,9 +183,7 @@ addNewParameter(){
         this.resetFieldsParameter();
     }
 }
-
 }
-
 
 syncWithTerm(){
   if(!this.uncertainty_p) this.uncertainty_p = 0; // default value, if you let this field empty.
@@ -241,11 +233,11 @@ resetFieldsParameter(){
   this.parameter = '';
 }
 
-
 addNewUncertainty(){
-  this.model.uncertainty.push(this.uncertainty)
-  this.model.uncertainty_p.push(this.uncertainty_p)
-  this.model.uncertainty_term.push(this.uncertainty_term)
+  this.model.uncertainties.push({uncertainty:this.uncertainty,p:this.uncertainty_p,term:this.uncertainty_term})
+  // this.model.uncertainty.push(this.uncertainty)
+  // this.model.uncertainty_p.push(this.uncertainty_p)
+  // this.model.uncertainty_term.push(this.uncertainty_term)
 }
 
 openModal(){
