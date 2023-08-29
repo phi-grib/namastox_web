@@ -7,11 +7,9 @@
     color: $tertiary-color;
 }
 
-.modal-content {
-    border: 2px solid  $primary-color !important;
-    // background: linear-gradient(to right, $primary-color, #DE6168);
-    // opacity: 0.95;
-}
+ .modal-content {
+     border: 0.2px solid  $primary-color !important;
+ }
 
 .modal-dialog {
     position: absolute;
@@ -28,8 +26,15 @@
 .primary-color{
     color: $primary-color;
 }
+.secondary-color{
+    color: $secondary-color;
+}
 table {
     thead {
         color: $secondary-color;
     }
 }
+
+.modal-footer {
+    border: none; 
+  }
