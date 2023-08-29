@@ -28,3 +28,8 @@
 .primary-color{
     color: $primary-color;
 }
+table {
+    thead {
+        color: $secondary-color;
+    }
+}

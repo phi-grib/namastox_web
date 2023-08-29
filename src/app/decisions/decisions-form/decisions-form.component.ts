@@ -25,8 +25,8 @@ pending_task_selected_id: string = '';
 labelFile = '';
 objectKeys = Object.keys;
 upstream_tasks:any
-popupX = 1180;
-popupY = 100;
+popupX = 110;
+popupY = 650;
 
 isDragging = false;
 dragOffsetX = 0;
@@ -40,6 +40,14 @@ isOpenModal = false;
  constructor(private commonService: CommonService,public ra: RA,private updateService: UpdateService,private toastr: ToastrService, public pendingTasks: PendingTasks,private func: CommonFunctions,public global:Global,private renderer: Renderer2, private el: ElementRef){
 
    }
+
+
+   isReportOrParameters(value): boolean {
+    if (value.length > 0) {
+      return typeof value[0] === 'string';
+    }
+    return false;
+  }
 
 ngOnInit(): void {
   setTimeout(() => {

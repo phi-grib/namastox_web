@@ -60,10 +60,10 @@
 </form>
 
 <div class="modal fade" data-bs-focus="false" show="false" (mousedown)="onDragStart($event)" (mousemove)="onDrag($event)" [style.left.px]="popupX" [style.top.px]="popupY" id="exampleModal" tabindex="-1" data-bs-keyboard="false" data-bs-backdrop="false" aria-labelledby="exampleModalLabel" aria-hidden="false">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
+  <div  class="modal-dialog modal-lg">
+    <div *ngIf="this.upstream_tasks" class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-3" id="supportModalLabel">Support Information<span  id="suppIDText">({{this.pending_task.result.id}})</span> </h1>
+        <h1 class="modal-title fs-3" id="supportModalLabel">Support Information<span id="suppIDText">({{this.pending_task?.result?.id}})</span> </h1>
         <button id="closeBtnModal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -71,13 +71,13 @@
           <div class="col-2 primary-color">
             Question
           </div>
-          <div class="col-10">
+          <div  class="col-10">
             {{this.pending_task['task description'].name}}
           </div>
         </div>
 
         <div class="row">
-          <table class="table" *ngIf="this.upstream_tasks">
+          <table class="table">
             <thead>
               <tr>
                 <th>Upstream task</th>
@@ -90,8 +90,25 @@
             <tbody>
                 <tr *ngFor="let idx of objectKeys(this.upstream_tasks)">
                   <td>{{this.upstream_tasks[idx].name}}</td>
-                  <!-- Controlar si es un array de un elemento o de values(parameter,unit,value) -->
-                  <td>{{this.upstream_tasks[idx].values}}</td>
+                    <td *ngIf="isReportOrParameters(this.upstream_tasks[idx].values)">{{this.upstream_tasks[idx].values}}</td>
+                      <td *ngIf="!isReportOrParameters(this.upstream_tasks[idx].values)">
+                        <table class="table table-borderless">
+                         <thead>
+                          <tr>
+                            <th>Parameter</th>
+                            <th>Value</th>
+                            <th>Unit</th>
+                          </tr>
+                         </thead>
+                         <tbody>
+                          <tr *ngFor="let value of this.upstream_tasks[idx].values">
+                            <td>{{this.value.parameter}}</td>
+                            <td>{{this.value.value}}</td>
+                            <td>{{this.value.unit}}</td>
+                          </tr>
+                         </tbody>
+                        </table>
+                      </td>
                   <ng-container *ngFor="let value of this.upstream_tasks[idx].uncertainties;let i = index">
                     <td>{{value.uncertainty}}</td>
                     <td>{{value.term}}</td>
