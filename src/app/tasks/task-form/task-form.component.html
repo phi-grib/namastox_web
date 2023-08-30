@@ -1,6 +1,8 @@
 <div *ngIf="this.pending_task"> 
   <form id="taskForm"  #taskForm="ngForm" (ngSubmit)="onSubmit()" class="container-form mt-3">
-    <a *ngIf="this.pending_task['task description'].method_link === 'local_models'"  (click)="openModal()" data-bs-toggle="modal" data-bs-target="#predModal" role="button"  class="btn btn-ets-do mb-2">Select Models</a>
+    <div class="d-flex justify-content-end">
+      <a *ngIf="this.pending_task['task description'].method_link === 'local_models'"  (click)="openModal()" data-bs-toggle="modal" data-bs-target="#predModal" role="button"  class="btn btn-ets-do mb-2 ">Select Models</a>
+    </div>
         <div  *ngIf="this.pending_task?.result.result_type === 'value'" class="mb-2">
           <div class="row">
             <div class="col">
