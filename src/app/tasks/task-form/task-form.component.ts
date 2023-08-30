@@ -41,7 +41,6 @@ export class TaskFormComponent {
     setTimeout(() => {
       this.pending_task = this.task;
       this.model = this.task.result;
-      console.log(this.pending_task)
       if(this.editMode && this.pending_task.result['result_type'] == 'text'){
          this.report = this.model.values[0];
       }
@@ -70,10 +69,9 @@ export class TaskFormComponent {
     })
   }
   executePredict(){
-    // this.model.values = [];
+    this.model.values = [];
     var listNames:any = [];
     var listVersions:any = [];
-
     for (let idx = 0; idx < this.listModelsSelected.length; idx++) {
       const element = this.listModelsSelected[idx];
       listNames.push(element[0])
@@ -85,8 +83,10 @@ export class TaskFormComponent {
             const name = result['models'][idx][0]+"v"+result['models'][idx][1];
             const val = result['results'][idx];
             const param = {parameter:name,value:val,unit:null}
-            this.model.values.push(param);
+            this.model.values[idx] = param;
           }
+          console.log("Execute Predict")
+          console.log(this.model.values)
       },
       error: (e) => {
         this.toastr.error(e.error,'FAILED', {
@@ -189,6 +189,8 @@ addNewParameter(){
         this.resetFieldsParameter();
     }
 }
+console.log("addnewparameter")
+console.log(this.model.values)
 }
 
 syncWithTerm(){
