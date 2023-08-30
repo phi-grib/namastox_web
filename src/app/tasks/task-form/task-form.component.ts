@@ -70,7 +70,7 @@ export class TaskFormComponent {
     })
   }
   executePredict(){
-    this.model.values = [];
+    // this.model.values = [];
     var listNames:any = [];
     var listVersions:any = [];
 
@@ -88,7 +88,13 @@ export class TaskFormComponent {
             this.model.values.push(param);
           }
       },
-      error: (e) => console.log(e)
+      error: (e) => {
+        this.toastr.error(e.error,'FAILED', {
+          timeOut: 5000, positionClass: 'toast-top-right'
+        });
+        console.log(e)
+      
+      }         
     })
     this.listModelsSelected = [];
   }
