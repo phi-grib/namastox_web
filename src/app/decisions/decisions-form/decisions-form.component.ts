@@ -25,8 +25,8 @@ pending_task_selected_id: string = '';
 labelFile = '';
 objectKeys = Object.keys;
 upstream_tasks:any
-popupX = 110;
-popupY = 650;
+popupX = 1150;
+popupY = 100;
 
 isDragging = false;
 dragOffsetX = 0;

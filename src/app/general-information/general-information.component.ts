@@ -17,13 +17,27 @@ export class GeneralInformationComponent implements OnInit {
   substance_CASRN: string = '';
   substance_SMILES: string = '';
   substance_id: string = '';
-  substance_file: any;
+  substance_file: File | null = null;;
   form = new FormGroup({});
   model: any;
   complete: boolean = false;
 
   generalInformationForm = new FormGroup({});
 
+
+  uploadSubstance(event: any) {
+    const selectedFile = event.target.files[0]; 
+    if (selectedFile) {
+      this.substance_file = selectedFile;
+      this.updateService.uploadSubstances(this.substance_file).subscribe(result =>{
+        if(result['success']){
+          var firstSubstance = result['result'][0]
+          this.ra.general_information.general.substances = [firstSubstance]
+          }
+       })
+     
+    }
+  }
 
 
   isObject(value): boolean{
@@ -75,23 +89,11 @@ export class GeneralInformationComponent implements OnInit {
           console.log("Error:", error);
         });
       }
+
+
       
-  uploadSubstance(){
-      if(this.substance_file){
-        this.updateService.uploadSubstances(this.substance_file[0]).subscribe(result =>{
-          if(result['success']){
-            var firstSubstance = result['result'][0]
-            this.ra.general_information.general.substances = [firstSubstance]
-            }
-         })
-         this.substance_file = undefined
-      }
-    
-  }
    onSubmit() {
       var substance = {}
-      this.uploadSubstance();
-
       substance =  {
         id: this.substance_id,
         name: this.substance_name,
