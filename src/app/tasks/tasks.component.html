@@ -147,9 +147,9 @@
                           <td>{{this.results.resultSelected.result.values[idx].parameter}}</td>
                           <td>{{this.results.resultSelected.result.values[idx].value.toString() | slice:0:8}}</td>
                           <td>{{this.results.resultSelected.result.values[idx].unit}}</td>
-                          <td>{{this.results.resultSelected.result.uncertainties[idx]['uncertainty']}}</td>
-                          <td>{{this.results.resultSelected.result.uncertainties[idx]['p']}}</td>
-                          <td>{{this.results.resultSelected.result.uncertainties[idx]['term']}}</td>
+                          <td>{{this.results.resultSelected.result?.uncertainties[idx]?.uncertainty}}</td>
+                          <td>{{this.results.resultSelected.result?.uncertainties[idx]?.p}}</td>
+                          <td>{{this.results.resultSelected.result?.uncertainties[idx]?.term}}</td>
                         </tr>
                       </tbody>
                       </table>
