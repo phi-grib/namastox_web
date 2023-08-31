@@ -165,7 +165,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" id="btnclosePredModal" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-          <button  class="btn btn-ets-do" (click)="executePredict()">Predict</button>
+          <button  class="btn btn-ets-do" [disabled]="this.listModelsSelected.length == 0" (click)="executePredict()">Predict</button>
         </div>
       </div>
     </div>
