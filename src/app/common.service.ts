@@ -122,4 +122,14 @@ export class CommonService {
     const url: string = environment.baseUrl + "upstream_tasks/"+ra_name+"/"+task_id
     return this.http.get(url);
   }
+
+  /**
+   * Get documentation of model 
+   * @param m_name 
+   * @param version 
+   */
+  getModelDocumentation(m_name:string,version:number){
+    const url: string = environment.baseUrl + "model_documentation/"+m_name+"/"+version;
+    return this.http.get(url)
+  }
 }

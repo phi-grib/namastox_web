@@ -107,10 +107,23 @@ export class TaskFormComponent {
     })
     this.listModelsSelected = [];
   }
+
+  getModelDocumentation(model){
+    this.commonService.getModelDocumentation(model[0],model[1]).subscribe({
+      next: (result) => {
+        console.log("RESULT:")
+        console.log(result)
+      },
+
+    })
+
+  }
+
   onChange(model,event){
     const isChecked = event.target.checked;
       if(isChecked){
-      this.listModelsSelected.push(model)
+      this.listModelsSelected.push(model);
+      this.getModelDocumentation(model);
       }else{
          for (let idx = 0; idx < this.listModelsSelected.length; idx++) {
            const element = this.listModelsSelected[idx];

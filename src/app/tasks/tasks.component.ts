@@ -62,20 +62,6 @@ export class TasksComponent implements OnInit {
         error: (e) => console.log(e)
       })
     }}
-
-    onChange(model,event){
-    const isChecked = event.target.checked;
-      if(isChecked){
-      this.listModelsSelected.push(model)
-      }else{
-         for (let idx = 0; idx < this.listModelsSelected.length; idx++) {
-           const element = this.listModelsSelected[idx];
-           if(element[0] == model[0] && element[1] == model[1]){
-            this.listModelsSelected.splice(idx,1)
-           }
-         }
-      }
-    }
   drawMol(){
      for (let index = 0; index < this.results.resultSelected.substance.length; index++) {
       let smilesDrawer = new SmilesDrawer.Drawer({ width: 200, height: 150 });

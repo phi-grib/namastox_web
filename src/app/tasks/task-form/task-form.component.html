@@ -135,33 +135,40 @@
       </div>
   </form>
        <!-- Modal -->
-<div class="modal fade" id="predModal" tabindex="-1" aria-labelledby="predModal" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+<div class="modal  fade" id="predModal" tabindex="-1" aria-labelledby="predModal" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="predModalLabel">Select Models to Prediction</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
-          <table  id="modelsTable" class="table display compact">
-            <thead>
-              <tr>
-                <th class="col-1">
-                </th>
-                <th class="text-center col-1">Version</th>
-                <th class="text-center col">Name</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let model of this.listAllModels ">
-                <td>
-                <input class="form-check-input" type="checkbox" (change)="onChange(model,$event)" id="flexCheckDefault" />
-                </td>
-                <td class="text-center">{{model[1]}}</td>
-                <td class="text-center">{{model[0]}}</td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="modal-body row">
+          <div class="col-4">
+            <table  style="width: 100% !important;"  id="modelsTable" class="table display compact">
+              <thead>
+                <tr>
+                  <th style="width: 10% !important;">
+                  </th>
+                  <th style="width: 10% !important;">Version</th>
+                  <th style="width: 70% !important;">Name</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let model of this.listAllModels ">
+                  <td>
+                  <input class="form-check-input text-center" type="checkbox" (change)="onChange(model,$event)" id="flexCheckDefault" />
+                  </td>
+                  <td>{{model[1]}}</td>
+                  <td>{{model[0]}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-8">
+
+
+          </div>
+
         </div>
         <div class="modal-footer">
           <button type="button" id="btnclosePredModal" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
