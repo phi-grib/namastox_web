@@ -147,12 +147,12 @@ sendlink(event) {
     })
   }
 
+
   onSubmit(){
     setTimeout(() => {
       this.updateService.updateResult(this.ra.name,this.model).subscribe({
         next: (result) => {
           if (result['success']) {
-            document.getElementById('closeBtnModal').click();// close modal with information
             this.pendingTasks.results = [];
             this.func.refreshRA(); // call next step in the workflow 
             if(!this.editMode){
