@@ -69,7 +69,9 @@ export class TaskFormComponent {
     })
   }
   executePredict(){
+    this.resetFieldsUncertainty();
     this.model.values = [];
+    this.model.uncertainties = [];
     var listNames:any = [];
     var listVersions:any = [];
     for (let idx = 0; idx < this.listModelsSelected.length; idx++) {
@@ -85,8 +87,6 @@ export class TaskFormComponent {
             const param = {parameter:name,value:val,unit:null}
             this.model.values[idx] = param;
           }
-          console.log("Execute Predict")
-          console.log(this.model.values)
       },
       error: (e) => {
         this.toastr.error(e.error,'FAILED', {
@@ -189,8 +189,6 @@ addNewParameter(){
         this.resetFieldsParameter();
     }
 }
-console.log("addnewparameter")
-console.log(this.model.values)
 }
 
 syncWithTerm(){
@@ -242,11 +240,8 @@ resetFieldsParameter(){
 }
 
 addNewUncertainty(){
-  var positionParameter = this.model.values.length + 1 
+  var positionParameter = this.model.values.length - 1
   this.model.uncertainties[positionParameter] = {uncertainty:this.uncertainty,p:this.uncertainty_p,term:this.uncertainty_term}
-  // this.model.uncertainty.push(this.uncertainty)
-  // this.model.uncertainty_p.push(this.uncertainty_p)
-  // this.model.uncertainty_term.push(this.uncertainty_term)
 }
 
 openModal(){
