@@ -36,7 +36,7 @@
                       <div class="row">
                         <div class="col-auto">
                           <select   (change)="selectedUncertaintyTerm($event.target)" id="uncertainty_term"  class="form-control">
-                            <option value="">N/A</option>
+                            <option value="N/A">N/A</option>
                             <option *ngFor="let value of this.pending_task['task description'].uncertainty_term"   [value]="value">
                               {{value}}
                             </option>

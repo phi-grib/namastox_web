@@ -46,7 +46,7 @@ export class TaskFormComponent {
       }
       this.documents = this.model['links'];
       this.uncertainty_p = 0;
-      this.uncertainty_term = this.pending_task['task description'].uncertainty_term[0]
+      this.uncertainty_term = '';
     },100);
 
   }
@@ -187,6 +187,7 @@ addNewParameter(){
         });
         this.addNewUncertainty();
         this.resetFieldsParameter();
+        this.resetFieldsUncertainty();
     }
 }
 }
