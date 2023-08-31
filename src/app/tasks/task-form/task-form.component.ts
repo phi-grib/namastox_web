@@ -68,6 +68,11 @@ export class TaskFormComponent {
       error: (e) => console.log(e)
     })
   }
+
+  closeModal(){
+    document.getElementById('btnclosePredModal').click();
+  }
+   
   executePredict(){
     this.resetFieldsUncertainty();
     this.model.values = [];
@@ -87,6 +92,10 @@ export class TaskFormComponent {
             const param = {parameter:name,value:val,unit:null}
             this.model.values[idx] = param;
           }
+          this.closeModal();
+          this.toastr.success('PREDICTION DONE', 'SUCCESSFUL PREDICTION', {
+            timeOut: 5000, positionClass: 'toast-top-right'
+          });
       },
       error: (e) => {
         this.toastr.error(e.error,'FAILED', {

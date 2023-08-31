@@ -107,32 +107,7 @@ setTimeout(() => {
   isObject(value): boolean{
 return typeof value === 'object'; 
   }
-  
-  executePredict(){
-    this.model.values = [];
-    var listNames:any = [];
-    var listVersions:any = [];
 
-    for (let idx = 0; idx < this.listModelsSelected.length; idx++) {
-      const element = this.listModelsSelected[idx];
-      listNames.push(element[0])
-      listVersions.push(element[1])
-    }
-
-    this.commonService.getPrediction(this.ra.name,listNames,listVersions).subscribe({
-      next: (result)=>{
-          for (let idx = 0; idx < result['models'].length; idx++) {
-            const name = result['models'][idx][0]+"v"+result['models'][idx][1];
-            const val = result['results'][idx];
-            const param = {parameter:name,value:val,unit:null}
-            this.model.values.push(param);
-          }
-      },
-      error: (e) => console.log(e)
-    })
-    this.listModelsSelected = [];
-
-  }
   getPendingTask() {
     this.pending_task = false;
     this.commonService.getPendingTask(this.ra.name, this.pending_task_selected).subscribe({
