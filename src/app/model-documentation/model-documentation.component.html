@@ -1,0 +1,24 @@
+<div class="container-fluid">
+<div class="card-body">
+    <span class="h4 mb-1">General Information</span>
+    <div *ngFor="let value of genInformationKeys" class="row border-bottom" id="headerOverview">
+        <div class="col-3 p-1">
+            {{value}}
+        </div>
+        <ng-container *ngIf="!isObject(this.documentation[value])" >
+            <div *ngIf="!isObject(this.documentation[value])" class="col text-dark">
+                {{this.documentation[value]}} 
+             </div>
+        </ng-container>
+        <div class="col" *ngIf="isObject(this.documentation[value])">
+            <div class="row border-bottom" *ngFor="let idx of objectKeys(this.documentation[value])">
+                <div class="col"> {{idx}}</div>
+                <div class="col text-dark">{{this.documentation[value][idx]}} </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+</div>

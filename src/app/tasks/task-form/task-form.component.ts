@@ -3,7 +3,8 @@ import { FormBuilder } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { CommonFunctions } from 'src/app/common.functions';
 import { CommonService } from 'src/app/common.service';
-import { PendingTasks, RA, Results,Global } from 'src/app/globals';
+import { PendingTasks, RA, Results,Global, Model } from 'src/app/globals';
+import { ModelsService } from 'src/app/models.service';
 import { UpdateService } from 'src/app/update.service';
 
 @Component({
@@ -15,6 +16,7 @@ export class TaskFormComponent {
   @ViewChild('DocumentFileInput', { static: false }) DocumentFileInput: ElementRef;
 
   uncertainty;
+  ModelDocumentation = undefined;
   uncertainty_p:any;
   uncertainty_term:string;
 
@@ -33,7 +35,7 @@ export class TaskFormComponent {
   @Input() task:any;
   @Input() editMode: any;
 
-  constructor(public ra: RA, private commonService: CommonService, public pendingTasks: PendingTasks, private func: CommonFunctions, public results: Results, private updateService: UpdateService, private toastr: ToastrService,private formBuilder: FormBuilder, public global:Global) { 
+  constructor(public ra: RA, private commonService: CommonService, public pendingTasks: PendingTasks, private func: CommonFunctions, public results: Results, private updateService: UpdateService, private toastr: ToastrService,private formBuilder: FormBuilder, public global:Global,private modelsService:ModelsService) { 
   }
   
   ngOnInit(): void {
@@ -72,9 +74,14 @@ export class TaskFormComponent {
   closeModal(){
     document.getElementById('btnclosePredModal').click();
   }
+
+  setUnit(){
+    this.model.unit = this.ModelDocumentation['Endpoint_units'] != "None";
+  }
    
   executePredict(){
     this.resetFieldsUncertainty();
+    this.setUnit();
     this.model.values = [];
     this.model.uncertainties = [];
     var listNames:any = [];
@@ -84,7 +91,7 @@ export class TaskFormComponent {
       listNames.push(element[0])
       listVersions.push(element[1])
     }
-    this.commonService.getPrediction(this.ra.name,listNames,listVersions).subscribe({
+    this.modelsService.getPrediction(this.ra.name,listNames,listVersions).subscribe({
       next: (result)=>{
           for (let idx = 0; idx < result['models'].length; idx++) {
             const name = result['models'][idx][0]+"v"+result['models'][idx][1];
@@ -108,22 +115,24 @@ export class TaskFormComponent {
     this.listModelsSelected = [];
   }
 
+
   getModelDocumentation(model){
-    this.commonService.getModelDocumentation(model[0],model[1]).subscribe({
+    this.ModelDocumentation = undefined;
+    this.model.name = model[0];
+    this.model.version = model[1];
+
+    this.modelsService.getModelDocumentation(model[0],model[1]).subscribe({
       next: (result) => {
-        console.log("RESULT:")
-        console.log(result)
+        this.ModelDocumentation = result;
       },
-
     })
-
   }
 
   onChange(model,event){
     const isChecked = event.target.checked;
       if(isChecked){
       this.listModelsSelected.push(model);
-      this.getModelDocumentation(model);
+      // this.getModelDocumentation(model);
       }else{
          for (let idx = 0; idx < this.listModelsSelected.length; idx++) {
            const element = this.listModelsSelected[idx];
@@ -270,7 +279,7 @@ addNewUncertainty(){
 openModal(){
   $("#modelsTable").DataTable().destroy();
   //get models
-  this.commonService.getModels().subscribe({
+  this.modelsService.getModels().subscribe({
     next: (result)=> {
       this.listAllModels =  result
       setTimeout(() => {

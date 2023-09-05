@@ -21,6 +21,7 @@ import { ManageRaComponent } from './manage-ra/manage-ra.component';
 import { TaskFormComponent } from './tasks/task-form/task-form.component';
 import { formatDatePipe } from './formatDatePipe';
 import { DecisionsFormComponent } from './decisions/decisions-form/decisions-form.component';
+import { ModelDocumentationComponent } from './model-documentation/model-documentation.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { DecisionsFormComponent } from './decisions/decisions-form/decisions-for
     ManageRaComponent,
     TaskFormComponent,
     formatDatePipe,
-    DecisionsFormComponent
+    DecisionsFormComponent,
+    ModelDocumentationComponent
   ],
   imports: [
     BrowserModule,

@@ -154,7 +154,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let model of this.listAllModels ">
+                <tr *ngFor="let model of this.listAllModels" (click)="getModelDocumentation(model)">
                   <td>
                   <input class="form-check-input text-center" type="checkbox" (change)="onChange(model,$event)" id="flexCheckDefault" />
                   </td>
@@ -164,9 +164,8 @@
               </tbody>
             </table>
           </div>
-          <div class="col-8">
-
-
+          <div *ngIf="ModelDocumentation" class="col-8">
+<model-documentation [documentation]="ModelDocumentation"></model-documentation>
           </div>
 
         </div>
