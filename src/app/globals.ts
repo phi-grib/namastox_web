@@ -32,3 +32,9 @@ export class Global {
     editModeTasks: boolean = false;
     editModeDecisions: boolean = false;
 }
+
+export class Model {
+    name: string;
+    version: number;
+    documentation:any;
+}
