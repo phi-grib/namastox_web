@@ -76,7 +76,7 @@ export class TaskFormComponent {
   }
 
   setUnit(){
-    this.model.unit = this.ModelDocumentation['Endpoint_units'] != "None";
+    this.model.unit = this.ModelDocumentation['Endpoint_units'] != "None" ? this.ModelDocumentation['Endpoint_units'] : '';
   }
    
   executePredict(){
