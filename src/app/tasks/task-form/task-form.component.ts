@@ -3,7 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { CommonFunctions } from 'src/app/common.functions';
 import { CommonService } from 'src/app/common.service';
-import { PendingTasks, RA, Results,Global, Model } from 'src/app/globals';
+import { PendingTasks, RA, Results,Global } from 'src/app/globals';
 import { ModelsService } from 'src/app/models.service';
 import { UpdateService } from 'src/app/update.service';
 
@@ -120,11 +120,13 @@ export class TaskFormComponent {
     this.ModelDocumentation = undefined;
     this.model.name = model[0];
     this.model.version = model[1];
-
     this.modelsService.getModelDocumentation(model[0],model[1]).subscribe({
       next: (result) => {
         this.ModelDocumentation = result;
       },
+     error: (err) => {
+      console.log(err)
+     }
     })
   }
 
