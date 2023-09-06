@@ -75,8 +75,6 @@ export class TaskFormComponent {
     document.getElementById('btnclosePredModal').click();
   }
 
- 
-   
   executePredict(){
     this.resetFieldsUncertainty();
     this.model.values = [];
@@ -90,6 +88,8 @@ export class TaskFormComponent {
     }
     this.modelsService.getPrediction(this.ra.name,listNames,listVersions).subscribe({
       next: (result)=>{
+        console.log("Result of Prediction")
+        console.log(result)
           for (let idx = 0; idx < result['models'].length; idx++) {
             const name = result['models'][idx][0]+"v"+result['models'][idx][1];
             const val = result['results'][idx];
