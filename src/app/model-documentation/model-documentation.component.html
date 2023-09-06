@@ -6,28 +6,28 @@
 
     <li class="nav-item" role="presentation">
       <button class="nav-link" id="pills-algorithm-tab" data-bs-toggle="pill" data-bs-target="#pills-algorithm" type="button"
-        role="tab" aria-controls="pills-algorithm" aria-selected="false">Algorithm and software</button>
+        role="tab" aria-controls="pills-algorithm" aria-selected="false">Algorithm and Software</button>
     </li>
     <li class="nav-item" role="presentation">
         <button class="nav-link" id="pills-other_information-tab" data-bs-toggle="pill" data-bs-target="#pills-other_information" type="button"
-          role="tab" aria-controls="pills-other_information" aria-selected="false">Other information</button>
+          role="tab" aria-controls="pills-other_information" aria-selected="false">Other Information</button>
       </li>
 </ul>
   <div class="tab-content container-fluid" id="pills-modelInformationtab">
     <div class="tab-pane fade show active mt-2" id="pills-gen-informationmodel" role="tabpanel" aria-labelledby="pills-gen-informationmodel-tab">
         <div class="card-body">
             <div *ngFor="let value of genInformationKeys" class="row border-bottom" id="headerOverview">
-                <div class="col-3 p-1">
+                <div  class="col-3 p-1">
                     {{value.replaceAll('_', ' ')}}
                 </div>
                 
-                    <div *ngIf="!isObject(this.documentation[value])" class="col text-dark">
+                    <div *ngIf="!isObject(this.documentation[value]) && this.documentation[value] !== 'None'" class="col text-dark">
                         {{this.documentation[value]}} 
                      </div>
                 <div class="col" *ngIf="isObject(this.documentation[value])">
                     <div class="row" *ngFor="let idx of objectKeys(this.documentation[value])">
                         <div class="col"> {{idx.replaceAll('_', ' ')}}</div>
-                        <div class="col text-dark">{{this.documentation[value][idx]}} </div>
+                        <div *ngIf="this.documentation[value][idx] !== 'None'" class="col text-dark">{{this.documentation[value][idx]}} </div>
                     </div>
         
                 </div>
@@ -41,13 +41,13 @@
                 <div class="col-3 p-1">
                     {{value.replaceAll('_', ' ')}}
                 </div>
-                    <div *ngIf="!isObject(this.documentation[value])" class="col text-dark">
+                    <div *ngIf="!isObject(this.documentation[value])  && this.documentation[value] !== 'None'" class="col text-dark">
                         {{this.documentation[value]}} 
                      </div>
                 <div class="col" *ngIf="isObject(this.documentation[value])">
                     <div class="row" *ngFor="let idx of objectKeys(this.documentation[value])">
                         <div class="col"> {{idx.replaceAll('_', ' ')}}</div>
-                        <div class="col text-dark">{{this.documentation[value][idx]}} </div>
+                        <div *ngIf="this.documentation[value][idx] !== 'None'" class="col text-dark">{{this.documentation[value][idx]}} </div>
                     </div>
                 </div>
             </div>
@@ -59,13 +59,13 @@
                 <div class="col-4 p-1">
                     {{value.replaceAll('_', ' ')}}
                 </div>
-                    <div *ngIf="!isObject(this.documentation[value])" class="col text-dark">
+                    <div *ngIf="!isObject(this.documentation[value]) && this.documentation[value] !== 'None'" class="col text-dark">
                         {{this.documentation[value]}} 
                      </div>
                 <div class="col" *ngIf="isObject(this.documentation[value])">
                     <div class="row" *ngFor="let idx of objectKeys(this.documentation[value])">
                         <div class="col"> {{idx.replaceAll('_', ' ')}}</div>
-                        <div class="col text-dark">{{this.documentation[value][idx]}} </div>
+                        <div *ngIf="this.documentation[value][idx] !== 'None'" class="col text-dark">{{this.documentation[value][idx]}}</div>
                     </div>  
                 </div>
             </div>

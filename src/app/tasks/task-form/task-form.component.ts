@@ -75,13 +75,10 @@ export class TaskFormComponent {
     document.getElementById('btnclosePredModal').click();
   }
 
-  setUnit(){
-    this.model.unit = this.ModelDocumentation['Endpoint_units'] != "None" ? this.ModelDocumentation['Endpoint_units'] : '';
-  }
+ 
    
   executePredict(){
     this.resetFieldsUncertainty();
-    this.setUnit();
     this.model.values = [];
     this.model.uncertainties = [];
     var listNames:any = [];
@@ -96,7 +93,8 @@ export class TaskFormComponent {
           for (let idx = 0; idx < result['models'].length; idx++) {
             const name = result['models'][idx][0]+"v"+result['models'][idx][1];
             const val = result['results'][idx];
-            const param = {parameter:name,value:val,unit:null}
+            const unit =  this.ModelDocumentation['Endpoint_units'];
+            const param = {parameter:name,value:val,unit:unit}
             this.model.values[idx] = param;
           }
           this.closeModal();
