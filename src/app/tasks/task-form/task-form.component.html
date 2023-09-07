@@ -154,7 +154,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let model of this.listAllModels" (click)="getModelDocumentation(model)">
+                <tr  [ngClass]="{ 'selected-row': model === selectedModel }" *ngFor="let model of this.listAllModels" (click)="getModelDocumentation(model)">
                   <td>
                   <input class="form-check-input text-center" type="checkbox" (change)="onChange(model,$event)" id="flexCheckDefault" />
                   </td>

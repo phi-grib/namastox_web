@@ -16,6 +16,7 @@ export class TaskFormComponent {
   @ViewChild('DocumentFileInput', { static: false }) DocumentFileInput: ElementRef;
 
   uncertainty;
+  selectedModel: any;
   ModelDocumentation = undefined;
   uncertainty_p:any;
   uncertainty_term:string;
@@ -115,6 +116,7 @@ export class TaskFormComponent {
 
 
   getModelDocumentation(model){
+    this.selectedModel = model;
     this.ModelDocumentation = undefined;
     this.model.name = model[0];
     this.model.version = model[1];
@@ -222,7 +224,6 @@ addNewParameter(){
     }
 }
 }
-
 syncWithTerm(){
   if(!this.uncertainty_p) this.uncertainty_p = 0; // default value, if you let this field empty.
 
@@ -277,6 +278,7 @@ addNewUncertainty(){
 }
 
 openModal(){
+  this.ModelDocumentation = undefined;
   $("#modelsTable").DataTable().destroy();
   //get models
   this.modelsService.getModels().subscribe({
