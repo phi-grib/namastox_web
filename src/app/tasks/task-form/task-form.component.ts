@@ -89,14 +89,14 @@ export class TaskFormComponent {
     }
     this.modelsService.getPrediction(this.ra.name,listNames,listVersions).subscribe({
       next: (result)=>{
-        console.log("Result of Prediction")
-        console.log(result)
           for (let idx = 0; idx < result['models'].length; idx++) {
             const name = result['models'][idx][0]+"v"+result['models'][idx][1];
             const val = result['results'][idx];
             const unit =  this.ModelDocumentation['Endpoint_units'];
             const param = {parameter:name,value:val,unit:unit}
             this.model.values[idx] = param;
+            const uncertainty = result['uncertainty'][idx]
+            this.model.uncertainties[idx] = {uncertainty:'',p:uncertainty,term:"N/A"}
           }
           this.closeModal();
           this.toastr.success('PREDICTION DONE', 'SUCCESSFUL PREDICTION', {
