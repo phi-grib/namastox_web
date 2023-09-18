@@ -1,10 +1,10 @@
-@import '../../../assets/scss/buttons.scss';
+@import "../../../assets/scss/buttons.scss";
 
 .container-form {
-    color: $secondary-color;
+  color: $secondary-color;
 }
 .addbtn {
-    color: $tertiary-color;
+  color: $tertiary-color;
 }
 
 //  .modal-content {
@@ -12,29 +12,29 @@
 //  }
 
 .modal-dialog {
-    position: absolute;
-    cursor: move;
+  position: absolute;
+  cursor: move;
 }
-#suppIDText{
-    color: rosybrown;
-    font-size: smaller;
-    margin-left: 5px !important;
+#suppIDText {
+  color: rosybrown;
+  font-size: smaller;
+  margin-left: 5px !important;
 }
 #supportModalLabel {
-    color: $primary-color;
+  color: $primary-color;
 }
-.primary-color{
-    color: $primary-color;
+.primary-color {
+  color: $primary-color;
 }
-.secondary-color{
-    color: $secondary-color;
+.secondary-color {
+  color: $secondary-color;
 }
 table {
-    thead {
-        color: $secondary-color;
-    }
+  thead {
+    color: $secondary-color;
+  }
 }
 
 .modal-footer {
-    border: none; 
-  }
+  border: none;
+}
