@@ -6,16 +6,18 @@ import { Global, RA } from './globals';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
-
 export class AppComponent implements OnInit {
   title = 'namastox_web';
-  constructor(public global: Global, public ra: RA, private commonService: CommonService, private func: CommonFunctions) { }
+  constructor(
+    public global: Global,
+    public ra: RA,
+    private commonService: CommonService,
+    private func: CommonFunctions
+  ) {}
   ngOnInit(): void {
-
     this.commonService.getRaList().subscribe({
-
       next: (result: any) => {
         this.ra.listRA = [...result];
         if (this.ra.listRA.length > 0) {
@@ -24,23 +26,23 @@ export class AppComponent implements OnInit {
           this.commonService.getGeneralInfo(this.ra.name).subscribe({
             next: (result) => {
               this.ra.general_information = result;
-              this.func.refreshRA()
+              this.func.refreshRA();
               setTimeout(() => {
                 this.global.interfaceVisible = true;
               }, 500);
             },
             error: (e) => {
-              console.log(e)
-            }
-          })
+              console.log(e);
+            },
+          });
         }
       },
       error: (e) => {
-        console.error(e)
-      }
-    })
+        console.error(e);
+      },
+    });
   }
-  loadOverviewCanvas(){
+  loadOverviewCanvas() {
     this.commonService.drawOverviewCanvas(false);
   }
   navbarleft = 60;

@@ -1,10 +1,10 @@
-@import '../assets/scss/navbar.scss';
+@import "../assets/scss/navbar.scss";
 
 .app-base {
-    padding-left: 0px;
-    padding-right: 0px; /* prevents horizontal scrollbar*/
-    overflow-x: hidden;
+  padding-left: 0px;
+  padding-right: 0px; /* prevents horizontal scrollbar*/
+  overflow-x: hidden;
 }
 ::ng-deep .as-split-gutter-icon {
-    background-color: $tertiary-color;
+  background-color: $tertiary-color;
 }

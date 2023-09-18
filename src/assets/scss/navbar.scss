@@ -1,19 +1,17 @@
-@import './colors.scss';
+@import "./colors.scss";
 
-.nav{
-    background: linear-gradient(to right, $primary-color, #DE6168);
-    &-link {
-        color: white;
-        font-size: 1rem;
-        &.active{
-            background: none;
-            color: white;
-            font-weight: bold;
-            font-size: 1rem;
-            border-bottom: 6px solid $secondary-color;
-            border-radius: 0;
-        }
+.nav {
+  background: linear-gradient(to right, $primary-color, #de6168);
+  &-link {
+    color: white;
+    font-size: 1rem;
+    &.active {
+      background: none;
+      color: white;
+      font-weight: bold;
+      font-size: 1rem;
+      border-bottom: 6px solid $secondary-color;
+      border-radius: 0;
     }
+  }
 }
-
-

@@ -1,54 +1,163 @@
 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-  <li  class="nav-item" role="presentation">
-    <button class="nav-link active" id="pills-overview-tab" data-bs-toggle="pill" data-bs-target="#pills-overview"
-      type="button" (click)="loadOverviewCanvas()" role="tab" aria-controls="pills-overview" aria-selected="True">Overview</button>
+  <li class="nav-item" role="presentation">
+    <button
+      class="nav-link active"
+      id="pills-overview-tab"
+      data-bs-toggle="pill"
+      data-bs-target="#pills-overview"
+      type="button"
+      (click)="loadOverviewCanvas()"
+      role="tab"
+      aria-controls="pills-overview"
+      aria-selected="True"
+    >
+      Overview
+    </button>
   </li>
   <li class="nav-item" role="presentation">
-    <button  class="nav-link" id="pills-gen-information-tab" data-bs-toggle="pill"
-      data-bs-target="#pills-gen-information" type="button" role="tab" aria-controls="pills-gen-information"
-      aria-selected="false">General information</button>
+    <button
+      class="nav-link"
+      id="pills-gen-information-tab"
+      data-bs-toggle="pill"
+      data-bs-target="#pills-gen-information"
+      type="button"
+      role="tab"
+      aria-controls="pills-gen-information"
+      aria-selected="false"
+    >
+      General information
+    </button>
   </li>
   <li class="nav-item" role="presentation">
-    <button class="nav-link" id="pills-tasks-tab" data-bs-toggle="pill" data-bs-target="#pills-tasks" type="button"
-      role="tab" aria-controls="pills-tasks" aria-selected="false">Tasks</button>
+    <button
+      class="nav-link"
+      id="pills-tasks-tab"
+      data-bs-toggle="pill"
+      data-bs-target="#pills-tasks"
+      type="button"
+      role="tab"
+      aria-controls="pills-tasks"
+      aria-selected="false"
+    >
+      Tasks
+    </button>
   </li>
   <li class="nav-item" role="presentation">
-    <button class="nav-link" id="pills-decisions-tab" data-bs-toggle="pill" data-bs-target="#pills-decisions"
-      type="button" role="tab" aria-controls="pills-decisions" aria-selected="false">Decisions</button>
+    <button
+      class="nav-link"
+      id="pills-decisions-tab"
+      data-bs-toggle="pill"
+      data-bs-target="#pills-decisions"
+      type="button"
+      role="tab"
+      aria-controls="pills-decisions"
+      aria-selected="false"
+    >
+      Decisions
+    </button>
   </li>
   <li class="nav-item" role="presentation">
-    <button class="nav-link" id="pills-notes-tab" data-bs-toggle="pill" data-bs-target="#pills-notes" type="button"
-      role="tab" aria-controls="pills-notes" aria-selected="false">Notes</button>
+    <button
+      class="nav-link"
+      id="pills-notes-tab"
+      data-bs-toggle="pill"
+      data-bs-target="#pills-notes"
+      type="button"
+      role="tab"
+      aria-controls="pills-notes"
+      aria-selected="false"
+    >
+      Notes
+    </button>
   </li>
-  <li style="margin-right: auto !important;" class="nav-item" role="presentation">
-    <button class="nav-link" id="pills-assesment-tab" data-bs-toggle="pill" data-bs-target="#pills-assesment"
-      type="button" role="tab" aria-controls="pills-assesment" aria-selected="false">Assesment</button>
+  <li
+    style="margin-right: auto !important"
+    class="nav-item"
+    role="presentation"
+  >
+    <button
+      class="nav-link"
+      id="pills-assesment-tab"
+      data-bs-toggle="pill"
+      data-bs-target="#pills-assesment"
+      type="button"
+      role="tab"
+      aria-controls="pills-assesment"
+      aria-selected="false"
+    >
+      Assesment
+    </button>
   </li>
-  <img style="height: 44px;" [src]="'../../assets/img/aspis_logo.png'" alt="">
-  <img style="height: 30px; margin-top:8px;margin-right: 7px;" [src]="'../../assets/img/riskhunterlogowhite.png'" alt="">
+  <img style="height: 44px" [src]="'../../assets/img/aspis_logo.png'" alt="" />
+  <img
+    style="height: 30px; margin-top: 8px; margin-right: 7px"
+    [src]="'../../assets/img/riskhunterlogowhite.png'"
+    alt=""
+  />
 </ul>
 
-<as-split style="height: 93vh;" class="" direction="horizontal">
+<as-split style="height: 93vh" class="" direction="horizontal">
   <as-split-area [size]="this.navbarleft">
-
     <div class="tab-content container-fluid" id="pills-tabContent">
       <app-select-ra></app-select-ra>
-      <div class="tab-pane fade show active mt-2" id="pills-overview" role="tabpanel"
-        aria-labelledby="pills-overview-tab"><app-overview *ngIf="this.global.interfaceVisible"></app-overview></div>
-      <div class="tab-pane fade mt-2" id="pills-gen-information" role="tabpanel"
-        aria-labelledby="pills-gen-information-tab"><app-general-information
-          *ngIf="this.global.interfaceVisible"></app-general-information></div>
-      <div class="tab-pane fade mt-2" id="pills-tasks" role="tabpanel" aria-labelledby="pills-tasks-tab"><app-tasks
-          *ngIf="this.global.interfaceVisible"></app-tasks></div>
-      <div class="tab-pane fade mt-2" id="pills-decisions" role="tabpanel" aria-labelledby="pills-decisions-tab">
-        <app-decisions *ngIf="this.global.interfaceVisible"></app-decisions></div>
-      <div class="tab-pane fade mt-2" id="pills-notes" role="tabpanel" aria-labelledby="pills-notes-tab">
-        <app-notes></app-notes> </div>
-      <div class="tab-pane fade mt-2" id="pills-assesment" role="tabpanel" aria-labelledby="pills-assesment-tab">
-        <div class="alert alert-warning d-flex justify-content-between align-items-center" role="alert">
-          <span>Under development!</span>
-          <i class="fas fa-exclamation-triangle fa-lg" style="color: #000000;"></i>
+      <div
+        class="tab-pane fade show active mt-2"
+        id="pills-overview"
+        role="tabpanel"
+        aria-labelledby="pills-overview-tab"
+      >
+        <app-overview *ngIf="this.global.interfaceVisible"></app-overview>
       </div>
+      <div
+        class="tab-pane fade mt-2"
+        id="pills-gen-information"
+        role="tabpanel"
+        aria-labelledby="pills-gen-information-tab"
+      >
+        <app-general-information
+          *ngIf="this.global.interfaceVisible"
+        ></app-general-information>
+      </div>
+      <div
+        class="tab-pane fade mt-2"
+        id="pills-tasks"
+        role="tabpanel"
+        aria-labelledby="pills-tasks-tab"
+      >
+        <app-tasks *ngIf="this.global.interfaceVisible"></app-tasks>
+      </div>
+      <div
+        class="tab-pane fade mt-2"
+        id="pills-decisions"
+        role="tabpanel"
+        aria-labelledby="pills-decisions-tab"
+      >
+        <app-decisions *ngIf="this.global.interfaceVisible"></app-decisions>
+      </div>
+      <div
+        class="tab-pane fade mt-2"
+        id="pills-notes"
+        role="tabpanel"
+        aria-labelledby="pills-notes-tab"
+      >
+        <app-notes></app-notes>
+      </div>
+      <div
+        class="tab-pane fade mt-2"
+        id="pills-assesment"
+        role="tabpanel"
+        aria-labelledby="pills-assesment-tab"
+      >
+        <div
+          class="alert alert-warning d-flex justify-content-between align-items-center"
+          role="alert"
+        >
+          <span>Under development!</span>
+          <i
+            class="fas fa-exclamation-triangle fa-lg"
+            style="color: #000000"
+          ></i>
+        </div>
       </div>
     </div>
   </as-split-area>
