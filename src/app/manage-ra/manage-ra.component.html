@@ -1,41 +1,100 @@
 <div class="collapse" id="navbarToggleExternalContent">
   <div class="btn-group" role="group" aria-label="Basic example">
-    <button (click)="focus()" type="button" class="btn btn-ets-do" data-bs-toggle="modal" data-bs-target="#newRA">New
-      RA</button>
-    <button (click)="deleteRA()" [disabled]="this.ra.listRA.length < 1" type="button" class="btn btn-ets-delete">Delete
-      RA</button>
-    <button (click)="deleteStep()" [disabled]="this.ra.listRA.length < 1" type="button"
-      class="btn btn-ets-delete">Delete Step</button>
-      <button (click)="importRA()" type="button"
-      class="btn btn-ets-bad">Import RA</button>
-      <input type="file" id="fileinput" style="display: none" (change)="handleFile($event)">
-      <button (click)="exportRA()" [disabled]="this.ra.listRA.length < 1" type="button"
-      class="btn btn-ets-bad">Export RA</button>
+    <button
+      (click)="focus()"
+      type="button"
+      class="btn btn-ets-do"
+      data-bs-toggle="modal"
+      data-bs-target="#newRA"
+    >
+      New RA
+    </button>
+    <button
+      (click)="deleteRA()"
+      [disabled]="this.ra.listRA.length < 1"
+      type="button"
+      class="btn btn-ets-delete"
+    >
+      Delete RA
+    </button>
+    <button
+      (click)="deleteStep()"
+      [disabled]="this.ra.listRA.length < 1"
+      type="button"
+      class="btn btn-ets-delete"
+    >
+      Delete Step
+    </button>
+    <button (click)="importRA()" type="button" class="btn btn-ets-bad">
+      Import RA
+    </button>
+    <input
+      type="file"
+      id="fileinput"
+      style="display: none"
+      (change)="handleFile($event)"
+    />
+    <button
+      (click)="exportRA()"
+      [disabled]="this.ra.listRA.length < 1"
+      type="button"
+      class="btn btn-ets-bad"
+    >
+      Export RA
+    </button>
   </div>
 </div>
-<div class="modal fade" id="newRA" tabindex="-1" role="dialog" aria-labelledby="newModalLabel" aria-hidden="false">
+<div
+  class="modal fade"
+  id="newRA"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="newModalLabel"
+  aria-hidden="false"
+>
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="newModalLabel">New RA</h5>
-        <button class="btn btn-danger btn-sm"  data-bs-dismiss="modal" aria-label="Cancel">
+        <button
+          class="btn btn-danger btn-sm"
+          data-bs-dismiss="modal"
+          aria-label="Cancel"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <div class="row g-3 align-items-center">
           <div class="col-auto">
-            <label for="model_name" class="col-form-label label_name">RA name:</label>
+            <label for="model_name" class="col-form-label label_name"
+              >RA name:</label
+            >
           </div>
           <div class="col-auto">
-            <input #nameRAinput type="text" class="form-control ml-2" [(ngModel)]="this.newRAname" placeholder="name">
+            <input
+              #nameRAinput
+              type="text"
+              class="form-control ml-2"
+              [(ngModel)]="this.newRAname"
+              placeholder="name"
+            />
           </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-nam-bad" data-bs-dismiss="modal">Cancel</button>
-        <button type="button" [disabled]="!this.newRAname" class="btn btn-ets-do" data-bs-dismiss="modal"
-          (click)="newRA()">Create</button>
+        <button type="button" class="btn btn-nam-bad" data-bs-dismiss="modal">
+          Cancel
+        </button>
+        <button
+          type="button"
+          [disabled]="!this.newRAname"
+          class="btn btn-ets-do"
+          data-bs-dismiss="modal"
+          (click)="newRA()"
+        >
+          Create
+        </button>
       </div>
     </div>
   </div>
