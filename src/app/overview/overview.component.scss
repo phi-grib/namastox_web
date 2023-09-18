@@ -1,18 +1,15 @@
-@import '../../assets/scss/title.scss';
+@import "../../assets/scss/title.scss";
 
-
-
-#headerOverview{
+#headerOverview {
   background-color: $primary-color;
   color: white;
-  
 }
 .card-body {
-    /* overflow: auto; */
-    border-width: 0px;
-    padding: 0px;
-    margin-bottom : 5px;
-  }
+  /* overflow: auto; */
+  border-width: 0px;
+  padding: 0px;
+  margin-bottom: 5px;
+}
 
 .text {
   color: $secondary-color;
@@ -21,23 +18,21 @@
 table {
   table-layout: fixed;
   width: 100%;
-  thead{
-    tr{
-      th:nth-child(1){
-          width: 30% !important;
+  thead {
+    tr {
+      th:nth-child(1) {
+        width: 30% !important;
+      }
+      th:nth-child(2) {
+        width: 20% !important;
+      }
+      th:nth-child(3) {
+        width: 50% !important;
+      }
+    }
   }
-  th:nth-child(2){
-      width: 20% !important;
-  }
-  th:nth-child(3){
-    width: 50% !important;
-}
-  }
- 
-}
 
-td {
-  width: 150px; 
-}
-
+  td {
+    width: 150px;
+  }
 }
