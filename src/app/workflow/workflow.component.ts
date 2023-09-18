@@ -1,46 +1,36 @@
-import {
-  Component,
-  ViewChild,
-  ElementRef,
-  OnInit
-} from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import mermaid from 'mermaid';
 import { CommonService } from '../common.service';
 import { PendingTasks, RA, Results } from '../globals';
 @Component({
   selector: 'app-workflow',
   templateUrl: './workflow.component.html',
-  styleUrls: ['./workflow.component.scss']
+  styleUrls: ['./workflow.component.scss'],
 })
-
 export class WorkflowComponent implements OnInit {
-
-  constructor(public ra: RA, private commonService: CommonService, private pendingTasks: PendingTasks, private results: Results) {
-
-  }
+  constructor(
+    public ra: RA,
+    private commonService: CommonService,
+    private pendingTasks: PendingTasks,
+    private results: Results
+  ) {}
   @ViewChild('mermaidDiv', { static: false }) mermaidDiv: ElementRef;
-
 
   flowchartRefresh() {
     const element: any = this.mermaidDiv.nativeElement;
-    mermaid.render(
-      'graphDiv',
-      this.ra.workflow,
-      (svgCode, bindFunctions) => {
-        element.innerHTML = svgCode;
-        bindFunctions(element);
-      }
-    );
+    mermaid.render('graphDiv', this.ra.workflow, (svgCode, bindFunctions) => {
+      element.innerHTML = svgCode;
+      bindFunctions(element);
+    });
   }
-
 
   selectTableRowByValue(tableID: string, column: number, value: string) {
     //first check if accordion is opened
-    const accTask = document.getElementById('pastCollapseTasks')
-    const accSelectTask = document.getElementById('tableCollapseTasks')
-    if(accSelectTask.classList.contains('collapsed')){
+    const accTask = document.getElementById('pastCollapseTasks');
+    const accSelectTask = document.getElementById('tableCollapseTasks');
+    if (accSelectTask.classList.contains('collapsed')) {
       accSelectTask.click();
-     }
+    }
     setTimeout(() => {
       const table = document.querySelector(tableID);
       table.querySelectorAll('tr').forEach((row) => {
@@ -48,27 +38,27 @@ export class WorkflowComponent implements OnInit {
         if (cells[column] != undefined && cells[column].textContent === value) {
           row.click();
           setTimeout(() => {
-            if(accTask.classList.contains('collapsed')){
+            if (accTask.classList.contains('collapsed')) {
               accTask.click();
-             }
+            }
           }, 300);
         }
       });
-      
     }, 300);
   }
-  selectOptionBytaskID(selectorID,taskID){
+  selectOptionBytaskID(selectorID, taskID) {
     const selector = document.getElementById(selectorID);
-       selector.querySelectorAll('option').forEach((option)=> {
-          if(option.textContent === taskID){
-            option.selected = true;
-            this.commonService.AutoGenerateForm(taskID);
-          } 
-       })
+    selector.querySelectorAll('option').forEach((option) => {
+      if (option.textContent === taskID) {
+        option.selected = true;
+        this.commonService.AutoGenerateForm(taskID);
+      }
+    });
   }
-  selectTask(typeTask,taskID){
-    const selectorID = typeTask === 'results' ?'selectPendingResult' :'selectPendingDecision';
-    this.selectOptionBytaskID(selectorID,taskID,);
+  selectTask(typeTask, taskID) {
+    const selectorID =
+      typeTask === 'results' ? 'selectPendingResult' : 'selectPendingDecision';
+    this.selectOptionBytaskID(selectorID, taskID);
   }
   selectPastTask(typeTask, taskName) {
     const tableID = typeTask === 'results' ? '#dtTasks' : '#dtDecisions';
@@ -80,35 +70,42 @@ export class WorkflowComponent implements OnInit {
       $('#pills-tasks-tab').click();
       if (pending) {
         $('#pills-pendingtask-tab').click();
-        this.selectTask(typeTask,taskname);
+        this.selectTask(typeTask, taskname);
       } else {
         $('#pills-pasttasks-tab').click();
-        this.selectPastTask(typeTask, taskname)
+        this.selectPastTask(typeTask, taskname);
       }
     } else {
       $('#pills-decisions-tab').click();
       if (pending) {
         $('#pills-pendingdecisions-tab').click();
-        this.selectTask(typeTask,taskname);
+        this.selectTask(typeTask, taskname);
       } else {
         $('#pills-pastdecisions-tab').click();
-        this.selectPastTask(typeTask, taskname)
+        this.selectPastTask(typeTask, taskname);
       }
     }
   }
 
   checkType(taskName) {
     // RESULTS
-    const pendingTaskResults = this.pendingTasks.results.find(task => task.id == taskName)
-    const pastTaskResults = this.results.results.find(task => task.id == taskName)
-    if (pendingTaskResults) this.redirectToTask('results', true, taskName)
-    if (pastTaskResults) this.redirectToTask('results', false, taskName)
+    const pendingTaskResults = this.pendingTasks.results.find(
+      (task) => task.id == taskName
+    );
+    const pastTaskResults = this.results.results.find(
+      (task) => task.id == taskName
+    );
+    if (pendingTaskResults) this.redirectToTask('results', true, taskName);
+    if (pastTaskResults) this.redirectToTask('results', false, taskName);
     // DECISIONS
-    const pendingTaskDecisions = this.pendingTasks.decisions.find(task => task.id == taskName)
-    const pastTaskDecisions = this.results.decisions.find(task => task.id == taskName)
-    if (pendingTaskDecisions) this.redirectToTask('decisions', true, taskName)
-    if (pastTaskDecisions) this.redirectToTask('decisions', false, taskName)
-
+    const pendingTaskDecisions = this.pendingTasks.decisions.find(
+      (task) => task.id == taskName
+    );
+    const pastTaskDecisions = this.results.decisions.find(
+      (task) => task.id == taskName
+    );
+    if (pendingTaskDecisions) this.redirectToTask('decisions', true, taskName);
+    if (pastTaskDecisions) this.redirectToTask('decisions', false, taskName);
   }
 
   ngOnInit(): void {
@@ -121,7 +118,7 @@ export class WorkflowComponent implements OnInit {
       flowchart: {
         useMaxWidth: true,
         htmlLabels: true,
-        curve: 'stepAfter'
+        curve: 'stepAfter',
       },
     });
 
@@ -129,7 +126,6 @@ export class WorkflowComponent implements OnInit {
 
     this.commonService.refreshWorklfow$.subscribe(() => {
       this.flowchartRefresh();
-    })
+    });
   }
 }
-
