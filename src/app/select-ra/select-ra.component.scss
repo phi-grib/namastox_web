@@ -1,24 +1,23 @@
-@import '../../assets/scss/colors.scss';
-@import '../../assets/scss/buttons.scss';
+@import "../../assets/scss/colors.scss";
+@import "../../assets/scss/buttons.scss";
 
-
-#menubtn{
+#menubtn {
   color: $primary-color;
 }
 
 /* Add some margins for each label */
 .form-inline label {
-    margin: 5px 10px 5px 0;
-  }
-  
-  /* Style the input fields */
+  margin: 5px 10px 5px 0;
+}
+
+/* Style the input fields */
 .form-inline inpselectut {
-    vertical-align: middle;
-    margin: 5px 10px 5px 0;
-    padding: 10px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-  }
+  vertical-align: middle;
+  margin: 5px 10px 5px 0;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
 
 select {
   border: 0.5px solid whitesmoke;
@@ -26,10 +25,8 @@ select {
   color: $secondary-color;
 }
 
-
-
 .btn-nam-good {
-  background: #28328A;
+  background: #28328a;
   color: #ffffff;
   border-width: 0;
   // font-family: 'Barlow Semi Condensed', 'Arial', 'Helvetica';
@@ -39,19 +36,18 @@ select {
 .btn-nam-good:hover,
 .btn-nam-good:focus,
 .btn-nam-good.active {
-  background:#4251de ;
+  background: #4251de;
   color: #ffffff;
 }
 
-
 span {
-  &:hover{
+  &:hover {
     background-color: red !important;
   }
 }
 
-#offcanvasExample{
-  width: 150px; 
+#offcanvasExample {
+  width: 150px;
   height: 150px;
   margin-top: 75px;
   background: transparent !important;

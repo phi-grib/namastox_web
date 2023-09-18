@@ -7,13 +7,17 @@ import { Global, PendingTasks, RA, Results } from '../globals';
 @Component({
   selector: 'app-select-ra',
   templateUrl: './select-ra.component.html',
-  styleUrls: ['./select-ra.component.scss']
+  styleUrls: ['./select-ra.component.scss'],
 })
 export class SelectRaComponent {
-
-  constructor(public global: Global, public ra: RA, private commonService: CommonService, private func: CommonFunctions, private pendingTasks: PendingTasks, private results: Results) {
-
-  }
+  constructor(
+    public global: Global,
+    public ra: RA,
+    private commonService: CommonService,
+    private func: CommonFunctions,
+    private pendingTasks: PendingTasks,
+    private results: Results
+  ) {}
 
   loadRA() {
     this.func.refreshRA();
@@ -22,29 +26,32 @@ export class SelectRaComponent {
   loadStep() {
     this.results.resultSelected = '';
     this.results.decisionSelected = '';
-    this.commonService.getStatusWithStep(this.ra.name, this.ra.status.step).subscribe({
-      next: (result) => this.ra.status = result.ra,
-      error: (e) => console.log(e)
-    })
-    this.commonService.getResultsWithStep(this.ra.name, this.ra.status.step).subscribe({
-      next: (result) => {
-        this.ra.results = result
-        this.func.separatePastTasks();
-      },
-      error: (e) => console.log(e)
-    })
-    this.commonService.getWorkflowByStep(this.ra.name,this.ra.status.step).subscribe({
-      next: (result) => {
-        this.ra.workflow = result['result'];
-        this.commonService.updateWorkflow();
-
-      }
-    })
-
-    
+    this.commonService
+      .getStatusWithStep(this.ra.name, this.ra.status.step)
+      .subscribe({
+        next: (result) => (this.ra.status = result.ra),
+        error: (e) => console.log(e),
+      });
+    this.commonService
+      .getResultsWithStep(this.ra.name, this.ra.status.step)
+      .subscribe({
+        next: (result) => {
+          this.ra.results = result;
+          this.func.separatePastTasks();
+        },
+        error: (e) => console.log(e),
+      });
+    this.commonService
+      .getWorkflowByStep(this.ra.name, this.ra.status.step)
+      .subscribe({
+        next: (result) => {
+          this.ra.workflow = result['result'];
+          this.commonService.updateWorkflow();
+        },
+      });
   }
   // angular-split function
-  @ViewChild('mySplit') mySplitEl: SplitComponent
+  @ViewChild('mySplit') mySplitEl: SplitComponent;
   // area size
   _size1 = 0;
   _size2 = 100;
@@ -67,8 +74,7 @@ export class SelectRaComponent {
       if (e.sizes[0] == 0) {
         this.size1 = 30;
         this.size2 = 70;
-      }
-      else {
+      } else {
         this.size2 = 100;
         this.size1 = 0;
       }

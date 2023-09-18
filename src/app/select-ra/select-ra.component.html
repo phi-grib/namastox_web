@@ -1,25 +1,50 @@
 <!-- options ra delete | new  -->
 <app-manage-ra></app-manage-ra>
 
-<div style="display:flex;" class="mb-2">
+<div style="display: flex" class="mb-2">
   <div class="d-inline-block">
-    <a id="menubtn" class="btn" data-bs-toggle="collapse"
-      data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false"
-      aria-label="Toggle navigation" role="button">
+    <a
+      id="menubtn"
+      class="btn"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarToggleExternalContent"
+      aria-controls="navbarToggleExternalContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+      role="button"
+    >
       <i class="fa-solid fa-bars"></i>
     </a>
   </div>
-  <div *ngIf="this.global.interfaceVisible" class="form-inline d-inline-block position-relative">
+  <div
+    *ngIf="this.global.interfaceVisible"
+    class="form-inline d-inline-block position-relative"
+  >
     <label for="ra1">RA </label>
-    <select id="ra1" (change)="loadRA()" [(ngModel)]="this.ra.name" aria-label="Default select example">
-      <option *ngFor="let ra of this.ra.listRA" [value]='ra'>{{ra}}</option>
+    <select
+      id="ra1"
+      (change)="loadRA()"
+      [(ngModel)]="this.ra.name"
+      aria-label="Default select example"
+    >
+      <option *ngFor="let ra of this.ra.listRA" [value]="ra">{{ ra }}</option>
     </select>
   </div>
   <div *ngIf="this.global.interfaceVisible" class="m-2 d-inline-block"></div>
-  <div *ngIf="this.global.interfaceVisible" class="form-inline d-inline-block position-relative">
+  <div
+    *ngIf="this.global.interfaceVisible"
+    class="form-inline d-inline-block position-relative"
+  >
     <label for="ra2">step </label>
-    <select id="ra2" (change)="loadStep()" [(ngModel)]="this.ra.status.step" aria-label="Default select example">
-      <option *ngFor="let step of this.ra.listSteps" [value]='step'>{{step}}</option>
+    <select
+      id="ra2"
+      (change)="loadStep()"
+      [(ngModel)]="this.ra.status.step"
+      aria-label="Default select example"
+    >
+      <option *ngFor="let step of this.ra.listSteps" [value]="step">
+        {{ step }}
+      </option>
     </select>
   </div>
 </div>
