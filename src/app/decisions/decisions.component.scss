@@ -1,52 +1,49 @@
-@import '../../assets/scss/title.scss';
-@import '../../assets/scss/buttons.scss';
-@import '../../assets/scss/submenu.scss';
-
-
-
+@import "../../assets/scss/title.scss";
+@import "../../assets/scss/buttons.scss";
+@import "../../assets/scss/submenu.scss";
 
 #dtDecisions {
-    padding-top:10px;
-    thead {
-        background-color: $primary-color;
-        color: white;
-        tr{
-            th:nth-child(1){
-                width: 20% !important;
-            }
-            th:nth-child(2){
-                width: 10% !important;
-            }
-            th:nth-child(3){
-                width: 30% !important;
-            }
-            th:nth-child(4){
-                width: 60% !important;
-            }
-        }
+  padding-top: 10px;
+  thead {
+    background-color: $primary-color;
+    color: white;
+    tr {
+      th:nth-child(1) {
+        width: 20% !important;
+      }
+      th:nth-child(2) {
+        width: 10% !important;
+      }
+      th:nth-child(3) {
+        width: 30% !important;
+      }
+      th:nth-child(4) {
+        width: 60% !important;
+      }
     }
-    td{
-        vertical-align: top;
-        text-align: left;
-        padding: 0px 10px !important;
-    }
+  }
+  td {
+    vertical-align: top;
+    text-align: left;
+    padding: 0px 10px !important;
+  }
 }
 
-hr{
-    height: 3px;
-    background-color: $tertiary-color;
-    border: None;
+hr {
+  height: 3px;
+  background-color: $tertiary-color;
+  border: None;
 }
 
 .text {
-    color: $secondary-color;
-  }
+  color: $secondary-color;
+}
 
-  .container-form {
-    color: $secondary-color;
+.container-form {
+  color: $secondary-color;
 }
 // ::ng-deep th:nth-child(1){
-//    
+//
 
 // }
 // ::ng-deep th:nth-child(3){
@@ -55,35 +52,34 @@ hr{
 // }
 
 #dtSubstancesDecisions {
-    table-layout: fixed;
-    width: 100%;
-    thead{
-      tr{
-        th:nth-child(1){
-            width: 30% !important;
-    }
-    th:nth-child(2){
+  table-layout: fixed;
+  width: 100%;
+  thead {
+    tr {
+      th:nth-child(1) {
+        width: 30% !important;
+      }
+      th:nth-child(2) {
         width: 20% !important;
-    }
-    th:nth-child(3){
+      }
+      th:nth-child(3) {
         width: 50% !important;
+      }
     }
-    }
-     }
   }
-
-  .accordion-button:focus {
-    box-shadow: none;
-    border-color: rgba(0,0,0,.125);
 }
- .accordion-button  {
-    background-color: rgb(248, 246, 246) !important;
-    color: $secondary-color !important;
-    border: none !important;
-    border-color: transparent !important;
- }
- .accordion-button:not(.collapsed) {
-    background-color: rgb(248, 246, 246) !important;
-    color: $secondary-color !important;
- }
-  
+
+.accordion-button:focus {
+  box-shadow: none;
+  border-color: rgba(0, 0, 0, 0.125);
+}
+.accordion-button {
+  background-color: rgb(248, 246, 246) !important;
+  color: $secondary-color !important;
+  border: none !important;
+  border-color: transparent !important;
+}
+.accordion-button:not(.collapsed) {
+  background-color: rgb(248, 246, 246) !important;
+  color: $secondary-color !important;
+}
