@@ -1,89 +1,86 @@
-@import '../../assets/scss/title.scss';
-@import '../../assets/scss/buttons.scss';
-@import '../../assets/scss/submenu.scss';
+@import "../../assets/scss/title.scss";
+@import "../../assets/scss/buttons.scss";
+@import "../../assets/scss/submenu.scss";
 
-
-.multiple-value{
-    background-color: grayscale($color: #f5f0f0) !important;
+.multiple-value {
+  background-color: grayscale($color: #f5f0f0) !important;
 }
 #dtTasks {
-    padding-top:10px;
-    thead {
-        background-color: $primary-color;
-        color: white;
-        tr{
-            th:nth-child(1){
-                width: 20% !important;
-        }
-        th:nth-child(2){
-            width: 10% !important;
-        }
-        th:nth-child(3){
-            width: 20% !important;
-        }
-        th:nth-child(5){
-            width: 25% !important;
-        }
-        }
-       }
-    td{
-        vertical-align: top;
-        padding: 0px 10px !important;
+  padding-top: 10px;
+  thead {
+    background-color: $primary-color;
+    color: white;
+    tr {
+      th:nth-child(1) {
+        width: 20% !important;
+      }
+      th:nth-child(2) {
+        width: 10% !important;
+      }
+      th:nth-child(3) {
+        width: 20% !important;
+      }
+      th:nth-child(5) {
+        width: 25% !important;
+      }
     }
-    }
+  }
+  td {
+    vertical-align: top;
+    padding: 0px 10px !important;
+  }
+}
 
-    #dtSubstancesTasks {
-        table-layout: fixed;
-        width: 100%;
-        thead{
-          tr{
-            th:nth-child(1){
-                width: 30% !important;
-        }
-        th:nth-child(2){
-            width: 20% !important;
-        }
-        th:nth-child(3){
-            width: 50% !important;
-        }
-        }
+#dtSubstancesTasks {
+  table-layout: fixed;
+  width: 100%;
+  thead {
+    tr {
+      th:nth-child(1) {
+        width: 30% !important;
       }
+      th:nth-child(2) {
+        width: 20% !important;
       }
-hr{
-    height: 3px;
-    background-color: $tertiary-color;
-    border: None;
+      th:nth-child(3) {
+        width: 50% !important;
+      }
+    }
+  }
+}
+hr {
+  height: 3px;
+  background-color: $tertiary-color;
+  border: None;
 }
 
 .text {
+  color: $secondary-color;
+}
+
+.container-form {
+  color: $secondary-color;
+}
+
+.modal-title {
+  color: $secondary-color;
+}
+
+#modelsTable {
+  th {
     color: $secondary-color;
   }
-  
-.container-form {
-    color: $secondary-color;
 }
 
- .modal-title{
-    color: $secondary-color;
- }
-
- #modelsTable{
-    th{
-        color: $secondary-color;
-    }
-
- }
-
-
- .accordion-button:focus {
-    box-shadow: none;
-    border-color: rgba(0,0,0,.125);
+.accordion-button:focus {
+  box-shadow: none;
+  border-color: rgba(0, 0, 0, 0.125);
 }
- .accordion-button  {
-    background-color: rgb(248, 246, 246) !important;
-    color: $secondary-color !important;
- }
- .accordion-button:not(.collapsed) {
-    background-color: rgb(248, 246, 246) !important;
-    color: $secondary-color !important;
- }
+.accordion-button {
+  background-color: rgb(248, 246, 246) !important;
+  color: $secondary-color !important;
+}
+.accordion-button:not(.collapsed) {
+  background-color: rgb(248, 246, 246) !important;
+  color: $secondary-color !important;
+}

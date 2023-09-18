@@ -1,32 +1,68 @@
 <ul class="nav nav-pills" id="results-tab" role="tablist">
   <li class="nav-item" role="presentation">
-    <button class="nav-link active" id="pills-pendingtask-tab" data-bs-toggle="pill" data-bs-target="#pills-pendingtask"
-      type="button" role="tab" aria-controls="pills-pendingtask" aria-selected="True">Pending</button>
+    <button
+      class="nav-link active"
+      id="pills-pendingtask-tab"
+      data-bs-toggle="pill"
+      data-bs-target="#pills-pendingtask"
+      type="button"
+      role="tab"
+      aria-controls="pills-pendingtask"
+      aria-selected="True"
+    >
+      Pending
+    </button>
   </li>
   <li class="nav-item" role="presentation">
-    <button class="nav-link" id="pills-pasttasks-tab" data-bs-toggle="pill" data-bs-target="#pills-pasttasks"
-      type="button" role="tab" aria-controls="pills-pasttasks" aria-selected="false">Past</button>
+    <button
+      class="nav-link"
+      id="pills-pasttasks-tab"
+      data-bs-toggle="pill"
+      data-bs-target="#pills-pasttasks"
+      type="button"
+      role="tab"
+      aria-controls="pills-pasttasks"
+      aria-selected="false"
+    >
+      Past
+    </button>
   </li>
 </ul>
 <div class="tab-content container-fluid" id="pills-tabContent">
-  <div class="tab-pane fade show active mt-2" id="pills-pendingtask" role="tabpanel"
-    aria-labelledby="pills-pendingtask-tab">
-    <div *ngIf="this.pendingTasks.results.length > 0 else noTasks">
+  <div
+    class="tab-pane fade show active mt-2"
+    id="pills-pendingtask"
+    role="tabpanel"
+    aria-labelledby="pills-pendingtask-tab"
+  >
+    <div *ngIf="this.pendingTasks.results.length > 0; else noTasks">
       <div class="row">
         <div class="col">
-          <select (change)="getPendingTask()" id="selectPendingResult" [(ngModel)]="this.pending_task_selected"
-            class="form-select" aria-label="Default select example">
-            <option *ngFor="let idx of objectKeys(this.pendingTasks.results)"
-              [value]='this.pendingTasks.results[idx].id'>{{this.pendingTasks.results[idx].id}}</option>
+          <select
+            (change)="getPendingTask()"
+            id="selectPendingResult"
+            [(ngModel)]="this.pending_task_selected"
+            class="form-select"
+            aria-label="Default select example"
+          >
+            <option
+              *ngFor="let idx of objectKeys(this.pendingTasks.results)"
+              [value]="this.pendingTasks.results[idx].id"
+            >
+              {{ this.pendingTasks.results[idx].id }}
+            </option>
           </select>
-          <div *ngIf="this.pending_task?.result" class="container-information mt-2 ml-2">
+          <div
+            *ngIf="this.pending_task?.result"
+            class="container-information mt-2 ml-2"
+          >
             <div class="card-body">
               <div class="row">
                 <div class="col-2 text">
                   <strong>Name</strong>
                 </div>
                 <div class="col-10">
-                  {{this.pending_task['task description'].name}}
+                  {{ this.pending_task["task description"].name }}
                 </div>
               </div>
               <div class="row">
@@ -34,12 +70,16 @@
                   <strong>Description</strong>
                 </div>
                 <div class="col-10">
-                  {{this.pending_task['task description'].description}}
+                  {{ this.pending_task["task description"].description }}
                 </div>
               </div>
-            </div>   
-              <!-- task form -->
-            <task-form *ngIf="this.pending_task" [editMode]="false" [task]="this.pending_task"></task-form>
+            </div>
+            <!-- task form -->
+            <task-form
+              *ngIf="this.pending_task"
+              [editMode]="false"
+              [task]="this.pending_task"
+            ></task-form>
           </div>
         </div>
       </div>
@@ -47,15 +87,33 @@
     <ng-template #noTasks>No pending Tasks</ng-template>
   </div>
 
-  <div class="tab-pane fade" id="pills-pasttasks" role="tabpanel" aria-labelledby="pills-pasttasks-tab">
+  <div
+    class="tab-pane fade"
+    id="pills-pasttasks"
+    role="tabpanel"
+    aria-labelledby="pills-pasttasks-tab"
+  >
     <div class="accordion accordion-flush" id="accordionTasks">
       <div class="accordion-item">
         <h2 class="accordion-header" id="flush-headingTwoTasks">
-          <button id="tableCollapseTasks" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOneTasks" aria-expanded="false" aria-controls="flush-collapseOneTasks">
-          Select Task
+          <button
+            id="tableCollapseTasks"
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#flush-collapseOneTasks"
+            aria-expanded="false"
+            aria-controls="flush-collapseOneTasks"
+          >
+            Select Task
           </button>
         </h2>
-        <div id="flush-collapseOneTasks" class="accordion-collapse collapse show"  aria-labelledby="flush-headingTwoTasks" data-bs-parent="#accordionTasks">
+        <div
+          id="flush-collapseOneTasks"
+          class="accordion-collapse collapse show"
+          aria-labelledby="flush-headingTwoTasks"
+          data-bs-parent="#accordionTasks"
+        >
           <div class="accordion-body">
             <div class="row">
               <div class="col">
@@ -70,13 +128,25 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr (click)="selectTask(result.id)" *ngFor="let result of this.results.results">
-                    <td>{{result.date | formatDate}}</td>
-                      <td>{{result.id}}</td>
-                      <td>{{result.name}}</td>
-                      <td>{{result.summary | slice:0:150}}...</td>
-                      <td *ngIf="isObject(result.values[0]) else reportTD">{{result.values[0].parameter}},{{result.values[0].value}},{{result.values[0].unit}} <span *ngIf="result.values.length > 0">...</span></td>
-                    <ng-template #reportTD><td>{{result.values[0] | slice:0:20}}...  </td></ng-template>
+                    <tr
+                      (click)="selectTask(result.id)"
+                      *ngFor="let result of this.results.results"
+                    >
+                      <td>{{ result.date | formatDate }}</td>
+                      <td>{{ result.id }}</td>
+                      <td>{{ result.name }}</td>
+                      <td>{{ result.summary | slice : 0 : 150 }}...</td>
+                      <td *ngIf="isObject(result.values[0]); else reportTD">
+                        {{ result.values[0].parameter }},{{
+                          result.values[0].value
+                        }},{{ result.values[0].unit }}
+                        <span *ngIf="result.values.length > 0">...</span>
+                      </td>
+                      <ng-template #reportTD
+                        ><td>
+                          {{ result.values[0] | slice : 0 : 20 }}...
+                        </td></ng-template
+                      >
                     </tr>
                   </tbody>
                 </table>
@@ -86,22 +156,41 @@
         </div>
       </div>
       <div class="accordion-item">
-        <h2 class="accordion-header " id="flush-headingTwoTasks">
-          <button (click)="showTablePastTasks()" id="pastCollapseTasks" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwoTasks" aria-expanded="true" aria-controls="flush-collapseTwoTasks">
-            {{this.results?.resultSelected['task description']?.id}}
+        <h2 class="accordion-header" id="flush-headingTwoTasks">
+          <button
+            (click)="showTablePastTasks()"
+            id="pastCollapseTasks"
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#flush-collapseTwoTasks"
+            aria-expanded="true"
+            aria-controls="flush-collapseTwoTasks"
+          >
+            {{ this.results?.resultSelected["task description"]?.id }}
           </button>
         </h2>
-        <div id="flush-collapseTwoTasks" class="accordion-collapse collapse"  aria-labelledby="flush-headingTwoTasks" data-bs-parent="#accordionTasks">
+        <div
+          id="flush-collapseTwoTasks"
+          class="accordion-collapse collapse"
+          aria-labelledby="flush-headingTwoTasks"
+          data-bs-parent="#accordionTasks"
+        >
           <div class="accordion-body">
-            <div class="mt-2" *ngIf="this.results.resultSelected.result && !this.global.editModeTasks">
-              <hr>
+            <div
+              class="mt-2"
+              *ngIf="
+                this.results.resultSelected.result && !this.global.editModeTasks
+              "
+            >
+              <hr />
               <div class="card-body mb-3">
                 <div class="row">
                   <div class="col-2 text">
                     <strong>Date</strong>
                   </div>
                   <div class="col-10">
-                    {{this.results.resultSelected.result['date']}}
+                    {{ this.results.resultSelected.result["date"] }}
                   </div>
                 </div>
                 <div class="row">
@@ -109,7 +198,7 @@
                     <strong>Name</strong>
                   </div>
                   <div class="col-10">
-                    {{this.results.resultSelected['task description'].name}}
+                    {{ this.results.resultSelected["task description"].name }}
                   </div>
                 </div>
                 <div class="row">
@@ -117,51 +206,118 @@
                     <strong>Description</strong>
                   </div>
                   <div class="col-10">
-                    {{this.results.resultSelected['task description'].description}}
+                    {{
+                      this.results.resultSelected["task description"]
+                        .description
+                    }}
                   </div>
                 </div>
               </div>
-              <div
-               class="card-body">
+              <div class="card-body">
                 <div class="row pt-1 pb-1">
-                  <div *ngIf="this.results.resultSelected.result.result_type === 'text'" class="col-2 text  border-bottom">
+                  <div
+                    *ngIf="
+                      this.results.resultSelected.result.result_type === 'text'
+                    "
+                    class="col-2 text border-bottom"
+                  >
                     Report
                   </div>
-                  <div *ngIf='this.results.resultSelected.result.result_type === "value"' class="col-2 text  border-bottom">
+                  <div
+                    *ngIf="
+                      this.results.resultSelected.result.result_type === 'value'
+                    "
+                    class="col-2 text border-bottom"
+                  >
                     Values
                   </div>
                   <div class="col border-bottom">
-                    <table *ngIf="isObject(this.results.resultSelected.result.values[0])"  class="table table-borderless">
+                    <table
+                      *ngIf="
+                        isObject(this.results.resultSelected.result.values[0])
+                      "
+                      class="table table-borderless"
+                    >
                       <thead class="text">
                         <tr>
-                          <th >Parameter</th>
-                          <th >Value</th>
-                          <th >Unit</th>
+                          <th>Parameter</th>
+                          <th>Value</th>
+                          <th>Unit</th>
                           <th>Uncertainty</th>
                           <th>Probability</th>
                           <th>Term</th>
                         </tr>
                       </thead>
-                      <tbody *ngFor="let idx of objectKeys(this.results.resultSelected.result.values)">
+                      <tbody
+                        *ngFor="
+                          let idx of objectKeys(
+                            this.results.resultSelected.result.values
+                          )
+                        "
+                      >
                         <tr>
-                          <td>{{this.results.resultSelected.result.values[idx].parameter}}</td>
-                          <td>{{this.results.resultSelected.result.values[idx].value.toString() | slice:0:8}}</td>
-                          <td>{{this.results.resultSelected.result.values[idx].unit}}</td>
-                          <td>{{this.results.resultSelected.result?.uncertainties[idx]?.uncertainty}}</td>
-                          <td>{{this.results.resultSelected.result?.uncertainties[idx]?.p}}</td>
-                          <td>{{this.results.resultSelected.result?.uncertainties[idx]?.term}}</td>
+                          <td>
+                            {{
+                              this.results.resultSelected.result.values[idx]
+                                .parameter
+                            }}
+                          </td>
+                          <td>
+                            {{
+                              this.results.resultSelected.result.values[
+                                idx
+                              ].value.toString() | slice : 0 : 8
+                            }}
+                          </td>
+                          <td>
+                            {{
+                              this.results.resultSelected.result.values[idx]
+                                .unit
+                            }}
+                          </td>
+                          <td>
+                            {{
+                              this.results.resultSelected.result?.uncertainties[
+                                idx
+                              ]?.uncertainty
+                            }}
+                          </td>
+                          <td>
+                            {{
+                              this.results.resultSelected.result?.uncertainties[
+                                idx
+                              ]?.p
+                            }}
+                          </td>
+                          <td>
+                            {{
+                              this.results.resultSelected.result?.uncertainties[
+                                idx
+                              ]?.term
+                            }}
+                          </td>
                         </tr>
                       </tbody>
-                      </table>
-                      <div *ngIf="this.results.resultSelected.result.result_type === 'text'" class="col">
-                        {{this.results.resultSelected.result.values[0]}}
-                      </div>
+                    </table>
+                    <div
+                      *ngIf="
+                        this.results.resultSelected.result.result_type ===
+                        'text'
+                      "
+                      class="col"
+                    >
+                      {{ this.results.resultSelected.result.values[0] }}
+                    </div>
                   </div>
                 </div>
 
-                <div *ngIf="this.results.resultSelected.result.result_type === 'text'"  class="row  pt-1 pb-1">
-                  <div  class="col-2 text  border-bottom">
-                  </div>
+                <div
+                  *ngIf="
+                    this.results.resultSelected.result.result_type === 'text'
+                  "
+                  class="row pt-1 pb-1"
+                >
+                  <div class="col-2 text border-bottom"></div>
                   <div class="col border-bottom">
                     <table class="table table-borderless">
                       <thead class="text">
@@ -169,61 +325,125 @@
                         <th>Probability</th>
                         <th>Term</th>
                       </thead>
-                       <tbody>
+                      <tbody>
                         <tr>
-                          <td>{{this.results.resultSelected.result?.uncertainties[0]?.uncertainty}}</td>
-                          <td>{{this.results.resultSelected.result?.uncertainties[0]?.p}}</td>
-                          <td>{{this.results.resultSelected.result?.uncertainties[0]?.term}}</td>
+                          <td>
+                            {{
+                              this.results.resultSelected.result
+                                ?.uncertainties[0]?.uncertainty
+                            }}
+                          </td>
+                          <td>
+                            {{
+                              this.results.resultSelected.result
+                                ?.uncertainties[0]?.p
+                            }}
+                          </td>
+                          <td>
+                            {{
+                              this.results.resultSelected.result
+                                ?.uncertainties[0]?.term
+                            }}
+                          </td>
                         </tr>
-                      </tbody> 
+                      </tbody>
                     </table>
-
                   </div>
                 </div>
-                <div class="row pt-1 pb-1" *ngIf="this.results.resultSelected.result.uncertainty">
-                  <div class="col-2 text  border-bottom">
-                    Uncertainty
-                  </div>
+                <div
+                  class="row pt-1 pb-1"
+                  *ngIf="this.results.resultSelected.result.uncertainty"
+                >
+                  <div class="col-2 text border-bottom">Uncertainty</div>
                   <div class="col border-bottom">
-                    {{this.results.resultSelected.result.uncertainty}}
+                    {{ this.results.resultSelected.result.uncertainty }}
                   </div>
                 </div>
-                <div *ngIf="this.results.resultSelected.result.links" class="row pt-1 pb-1">
-                  <div class="col-2 text  border-bottom d-flex  align-items-center">
+                <div
+                  *ngIf="this.results.resultSelected.result.links"
+                  class="row pt-1 pb-1"
+                >
+                  <div
+                    class="col-2 text border-bottom d-flex align-items-center"
+                  >
                     Documentation
                   </div>
                   <div class="col border-bottom">
-                    <div class="d-inline mx-1" *ngFor="let idx of objectKeys(this.results.resultSelected.result.links)">
-                      <button (click)="downloadFile(this.results.resultSelected.result.links[idx].File)" class="btn btn-outline-success mt-2 mb-2">{{this.results.resultSelected.result.links[idx].label}} </button>
+                    <div
+                      class="d-inline mx-1"
+                      *ngFor="
+                        let idx of objectKeys(
+                          this.results.resultSelected.result.links
+                        )
+                      "
+                    >
+                      <button
+                        (click)="
+                          downloadFile(
+                            this.results.resultSelected.result.links[idx].File
+                          )
+                        "
+                        class="btn btn-outline-success mt-2 mb-2"
+                      >
+                        {{
+                          this.results.resultSelected.result.links[idx].label
+                        }}
+                      </button>
                     </div>
                   </div>
                 </div>
                 <div class="row pt-1 pb-1">
-                  <div class="col-2 text  border-bottom">
-                    Summary
-                  </div>
+                  <div class="col-2 text border-bottom">Summary</div>
                   <div class="col border-bottom">
-                    {{this.results.resultSelected.result.summary}}
+                    {{ this.results.resultSelected.result.summary }}
                   </div>
                 </div>
-                <div  *ngIf="this.results.resultSelected?.result?.substance?.length > 1" class="row pt-1 pb-1">
-                  <div class="col-2 text">
-                  Substance
-                  </div>
-                  <div   class="col">
-                    <table id="dtSubstancesTasks" class="table table-borderless">
+                <div
+                  *ngIf="
+                    this.results.resultSelected?.result?.substance?.length > 1
+                  "
+                  class="row pt-1 pb-1"
+                >
+                  <div class="col-2 text">Substance</div>
+                  <div class="col">
+                    <table
+                      id="dtSubstancesTasks"
+                      class="table table-borderless"
+                    >
                       <thead class="text">
                         <tr>
-                          <th  style="text-align: center;">Name</th>
-                          <th  style="text-align: center;">CASRN</th>
-                          <th style="text-align: center;">SMILES</th>
+                          <th style="text-align: center">Name</th>
+                          <th style="text-align: center">CASRN</th>
+                          <th style="text-align: center">SMILES</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr  *ngFor="let idx of objectKeys(this.results.resultSelected.result.substance)">
-                          <td style="vertical-align: middle;text-align: center;">{{this.results.resultSelected.result.substance[idx].name}}</td>
-                          <td style="vertical-align: middle;text-align: center;">{{this.results.resultSelected.result.substance[idx].CASRN}}</td>
-                          <td style="text-align: center;"><canvas [id]="'taskCanvas'+idx"></canvas></td>
+                        <tr
+                          *ngFor="
+                            let idx of objectKeys(
+                              this.results.resultSelected.result.substance
+                            )
+                          "
+                        >
+                          <td
+                            style="vertical-align: middle; text-align: center"
+                          >
+                            {{
+                              this.results.resultSelected.result.substance[idx]
+                                .name
+                            }}
+                          </td>
+                          <td
+                            style="vertical-align: middle; text-align: center"
+                          >
+                            {{
+                              this.results.resultSelected.result.substance[idx]
+                                .CASRN
+                            }}
+                          </td>
+                          <td style="text-align: center">
+                            <canvas [id]="'taskCanvas' + idx"></canvas>
+                          </td>
                         </tr>
                       </tbody>
                       <!-- <tbody *ngIf="this.results.resultSelected.substance instanceof Object">
@@ -235,16 +455,20 @@
                   </div>
                 </div>
                 <div class="row">
-                  <button (click)="editTask()" class="btn btn-ets-edit">Edit</button>
+                  <button (click)="editTask()" class="btn btn-ets-edit">
+                    Edit
+                  </button>
                 </div>
               </div>
             </div>
-                <task-form *ngIf="this.global.editModeTasks" [editMode]="true" [task]="this.results.resultSelected"></task-form >
+            <task-form
+              *ngIf="this.global.editModeTasks"
+              [editMode]="true"
+              [task]="this.results.resultSelected"
+            ></task-form>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-

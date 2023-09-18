@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonService } from '../common.service';
-import { PendingTasks, RA, Results,Global } from '../globals';
+import { PendingTasks, RA, Results, Global } from '../globals';
 import { FormBuilder } from '@angular/forms';
 import { CommonFunctions } from '../common.functions';
 import { UpdateService } from '../update.service';
@@ -10,10 +10,9 @@ import * as SmilesDrawer from 'smiles-drawer';
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
-  styleUrls: ['./tasks.component.scss']
+  styleUrls: ['./tasks.component.scss'],
 })
 export class TasksComponent implements OnInit {
-
   loadForm: boolean = false;
   model: any;
   pending_task_selected: String = '';
@@ -26,82 +25,100 @@ export class TasksComponent implements OnInit {
   labelFile = '';
   documents = [];
   report: string = '';
-  modelSelected:any;
-  listAllModels:any;
-  listModelsSelected: any = []; 
-  loadEditForm: boolean = false; 
-  
+  modelSelected: any;
+  listAllModels: any;
+  listModelsSelected: any = [];
+  loadEditForm: boolean = false;
 
-  constructor(public ra: RA, private commonService: CommonService, public pendingTasks: PendingTasks, private func: CommonFunctions, public results: Results, private updateService: UpdateService, private toastr: ToastrService,private formBuilder: FormBuilder,public global:Global) {
-  }
+  constructor(
+    public ra: RA,
+    private commonService: CommonService,
+    public pendingTasks: PendingTasks,
+    public results: Results,
+    public global: Global
+  ) {}
 
   ngOnInit(): void {
     this.commonService.generateForms$.subscribe((taskID) => {
       //Check select is not empty
       if (this.pendingTasks.results[0]) {
-        if(taskID){
-          this.pending_task_selected = taskID
-        }else{
-        this.pending_task_selected = this.pendingTasks.results[0].id;
+        if (taskID) {
+          this.pending_task_selected = taskID;
+        } else {
+          this.pending_task_selected = this.pendingTasks.results[0].id;
         }
         this.getPendingTask();
       }
-    })
+    });
   }
-  editTask(){
+  
+  editTask() {
     this.global.editModeTasks = !this.global.editModeTasks;
   }
 
   downloadFile(File) {
     if (File) {
-      this.commonService.getLink(this.ra.name,File).subscribe({
+      this.commonService.getLink(this.ra.name, File).subscribe({
         next: (link) => {
           const blob = new Blob([link], { type: 'application/octet-stream' });
-          saveAs(blob,File);
+          saveAs(blob, File);
         },
-        error: (e) => console.log(e)
-      })
-    }}
-  drawMol(){
-     for (let index = 0; index < this.results.resultSelected.substance.length; index++) {
-      let smilesDrawer = new SmilesDrawer.Drawer({ width: 200, height: 150 });
-      SmilesDrawer.parse(this.results.resultSelected.substance[index].SMILES, function (tree) {
-        smilesDrawer.draw(tree, 'taskCanvas'+index, 'light', false);
-    },  function (err) {
-      console.log(err);
-    });
-     } 
-}
-  selectTask(id: string) {
-    this.commonService.getTask(this.ra.name,id).subscribe(result => {
-      this.results.resultSelected = result;
-      if(!Array.isArray(this.results.resultSelected.substance)) {
-          this.results.resultSelected.substance = [this.results.resultSelected.substance]
-      }
-setTimeout(() => {
-  if(this.results.resultSelected?.substance.length > 1) this.drawMol();
-}, 300);
-    })
-    $("#tableCollapseTasks").click();
-    $("#pastCollapseTasks").click(); 
+        error: (e) => console.log(e),
+      });
+    }
   }
-  
-  showTablePastTasks(){
-    $("#tableCollapseTasks").click();
+  drawMol() {
+    for (
+      let index = 0;
+      index < this.results.resultSelected.substance.length;
+      index++
+    ) {
+      let smilesDrawer = new SmilesDrawer.Drawer({ width: 200, height: 150 });
+      SmilesDrawer.parse(
+        this.results.resultSelected.substance[index].SMILES,
+        function (tree) {
+          smilesDrawer.draw(tree, 'taskCanvas' + index, 'light', false);
+        },
+        function (err) {
+          console.log(err);
+        }
+      );
+    }
+  }
+  selectTask(id: string) {
+    this.commonService.getTask(this.ra.name, id).subscribe((result) => {
+      this.results.resultSelected = result;
+      if (!Array.isArray(this.results.resultSelected.substance)) {
+        this.results.resultSelected.substance = [
+          this.results.resultSelected.substance,
+        ];
+      }
+      setTimeout(() => {
+        if (this.results.resultSelected?.substance.length > 1) this.drawMol();
+      }, 300);
+    });
+    $('#tableCollapseTasks').click();
+    $('#pastCollapseTasks').click();
   }
 
-  isObject(value): boolean{
-return typeof value === 'object'; 
+  showTablePastTasks() {
+    $('#tableCollapseTasks').click();
+  }
+
+  isObject(value): boolean {
+    return typeof value === 'object';
   }
 
   getPendingTask() {
     this.pending_task = false;
-    this.commonService.getPendingTask(this.ra.name, this.pending_task_selected).subscribe({
-      next: (result) => {
-        console.log(result)
-        this.pending_task = result;
-      },
-      error: (e) => console.log(e)
-    })
-  }}
-
+    this.commonService
+      .getPendingTask(this.ra.name, this.pending_task_selected)
+      .subscribe({
+        next: (result) => {
+          console.log(result);
+          this.pending_task = result;
+        },
+        error: (e) => console.log(e),
+      });
+  }
+}
