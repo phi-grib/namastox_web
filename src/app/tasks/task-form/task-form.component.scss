@@ -1,26 +1,24 @@
-@import '../../../assets/scss/title.scss';
-@import '../../../assets/scss/buttons.scss';
-@import '../../../assets/scss/submenu.scss';
+@import "../../../assets/scss/title.scss";
+@import "../../../assets/scss/buttons.scss";
+@import "../../../assets/scss/submenu.scss";
 
 #taskForm {
-    color: $secondary-color;
+  color: $secondary-color;
 }
 .addbtn {
-    color: $tertiary-color;
+  color: $tertiary-color;
 }
 
-
 #predModal {
-    color: $primary-color;
-    table {
-        th {
-            color: $secondary-color;
-        }
+  color: $primary-color;
+  table {
+    th {
+      color: $secondary-color;
     }
-
+  }
 }
 
 .selected-row {
-    background-color: $primary-color;
-    color: white;
-  }
+  background-color: $primary-color;
+  color: white;
+}
