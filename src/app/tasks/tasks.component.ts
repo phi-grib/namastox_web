@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonService } from '../common.service';
 import { PendingTasks, RA, Results, Global } from '../globals';
-import { FormBuilder } from '@angular/forms';
-import { CommonFunctions } from '../common.functions';
-import { UpdateService } from '../update.service';
-import { ToastrService } from 'ngx-toastr';
 import { saveAs } from 'file-saver';
 import * as SmilesDrawer from 'smiles-drawer';
 @Component({
