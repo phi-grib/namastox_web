@@ -35,10 +35,10 @@
     "jquery": "^3.6.3",
     "jszip": "^3.10.1",
     "mermaid": "^9.4.0",
-    "ngx-markdown": "^15.1.1",
+    "ngx-markdown": "^16.0.0",
     "ngx-toastr": "^17.0.2",
     "rxjs": "~7.8.0",
-    "smiles-drawer": "^1.1.22",
+    "smiles-drawer": "^2.1.7",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.3"
   },
