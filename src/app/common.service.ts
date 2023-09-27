@@ -11,6 +11,7 @@ export class CommonService {
 
   private generateForms = new Subject<String>();
   generateForms$ = this.generateForms.asObservable();
+  
   AutoGenerateForm(taskID?: string) {
     this.generateForms.next(taskID);
   }

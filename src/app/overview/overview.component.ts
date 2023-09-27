@@ -31,7 +31,7 @@ export class OverviewComponent implements OnInit {
       let moleculeOptions = {width: 200, height: 150 };
       let reactionOptions = {};
       let sd = new SmilesDrawer.SmiDrawer(moleculeOptions,reactionOptions);
-      sd.draw('CC(C)CC1=CC=C(C=C1)C(C)C(O)=O','#overviewCanvas') 
+      sd.draw(smile,'#overviewCanvas') 
     }
   }
 }
