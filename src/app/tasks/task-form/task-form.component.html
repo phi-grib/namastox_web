@@ -286,6 +286,32 @@
                 class="form-control"
               />
             </div>
+            <div class="col-auto d-flex flex-column">
+              <span class="text-body">Include in Report</span>
+              <div class="d-flex flex-row justify-content-around">
+                <input
+                  class="form-check-input"
+                  [disabled]="this.editMode"
+                  type="radio"
+                  name="inlineRadioOptions"
+                  [(ngModel)]="supplementaryDocument"
+                  id="inlineRadio1"
+                  [value]="true"
+                />
+                <label class="form-check-label" for="inlineRadio1">Yes</label>
+
+                <input
+                  class="form-check-input"
+                  [disabled]="this.editMode"
+                  type="radio"
+                  name="inlineRadioOptions"
+                  [(ngModel)]="supplementaryDocument"
+                  id="inlineRadio2"
+                  [value]="false"
+                />
+                <label class="form-check-label" for="inlineRadio2">No</label>
+              </div>
+            </div>
             <div class="col">
               <input
                 #DocumentFileInput
@@ -293,7 +319,7 @@
                 (change)="sendlink($event)"
                 placeholder=""
                 type="file"
-                class="form-control"
+                class="form-control h-100"
               />
             </div>
           </div>

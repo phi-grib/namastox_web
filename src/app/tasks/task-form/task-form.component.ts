@@ -37,6 +37,9 @@ export class TaskFormComponent {
   @Input() task: any;
   @Input() editMode: any;
 
+  // auxiliary variable to select whether the document will appear in the report or not
+  supplementaryDocument: boolean = false;
+
   constructor(
     public ra: RA,
     private commonService: CommonService,
@@ -348,6 +351,8 @@ export class TaskFormComponent {
   }
 
   sendlink(event) {
+    console.log("decision:")
+    console.log(this.supplementaryDocument)
     this.model['result_link'] = event.target.files[0];
     if (this.labelFile && this.model['result_link']) {
       this.updateService
