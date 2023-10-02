@@ -29,6 +29,7 @@ export class DecisionsFormComponent {
   upstream_tasks: any;
   popupX = 1150;
   popupY = 100;
+  supplementaryDocument: boolean = false;
 
   isDragging = false;
   dragOffsetX = 0;
