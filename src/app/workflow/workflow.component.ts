@@ -49,7 +49,7 @@ export class WorkflowComponent implements OnInit {
   selectOptionBytaskID(selectorID, taskID) {
     const selector = document.getElementById(selectorID);
     selector.querySelectorAll('option').forEach((option) => {
-      if (option.textContent === taskID) {
+      if (option.textContent.trim() === taskID) {
         option.selected = true;
         this.commonService.AutoGenerateForm(taskID);
       }
