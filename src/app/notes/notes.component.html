@@ -1,4 +1,25 @@
-<div class="alert alert-warning d-flex justify-content-between align-items-center" role="alert">
-    <span>Under development!</span>
-    <i class="fas fa-exclamation-triangle fa-lg" style="color: #000000;"></i>
+
+<div class="container">
+    <div class="column">
+       <div class="row">
+        <table id="dtNotes" class="display compact">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let note of listOfNotes" >
+                    <td>{{note.id}}</td>
+                    <td>{{note.title}}</td>
+                    <td>{{note.date}}</td>
+                </tr>
+            </tbody>
+        </table>
+       </div>
+       <div class="row">
+       </div>
+    </div>
 </div>
