@@ -22,7 +22,8 @@ import { TaskFormComponent } from './tasks/task-form/task-form.component';
 import { formatDatePipe } from './formatDatePipe';
 import { DecisionsFormComponent } from './decisions/decisions-form/decisions-form.component';
 import { ModelDocumentationComponent } from './model-documentation/model-documentation.component';
-
+import { NoteFormComponent } from './note-form/note-form.component';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { ModelDocumentationComponent } from './model-documentation/model-documen
     TaskFormComponent,
     formatDatePipe,
     DecisionsFormComponent,
-    ModelDocumentationComponent
+    ModelDocumentationComponent,
+    NoteFormComponent
   ],
   imports: [
     BrowserModule,
@@ -49,6 +51,7 @@ import { ModelDocumentationComponent } from './model-documentation/model-documen
     ReactiveFormsModule,
     FormsModule,
     BrowserAnimationsModule,
+    BsDatepickerModule.forRoot(),
     ToastrModule.forRoot(),
     MarkdownModule.forRoot({
       loader: HttpClient,

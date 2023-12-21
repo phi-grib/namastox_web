@@ -1,5 +1,11 @@
 @import "../../assets/scss/buttons.scss";
 
+hr {
+  height: 3px;
+  background-color: $tertiary-color;
+  border: None;
+}
+
 #dtNotes {
     padding-top: 10px;
     thead {
@@ -25,4 +31,19 @@
       text-align: left;
       padding: 0px 10px !important;
     }
+  }
+
+  .accordion-button:focus {
+    box-shadow: none;
+    border-color: rgba(0, 0, 0, 0.125);
+  }
+  .accordion-button {
+    background-color: rgb(248, 246, 246) !important;
+    color: $secondary-color !important;
+    border: none !important;
+    border-color: transparent !important;
+  }
+  .accordion-button:not(.collapsed) {
+    background-color: rgb(248, 246, 246) !important;
+    color: $secondary-color !important;
   }

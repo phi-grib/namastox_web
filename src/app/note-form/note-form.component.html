@@ -1,0 +1,64 @@
+<form
+  id="addNoteForm"
+  #addNoteForm="ngForm"
+  (ngSubmit)="onSubmit()"
+  class="container-form mt-3"
+>
+  <div class="row">
+    <div class="col-3">
+      <div class="row">
+        <div class="col-2">
+          <label for="inputPassword6" class="col-form-label">ID</label>
+        </div>
+        <div class="col-10">
+          <input type="text" id="title" class="form-control">
+        </div>
+      </div>
+    </div>
+    <div class="col-auto">
+      <div class="row">
+        <div class="col-auto">
+          <label for="inputPassword6" class="col-form-label">Title</label>
+        </div>
+        <div class="col-auto">
+          <input type="text" id="title" class="form-control">
+        </div>
+      </div>
+    </div>
+    <div class="col-auto">
+      <div class="row">
+        <div class="col-auto">
+          <label for="inputPassword6" class="col-form-label">Date</label>
+        </div>
+        <div class="col-auto">
+          <div class="form-group">
+            <label for="datepicker">Seleccionar fecha:</label>
+            <input type="text" class="form-control" bsDatepicker [bsConfig]="datePickerConfig">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- <div class="row g-3">
+
+  <div class="col-auto">
+    <label for="inputPassword6" class="col-form-label">Title</label>
+  </div>
+  <div class="col-auto">
+    <input type="text" id="title" style="width:600px !important" class="form-control">
+  </div>
+</div> -->
+
+  <div class="row">
+    <div class="col d-flex justify-content-end">
+      <button
+        [disabled]="addNoteForm.invalid"
+        type="submit"
+        class="btn btn-ets-do submit-button"
+      >
+        Submit
+      </button>
+    </div>
+  </div>
+</form>

@@ -21,10 +21,24 @@ export class NotesComponent {
 
     },
     {
-      id: 'd1223',
+      id: 'd1224',
       title: 'title3',
       date: '11-02-2021'
 
     }
   ]
+
+  note = {};
+
+  showTableListNotes(){
+    $('#tableCollapse').click();
+  }
+
+  selectNote(id:string){
+    this.note = this.listOfNotes.find(note  => note.id === id)
+    console.log(this.note)
+    $('#tableCollapse').click();
+    $('#pastCollapse').click();
+  }
+
 }
