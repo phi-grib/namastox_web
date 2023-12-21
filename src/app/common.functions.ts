@@ -31,6 +31,7 @@ export class CommonFunctions {
       this.ra.status = values[2].ra;
       this.ra.results = values[3];
       this.separatePastTasks();
+      this.refreshNotes();
       this.ra.workflow = values[4]['result'];
       this.commonService.updateWorkflow();
       setTimeout(() => {
@@ -70,6 +71,11 @@ export class CommonFunctions {
         this.pendingTasks.results.push(this.ra.pending_tasks[idx]);
       }
     }
+  }
+
+  refreshNotes(){
+    $('#dtNotes').DataTable().destroy();
+    $('#dtNotes').DataTable();
   }
 
   separatePastTasks() {

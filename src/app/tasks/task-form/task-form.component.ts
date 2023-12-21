@@ -351,8 +351,6 @@ export class TaskFormComponent {
   }
 
   sendlink(event) {
-    console.log("decision:")
-    console.log(this.supplementaryDocument)
     this.model['result_link'] = event.target.files[0];
     if (this.labelFile && this.model['result_link']) {
       this.updateService
