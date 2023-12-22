@@ -11,7 +11,7 @@ export class NoteFormComponent implements OnInit {
   datePickerConfig: Partial<BsDatepickerConfig>;
   constructor() {
     this.datePickerConfig = Object.assign({}, {
-      containerClass: 'theme-dark-blue',
+      containerClass: 'theme-default',
       dateInputFormat: 'DD/MM/YYYY', // Formato de fecha
     });
   }

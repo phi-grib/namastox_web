@@ -1,5 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 @import "./assets/scss/colors.scss";
+@import '~ngx-bootstrap/datepicker/bs-datepicker.css';
+
+
+body .bs-datepicker-container .bs-datepicker-head {
+  background-color: $primary-color !important;
+}
+body .bs-datepicker-container .bs-datepicker-head * {
+  color: white !important;
+}
 
 * {
   font-family: "Barlow Semi Condensed", "Arial", "Helvetica";
