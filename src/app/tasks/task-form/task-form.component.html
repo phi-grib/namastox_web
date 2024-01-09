@@ -286,18 +286,6 @@
                 class="form-control"
               />
             </div>
-
-            <div class="col">
-              <input
-                #DocumentFileInput
-                [disabled]="!this.labelFile"
-                (change)="sendlink($event)"
-                placeholder=""
-                type="file"
-                class="form-control"
-              />
-            </div>
-
             <div class="col-auto d-flex flex-column ">
               <div class="d-flex flex-row justify-content-around">
                 <input
@@ -312,8 +300,16 @@
               </div>
               <span class="text-muted sm-text">Include</span>
             </div>
-
-
+            <div class="col">
+              <input
+                #DocumentFileInput
+                [disabled]="!this.labelFile"
+                (change)="sendlink($event)"
+                placeholder=""
+                type="file"
+                class="form-control"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -376,10 +372,9 @@
           Back
         </button>
       </div>
-      <div class="col">
+      <div class="col d-flex justify-content-end">
         <button
           [disabled]="taskForm.invalid && this.model?.values?.length < 1"
-          style="margin-left: 35px"
           type="submit"
           class="btn btn-ets-do submit-button"
         >
