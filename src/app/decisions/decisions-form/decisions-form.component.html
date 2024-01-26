@@ -191,13 +191,14 @@
   aria-labelledby="exampleModalLabel"
   aria-hidden="false"
 >
-  <div class="modal-dialog modal-lg">
+  <div  class="modal-dialog modal-xl">
     <div *ngIf="this.upstream_tasks" class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-3" id="supportModalLabel">
-          Support Information<span id="suppIDText"
-            >({{ this.pending_task?.result?.id }})</span
-          >
+        <h1 class="modal-title fs-2" id="supportModalLabel">
+          {{ this.pending_task["task description"].name }}
+     <span class="text-muted fs-4 d-block">
+      {{this.pending_task['task description'].description}}
+     </span>
         </h1>
         <button
           id="closeBtnModal"
@@ -208,22 +209,23 @@
         ></button>
       </div>
       <div class="modal-body">
-        <div class="row">
-          <div class="col-2 fw-bold secondary-color">Question</div>
-          <div class="col-10">
-            {{ this.pending_task["task description"].name }}
+        <!-- <div class="row align-items-center mb-4">
+          <div class="col-auto fs-4">
           </div>
-        </div>
+        </div> -->
 
         <div class="row">
-          <table class="table">
-            <thead>
+          <table class="table" style="width: 100%;">
+            <thead class="">
               <tr>
                 <th>Upstream task</th>
                 <th>Result</th>
                 <th>Variability / notes</th>
                 <th>Uncertainty(text)</th>
                 <th>Uncertainty(p)</th>
+                <th>extra 1</th>
+                <th>extra 2 </th>
+                <th>extra 3</th>
               </tr>
             </thead>
             <tbody>

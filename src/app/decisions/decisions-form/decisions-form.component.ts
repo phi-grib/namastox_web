@@ -27,8 +27,8 @@ export class DecisionsFormComponent {
   labelFile = '';
   objectKeys = Object.keys;
   upstream_tasks: any;
-  popupX = 1150;
-  popupY = 100;
+  popupX = 300;
+  popupY = 450;
   supplementaryDocument: boolean = false;
 
   isDragging = false;

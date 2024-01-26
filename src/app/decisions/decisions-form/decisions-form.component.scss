@@ -11,6 +11,10 @@
 //      border: 0.2px solid  $primary-color !important;
 //  }
 
+.modal-xl {
+  --bs-modal-width: 1500px !important;
+}
+
 .modal-dialog {
   position: absolute;
   cursor: move;
