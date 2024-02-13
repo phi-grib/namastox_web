@@ -24,6 +24,7 @@ import { DecisionsFormComponent } from './decisions/decisions-form/decisions-for
 import { ModelDocumentationComponent } from './model-documentation/model-documentation.component';
 import { NoteFormComponent } from './note-form/note-form.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { ReportComponent } from './report/report.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     formatDatePipe,
     DecisionsFormComponent,
     ModelDocumentationComponent,
-    NoteFormComponent
+    NoteFormComponent,
+    ReportComponent
   ],
   imports: [
     BrowserModule,
