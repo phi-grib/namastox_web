@@ -1,20 +1,29 @@
 @import "../../assets/scss/buttons.scss";
 
 .div-style {
-    width: 100%;
+    width: 50%;
     min-height: 23px;
     background: $secondary-color;
     border-top-right-radius: 2px;
     border-top-left-radius: 2px; 
   }
-
   .dropdown-menu {
     background: $primary-color;
-
   }
-
   .container-information{
     background: rgb(248, 246, 246);
     border-bottom-left-radius: 2px;
     border-bottom-right-radius: 2px;
+    width: 50%;
   }
+.number {
+  color: $tertiary-color;
+  font-weight: bold;
+}
+span {
+  font-size: 18px;
+}
+
+.dropdown-item {
+  text-align: center;
+}
