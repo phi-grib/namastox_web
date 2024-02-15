@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { environment } from '../environments/environment';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -108,5 +109,16 @@ export class CommonService {
     const url: string =
       environment.baseUrl + 'upstream_tasks/' + ra_name + '/' + task_id;
     return this.http.get(url);
+  }
+  exportToFile(ra_name:string,format:string): Observable<any> {
+    const url: string = environment.baseUrl + "report/" +ra_name+"/"+format;
+    
+    if(format == "word" || format == "excel"){
+      return this.http.get(url,{responseType: 'arraybuffer'})
+    }else{
+      return this.http.get(url)
+
+    }
+
   }
 }
