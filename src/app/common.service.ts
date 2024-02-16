@@ -116,7 +116,7 @@ export class CommonService {
     if(format == "word" || format == "excel"){
       return this.http.get(url,{responseType: 'arraybuffer'})
     }else{
-      return this.http.get(url)
+      return this.http.get(url,{responseType:'text'})
 
     }
 
