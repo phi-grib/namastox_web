@@ -9,7 +9,7 @@ import {saveAs} from 'file-saver';
   styleUrls: ['./report.component.scss']
 })
 export class ReportComponent {
-  constructor(private ra: RA,private commonService: CommonService){
+  constructor(public ra: RA,private commonService: CommonService){
 
   }
 downloadExcel() {

@@ -2,9 +2,12 @@
     <div class="div-style">
     </div>
     <div class="container-information pt-2">
-        <span class="pl-2"> <span class="badge number">10 </span>ipsum quia dolor sit</span>
+        <span class="pl-2"> <span class="badge number">{{this.ra.status['tasks_completed']}} </span>Tasks completed</span>
         <br>
-        <span class="pl-2"> <span class="badge number">5  </span>neque porro quisquam est</span>
+        <span class="pl-2"> <span class="badge number">{{this.ra.status['step']}}</span>Step</span>
+        <br>
+        <span class="pl-2"> <span class="badge number">{{this.ra.status['notes']}}</span>Notes</span>
+
 
         <div  class="d-flex p-2 justify-content-end">
             <div class="btn-group  ml-2 " role="group" aria-label="group1 ">
