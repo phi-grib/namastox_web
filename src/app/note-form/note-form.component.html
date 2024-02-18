@@ -5,33 +5,10 @@
   class="container-form mt-3"
 >
   <div class="row">
-    <div class="col-2">
+    <div class="col">
       <div class="row">
-        <div class="col-2">
-          <label for="inputPassword6" class="col-form-label">ID</label>
-        </div>
-        <div class="col-10">
-          <input name="id" [(ngModel)]="this.id" type="text" id="id" class="form-control">
-        </div>
-      </div>
-    </div>
-    <div class="col-6">
-      <div class="row">
-        <div class="col-1">
-          <label for="inputPassword6" class="col-form-label">Title</label>
-        </div>
-        <div class="col-11">
-          <input [(ngModel)]="this.title" type="text" id="title" class="form-control" name="title">
-        </div>
-      </div>
-    </div>
-    <div class="col-4">
-      <div class="row">
-        <div class="col-2">
-          <label for="inputPassword6" class="col-form-label">Date</label>
-        </div>
-        <div class="col-10">
-            <input [(ngModel)]="this.date" type="text" class="form-control" bsDatepicker [bsConfig]="datePickerConfig">
+        <div class="col-12">
+          <input [(ngModel)]="this.title" placeholder="Insert title" type="text" id="title" class="form-control" name="title">
         </div>
       </div>
     </div>
@@ -39,9 +16,9 @@
   <!-- textarea note form -->
   <div class="row mt-4">
     <label for="inputPassword3" class="col-2 col-form-label"></label>
-    <div class="col-10">
+    <div class="col-12">
       <textarea
-      [(ngModel)]="this.information"
+      [(ngModel)]="this.text"
         rows="4"
         required
         placeholder="Insert your text here"

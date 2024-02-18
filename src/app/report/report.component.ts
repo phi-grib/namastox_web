@@ -24,6 +24,7 @@ downloadExcel() {
   );
 }
 downloadWord() {
+  alert("Not implemented")
 
 }
 downloadFile() {

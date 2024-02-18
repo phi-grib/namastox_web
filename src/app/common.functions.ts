@@ -22,7 +22,15 @@ export class CommonFunctions {
     let status$ = this.commonService.getStatus(this.ra.name);
     let results$ = this.commonService.getResults(this.ra.name);
     let workflow$ = this.commonService.getWorkflow(this.ra.name);
-    let observables = [generalInfo$, listSteps$, status$, results$, workflow$];
+    let notes$ = this.commonService.getNotes(this.ra.name);
+    let observables = [
+      generalInfo$,
+      listSteps$,
+      status$,
+      results$,
+      workflow$,
+      notes$,
+    ];
 
     forkJoin(observables).subscribe((values) => {
       this.ra.general_information = values[0];
@@ -31,8 +39,13 @@ export class CommonFunctions {
       this.ra.status = values[2].ra;
       this.ra.results = values[3];
       this.separatePastTasks();
-      this.refreshNotes();
       this.ra.workflow = values[4]['result'];
+      $('#dtNotes').DataTable().destroy();
+      this.ra.notes = values[5];
+      setTimeout(() => {
+        $('#dtNotes').DataTable();
+      }, 200);
+
       this.commonService.updateWorkflow();
       setTimeout(() => {
         if (this.ra.status.step > 0) {
@@ -59,6 +72,7 @@ export class CommonFunctions {
     this.pendingTasks.decisions = [];
     this.results.resultSelected = '';
     this.results.decisionSelected = '';
+    this.ra.note = {};
   }
   /**separates tasks into different lists  */
   separatePendingTasks() {
@@ -72,12 +86,6 @@ export class CommonFunctions {
       }
     }
   }
-
-  refreshNotes(){
-    $('#dtNotes').DataTable().destroy();
-    $('#dtNotes').DataTable();
-  }
-
   separatePastTasks() {
     $('#dtTasks').DataTable().destroy();
     $('#dtDecisions').DataTable().destroy();

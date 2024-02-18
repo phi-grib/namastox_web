@@ -1,33 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { RA } from '../globals';
+import { CommonService } from '../common.service';
 
 @Component({
   selector: 'app-notes',
   templateUrl: './notes.component.html',
   styleUrls: ['./notes.component.scss']
 })
-export class NotesComponent {
+export class NotesComponent{
+  constructor(public ra:RA,private commonService:CommonService){
 
-  listOfNotes =  [
-    {
-      id: 'd1223',
-      title: 'title1',
-      date: '21-02-2020'
-
-    },
-    {
-      id: '23123',
-      title: 'title2',
-      date: '21-02-2030'
-
-    },
-    {
-      id: 'd1224',
-      title: 'title3',
-      date: '11-02-2021'
-
-    }
-  ]
-
+  }
   note = {};
 
   showTableListNotes(){
@@ -35,7 +18,7 @@ export class NotesComponent {
   }
 
   selectNote(id:string){
-    this.note = this.listOfNotes.find(note  => note.id === id)
+    this.ra.note = this.ra.notes.find(note  => note.id === id)
     console.log(this.note)
     $('#tableCollapse').click();
     $('#pastCollapse').click();

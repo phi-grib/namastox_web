@@ -12,6 +12,8 @@ export class RA {
   pending_tasks: any = [];
   listSteps: any[] = [];
   workflow: any = undefined;
+  notes: any = [];
+  note: any = {}
 }
 
 export class Results {

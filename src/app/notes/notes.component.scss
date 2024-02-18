@@ -5,7 +5,10 @@ hr {
   background-color: $tertiary-color;
   border: None;
 }
-
+.title{
+  color: $primary-color;
+  font-weight: bold;
+}
 #dtNotes {
     padding-top: 10px;
     thead {

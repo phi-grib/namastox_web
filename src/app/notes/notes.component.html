@@ -26,8 +26,8 @@
             >
               <div class="accordion-body">
                 <div class="row">
-                  <div class="col">
-                    <table id="dtNotes" class="display compact">
+                  <div  class="col">
+                    <table   id="dtNotes" class="display compact">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -36,7 +36,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr (click)="selectNote(note.id)" *ngFor="let note of listOfNotes" >
+                            <tr (click)="selectNote(note.id)" *ngFor="let note of this.ra.notes" >
                                 <td>{{note.id}}</td>
                                 <td>{{note.title}}</td>
                                 <td>{{note.date}}</td>
@@ -61,7 +61,7 @@
             aria-expanded="true"
             aria-controls="flush-collapseTwo"
           >
-            {{note['id']}}
+            {{this.ra.note['id']}}
           </button>
         </h2>
         <div
@@ -72,8 +72,8 @@
         >
           <div class="accordion-body">
             <div class="row">
-                <div class="col">
-                    sdsa
+                <div class="col-auto">
+                 {{this.ra.note['text']}}
                 </div>
             </div>
           </div>

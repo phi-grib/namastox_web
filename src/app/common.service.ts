@@ -121,4 +121,20 @@ export class CommonService {
     }
 
   }
+
+  getNotes(ra_name:string,step?:number){
+    const url:string = environment.baseUrl + "notes/"+ra_name
+    if(step){
+    const url:string = environment.baseUrl + "notes/"+ra_name+"/"+step
+    }
+    return this.http.get(url)
+
+  }
+  saveNote(ra_name:string,title,text){
+    const formData = new FormData();
+    formData.append('title', JSON.stringify(title));
+    formData.append('text', JSON.stringify(text));
+    const url: string = environment.baseUrl + "note/"+ra_name;
+    return this.http.put(url, formData);
+  }
 }

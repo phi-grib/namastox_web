@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { DateObject } from 'ngx-bootstrap/chronos/types';
-import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+import { CommonService } from '../common.service';
+import { RA } from '../globals';
+import { CommonFunctions } from '../common.functions';
 
 @Component({
   selector: 'app-note-form',
@@ -8,21 +9,13 @@ import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
   styleUrls: ['./note-form.component.scss']
 })
 export class NoteFormComponent implements OnInit {
+  constructor(private ra:RA,private commonService:CommonService,private func: CommonFunctions){
 
-  datePickerConfig: Partial<BsDatepickerConfig>;
-
+  }
   // variables for test (change when receive object from backend).
   title:string = "";
-  id: string = '';
-  information: string = "";
-  date:string; // fix error: Format incorrect
+  text: string = "";
   
-  constructor() {
-    this.datePickerConfig = Object.assign({}, {
-      containerClass: 'theme-default',
-      dateInputFormat: 'DD/MM/YYYY', // Formato de fecha
-    });
-  }
   ngOnInit(): void {
   
   }
@@ -31,19 +24,41 @@ export class NoteFormComponent implements OnInit {
    */
   resetFields(){
     this.title = ""
-    this.id =""
-    this.information = ""
-    this.date = "";
+    this.text = ""
   }
 
   onSubmit(){
+    var note = {}
     console.log("title",this.title)
-    console.log("ID",this.id)
-    console.log("date",this.date)
-    console.log("information",this.information)
+    console.log("text",this.text)
+    this.commonService.saveNote(this.ra.name,this.title,this.text).subscribe({
+      next: (result) => {
+        setTimeout(() => {
+          this.commonService.getNotes(this.ra.name).subscribe({
+            next: (result)=> {
+              console.log("respuesta backend:")
+              console.log(result)
+              console.log("el array antes de actualizarlo")
+              console.log(this.ra.notes)
+              // this.ra.notes = undefined
+              this.ra.notes = result
+              console.log("despues de actualizarlo")
+              console.log(this.ra.notes)
+            },
+            error: (e)=> {
+              console.log(e)
+            }
+          })
+        }, 200);
+      },
+      error: (e) => {
+        console.log(e)
+      }
+    
+    }
+    )
     this.resetFields();
     //insert function to add note  
     // if it's done , call function: list notes again
   }
-
 }
