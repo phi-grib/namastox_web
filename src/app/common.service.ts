@@ -132,8 +132,8 @@ export class CommonService {
   }
   saveNote(ra_name:string,title,text){
     const formData = new FormData();
-    formData.append('title', JSON.stringify(title));
-    formData.append('text', JSON.stringify(text));
+    formData.append('title',title);
+    formData.append('text',text);
     const url: string = environment.baseUrl + "note/"+ra_name;
     return this.http.put(url, formData);
   }
