@@ -137,4 +137,8 @@ export class CommonService {
     const url: string = environment.baseUrl + "note/"+ra_name;
     return this.http.put(url, formData);
   }
+  deleteNote(ra_name:string,id:string){
+    const url:string = environment.baseUrl + "note/"+ra_name+"/"+id
+    return this.http.delete(url)
+  }
 }

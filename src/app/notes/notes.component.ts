@@ -19,14 +19,33 @@ export class NotesComponent{
 
   selectNote(id:string){
     this.ra.note = this.ra.notes.find(note  => note.id === id)
-    console.log(this.note)
     $('#tableCollapse').click();
     $('#pastCollapse').click();
   }
 
   deleteNote(noteID){
-    alert("Not implemented yet")
-    console.log(noteID)
+    this.commonService.deleteNote(this.ra.name,noteID).subscribe({
+      next: (result)=> {
+        this.ra.note = {}
+        this.commonService.getNotes(this.ra.name).subscribe({
+          next: (result)=> {
+            this.ra.notes = result
+            this.commonService.getStatus(this.ra.name).subscribe({
+              next:(result) => {
+                this.ra.status = result['ra']
+              },
+              error: (e) => {
+                console.log(e)
+              }
+            })
+          },
+          error: (e)=>{
+            console.log(e);
+          }
+        })
+      }, error: (e)=> {
+        console.log(e);
+      }
+    })
   }
-
 }

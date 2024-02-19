@@ -12,31 +12,28 @@ export class NoteFormComponent implements OnInit {
   constructor(private ra:RA,private commonService:CommonService,private func: CommonFunctions){
 
   }
-  // variables for test (change when receive object from backend).
   title:string = "";
   text: string = "";
   
   ngOnInit(): void {
   
   }
-  /**
-   * improve this function, change for native form function
-   */
   resetFields(){
     this.title = ""
     this.text = ""
   }
 
   onSubmit(){
-    var note = {}
-    console.log("title",this.title)
-    console.log("text",this.text)
     this.commonService.saveNote(this.ra.name,this.title,this.text).subscribe({
       next: (result) => {
         setTimeout(() => {
           this.commonService.getNotes(this.ra.name).subscribe({
             next: (result)=> {
               this.ra.notes = result
+              if(this.ra.notes == 1){
+                $('#dtNotes').DataTable();
+                }
+
               this.commonService.getStatus(this.ra.name).subscribe({
                 next:(result) => {
                   this.ra.status = result['ra']
@@ -59,7 +56,5 @@ export class NoteFormComponent implements OnInit {
     }
     )
     this.resetFields();
-    //insert function to add note  
-    // if it's done , call function: list notes again
   }
 }
