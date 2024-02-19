@@ -33,6 +33,7 @@
                                 <th>Title</th>
                                 <th>Date</th>
                                 <th></th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -40,6 +41,15 @@
                                 <td>{{note.title}}</td>
                                 <td>{{note.date}}</td>
                                 <td>{{ note.text | slice : 0 : 20 }}...</td>
+                                <td>      <a
+                                  (click)="deleteNote(note.id)"
+                                  class="btn ms-auto"
+                                  role="button"
+                                  ><i
+                                    class="fa-solid fa-circle-minus fa-lg"
+                                    style="color: #e01b24"
+                                  ></i
+                                ></a></td>
                             </tr>
                         </tbody>
                     </table>

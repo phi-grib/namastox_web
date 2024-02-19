@@ -24,4 +24,9 @@ export class NotesComponent{
     $('#pastCollapse').click();
   }
 
+  deleteNote(noteID){
+    alert("Not implemented yet")
+    console.log(noteID)
+  }
+
 }
