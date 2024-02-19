@@ -8,7 +8,7 @@
     border-top-left-radius: 2px; 
   }
   .dropdown-menu {
-    background: $primary-color;
+    background: $secondary-color;
   }
   .container-information{
     background: rgb(248, 246, 246);
@@ -26,4 +26,13 @@ span {
 
 .dropdown-item {
   text-align: center;
+}
+
+.dropdown-menu{
+  button{
+    background-color: $secondary-color;
+  }
+  button:hover {
+    background-color: $tertiary-color;
+  }
 }
