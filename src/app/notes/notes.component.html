@@ -30,16 +30,16 @@
                     <table   id="dtNotes" class="display compact">
                         <thead>
                             <tr>
-                                <th>ID</th>
                                 <th>Title</th>
                                 <th>Date</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr (click)="selectNote(note.id)" *ngFor="let note of this.ra.notes" >
-                                <td>{{note.id}}</td>
                                 <td>{{note.title}}</td>
                                 <td>{{note.date}}</td>
+                                <td>{{ note.text | slice : 0 : 20 }}...</td>
                             </tr>
                         </tbody>
                     </table>
