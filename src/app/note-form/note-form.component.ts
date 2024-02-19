@@ -36,14 +36,15 @@ export class NoteFormComponent implements OnInit {
         setTimeout(() => {
           this.commonService.getNotes(this.ra.name).subscribe({
             next: (result)=> {
-              console.log("respuesta backend:")
-              console.log(result)
-              console.log("el array antes de actualizarlo")
-              console.log(this.ra.notes)
-              // this.ra.notes = undefined
               this.ra.notes = result
-              console.log("despues de actualizarlo")
-              console.log(this.ra.notes)
+              this.commonService.getStatus(this.ra.name).subscribe({
+                next:(result) => {
+                  this.ra.status = result['ra']
+                },
+                error: (e) => {
+                  console.log(e)
+                }
+              })
             },
             error: (e)=> {
               console.log(e)
