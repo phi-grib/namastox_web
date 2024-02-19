@@ -25,7 +25,15 @@ downloadExcel() {
 }
 downloadWord() {
   alert("Not implemented")
-
+}
+downloadEFSA(){
+  alert("Not implemented")
+}
+downloadREACH(){
+  alert("Not implemented")
+}
+downloadEMA(){
+  alert("Not implemented")
 }
 downloadFile() {
   this.commonService.exportToFile(this.ra.name, 'yaml').subscribe (

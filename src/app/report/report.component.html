@@ -10,14 +10,24 @@
 
 
         <div  class="d-flex p-2 justify-content-end">
-            <div class="btn-group  ml-2 " role="group" aria-label="group1 ">
+            <div class="btn-group  ml-2  " role="group" aria-label="group1 ">
                 <button id="btnGroupDrop1" type="button" class="btn btn-ets-bad dropdown-toggle ml-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Download
+                    Generic formats
                 </button>
                 <div class="dropdown-menu column" aria-labelledby="btnGroupDrop1" >
                     <button type="button" class="btn-ets-do dropdown-item btn btn-ets-down ml-2" data-toggle="modal" (click)="downloadExcel()">Excel</button>
                     <button type="button" class="btn-ets-do dropdown-item btn btn-ets-down ml-2" data-toggle="modal" (click)="downloadWord()">Word</button>
                     <button type="button" class="btn-ets-do dropdown-item btn btn-ets-down ml-2" data-toggle="modal" (click)="downloadFile()">YAML</button>
+                </div> 
+            </div>
+            <div class="btn-group  ml-2 " role="group" aria-label="group2 ">
+                <button id="btnGroupDrop2" type="button" class="btn btn-ets-bad dropdown-toggle ml-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Template
+                </button>
+                <div class="dropdown-menu column" aria-labelledby="btnGroupDrop2" >
+                    <button type="button" class="btn-ets-do dropdown-item btn btn-ets-down ml-2" data-toggle="modal" (click)="downloadEFSA()">EFSA</button>
+                    <button type="button" class="btn-ets-do dropdown-item btn btn-ets-down ml-2" data-toggle="modal" (click)="downloadREACH()">REACH</button>
+                    <button type="button" class="btn-ets-do dropdown-item btn btn-ets-down ml-2" data-toggle="modal" (click)="downloadEMA()">EMA</button>
                 </div> 
             </div>
         </div>
