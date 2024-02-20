@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonService } from '../common.service';
 import { RA } from '../globals';
 import { CommonFunctions } from '../common.functions';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-note-form',
@@ -9,7 +10,7 @@ import { CommonFunctions } from '../common.functions';
   styleUrls: ['./note-form.component.scss']
 })
 export class NoteFormComponent implements OnInit {
-  constructor(private ra:RA,private commonService:CommonService,private func: CommonFunctions){
+  constructor(private toastr: ToastrService,private ra:RA,private commonService:CommonService,private func: CommonFunctions){
 
   }
   title:string = "";
@@ -26,6 +27,16 @@ export class NoteFormComponent implements OnInit {
   onSubmit(){
     this.commonService.saveNote(this.ra.name,this.title,this.text).subscribe({
       next: (result) => {
+        this.toastr.success(
+          'Note ' + this.title,
+          'SUCCESSFULLY ADDED',
+          {
+            timeOut: 5000,
+            positionClass: 'toast-top-right',
+          }
+        );
+      this.resetFields();
+
         setTimeout(() => {
           this.commonService.getNotes(this.ra.name).subscribe({
             next: (result)=> {
@@ -55,6 +66,5 @@ export class NoteFormComponent implements OnInit {
     
     }
     )
-    this.resetFields();
   }
 }

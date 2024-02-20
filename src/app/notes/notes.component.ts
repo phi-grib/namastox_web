@@ -15,7 +15,6 @@ export class NotesComponent{
 
   selectNote(id:string){
     this.ra.note = this.ra.notes.find(note  => note.id === id)
-    $('#pastCollapse').click();
   }
 
   deleteNote(noteID){
