@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RA } from '../globals';
 import { CommonService } from '../common.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-notes',
@@ -8,7 +9,7 @@ import { CommonService } from '../common.service';
   styleUrls: ['./notes.component.scss']
 })
 export class NotesComponent{
-  constructor(public ra:RA,private commonService:CommonService){
+  constructor(private toastr: ToastrService,public ra:RA,private commonService:CommonService){
 
   }
   note = {};
@@ -21,6 +22,14 @@ export class NotesComponent{
 
     this.commonService.deleteNote(this.ra.name,noteID).subscribe({
       next: (result)=> {
+        this.toastr.success(
+          'Note ' + noteID,
+          'SUCCESSFULLY DELETED',
+          {
+            timeOut: 5000,
+            positionClass: 'toast-top-right',
+          }
+        );
         this.ra.note = {}
         this.commonService.getNotes(this.ra.name).subscribe({
           next: (result)=> {
