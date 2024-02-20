@@ -41,7 +41,8 @@
                                 <td>{{note.title}}</td>
                                 <td>{{note.date}}</td>
                                 <td>{{ note.text | slice : 0 : 20 }}...</td>
-                                <td>      <a
+                                 <td>
+                                        <a
                                   (click)="deleteNote(note.id)"
                                   class="btn ms-auto"
                                   role="button"
@@ -49,7 +50,8 @@
                                     class="fa-solid fa-circle-minus fa-lg"
                                     style="color: #e01b24"
                                   ></i
-                                ></a></td>
+                                ></a>
+                              </td> 
                             </tr>
                         </tbody>
                     </table>
@@ -62,7 +64,6 @@
     <div class="accordion-item">
         <h2 class="accordion-header" id="flush-headingTwo">
           <button
-            (click)="showTableListNotes()"
             id="pastCollapse"
             class="accordion-button collapsed"
             type="button"

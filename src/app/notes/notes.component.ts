@@ -13,17 +13,13 @@ export class NotesComponent{
   }
   note = {};
 
-  showTableListNotes(){
-    $('#tableCollapse').click();
-  }
-
   selectNote(id:string){
     this.ra.note = this.ra.notes.find(note  => note.id === id)
-    $('#tableCollapse').click();
     $('#pastCollapse').click();
   }
 
   deleteNote(noteID){
+
     this.commonService.deleteNote(this.ra.name,noteID).subscribe({
       next: (result)=> {
         this.ra.note = {}
