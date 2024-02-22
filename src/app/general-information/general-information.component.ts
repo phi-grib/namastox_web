@@ -57,6 +57,22 @@ export class GeneralInformationComponent implements OnInit {
     }
   }
 
+  uploadCustomWorkflow(event:any){
+    const selectedFile = event.target.files[0];
+    console.log(selectedFile)
+    if(selectedFile){
+      this.updateService.uploadCustomWorkflow(this.ra.name,selectedFile).subscribe({
+        next: (result) => {
+          console.log(result)
+        },
+        error: (e) =>{
+          console.log(e)
+        }
+      })
+    }
+
+  }
+
   isObject(value): boolean {
     return typeof value === 'object';
   }
@@ -126,6 +142,8 @@ export class GeneralInformationComponent implements OnInit {
         console.log('Error:', error);
       });
   }
+
+
 
   onSubmit() {
     var substance = {};
