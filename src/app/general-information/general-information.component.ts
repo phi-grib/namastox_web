@@ -5,6 +5,7 @@ import { CommonService } from '../common.service';
 import { RA } from '../globals';
 import { UpdateService } from '../update.service';
 import { ToastrService } from 'ngx-toastr';
+
 @Component({
   selector: 'app-general-information',
   templateUrl: './general-information.component.html',
@@ -20,6 +21,7 @@ export class GeneralInformationComponent implements OnInit {
   form = new FormGroup({});
   model: any;
   complete: boolean = false;
+  workflow_custom: File | null = null;
 
   generalInformationForm = new FormGroup({});
   constructor(
@@ -34,14 +36,14 @@ export class GeneralInformationComponent implements OnInit {
       this.substance_CASRN = '';
       this.substance_id = '';
       this.substance_SMILES = '';
-      this.substance_CASRN =
+      this.substance_CASRN = '';
         this.ra.general_information.general.substances[0]?.casrn;
       this.substance_id = this.ra.general_information.general.substances[0]?.id;
       this.substance_SMILES =
         this.ra.general_information.general.substances[0]?.smiles;
     });
   }
-
+  
   uploadSubstance(event: any) {
     const selectedFile = event.target.files[0];
     if (selectedFile) {
@@ -59,18 +61,20 @@ export class GeneralInformationComponent implements OnInit {
 
   uploadCustomWorkflow(event:any){
     const selectedFile = event.target.files[0];
-    console.log(selectedFile)
     if(selectedFile){
-      this.updateService.uploadCustomWorkflow(this.ra.name,selectedFile).subscribe({
-        next: (result) => {
-          console.log(result)
-        },
-        error: (e) =>{
-          console.log(e)
-        }
-      })
+      if(this.ra.status.step > 0){
+        this.toastr.warning(
+          'All work performed in the current workflow will be deleted.',
+          'WARNING',
+          {
+            disableTimeOut: true,
+            positionClass: 'toast-top-right',
+          }
+        );
+      }
+      this.workflow_custom = selectedFile;
+      this.ra.general_information.general['workflow_custom'] = selectedFile.name;
     }
-
   }
 
   isObject(value): boolean {
@@ -159,7 +163,8 @@ export class GeneralInformationComponent implements OnInit {
       this.updateService
         .updateGeneralInformation(
           this.ra.name,
-          this.ra.general_information.general
+          this.ra.general_information.general,
+          this.workflow_custom
         )
         .subscribe({
           next: (result) => {
