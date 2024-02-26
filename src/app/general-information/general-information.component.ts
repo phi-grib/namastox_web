@@ -54,6 +54,7 @@ export class GeneralInformationComponent implements OnInit {
           if (result['success']) {
             var firstSubstance = result['result'][0];
             this.ra.general_information.general.substances = [firstSubstance];
+            this.substance_file = null;
           }
         });
     }
@@ -183,6 +184,7 @@ export class GeneralInformationComponent implements OnInit {
           },
           complete: () => {
             setTimeout(() => {
+            this.workflow_custom = null;
             document.getElementById("pills-overview-tab").click()
             }, 100);
           }

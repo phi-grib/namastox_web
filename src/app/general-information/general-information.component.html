@@ -237,7 +237,6 @@
               <input
                 [readonly]="this.ra?.status?.step > 1"
                 name="substance_file"
-                [(ngModel)]="this.substance_file"
                 placeholder=""
                 (change)="uploadSubstance($event)"
                 type="file"
@@ -262,7 +261,6 @@
         <div class="col">
           <input
             [readonly]="this.ra?.status?.step > 1"
-            [(ngModel)]="this.workflow_custom"
             name="workflow_custom"
             [placeholder]="
               this.ra.general_information.placeholders['workflow_custom']
