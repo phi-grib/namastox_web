@@ -182,14 +182,9 @@ export class GeneralInformationComponent implements OnInit {
             console.log(e);
           },
           complete: () => {
-            this.commonService.getStatus(this.ra.name).subscribe({
-              next: (result) => {
-                this.ra.status = result[2].ra
-              },
-              error: (e) => {
-                console.log(e)
-              }
-            })
+            setTimeout(() => {
+            document.getElementById("pills-overview-tab").click()
+            }, 100);
           }
         });
       this.generalInformationForm.reset();
