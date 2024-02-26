@@ -62,16 +62,6 @@ export class GeneralInformationComponent implements OnInit {
   uploadCustomWorkflow(event:any){
     const selectedFile = event.target.files[0];
     if(selectedFile){
-      if(this.ra.status.step > 0){
-        this.toastr.warning(
-          'All work performed in the current workflow will be deleted.',
-          'WARNING',
-          {
-            disableTimeOut: true,
-            positionClass: 'toast-top-right',
-          }
-        );
-      }
       this.workflow_custom = selectedFile;
       this.ra.general_information.general['workflow_custom'] = selectedFile.name;
     }
@@ -191,6 +181,16 @@ export class GeneralInformationComponent implements OnInit {
             );
             console.log(e);
           },
+          complete: () => {
+            this.commonService.getStatus(this.ra.name).subscribe({
+              next: (result) => {
+                this.ra.status = result[2].ra
+              },
+              error: (e) => {
+                console.log(e)
+              }
+            })
+          }
         });
       this.generalInformationForm.reset();
     }, 500);
