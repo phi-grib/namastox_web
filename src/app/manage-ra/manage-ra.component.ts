@@ -30,8 +30,7 @@ export class ManageRaComponent {
           $('#pills-overview-tab').click();
           this.commonService.getRaList().subscribe((result: any) => {
             this.ra.listRA = [...result];
-            this.ra.name = this.ra.listRA[this.ra.listRA.length - 1];
-            this.func.refreshRA();
+            this.ra.name = this.newRAname
           });
           setTimeout(() => {
             document.getElementById('menubtn').click();
@@ -42,8 +41,26 @@ export class ManageRaComponent {
       error: (e) => {
         console.log(e);
       },
-      complete: () => (this.newRAname = ''),
+      complete: () => {
+        setTimeout(() => {
+        this.loadRACreated(this.newRAname);
+        this.newRAname = '';
+        }, 200);
+      } 
     });
+  }
+
+  loadRACreated(newRAname){
+    const selector = document.getElementById("ra1");
+    selector.querySelectorAll('option').forEach((option)=>{
+      if (option.textContent.trim() === newRAname){
+          option.selected = true;
+          this.func.refreshRA();
+          setTimeout(() => {
+          document.getElementById("pills-gen-information-tab").click();
+          }, 200);
+      }
+    })
   }
 
   focus(): void {
