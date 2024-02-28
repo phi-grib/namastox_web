@@ -30,7 +30,7 @@ export class ManageRaComponent {
           $('#pills-overview-tab').click();
           this.commonService.getRaList().subscribe((result: any) => {
             this.ra.listRA = [...result];
-            this.ra.name = this.newRAname
+            this.ra.name = this.newRAname;
           });
           setTimeout(() => {
             document.getElementById('menubtn').click();
@@ -40,6 +40,15 @@ export class ManageRaComponent {
       },
       error: (e) => {
         console.log(e);
+        this.toastr.error(
+          e.error,
+          e.statusText,
+           
+          {
+            timeOut: 5000,
+            positionClass: 'toast-top-right',
+          }
+        );
       },
       complete: () => {
         setTimeout(() => {
