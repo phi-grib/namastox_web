@@ -25,6 +25,7 @@ import { ModelDocumentationComponent } from './model-documentation/model-documen
 import { NoteFormComponent } from './note-form/note-form.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ReportComponent } from './report/report.component';
+import { AutolinkPipePipe } from '../app/autolink-pipe.pipe';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { ReportComponent } from './report/report.component';
     DecisionsFormComponent,
     ModelDocumentationComponent,
     NoteFormComponent,
-    ReportComponent
+    ReportComponent,
+    AutolinkPipePipe
   ],
   imports: [
     BrowserModule,

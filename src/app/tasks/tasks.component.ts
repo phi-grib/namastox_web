@@ -3,6 +3,8 @@ import { CommonService } from '../common.service';
 import { PendingTasks, RA, Results, Global } from '../globals';
 import { saveAs } from 'file-saver';
 import * as SmilesDrawer from 'smiles-drawer';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
@@ -25,7 +27,6 @@ export class TasksComponent implements OnInit {
   listAllModels: any;
   listModelsSelected: any = [];
   loadEditForm: boolean = false;
-
   constructor(
     public ra: RA,
     private commonService: CommonService,
