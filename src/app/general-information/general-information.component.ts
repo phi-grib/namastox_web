@@ -185,6 +185,8 @@ export class GeneralInformationComponent implements OnInit {
           complete: () => {
             setTimeout(() => {
             this.workflow_custom = null;
+            const fileInput = document.getElementById('workflow_custom') as HTMLInputElement;
+            fileInput.value = null;
             document.getElementById("pills-overview-tab").click()
             }, 100);
           }
