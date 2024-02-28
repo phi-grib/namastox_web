@@ -70,8 +70,7 @@
                 <div class="col-2 text">
                   <strong>Description</strong>
                 </div>
-                <div class="col-10">
-                  {{ this.pending_task["task description"].description }}
+                <div class="col-10" [innerHTML]="this.pending_task['task description'].description | autolinkPipe">
                 </div>
               </div>
             </div>
@@ -196,11 +195,7 @@
                   <div class="col-2 text">
                     <strong>Description</strong>
                   </div>
-                  <div class="col-10">
-                    {{
-                      this.results.decisionSelected["task description"]
-                        .description
-                    }}
+                  <div class="col-10" [innerHTML]="this.results.decisionSelected['task description'].description | autolinkPipe">
                   </div>
                 </div>
               </div>
