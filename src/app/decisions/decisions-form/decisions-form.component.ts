@@ -72,6 +72,7 @@ export class DecisionsFormComponent {
       .subscribe({
         next: (result) => {
           this.upstream_tasks = result;
+          console.log(this.upstream_tasks)
         },
         error: (e) => {
           console.log(e);
