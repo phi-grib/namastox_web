@@ -37,8 +37,7 @@ export class TaskFormComponent {
   @Input() task: any;
   @Input() editMode: any;
 
-  // auxiliary variable to select whether the document will appear in the report or not
-  supplementaryDocument: boolean = false;
+  includeDoc: boolean = false;
 
   constructor(
     public ra: RA,
@@ -354,7 +353,7 @@ export class TaskFormComponent {
     this.model['result_link'] = event.target.files[0];
     if (this.labelFile && this.model['result_link']) {
       this.updateService
-        .updateLink(this.ra.name, this.model['result_link'])
+        .updateLink(this.ra.name, this.model['result_link'],this.includeDoc)
         .subscribe({
           next: (result) => {
             this.toastr.success(

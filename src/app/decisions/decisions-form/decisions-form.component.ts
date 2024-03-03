@@ -29,7 +29,7 @@ export class DecisionsFormComponent {
   upstream_tasks: any;
   popupX = 300;
   popupY = 450;
-  supplementaryDocument: boolean = false;
+  includeDoc: boolean = false;
 
   isDragging = false;
   dragOffsetX = 0;
@@ -111,7 +111,7 @@ export class DecisionsFormComponent {
     this.model['result_link'] = event.target.files[0];
     if (this.labelFile && this.model['result_link']) {
       this.updateService
-        .updateLink(this.ra.name, this.model['result_link'])
+        .updateLink(this.ra.name, this.model['result_link'],this.includeDoc)
         .subscribe({
           next: (result) => {
             this.toastr.success(
