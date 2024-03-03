@@ -217,57 +217,6 @@
         >
         </textarea>
       </div>
-      <div class="row mt-3">
-        <label for="Parameter" class="col-2 col-form-label">Uncertainty</label>
-        <div class="col-4">
-          <input
-            name="uncertainty"
-            [placeholder]="this.pending_task['task description'].uncertainty"
-            [(ngModel)]="this.uncertainty"
-            type="text"
-            class="form-control"
-            id="uncertainty"
-          />
-        </div>
-        <label for="value" class="col-auto col-form-label">Probability</label>
-        <div class="col-1">
-          <input
-            [placeholder]=""
-            (blur)="syncWithTerm()"
-            (keydown)="onlyNumbers($event)"
-            [ngClass]="{
-              'is-invalid':
-                invalidProbability() &&
-                (valueInputRef.dirty || valueInputRef.touched)
-            }"
-            #valueInputRef="ngModel"
-            type="text"
-            name="uncertainty_p"
-            id="uncertainty_p"
-            [(ngModel)]="this.uncertainty_p"
-            class="form-control"
-          />
-        </div>
-        <label for="unit" class="col-auto col-form-label">Term</label>
-        <div class="col-auto">
-          <select
-            (change)="selectedUncertaintyTerm($event.target)"
-            id="uncertainty_term"
-            class="form-control"
-          >
-            <option value="N/A">N/A</option>
-            <option
-              *ngFor="
-                let value of this.pending_task['task description']
-                  .uncertainty_term
-              "
-              [value]="value"
-            >
-              {{ value }}
-            </option>
-          </select>
-        </div>
-      </div>
     </div>
 
     <div>
