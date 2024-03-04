@@ -10,7 +10,7 @@ export class AutolinkPipePipe implements PipeTransform {
   transform(value: string): SafeHtml {
     const urlRegex = /(https?:\/\/[^\s]+)/g;
      // Reemplaza los enlaces con la etiqueta de anclaje HTML
-     const result = value.replace(urlRegex, (url) => {
+     const result = value?.replace(urlRegex, (url) => {
       return `<a href="${url}" target="_blank">${url}</a>`;
     });
 
