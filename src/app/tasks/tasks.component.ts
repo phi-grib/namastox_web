@@ -112,7 +112,6 @@ export class TasksComponent implements OnInit {
       .getPendingTask(this.ra.name, this.pending_task_selected)
       .subscribe({
         next: (result) => {
-          console.log(result);
           this.pending_task = result;
         },
         error: (e) => console.log(e),
