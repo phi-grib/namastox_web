@@ -49,7 +49,7 @@
               *ngFor="let idx of objectKeys(this.pendingTasks.results)"
               [value]="this.pendingTasks.results[idx].id"
             >
-              {{ this.pendingTasks.results[idx].id }}
+              {{ this.pendingTasks.results[idx].label }}
             </option>
           </select>
           <div
