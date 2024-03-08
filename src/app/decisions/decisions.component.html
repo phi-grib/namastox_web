@@ -73,6 +73,18 @@
                 <div class="col-10" [innerHTML]="this.pending_task['task description'].description | autolinkPipe">
                 </div>
               </div>
+              <div class="row">
+                <div class="col-2 text">
+                  <strong>Method links</strong>
+                </div>
+                <div class="col-10">
+                  <ul class="list-group list-group-flush">
+                      <li class="list-group-item" *ngFor="let link of this.pending_task['task description'].method_link">
+                        <a target="_blank" [href]="link">{{link}}</a>
+                      </li>
+                  </ul>
+                </div>
+              </div>
             </div>
             <decisions-form
               *ngIf="this.pending_task"
@@ -120,7 +132,7 @@
                   <thead>
                     <tr>
                       <th>Date</th>
-                      <th>ID</th>
+                      <th>Label</th>
                       <th>Name</th>
                       <th>summary</th>
                       <th>decision</th>
@@ -132,7 +144,7 @@
                       *ngFor="let decision of this.results.decisions"
                     >
                       <td>{{ decision.date | formatDate }}</td>
-                      <td>{{ decision.id }}</td>
+                      <td>{{ decision.label }}</td>
                       <td>{{ decision.name }}</td>
                       <td>{{ decision.summary | slice : 0 : 150 }}...</td>
                       <td>{{ decision.decision }}</td>
@@ -158,6 +170,7 @@
             aria-controls="flush-collapseTwo"
           >
             {{ this.results?.decisionSelected["task description"]?.id }}
+            <!-- change for label -->
           </button>
         </h2>
         <div
