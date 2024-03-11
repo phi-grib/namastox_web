@@ -31,6 +31,7 @@ export class ManageRaComponent {
           this.commonService.getRaList().subscribe((result: any) => {
             this.ra.listRA = [...result];
             this.ra.name = this.newRAname;
+            this.func.refreshRA();
           });
           setTimeout(() => {
             document.getElementById('menubtn').click();
@@ -49,29 +50,10 @@ export class ManageRaComponent {
             positionClass: 'toast-top-right',
           }
         );
-      },
-      complete: () => {
-        setTimeout(() => {
-        this.loadRACreated(this.newRAname);
-        this.newRAname = '';
-        }, 200);
-      } 
+      }
     });
   }
-
-  loadRACreated(newRAname){
-    const selector = document.getElementById("ra1");
-    selector.querySelectorAll('option').forEach((option)=>{
-      if (option.textContent.trim() === newRAname){
-          option.selected = true;
-          this.func.refreshRA();
-          setTimeout(() => {
-          document.getElementById("pills-gen-information-tab").click();
-          }, 200);
-      }
-    })
-  }
-
+  
   focus(): void {
     setTimeout(() => {
       this.nameRAinput.nativeElement.focus();
@@ -117,6 +99,7 @@ export class ManageRaComponent {
             this.global.interfaceVisible = false;
           }
           document.getElementById('menubtn').click();
+          document.getElementById('pills-overview-tab').click();
         });
       },
       (error) => {
