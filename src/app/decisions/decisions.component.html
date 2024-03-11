@@ -215,7 +215,11 @@
                     <strong>Method links</strong>
                   </div>
                   <div class="col-10">
-                    under development!
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" *ngFor="let link of this.results.decisionSelected['task description'].method_link">
+                          <a target="_blank" [href]="link">{{link}}</a>
+                        </li>
+                    </ul>
                   </div>
                 </div>
               </div>

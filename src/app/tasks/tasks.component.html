@@ -221,6 +221,18 @@
                   .description | autolinkPipe">
                   </div>
                 </div>
+                <div class="row">
+                  <div class="col-2 text">
+                    <strong>Method links</strong>
+                  </div>
+                  <div class="col-10">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" *ngFor="let link of this.results.resultSelected['task description'].method_link">
+                          <a target="_blank" [href]="link">{{link}}</a>
+                        </li>
+                    </ul>
+                  </div>
+                </div>
               </div>
               <div class="card-body">
                 <div class="row pt-1 pb-1">
