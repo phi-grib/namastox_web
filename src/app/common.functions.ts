@@ -73,6 +73,7 @@ export class CommonFunctions {
     this.results.resultSelected = '';
     this.results.decisionSelected = '';
     this.ra.note = {};
+    this.ra.general_information.general.substances = [];
   }
   /**separates tasks into different lists  */
   separatePendingTasks() {

@@ -32,7 +32,7 @@
         <div class="row">
           <div class="col-4 text">Structure</div>
           <div class="col-8">
-            <img id="overviewCanvas"/>
+            <img *ngIf="this.ra.general_information?.general?.substances.length > 0" id="overviewCanvas"/>
           </div>
         </div>
       </div>
