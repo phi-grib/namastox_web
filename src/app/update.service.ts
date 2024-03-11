@@ -23,10 +23,9 @@ export class UpdateService {
     return this.http.put(url, formData);
   }
 
-  updateLink(ra_name: string, file: any,include:any) {
+  updateLink(ra_name: string, file: any) {
     const formData = new FormData();
     formData.append('file', file);
-    formData.append('include', include);
     const url: string = environment.baseUrl + 'link/' + ra_name;
     return this.http.post(url, formData);
   }

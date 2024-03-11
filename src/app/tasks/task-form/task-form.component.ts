@@ -353,7 +353,7 @@ export class TaskFormComponent {
     this.model['result_link'] = event.target.files[0];
     if (this.labelFile && this.model['result_link']) {
       this.updateService
-        .updateLink(this.ra.name, this.model['result_link'],this.includeDoc)
+        .updateLink(this.ra.name, this.model['result_link'])
         .subscribe({
           next: (result) => {
             this.toastr.success(
@@ -367,6 +367,7 @@ export class TaskFormComponent {
             this.documents.push({
               label: this.labelFile,
               File: this.model['result_link'].name,
+              include: this.includeDoc
             });
             this.model['links'] = this.documents;
             this.labelFile = '';
