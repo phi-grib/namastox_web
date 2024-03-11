@@ -94,7 +94,7 @@
           <span style="text-align: center">{{ this.ra?.status?.step }}</span>
         </div>
         <div *ngFor="let task of this.ra.pending_tasks" class="row mb-1">
-          <div class="col-2 text">{{ task.id }}</div>
+          <div class="col-2 text">{{ task.label }}</div>
           <div class="col-10" [innerHTML]="task.description | autolinkPipe"></div>
         </div>
       </div>
