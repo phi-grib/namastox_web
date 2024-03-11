@@ -145,7 +145,7 @@
                       *ngFor="let result of this.results.results"
                     >
                       <td>{{ result.date | formatDate }}</td>
-                      <td>{{ result.label }}</td>
+                      <td id="{{result.id}}">{{ result.label }}</td>
                       <td>{{ result.name }}</td>
                       <td>{{ result.summary | slice : 0 : 150 }}...</td>
                       <td *ngIf="isObject(result.values[0]); else reportTD">

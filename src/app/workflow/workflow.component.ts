@@ -60,9 +60,11 @@ export class WorkflowComponent implements OnInit {
       typeTask === 'results' ? 'selectPendingResult' : 'selectPendingDecision';
     this.selectOptionBytaskID(selectorID, taskID);
   }
-  selectPastTask(typeTask, taskName) {
+  selectPastTask(typeTask, taskLabel) {
+    taskLabel = this.results[typeTask].find(task => task.id == taskLabel)
+    taskLabel = taskLabel.label
     const tableID = typeTask === 'results' ? '#dtTasks' : '#dtDecisions';
-    this.selectTableRowByValue(tableID, 1, taskName);
+    this.selectTableRowByValue(tableID, 1, taskLabel);
   }
 
   redirectToTask(typeTask, pending, taskname) {
