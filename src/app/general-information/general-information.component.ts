@@ -73,7 +73,14 @@ export class GeneralInformationComponent implements OnInit {
 
   autocomplete() {
     if (!this.substance_name && !this.substance_CASRN) {
-      console.log('No input provided.');
+      this.toastr.warning(
+        'No input provided',
+        'WARNING',
+        {
+          timeOut: 5000,
+          positionClass: 'toast-top-right',
+        }
+      );
       return;
     }
 
@@ -115,19 +122,14 @@ export class GeneralInformationComponent implements OnInit {
               }
             );
           }
-
           this.substance_id = ids;
           this.substance_SMILES = substanceData['smiles'];
-        } else {
-          console.log(
-            this.substance_name ? 'Not found by Name' : 'Not found by CASRN'
-          );
         }
       })
       .catch((error) => {
-        this.toastr.error(
-          'Check the console to see more information',
-          error.statusText,
+        this.toastr.warning(
+          error.error,
+          'WARNING',
           {
             timeOut: 5000,
             positionClass: 'toast-top-right',
