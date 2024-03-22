@@ -8,7 +8,7 @@
     <div class="d-flex justify-content-end">
       <a
         *ngIf="
-          this.pending_task['task description'].method_link === 'local_models'
+          this.pending_task['task description'].method_link[0] === 'local_models'
         "
         (click)="openModal()"
         data-bs-toggle="modal"
@@ -38,7 +38,7 @@
               <input
                 required
                 [placeholder]=""
-                [(ngModel)]="this.model.value"
+                [(ngModel)]="this.value"
                 type="text"
                 class="form-control"
                 name="value"
@@ -51,7 +51,7 @@
                 <div class="col">
                   <input
                     placeholder=""
-                    [(ngModel)]="this.model.unit"
+                    [(ngModel)]="this.unit"
                     type="text"
                     class="form-control"
                     name="unit"

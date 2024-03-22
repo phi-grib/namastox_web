@@ -21,6 +21,8 @@ export class TaskFormComponent {
   ModelDocumentation = undefined;
   uncertainty_p: any;
   uncertainty_term: string;
+  unit: string | number;
+  value: string | number;
 
   loadForm: boolean = false;
   pending_task: any;
@@ -172,8 +174,7 @@ export class TaskFormComponent {
   resetFieldsUncertainty() {
     this.uncertainty = '';
     this.uncertainty_p = 0;
-    this.uncertainty_term =
-      this.pending_task['task description'].uncertainty_term[0];
+    this.uncertainty_term = this.pending_task['task description'].uncertainty_term[0];
   }
   
   /**
@@ -240,14 +241,14 @@ export class TaskFormComponent {
           console.error(e);
         },
       });
-      this.model.values = [];
-      this.documents = [];
-      this.report = '';
+      //  this.model.values = [];
+      //  this.documents = [];
+      //  this.report = '';
     }, 300);
   }
   addNewParameter() {
     if (
-      (this.report || (this.parameter && this.model.value)) &&
+      (this.report || (this.parameter && this.value)) &&
       this.uncertainty_p >= 0 &&
       this.uncertainty_p <= 1
     ) {
@@ -256,8 +257,8 @@ export class TaskFormComponent {
       } else {
         this.model.values.push({
           parameter: this.parameter,
-          value: this.model.value,
-          unit: this.model['unit'],
+          value: this.value,
+          unit: this.unit,
         });
         this.addNewUncertainty();
         this.resetFieldsParameter();
@@ -318,8 +319,8 @@ export class TaskFormComponent {
   }
 
   resetFieldsParameter() {
-    this.model.unit = '';
-    this.model.value = '';
+    this.unit = '';
+    this.value = '';
     this.parameter = '';
   }
 
