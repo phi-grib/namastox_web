@@ -248,13 +248,10 @@ export class TaskFormComponent {
   }
   addNewParameter() {
     if (
-      (this.report || (this.parameter && this.value)) &&
+      (!this.report || (this.parameter && this.value)) &&
       this.uncertainty_p >= 0 &&
       this.uncertainty_p <= 1
     ) {
-      if (this.report) {
-        this.addNewUncertainty();
-      } else {
         this.model.values.push({
           parameter: this.parameter,
           value: this.value,
@@ -263,7 +260,6 @@ export class TaskFormComponent {
         this.addNewUncertainty();
         this.resetFieldsParameter();
         this.resetFieldsUncertainty();
-      }
     }
   }
   syncWithTerm() {
@@ -325,12 +321,12 @@ export class TaskFormComponent {
   }
 
   addNewUncertainty() {
-    var positionParameter = this.model.values.length - 1;
-    this.model.uncertainties[positionParameter] = {
-      uncertainty: this.uncertainty,
-      p: this.uncertainty_p,
-      term: this.uncertainty_term,
-    };
+      var positionParameter = this.model.values.length - 1;
+      this.model.uncertainties[positionParameter] = {
+        uncertainty: this.uncertainty,
+        p: this.uncertainty_p,
+        term: this.uncertainty_term,
+      };
   }
 
   openModal() {

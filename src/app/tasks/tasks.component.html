@@ -217,7 +217,7 @@
                   <div class="col-2 text">
                     <strong>Description</strong>
                   </div>
-                  <div class="col-10" [innerHTML]="this.results.resultSelected['task description']
+                  <div *ngIf="this.results.resultSelected['task description'].description" class="col-10" [innerHTML]="this.results.resultSelected['task description']
                   .description | autolinkPipe">
                   </div>
                 </div>
@@ -338,8 +338,8 @@
                   "
                   class="row pt-1 pb-1"
                 >
-                  <div class="col-2 text border-bottom"></div>
-                  <div class="col border-bottom">
+                  <div *ngIf="this.results.resultSelected.result.result_type != 'text'" class="col-2 text border-bottom"></div>
+                  <div *ngIf="this.results.resultSelected.result.result_type != 'text'" class="col border-bottom">
                     <table class="table table-borderless">
                       <thead class="text">
                         <th>Uncertainty</th>
