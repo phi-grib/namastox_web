@@ -328,7 +328,6 @@ export class TaskFormComponent {
         term: this.uncertainty_term,
       };
   }
-
   openModal() {
     this.ModelDocumentation = undefined;
     $('#modelsTable').DataTable().destroy();
@@ -344,6 +343,9 @@ export class TaskFormComponent {
         console.log(err);
       },
     });
+  }
+  importList(event){
+
   }
 
   sendlink(event) {

@@ -6,6 +6,15 @@
     class="container-form mt-3"
   >
     <div class="d-flex justify-content-end">
+
+      <a
+      data-bs-toggle="modal"
+      data-bs-target="#importTableModal"
+      role="button"
+      class="btn btn-ets-do mb-2"
+      >Import Table</a>
+
+
       <a
         *ngIf="
           this.pending_task['task description'].method_link[0] === 'local_models'
@@ -337,7 +346,7 @@
       </div>
     </div>
   </form>
-  <!-- Modal -->
+  <!-- Modal Select Models -->
   <div
     class="modal fade"
     id="predModal"
@@ -418,4 +427,48 @@
       </div>
     </div>
   </div>
+  <!-- Modal Import List -->
+  <div
+  class="modal fade"
+  id="importTableModal"
+  tabindex="-1"
+  aria-labelledby="importTableModal"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-xs">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="importTableModalLabel">
+          Import Table
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+
+        <input
+        (change)="importList($event)"
+        placeholder=""
+        type="file"
+        class="form-control"
+      />
+      
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          id="btnclosePredModal"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
 </div>
