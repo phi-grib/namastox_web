@@ -344,7 +344,8 @@ export class TaskFormComponent {
       },
     });
   }
-  importList(event){
+  importTable(event){
+    this.model['input_file'] = event.target.files[0];
 
   }
 
