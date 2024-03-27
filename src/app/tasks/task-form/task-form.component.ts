@@ -203,6 +203,8 @@ export class TaskFormComponent {
   }
 
   onSubmit() {
+    console.log("model:")
+    console.log(this.model)
     this.loadForm = false;
     if (this.report) this.model.values[0] = this.report;
     this.addNewParameter();
