@@ -368,8 +368,11 @@
           ></button>
         </div>
         <div class="modal-body row">
+          <div *ngIf="!this.listAllModels" class="alert p-2 alert-warning" role="alert">
+            No models available
+          </div>
           <div class="col-4">
-            <table
+            <table *ngIf="this.listAllModels"
               style="width: 100% !important"
               id="modelsTable"
               class="table display compact"
