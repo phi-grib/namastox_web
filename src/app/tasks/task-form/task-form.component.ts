@@ -353,7 +353,10 @@ export class TaskFormComponent {
 
     this.updateService.updateTable(this.ra.name,this.model['input_file']).subscribe({
       next: (result) => {
+        console.log("result:")
+        console.log(result)
         if(result['success']){
+          
           this.model.values = result['values']
           this.model.uncertainties = result['uncertainties']
           this.toastr.success(
@@ -369,6 +372,14 @@ export class TaskFormComponent {
       },
       error: (e) => { 
         console.log(e)
+        this.toastr.error(
+          '',
+          e['error'].error,
+          {
+            timeOut:6000,
+            positionClass: 'toast-top-right'
+          }
+        );
       }
     })
 
