@@ -329,6 +329,8 @@ export class TaskFormComponent {
         p: this.uncertainty_p,
         term: this.uncertainty_term,
       };
+
+      
   }
   openModal() {
     this.ModelDocumentation = undefined;
@@ -348,6 +350,28 @@ export class TaskFormComponent {
   }
   importTable(event){
     this.model['input_file'] = event.target.files[0];
+
+    this.updateService.updateTable(this.ra.name,this.model['input_file']).subscribe({
+      next: (result) => {
+        if(result['success']){
+          this.model.values = result['values']
+          this.model.uncertainties = result['uncertainties']
+          this.toastr.success(
+            '',
+            'SUCCESSFULLY IMPORTED',
+            {
+              timeOut: 5000,
+              positionClass: 'toast-top-right',
+            }
+          );
+          document.getElementById('btncloseImportTableModal').click();
+        }
+      },
+      error: (e) => { 
+        console.log(e)
+      }
+    })
+
 
   }
 

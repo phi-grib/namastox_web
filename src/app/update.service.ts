@@ -29,6 +29,12 @@ export class UpdateService {
     const url: string = environment.baseUrl + 'link/' + ra_name;
     return this.http.post(url, formData);
   }
+   updateTable(ra_name:string,file:any){
+     const formData = new FormData();
+     formData.append('file',file);
+     const url: string = environment.baseUrl + "table/"+ra_name;
+     return this.http.post(url,formData)
+   }
 
   uploadSubstances(file: any) {
     const formData = new FormData();
