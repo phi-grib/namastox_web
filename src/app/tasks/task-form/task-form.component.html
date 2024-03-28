@@ -8,6 +8,7 @@
     <div class="d-flex justify-content-end">
 
       <a
+      *ngIf="this.pending_task.result.result_type === 'value'"
       data-bs-toggle="modal"
       data-bs-target="#importTableModal"
       role="button"
