@@ -33,14 +33,16 @@ export class GeneralInformationComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.commonService.generateForms$.subscribe(() => {
-      console.log("generando")
-      this.substance_CASRN = '';
-      this.substance_id = '';
-      this.substance_SMILES = '';
-      this.substance_CASRN = '';
-      this.ra.general_information.general.substances[0]?.casrn;
-      this.substance_id = this.ra.general_information.general.substances[0]?.id;
-      this.substance_SMILES =this.ra.general_information.general.substances[0]?.smiles;
+      if(this.ra.status.step > 0){
+        this.substance_name = this.ra.general_information.general.substances[0]?.name;
+        this.substance_CASRN = this.ra.general_information.general.substances[0]?.casrn;
+        this.substance_id = this.ra.general_information.general.substances[0]?.id;
+        this.substance_SMILES =this.ra.general_information.general.substances[0]?.smiles;
+      }else{
+        this.substance_CASRN = '';
+        this.substance_id = '';
+        this.substance_SMILES = '';
+      }
     });
   }
   
@@ -151,7 +153,7 @@ export class GeneralInformationComponent implements OnInit {
       smiles: this.substance_SMILES,
     };
 
-    this.ra.general_information.general.substances.push(substance);
+    this.ra.general_information.general.substances[0] = substance;
     setTimeout(() => {
       this.updateService
         .updateGeneralInformation(
