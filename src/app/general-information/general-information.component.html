@@ -156,7 +156,6 @@
             >
             <div class="col">
               <input
-                [readonly]="this.ra?.status?.step > 1"
                 name="substance_name"
                 [placeholder]="
                   this.ra.general_information.placeholders['substances'].name
@@ -174,7 +173,6 @@
             >
             <div class="col">
               <input
-                [readonly]="this.ra?.status?.step > 1"
                 name="substance_id"
                 [placeholder]="
                   this.ra.general_information.placeholders['substances'].id
@@ -192,7 +190,6 @@
             >
             <div class="col">
               <input
-                [readonly]="this.ra?.status?.step > 1"
                 name="substance_CASRN"
                 [placeholder]="
                   this.ra.general_information.placeholders['substances'][
@@ -212,7 +209,6 @@
             >
             <div class="col">
               <input
-                readonly
                 [(ngModel)]="this.substance_SMILES"
                 name="substance_SMILES"
                 id="substance_SMILES"
@@ -227,7 +223,6 @@
             >
             <div class="col">
               <input
-                [readonly]="this.ra?.status?.step > 1"
                 name="substance_file"
                 placeholder=""
                 (change)="uploadSubstance($event)"
