@@ -33,6 +33,7 @@ export class GeneralInformationComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.commonService.generateForms$.subscribe(() => {
+      console.log("generando")
       this.substance_CASRN = '';
       this.substance_id = '';
       this.substance_SMILES = '';
@@ -187,7 +188,7 @@ export class GeneralInformationComponent implements OnInit {
             setTimeout(() => {
             this.workflow_custom = null;
             const fileInput = document.getElementById('workflow_custom') as HTMLInputElement;
-            fileInput.value = null;
+            if (fileInput) fileInput.value = null;
             substance = {};
             document.getElementById("pills-overview-tab").click()
             }, 100);
