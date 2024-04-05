@@ -19,7 +19,7 @@
     </button>
     <button
       (click)="deleteStep()"
-      [disabled]="this.ra.listRA.length < 1"
+      [disabled]="this.ra.listRA.length < 1 || this.ra.status.step <=1"
       type="button"
       class="btn btn-ets-delete"
     >
