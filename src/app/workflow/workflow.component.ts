@@ -120,7 +120,7 @@ export class WorkflowComponent implements OnInit {
       flowchart: {
         useMaxWidth: true,
         htmlLabels: true,
-        curve: 'stepAfter',
+      //  curve: 'stepAfter',
       },
     });
 
