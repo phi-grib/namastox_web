@@ -136,7 +136,7 @@
 
       </div>
       <div class="info-values">
-        <table style="width: 100%;"  >
+        <table *ngIf="this.model.values.length > 0" style="width: 100%;"  >
           <thead>
             <tr>
               <th style="width: 15%;">Parameter</th>
@@ -198,12 +198,13 @@
         >
         <div class="col-10">
           <div class="row">
-            <div class="col-3">
+            <div class="col">
               <input
-                type="text"
-                [(ngModel)]="this.labelFile"
-                name="labelFile"
-                placeholder="label"
+                #DocumentFileInput
+                [disabled]="!this.labelFile"
+                (change)="sendlink($event)"
+                placeholder=""
+                type="file"
                 class="form-control"
               />
             </div>
@@ -221,13 +222,12 @@
               </div>
               <span class="text-muted sm-text">Include</span>
             </div>
-            <div class="col">
+            <div class="col-3">
               <input
-                #DocumentFileInput
-                [disabled]="!this.labelFile"
-                (change)="sendlink($event)"
-                placeholder=""
-                type="file"
+                type="text"
+                [(ngModel)]="this.labelFile"
+                name="labelFile"
+                placeholder="label"
                 class="form-control"
               />
             </div>
