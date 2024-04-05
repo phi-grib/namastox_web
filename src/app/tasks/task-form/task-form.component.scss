@@ -9,6 +9,16 @@
   color: $tertiary-color;
 }
 
+.info-values{
+  background-color: rgb(250, 250, 250);
+  margin-top: 12px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 2px;
+  padding-left: 5px;
+  margin-bottom: 12px;
+}
+
 #predModal {
   color: $primary-color;
   table {

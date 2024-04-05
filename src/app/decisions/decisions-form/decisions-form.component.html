@@ -46,21 +46,8 @@
     </div>
   </div>
   <div class="row mb-3">
-    <label for="inputPassword3" class="col-2 col-form-label">Summary:</label>
-    <div class="col-10">
-      <textarea
-        [placeholder]="this.pending_task['task description']['summary']"
-        [(ngModel)]="this.model.summary"
-        class="form-control"
-        name="summary"
-        id="summary"
-        rows="4"
-      ></textarea>
-    </div>
-  </div>
-  <div class="row mb-3">
     <label for="inputPassword3" class="col-2 col-form-label"
-      >Justification:</label
+      >Justification*:</label
     >
     <div class="col-10">
       <textarea
@@ -75,7 +62,6 @@
     </div>
   </div>
 
-  <!-- documents -->
   <div class="row mt-2 mb-3">
     <label for="inputPassword3" class="col-2 col-form-label"
       >Documentation:</label
@@ -119,6 +105,21 @@
       </div>
     </div>
   </div>
+
+  <div class="row mb-3">
+    <label for="inputPassword3" class="col-2 col-form-label">Summary:</label>
+    <div class="col-10">
+      <textarea
+        [placeholder]="this.pending_task['task description']['summary']"
+        [(ngModel)]="this.model.summary"
+        class="form-control"
+        name="summary"
+        id="summary"
+        rows="4"
+      ></textarea>
+    </div>
+  </div>
+  
   <div *ngFor="let idx of objectKeys(this.documents)" class="row mt-2 mb-3">
     <label for="inputPassword3" class="col-2 col-form-label"></label>
     <div class="col-10">
