@@ -68,7 +68,31 @@
     >
     <div class="col-10">
       <div class="row">
-        <div class="col-3">
+        <div class="col-5">
+          <input
+            #DocumentFile
+            (change)="sendlink($event)"
+            placeholder=""
+            type="file"
+            class="form-control"
+          />
+        </div>
+        <div class="col-auto d-flex flex-column">
+          <div class="d-flex flex-row justify-content-around">
+            <input
+              class="form-check-input"
+              [disabled]="this.editMode"
+              type="checkbox"
+              name="inlineRadioOptions"
+              [(ngModel)]="includeDoc"
+              id="inlineRadio1"
+              [value]="true"
+            />
+          </div>
+          <span class="text-muted sm-text">Include</span>
+
+        </div>
+        <div class="col-5">
           <input
             type="text"
             [(ngModel)]="this.labelFile"
@@ -77,30 +101,44 @@
             class="form-control"
           />
         </div>
-               <div class="col-auto d-flex flex-column">
-              <div class="d-flex flex-row justify-content-around">
-                <input
-                  class="form-check-input"
-                  [disabled]="this.editMode"
-                  type="checkbox"
-                  name="inlineRadioOptions"
-                  [(ngModel)]="includeDoc"
-                  id="inlineRadio1"
-                  [value]="true"
-                />
-              </div>
-              <span class="text-muted sm-text">Include</span>
-
-            </div>
-        <div class="col">
+        <div style="margin-left: auto !important;" class="col-1 text-end">
+          <a
+            (click)="addDocument()"
+            class="addbtn btn ms-auto"
+            role="button"
+            ><i class="fa-solid fa-circle-plus fa-lg"></i
+          ></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngFor="let idx of objectKeys(this.documents)" class="row mt-2 mb-3">
+    <label for="inputPassword3" class="col-2 col-form-label"></label>
+    <div class="col-10">
+      <div class="row">
+        <div class="col-3">
           <input
-            #DocumentFile
-            [disabled]="!this.labelFile"
-            (change)="sendlink($event)"
-            placeholder=""
-            type="file"
-            class="form-control"
+            type="text"
+            [value]="this.documents[idx].label"
+            readonly
+            class="form-control-plaintext text-center"
           />
+        </div>
+        <div class="col-1">
+          <div style="text-align: center !important;;margin-top:7px;">
+            <i *ngIf="this.documents[idx].include" style="text-align: center;margin-right: 18px;" class="fa-solid fa-check-to-slot fa-lg"></i>
+          </div>
+          </div>
+        <div class="col-1">
+          <a
+            (click)="deleteFile(this.documents[idx].label)"
+            class="btn ms-auto"
+            role="button"
+            ><i
+              class="fa-solid fa-circle-minus fa-lg"
+              style="color: #e01b24"
+            ></i
+          ></a>
         </div>
       </div>
     </div>
@@ -119,47 +157,6 @@
       ></textarea>
     </div>
   </div>
-  
-  <div *ngFor="let idx of objectKeys(this.documents)" class="row mt-2 mb-3">
-    <label for="inputPassword3" class="col-2 col-form-label"></label>
-    <div class="col-10">
-      <div class="row">
-        <div class="col-3">
-          <input
-            type="text"
-            [value]="this.documents[idx].label"
-            readonly
-            class="form-control-plaintext text-center"
-          />
-        </div>
-        <div class="col-1">
-          <div style="text-align: center !important;">
-            <i *ngIf="this.documents[idx].include" style="text-align: center;margin-right: 18px;" class="fa-solid fa-check-to-slot fa-lg"></i>
-          </div>
-          </div>
-        <div class="col">
-          <input
-            [value]="this.documents[idx].File"
-            type="text"
-            readonly
-            class="form-control-plaintext text-center"
-          />
-        </div>
-        <div class="col-1">
-          <a
-            (click)="deleteFile(this.documents[idx].label)"
-            class="btn ms-auto"
-            role="button"
-            ><i
-              class="fa-solid fa-circle-minus fa-lg"
-              style="color: #e01b24"
-            ></i
-          ></a>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <div class="row">
     <div class="col-10">
       <button

@@ -103,12 +103,19 @@ export class DecisionsFormComponent {
   onMouseUp() {
     this.isDragging = false;
   }
+  setLabelDocumentName(documentName){
+    let docNameWithoutExtension = documentName.split('.').slice(0, -1).join('.');
+    return docNameWithoutExtension;
+  }
   /**
    * Processes the document to send it to the server
    * @param file
    */
   sendlink(event) {
     this.model['result_link'] = event.target.files[0];
+    this.labelFile = this.setLabelDocumentName(event.target.files[0].name);
+  }
+  addDocument(){
     if (this.labelFile && this.model['result_link']) {
       this.updateService
         .updateLink(this.ra.name, this.model['result_link'])

@@ -203,11 +203,8 @@ export class TaskFormComponent {
   }
 
   onSubmit() {
-    console.log("model:")
-    console.log(this.model)
     this.loadForm = false;
     if (this.report) this.model.values[0] = this.report;
-    this.addNewParameter();
     setTimeout(() => {
       this.updateService.updateResult(this.ra.name, this.model).subscribe({
         next: (result) => {
@@ -350,7 +347,6 @@ export class TaskFormComponent {
   }
   importTable(event){
     this.model['input_file'] = event.target.files[0];
-
     this.updateService.updateTable(this.ra.name,this.model['input_file']).subscribe({
       next: (result) => {
         console.log("result:")
@@ -382,12 +378,13 @@ export class TaskFormComponent {
         );
       }
     })
-
-
+  }
+  setLabelDocumentName(documentName){
+    let docNameWithoutExtension = documentName.split('.').slice(0, -1).join('.');
+    return docNameWithoutExtension;
   }
 
-  sendlink(event) {
-    this.model['result_link'] = event.target.files[0];
+  addDocument(){
     if (this.labelFile && this.model['result_link']) {
       this.updateService
         .updateLink(this.ra.name, this.model['result_link'])
@@ -424,6 +421,11 @@ export class TaskFormComponent {
           },
         });
     }
+  }
+
+  sendlink(event) {
+    this.model['result_link'] = event.target.files[0];
+    this.labelFile = this.setLabelDocumentName(event.target.files[0].name)
   }
 
   deleteFile(label) {
