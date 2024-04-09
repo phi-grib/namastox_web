@@ -24,7 +24,15 @@ downloadExcel() {
   );
 }
 downloadWord() {
-  alert("Not implemented")
+    this.commonService.exportToFile(this.ra.name, 'word').subscribe (
+      result => {
+        let blob = new Blob([ result ],{ type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+        saveAs(blob, this.ra.name + '.docx');
+      },
+      error => {
+        alert('Error downloading documentation in WORD format');
+      }
+    );
 }
 downloadEFSA(){
   alert("Not implemented")
