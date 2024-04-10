@@ -147,7 +147,7 @@
                       <td>{{ decision.label }}</td>
                       <td>{{ decision.name }}</td>
                       <td>{{ decision.summary | slice : 0 : 150 }}...</td>
-                      <td>{{ decision.decision }}</td>
+                      <td>{{ decision.decision ? 'Yes' : 'No'  }}</td>
                     </tr>
                   </tbody>
                 </table>
