@@ -121,6 +121,11 @@ export class CommonService {
     }
 
   }
+  attachments(ra_name: string) {
+    const url: string = environment.baseUrl + 'attachments/' + ra_name;
+    return this.http.get(url, { responseType: 'blob' });
+  }
+
 
   getNotes(ra_name:string,step?:number){
     const url:string = environment.baseUrl + "notes/"+ra_name

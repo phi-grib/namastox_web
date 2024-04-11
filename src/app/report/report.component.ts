@@ -11,7 +11,21 @@ import { saveAs } from 'file-saver';
 export class ReportComponent {
   constructor(public ra: RA, private commonService: CommonService) {}
   downloadFiles() {
-    alert("Not implemented yet")
+    this.commonService.attachments(this.ra.name).subscribe(
+      (result)=> {
+        const url = window.URL.createObjectURL(result);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = this.ra.name + '.tgz';
+        link.click();
+        window.URL.revokeObjectURL(url);
+
+      },
+      (e) => {
+        console.error("error")
+        console.log(e)
+      }
+    )
   }
   downloadExcel() {
     this.commonService.exportToFile(this.ra.name, 'excel').subscribe(
