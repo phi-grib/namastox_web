@@ -16,7 +16,7 @@ export class ReportComponent {
         const url = window.URL.createObjectURL(result);
         const link = document.createElement('a');
         link.href = url;
-        link.download = this.ra.name + '.tgz';
+        link.download = this.ra.name + '_repo.tgz';
         link.click();
         window.URL.revokeObjectURL(url);
 
