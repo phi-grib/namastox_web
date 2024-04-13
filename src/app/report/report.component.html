@@ -1,6 +1,6 @@
 <div class="container ">
     <div class="div-style">
-        <span style="padding-left: 5px !important;" class="text-white">RA progress</span>
+        <h5 style="padding-left: 5px !important;" class="text-white p-1">RA progress</h5>
     </div>
     <div class="container-information pt-2">
         <span class="pl-2"> <span class="badge number">{{this.ra.status['tasks_completed']}} </span>Tasks completed</span>
@@ -13,14 +13,12 @@
 
         <div  class="d-flex p-2 justify-content-between">
             <div>
-                <span style="margin-right: 6px !important;">Download:</span> <button (click)="downloadFiles()" type="button" class="btn btn-ets-bad">Attachments</button>
+                <span style="margin-right: 10px !important;">Download:</span> <button (click)="downloadFiles()" type="button" class="btn btn-ets-bad">Attachments</button>
             </div>
             <div>
                
                 <div class="btn-group  ml-2  " role="group" aria-label="group1 ">
-                    <button id="btnGroupDrop1" type="button" class="btn btn-ets-bad dropdown-toggle ml-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Generic formats
-                    </button>
+                    <span style="margin-right: 10px !important;" class="align-bottom">Generate report:</span> <button id="btnGroupDrop1" type="button" class="btn btn-ets-bad dropdown-toggle ml-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Generic formats</button>
                     <div class="dropdown-menu column" aria-labelledby="btnGroupDrop1" >
                         <button type="button" class="btn-ets-do dropdown-item btn btn-ets-down ml-2" data-toggle="modal" (click)="downloadExcel()">Excel</button>
                         <button type="button" class="btn-ets-do dropdown-item btn btn-ets-down ml-2" data-toggle="modal" (click)="downloadWord()">Word</button>
