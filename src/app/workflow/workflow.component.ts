@@ -147,8 +147,8 @@ export class WorkflowComponent implements OnInit {
       // Obtiene las dimensiones del SVG
       const svgBounds = svgElement.getBoundingClientRect();
       // Establece el tamaño del canvas para que coincida con las dimensiones del SVG
-    canvas.width = svgBounds.width;
-    canvas.height = svgBounds.height;
+    canvas.width = 500;
+    canvas.height = 500;
 
       // Crea una nueva imagen SVG
       const xml = new XMLSerializer().serializeToString(svgElement);
