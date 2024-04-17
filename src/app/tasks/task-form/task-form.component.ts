@@ -1,5 +1,4 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { CommonFunctions } from 'src/app/common.functions';
 import { CommonService } from 'src/app/common.service';
@@ -35,6 +34,7 @@ export class TaskFormComponent {
   listAllModels: any;
   pending_task_selected_id: String = '';
   listModelsSelected: any = [];
+  parameterInserted: boolean = true;
 
   @Input() task: any;
   @Input() editMode: any;
@@ -49,7 +49,6 @@ export class TaskFormComponent {
     public results: Results,
     private updateService: UpdateService,
     private toastr: ToastrService,
-    private formBuilder: FormBuilder,
     public global: Global,
     private modelsService: ModelsService
   ) {}
@@ -202,48 +201,54 @@ export class TaskFormComponent {
     return this.uncertainty_p < 0 || this.uncertainty_p > 1;
   }
 
-  onSubmit() {
+  onSubmit(event) {
     this.loadForm = false;
     if (this.report) this.model.values[0] = this.report;
-    setTimeout(() => {
-      this.updateService.updateResult(this.ra.name, this.model).subscribe({
-        next: (result) => {
-          if (result['success']) {
-            this.pendingTasks.results = [];
-            this.func.refreshRA();
-            if (!this.editMode) {
-              setTimeout(() => {
-                if (this.pendingTasks.results.length) {
-                  this.pending_task_selected_id =
-                    this.pendingTasks.results[0].id;
-                  this.getPendingTask();
-                }
-              }, 1000);
-            } else {
-              this.global.editModeTasks = false;
+    if(this.model.values.length > 0){
+      setTimeout(() => {
+        this.updateService.updateResult(this.ra.name, this.model).subscribe({
+          next: (result) => {
+            if (result['success']) {
+              this.pendingTasks.results = [];
+              this.func.refreshRA();
+              if (!this.editMode) {
+                setTimeout(() => {
+                  if (this.pendingTasks.results.length) {
+                    this.pending_task_selected_id =
+                      this.pendingTasks.results[0].id;
+                    this.getPendingTask();
+                  }
+                }, 1000);
+              } else {
+                this.global.editModeTasks = false;
+              }
+              this.toastr.success('RA ' + this.ra.name, 'SUCCESSFULLY UPDATED', {
+                timeOut: 5000,
+                positionClass: 'toast-top-right',
+              });
             }
-            this.toastr.success('RA ' + this.ra.name, 'SUCCESSFULLY UPDATED', {
-              timeOut: 5000,
-              positionClass: 'toast-top-right',
-            });
-          }
-        },
-        error: (e) => {
-          this.toastr.error(
-            'Check the console to see more information',
-            'Unexpected Error',
-            {
-              timeOut: 5000,
-              positionClass: 'toast-top-right',
-            }
-          );
-          console.error(e);
-        },
-      });
-      //  this.model.values = [];
-      //  this.documents = [];
-      //  this.report = '';
-    }, 300);
+          },
+          error: (e) => {
+            this.toastr.error(
+              'Check the console to see more information',
+              'Unexpected Error',
+              {
+                timeOut: 5000,
+                positionClass: 'toast-top-right',
+              }
+            );
+            console.error(e);
+          },
+        });
+        //  this.model.values = [];
+        //  this.documents = [];
+        //  this.report = '';
+      }, 300);
+    }else{
+      this.parameterInserted = false;
+      event.preventDefault();
+    }
+
   }
   addNewParameter() {
     if (
@@ -256,6 +261,7 @@ export class TaskFormComponent {
           value: this.value,
           unit: this.unit,
         });
+        this.parameterInserted = true;
         this.addNewUncertainty();
         this.resetFieldsParameter();
         this.resetFieldsUncertainty();
