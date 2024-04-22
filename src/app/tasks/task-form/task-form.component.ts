@@ -257,6 +257,7 @@ export class TaskFormComponent {
       this.uncertainty_p <= 1
     ) {
         this.model.values.push({
+          method: this.method,
           parameter: this.parameter,
           value: this.value,
           unit: this.unit,

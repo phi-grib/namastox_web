@@ -87,7 +87,7 @@
                     <i class="fa-solid fa-circle-plus fa-lg"></i>
                   </a>
                 </div>
-                <div class="col">
+                <div class="col d-flex justify-content-end">
                   <a
                   style="background: rgb(250,250,250)"
                     (click)="addNewParameter()"
@@ -121,6 +121,7 @@
             <tr
             *ngFor="let value of this.model.values; let i = index"
           >
+            <td >{{ value?.method}}</td>
             <td >{{ value?.parameter}}</td>
             <td>{{ value?.value.toString() | slice : 0 : 6 }}</td>
             <td>{{ value?.unit }}</td>
