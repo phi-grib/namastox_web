@@ -22,6 +22,7 @@ export class TaskFormComponent {
   uncertainty_term: string;
   unit: string | number;
   value: string | number;
+  method: string;
 
   loadForm: boolean = false;
   pending_task: any;
@@ -251,8 +252,7 @@ export class TaskFormComponent {
 
   }
   addNewParameter() {
-    if (
-      (!this.report || (this.parameter && this.value)) &&
+    if ((this.parameter && this.value) &&
       this.uncertainty_p >= 0 &&
       this.uncertainty_p <= 1
     ) {
@@ -320,6 +320,7 @@ export class TaskFormComponent {
   }
 
   resetFieldsParameter() {
+    this.method = '';
     this.unit = '';
     this.value = '';
     this.parameter = '';
@@ -332,8 +333,6 @@ export class TaskFormComponent {
         p: this.uncertainty_p,
         term: this.uncertainty_term,
       };
-
-      
   }
   openModal() {
     this.ModelDocumentation = undefined;
