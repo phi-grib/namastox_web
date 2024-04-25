@@ -18,14 +18,12 @@ export class CommonFunctions {
     this.clearRA();
     let generalInfo$ = this.commonService.getGeneralInfo(this.ra.name);
     let pendingTasks$ = this.commonService.getPendingTasks(this.ra.name);
-    let listSteps$ = this.commonService.getSteps(this.ra.name);
     let status$ = this.commonService.getStatus(this.ra.name);
     let results$ = this.commonService.getResults(this.ra.name);
     let workflow$ = this.commonService.getWorkflow(this.ra.name);
     let notes$ = this.commonService.getNotes(this.ra.name);
     let observables = [
       generalInfo$,
-      listSteps$,
       status$,
       results$,
       workflow$,
@@ -35,13 +33,12 @@ export class CommonFunctions {
     forkJoin(observables).subscribe((values) => {
       this.ra.general_information = values[0];
       this.commonService.drawOverviewCanvas(false);
-      this.ra.listSteps = [...values[1]];
-      this.ra.status = values[2].ra;
-      this.ra.results = values[3];
+      this.ra.status = values[1].ra;
+      this.ra.results = values[2];
       this.separatePastTasks();
-      this.ra.workflow = values[4]['result'];
+      this.ra.workflow = values[3]['result'];
       $('#dtNotes').DataTable().destroy();
-      this.ra.notes = values[5];
+      this.ra.notes = values[4];
       setTimeout(() => {
         $('#dtNotes').DataTable();
       }, 200);

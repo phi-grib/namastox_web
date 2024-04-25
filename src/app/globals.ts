@@ -10,7 +10,6 @@ export class RA {
   status: any = '';
   results: any = undefined;
   pending_tasks: any = [];
-  listSteps: any[] = [];
   workflow: any = undefined;
   notes: any = [];
   note: any = {}
