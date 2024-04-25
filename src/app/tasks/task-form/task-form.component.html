@@ -108,13 +108,14 @@
         <table *ngIf="this.model.values.length > 0" style="width: 100%;"  >
           <thead>
             <tr>
-              <th style="width: 15%;"></th>
-              <th style="width: 10%;"></th>
-              <th style="width: 10%;"></th>
-              <th class="text-center" style="width: 10%;"></th>
-              <th class="text-center" style="width: 20%;"></th>
-              <th style="width: 30%;"></th>
-              <th></th>
+              <th style="width: 15%;">Method</th>
+              <th style="width: 15%;">Parameter</th>
+              <th style="width: 15%;">Value</th>
+              <th class="text-center" style="width: 5%;">Unit</th>
+              <th class="text-center" style="width: 15%;">Uncertainty</th>
+              <th style="width: 10%;">Probability</th>
+              <th style="width: 25%;">Term</th>
+              <th></th> 
             </tr>
           </thead>
           <tbody>
@@ -124,9 +125,9 @@
             <td >{{ value?.method}}</td>
             <td >{{ value?.parameter}}</td>
             <td>{{ value?.value.toString() | slice : 0 : 6 }}</td>
-            <td>{{ value?.unit }}</td>
+            <td class="text-center">{{ value?.unit }}</td>
             <td class="text-center">{{ this.model?.uncertainties[i]?.uncertainty }}</td>
-            <td class="text-center">{{ this.model?.uncertainties[i]?.p }}</td>
+            <td >{{ this.model?.uncertainties[i]?.p }}</td>
             <td>{{ this.model?.uncertainties[i]?.term }}</td>
             <td style="text-align: right;">            <a (click)="deleteParameter(i)" class="btn ms-auto" role="button"
               ><i
