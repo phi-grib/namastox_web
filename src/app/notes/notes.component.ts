@@ -18,12 +18,12 @@ export class NotesComponent{
     this.ra.note = this.ra.notes.find(note  => note.id === id)
   }
 
-  deleteNote(noteID){
+  deleteNote(note){
 
-    this.commonService.deleteNote(this.ra.name,noteID).subscribe({
+    this.commonService.deleteNote(this.ra.name,note.id).subscribe({
       next: (result)=> {
         this.toastr.success(
-          'Note ' + noteID,
+          'Note ' + note.title,
           'SUCCESSFULLY DELETED',
           {
             timeOut: 5000,
