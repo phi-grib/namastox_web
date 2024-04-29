@@ -78,11 +78,12 @@
                   <strong>Method links</strong>
                 </div>
                 <div *ngIf="this.pending_task['task description'].method_link[0] !== 'local_models'" class="col-10">
-                  <ul class="list-group list-group-flush">
-                      <li class="list-group-item" *ngFor="let link of this.pending_task['task description'].method_link">
+                  <div>
+                      <span *ngFor="let link of this.pending_task['task description'].method_link">
                         <a target="_blank" [href]="link">{{link}}</a>
-                      </li>
-                  </ul>
+                        <br>
+                      </span>
+                    </div>
                 </div>
               </div>
             </div>
@@ -215,11 +216,12 @@
                     <strong>Method links</strong>
                   </div>
                   <div *ngIf="this.pending_task['task description'].method_link[0] !== 'local_models'" class="col-10">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item" *ngFor="let link of this.results.decisionSelected['task description'].method_link">
+                    <div>
+                        <span *ngFor="let link of this.results.decisionSelected['task description'].method_link">
                           <a target="_blank" [href]="link">{{link}}</a>
-                        </li>
-                    </ul>
+                          <br>
+                        </span>
+                      </div>
                   </div>
                 </div>
               </div>
