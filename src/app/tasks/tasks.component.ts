@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CommonService } from '../common.service';
 import { PendingTasks, RA, Results, Global } from '../globals';
 import { saveAs } from 'file-saver';
 import * as SmilesDrawer from 'smiles-drawer';
-import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+declare var $: any; 
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
   styleUrls: ['./tasks.component.scss'],
 })
 export class TasksComponent implements OnInit {
-  modalRef: NgbModalRef;
+  @ViewChild('imageModal') imageModal: ElementRef;
   imageUrl = '';
   loadForm: boolean = false;
   model: any;
@@ -28,13 +28,13 @@ export class TasksComponent implements OnInit {
   listAllModels: any;
   listModelsSelected: any = [];
   loadEditForm: boolean = false;
-  images = [];
+  image = [];
   constructor(
     public ra: RA,
     private commonService: CommonService,
     public pendingTasks: PendingTasks,
     public results: Results,
-    public global: Global
+    public global: Global,
   ) {}
 
   ngOnInit(): void {
@@ -60,12 +60,14 @@ export class TasksComponent implements OnInit {
   editTask() {
     this.global.editModeTasks = !this.global.editModeTasks;
   }
-
+  confirmDownload(){
+    saveAs(this.image[0],this.image[1])
+    this.image = [];
+  }
 
 
   downloadFile(File) {
     var isImage = false;
-    var modalImageBtn = document.getElementById("imgBtn"); 
     if (File) {
       isImage = this.isImage(File)
         this.commonService.getLink(this.ra.name, File).subscribe({
@@ -78,7 +80,9 @@ export class TasksComponent implements OnInit {
               reader.readAsDataURL(blob);
               reader.onloadend = () => {
                 this.imageUrl = reader.result as string;
-                modalImageBtn.click();
+                $(this.imageModal.nativeElement).modal('show');
+                this.image[0] = blob;
+                this.image[1] = File;
               };
             }
           },
