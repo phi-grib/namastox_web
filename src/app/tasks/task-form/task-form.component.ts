@@ -40,7 +40,7 @@ export class TaskFormComponent {
   @Input() task: any;
   @Input() editMode: any;
 
-  includeDoc: boolean = false;
+  includeDoc: boolean = true;
 
   constructor(
     public ra: RA,
