@@ -26,7 +26,7 @@ import { NoteFormComponent } from './note-form/note-form.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ReportComponent } from './report/report.component';
 import { AutolinkPipePipe } from '../app/autolink-pipe.pipe';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,6 +47,7 @@ import { AutolinkPipePipe } from '../app/autolink-pipe.pipe';
     AutolinkPipePipe
   ],
   imports: [
+    NgbModule,
     BrowserModule,
     DataTablesModule,
     AngularSplitModule,

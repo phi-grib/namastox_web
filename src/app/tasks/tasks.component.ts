@@ -3,14 +3,15 @@ import { CommonService } from '../common.service';
 import { PendingTasks, RA, Results, Global } from '../globals';
 import { saveAs } from 'file-saver';
 import * as SmilesDrawer from 'smiles-drawer';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
   styleUrls: ['./tasks.component.scss'],
 })
 export class TasksComponent implements OnInit {
+  modalRef: NgbModalRef;
+  imageUrl = '';
   loadForm: boolean = false;
   model: any;
   pending_task_selected: String = '';
@@ -27,6 +28,7 @@ export class TasksComponent implements OnInit {
   listAllModels: any;
   listModelsSelected: any = [];
   loadEditForm: boolean = false;
+  images = [];
   constructor(
     public ra: RA,
     private commonService: CommonService,
@@ -48,20 +50,40 @@ export class TasksComponent implements OnInit {
       }
     });
   }
+
+  isImage(filename: string):boolean {
+    var imgFormats = ['jpeg','png','jpg']
+    const extension= filename.split('.').pop()
+    return imgFormats.includes(extension)
+  }
   
   editTask() {
     this.global.editModeTasks = !this.global.editModeTasks;
   }
 
+
+
   downloadFile(File) {
+    var isImage = false;
+    var modalImageBtn = document.getElementById("imgBtn"); 
     if (File) {
-      this.commonService.getLink(this.ra.name, File).subscribe({
-        next: (link) => {
-          const blob = new Blob([link], { type: 'application/octet-stream' });
-          saveAs(blob, File);
-        },
-        error: (e) => console.log(e),
-      });
+      isImage = this.isImage(File)
+        this.commonService.getLink(this.ra.name, File).subscribe({
+          next: (link) => {
+            const blob = new Blob([link], { type: 'application/octet-stream' });
+            if(!isImage){
+              saveAs(blob, File);
+            }else{
+              const reader = new FileReader();
+              reader.readAsDataURL(blob);
+              reader.onloadend = () => {
+                this.imageUrl = reader.result as string;
+                modalImageBtn.click();
+              };
+            }
+          },
+          error: (e) => console.log(e),
+        });
     }
   }
   drawMol() {
@@ -82,11 +104,10 @@ export class TasksComponent implements OnInit {
       );
     }
   }
+
   selectTask(id: string) {
     this.commonService.getTask(this.ra.name, id).subscribe((result) => {
       this.results.resultSelected = result;
-      console.log("links")
-      console.log(this.results.resultSelected.result.links)
       if (!Array.isArray(this.results.resultSelected.substance)) {
         this.results.resultSelected.substance = [
           this.results.resultSelected.substance,

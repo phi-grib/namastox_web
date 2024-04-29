@@ -2,6 +2,9 @@ import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import mermaid from 'mermaid';
 import { CommonService } from '../common.service';
 import { PendingTasks, RA, Results } from '../globals';
+import { toBase64 } from 'js-base64';
+type Exporter = (context: CanvasRenderingContext2D, image: HTMLImageElement) => () => void;
+
 
 @Component({
   selector: 'app-workflow',
@@ -16,9 +19,7 @@ export class WorkflowComponent implements OnInit {
     private results: Results
   ) {}
   @ViewChild('mermaidDiv', { static: false }) mermaidDiv: ElementRef;
-  @ViewChild('graphDiv', { static: false }) graphDiv: ElementRef;
 
-    
   flowchartRefresh() {
     const element: any = this.mermaidDiv.nativeElement;
     mermaid.render('graphDiv', this.ra.workflow, (svgCode, bindFunctions) => {
@@ -117,6 +118,11 @@ export class WorkflowComponent implements OnInit {
     (window as any).onA = (nodeName) => {
       this.checkType(nodeName);
     };
+
+    /**
+     * Export workflow image format
+     */
+
     mermaid.initialize({
       securityLevel: 'loose',
       flowchart: {
@@ -125,48 +131,98 @@ export class WorkflowComponent implements OnInit {
       //  curve: 'stepAfter',
       },
     });
+
     mermaid.init();
+
     this.commonService.refreshWorklfow$.subscribe(() => {
       this.flowchartRefresh();
     });
   }
-  /**
-   * Image format export
-   */
-  exportWorkflow(){ 
-    this.guardarImagen();
-    }
-    guardarImagen() {
-      // Obtiene el elemento SVG
-      const svgElement = document.getElementById('graphDiv');
-    
-      // Crea un canvas
-      const canvas = document.createElement('canvas');
-      const context = canvas.getContext('2d');
 
-    canvas.width = 407.875;
-    canvas.height = 632.75;
 
-      // Crea una nueva imagen SVG
-      const xml = new XMLSerializer().serializeToString(svgElement);
-      const svg64 = btoa(xml);
-      const image64 = 'data:image/svg+xml;base64,' + svg64;
-    
-      // Carga la imagen SVG en un objeto de imagen
-      const img = new Image();
-      img.onload = () => {
-        // Dibuja la imagen SVG en el canvas
-        context.drawImage(img, 0, 0);
-    
-        // Convierte el canvas en una URL de datos de imagen
-        const imgData = canvas.toDataURL('image/png');
-    
-        // Crea un enlace temporal para descargar la imagen
-        const link = document.createElement('a');
-        link.setAttribute('download', 'screenshot.png');
-        link.setAttribute('href', imgData);
-        link.click();
-      };
-      img.src = image64;
-    }
+   simulateDownload(download: string, href: string): void  {
+    const a = document.createElement('a');
+    a.download = download;
+    a.href = href;
+    a.click();
+    a.remove();
   };
+
+   downloadImage: Exporter = (context, image) => {
+    return () => {
+      const { canvas } = context;
+      context.drawImage(image, 0, 0, canvas.width, canvas.height);
+      this.simulateDownload(
+        `mermaid-diagram_${this.ra.name}.png`,
+        canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream')
+      );
+    };
+  };
+  
+
+   onDownloadPNG (event?: Event)  {
+    console.log("aqui")
+    this.exportImage(event, this.downloadImage);
+  };
+
+   getSvgElement () {
+    const svgElement = document.getElementById('graphDiv')?.cloneNode(true) as HTMLElement;
+    svgElement.setAttribute('xmlns:xlink', 'http://www.w3.org/1999/xlink');
+    const styleElement = document.createElement('style');
+    styleElement.textContent = `@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css");'`;
+    svgElement.prepend(styleElement);
+    return svgElement;
+  };
+
+
+   getBase64SVG = (svg?: HTMLElement, width?: number, height?: number): string => {
+    if (svg) {
+      // Prevents the SVG size of the interface from being changed
+      svg = svg.cloneNode(true) as HTMLElement;
+    }
+    height && svg?.setAttribute('height', `${height}px`);
+    width && svg?.setAttribute('width', `${width}px`); // Workaround https://stackoverflow.com/questions/28690643/firefox-error-rendering-an-svg-image-to-html5-canvas-with-drawimage
+    if (!svg) {
+      svg = this.getSvgElement();
+    }
+    const svgString = svg.outerHTML
+      .replaceAll('<br>', '<br/>')
+      .replaceAll(/<img([^>]*)>/g, (m, g: string) => `<img ${g} />`);
+    return toBase64(svgString);
+  };
+
+
+   exportImage(event: Event, exporter: Exporter)  {
+    if (document.querySelector('.outOfSync')) {
+      throw new Error('Diagram is out of sync');
+    }
+    const canvas: HTMLCanvasElement = document.createElement('canvas');
+    const svg = document.getElementById('graphDiv');
+    if (!svg) {
+      throw new Error('svg not found');
+    }
+    const box: DOMRect = svg.getBoundingClientRect();
+    canvas.width = box.width;
+    canvas.height = box.height;
+
+    const context = canvas.getContext('2d');
+    if (!context) {
+      throw new Error('context not found');
+    }
+    context.fillStyle = `hsl(${window.getComputedStyle(document.body).getPropertyValue('--b1')})`;
+    context.fillRect(0, 0, canvas.width, canvas.height);
+
+    const image = new Image();
+    image.addEventListener('load', exporter(context, image));
+    image.src = `data:image/svg+xml;base64,${this.getBase64SVG(svg, canvas.width, canvas.height)}`;
+
+    event.stopPropagation();
+    event.preventDefault();
+  };
+
+
+
+
+
+
+}
