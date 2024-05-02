@@ -283,7 +283,7 @@ export class TaskFormComponent {
         parameter: this.parameter,
         value: this.value,
         unit: this.unit,
-      }              
+      }
       }else{
         this.model.values.push({
           method: this.method,
@@ -291,11 +291,12 @@ export class TaskFormComponent {
           value: this.value,
           unit: this.unit,
         });
+        this.resetFieldsParameter();
+        this.resetFieldsUncertainty();
       }
         this.parameterInserted = true;
         this.addNewUncertainty();
-        this.resetFieldsParameter();
-        this.resetFieldsUncertainty();
+
     }else{
       this.parameterInserted = false
     }

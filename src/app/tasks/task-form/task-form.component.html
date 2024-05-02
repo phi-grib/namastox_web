@@ -32,7 +32,7 @@
         data-bs-target="#predModal"
         role="button"
         class="btn btn-ets-do mb-2"
-        >Select Models</a
+        >Predict</a
       >
     </div>
     <div *ngIf="this.pending_task?.result.result_type === 'value'" class="mb-2">
@@ -485,7 +485,7 @@ aria-hidden="true"
         class="btn btn-ets-do"
         role="button"
         >
-        {{ editParameterMode ? 'Edit' : 'Add' }}
+        {{ editParameterMode ? 'Update' : 'Add' }}
       </a>
        <button
         type="button"
@@ -493,7 +493,7 @@ aria-hidden="true"
         class="btn btn-ets-bad"
         data-bs-dismiss="modal"
       >
-        Cancel
+      {{ editParameterMode ? 'Close' : 'Cancel' }}
       </button> 
     </div> 
   </div>
