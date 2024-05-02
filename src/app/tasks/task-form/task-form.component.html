@@ -405,15 +405,6 @@ aria-hidden="true"
                     id="unit"
                   />
                 </div>
-                <div class="col d-flex justify-content-end">
-                  <a
-                  style="background: rgb(250,250,250)"
-                    (click)="addNewParameter()"
-                    class="addbtn btn ms-auto"
-                    role="button"
-                    ><i class="fa-solid fa-arrow-turn-down fa-rotate-90 fa-lg"></i
-                  ></a>
-                </div>
               </div>
             </div>
           </div>
@@ -478,16 +469,23 @@ aria-hidden="true"
         </div>
       </div>
     </div>
-    <!-- <div class="modal-footer"> -->
-      <!-- <button
+     <div class="modal-footer">
+      <a
+        (click)="addNewParameter()"
+        class="btn btn-ets-do"
+        role="button"
+        >
+        Add
+      </a> 
+       <button
         type="button"
         id="btncloseImportTableModal"
         class="btn btn-secondary"
         data-bs-dismiss="modal"
       >
         Cancel
-      </button> -->
-    <!-- </div> -->
+      </button> 
+    </div> 
   </div>
 </div>
 </div>
