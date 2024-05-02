@@ -246,7 +246,14 @@ export class TaskFormComponent {
         //  this.report = '';
       }, 300);
     }else{
-      this.parameterInserted = false;
+      this.toastr.warning(
+        '',
+        'value is required',
+        {
+          timeOut: 5000,
+          positionClass: 'toast-top-right',
+        }
+      );
       event.preventDefault();
     }
 
