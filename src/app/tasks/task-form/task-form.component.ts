@@ -284,6 +284,14 @@ export class TaskFormComponent {
         value: this.value,
         unit: this.unit,
       }
+      this.toastr.success(
+        '',
+        'Updated Successfully',
+        {
+          timeOut: 5000,
+          positionClass: 'toast-top-right',
+        }
+      );
       }else{
         this.model.values.push({
           method: this.method,
@@ -291,6 +299,14 @@ export class TaskFormComponent {
           value: this.value,
           unit: this.unit,
         });
+        this.toastr.success(
+          '',
+          'Added Successfully',
+          {
+            timeOut: 5000,
+            positionClass: 'toast-top-right',
+          }
+        );
         this.resetFieldsParameter();
         this.resetFieldsUncertainty();
       }
