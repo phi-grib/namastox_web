@@ -345,7 +345,7 @@ aria-hidden="true"
 <div class="modal-dialog modal-xl">
   <div class="modal-content">
     <div class="modal-header">
-      <h5 class="modal-title" id="extraInformationLabel">
+      <h5 class="modal-title fw-bold" id="extraInformationLabel">
         Add new Value
       </h5>
       <button
@@ -359,7 +359,7 @@ aria-hidden="true"
       <div class="row">
         <div class="col">
           <div class="row">
-            <div class="col">
+            <div class="col-5">
               <label for="method" class="form-label">Method</label>
               <input
                 name="method"
@@ -392,7 +392,7 @@ aria-hidden="true"
                 id="value"
               />
             </div>
-            <div class="col">
+            <div class="col-1">
               <label for="unit" class="form-label">Unit</label>
               <div class="row">
                 <div class="col">
@@ -409,9 +409,6 @@ aria-hidden="true"
             </div>
           </div>
         </div>
-        <div *ngIf="!parameterInserted" class="text-danger">
-          Parameter is required !
-        </div>
       </div>
       <div class="row mt-2">
         <div class="col-5">
@@ -425,7 +422,7 @@ aria-hidden="true"
             id="uncertainty"
           />
         </div>
-        <div class="col-auto">
+        <div class="col-1">
           <label for="value" class="form-label">Probability</label>
           <input
             (blur)="syncWithTerm()"
@@ -468,6 +465,9 @@ aria-hidden="true"
           </div>
         </div>
       </div>
+      <div *ngIf="!parameterInserted" class="text-danger mt-2">
+        There are missing required fields to fill out
+      </div>
     </div>
      <div class="modal-footer">
       <a
@@ -480,7 +480,7 @@ aria-hidden="true"
        <button
         type="button"
         id="btncloseImportTableModal"
-        class="btn btn-secondary"
+        class="btn btn-ets-bad"
         data-bs-dismiss="modal"
       >
         Cancel

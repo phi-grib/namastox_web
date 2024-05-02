@@ -266,6 +266,8 @@ export class TaskFormComponent {
         this.addNewUncertainty();
         this.resetFieldsParameter();
         this.resetFieldsUncertainty();
+    }else{
+      this.parameterInserted = false
     }
   }
   syncWithTerm() {
