@@ -8,7 +8,9 @@
     <div class="d-flex justify-content-end">
 
       <a  class="btn btn-ets-do mb-2"
+      *ngIf="this.pending_task.result.result_type === 'value'"
       role="button"
+      (click)="addParameterMode()"
       data-bs-toggle="modal"
       data-bs-target="#extraInformation"
       >
@@ -44,7 +46,7 @@
               <th class="text-center" style="width: 5%;">Unit</th>
               <th class="text-center" style="width: 15%;">Uncertainty</th>
               <th style="width: 10%;">Probability</th>
-              <th style="width: 25%;">Term</th>
+              <th style="width: 15%;">Term</th>
               <th></th> 
             </tr>
           </thead>
@@ -59,12 +61,20 @@
             <td class="text-center">{{ this.model?.uncertainties[i]?.uncertainty }}</td>
             <td >{{ this.model?.uncertainties[i]?.p }}</td>
             <td>{{ this.model?.uncertainties[i]?.term }}</td>
-            <td style="text-align: right;">            <a (click)="deleteParameter(i)" class="btn ms-auto" role="button"
-              ><i
-                class="fa-solid fa-circle-minus fa-lg"
-                style="color: #e01b24"
-              ></i
-            ></a></td>
+            <td>
+              <div class="d-flex">
+                <a (click)="deleteParameter(i)" class="btn btn-ets-delete" role="button"
+                >
+                Delete
+              </a>
+                <a (click)="editFormParam(i)" class="btn btn-ets-do pr-4" role="button"
+                data-bs-toggle="modal"
+                data-bs-target="#extraInformation"
+                >
+                Edit
+                </a>
+              </div>
+          </td>
           </tr>
           </tbody>
         </table>
@@ -475,8 +485,8 @@ aria-hidden="true"
         class="btn btn-ets-do"
         role="button"
         >
-        Add
-      </a> 
+        {{ editParameterMode ? 'Edit' : 'Add' }}
+      </a>
        <button
         type="button"
         id="btncloseImportTableModal"

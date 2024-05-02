@@ -16,6 +16,7 @@ export class TaskFormComponent {
   DocumentFileInput: ElementRef;
 
   uncertainty;
+  idx = undefined;
   selectedModel: any;
   ModelDocumentation = undefined;
   uncertainty_p: any;
@@ -23,6 +24,7 @@ export class TaskFormComponent {
   unit: string | number;
   value: string | number;
   method: string;
+  editParameterMode = false;
 
   loadForm: boolean = false;
   pending_task: any;
@@ -68,6 +70,23 @@ export class TaskFormComponent {
   }
   selectedUncertaintyTerm(target) {
     this.uncertainty_term = target.value;
+  }
+  
+  deleteParameter(idx) {
+    this.model.uncertainties.splice(idx, 1);
+    this.model.values.splice(idx, 1);
+  }
+  editFormParam(idx){
+    const { method, parameter, value, unit } = this.model.values[idx];
+    const { uncertainty, p, term } = this.model.uncertainties[idx];
+    Object.assign(this, { method, parameter, value, unit, uncertainty, p, term });
+    this.editParameterMode = true;
+    this.idx = idx
+  }
+  addParameterMode(){
+    this.editParameterMode = false;
+    this.resetFieldsParameter();
+    this.resetFieldsUncertainty();
   }
 
   back() {
@@ -166,11 +185,6 @@ export class TaskFormComponent {
     }
   }
 
-  deleteParameter(idx) {
-    this.model.uncertainties.splice(idx, 1);
-    this.model.values.splice(idx, 1);
-  }
-
   resetFieldsUncertainty() {
     this.uncertainty = '';
     this.uncertainty_p = 0;
@@ -263,12 +277,21 @@ export class TaskFormComponent {
       this.uncertainty_p >= 0 &&
       this.uncertainty_p <= 1
     ) {
+      if(this.editParameterMode){
+      this.model.values[this.idx] = {
+        method: this.method,
+        parameter: this.parameter,
+        value: this.value,
+        unit: this.unit,
+      }              
+      }else{
         this.model.values.push({
           method: this.method,
           parameter: this.parameter,
           value: this.value,
           unit: this.unit,
         });
+      }
         this.parameterInserted = true;
         this.addNewUncertainty();
         this.resetFieldsParameter();
@@ -337,12 +360,21 @@ export class TaskFormComponent {
   }
 
   addNewUncertainty() {
-      var positionParameter = this.model.values.length - 1;
-      this.model.uncertainties[positionParameter] = {
-        uncertainty: this.uncertainty,
-        p: this.uncertainty_p,
-        term: this.uncertainty_term,
-      };
+      if(!this.editParameterMode){
+        var positionParameter = this.model.values.length - 1;
+        this.model.uncertainties[positionParameter] = {
+          uncertainty: this.uncertainty,
+          p: this.uncertainty_p,
+          term: this.uncertainty_term,
+        };
+      }else{
+        this.model.uncertainties[this.idx] = {
+          uncertainty: this.uncertainty,
+          p: this.uncertainty_p,
+          term: this.uncertainty_term
+        }
+      }
+
   }
   openModal() {
     this.ModelDocumentation = undefined;
