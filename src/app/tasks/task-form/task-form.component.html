@@ -7,6 +7,13 @@
   >
     <div class="d-flex justify-content-end">
 
+      <a  class="btn btn-ets-do mb-2"
+      role="button"
+      data-bs-toggle="modal"
+      data-bs-target="#extraInformation"
+      >
+      Add value
+    </a>
       <a
       *ngIf="this.pending_task.result.result_type === 'value'"
       data-bs-toggle="modal"
@@ -14,8 +21,6 @@
       role="button"
       class="btn btn-ets-do mb-2"
       >Import Table</a>
-
-
       <a
         *ngIf="
           this.pending_task['task description'].method_link[0] === 'local_models'
@@ -29,81 +34,6 @@
       >
     </div>
     <div *ngIf="this.pending_task?.result.result_type === 'value'" class="mb-2">
-      <div class="row">
-        <div class="col">
-          <div class="row">
-            <div class="col">
-              <label for="method" class="form-label">method</label>
-              <input
-                name="method"
-                placeholder=""
-                [(ngModel)]="this.method"
-                type="text"
-                class="form-control"
-                id="method"
-              />
-            </div>
-            <div class="col">
-              <label for="Parameter" class="form-label">Parameter</label>
-              <input
-                name="parameter"
-                placeholder=""
-                [(ngModel)]="this.parameter"
-                type="text"
-                class="form-control"
-                id="parameter"
-              />
-            </div>
-            <div class="col-3">
-              <label for="value" class="form-label">Value</label>
-              <input
-                [placeholder]=""
-                [(ngModel)]="this.value"
-                type="text"
-                class="form-control"
-                name="value"
-                id="value"
-              />
-            </div>
-            <div class="col">
-              <label for="unit" class="form-label">Unit</label>
-              <div class="row">
-                <div class="col">
-                  <input
-                    placeholder=""
-                    [(ngModel)]="this.unit"
-                    type="text"
-                    class="form-control"
-                    name="unit"
-                    id="unit"
-                  />
-                </div>
-                <div class="col">
-                  <a  class="addbtn btn ms-auto"
-                    role="button"
-                    data-bs-toggle="modal"
-                    data-bs-target="#extraInformation"
-                    >
-                    <i class="fa-solid fa-circle-plus fa-lg"></i>
-                  </a>
-                </div>
-                <div class="col d-flex justify-content-end">
-                  <a
-                  style="background: rgb(250,250,250)"
-                    (click)="addNewParameter()"
-                    class="addbtn btn ms-auto"
-                    role="button"
-                    ><i class="fa-solid fa-arrow-turn-down fa-rotate-90 fa-lg"></i
-                  ></a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div *ngIf="!parameterInserted" class="text-danger">
-          Parameter is required !
-        </div>
-      </div>
       <div class="info-values">
         <table *ngIf="this.model.values.length > 0" style="width: 100%;"  >
           <thead>
@@ -416,7 +346,7 @@ aria-hidden="true"
   <div class="modal-content">
     <div class="modal-header">
       <h5 class="modal-title" id="extraInformationLabel">
-        Extra Information
+        Add new Value
       </h5>
       <button
         type="button"
@@ -426,7 +356,73 @@ aria-hidden="true"
       ></button>
     </div>
     <div class="modal-body">
-      <div class="row p-3">
+      <div class="row">
+        <div class="col">
+          <div class="row">
+            <div class="col">
+              <label for="method" class="form-label">Method</label>
+              <input
+                name="method"
+                placeholder=""
+                [(ngModel)]="this.method"
+                type="text"
+                class="form-control"
+                id="method"
+              />
+            </div>
+            <div class="col">
+              <label for="Parameter" class="form-label">Parameter</label>
+              <input
+                name="parameter"
+                placeholder=""
+                [(ngModel)]="this.parameter"
+                type="text"
+                class="form-control"
+                id="parameter"
+              />
+            </div>
+            <div class="col-3">
+              <label for="value" class="form-label">Value</label>
+              <input
+                [placeholder]=""
+                [(ngModel)]="this.value"
+                type="text"
+                class="form-control"
+                name="value"
+                id="value"
+              />
+            </div>
+            <div class="col">
+              <label for="unit" class="form-label">Unit</label>
+              <div class="row">
+                <div class="col">
+                  <input
+                    placeholder=""
+                    [(ngModel)]="this.unit"
+                    type="text"
+                    class="form-control"
+                    name="unit"
+                    id="unit"
+                  />
+                </div>
+                <div class="col d-flex justify-content-end">
+                  <a
+                  style="background: rgb(250,250,250)"
+                    (click)="addNewParameter()"
+                    class="addbtn btn ms-auto"
+                    role="button"
+                    ><i class="fa-solid fa-arrow-turn-down fa-rotate-90 fa-lg"></i
+                  ></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!parameterInserted" class="text-danger">
+          Parameter is required !
+        </div>
+      </div>
+      <div class="row mt-2">
         <div class="col-5">
           <label for="Parameter" class="form-label">Uncertainty</label>
           <input
