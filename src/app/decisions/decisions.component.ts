@@ -13,8 +13,6 @@ declare var $: any;
   styleUrls: ['./decisions.component.scss'],
 })
 export class DecisionsComponent implements OnInit {
-  @ViewChild('imageModal') imageModal: ElementRef;
-  imageUrl = '';
   loadForm: boolean = false;
   form = new FormGroup({});
   formEdit = new FormGroup({});
@@ -25,7 +23,7 @@ export class DecisionsComponent implements OnInit {
   modelEdit: any;
   link: Blob;
   loadEditForm: boolean = false;
-  image = [];
+  listImages = [];
 
   optSelect = [
     {
@@ -73,42 +71,42 @@ export class DecisionsComponent implements OnInit {
         error: (e) => console.log(e),
       });
   }
-  confirmDownload(){
-    saveAs(this.image[0],this.image[1])
-    this.image = [];
-  }
+
 
   editDecision() {
     this.global.editModeDecisions = !this.global.editModeDecisions;
   }
   downloadFile(File) {
-    var isImage = false;
     if (File) {
-      isImage = this.isImage(File)
       this.commonService.getLink(this.ra.name, File).subscribe({
         next: (link) => {
           const blob = new Blob([link], { type: 'application/octet-stream' });
-          if(!isImage){
             saveAs(blob, File);
-          }else{
-            const reader = new FileReader();
-            reader.readAsDataURL(blob);
-            reader.onloadend = () => {
-              this.imageUrl = reader.result as string;
-              $(this.imageModal.nativeElement).modal('show');
-              this.image[0] = blob;
-              this.image[1] = File;
-            };
-          }
         },
         error: (e) => console.log(e),
       });
     }
   }
-  isImage(filename: string):boolean {
-    var imgFormats = ['jpeg','png','jpg']
-    const extension= filename.split('.').pop()
-    return imgFormats.includes(extension)
+  isImage() {
+    this.listImages = [];
+    var imgFormats = ['jpeg','png','jpg'];
+    this.results.decisionSelected.result.links.forEach(element => {
+        const extension= element.File.split('.').pop();
+        if(imgFormats.includes(extension)){
+          this.commonService.getLink(this.ra.name, element.File).subscribe({
+            next: (link) => {
+              const blob = new Blob([link], { type: 'application/octet-stream' });
+                const reader = new FileReader();
+                reader.readAsDataURL(blob);
+                reader.onloadend = () => {
+                  this.listImages.push({'name':element.label,'link':reader.result as string});
+                }; 
+            },
+            error: (e) => console.log(e),
+          });
+        }
+          console.log(this.listImages)
+      });
   }
 
   showTablePastDecisions() {
@@ -142,8 +140,10 @@ export class DecisionsComponent implements OnInit {
     this.commonService.getTask(this.ra.name, id).subscribe({
       next: (result) => {
         this.results.decisionSelected = result;
+        this.isImage();
         setTimeout(() => {
           if (this.results.decisionSelected?.substance) this.drawMol();
+          this.isImage();
         }, 300);
 
         if (this.results.decisionSelected.result_link) {
