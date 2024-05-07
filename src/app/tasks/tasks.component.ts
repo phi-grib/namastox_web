@@ -50,6 +50,8 @@ export class TasksComponent implements OnInit {
   }
 
   isImage() {
+    this.listImages = [];
+    console.log(this.listImages)
     var imgFormats = ['jpeg','png','jpg'];
       this.results.resultSelected.result.links.forEach(element => {
         const extension= element.File.split('.').pop();
@@ -57,7 +59,6 @@ export class TasksComponent implements OnInit {
           this.commonService.getLink(this.ra.name, element.File).subscribe({
             next: (link) => {
               const blob = new Blob([link], { type: 'application/octet-stream' });
-                saveAs(blob, File);
                 const reader = new FileReader();
                 reader.readAsDataURL(blob);
                 reader.onloadend = () => {
@@ -69,7 +70,6 @@ export class TasksComponent implements OnInit {
         }
 
       });
-      console.log(this.listImages)
   }
   
   editTask() {
@@ -77,18 +77,11 @@ export class TasksComponent implements OnInit {
   }
 
   downloadFile(File) {
-    var imageUrl = '';
     if (File) {
         this.commonService.getLink(this.ra.name, File).subscribe({
           next: (link) => {
             const blob = new Blob([link], { type: 'application/octet-stream' });
               saveAs(blob, File);
-              const reader = new FileReader();
-              reader.readAsDataURL(blob);
-              reader.onloadend = () => {
-                imageUrl = reader.result as string;
-                this.listImages.push(imageUrl);
-              }; 
           },
           error: (e) => console.log(e),
         });
@@ -113,10 +106,10 @@ export class TasksComponent implements OnInit {
     }
   }
 
-  selectTask(id: string) {+
+  selectTask(id: string) {
+    
     this.commonService.getTask(this.ra.name, id).subscribe((result) => {
       this.results.resultSelected = result;
-      this.isImage();
       if (!Array.isArray(this.results.resultSelected.substance)) {
         this.results.resultSelected.substance = [
           this.results.resultSelected.substance,
@@ -124,6 +117,8 @@ export class TasksComponent implements OnInit {
       }
       setTimeout(() => {
         if (this.results.resultSelected?.substance.length > 1) this.drawMol();
+        this.isImage();
+
       }, 300);
     });
     $('#tableCollapseTasks').click();
