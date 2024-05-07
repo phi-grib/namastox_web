@@ -10,8 +10,6 @@ declare var $: any;
   styleUrls: ['./tasks.component.scss'],
 })
 export class TasksComponent implements OnInit {
-  @ViewChild('imageModal') imageModal: ElementRef;
-  imageUrl = '';
   loadForm: boolean = false;
   model: any;
   pending_task_selected: String = '';
@@ -28,7 +26,7 @@ export class TasksComponent implements OnInit {
   listAllModels: any;
   listModelsSelected: any = [];
   loadEditForm: boolean = false;
-  image = [];
+  listImages = [];
   constructor(
     public ra: RA,
     private commonService: CommonService,
@@ -51,40 +49,46 @@ export class TasksComponent implements OnInit {
     });
   }
 
-  isImage(filename: string):boolean {
-    var imgFormats = ['jpeg','png','jpg']
-    const extension= filename.split('.').pop()
-    return imgFormats.includes(extension)
+  isImage() {
+    var imgFormats = ['jpeg','png','jpg'];
+      this.results.resultSelected.result.links.forEach(element => {
+        const extension= element.File.split('.').pop();
+        if(imgFormats.includes(extension)){
+          this.commonService.getLink(this.ra.name, element.File).subscribe({
+            next: (link) => {
+              const blob = new Blob([link], { type: 'application/octet-stream' });
+                saveAs(blob, File);
+                const reader = new FileReader();
+                reader.readAsDataURL(blob);
+                reader.onloadend = () => {
+                  this.listImages.push({'name':element.label,'link':reader.result as string});
+                }; 
+            },
+            error: (e) => console.log(e),
+          });
+        }
+
+      });
+      console.log(this.listImages)
   }
   
   editTask() {
     this.global.editModeTasks = !this.global.editModeTasks;
   }
-  confirmDownload(){
-    saveAs(this.image[0],this.image[1])
-    this.image = [];
-  }
-
 
   downloadFile(File) {
-    var isImage = false;
+    var imageUrl = '';
     if (File) {
-      isImage = this.isImage(File)
         this.commonService.getLink(this.ra.name, File).subscribe({
           next: (link) => {
             const blob = new Blob([link], { type: 'application/octet-stream' });
-            if(!isImage){
               saveAs(blob, File);
-            }else{
               const reader = new FileReader();
               reader.readAsDataURL(blob);
               reader.onloadend = () => {
-                this.imageUrl = reader.result as string;
-                $(this.imageModal.nativeElement).modal('show');
-                this.image[0] = blob;
-                this.image[1] = File;
-              };
-            }
+                imageUrl = reader.result as string;
+                this.listImages.push(imageUrl);
+              }; 
           },
           error: (e) => console.log(e),
         });
@@ -109,9 +113,10 @@ export class TasksComponent implements OnInit {
     }
   }
 
-  selectTask(id: string) {
+  selectTask(id: string) {+
     this.commonService.getTask(this.ra.name, id).subscribe((result) => {
       this.results.resultSelected = result;
+      this.isImage();
       if (!Array.isArray(this.results.resultSelected.substance)) {
         this.results.resultSelected.substance = [
           this.results.resultSelected.substance,

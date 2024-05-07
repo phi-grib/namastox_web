@@ -1,22 +1,20 @@
-import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { AfterViewInit,Component, ViewChild,ElementRef, OnInit } from '@angular/core';
 import mermaid from 'mermaid';
 import { CommonService } from '../common.service';
 import { PendingTasks, RA, Results } from '../globals';
-import { toBase64 } from 'js-base64';
-type Exporter = (context: CanvasRenderingContext2D, image: HTMLImageElement) => () => void;
-
 
 @Component({
   selector: 'app-workflow',
   templateUrl: './workflow.component.html',
   styleUrls: ['./workflow.component.scss'],
 })
-export class WorkflowComponent implements OnInit {
+export class WorkflowComponent implements AfterViewInit {
   constructor(
     public ra: RA,
     private commonService: CommonService,
     private pendingTasks: PendingTasks,
-    private results: Results
+    private results: Results,
+    private elementRef: ElementRef
   ) {}
   @ViewChild('mermaidDiv', { static: false }) mermaidDiv: ElementRef;
 
@@ -114,15 +112,16 @@ export class WorkflowComponent implements OnInit {
     if (pastTaskDecisions) this.redirectToTask('decisions', false, taskName);
   }
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
+    let onAExecuted = false;
     (window as any).onA = (nodeName) => {
-      this.checkType(nodeName);
+      if (!onAExecuted) {
+        this.checkType(nodeName);
+        onAExecuted = true;
+      } else {
+        onAExecuted = false;
+      }
     };
-
-    /**
-     * Export workflow image format
-     */
-
     mermaid.initialize({
       securityLevel: 'loose',
       flowchart: {
@@ -132,97 +131,41 @@ export class WorkflowComponent implements OnInit {
       },
     });
 
-    mermaid.init();
-
     this.commonService.refreshWorklfow$.subscribe(() => {
       this.flowchartRefresh();
     });
   }
 
+  downloadWorkflow ()  {
+ // Obtener el elemento SVG
+ const svgElement = document.getElementById('graphDiv');
 
-   simulateDownload(download: string, href: string): void  {
-    const a = document.createElement('a');
-    a.download = download;
-    a.href = href;
-    a.click();
-    a.remove();
-  };
+ // Serializar el contenido del SVG como una cadena
+ const svgString = new XMLSerializer().serializeToString(svgElement);
 
-   downloadImage: Exporter = (context, image) => {
-    return () => {
-      const { canvas } = context;
-      context.drawImage(image, 0, 0, canvas.width, canvas.height);
-      this.simulateDownload(
-        `mermaid-diagram_${this.ra.name}.png`,
-        canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream')
-      );
-    };
-  };
-  
+ // Crear un elemento de imagen con el contenido del SVG como fuente
+ const img = new Image();
+ img.src = `data:image/svg+xml;base64,${btoa(svgString)}`;
 
-   onDownloadPNG (event?: Event)  {
-    console.log("aqui")
-    this.exportImage(event, this.downloadImage);
-  };
+ // Esperar a que la imagen se cargue
+ img.onload = () => {
+   // Crear un canvas
+   const canvas = document.createElement('canvas');
+   canvas.width = img.width;
+   canvas.height = img.height;
+   const ctx = canvas.getContext('2d');
 
-   getSvgElement () {
-    const svgElement = document.getElementById('graphDiv')?.cloneNode(true) as HTMLElement;
-    svgElement.setAttribute('xmlns:xlink', 'http://www.w3.org/1999/xlink');
-    const styleElement = document.createElement('style');
-    styleElement.textContent = `@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css");'`;
-    svgElement.prepend(styleElement);
-    return svgElement;
-  };
+   // Renderizar la imagen en el canvas
+   ctx.drawImage(img, 0, 0,40,80);
 
+   // Obtener la URL de la imagen en formato PNG
+   const dataURL = canvas.toDataURL('image/png','image/octet-stream');
 
-   getBase64SVG = (svg?: HTMLElement, width?: number, height?: number): string => {
-    if (svg) {
-      // Prevents the SVG size of the interface from being changed
-      svg = svg.cloneNode(true) as HTMLElement;
-    }
-    height && svg?.setAttribute('height', `${height}px`);
-    width && svg?.setAttribute('width', `${width}px`); // Workaround https://stackoverflow.com/questions/28690643/firefox-error-rendering-an-svg-image-to-html5-canvas-with-drawimage
-    if (!svg) {
-      svg = this.getSvgElement();
-    }
-    const svgString = svg.outerHTML
-      .replaceAll('<br>', '<br/>')
-      .replaceAll(/<img([^>]*)>/g, (m, g: string) => `<img ${g} />`);
-    return toBase64(svgString);
-  };
-
-
-   exportImage(event: Event, exporter: Exporter)  {
-    if (document.querySelector('.outOfSync')) {
-      throw new Error('Diagram is out of sync');
-    }
-    const canvas: HTMLCanvasElement = document.createElement('canvas');
-    const svg = document.getElementById('graphDiv');
-    if (!svg) {
-      throw new Error('svg not found');
-    }
-    const box: DOMRect = svg.getBoundingClientRect();
-    canvas.width = box.width;
-    canvas.height = box.height;
-
-    const context = canvas.getContext('2d');
-    if (!context) {
-      throw new Error('context not found');
-    }
-    context.fillStyle = `hsl(${window.getComputedStyle(document.body).getPropertyValue('--b1')})`;
-    context.fillRect(0, 0, canvas.width, canvas.height);
-
-    const image = new Image();
-    image.addEventListener('load', exporter(context, image));
-    image.src = `data:image/svg+xml;base64,${this.getBase64SVG(svg, canvas.width, canvas.height)}`;
-
-    event.stopPropagation();
-    event.preventDefault();
-  };
-
-
-
-
-
-
+   // Crear un enlace de descarga para descargar la imagen
+   const link = document.createElement('a');
+   link.download = 'imagen.png';
+   link.href = dataURL;
+   link.click();
+ };
+}
 }
