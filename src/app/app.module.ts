@@ -27,6 +27,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ReportComponent } from './report/report.component';
 import { AutolinkPipePipe } from '../app/autolink-pipe.pipe';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxPanZoomModule } from 'ngx-panzoom';
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,6 +56,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     ReactiveFormsModule,
     FormsModule,
+    NgxPanZoomModule,
     BrowserAnimationsModule,
     BsDatepickerModule.forRoot(),
     ToastrModule.forRoot(),

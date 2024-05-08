@@ -1,3 +1,17 @@
-<div [hidden]="!(this.ra.name && this.ra?.status?.step > 0)" #mermaidDiv></div> 
 
-<!-- <button (click)="downloadWorkflow()">Download WORKFLOW</button>  -->
+
+ 
+
+	
+		   <pan-zoom [config]="panZoomConfig">  
+                <div  #mermaidDiv></div>
+           </pan-zoom> 
+           <div class="footer-container d-flex align-items-baseline">
+            <a type="button" (click)="zoomIn()"><i class="fa-solid icon fa-magnifying-glass-plus"></i></a>
+            <button id="btnReset" class="btn" (click)="reset()">Reset</button>
+            <a type="button" (click)="zoomOut()"><i class="fa-solid icon fa-magnifying-glass-minus"></i></a>
+            <!-- <button (click)="downloadWorkflow()">Download WORKFLOW</button> -->
+        </div>   
+    
+
+ 

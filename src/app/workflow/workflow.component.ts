@@ -2,7 +2,8 @@ import { AfterViewInit,Component, ViewChild,ElementRef, OnInit } from '@angular/
 import mermaid from 'mermaid';
 import { CommonService } from '../common.service';
 import { PendingTasks, RA, Results } from '../globals';
-// import { PanZoomConfig, PanZoomAPI, PanZoomModel, PanZoomConfigOptions } from 'ngx-panzoom';
+import { PanZoomConfig, PanZoomAPI, PanZoomModel, PanZoomConfigOptions } from 'ngx-panzoom';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-workflow',
@@ -10,13 +11,16 @@ import { PendingTasks, RA, Results } from '../globals';
   styleUrls: ['./workflow.component.scss'],
 })
 export class WorkflowComponent implements AfterViewInit {
-  // panZoomConfig: PanZoomConfig = new PanZoomConfig();
+  panZoomConfig: PanZoomConfig = new PanZoomConfig(
+     {zoomOnMouseWheel:false,neutralZoomLevel:1,zoomLevels:6}
+  );
+	private panZoomAPI: PanZoomAPI;
+	private apiSubscription: Subscription;
   constructor(
     public ra: RA,
     private commonService: CommonService,
     private pendingTasks: PendingTasks,
     private results: Results,
-    private elementRef: ElementRef
   ) {}
   @ViewChild('mermaidDiv', { static: false }) mermaidDiv: ElementRef;
 
@@ -114,7 +118,21 @@ export class WorkflowComponent implements AfterViewInit {
     if (pastTaskDecisions) this.redirectToTask('decisions', false, taskName);
   }
 
+	zoomIn() {
+		this.panZoomAPI.zoomIn();
+	}
+
+	zoomOut() {
+		this.panZoomAPI.zoomOut();
+	}
+
+	reset() {
+		this.panZoomAPI.resetView();
+	}
   ngAfterViewInit(): void {
+    this.apiSubscription = this.panZoomConfig.api.subscribe(
+			(api: PanZoomAPI) => (this.panZoomAPI = api)
+		);
     let onAExecuted = false;
     (window as any).onA = (nodeName) => {
       if (!onAExecuted) {
