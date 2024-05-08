@@ -2,6 +2,7 @@ import { AfterViewInit,Component, ViewChild,ElementRef, OnInit } from '@angular/
 import mermaid from 'mermaid';
 import { CommonService } from '../common.service';
 import { PendingTasks, RA, Results } from '../globals';
+// import { PanZoomConfig, PanZoomAPI, PanZoomModel, PanZoomConfigOptions } from 'ngx-panzoom';
 
 @Component({
   selector: 'app-workflow',
@@ -9,6 +10,7 @@ import { PendingTasks, RA, Results } from '../globals';
   styleUrls: ['./workflow.component.scss'],
 })
 export class WorkflowComponent implements AfterViewInit {
+  // panZoomConfig: PanZoomConfig = new PanZoomConfig();
   constructor(
     public ra: RA,
     private commonService: CommonService,
