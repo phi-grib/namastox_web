@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
 })
 export class WorkflowComponent implements AfterViewInit {
   panZoomConfig: PanZoomConfig = new PanZoomConfig(
-     {zoomOnMouseWheel:false,neutralZoomLevel:1,zoomLevels:6}
+     {zoomOnMouseWheel:false,zoomOnDoubleClick:false,dynamicContentDimensions:true}
   );
 	private panZoomAPI: PanZoomAPI;
 	private apiSubscription: Subscription;
@@ -27,6 +27,7 @@ export class WorkflowComponent implements AfterViewInit {
   flowchartRefresh() {
     const element: any = this.mermaidDiv.nativeElement;
     mermaid.render('graphDiv', this.ra.workflow, (svgCode, bindFunctions) => {
+      
       element.innerHTML = svgCode;
       bindFunctions(element);
     });
@@ -153,6 +154,7 @@ export class WorkflowComponent implements AfterViewInit {
 
     this.commonService.refreshWorklfow$.subscribe(() => {
       this.flowchartRefresh();
+      this.panZoomAPI.detectContentDimensions();
     });
   }
 

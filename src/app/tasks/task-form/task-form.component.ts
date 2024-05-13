@@ -1,5 +1,6 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { interval, takeUntil } from 'rxjs';
 import { CommonFunctions } from 'src/app/common.functions';
 import { CommonService } from 'src/app/common.service';
 import { PendingTasks, RA, Results, Global } from 'src/app/globals';
@@ -43,7 +44,7 @@ export class TaskFormComponent {
   @Input() editMode: any;
 
   includeDoc: boolean = true;
-
+  isBlinking: boolean = false;
   constructor(
     public ra: RA,
     private commonService: CommonService,
@@ -260,6 +261,7 @@ export class TaskFormComponent {
         //  this.report = '';
       }, 300);
     }else{
+      this.alertUserAction();
       this.toastr.warning(
         '',
         'value is required',
@@ -272,6 +274,15 @@ export class TaskFormComponent {
     }
 
   }
+
+  alertUserAction(){
+    this.isBlinking = true;
+    setTimeout(() => {
+      this.isBlinking = !this.isBlinking
+    }, 4000);
+
+  }
+
   addNewParameter() {
     if ((this.parameter && this.value) &&
       this.uncertainty_p >= 0 &&

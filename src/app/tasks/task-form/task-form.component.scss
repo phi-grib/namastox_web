@@ -2,6 +2,16 @@
 @import "../../../assets/scss/buttons.scss";
 @import "../../../assets/scss/submenu.scss";
 
+
+@keyframes blink {
+  0% { background-color: $primary-color; }
+  50% { background-color: rgb(236,130,41); }
+  100% { background-color: $primary-color; }
+}
+
+.blink {
+  animation: blink 2s 3;
+}
 #taskForm,#extraInformation {
   color: $secondary-color;
 }
