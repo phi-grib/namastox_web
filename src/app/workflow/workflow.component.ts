@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
 })
 export class WorkflowComponent implements AfterViewInit {
   panZoomConfig: PanZoomConfig = new PanZoomConfig(
-     {zoomOnMouseWheel:false,zoomOnDoubleClick:false,dynamicContentDimensions:true}
+     {freeMouseWheelFactor:0.001,zoomOnDoubleClick:false,dynamicContentDimensions:true}
   );
 	private panZoomAPI: PanZoomAPI;
 	private apiSubscription: Subscription;
@@ -31,9 +31,12 @@ export class WorkflowComponent implements AfterViewInit {
     mermaid.render('graphDiv', this.ra.workflow, (svgCode, bindFunctions) => {
       element.innerHTML = svgCode;
       bindFunctions(element);
-      const svgElement = this.elementRef.nativeElement.querySelector('#graphDiv');
-      this.renderer.removeAttribute(svgElement,'style');
-      this.renderer.setAttribute(svgElement,'width','730px');
+      console.log(this.ra.step)
+      if(this.ra.status.step >= 3){
+        const svgElement = this.elementRef.nativeElement.querySelector('#graphDiv');
+        this.renderer.removeAttribute(svgElement,'style');
+        this.renderer.setAttribute(svgElement,'width','730px');
+      }
     });
   }
   selectTableRowByValue(tableID: string, column: number, value: string) {
@@ -157,7 +160,6 @@ export class WorkflowComponent implements AfterViewInit {
 
     this.commonService.refreshWorklfow$.subscribe(() => {
       this.flowchartRefresh();
-      this.panZoomAPI.detectContentDimensions();
     });
   }
 
