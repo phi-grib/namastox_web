@@ -1,4 +1,4 @@
-import { AfterViewInit,Component, ViewChild,ElementRef, OnInit } from '@angular/core';
+import { AfterViewInit,Component, ViewChild,ElementRef,Renderer2 } from '@angular/core';
 import mermaid from 'mermaid';
 import { CommonService } from '../common.service';
 import { PendingTasks, RA, Results } from '../globals';
@@ -21,18 +21,21 @@ export class WorkflowComponent implements AfterViewInit {
     private commonService: CommonService,
     private pendingTasks: PendingTasks,
     private results: Results,
+    private elementRef:ElementRef,
+    private renderer:Renderer2
   ) {}
   @ViewChild('mermaidDiv', { static: false }) mermaidDiv: ElementRef;
 
   flowchartRefresh() {
     const element: any = this.mermaidDiv.nativeElement;
     mermaid.render('graphDiv', this.ra.workflow, (svgCode, bindFunctions) => {
-      
       element.innerHTML = svgCode;
       bindFunctions(element);
+      const svgElement = this.elementRef.nativeElement.querySelector('#graphDiv');
+      this.renderer.removeAttribute(svgElement,'style');
+      this.renderer.setAttribute(svgElement,'width','730px');
     });
   }
-
   selectTableRowByValue(tableID: string, column: number, value: string) {
     //first check if accordion is opened
     const accTask = document.getElementById('pastCollapseTasks');
