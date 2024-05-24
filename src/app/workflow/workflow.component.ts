@@ -160,6 +160,8 @@ export class WorkflowComponent implements AfterViewInit {
 
     this.commonService.refreshWorklfow$.subscribe(() => {
       this.flowchartRefresh();
+		this.panZoomAPI.resetView();
+
     });
   }
 
