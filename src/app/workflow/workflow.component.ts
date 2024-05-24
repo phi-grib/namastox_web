@@ -2,19 +2,14 @@ import { AfterViewInit,Component, ViewChild,ElementRef,Renderer2 } from '@angula
 import mermaid from 'mermaid';
 import { CommonService } from '../common.service';
 import { PendingTasks, RA, Results } from '../globals';
-import { PanZoomConfig, PanZoomAPI, PanZoomModel, PanZoomConfigOptions } from 'ngx-panzoom';
 import { Subscription } from 'rxjs';
-
+import * as d3 from "d3";
 @Component({
   selector: 'app-workflow',
   templateUrl: './workflow.component.html',
   styleUrls: ['./workflow.component.scss'],
 })
 export class WorkflowComponent implements AfterViewInit {
-  panZoomConfig: PanZoomConfig = new PanZoomConfig(
-     {freeMouseWheelFactor:0.001,zoomOnDoubleClick:false,dynamicContentDimensions:true}
-  );
-	private panZoomAPI: PanZoomAPI;
 	private apiSubscription: Subscription;
   constructor(
     public ra: RA,
@@ -31,12 +26,7 @@ export class WorkflowComponent implements AfterViewInit {
     mermaid.render('graphDiv', this.ra.workflow, (svgCode, bindFunctions) => {
       element.innerHTML = svgCode;
       bindFunctions(element);
-      console.log(this.ra.step)
-      if(this.ra.status.step >= 3){
-        const svgElement = this.elementRef.nativeElement.querySelector('#graphDiv');
-        this.renderer.removeAttribute(svgElement,'style');
-        this.renderer.setAttribute(svgElement,'width','730px');
-      }
+      this.addZoomAndPan(element.querySelector('svg'));
     });
   }
   selectTableRowByValue(tableID: string, column: number, value: string) {
@@ -124,22 +114,22 @@ export class WorkflowComponent implements AfterViewInit {
     if (pendingTaskDecisions) this.redirectToTask('decisions', true, taskName);
     if (pastTaskDecisions) this.redirectToTask('decisions', false, taskName);
   }
+  addZoomAndPan(svgElement: SVGSVGElement) {
+    const svg = d3.select(svgElement);
+    const g = svg.select("g");
 
-	zoomIn() {
-		this.panZoomAPI.zoomIn();
-	}
+    const zoom = d3.zoom().on('zoom', (event) => {
+      g.attr('transform', event.transform);
+    });
 
-	zoomOut() {
-		this.panZoomAPI.zoomOut();
-	}
-
-	reset() {
-		this.panZoomAPI.resetView();
-	}
+    svg.call(zoom);
+  }
   ngAfterViewInit(): void {
-    this.apiSubscription = this.panZoomConfig.api.subscribe(
-			(api: PanZoomAPI) => (this.panZoomAPI = api)
-		);
+    const svg = d3.select("graphDiv");
+    const zoomFn = d3.zoom().on('zoom', (event) => {
+      svg.attr("transform", event.transform);
+    });
+    svg.call(zoomFn);
     let onAExecuted = false;
     (window as any).onA = (nodeName) => {
       if (!onAExecuted) {
@@ -160,7 +150,6 @@ export class WorkflowComponent implements AfterViewInit {
 
     this.commonService.refreshWorklfow$.subscribe(() => {
       this.flowchartRefresh();
-		this.panZoomAPI.resetView();
 
     });
   }
