@@ -4,7 +4,7 @@ import { CommonService } from '../common.service';
 import { PendingTasks, RA, Results } from '../globals';
 import { PanZoomConfig, PanZoomAPI } from 'ngx-panzoom';
 import { Subscription } from 'rxjs';
-import { toPng } from 'html-to-image';
+// import { toPng } from 'html-to-image';
 
 @Component({
   selector: 'app-workflow',
@@ -157,12 +157,12 @@ export class WorkflowComponent implements AfterViewInit {
     });
   }
 
-  downloadWorkflow() {
-    toPng(document.getElementById('graphDiv'))
-      .then((dataUrl) => {
-        this.downloadFile(dataUrl, 'image/png', 'imagen.png');
-      });
-  }
+  // downloadWorkflow() {
+  //   toPng(document.getElementById('graphDiv'))
+  //     .then((dataUrl) => {
+  //       this.downloadFile(dataUrl, 'image/png', 'imagen.png');
+  //     });
+  // }
 
   downloadFile(dataUrl: string, type: string, filename: string) {
     const link = document.createElement('a');
