@@ -140,14 +140,8 @@ export class WorkflowComponent implements AfterViewInit {
     this.apiSubscription = this.panZoomConfig.api.subscribe(
 			(api: PanZoomAPI) => (this.panZoomAPI = api)
 		);
-    let onAExecuted = false;
     (window as any).onA = (nodeName) => {
-      if (!onAExecuted) {
         this.checkType(nodeName);
-        onAExecuted = true;
-      } else {
-        onAExecuted = false;
-      }
     };
     mermaid.initialize({
       securityLevel: 'loose',
