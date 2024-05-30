@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs';
 })
 export class WorkflowComponent implements AfterViewInit {
   panZoomConfig: PanZoomConfig = new PanZoomConfig(
-     {freeMouseWheelFactor:0.001,zoomOnDoubleClick:false,dynamicContentDimensions:true}
+     {freeMouseWheelFactor:0.001,zoomOnDoubleClick:false,dynamicContentDimensions:true,initialZoomLevel:3}
   );
 	private panZoomAPI: PanZoomAPI;
 	private apiSubscription: Subscription;
@@ -32,12 +32,13 @@ export class WorkflowComponent implements AfterViewInit {
     mermaid.render('graphDiv', this.ra.workflow, (svgCode, bindFunctions) => {
       element.innerHTML = svgCode;
       bindFunctions(element);
-      if(this.ra.status.step >= 3){
-        const svgElement = this.elementRef.nativeElement.querySelector('#graphDiv');
-        this.renderer.removeAttribute(svgElement,'style');
-        this.renderer.setAttribute(svgElement,'width','730px');
-      }
+      // if(this.ra.status.step >= 3){
+      //   const svgElement = this.elementRef.nativeElement.querySelector('#graphDiv');
+      //   this.renderer.removeAttribute(svgElement,'style');
+      //   this.renderer.setAttribute(svgElement,'width','730px');
+      // }
     });
+    this.panZoomAPI.resetView();
   }
   selectTableRowByValue(tableID: string, column: number, value: string) {
     //first check if accordion is opened
