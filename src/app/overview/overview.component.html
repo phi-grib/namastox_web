@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div  class="container-fluid">
   <div class="card-body">
     <div class="row border-bottom" id="headerOverview">
       <div class="col">{{ this.ra?.name }} ({{ this.ra?.status?.ID }})</div>
@@ -14,19 +14,19 @@
         <div class="row">
           <div class="col-4 text">Name</div>
           <div class="col-8">
-            {{ this.ra?.general_information.general.substances[0]?.name }}
+            {{ this.ra?.general_information?.general?.substances[0]?.name }}
           </div>
         </div>
         <div class="row">
           <div class="col-4 text">ID</div>
           <div class="col-8">
-            {{ this.ra?.general_information.general.substances[0]?.id }}
+            {{ this.ra?.general_information?.general?.substances[0]?.id }}
           </div>
         </div>
         <div class="row">
           <div class="col-4 text">CAS-RN</div>
           <div class="col-8">
-            {{ this.ra?.general_information.general.substances[0]?.casrn }}
+            {{ this.ra?.general_information?.general?.substances[0]?.casrn }}
           </div>
         </div>
         <div class="row">
@@ -41,7 +41,7 @@
       <div class="col-3 text">Endpoint</div>
       <div class="col-3">
         <div class="row">
-          {{ this.ra?.general_information.general?.endpoint }}
+          {{ this.ra?.general_information?.general?.endpoint }}
         </div>
       </div>
     </div>
@@ -49,7 +49,7 @@
       <div class="col-3 text">AR</div>
       <div class="col">
         <div class="row">
-          {{ this.ra?.general_information.general?.administration_route }}
+          {{ this.ra?.general_information?.general?.administration_route }}
         </div>
       </div>
     </div>
@@ -57,7 +57,7 @@
       <div class="col-3 text">Species</div>
       <div class="col">
         <div class="row">
-          {{ this.ra?.general_information.general.species }}
+          {{ this.ra?.general_information?.general?.species }}
         </div>
       </div>
     </div>
@@ -65,7 +65,7 @@
       <div class="col-3 text">Framework</div>
       <div class="col">
         <div class="row">
-          {{ this.ra?.general_information.general.regulatory_framework }}
+          {{ this.ra?.general_information?.general?.regulatory_framework }}
         </div>
       </div>
     </div>
@@ -73,7 +73,7 @@
       <div class="col-3 text">Summary</div>
       <div class="col">
         <div class="row">
-          {{ this.ra?.general_information.general.general_description }}
+          {{ this.ra?.general_information?.general?.general_description }}
         </div>
       </div>
     </div>

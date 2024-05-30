@@ -27,7 +27,6 @@ export class ManageRaComponent {
     this.manageRA.createRA(this.newRAname).subscribe({
       next: (result) => {
         if (result['success']) {
-          
           $('#pills-gen-information-tab').click();
           this.commonService.getRaList().subscribe((result: any) => {
             this.ra.listRA = [...result];
