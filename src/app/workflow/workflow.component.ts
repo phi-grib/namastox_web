@@ -2,14 +2,20 @@ import { AfterViewInit,Component, ViewChild,ElementRef,Renderer2 } from '@angula
 import mermaid from 'mermaid';
 import { CommonService } from '../common.service';
 import { PendingTasks, RA, Results } from '../globals';
+import { PanZoomConfig, PanZoomAPI } from 'ngx-panzoom';
 import { Subscription } from 'rxjs';
-import * as d3 from "d3";
+import { toPng } from 'html-to-image';
+
 @Component({
   selector: 'app-workflow',
   templateUrl: './workflow.component.html',
   styleUrls: ['./workflow.component.scss'],
 })
 export class WorkflowComponent implements AfterViewInit {
+  panZoomConfig: PanZoomConfig = new PanZoomConfig(
+     {freeMouseWheelFactor:0.001,zoomOnDoubleClick:false,dynamicContentDimensions:true}
+  );
+	private panZoomAPI: PanZoomAPI;
 	private apiSubscription: Subscription;
   constructor(
     public ra: RA,
@@ -26,7 +32,11 @@ export class WorkflowComponent implements AfterViewInit {
     mermaid.render('graphDiv', this.ra.workflow, (svgCode, bindFunctions) => {
       element.innerHTML = svgCode;
       bindFunctions(element);
-      this.addZoomAndPan(element.querySelector('svg'));
+      if(this.ra.status.step >= 3){
+        const svgElement = this.elementRef.nativeElement.querySelector('#graphDiv');
+        this.renderer.removeAttribute(svgElement,'style');
+        this.renderer.setAttribute(svgElement,'width','730px');
+      }
     });
   }
   selectTableRowByValue(tableID: string, column: number, value: string) {
@@ -114,22 +124,22 @@ export class WorkflowComponent implements AfterViewInit {
     if (pendingTaskDecisions) this.redirectToTask('decisions', true, taskName);
     if (pastTaskDecisions) this.redirectToTask('decisions', false, taskName);
   }
-  addZoomAndPan(svgElement: SVGSVGElement) {
-    const svg = d3.select(svgElement);
-    const g = svg.select("g");
 
-    const zoom = d3.zoom().on('zoom', (event) => {
-      g.attr('transform', event.transform);
-    });
+	zoomIn() {
+		this.panZoomAPI.zoomIn();
+	}
 
-    svg.call(zoom);
-  }
+	zoomOut() {
+		this.panZoomAPI.zoomOut();
+	}
+
+	reset() {
+		this.panZoomAPI.resetView();
+	}
   ngAfterViewInit(): void {
-    const svg = d3.select("graphDiv");
-    const zoomFn = d3.zoom().on('zoom', (event) => {
-      svg.attr("transform", event.transform);
-    });
-    svg.call(zoomFn);
+    this.apiSubscription = this.panZoomConfig.api.subscribe(
+			(api: PanZoomAPI) => (this.panZoomAPI = api)
+		);
     let onAExecuted = false;
     (window as any).onA = (nodeName) => {
       if (!onAExecuted) {
@@ -150,40 +160,21 @@ export class WorkflowComponent implements AfterViewInit {
 
     this.commonService.refreshWorklfow$.subscribe(() => {
       this.flowchartRefresh();
-
     });
   }
 
-  downloadWorkflow ()  {
- // Obtener el elemento SVG
- const svgElement = document.getElementById('graphDiv');
+  downloadWorkflow() {
+    toPng(document.getElementById('graphDiv'))
+      .then((dataUrl) => {
+        this.downloadFile(dataUrl, 'image/png', 'imagen.png');
+      });
+  }
 
- // Serializar el contenido del SVG como una cadena
- const svgString = new XMLSerializer().serializeToString(svgElement);
-
- // Crear un elemento de imagen con el contenido del SVG como fuente
- const img = new Image();
- img.src = `data:image/svg+xml;base64,${btoa(svgString)}`;
-
- // Esperar a que la imagen se cargue
- img.onload = () => {
-   // Crear un canvas
-   const canvas = document.createElement('canvas');
-   canvas.width = img.width;
-   canvas.height = img.height;
-   const ctx = canvas.getContext('2d');
-
-   // Renderizar la imagen en el canvas
-   ctx.drawImage(img, 0, 0,40,80);
-
-   // Obtener la URL de la imagen en formato PNG
-   const dataURL = canvas.toDataURL('image/png','image/octet-stream');
-
-   // Crear un enlace de descarga para descargar la imagen
-   const link = document.createElement('a');
-   link.download = 'imagen.png';
-   link.href = dataURL;
-   link.click();
- };
-}
+  downloadFile(dataUrl: string, type: string, filename: string) {
+    const link = document.createElement('a');
+    link.download = filename;
+    link.href = dataUrl;
+    link.type = type;
+    link.click();
+  }
 }

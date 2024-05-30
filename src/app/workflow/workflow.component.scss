@@ -3,3 +3,29 @@ img {
   margin-left: auto;
   max-height: 44px;
 }
+.text {
+  color: $secondary-color;
+  font-size: 22px;
+}
+.footer-container {
+  position: fixed;
+  top: 40px;
+  right: 0;
+  margin: 20px; /* Ajusta el margen según sea necesario */
+  width: 90px;
+}
+.footer-container button {
+  display: block;
+  margin-bottom: 10px; /* Espaciado entre los botones */
+}
+.icon {
+  color: $primary-color;
+  opacity: 0.4;
+  &:hover{
+    opacity: 1;
+  }
+}
+
+#btnReset:hover {
+  color: $primary-color;
+}
