@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { CommonFunctions } from '../common.functions';
 import { CommonService } from '../common.service';
@@ -10,8 +10,10 @@ import { ManageRAsService } from '../manage-ras.service';
   templateUrl: './manage-ra.component.html',
   styleUrls: ['./manage-ra.component.scss'],
 })
-export class ManageRaComponent {
+export class ManageRaComponent  implements AfterViewInit{
   newRAname: string = '';
+  @ViewChild('nameRAinput') nameRAinput: ElementRef;
+  @ViewChild('fileInput') fileInput;
 
   constructor(
     private toastr: ToastrService,
@@ -22,7 +24,11 @@ export class ManageRaComponent {
     private manageRA: ManageRAsService
   ) {}
 
-  @ViewChild('nameRAinput') nameRAinput: ElementRef;
+
+
+  ngAfterViewInit() {
+    
+  }
   newRA() {
     this.manageRA.createRA(this.newRAname).subscribe({
       next: (result) => {
@@ -121,9 +127,10 @@ export class ManageRaComponent {
     });
   }
   importRA() {
-    document.getElementById('fileinput')?.click();
+    document.getElementById('fileinput').click();
   }
   handleFile($event) {
+    console.log()
     const file = $event.target.files[0];
     const ra_name = file.name.split('.')[0];
     this.manageRA.importRA(file).subscribe(
@@ -143,11 +150,18 @@ export class ManageRaComponent {
             }
           );
         }
+        this.resetFileInput();
       },
       (error) => {
         console.log('Error while importing:');
         console.log(error);
+        this.resetFileInput();
       }
     );
+  }
+  resetFileInput(){
+    if (this.fileInput && this.fileInput.nativeElement) {
+      this.fileInput.nativeElement.value = '';
+    }
   }
 }
