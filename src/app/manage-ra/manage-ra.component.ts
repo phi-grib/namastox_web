@@ -38,6 +38,7 @@ export class ManageRaComponent  implements AfterViewInit{
             this.ra.listRA = [...result];
             this.ra.name = this.newRAname;
             this.func.refreshRA();
+            this.nameRAinput.nativeElement.value = '';
           });
           setTimeout(() => {
             document.getElementById('menubtn').click();
