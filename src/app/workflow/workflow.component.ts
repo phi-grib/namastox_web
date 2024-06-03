@@ -12,6 +12,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./workflow.component.scss'],
 })
 export class WorkflowComponent implements AfterViewInit {
+  controlWorkflow: number = 0;
   panZoomConfig: PanZoomConfig = new PanZoomConfig(
      {freeMouseWheelFactor:0.001,zoomOnDoubleClick:false,dynamicContentDimensions:true,initialZoomLevel:3}
   );
@@ -106,6 +107,7 @@ export class WorkflowComponent implements AfterViewInit {
   }
 
   checkType(taskName) {
+    this.controlWorkflow +=1;
     // RESULTS
     const pendingTaskResults = this.pendingTasks.results.find(
       (task) => task.id == taskName
@@ -113,8 +115,10 @@ export class WorkflowComponent implements AfterViewInit {
     const pastTaskResults = this.results.results.find(
       (task) => task.id == taskName
     );
-    if (pendingTaskResults) this.redirectToTask('results', true, taskName);
+    if(this.controlWorkflow == 1){
     if (pastTaskResults) this.redirectToTask('results', false, taskName);
+    }
+    if (pendingTaskResults) this.redirectToTask('results', true, taskName);
     // DECISIONS
     const pendingTaskDecisions = this.pendingTasks.decisions.find(
       (task) => task.id == taskName
@@ -123,7 +127,12 @@ export class WorkflowComponent implements AfterViewInit {
       (task) => task.id == taskName
     );
     if (pendingTaskDecisions) this.redirectToTask('decisions', true, taskName);
+    if(this.controlWorkflow == 1){
     if (pastTaskDecisions) this.redirectToTask('decisions', false, taskName);
+    }
+    if(this.controlWorkflow ==2){
+      this.controlWorkflow = 0;
+    }
   }
 
 	zoomIn() {
