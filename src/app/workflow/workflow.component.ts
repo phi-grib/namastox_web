@@ -41,13 +41,33 @@ export class WorkflowComponent implements AfterViewInit {
     });
     this.panZoomAPI.resetView();
   }
-  selectTableRowByValue(tableID: string, column: number, value: string) {
-    //first check if accordion is opened
-    const accTask = document.getElementById('pastCollapseTasks');
-    const accSelectTask = document.getElementById('tableCollapseTasks');
-    if (accSelectTask.classList.contains('collapsed')) {
-      accSelectTask.click();
+
+   getElementsByTableID = (tableID) => {
+    const elements:any = {
+        btnTask: document.querySelector('#pastCollapseTasks'),
+        btnSelectTask: document.querySelector('#tableCollapseTasks'),
+        accordionbodySelector: document.querySelector('#flush-collapseOneTasks'),
+        accordionbodyTask: document.querySelector('#flush-collapseTwoTasks')
+    };
+
+    if (tableID === "#dtDecisions") {
+        elements.btnTask = document.querySelector('#pastCollapseDecisions');
+        elements.btnSelectTask = document.querySelector('#tableCollapseDecisions');
+        elements.accordionbodySelector = document.querySelector('#flush-collapseOneDecisions');
+        elements.accordionbodyTask = document.querySelector('#flush-collapseTwoDecisions');
     }
+
+    return elements;
+};
+
+
+  selectTableRowByValue(tableID: string, column: number, value: string) {
+    const { btnTask, btnSelectTask, accordionbodySelector, accordionbodyTask } = this.getElementsByTableID(tableID);
+    
+    if (accordionbodySelector.classList.contains('collapse')) {
+      btnSelectTask.click();
+    }
+
     setTimeout(() => {
       const table = document.querySelector(tableID);
       table.querySelectorAll('tr').forEach((row) => {
@@ -55,10 +75,10 @@ export class WorkflowComponent implements AfterViewInit {
         if (cells[column] != undefined && cells[column].textContent === value) {
           row.click();
           setTimeout(() => {
-            if (accTask.classList.contains('collapsed')) {
-              accTask.click();
+            if (accordionbodyTask.classList.contains('collapse')) {
+              btnTask.click();
             }
-          }, 300);
+          }, 100);
         }
       });
     }, 300);

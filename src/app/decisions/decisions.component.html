@@ -109,21 +109,21 @@
       <div class="accordion-item">
         <h2 class="accordion-header" id="flush-headingOne">
           <button
-            id="tableCollapse"
+            id="tableCollapseDecisions"
             class="accordion-button collapsed"
             type="button"
             data-bs-toggle="collapse"
-            data-bs-target="#flush-collapseOne"
+            data-bs-target="#flush-collapseOneDecisions"
             aria-expanded="false"
-            aria-controls="flush-collapseOne"
+            aria-controls="flush-collapseOneDecisions"
           >
             Completed Task
           </button>
         </h2>
         <div
-          id="flush-collapseOne"
+          id="flush-collapseOneDecisions"
           class="accordion-collapse collapse show"
-          aria-labelledby="flush-headingOne"
+          aria-labelledby="flush-headingOneDecisions"
           data-bs-parent="#accordionFlushExample"
         >
           <div class="accordion-body">
@@ -162,21 +162,21 @@
         <h2 class="accordion-header" id="flush-headingTwo">
           <button
             (click)="showTablePastDecisions()"
-            id="pastCollapse"
+            id="pastCollapseDecisions"
             class="accordion-button collapsed"
             type="button"
             data-bs-toggle="collapse"
-            data-bs-target="#flush-collapseTwo"
+            data-bs-target="#flush-collapseTwoDecisions"
             aria-expanded="true"
-            aria-controls="flush-collapseTwo"
+            aria-controls="flush-collapseTwoDecisions"
           >
             {{ this.results?.decisionSelected["task description"]?.label }}
           </button>
         </h2>
         <div
-          id="flush-collapseTwo"
+          id="flush-collapseTwoDecisions"
           class="accordion-collapse collapse"
-          aria-labelledby="flush-headingTwo"
+          aria-labelledby="flush-headingTwoDecisions"
           data-bs-parent="#accordionFlushExample"
         >
           <div class="accordion-body">
