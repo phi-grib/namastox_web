@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { SplitComponent } from 'angular-split';
 import { CommonFunctions } from './common.functions';
 import { CommonService } from './common.service';
-import { Global, RA } from './globals';
+import { Global, RA, User } from './globals';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
   constructor(
     public global: Global,
     public ra: RA,
+    public user: User,
     private commonService: CommonService,
     private func: CommonFunctions
   ) {}

@@ -8,7 +8,7 @@ import { AngularSplitModule } from 'angular-split';
 import { AppComponent } from './app.component';
 import { WorkflowComponent } from './workflow/workflow.component';
 import { NotesComponent } from './notes/notes.component';
-import { RA,Global, PendingTasks, Results } from './globals';
+import { RA,Global, PendingTasks, Results,User } from './globals';
 import { OverviewComponent } from './overview/overview.component';
 import { GeneralInformationComponent } from './general-information/general-information.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -28,6 +28,8 @@ import { ReportComponent } from './report/report.component';
 import { AutolinkPipePipe } from '../app/autolink-pipe.pipe';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPanZoomModule } from 'ngx-panzoom';
+import { CookieService } from 'ngx-cookie-service';
+import {LoginComponent} from "./login/login.component";
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,6 +40,7 @@ import { NgxPanZoomModule } from 'ngx-panzoom';
     TasksComponent,
     DecisionsComponent,
     SelectRaComponent,
+    LoginComponent,
     ManageRaComponent,
     TaskFormComponent,
     formatDatePipe,
@@ -68,7 +71,7 @@ import { NgxPanZoomModule } from 'ngx-panzoom';
       },
     })
   ],
-  providers: [RA,Global,PendingTasks,Results],
+  providers: [CookieService,RA,Global,PendingTasks,Results,User],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

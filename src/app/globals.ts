@@ -39,3 +39,10 @@ export class Model {
   version: number;
   documentation: any;
 }
+
+@Injectable()
+export class User {
+  username: string;
+  password: string;
+  status: boolean = false;
+}
