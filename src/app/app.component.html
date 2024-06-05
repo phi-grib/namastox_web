@@ -10,6 +10,7 @@
       role="tab"
       aria-controls="pills-overview"
       aria-selected="True"
+      [disabled]="!this.user.status"
     >
       Overview
     </button>
@@ -24,6 +25,7 @@
       role="tab"
       aria-controls="pills-gen-information"
       aria-selected="false"
+      [disabled]="!this.user.status"
     >
       General information
     </button>
@@ -38,6 +40,7 @@
       role="tab"
       aria-controls="pills-tasks"
       aria-selected="false"
+      [disabled]="!this.user.status"
     >
       Tasks
     </button>
@@ -52,6 +55,7 @@
       role="tab"
       aria-controls="pills-decisions"
       aria-selected="false"
+      [disabled]="!this.user.status"
     >
       Decisions
     </button>
@@ -66,6 +70,7 @@
       role="tab"
       aria-controls="pills-notes"
       aria-selected="false"
+      [disabled]="!this.user.status"
     >
       Notes
     </button>
@@ -84,6 +89,7 @@
       role="tab"
       aria-controls="pills-report"
       aria-selected="false"
+      [disabled]="!this.user.status"
     >
       Report
     </button>
@@ -96,12 +102,12 @@
   />
 </ul>
 
-<!-- <div *ngIf="!this.user.status" class="container">
+<div *ngIf="!this.user.status" class="container">
   <app-login></app-login>
-</div> -->
+</div> 
 
 
-<as-split  style="height: 93vh" class="" direction="horizontal">
+<as-split *ngIf="this.user.status"  style="height: 93vh" class="" direction="horizontal">
   <as-split-area [size]="this.navbarleft">
     <div class="tab-content container-fluid" id="pills-tabContent">
       <app-select-ra></app-select-ra>
