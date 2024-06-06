@@ -30,10 +30,9 @@
       <option *ngFor="let ra of this.ra.listRA" [value]="ra">{{ ra }}</option>
     </select>
   </div>
-  <div *ngIf="this.global.interfaceVisible" class="m-2 d-inline-block"></div>
-  <div
-    *ngIf="this.global.interfaceVisible"
-    class="form-inline d-inline-block position-relative"
-  >
-  </div>
+  <!-- convertir a componente -->
+
+ <div  style="margin-left: auto;">
+    <app-user-info></app-user-info>
+  </div> 
 </div>

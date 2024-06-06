@@ -15,15 +15,14 @@ export class LoginComponent implements OnInit {
 
   setCookie() {
     this.cookieService.set('username', this.user.username, { expires: 1, path: '/' });
-    this.cookieService.set('password', this.user.password, { expires: 1, path: '/' });
   }
 
   getCookie() {
-  const username = this.cookieService.get('username');
+    this.user.username = this.cookieService.get('username');
 
-if(username){
+if(this.user.username){
   this.user.status = true;
-  alert('Logged with user '+username);
+  alert('Logged with user '+this.user.username);
 }
   }
   onSubmit(){

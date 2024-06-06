@@ -30,6 +30,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPanZoomModule } from 'ngx-panzoom';
 import { CookieService } from 'ngx-cookie-service';
 import {LoginComponent} from "./login/login.component";
+import { UserInfoComponent } from './user-info/user-info.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,6 +46,7 @@ import {LoginComponent} from "./login/login.component";
     TaskFormComponent,
     formatDatePipe,
     DecisionsFormComponent,
+    UserInfoComponent,
     ModelDocumentationComponent,
     NoteFormComponent,
     ReportComponent,
