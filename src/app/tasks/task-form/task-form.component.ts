@@ -66,7 +66,7 @@ export class TaskFormComponent {
       }
       this.documents = this.model['links'];
       this.uncertainty_p = 0;
-      this.uncertainty_term = '';
+      this.uncertainty_term = 'N/A';
     }, 100);
   }
   selectedUncertaintyTerm(target) {
@@ -189,7 +189,7 @@ export class TaskFormComponent {
   resetFieldsUncertainty() {
     this.uncertainty = '';
     this.uncertainty_p = 0;
-    this.uncertainty_term = this.pending_task['task description'].uncertainty_term[0];
+    this.uncertainty_term = "N/A";
   }
   
   /**
@@ -303,6 +303,7 @@ export class TaskFormComponent {
           positionClass: 'toast-top-right',
         }
       );
+      this.addNewUncertainty();
       }else{
         this.model.values.push({
           method: this.method,
@@ -318,12 +319,11 @@ export class TaskFormComponent {
             positionClass: 'toast-top-right',
           }
         );
+        this.addNewUncertainty();
         this.resetFieldsParameter();
         this.resetFieldsUncertainty();
       }
         this.parameterInserted = true;
-        this.addNewUncertainty();
-
     }else{
       this.parameterInserted = false
     }
@@ -359,6 +359,7 @@ export class TaskFormComponent {
       this.uncertainty_term =
         this.pending_task['task description'].uncertainty_term[8];
     } else {
+      this.uncertainty_term ="N/A";
     }
 
     this.changeSelectedOptionDOM();
