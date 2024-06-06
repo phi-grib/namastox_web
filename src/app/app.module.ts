@@ -29,7 +29,6 @@ import { AutolinkPipePipe } from '../app/autolink-pipe.pipe';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPanZoomModule } from 'ngx-panzoom';
 import { CookieService } from 'ngx-cookie-service';
-import {LoginComponent} from "./login/login.component";
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +39,6 @@ import {LoginComponent} from "./login/login.component";
     TasksComponent,
     DecisionsComponent,
     SelectRaComponent,
-    LoginComponent,
     ManageRaComponent,
     TaskFormComponent,
     formatDatePipe,
