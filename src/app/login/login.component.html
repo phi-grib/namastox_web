@@ -1,21 +1,6 @@
 <div class="container">
     <div class="containerLogin">
-        <form
-          id="loginForm"
-          #loginForm="ngForm"
-          (ngSubmit)="onSubmit()"
-          >
-          <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1"><i class="fa-regular fa-user" style="color: #474286"></i></span>
-            <input required [(ngModel)]="this.user.username" name="username" class="form-control" id="exampleInputEmail1" placeholder="username">
-          </div>
-            <div class="input-group mb-3">
-              <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-lock" style="color: #474286"></i></span>
-              <input required [(ngModel)]="this.user.password" name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="password">
-            </div>
-            <button [disabled]="loginForm.invalid" type="submit" class="btn btn-ets-do">Login</button>
-          </form>
-
+      <a class="btn btn-ets-do" href="/login" role="button">Login</a>
     </div>
 </div> 
 

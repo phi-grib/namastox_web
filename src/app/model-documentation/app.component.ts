@@ -20,18 +20,7 @@ export class AppComponent implements OnInit {
     private keycloackService:KeycloackService
   ) {}
   ngOnInit(): void {
-    this.keycloackService.getSessionUser().subscribe({
-      next: (result:any) => {
-        if(result){
-          this.user.username = result['username']
-          this.user.id_token = result["id_token"]
-          this.user.status = true
-        }
-      },
-      error:(e) => {
-        console.log(e)
-      }
-    })
+
     this.commonService.getRaList().subscribe({
       next: (result: any) => {
         this.ra.listRA = [...result];

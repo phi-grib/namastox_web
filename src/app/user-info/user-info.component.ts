@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { User } from '../globals';
 import { CookieService } from 'ngx-cookie-service';
+import { KeycloackService } from '../keycloack.service';
 
 @Component({
   selector: 'app-user-info',
@@ -9,14 +10,26 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class UserInfoComponent {
 
-  constructor(public user:User,private cookieService: CookieService){
+  constructor(public user:User,private cookieService: CookieService,private keycloackService:KeycloackService){
 
   }
 
   logout(){
-    this.cookieService.delete("username",'/')
-    this.user.username = '';
-    this.user.password = '';
-    this.user.status = false;
+    this.keycloackService.getSessionUser().subscribe({
+      next: (result:any) => {
+        if(result){
+          this.user.username = result['username']
+          this.user.id_token = result["id_token"]
+          this.user.status = true
+        }else {
+          this.user.username = ""
+          this.user.id_token = ""
+          this.user.status = false
+        }
+      },
+      error:(e) => {
+        console.log(e)
+      }
+    })
   }
 }
