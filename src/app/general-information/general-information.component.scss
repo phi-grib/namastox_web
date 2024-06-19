@@ -6,11 +6,18 @@
 }
 
 .containerMols {
-  height: 200px; /* Cambia este valor según lo necesites */
+  height: 300px; /* Cambia este valor según lo necesites */
   overflow: auto;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
+}
+
+thead tr th {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: white;
 }
