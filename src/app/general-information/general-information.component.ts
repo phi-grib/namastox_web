@@ -23,6 +23,7 @@ export class GeneralInformationComponent implements OnInit {
   model: any;
   complete: boolean = false;
   listMols = [];
+  idxMol = -1;
   workflow_custom: File | null = null;
   objectKeys = Object.keys;
 
@@ -59,7 +60,7 @@ export class GeneralInformationComponent implements OnInit {
     this.ra.general_information.general.substances.splice(idx,1);
   }
   
-  addMolecule(){
+  addMolecule(edit){
     var substance = {};
     substance = {
       id: this.substance_id,
@@ -67,11 +68,24 @@ export class GeneralInformationComponent implements OnInit {
       casrn: this.substance_CASRN,
       smiles: this.substance_SMILES,
     };
-    this.ra.general_information.general.substances.push(substance)
+    if(edit){
+      this.ra.general_information.general.substances[this.idxMol] = substance
+    }else{
+      this.ra.general_information.general.substances.push(substance)
+
+    }
+
     setTimeout(() => {
       this.drawMol();
         
       }, 300);
+  }
+  editMol(idx){
+    this.substance_SMILES =  this.ra.general_information.general.substances[idx].smiles
+    this.substance_id = this.ra.general_information.general.substances[idx].id
+    this.substance_name = this.ra.general_information.general.substances[idx].name
+    this.substance_CASRN =  this.ra.general_information.general.substances[idx].casrn
+    this.idxMol = idx;
   }
 
   uploadSubstance(event: any) {
