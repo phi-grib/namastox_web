@@ -22,16 +22,15 @@ export class OverviewComponent implements OnInit {
       }, 300);
     });
   }
+
   drawMol() {
-    var smile = '';
-    //check if user insert a valid substance
-    const substances = this.ra.general_information?.general?.substances;
-    smile = substances?.length > 0 ? substances[0].smiles : null;
-    if(smile){
+
+    this.ra.general_information.general.substances.forEach((mol,idx) => {
       let moleculeOptions = {width: 200, height: 150 };
       let reactionOptions = {};
       let sd = new SmilesDrawer.SmiDrawer(moleculeOptions,reactionOptions);
-      sd.draw(smile,'#overviewCanvas') 
-    }
+      sd.draw(mol.smiles,'#overviewCanvas'+idx) 
+    });
   }
+
 }

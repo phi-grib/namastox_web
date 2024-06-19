@@ -170,7 +170,7 @@
         </div>
       </div>
       <div class="containerMols">
-        <table>
+        <table *ngIf="this.ra.general_information.general.substances.length  > 0">
           <thead class="thead">
             <tr>
               <th>Name</th>

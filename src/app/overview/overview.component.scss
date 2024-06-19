@@ -36,3 +36,9 @@ table {
     width: 150px;
   }
 }
+
+.containerMols {
+  max-height: 300px;
+  overflow: auto;
+  color: $secondary-color;
+}

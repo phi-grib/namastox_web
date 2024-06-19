@@ -9,31 +9,25 @@
       </div>
     </div>
     <div class="row pt-1 pb-1 border-bottom">
-      <div class="col-3 text">Substance</div>
+      <div class="col-3 text">Substances</div>
       <div class="col">
-        <div class="row">
-          <div class="col-4 text">Name</div>
-          <div class="col-8">
-            {{ this.ra?.general_information?.general?.substances[0]?.name }}
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-4 text">ID</div>
-          <div class="col-8">
-            {{ this.ra?.general_information?.general?.substances[0]?.id }}
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-4 text">CAS-RN</div>
-          <div class="col-8">
-            {{ this.ra?.general_information?.general?.substances[0]?.casrn }}
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-4 text">Structure</div>
-          <div class="col-8">
-            <img *ngIf="this.ra.general_information?.general?.substances.length > 0" id="overviewCanvas"/>
-          </div>
+        <div class="containerMols">
+          <table>
+            <thead class="thead">
+              <tr>
+                <th>Name</th>
+                <th>CAS-RN</th>
+                <th>Structure</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let idx of objectKeys(this.ra.general_information.general.substances)">
+                <td>{{this.ra.general_information.general.substances[idx].name}}</td>
+                <td>{{this.ra.general_information.general.substances[idx].casrn}}</td>
+                <td><img id="overviewCanvas{{idx}}"></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
