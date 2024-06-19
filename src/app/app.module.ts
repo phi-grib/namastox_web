@@ -23,7 +23,6 @@ import { formatDatePipe } from './formatDatePipe';
 import { DecisionsFormComponent } from './decisions/decisions-form/decisions-form.component';
 import { ModelDocumentationComponent } from './model-documentation/model-documentation.component';
 import { NoteFormComponent } from './note-form/note-form.component';
-import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ReportComponent } from './report/report.component';
 import { AutolinkPipePipe } from '../app/autolink-pipe.pipe';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -59,7 +58,6 @@ import { CookieService } from 'ngx-cookie-service';
     FormsModule,
     NgxPanZoomModule,
     BrowserAnimationsModule,
-    BsDatepickerModule.forRoot(),
     ToastrModule.forRoot(),
     MarkdownModule.forRoot({
       loader: HttpClient,

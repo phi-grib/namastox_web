@@ -4,3 +4,13 @@
 .container-form {
   color: $secondary-color;
 }
+
+.containerMols {
+  height: 200px; /* Cambia este valor según lo necesites */
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}

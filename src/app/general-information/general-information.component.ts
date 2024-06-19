@@ -5,6 +5,7 @@ import { CommonService } from '../common.service';
 import { RA } from '../globals';
 import { UpdateService } from '../update.service';
 import { ToastrService } from 'ngx-toastr';
+import * as SmilesDrawer from 'smiles-drawer';
 
 @Component({
   selector: 'app-general-information',
@@ -21,7 +22,9 @@ export class GeneralInformationComponent implements OnInit {
   form = new FormGroup({});
   model: any;
   complete: boolean = false;
+  listMols = [];
   workflow_custom: File | null = null;
+  objectKeys = Object.keys;
 
   generalInformationForm = new FormGroup({});
   constructor(
@@ -45,7 +48,26 @@ export class GeneralInformationComponent implements OnInit {
       }
     });
   }
+
+  deleteMol(idx){
+    this.ra.general_information.general.substances.splice(idx,1);
+  }
   
+  addMolecule(){
+    var substance = {};
+    substance = {
+      id: this.substance_id,
+      name: this.substance_name,
+      casrn: this.substance_CASRN,
+      smiles: this.substance_SMILES,
+    };
+    this.ra.general_information.general.substances.push(substance)
+    setTimeout(() => {
+      this.drawMol();
+        
+      }, 300);
+  }
+
   uploadSubstance(event: any) {
     const selectedFile = event.target.files[0];
     if (selectedFile) {
@@ -54,13 +76,29 @@ export class GeneralInformationComponent implements OnInit {
         .uploadSubstances(this.substance_file)
         .subscribe((result) => {
           if (result['success']) {
-            var firstSubstance = result['result'][0];
-            this.ra.general_information.general.substances = [firstSubstance];
+            console.log("Substances")
+            console.log(result["result"])
+            this.ra.general_information.general.substances = this.ra.general_information.general.substances.concat(result['result']);
             this.substance_file = null;
           }
+          setTimeout(() => {
+          this.drawMol();
+            
+          }, 300);
         });
     }
   }
+
+  drawMol() {
+
+    this.ra.general_information.general.substances.forEach((mol,idx) => {
+      let moleculeOptions = {width: 200, height: 150 };
+      let reactionOptions = {};
+      let sd = new SmilesDrawer.SmiDrawer(moleculeOptions,reactionOptions);
+      sd.draw(mol.smiles,'#canvas'+idx) 
+    });
+  }
+
 
   uploadCustomWorkflow(event:any){
     const selectedFile = event.target.files[0];
@@ -145,15 +183,6 @@ export class GeneralInformationComponent implements OnInit {
 
 
   onSubmit() {
-    var substance = {};
-    substance = {
-      id: this.substance_id,
-      name: this.substance_name,
-      casrn: this.substance_CASRN,
-      smiles: this.substance_SMILES,
-    };
-
-    this.ra.general_information.general.substances[0] = substance;
     setTimeout(() => {
       this.updateService
         .updateGeneralInformation(
@@ -191,7 +220,6 @@ export class GeneralInformationComponent implements OnInit {
             this.workflow_custom = null;
             const fileInput = document.getElementById('workflow_custom') as HTMLInputElement;
             if (fileInput) fileInput.value = null;
-            substance = {};
             document.getElementById("pills-overview-tab").click()
             }, 100);
           }

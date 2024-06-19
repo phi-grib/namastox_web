@@ -144,103 +144,6 @@
           />
         </div>
       </div>
-
-      <div class="row mb-3">
-        <label for="inputPassword3" class="col-3 col-form-label"
-          >Substance:</label
-        >
-        <div class="col">
-          <div class="row mb-3">
-            <label for="inputPassword3" class="col-2 col-form-label"
-              >Name(s)</label
-            >
-            <div class="col">
-              <input
-                name="substance_name"
-                [placeholder]="
-                  this.ra.general_information.placeholders['substances'].name
-                "
-                [(ngModel)]="this.substance_name"
-                type="text"
-                class="form-control"
-                id="substance_name"
-              />
-            </div>
-          </div>
-          <div class="row mb-3">
-            <label for="inputPassword3" class="col-2 col-form-label"
-              >ID(s)</label
-            >
-            <div class="col">
-              <input
-                name="substance_id"
-                [placeholder]="
-                  this.ra.general_information.placeholders['substances'].id
-                "
-                [(ngModel)]="this.substance_id"
-                type="text"
-                class="form-control"
-                id="substance_id"
-              />
-            </div>
-          </div>
-          <div class="row mb-3">
-            <label for="inputPassword3" class="col-2 col-form-label"
-              >CAS-RN(s)</label
-            >
-            <div class="col">
-              <input
-                name="substance_CASRN"
-                [placeholder]="
-                  this.ra.general_information.placeholders['substances'][
-                    'cas-rn'
-                  ]
-                "
-                [(ngModel)]="this.substance_CASRN"
-                type="text"
-                class="form-control"
-                id="substance_CASRN"
-              />
-            </div>
-          </div>
-          <div *ngIf="this.substance_SMILES" class="row mb-3">
-            <label for="inputPassword3" class="col-2 col-form-label"
-              >SMILES</label
-            >
-            <div class="col">
-              <input
-                [(ngModel)]="this.substance_SMILES"
-                name="substance_SMILES"
-                id="substance_SMILES"
-                type="text"
-                class="form-control"
-              />
-            </div>
-          </div>
-          <div class="row mb-3">
-            <label for="inputPassword3" class="col-2 col-form-label"
-              >Structure</label
-            >
-            <div class="col">
-              <input
-                name="substance_file"
-                placeholder=""
-                (change)="uploadSubstance($event)"
-                type="file"
-                class="form-control text-start"
-                id="substance_file"
-              />
-            </div>
-          </div>
-          <div class="row mb-3">
-            <div class="col text-end">
-              <a (click)="autocomplete()" class="btn btn-ets-do" role="button"
-                >Autocomplete</a
-              >
-            </div>
-          </div>
-        </div>
-      </div>
       <div *ngIf="this.ra?.status?.step == 0" class="row mb-3">
         <label for="inputPassword3" class="col-3 col-form-label"
           >Workflow custom:</label
@@ -258,6 +161,42 @@
           />
         </div>
       </div>
+      <div class="col mb-3 d-flex justify-content-end">
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <button type="button" class="btn btn-ets-do" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Add Molecule
+          </button>
+          <button type="button" class="btn btn-ets-do">Import Table</button>
+        </div>
+      </div>
+      <div class="containerMols">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>ID</th>
+              <th>CAS-RN</th>
+              <th>Structure</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let idx of objectKeys(this.ra.general_information.general.substances)">
+              <td>{{this.ra.general_information.general.substances[idx].name}}</td>
+              <td>{{this.ra.general_information.general.substances[idx].id}}</td>
+              <td>{{this.ra.general_information.general.substances[idx].casrn}}</td>
+              <td><img id="canvas{{idx}}"></td>
+              <td>
+                <div class="btn-group" role="group" aria-label="Basic example">
+                  <button type="button" (click)="deleteMol(idx)" class="btn btn-ets-delete">Delete</button>
+                  <button type="button" class="btn btn-ets-do">Edit</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
       <button
         type="submit"
         class="btn btn-ets-do submit-button"
@@ -265,5 +204,116 @@
         Submit
       </button>
     </form>
+  </div>
+</div>
+
+
+<!-- Modal add new Molecule -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Add Molecule</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row mb-3">
+          <div class="col">
+            <div class="row mb-3">
+              <label for="inputPassword3" class="col-2 col-form-label"
+                >Name(s)</label
+              >
+              <div class="col">
+                <input
+                  name="substance_name"
+                  [placeholder]="
+                    this.ra.general_information.placeholders['substances'].name
+                  "
+                  [(ngModel)]="this.substance_name"
+                  type="text"
+                  class="form-control"
+                  id="substance_name"
+                />
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="inputPassword3" class="col-2 col-form-label"
+                >ID(s)</label
+              >
+              <div class="col">
+                <input
+                  name="substance_id"
+                  [placeholder]="
+                    this.ra.general_information.placeholders['substances'].id
+                  "
+                  [(ngModel)]="this.substance_id"
+                  type="text"
+                  class="form-control"
+                  id="substance_id"
+                />
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="inputPassword3" class="col-2 col-form-label"
+                >CAS-RN(s)</label
+              >
+              <div class="col">
+                <input
+                  name="substance_CASRN"
+                  [placeholder]="
+                    this.ra.general_information.placeholders['substances'][
+                      'cas-rn'
+                    ]
+                  "
+                  [(ngModel)]="this.substance_CASRN"
+                  type="text"
+                  class="form-control"
+                  id="substance_CASRN"
+                />
+              </div>
+            </div>
+            <div *ngIf="this.substance_SMILES" class="row mb-3">
+              <label for="inputPassword3" class="col-2 col-form-label"
+                >SMILES</label
+              >
+              <div class="col">
+                <input
+                  [(ngModel)]="this.substance_SMILES"
+                  name="substance_SMILES"
+                  id="substance_SMILES"
+                  type="text"
+                  class="form-control"
+                />
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="inputPassword3" class="col-2 col-form-label"
+                >Structure</label
+              >
+              <div class="col">
+                <input
+                  name="substance_file"
+                  placeholder=""
+                  (change)="uploadSubstance($event)"
+                  type="file"
+                  class="form-control text-start"
+                  id="substance_file"
+                />
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col text-end">
+        <button type="button" (click)="autocomplete()" class="btn btn-ets-do">Autocomplete</button>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" (click)="addMolecule()" class="btn btn-ets-do">Add</button>
+        <button type="button" class="btn btn-ets-bad" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
   </div>
 </div>
