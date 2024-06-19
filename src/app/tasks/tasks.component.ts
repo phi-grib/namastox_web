@@ -73,6 +73,7 @@ export class TasksComponent implements OnInit {
   }
   
   editTask() {
+    this.pending_task = false;
     this.global.editModeTasks = !this.global.editModeTasks;
   }
 
@@ -134,6 +135,7 @@ export class TasksComponent implements OnInit {
   }
 
   getPendingTask() {
+    this.global.editModeTasks = false;
     this.pending_task = false;
     this.commonService
       .getPendingTask(this.ra.name, this.pending_task_selected)
