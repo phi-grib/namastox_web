@@ -43,6 +43,9 @@ export class AppComponent implements OnInit {
       },
     });
   }
+  loadGeneralInfoCanvas(){
+    this.commonService.drawGeneralInfoCanvas(true);
+  }
   loadOverviewCanvas() {
     this.commonService.drawOverviewCanvas(false);
   }

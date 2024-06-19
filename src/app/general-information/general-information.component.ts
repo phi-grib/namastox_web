@@ -35,6 +35,11 @@ export class GeneralInformationComponent implements OnInit {
     private toastr: ToastrService,
   ) {}
   ngOnInit(): void {
+    this.commonService.renderGeneralInfoCanvas$.subscribe((status) => {
+       setTimeout(() => {
+         if (status) this.drawMol();
+       }, 300);
+    });
     this.commonService.generateForms$.subscribe(() => {
       if(this.ra.status.step > 0){
         this.substance_name = this.ra.general_information.general.substances[0]?.name;
@@ -46,6 +51,7 @@ export class GeneralInformationComponent implements OnInit {
         this.substance_id = '';
         this.substance_SMILES = '';
       }
+        this.drawMol();
     });
   }
 

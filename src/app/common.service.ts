@@ -22,12 +22,19 @@ export class CommonService {
   updateWorkflow() {
     this.refreshWorkflow.next(true);
   }
-  /* update canvas in Overview */
+  /* render canvas in Overview */
   private updateOverviewCanvas = new BehaviorSubject<boolean>(false);
   updateOverviewCanvas$ = this.updateOverviewCanvas.asObservable();
   drawOverviewCanvas(status: boolean) {
     this.updateOverviewCanvas.next(status);
   }
+  /*render canvas in General Information */
+  private renderGeneralInfoCanvas =  new Subject<boolean>();
+  renderGeneralInfoCanvas$ = this.renderGeneralInfoCanvas.asObservable();
+  drawGeneralInfoCanvas(status: boolean) {
+    this.renderGeneralInfoCanvas.next(status);
+  }
+
   /**Get list of RAs */
   getRaList() {
     const url: string = environment.baseUrl + 'list';
