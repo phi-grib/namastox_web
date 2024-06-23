@@ -70,9 +70,15 @@ export class GeneralInformationComponent implements OnInit {
     };
     if(edit){
       this.ra.general_information.general.substances[this.idxMol] = substance
+      this.toastr.success(substance['name'],"Edited Successfully",{
+        timeOut:3000
+      });
+
     }else{
       this.ra.general_information.general.substances.push(substance)
-
+      this.toastr.success(substance['name'],"Added Successfully",{
+        timeOut:3000
+      });
     }
 
     setTimeout(() => {
