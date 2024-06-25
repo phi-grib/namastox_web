@@ -38,7 +38,7 @@
         id="infobutton"
         data-bs-toggle="modal"
         (click)="openSupportModal()"
-        data-bs-target="#exampleModal"
+        data-bs-target="#supportModal"
         class="btn ms-auto btn-ets-do"
         role="button"
         >support</a
@@ -189,11 +189,11 @@
   (mousemove)="onDrag($event)"
   [style.left.px]="popupX"
   [style.top.px]="popupY"
-  id="exampleModal"
+  id="supportModal"
   tabindex="-1"
   data-bs-keyboard="false"
   data-bs-backdrop="false"
-  aria-labelledby="exampleModalLabel"
+  aria-labelledby="supportModalLabel"
   aria-hidden="false"
 >
   <div  class="modal-dialog modal-xl">
