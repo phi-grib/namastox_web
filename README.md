@@ -11,14 +11,30 @@ to install the cli use the following command
 npm install -g @angular/cli
 ```
 
+Download the repository:
+
+```bash
+git clone https://github.com/phi-grib/namastox_web.git
+```  
+
+Go to the source repository directory 
+
+```bash
+cd namastox_web
+```
+
 Remember that if it is a new installation run the command
 ```shell
 npm install --force
 ```
 
-## Development server
+## Execute Interface
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Run `ng serve` navigate to `http://localhost:4200/`.
+
+or
+
+Run `ng serve -o` (automatically open in your browser by default.)
 
 
 ## Acknowledgments
