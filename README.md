@@ -4,6 +4,13 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Software tool for supporting the implementation of New Assessment Methods (NAMs) within a New Generation Risk Assessment (NGRA) framework.
 
+## Installation
+
+namastox should have been already installed in this computer. Refer to the [namastox](https://github.com/phi-grib/namastox) manual for full instructions of how create a namastox conda environment and install the software. 
+
+namastox_API should have been also installed and be running. Refer to to the [namastox_API](https://github.com/phi-grib/namastox_API) manual for full instructions of how install and run the API.
+
+
 Make sure you have **Nodejs** and the **Angular** **Command** **Line** **Interface** installed.
 
 to install the cli use the following command
