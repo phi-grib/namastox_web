@@ -24,6 +24,9 @@ export class ManageRaComponent  implements AfterViewInit{
     private manageRA: ManageRAsService
   ) {}
 
+  duplicateRA(){
+console.log("duplicate RA")
+  }
 
 
   ngAfterViewInit() {

@@ -10,6 +10,15 @@
       New RA
     </button>
     <button
+    (click)="duplicateRA()"
+    type="button"
+    class="btn btn-ets-do"
+    data-bs-toggle="modal"
+    data-bs-target="#newRA"
+  >
+    Duplicate RA
+  </button>
+    <button
       (click)="deleteRA()"
       [disabled]="this.ra.listRA.length < 1"
       type="button"
