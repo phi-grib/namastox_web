@@ -55,7 +55,6 @@
               <th style="width: 15%;">Value</th>
               <th class="text-center" style="width: 5%;">Unit</th>
               <th class="text-center" style="width: 15%;">Uncertainty</th>
-              <th style="width: 10%;">Probability</th>
               <th style="width: 15%;">Term</th>
               <th></th> 
             </tr>
@@ -431,45 +430,11 @@ aria-hidden="true"
             id="uncertainty"
           />
         </div>
-        <div class="col-1">
-          <label for="value" class="form-label">Probability</label>
-          <input
-            (blur)="syncWithTerm()"
-            [placeholder]=""
-            (keydown)="onlyNumbers($event)"
-            [ngClass]="{
-              'is-invalid':
-                invalidProbability() &&
-                (valueInputRef.dirty || valueInputRef.touched)
-            }"
-            #valueInputRef="ngModel"
-            type="text"
-            name="uncertainty_p"
-            id="uncertainty_p"
-            [(ngModel)]="this.uncertainty_p"
-            class="form-control"
-          />
-        </div> 
         <div class="col-auto">
           <label for="unit" class="form-label">Term</label>
           <div class="row">
             <div class="col-auto">
-              <select
-                (change)="selectedUncertaintyTerm($event.target)"
-                id="uncertainty_term"
-                class="form-control"
-              >
-                <option  value="N/A">N/A</option>
-                <option
-                  *ngFor="
-                    let value of this.pending_task['task description']
-                      .uncertainty_term
-                  "
-                  [value]="value"
-                >
-                  {{ value }}
-                </option>
-              </select>
+              <input type="text" [(ngModel)]="uncertainty_term" class="form-control" id="uncertainty_term">
             </div>
           </div>
         </div>

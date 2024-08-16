@@ -21,7 +21,6 @@ export class TaskFormComponent {
   idx = undefined;
   selectedModel: any;
   ModelDocumentation = undefined;
-  uncertainty_p: any;
   uncertainty_term: string;
   unit: string | number;
   value: string | number;
@@ -67,12 +66,7 @@ export class TaskFormComponent {
         this.report = this.model.values[0];
       }
       this.documents = this.model['links'];
-      this.uncertainty_p = 0;
-      this.uncertainty_term = 'N/A';
     }, 100);
-  }
-  selectedUncertaintyTerm(target) {
-    this.uncertainty_term = target.value;
   }
   addMethod(){
     this.listMethods.push({...this.method})
@@ -192,8 +186,6 @@ export class TaskFormComponent {
 
   resetFieldsUncertainty() {
     this.uncertainty = '';
-    this.uncertainty_p = 0;
-    this.uncertainty_term = "N/A";
   }
   
   /**
@@ -221,11 +213,6 @@ export class TaskFormComponent {
     return this.sensitivity < 0 || this.sensitivity > 1;
   }
 
-  invalidProbability(): boolean {
-    if (this.uncertainty_p.length > 0)
-      this.uncertainty_p = parseFloat(this.uncertainty_p);
-    return this.uncertainty_p < 0 || this.uncertainty_p > 1;
-  }
 
   onSubmit(event) {
     this.loadForm = false;
@@ -297,9 +284,7 @@ export class TaskFormComponent {
   }
 
   addNewParameter() {
-    if ((this.parameter && this.value) &&
-      this.uncertainty_p >= 0 &&
-      this.uncertainty_p <= 1
+    if ((this.parameter && this.value)
     ) {
       if(this.editParameterMode){
       this.model.values[this.idx] = {
@@ -341,42 +326,6 @@ export class TaskFormComponent {
       this.parameterInserted = false
     }
   }
-  syncWithTerm() {
-    if (!this.uncertainty_p) this.uncertainty_p = 0; // default value, if you let this field empty.
-
-    if (this.uncertainty_p > 0.99 && this.uncertainty_p <= 1.0) {
-      this.uncertainty_term =
-        this.pending_task['task description'].uncertainty_term[0];
-    } else if (this.uncertainty_p > 0.95 && this.uncertainty_p <= 0.99) {
-      this.uncertainty_term =
-        this.pending_task['task description'].uncertainty_term[1];
-    } else if (this.uncertainty_p > 0.9 && this.uncertainty_p <= 0.95) {
-      this.uncertainty_term =
-        this.pending_task['task description'].uncertainty_term[2];
-    } else if (this.uncertainty_p > 0.66 && this.uncertainty_p <= 0.9) {
-      this.uncertainty_term =
-        this.pending_task['task description'].uncertainty_term[3];
-    } else if (this.uncertainty_p > 0.33 && this.uncertainty_p <= 0.66) {
-      this.uncertainty_term =
-        this.pending_task['task description'].uncertainty_term[4];
-    } else if (this.uncertainty_p > 0.1 && this.uncertainty_p <= 0.33) {
-      this.uncertainty_term =
-        this.pending_task['task description'].uncertainty_term[5];
-    } else if (this.uncertainty_p >= 0.05 && this.uncertainty_p <= 0.1) {
-      this.uncertainty_term =
-        this.pending_task['task description'].uncertainty_term[6];
-    } else if (this.uncertainty_p > 0.01 && this.uncertainty_p <= 0.05) {
-      this.uncertainty_term =
-        this.pending_task['task description'].uncertainty_term[7];
-    } else if (this.uncertainty_p >= 0.0 && this.uncertainty_p <= 0.01) {
-      this.uncertainty_term =
-        this.pending_task['task description'].uncertainty_term[8];
-    } else {
-      this.uncertainty_term ="N/A";
-    }
-
-    this.changeSelectedOptionDOM();
-  }
 
   /**
    * change also the value in the DOM
@@ -405,13 +354,11 @@ export class TaskFormComponent {
         var positionParameter = this.model.values.length - 1;
         this.model.uncertainties[positionParameter] = {
           uncertainty: this.uncertainty,
-          p: this.uncertainty_p,
           term: this.uncertainty_term,
         };
       }else{
         this.model.uncertainties[this.idx] = {
           uncertainty: this.uncertainty,
-          p: this.uncertainty_p,
           term: this.uncertainty_term
         }
       }
