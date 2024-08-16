@@ -63,7 +63,7 @@
             <tr
             *ngFor="let value of this.model.values; let i = index"
           >
-            <td >{{ value?.method}}</td>
+            <td >{{ value?.method.name}}</td>
             <td >{{ value?.parameter}}</td>
             <td>{{ value?.value.toString() | slice : 0 : 6 }}</td>
             <td class="text-center">{{ value?.unit }}</td>
@@ -375,6 +375,18 @@ aria-hidden="true"
       ></button>
     </div>
     <div class="modal-body">
+      <div class="row">
+        <div class="col  pb-3">
+          <h6>Select method*</h6>
+          <select
+          class="form-select"
+          id="method"
+          [(ngModel)]="this.method"
+        >
+          <option *ngFor="let method of this.listMethods" [value]="ra">{{ method.name }}</option>
+        </select>
+        </div>
+      </div>
       <div class="row">
         <div class="col">
           <div class="row">

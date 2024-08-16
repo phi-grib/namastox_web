@@ -70,6 +70,7 @@ export class TaskFormComponent {
   }
   addMethod(){
     this.listMethods.push({...this.method})
+    this.toastr.success("Successfully Added","")
   }
   deleteParameter(idx) {
     this.model.uncertainties.splice(idx, 1);
