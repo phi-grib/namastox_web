@@ -10,6 +10,15 @@
       <a  class="btn btn-ets-do mb-2"
       *ngIf="this.pending_task.result.result_type === 'value'"
       role="button"
+      (click)="openModalMethod()"
+      data-bs-toggle="modal"
+      data-bs-target="#methodModal"
+      >
+      Add method
+    </a>
+      <a  class="btn btn-ets-do mb-2"
+      *ngIf="this.pending_task.result.result_type === 'value'"
+      role="button"
       (click)="addParameterMode()"
       data-bs-toggle="modal"
       data-bs-target="#extraInformation"
@@ -345,7 +354,7 @@
     </div>
   </div>
 </div>
-<!-- Modal extra Parameter Information -->
+<!-- Modal add parameter -->
 <div
 class="modal fade"
 id="extraInformation"
@@ -370,17 +379,6 @@ aria-hidden="true"
       <div class="row">
         <div class="col">
           <div class="row">
-            <div class="col-5">
-              <label for="method" class="form-label">Method</label>
-              <input
-                name="method"
-                placeholder=""
-                [(ngModel)]="this.method"
-                type="text"
-                class="form-control"
-                id="method"
-              />
-            </div>
             <div class="col">
               <label for="Parameter" class="form-label">Parameter*</label>
               <input
@@ -487,6 +485,112 @@ aria-hidden="true"
         role="button"
         >
         {{ editParameterMode ? 'Update' : 'Add' }}
+      </a>
+       <button
+        type="button"
+        id="btncloseImportTableModal"
+        class="btn btn-ets-bad"
+        data-bs-dismiss="modal"
+      >
+      Close
+      </button> 
+    </div> 
+  </div>
+</div>
+</div>
+
+<!-- add method modal -->
+<div
+class="modal fade"
+id="methodModal"
+tabindex="-1"
+aria-labelledby="methodModal"
+aria-hidden="true"
+>
+<div class="modal-dialog modal-xl">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title fw-bold" id="methodModaLabel">
+        Add new Method
+      </h5>
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="modal"
+        aria-label="Close"
+      ></button>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col">
+          <div class="row">
+            <div class="col">
+              <label for="name" class="form-label">Name</label>
+              <input
+                name="name"
+                placeholder=""
+                [(ngModel)]="this.method.name"
+                type="text"
+                class="form-control"
+                id="name"
+              />
+            </div>
+            <div class="col">
+              <label for="description" class="form-label">Description</label>
+              <input
+                [placeholder]=""
+                [(ngModel)]="this.method.description"
+                type="text"
+                class="form-control"
+                name="description"
+                id="description"
+              />
+            </div>
+            <div class="col">
+              <label for="link" class="form-label">Link</label>
+                  <input
+                    placeholder=""
+                    [(ngModel)]="this.method.link"
+                    type="text"
+                    class="form-control"
+                    name="link"
+                    id="link"
+                  />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label for="sensitivity" class="form-label">Sensitivity</label>
+              <input 
+              [placeholder]=""
+              (keydown)="onlyNumbers($event)"
+              #sensitivityInputRef="ngModel"
+              type="text"
+              name="sensitivity"
+              id="sensitivity"
+              [(ngModel)]="sensitivity"
+              class="form-control"
+              />
+            </div>
+            <div class="col">
+              <label for="sensitivity" class="form-label">Specificity</label>
+              <input type="number" class="form-control" id="specificity" name="specificity" [(ngModel)]="this.method.specificity">
+            </div>
+            <div class="col">
+              <label for="sd" class="form-label">SD</label>
+              <input type="number" class="form-control" id="sd" name="sd" [(ngModel)]="this.method.sd">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+     <div class="modal-footer">
+      <a
+        (click)="addMethod()"
+        class="btn btn-ets-do"
+        role="button"
+        >
+        Add
       </a>
        <button
         type="button"

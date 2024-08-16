@@ -46,3 +46,12 @@ export class User {
   password: string;
   status: boolean = false;
 }
+@Injectable()
+export class Method {
+  name:string;
+  description:string;
+  link:string;
+  sensitivity:number;
+  specificity:number;
+  sd:number;
+}

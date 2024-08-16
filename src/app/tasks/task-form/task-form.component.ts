@@ -3,7 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 import { interval, takeUntil } from 'rxjs';
 import { CommonFunctions } from 'src/app/common.functions';
 import { CommonService } from 'src/app/common.service';
-import { PendingTasks, RA, Results, Global } from 'src/app/globals';
+import { PendingTasks, RA, Results, Global, Method } from 'src/app/globals';
 import { ModelsService } from 'src/app/models.service';
 import { UpdateService } from 'src/app/update.service';
 
@@ -15,6 +15,7 @@ import { UpdateService } from 'src/app/update.service';
 export class TaskFormComponent {
   @ViewChild('DocumentFileInput', { static: false })
   DocumentFileInput: ElementRef;
+  sensitivity:any;
 
   uncertainty;
   idx = undefined;
@@ -24,7 +25,6 @@ export class TaskFormComponent {
   uncertainty_term: string;
   unit: string | number;
   value: string | number;
-  method: string;
   editParameterMode = false;
 
   loadForm: boolean = false;
@@ -38,6 +38,7 @@ export class TaskFormComponent {
   listAllModels: any;
   pending_task_selected_id: String = '';
   listModelsSelected: any = [];
+  listMethods: any= [];
   parameterInserted: boolean = true;
 
   @Input() task: any;
@@ -54,7 +55,8 @@ export class TaskFormComponent {
     private updateService: UpdateService,
     private toastr: ToastrService,
     public global: Global,
-    private modelsService: ModelsService
+    private modelsService: ModelsService,
+    public method:Method
   ) {}
 
   ngOnInit(): void {
@@ -72,7 +74,9 @@ export class TaskFormComponent {
   selectedUncertaintyTerm(target) {
     this.uncertainty_term = target.value;
   }
-  
+  addMethod(){
+    this.listMethods.push({...this.method})
+  }
   deleteParameter(idx) {
     this.model.uncertainties.splice(idx, 1);
     this.model.values.splice(idx, 1);
@@ -193,7 +197,7 @@ export class TaskFormComponent {
   }
   
   /**
-   * Control that the user only enters numbers in the probability field
+   * Control that the user only enters numbers in the  field
    * @param event 
    * @returns 
    */
@@ -209,6 +213,12 @@ export class TaskFormComponent {
     if (/[^0-9.]+$/.test(event.key)) {
       event.preventDefault();
     }
+  }
+
+  invalidSensitivity(): boolean {
+    if(this.sensitivity.length > 0)
+      this.sensitivity = parseFloat(this.sensitivity)
+    return this.sensitivity < 0 || this.sensitivity > 1;
   }
 
   invalidProbability(): boolean {
@@ -273,6 +283,9 @@ export class TaskFormComponent {
       event.preventDefault();
     }
 
+  }
+  openModalMethod(){
+    //clean fields
   }
 
   alertUserAction(){
@@ -382,7 +395,6 @@ export class TaskFormComponent {
   }
 
   resetFieldsParameter() {
-    this.method = '';
     this.unit = '';
     this.value = '';
     this.parameter = '';
@@ -403,7 +415,6 @@ export class TaskFormComponent {
           term: this.uncertainty_term
         }
       }
-
   }
   openModal() {
     this.ModelDocumentation = undefined;

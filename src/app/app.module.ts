@@ -8,7 +8,7 @@ import { AngularSplitModule } from 'angular-split';
 import { AppComponent } from './app.component';
 import { WorkflowComponent } from './workflow/workflow.component';
 import { NotesComponent } from './notes/notes.component';
-import { RA,Global, PendingTasks, Results,User } from './globals';
+import { RA,Global, PendingTasks, Results,User, Method } from './globals';
 import { OverviewComponent } from './overview/overview.component';
 import { GeneralInformationComponent } from './general-information/general-information.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -67,7 +67,7 @@ import { CookieService } from 'ngx-cookie-service';
       },
     })
   ],
-  providers: [CookieService,RA,Global,PendingTasks,Results,User],
+  providers: [CookieService,RA,Global,PendingTasks,Results,User,Method],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
