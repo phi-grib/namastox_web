@@ -28,6 +28,7 @@ import { AutolinkPipePipe } from '../app/autolink-pipe.pipe';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPanZoomModule } from 'ngx-panzoom';
 import { CookieService } from 'ngx-cookie-service';
+import { FilterVersionPipe } from './filter-version.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,7 +46,8 @@ import { CookieService } from 'ngx-cookie-service';
     ModelDocumentationComponent,
     NoteFormComponent,
     ReportComponent,
-    AutolinkPipePipe
+    AutolinkPipePipe,
+    FilterVersionPipe
   ],
   imports: [
     NgbModule,

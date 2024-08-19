@@ -267,7 +267,7 @@
               <tbody>
                 <tr
                   [ngClass]="{ 'selected-row': model === selectedModel }"
-                  *ngFor="let model of this.listAllModels"
+                  *ngFor="let model of this.listAllModels | filterVersion: 0"
                   (click)="getModelDocumentation(model)"
                 >
                   <td>
