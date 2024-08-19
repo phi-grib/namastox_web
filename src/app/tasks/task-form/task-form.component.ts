@@ -126,13 +126,14 @@ export class TaskFormComponent {
         next: (result) => {
           console.log(result)
           for (let idx = 0; idx < result['models'].length; idx++) {
-            const param = {method:result['models'][idx][0],parameter:  result['parameters'][idx][0], value: result['results'][idx], unit: result['units'][idx] };
+            const param = {method:result['models'][idx][0],parameter:  result['parameters'][idx], value: result['results'][idx], unit: result['units'][idx] };
             this.model.values[idx] = param;
             const uncertainty = result['uncertainty'][idx];
             this.model.uncertainties[idx] = {
               uncertainty:uncertainty 
             };
           }
+
           this.closeModal();
           this.toastr.success('PREDICTION DONE', 'SUCCESSFUL PREDICTION', {
             timeOut: 5000,
