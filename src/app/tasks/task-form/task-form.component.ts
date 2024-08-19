@@ -68,7 +68,6 @@ export class TaskFormComponent {
     }, 100);
   }
   addMethod(){
-    this.model.methods = [];
     this.model.methods.push({...this.method})
     this.toastr.success("Successfully Added","")
   }
