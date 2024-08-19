@@ -77,8 +77,10 @@ export class TaskFormComponent {
   }
   editFormParam(idx){
     const { method, parameter, value, unit } = this.model.values[idx];
-    const { uncertainty, p, term } = this.model.uncertainties[idx];
-    Object.assign(this, { method, parameter, value, unit, uncertainty, p, term });
+    const { uncertainty, term } = this.model.uncertainties[idx];
+    Object.assign(this, { method, parameter, value, unit, uncertainty, term });
+
+    
     this.editParameterMode = true;
     this.idx = idx
   }
