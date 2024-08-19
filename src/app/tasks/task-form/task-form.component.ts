@@ -71,6 +71,11 @@ export class TaskFormComponent {
     this.model.methods.push({...this.method})
     this.toastr.success("Successfully Added","")
   }
+
+  deleteMethod(idx){
+    this.model.methods.splice(idx,1)
+  }
+
   deleteParameter(idx) {
     this.model.uncertainties.splice(idx, 1);
     this.model.values.splice(idx, 1);
@@ -124,6 +129,7 @@ export class TaskFormComponent {
       .getPrediction(this.ra.name, listNames, listVersions)
       .subscribe({
         next: (result) => {
+          console.log(result)
           for (let idx = 0; idx < result['models'].length; idx++) {
             const param = {method:result['models'][idx][0],parameter:  result['parameters'][idx], value: result['results'][idx], unit: result['units'][idx] };
             this.model.values.push(param)

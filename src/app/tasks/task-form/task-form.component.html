@@ -45,17 +45,49 @@
         >Predict</a
       >
     </div>
+    <div *ngIf="this.model.methods.length > 0" class="info-values">
+      <table style="width: 100%;;">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Link</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let method of this.model.methods;let i = index">
+            <td>{{method.name}}</td>
+            <td>{{method.description}}</td>
+            <td>{{method.link}}</td>
+            <td>
+              <div class="d-flex">
+                <a (click)="deleteMethod(i)" class="btn btn-ets-delete" role="button"
+                >
+                Delete
+              </a>
+                <button  disabled class="btn btn-ets-do pr-4"
+                >
+                Edit
+            </button>
+              </div>
+          </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <div *ngIf="this.pending_task?.result.result_type === 'value' && this.model.values.length > 0" class="mb-2">
       <div class="info-values">
         <table  style="width: 100%;"  >
           <thead>
             <tr>
+              <th style="width: 10%;">Substance</th>
               <th style="width: 10%;">Method</th>
               <th style="width: 10%;">Parameter</th>
               <th style="width: 10%;">Value</th>
               <th class="text-center" style="width: 5%;">Unit</th>
-              <th class="text-center" style="width: 30%;">Uncertainty</th>
-              <th style="width: 15%;">Term</th>
+              <th class="text-center" style="width: 25%;">Uncertainty</th>
+              <th style="width: 10%;">Term</th>
               <th></th> 
             </tr>
           </thead>
@@ -63,6 +95,7 @@
             <tr
             *ngFor="let value of this.model.values; let i = index"
           >
+          <td>{{this.ra.general_information.general.substances[0].name}}</td>
             <td >{{ value?.method}}</td>
             <td >{{ value?.parameter}}</td>
             <td>{{ value?.value.toString()}}</td>
