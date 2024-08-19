@@ -37,7 +37,6 @@ export class TaskFormComponent {
   listAllModels: any;
   pending_task_selected_id: String = '';
   listModelsSelected: any = [];
-  listMethods: any= [];
   parameterInserted: boolean = true;
 
   @Input() task: any;
@@ -69,7 +68,8 @@ export class TaskFormComponent {
     }, 100);
   }
   addMethod(){
-    this.listMethods.push({...this.method})
+    this.model.methods = [];
+    this.model.methods.push({...this.method})
     this.toastr.success("Successfully Added","")
   }
   deleteParameter(idx) {
@@ -216,6 +216,7 @@ export class TaskFormComponent {
 
 
   onSubmit(event) {
+    console.log( this.model.values)
     this.loadForm = false;
     if (this.report) this.model.values[0] = this.report;
     if(this.model.values.length > 0){
@@ -285,11 +286,12 @@ export class TaskFormComponent {
   }
 
   addNewParameter() {
+    console.log("add new parameter")
     if ((this.parameter && this.value)
     ) {
       if(this.editParameterMode){
       this.model.values[this.idx] = {
-        method: this.method,
+        method: this.method.name,
         parameter: this.parameter,
         value: this.value,
         unit: this.unit,
@@ -305,7 +307,7 @@ export class TaskFormComponent {
       this.addNewUncertainty();
       }else{
         this.model.values.push({
-          method: this.method,
+          method: this.method.name,
           parameter: this.parameter,
           value: this.value,
           unit: this.unit,
