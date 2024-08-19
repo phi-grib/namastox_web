@@ -63,9 +63,10 @@
             <tr
             *ngFor="let value of this.model.values; let i = index"
           >
-            <td >{{ value?.method.name}}</td>
+            <td >{{ value?.method}}</td>
             <td >{{ value?.parameter}}</td>
-            <td>{{ value?.value.toString() | slice : 0 : 6 }}</td>
+            <td>{{ value?.value.toString()}}</td>
+            <!-- <td>{{ value?.value.toString() | slice : 0 : 6 }}</td> -->
             <td class="text-center">{{ value?.unit }}</td>
             <td class="text-center">{{ this.model?.uncertainties[i]?.uncertainty }}</td>
             <td >{{ this.model?.uncertainties[i]?.p }}</td>

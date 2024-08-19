@@ -124,17 +124,13 @@ export class TaskFormComponent {
       .getPrediction(this.ra.name, listNames, listVersions)
       .subscribe({
         next: (result) => {
+          console.log(result)
           for (let idx = 0; idx < result['models'].length; idx++) {
-            const name = result['models'][idx][0] + 'v' + result['models'][idx][1];
-            const val = result['results'][idx];
-            const unit = this.ModelDocumentation['Endpoint_units'];
-            const param = { parameter: name, value: val, unit: unit };
+            const param = {method:result['models'][idx][0],parameter:  result['parameters'][idx][0], value: result['results'][idx], unit: result['units'][idx] };
             this.model.values[idx] = param;
             const uncertainty = result['uncertainty'][idx];
             this.model.uncertainties[idx] = {
-              uncertainty: '',
-              p: uncertainty,
-              term: 'N/A',
+              uncertainty:uncertainty 
             };
           }
           this.closeModal();
