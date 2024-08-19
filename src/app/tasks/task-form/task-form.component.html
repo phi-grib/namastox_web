@@ -497,12 +497,13 @@ aria-hidden="true"
         aria-label="Close"
       ></button>
     </div>
+    <form #methodForm="ngForm">
     <div class="modal-body">
       <div class="row">
         <div class="col">
           <div class="row">
             <div class="col">
-              <label for="name" class="form-label">Name</label>
+              <label for="name" class="form-label">Name*</label>
               <input
                 name="name"
                 placeholder=""
@@ -510,6 +511,7 @@ aria-hidden="true"
                 type="text"
                 class="form-control"
                 id="name"
+                required
               />
             </div>
             <div class="col">
@@ -539,36 +541,42 @@ aria-hidden="true"
             <div class="col">
               <label for="sensitivity" class="form-label">Sensitivity</label>
               <input 
-              [placeholder]=""
-              (keydown)="onlyNumbers($event)"
-              #sensitivityInputRef="ngModel"
-              type="text"
+              type="number"
+              min="0"
+              max="1"
+              step="0.01"
               name="sensitivity"
               id="sensitivity"
-              [(ngModel)]="this.method.sensitivity"
+              [(ngModel)]="method.sensitivity"
               class="form-control"
+              #sensitivityInputRef="ngModel"
               />
             </div>
             <div class="col">
               <label for="sensitivity" class="form-label">Specificity</label>
-              <input type="number" class="form-control" id="specificity" name="specificity" [(ngModel)]="this.method.specificity">
+              
+              <input #specificityInputRef="ngModel"  type="number" min="0" max="1" step="0.01"  class="form-control" id="specificity" name="specificity" [(ngModel)]="this.method.specificity">
             </div>
             <div class="col">
               <label for="sd" class="form-label">SD</label>
-              <input type="number" class="form-control" id="sd" name="sd" [(ngModel)]="this.method.sd">
+              <input type="string" class="form-control" id="sd" name="sd" [(ngModel)]="this.method.sd">
             </div>
+          </div>
+          <div   *ngIf="sensitivityInputRef.invalid || specificityInputRef.invalid " style="font-weight: bold !important;" class="text-warning  mt-2">
+            Sensitivity and Specificity must be between 0 and 1.
           </div>
         </div>
       </div>
     </div>
      <div class="modal-footer">
-      <a
+      <button
+        [disabled]="methodForm.invalid"
         (click)="addMethod()"
         class="btn btn-ets-do"
         role="button"
         >
         Add
-      </a>
+     </button>
        <button
         type="button"
         id="btncloseImportTableModal"
@@ -577,7 +585,8 @@ aria-hidden="true"
       >
       Close
       </button> 
-    </div> 
+    </div>
+  </form> 
   </div>
 </div>
 </div>

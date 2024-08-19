@@ -53,5 +53,5 @@ export class Method {
   link:string;
   sensitivity:number;
   specificity:number;
-  sd:number;
+  sd:string;
 }
