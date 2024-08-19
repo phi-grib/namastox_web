@@ -111,8 +111,6 @@ export class TaskFormComponent {
 
   executePredict() {
     this.resetFieldsUncertainty();
-    this.model.values = [];
-    this.model.uncertainties = [];
     var listNames: any = [];
     var listVersions: any = [];
     for (let idx = 0; idx < this.listModelsSelected.length; idx++) {
@@ -124,14 +122,13 @@ export class TaskFormComponent {
       .getPrediction(this.ra.name, listNames, listVersions)
       .subscribe({
         next: (result) => {
-          console.log(result)
           for (let idx = 0; idx < result['models'].length; idx++) {
             const param = {method:result['models'][idx][0],parameter:  result['parameters'][idx], value: result['results'][idx], unit: result['units'][idx] };
-            this.model.values[idx] = param;
+            this.model.values.push(param)
             const uncertainty = result['uncertainty'][idx];
-            this.model.uncertainties[idx] = {
+            this.model.uncertainties.push({
               uncertainty:uncertainty 
-            };
+            })  
           }
 
           this.closeModal();

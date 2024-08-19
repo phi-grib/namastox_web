@@ -50,11 +50,11 @@
         <table  style="width: 100%;"  >
           <thead>
             <tr>
-              <th style="width: 15%;">Method</th>
-              <th style="width: 15%;">Parameter</th>
-              <th style="width: 15%;">Value</th>
+              <th style="width: 10%;">Method</th>
+              <th style="width: 10%;">Parameter</th>
+              <th style="width: 10%;">Value</th>
               <th class="text-center" style="width: 5%;">Unit</th>
-              <th class="text-center" style="width: 15%;">Uncertainty</th>
+              <th class="text-center" style="width: 30%;">Uncertainty</th>
               <th style="width: 15%;">Term</th>
               <th></th> 
             </tr>
@@ -69,7 +69,6 @@
             <!-- <td>{{ value?.value.toString() | slice : 0 : 6 }}</td> -->
             <td class="text-center">{{ value?.unit }}</td>
             <td class="text-center">{{ this.model?.uncertainties[i]?.uncertainty }}</td>
-            <td >{{ this.model?.uncertainties[i]?.p }}</td>
             <td>{{ this.model?.uncertainties[i]?.term }}</td>
             <td>
               <div class="d-flex">
