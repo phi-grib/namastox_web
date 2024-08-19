@@ -381,9 +381,9 @@ aria-hidden="true"
           <select
           class="form-select"
           id="method"
-          [(ngModel)]="this.method"
+          [(ngModel)]="method"
         >
-          <option *ngFor="let method of this.model.methods" >{{ method.name }}</option>
+          <option *ngFor="let method of this.model.methods"  [ngValue]="method" >{{ method.name }}</option>
         </select>
         </div>
       </div>

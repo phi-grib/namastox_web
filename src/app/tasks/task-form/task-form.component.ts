@@ -281,7 +281,6 @@ export class TaskFormComponent {
   }
 
   addNewParameter() {
-    console.log("add new parameter")
     if ((this.parameter && this.value)
     ) {
       if(this.editParameterMode){
