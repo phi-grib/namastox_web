@@ -136,6 +136,7 @@ export class TaskFormComponent {
       .getPrediction(this.ra.name, listNames, listVersions)
       .subscribe({
         next: (result) => {
+          console.log(result)
           this.addMethod(result['methods']);
           for (let idx = 0; idx < result['models'].length; idx++) {
             const param = {

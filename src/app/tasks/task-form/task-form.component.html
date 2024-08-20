@@ -46,11 +46,14 @@
       >
     </div>
     <div *ngIf="this.model.methods.length > 0" class="info-values">
-      <table style="width: 100%;;">
+      <table style="width: 100%;">
         <thead>
           <tr>
             <th>Name</th>
             <th>Description</th>
+            <th>sensitivity</th>
+            <th>specificity</th>
+            <th>sd</th>
             <th>Link</th>
             <th></th>
           </tr>
@@ -59,6 +62,9 @@
           <tr *ngFor="let method of this.model.methods;let i = index">
             <td>{{method.name}}</td>
             <td>{{method.description}}</td>
+            <td>{{method.sensitivity}}</td>
+            <td>{{method.specificity}}</td>
+            <td>{{method.sd}}</td>
             <td>{{method.link}}</td>
             <td>
               <div class="d-flex">
