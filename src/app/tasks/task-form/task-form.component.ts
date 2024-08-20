@@ -15,7 +15,7 @@ import { UpdateService } from 'src/app/update.service';
 export class TaskFormComponent {
   @ViewChild('DocumentFileInput', { static: false })
   DocumentFileInput: ElementRef;
-  sensitivity:any;
+  sensitivity: any;
 
   uncertainty;
   idx = undefined;
@@ -54,7 +54,7 @@ export class TaskFormComponent {
     private toastr: ToastrService,
     public global: Global,
     private modelsService: ModelsService,
-    public method:Method
+    public method: Method
   ) {}
 
   ngOnInit(): void {
@@ -67,29 +67,36 @@ export class TaskFormComponent {
       this.documents = this.model['links'];
     }, 100);
   }
-  addMethod(){
-    this.model.methods.push({...this.method})
-    this.toastr.success("Successfully Added","")
+  addMethod(predMethods?: []) {
+    if (predMethods) {
+      predMethods.forEach(method => {
+        if (!this.model.methods.some(existingMethod => JSON.stringify(existingMethod) === JSON.stringify(method))) {
+            this.model.methods.push(method);
+        }
+      });
+    } else {
+      this.model.methods.push({ ...this.method });
+    }
+    this.toastr.success('Successfully Added', '');
   }
 
-  deleteMethod(idx){
-    this.model.methods.splice(idx,1)
+  deleteMethod(idx) {
+    this.model.methods.splice(idx, 1);
   }
 
   deleteParameter(idx) {
     this.model.uncertainties.splice(idx, 1);
     this.model.values.splice(idx, 1);
   }
-  editFormParam(idx){
+  editFormParam(idx) {
     const { method, parameter, value, unit } = this.model.values[idx];
     const { uncertainty, term } = this.model.uncertainties[idx];
     Object.assign(this, { method, parameter, value, unit, uncertainty, term });
 
-    
     this.editParameterMode = true;
-    this.idx = idx
+    this.idx = idx;
   }
-  addParameterMode(){
+  addParameterMode() {
     this.editParameterMode = false;
     this.resetFieldsParameter();
     this.resetFieldsUncertainty();
@@ -129,14 +136,19 @@ export class TaskFormComponent {
       .getPrediction(this.ra.name, listNames, listVersions)
       .subscribe({
         next: (result) => {
-          console.log(result)
+          this.addMethod(result['methods']);
           for (let idx = 0; idx < result['models'].length; idx++) {
-            const param = {method:result['models'][idx][0],parameter:  result['parameters'][idx], value: result['results'][idx], unit: result['units'][idx] };
-            this.model.values.push(param)
+            const param = {
+              method: result['models'][idx][0],
+              parameter: result['parameters'][idx],
+              value: result['results'][idx],
+              unit: result['units'][idx],
+            };
+            this.model.values.push(param);
             const uncertainty = result['uncertainty'][idx];
             this.model.uncertainties.push({
-              uncertainty:uncertainty 
-            })  
+              uncertainty: uncertainty,
+            });
           }
 
           this.closeModal();
@@ -189,11 +201,11 @@ export class TaskFormComponent {
   resetFieldsUncertainty() {
     this.uncertainty = '';
   }
-  
+
   /**
    * Control that the user only enters numbers in the  field
-   * @param event 
-   * @returns 
+   * @param event
+   * @returns
    */
   onlyNumbers(event: KeyboardEvent) {
     if (
@@ -210,17 +222,16 @@ export class TaskFormComponent {
   }
 
   invalidSensitivity(): boolean {
-    if(this.sensitivity.length > 0)
-      this.sensitivity = parseFloat(this.sensitivity)
+    if (this.sensitivity.length > 0)
+      this.sensitivity = parseFloat(this.sensitivity);
     return this.sensitivity < 0 || this.sensitivity > 1;
   }
 
-
   onSubmit(event) {
-    console.log( this.model.values)
+    console.log(this.model.values);
     this.loadForm = false;
     if (this.report) this.model.values[0] = this.report;
-    if(this.model.values.length > 0){
+    if (this.model.values.length > 0) {
       setTimeout(() => {
         this.updateService.updateResult(this.ra.name, this.model).subscribe({
           next: (result) => {
@@ -238,10 +249,14 @@ export class TaskFormComponent {
               } else {
                 this.global.editModeTasks = false;
               }
-              this.toastr.success('RA ' + this.ra.name, 'SUCCESSFULLY UPDATED', {
-                timeOut: 5000,
-                positionClass: 'toast-top-right',
-              });
+              this.toastr.success(
+                'RA ' + this.ra.name,
+                'SUCCESSFULLY UPDATED',
+                {
+                  timeOut: 5000,
+                  positionClass: 'toast-top-right',
+                }
+              );
             }
           },
           error: (e) => {
@@ -260,73 +275,58 @@ export class TaskFormComponent {
         //  this.documents = [];
         //  this.report = '';
       }, 300);
-    }else{
+    } else {
       this.alertUserAction();
-      this.toastr.warning(
-        '',
-        'value is required',
-        {
-          timeOut: 5000,
-          positionClass: 'toast-top-right',
-        }
-      );
+      this.toastr.warning('', 'value is required', {
+        timeOut: 5000,
+        positionClass: 'toast-top-right',
+      });
       event.preventDefault();
     }
-
   }
-  openModalMethod(){
+  openModalMethod() {
     //clean fields
   }
 
-  alertUserAction(){
+  alertUserAction() {
     this.isBlinking = true;
     setTimeout(() => {
-      this.isBlinking = !this.isBlinking
+      this.isBlinking = !this.isBlinking;
     }, 4000);
-
   }
 
   addNewParameter() {
-    if ((this.parameter && this.value)
-    ) {
-      if(this.editParameterMode){
-      this.model.values[this.idx] = {
-        method: this.method.name,
-        parameter: this.parameter,
-        value: this.value,
-        unit: this.unit,
-      }
-      this.toastr.success(
-        '',
-        'Updated Successfully',
-        {
+    if (this.parameter && this.value) {
+      if (this.editParameterMode) {
+        this.model.values[this.idx] = {
+          method: this.method.name,
+          parameter: this.parameter,
+          value: this.value,
+          unit: this.unit,
+        };
+        this.toastr.success('', 'Updated Successfully', {
           timeOut: 5000,
           positionClass: 'toast-top-right',
-        }
-      );
-      this.addNewUncertainty();
-      }else{
+        });
+        this.addNewUncertainty();
+      } else {
         this.model.values.push({
           method: this.method.name,
           parameter: this.parameter,
           value: this.value,
           unit: this.unit,
         });
-        this.toastr.success(
-          '',
-          'Added Successfully',
-          {
-            timeOut: 5000,
-            positionClass: 'toast-top-right',
-          }
-        );
+        this.toastr.success('', 'Added Successfully', {
+          timeOut: 5000,
+          positionClass: 'toast-top-right',
+        });
         this.addNewUncertainty();
         this.resetFieldsParameter();
         this.resetFieldsUncertainty();
       }
-        this.parameterInserted = true;
-    }else{
-      this.parameterInserted = false
+      this.parameterInserted = true;
+    } else {
+      this.parameterInserted = false;
     }
   }
 
@@ -353,18 +353,18 @@ export class TaskFormComponent {
   }
 
   addNewUncertainty() {
-      if(!this.editParameterMode){
-        var positionParameter = this.model.values.length - 1;
-        this.model.uncertainties[positionParameter] = {
-          uncertainty: this.uncertainty,
-          term: this.uncertainty_term,
-        };
-      }else{
-        this.model.uncertainties[this.idx] = {
-          uncertainty: this.uncertainty,
-          term: this.uncertainty_term
-        }
-      }
+    if (!this.editParameterMode) {
+      var positionParameter = this.model.values.length - 1;
+      this.model.uncertainties[positionParameter] = {
+        uncertainty: this.uncertainty,
+        term: this.uncertainty_term,
+      };
+    } else {
+      this.model.uncertainties[this.idx] = {
+        uncertainty: this.uncertainty,
+        term: this.uncertainty_term,
+      };
+    }
   }
   openModal() {
     this.ModelDocumentation = undefined;
@@ -382,46 +382,42 @@ export class TaskFormComponent {
       },
     });
   }
-  importTable(event){
+  importTable(event) {
     this.model['input_file'] = event.target.files[0];
-    this.updateService.updateTable(this.ra.name,this.model['input_file']).subscribe({
-      next: (result) => {
-        console.log("result:")
-        console.log(result)
-        if(result['success']){
-          
-          this.model.values = result['values']
-          this.model.uncertainties = result['uncertainties']
-          this.toastr.success(
-            '',
-            'SUCCESSFULLY IMPORTED',
-            {
+    this.updateService
+      .updateTable(this.ra.name, this.model['input_file'])
+      .subscribe({
+        next: (result) => {
+          console.log('result:');
+          console.log(result);
+          if (result['success']) {
+            this.model.values = result['values'];
+            this.model.uncertainties = result['uncertainties'];
+            this.toastr.success('', 'SUCCESSFULLY IMPORTED', {
               timeOut: 5000,
               positionClass: 'toast-top-right',
-            }
-          );
-          document.getElementById('btncloseImportTableModal').click();
-        }
-      },
-      error: (e) => { 
-        console.log(e)
-        this.toastr.error(
-          '',
-          e['error'].error,
-          {
-            timeOut:6000,
-            positionClass: 'toast-top-right'
+            });
+            document.getElementById('btncloseImportTableModal').click();
           }
-        );
-      }
-    })
+        },
+        error: (e) => {
+          console.log(e);
+          this.toastr.error('', e['error'].error, {
+            timeOut: 6000,
+            positionClass: 'toast-top-right',
+          });
+        },
+      });
   }
-  setLabelDocumentName(documentName){
-    let docNameWithoutExtension = documentName.split('.').slice(0, -1).join('.');
+  setLabelDocumentName(documentName) {
+    let docNameWithoutExtension = documentName
+      .split('.')
+      .slice(0, -1)
+      .join('.');
     return docNameWithoutExtension;
   }
 
-  addDocument(){
+  addDocument() {
     if (this.labelFile && this.model['result_link']) {
       this.updateService
         .updateLink(this.ra.name, this.model['result_link'])
@@ -438,7 +434,7 @@ export class TaskFormComponent {
             this.documents.push({
               label: this.labelFile,
               File: this.model['result_link'].name,
-              include: this.includeDoc
+              include: this.includeDoc,
             });
             this.model['links'] = this.documents;
             this.labelFile = '';
@@ -462,7 +458,7 @@ export class TaskFormComponent {
 
   sendlink(event) {
     this.model['result_link'] = event.target.files[0];
-    this.labelFile = this.setLabelDocumentName(event.target.files[0].name)
+    this.labelFile = this.setLabelDocumentName(event.target.files[0].name);
   }
 
   deleteFile(label) {
