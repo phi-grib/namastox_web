@@ -25,6 +25,7 @@ export class TaskFormComponent {
   unit: string | number;
   value: string | number;
   editParameterMode = false;
+  listMols  = [];
 
   loadForm: boolean = false;
   pending_task: any;
@@ -77,6 +78,7 @@ export class TaskFormComponent {
     } else {
       this.model.methods.push({ ...this.method });
     }
+    console.log(this.model.methods)
     this.toastr.success('Successfully Added', '');
   }
 
@@ -136,7 +138,6 @@ export class TaskFormComponent {
       .getPrediction(this.ra.name, listNames, listVersions)
       .subscribe({
         next: (result) => {
-          console.log(result)
           this.addMethod(result['methods']);
           for (let idx = 0; idx < result['models'].length; idx++) {
             const param = {
@@ -144,6 +145,7 @@ export class TaskFormComponent {
               parameter: result['parameters'][idx],
               value: result['results'][idx],
               unit: result['units'][idx],
+              molname: result['molnames'][idx]
             };
             this.model.values.push(param);
             const uncertainty = result['uncertainty'][idx];
