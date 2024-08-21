@@ -25,7 +25,6 @@ export class TaskFormComponent {
   unit: string | number;
   value: string | number;
   editParameterMode = false;
-  listMols  = [];
 
   loadForm: boolean = false;
   pending_task: any;
@@ -89,8 +88,6 @@ export class TaskFormComponent {
   deleteParameter(idx) {
     this.model.uncertainties.splice(idx, 1);
     this.model.values.splice(idx, 1);
-    this.listMols.splice(idx,1)
- 
   }
   editFormParam(idx) {
     const { method, parameter, value, unit } = this.model.values[idx];
@@ -147,6 +144,7 @@ export class TaskFormComponent {
               parameter: result['parameters'][idx],
               value: result['results'][idx],
               unit: result['units'][idx],
+              molname: result['molnames'][idx]
             };
             this.model.values.push(param);
             const uncertainty = result['uncertainty'][idx];
@@ -154,9 +152,6 @@ export class TaskFormComponent {
               uncertainty: uncertainty,
             });
           }
-        result['molnames'].forEach(mol => {
-          this.listMols.push(mol)
-         });
           this.closeModal();
           this.toastr.success('PREDICTION DONE', 'SUCCESSFUL PREDICTION', {
             timeOut: 5000,
@@ -315,7 +310,6 @@ export class TaskFormComponent {
         });
         this.addNewUncertainty();
       } else {
-        this.listMols.push('')
         this.model.values.push({
           method: this.method.name,
           parameter: this.parameter,

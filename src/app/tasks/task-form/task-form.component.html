@@ -101,7 +101,7 @@
             <tr
             *ngFor="let value of this.model.values; let i = index"
           >
-          <td>{{this.listMols[i]}}</td>
+          <td>{{value?.molname}}</td>
             <td >{{ value?.method}}</td>
             <td >{{ value?.parameter}}</td>
             <td>{{ value?.value.toString()}}</td>
