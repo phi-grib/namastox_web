@@ -68,14 +68,14 @@
             <td>{{method.link}}</td>
             <td>
               <div class="d-flex">
-                <button (click)="deleteMethod(i)" [disabled]="listEditableMethods[i]" class="btn btn-ets-delete" role="button"
+                <button (click)="deleteMethod(i)" *ngIf="!listEditableMethods[i]" class="btn btn-ets-delete" role="button"
                 >
                 Delete
               </button>
-                <button  [disabled]="listEditableMethods[i]" class="btn btn-ets-do pr-4"
+                <a  *ngIf="!listEditableMethods[i]" class="btn btn-ets-do pr-4"
                 >
                 Edit
-            </button>
+            </a>
               </div>
           </td>
           </tr>
@@ -101,7 +101,7 @@
             <tr
             *ngFor="let value of this.model.values; let i = index"
           >
-          <td>{{value?.molname}}</td>
+          <td>{{value?.substance}}</td>
             <td >{{ value?.method}}</td>
             <td >{{ value?.parameter}}</td>
             <td>{{ value?.value.toString()}}</td>

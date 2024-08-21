@@ -147,7 +147,7 @@ export class TaskFormComponent {
               parameter: result['parameters'][idx],
               value: result['results'][idx],
               unit: result['units'][idx],
-              molname: result['molnames'][idx]
+              substance: result['molnames'][idx]
             };
             this.model.values.push(param);
             const uncertainty = result['uncertainty'][idx];
