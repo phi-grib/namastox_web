@@ -16,7 +16,7 @@ export class TaskFormComponent {
   @ViewChild('DocumentFileInput', { static: false })
   DocumentFileInput: ElementRef;
   sensitivity: any;
-
+  isLoading: boolean = undefined;
   uncertainty;
   idx = undefined;
   selectedModel: any;
@@ -128,6 +128,7 @@ export class TaskFormComponent {
   }
 
   executePredict() {
+    this.isLoading = true;
     this.resetFieldsUncertainty();
     var listNames: any = [];
     var listVersions: any = [];
@@ -140,6 +141,7 @@ export class TaskFormComponent {
       .getPrediction(this.ra.name, listNames, listVersions)
       .subscribe({
         next: (result) => {
+          this.isLoading = false;
           this.addMethod(result['methods']);
           for (let idx = 0; idx < result['models'].length; idx++) {
             const param = {

@@ -287,6 +287,11 @@
           ></button>
         </div>
         <div class="modal-body row">
+          <div *ngIf="isLoading" class="loading-overlay">
+            <div class="spinner-border"  style="width: 10rem; height: 10rem;" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
           <div *ngIf="!this.listAllModels" class="alert p-2 alert-warning" role="alert">
             No models available
           </div>
@@ -631,3 +636,4 @@ aria-hidden="true"
 </div>
 
 </div>
+
