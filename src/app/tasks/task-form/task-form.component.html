@@ -68,11 +68,11 @@
             <td>{{method.link}}</td>
             <td>
               <div class="d-flex">
-                <a (click)="deleteMethod(i)" class="btn btn-ets-delete" role="button"
+                <button (click)="deleteMethod(i)" [disabled]="listEditableMethods[i]" class="btn btn-ets-delete" role="button"
                 >
                 Delete
-              </a>
-                <button  disabled class="btn btn-ets-do pr-4"
+              </button>
+                <button  [disabled]="listEditableMethods[i]" class="btn btn-ets-do pr-4"
                 >
                 Edit
             </button>

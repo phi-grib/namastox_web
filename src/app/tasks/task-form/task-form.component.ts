@@ -25,6 +25,7 @@ export class TaskFormComponent {
   unit: string | number;
   value: string | number;
   editParameterMode = false;
+  listEditableMethods = [];
 
   loadForm: boolean = false;
   pending_task: any;
@@ -71,10 +72,12 @@ export class TaskFormComponent {
     if (predMethods) {
       predMethods.forEach(method => {
         if (!this.model.methods.some(existingMethod => JSON.stringify(existingMethod) === JSON.stringify(method))) {
+          this.listEditableMethods.push(true)
             this.model.methods.push(method);
         }
       });
     } else {
+      this.listEditableMethods.push(false)
       this.model.methods.push({ ...this.method });
     }
 
