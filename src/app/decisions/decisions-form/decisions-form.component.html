@@ -225,9 +225,7 @@
               <tr>
                 <th>Upstream task</th>
                 <th>Result</th>
-                <th>Variability / notes</th>
-                <th>Uncertainty(text)</th>
-                <th>Uncertainty(p)</th>
+                <th>Method</th>
               </tr>
             </thead>
             <tbody>
@@ -247,27 +245,37 @@
                         <th>Parameter</th>
                         <th>Value</th>
                         <th>Unit</th>
+                        <th>Uncertainty</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr *ngFor="let value of this.upstream_tasks[idx].values">
+                      <tr *ngFor="let value of this.upstream_tasks[idx].values;let i = index">
                         <td>{{ this.value.parameter }}</td>
                         <td>{{ this.value.value }}</td>
                         <td>{{ this.value.unit }}</td>
+                        <td>{{ this.upstream_tasks[idx].uncertainties[i].uncertainty }}</td>
                       </tr>
                     </tbody>
                   </table>
                 </td>
-                <ng-container
-                  *ngFor="
-                    let value of this.upstream_tasks[idx].uncertainties;
-                    let i = index
-                  "
-                >
-                  <td>{{ value.uncertainty }}</td>
-                  <td>{{ value.term }}</td>
-                  <td>{{ value.p }}</td>
-                </ng-container>
+                <td >
+                    <table>
+                      <thead>
+                        <th>Name</th>
+                        <th>Specificity</th>
+                        <th>Sensitivity</th>
+                        <th>SD</th>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor=" let method of this.upstream_tasks[idx].methods">
+                          <td>{{this.method.name}}</td>
+                          <td>{{this.method.specificity}}</td>
+                          <td>{{this.method.sensitivity}}</td>
+                          <td>{{this.method.sd}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                </td>
               </tr>
             </tbody>
           </table>
