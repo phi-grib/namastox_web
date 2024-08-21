@@ -45,7 +45,7 @@
         >Predict</a
       >
     </div>
-    <div *ngIf="this.model.methods.length > 0" class="info-values">
+    <div *ngIf="this.pending_task?.result.result_type === 'value' && this.model.methods.length > 0" class="info-values">
       <table style="width: 100%;">
         <thead>
           <tr>
