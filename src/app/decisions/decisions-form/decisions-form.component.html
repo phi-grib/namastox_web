@@ -252,7 +252,8 @@
                     <tbody>
                       <tr *ngFor="let value of this.upstream_tasks[idx].values;let i = index">
                         <td>{{ this.value.parameter }}</td>
-                        <td>{{ this.value.value }}</td>
+                        <td *ngIf="['positive', 'negative', 'uncertain'].includes(this.value.value)">{{ this.value.value }}</td>
+                        <td *ngIf="!['positive', 'negative', 'uncertain'].includes(this.value.value)">{{this.value.value |  number:'1.3-3'}}</td>
                         <td>{{ this.value.unit }}</td>
                         <td>{{ this.upstream_tasks[idx].uncertainties[i].uncertainty }}</td>
                       </tr>
