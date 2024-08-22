@@ -150,7 +150,7 @@
                       <td>{{ result.summary | slice : 0 : 150 }}...</td>
                       <td *ngIf="isObject(result.values[0]); else reportTD">
                         {{ result.values[0].parameter }},{{
-                          result.values[0].value
+                          result.values[0].value 
                         }},{{ result.values[0].unit }}
                         <span *ngIf="result.values.length > 0">...</span>
                       </td>
@@ -317,7 +317,7 @@
                             {{
                               this.results.resultSelected.result.values[
                                 idx
-                              ].value.toString()
+                              ].value | truncateDecimals
                             }}
                           </td>
                           <td>
