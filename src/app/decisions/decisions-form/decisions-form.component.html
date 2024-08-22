@@ -232,15 +232,17 @@
               <tr *ngFor="let idx of objectKeys(this.upstream_tasks)">
                 <td>{{ this.upstream_tasks[idx].name }}</td>
                 <td
+                style="width: 700px !important;"
                   *ngIf="isReportOrParameters(this.upstream_tasks[idx].values)"
                 >
                   {{ this.upstream_tasks[idx].values }}
                 </td>
                 <td
                 style="padding: 0px !important;"
+                class="text-justify"
                   *ngIf="!isReportOrParameters(this.upstream_tasks[idx].values)"
                 >
-                  <table style="width: 100% !important;" class="table table-borderless">
+                  <table style="width: 700px !important;" class="table table-borderless">
                     <thead>
                       <tr>
                         <th style="width: 15% !important;">Parameter</th>
