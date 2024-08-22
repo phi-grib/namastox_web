@@ -240,13 +240,13 @@
                 style="padding: 0px !important;"
                   *ngIf="!isReportOrParameters(this.upstream_tasks[idx].values)"
                 >
-                  <table class="table table-borderless">
+                  <table style="width: 100% !important;" class="table table-borderless">
                     <thead>
                       <tr>
-                        <th>Parameter</th>
-                        <th>Value</th>
-                        <th>Unit</th>
-                        <th>Uncertainty</th>
+                        <th style="width: 15% !important;">Parameter</th>
+                        <th style="width: 15% !important;">Value</th>
+                        <th style="width: 10% !important;">Unit</th>
+                        <th style="width:55% !important;">Uncertainty</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -261,12 +261,12 @@
                   </table>
                 </td>
                 <td >
-                    <table style="width: 400px !important;"  class="table table-borderless">
+                    <table style="width: 600px !important;"  class="table table-borderless">
                       <thead>
-                        <th>Name</th>
-                        <th>Specificity</th>
-                        <th>Sensitivity</th>
-                        <th>SD</th>
+                        <th style="width: 15% !important;">Name</th>
+                        <th style="width: 15% !important;"> Specificity</th>
+                        <th style="width: 10% !important;">Sensitivity</th>
+                        <th style="width: 55% !important;">SD</th>
                       </thead>
                       <tbody>
                         <tr *ngFor=" let method of this.upstream_tasks[idx].methods">
