@@ -261,19 +261,19 @@
                   </table>
                 </td>
                 <td >
-                    <table style="width: 600px !important;"  class="table table-borderless">
+                    <table style="width: 400px !important;"  class="table table-borderless">
                       <thead>
-                        <th style="width: 15% !important;">Name</th>
-                        <th style="width: 15% !important;"> Specificity</th>
-                        <th style="width: 10% !important;">Sensitivity</th>
-                        <th style="width: 55% !important;">SD</th>
+                        <th  style="width: 25% !important;">Name</th>
+                        <th   style="width: 25% !important;"> Specificity</th>
+                        <th  style="width: 25% !important;">Sensitivity</th>
+                        <th  style="width: 25% !important;">SD</th>
                       </thead>
                       <tbody>
                         <tr *ngFor=" let method of this.upstream_tasks[idx].methods">
                           <td>{{this.method.name}}</td>
                           <td>{{this.method.specificity}}</td>
                           <td>{{this.method.sensitivity}}</td>
-                          <td>{{this.method.sd}}</td>
+                          <td >{{this.method.sd}}</td>
                         </tr>
                       </tbody>
                     </table>
