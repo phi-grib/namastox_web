@@ -29,6 +29,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPanZoomModule } from 'ngx-panzoom';
 import { CookieService } from 'ngx-cookie-service';
 import { FilterVersionPipe } from './filter-version.pipe';
+import { TruncateDecimalsPipe } from './truncate-decimals.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +48,8 @@ import { FilterVersionPipe } from './filter-version.pipe';
     NoteFormComponent,
     ReportComponent,
     AutolinkPipePipe,
-    FilterVersionPipe
+    FilterVersionPipe,
+    TruncateDecimalsPipe
   ],
   imports: [
     NgbModule,
