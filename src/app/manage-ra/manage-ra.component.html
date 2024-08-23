@@ -13,8 +13,6 @@
     (click)="duplicateRA()"
     type="button"
     class="btn btn-ets-do"
-    data-bs-toggle="modal"
-    data-bs-target="#newRA"
   >
     Duplicate RA
   </button>
@@ -52,9 +50,19 @@
     >
       Export RA
     </button>
+    <button
+    (click)="showConfModal()"
+    type="button"
+    class="btn btn-ets-bad"
+    data-bs-toggle="modal"
+    data-bs-target="#confModal"
+  >
+    Configure
+  </button>
   </div>
     <span class="version-text" >v0.4.0</span>
 </div>
+<!-- new ra modal -->
 <div
   class="modal fade"
   id="newRA"
@@ -105,6 +113,43 @@
           (click)="newRA()"
         >
           Create
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- conf models modal -->
+<div
+  class="modal fade"
+  id="confModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="newModalLabel"
+  aria-hidden="false"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="newModalLabel">Configure</h5>
+        <button
+          class="btn btn-danger btn-sm"
+          data-bs-dismiss="modal"
+          aria-label="Cancel"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <button class="btn btn-ets-do">Import Model</button>
+          <button class="btn btn-ets-delete">Delete Model</button>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-nam-bad" data-bs-dismiss="modal">
+          Cancel
         </button>
       </div>
     </div>

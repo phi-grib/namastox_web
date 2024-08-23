@@ -10,7 +10,7 @@ import { ManageRAsService } from '../manage-ras.service';
   templateUrl: './manage-ra.component.html',
   styleUrls: ['./manage-ra.component.scss'],
 })
-export class ManageRaComponent  implements AfterViewInit{
+export class ManageRaComponent implements AfterViewInit {
   newRAname: string = '';
   @ViewChild('nameRAinput') nameRAinput: ElementRef;
   @ViewChild('fileInput') fileInput;
@@ -24,14 +24,13 @@ export class ManageRaComponent  implements AfterViewInit{
     private manageRA: ManageRAsService
   ) {}
 
-  duplicateRA(){
-console.log("duplicate RA")
+  duplicateRA() {
+    console.log('duplicate RA');
   }
-
-
-  ngAfterViewInit() {
+  showConfModal() {
     
   }
+  ngAfterViewInit() {}
   newRA() {
     this.manageRA.createRA(this.newRAname).subscribe({
       next: (result) => {
@@ -54,16 +53,16 @@ console.log("duplicate RA")
         this.toastr.error(
           e.error,
           e.statusText,
-           
+
           {
             timeOut: 5000,
             positionClass: 'toast-top-right',
           }
         );
-      }
+      },
     });
   }
-  
+
   focus(): void {
     setTimeout(() => {
       this.nameRAinput.nativeElement.focus();
@@ -134,7 +133,7 @@ console.log("duplicate RA")
     document.getElementById('fileinput').click();
   }
   handleFile($event) {
-    console.log()
+    console.log();
     const file = $event.target.files[0];
     const ra_name = file.name.split('.')[0];
     this.manageRA.importRA(file).subscribe(
@@ -163,7 +162,7 @@ console.log("duplicate RA")
       }
     );
   }
-  resetFileInput(){
+  resetFileInput() {
     if (this.fileInput && this.fileInput.nativeElement) {
       this.fileInput.nativeElement.value = '';
     }
