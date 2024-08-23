@@ -16,6 +16,7 @@ export class ManageRaComponent implements AfterViewInit {
   @ViewChild('nameRAinput') nameRAinput: ElementRef;
   @ViewChild('fileInput') fileInput;
   modelFile;
+  isLoading: boolean = undefined;
 
   constructor(
     private toastr: ToastrService,
@@ -26,24 +27,29 @@ export class ManageRaComponent implements AfterViewInit {
     private manageRA: ManageRAsService,
     private updateService: UpdateService
   ) {}
-  confirmImportModel(){
-    console.log("confirmImportModel")
-    this.updateService.importModel(this.modelFile).subscribe( result=> {
-      console.log(result)
-    }, error=> {
-      console.log(error)
-    })
+  confirmImportModel() {
+    this.isLoading = true;
+    this.updateService.importModel(this.modelFile).subscribe(
+      (result) => {
+        if (result['success']) {
+          this.toastr.success(result['message'], '');
+        }
+        this.isLoading = false;
+      },
+      (error) => {
+        this.isLoading = false;
+        console.log(error);
+      }
+    );
   }
-  selectModelFile(event){
-    this.modelFile = event.target.files[0]
+  selectModelFile(event) {
+    this.modelFile = event.target.files[0];
   }
 
   duplicateRA() {
     console.log('duplicate RA');
   }
-  showConfModal() {
-    
-  }
+  showConfModal() {}
   ngAfterViewInit() {}
   newRA() {
     this.manageRA.createRA(this.newRAname).subscribe({
