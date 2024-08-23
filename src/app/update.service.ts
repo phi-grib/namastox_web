@@ -16,6 +16,13 @@ export class UpdateService {
     return this.http.put(url, formData);
   }
 
+  importModel(file:any){
+    const formData = new FormData();
+    formData.append('file', file);
+    const url: string = environment.baseUrl+"import_model"
+    return this.http.post(url,formData) 
+  }
+
   updateResult(ra_name: string, info: any) {
     const formData = new FormData();
     formData.append('result', JSON.stringify(info));

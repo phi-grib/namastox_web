@@ -4,6 +4,7 @@ import { CommonFunctions } from '../common.functions';
 import { CommonService } from '../common.service';
 import { Global, PendingTasks, RA, Results } from '../globals';
 import { ManageRAsService } from '../manage-ras.service';
+import { UpdateService } from '../update.service';
 
 @Component({
   selector: 'app-manage-ra',
@@ -14,6 +15,7 @@ export class ManageRaComponent implements AfterViewInit {
   newRAname: string = '';
   @ViewChild('nameRAinput') nameRAinput: ElementRef;
   @ViewChild('fileInput') fileInput;
+  modelFile;
 
   constructor(
     private toastr: ToastrService,
@@ -21,8 +23,20 @@ export class ManageRaComponent implements AfterViewInit {
     public ra: RA,
     private commonService: CommonService,
     private func: CommonFunctions,
-    private manageRA: ManageRAsService
+    private manageRA: ManageRAsService,
+    private updateService: UpdateService
   ) {}
+  confirmImportModel(){
+    console.log("confirmImportModel")
+    this.updateService.importModel(this.modelFile).subscribe( result=> {
+      console.log(result)
+    }, error=> {
+      console.log(error)
+    })
+  }
+  selectModelFile(event){
+    this.modelFile = event.target.files[0]
+  }
 
   duplicateRA() {
     console.log('duplicate RA');
