@@ -38,8 +38,8 @@ export class ManageRaComponent implements AfterViewInit {
         this.isLoading = false;
       },
       (error) => {
+        this.toastr.error(error.error.message,'')
         this.isLoading = false;
-        console.log(error);
       }
     );
   }
