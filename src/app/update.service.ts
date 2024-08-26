@@ -50,4 +50,9 @@ export class UpdateService {
     return this.http.put(url, formData);
   }
 
+  updateModelsRepo(path:string){
+    let encodeUrl = encodeURI(path)
+    const url: string = environment.baseUrl + "newrepo/"+encodeUrl;
+    return this.http.get(url);
+  }
 }

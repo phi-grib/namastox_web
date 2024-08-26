@@ -148,9 +148,17 @@
           (change)="selectModelFile($event)"
           placeholder=""
           type="file"
-          class="form-control text-center"
+          class="form-control"
         />
         </div>
+        <div class="d-flex mt-2 flex-row align-items-stretch">
+          <button (click)="changeModelRepo()"  class="btn btn-ets-do">
+            Change Repo
+          </button>
+          <input placeholder="Introduce new repository path"   style="width: 600px"  class="form-control" type="text" [(ngModel)]="newRepo">
+        </div>
+
+
         <div *ngIf="isLoading" class="loading-overlay">
           <div class="spinner-border"  style="width: 10rem; height: 10rem;" role="status">
             <span class="visually-hidden">Loading...</span>

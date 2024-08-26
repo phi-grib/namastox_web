@@ -17,6 +17,7 @@ export class ManageRaComponent implements AfterViewInit {
   @ViewChild('fileInput') fileInput;
   modelFile;
   isLoading: boolean = undefined;
+  newRepo: string = '';
 
   constructor(
     private toastr: ToastrService,
@@ -44,6 +45,17 @@ export class ManageRaComponent implements AfterViewInit {
   }
   selectModelFile(event) {
     this.modelFile = event.target.files[0];
+  }
+
+  changeModelRepo(){
+    this.updateService.updateModelsRepo(this.newRepo).subscribe(result => {
+      if(result['success']){
+        this.toastr.success('Repository updated successfully','')
+      }
+    }, error => {
+      console.log(error)
+      this.toastr.error(error.error,'')
+    })
   }
 
   duplicateRA() {
