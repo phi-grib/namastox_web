@@ -45,8 +45,11 @@
         >Predict</a
       >
     </div>
-    <div *ngIf="this.pending_task?.result.result_type === 'value' && this.model.methods.length > 0" class="info-values">
-      <table style="width: 100%;">
+    <div class="mt-1" *ngIf="this.pending_task?.result.result_type === 'value' && this.model.methods.length > 0">
+      <div class="table-header">
+        Methods
+      </div>
+      <table class="table table-bordered" style="width: 100%;">
         <thead>
           <tr>
             <th style="width: 10%;">Name</th>
@@ -83,8 +86,10 @@
       </table>
     </div>
     <div *ngIf="this.pending_task?.result.result_type === 'value' && this.model.values.length > 0" class="mb-2">
-      <div class="info-values">
-        <table  style="width: 100%;"  >
+      <div class="table-header">
+        Values
+      </div>
+        <table class="table table-bordered" style="width: 100%;"  >
           <thead>
             <tr>
               <th style="width: 10%;">Substance</th>
@@ -126,7 +131,6 @@
           </tr>
           </tbody>
         </table>
-      </div>
     </div>
     <div
       *ngIf="this.pending_task.result.result_type === 'text'"
