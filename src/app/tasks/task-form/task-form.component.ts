@@ -68,6 +68,7 @@ export class TaskFormComponent {
       this.documents = this.model['links'];
     }, 100);
   }
+  
   addMethod(predMethods?: []) {
     if (predMethods) {
       predMethods.forEach(method => {
@@ -290,7 +291,13 @@ export class TaskFormComponent {
     }
   }
   openModalMethod() {
-    //clean fields
+    //clean fields when user open again the method modal
+    this.method.name='';
+    this.method.description = '';
+    this.method.link = '';
+    this.method.sensitivity = undefined;
+    this.method.specificity = undefined;
+    this.method.sd = '';
   }
 
   alertUserAction() {
