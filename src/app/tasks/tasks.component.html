@@ -246,10 +246,14 @@
                     Report
                   </div>
                   <div class="col border-bottom">
-                    <div class="table-header">
+                    <div    *ngIf="
+                    this.results.resultSelected.result.result_type != 'text'
+                  " class="table-header">
                       Methods
                     </div>
-                    <table style="width: 100% !important;" class="table table-bordered">
+                    <table *ngIf="
+                    this.results.resultSelected.result.result_type != 'text'
+                  " style="width: 100% !important;" class="table table-bordered">
                       <thead class="text">
                         <tr>
                           <th style="width: 10%;">Name</th>
@@ -274,7 +278,9 @@
                       </tbody>
 
                     </table>
-                    <div class="table-header">
+                    <div   *ngIf="
+                    isObject(this.results.resultSelected.result.values[0])
+                  " class="table-header">
                       Values
                     </div>
                     <table
