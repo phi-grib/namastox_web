@@ -96,10 +96,10 @@
               <th style="width: 10%;">Method</th>
               <th style="width: 10%;">Parameter</th>
               <th style="width: 10%;">Value</th>
-              <th class="text-center" style="width: 5%;">Unit</th>
-              <th class="text-center" style="width: 25%;">Uncertainty</th>
+              <th  style="width: 5%;">Unit</th>
+              <th  style="width: 25%;">Uncertainty</th>
               <th style="width: 10%;">Term</th>
-              <th></th> 
+              <th  style="width: 5%;"></th> 
             </tr>
           </thead>
           <tbody>
@@ -111,8 +111,8 @@
             <td >{{ value?.parameter}}</td>
             <td>{{ value?.value.toString()}}</td>
             <!-- <td>{{ value?.value.toString() | slice : 0 : 6 }}</td> -->
-            <td class="text-center">{{ value?.unit }}</td>
-            <td class="text-center">{{ this.model?.uncertainties[i]?.uncertainty }}</td>
+            <td>{{ value?.unit }}</td>
+            <td>{{ this.model?.uncertainties[i]?.uncertainty }}</td>
             <td>{{ this.model?.uncertainties[i]?.term }}</td>
             <td>
               <div class="d-flex">
