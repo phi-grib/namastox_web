@@ -225,7 +225,6 @@
               <tr>
                 <th>Upstream task</th>
                 <th>Result</th>
-                <th>Method</th>
               </tr>
             </thead>
             <tbody>
@@ -242,13 +241,17 @@
                 class="text-justify"
                   *ngIf="!isReportOrParameters(this.upstream_tasks[idx].values)"
                 >
-                  <table style="width: 700px !important;" class="table table-borderless">
+                  <table style="width: 100% !important;" class="table table-borderless">
                     <thead>
                       <tr>
-                        <th style="width: 15% !important;">Parameter</th>
-                        <th style="width: 15% !important;">Value</th>
-                        <th style="width: 10% !important;">Unit</th>
-                        <th style="width:55% !important;">Uncertainty</th>
+                        <th style="width: 10%;">Parameter</th>
+                        <th style="width: 10%;">Value</th>
+                        <th style="width: 10%;">Unit</th>
+                        <th style="width: 35%;">Uncertainty</th>
+                        <th style="width: 10%;">Method</th>
+                        <th style="width: 10%;">Specificity</th>
+                        <th style="width: 10%;">Sensitivity</th>
+                        <th style="width: 5%;">SD</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -257,27 +260,13 @@
                         <td>{{ this.value.value | truncateDecimals }}</td>
                         <td>{{ this.value.unit }}</td>
                         <td>{{ this.upstream_tasks[idx].uncertainties[i].uncertainty }}</td>
+                        <td>{{this.upstream_tasks[idx].methods[i]?.name}}</td>
+                        <td>{{this.upstream_tasks[idx].methods[i]?.specificity}}</td>
+                        <td>{{this.upstream_tasks[idx].methods[i]?.sensitivity}}</td>
+                        <td>{{this.upstream_tasks[idx].methods[i]?.sd}}</td>
                       </tr>
                     </tbody>
                   </table>
-                </td>
-                <td >
-                    <table style="width: 400px !important;"  class="table table-borderless">
-                      <thead>
-                        <th  style="width: 25% !important;">Name</th>
-                        <th   style="width: 25% !important;"> Specificity</th>
-                        <th  style="width: 25% !important;">Sensitivity</th>
-                        <th  style="width: 25% !important;">SD</th>
-                      </thead>
-                      <tbody>
-                        <tr *ngFor=" let method of this.upstream_tasks[idx].methods">
-                          <td>{{this.method.name}}</td>
-                          <td>{{this.method.specificity}}</td>
-                          <td>{{this.method.sensitivity}}</td>
-                          <td >{{this.method.sd}}</td>
-                        </tr>
-                      </tbody>
-                    </table>
                 </td>
               </tr>
             </tbody>

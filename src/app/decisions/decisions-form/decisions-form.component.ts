@@ -67,10 +67,12 @@ export class DecisionsFormComponent {
   }
 
   openSupportModal() {
+    console.log("values:")
     this.commonService
       .getUpstreamTasks(this.ra.name, this.pending_task.result.id)
       .subscribe({
         next: (result) => {
+  
           console.log("support modal endpoint")
           console.log(result)
           this.upstream_tasks = result;
