@@ -39,6 +39,7 @@ export class TaskFormComponent {
   pending_task_selected_id: String = '';
   listModelsSelected: any = [];
   parameterInserted: boolean = true;
+  editMethodMode:boolean = false;
 
   @Input() task: any;
   @Input() editMode: any;
@@ -78,15 +79,28 @@ export class TaskFormComponent {
         }
       });
     } else {
-      this.listEditableMethods.push(false)
-      this.model.methods.push({ ...this.method });
-    }
+      if(this.editMethodMode){
+        this.model.methods[this.idx] = {
+          name: this.method.name,
+          description: this.method.description,
+          link: this.method.link,
+          sensitivity: this.method.sensitivity,
+          specificity: this.method.specificity,
+          sd: this.method.sd
+        };
+          this.toastr.success('Successfully Updated', '');
+      }else{
+        this.listEditableMethods.push(false)
+        this.model.methods.push({ ...this.method });
+        this.toastr.success('Successfully Added', '');
 
-    this.toastr.success('Successfully Added', '');
+      }
+    }
   }
 
   deleteMethod(idx) {
     this.model.methods.splice(idx, 1);
+    this.listEditableMethods.splice(idx,1)
   }
 
   deleteParameter(idx) {
@@ -126,6 +140,11 @@ export class TaskFormComponent {
 
   closeModal() {
     document.getElementById('btnclosePredModal').click();
+  }
+
+  editMethod(idx:number){
+
+
   }
 
   executePredict() {
@@ -290,8 +309,29 @@ export class TaskFormComponent {
       event.preventDefault();
     }
   }
-  openModalMethod() {
-    //clean fields when user open again the method modal
+  /**
+   * Receive a boolean to control if it is a new method or edit Method
+   * @param editMode
+   * @param idx
+   */
+  openModalMethod(editMode:boolean,idx?) {
+    this.idx = idx
+    this.editMethodMode = editMode
+    if(editMode){
+      this.method.name = this.model.methods[idx].name
+      this.method.description = this.model.methods[idx].description
+      this.method.link = this.model.methods[idx].link
+      this.method.sensitivity = this.model.methods[idx].sensitivity
+      this.method.specificity = this.model.methods[idx].specificity
+      this.method.sd = this.model.methods[idx].sd
+    }else{
+      this.editMethodMode = editMode;
+      this.cleanMethodFields();
+    }
+ 
+  }
+
+  cleanMethodFields(){
     this.method.name='';
     this.method.description = '';
     this.method.link = '';

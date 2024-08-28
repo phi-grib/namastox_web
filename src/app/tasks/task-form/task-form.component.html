@@ -10,7 +10,7 @@
       <a  class="btn btn-ets-do mb-2"
       *ngIf="this.pending_task.result.result_type === 'value'"
       role="button"
-      (click)="openModalMethod()"
+      (click)="openModalMethod(false)"
       data-bs-toggle="modal"
       data-bs-target="#methodModal"
       >
@@ -71,11 +71,13 @@
             <td>{{method.link}}</td>
             <td>
               <div class="d-flex">
-                <button (click)="deleteMethod(i)" *ngIf="!listEditableMethods[i]" class="btn btn-ets-delete" role="button"
+                <button *ngIf="!listEditableMethods[i]" (click)="deleteMethod(i)" class="btn btn-ets-delete" role="button"
                 >
                 Delete
               </button>
-                <a  *ngIf="!listEditableMethods[i]" class="btn btn-ets-do pr-4"
+                <a  (click)="openModalMethod(true,i)"
+                data-bs-toggle="modal"
+                data-bs-target="#methodModal" *ngIf="!listEditableMethods[i]" class="btn btn-ets-do pr-4"
                 >
                 Edit
             </a>
@@ -537,6 +539,8 @@ aria-hidden="true"
     <div class="modal-header">
       <h5 class="modal-title fw-bold" id="methodModaLabel">
         Add new Method
+        {{ editMethodMode ? 'Edit Method' : 'Add new Method' }}
+
       </h5>
       <button
         type="button"
@@ -623,7 +627,8 @@ aria-hidden="true"
         class="btn btn-ets-do"
         role="button"
         >
-        Add
+        {{ editMethodMode ? 'Update' : 'Add' }}
+      
      </button>
        <button
         type="button"
