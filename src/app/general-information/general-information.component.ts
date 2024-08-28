@@ -48,6 +48,7 @@ export class GeneralInformationComponent implements OnInit {
         this.substance_id = this.ra.general_information.general.substances[0]?.id;
         this.substance_SMILES =this.ra.general_information.general.substances[0]?.smiles;
       }else{
+        this.substance_name = '';
         this.substance_CASRN = '';
         this.substance_id = '';
         this.substance_SMILES = '';
@@ -79,6 +80,7 @@ export class GeneralInformationComponent implements OnInit {
       this.toastr.success(substance['name'],"Added Successfully",{
         timeOut:3000
       });
+
     }
 
     setTimeout(() => {
