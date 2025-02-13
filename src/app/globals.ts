@@ -43,7 +43,6 @@ export class Model {
 @Injectable()
 export class User {
   username: string;
-  password: string;
   status: boolean = false;
 }
 @Injectable()

@@ -30,6 +30,7 @@ import { NgxPanZoomModule } from 'ngx-panzoom';
 import { CookieService } from 'ngx-cookie-service';
 import { FilterVersionPipe } from './filter-version.pipe';
 import { TruncateDecimalsPipe } from './truncate-decimals.pipe';
+import { UserInfoComponent } from './user-info/user-info.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,6 +39,7 @@ import { TruncateDecimalsPipe } from './truncate-decimals.pipe';
     OverviewComponent,
     GeneralInformationComponent,
     TasksComponent,
+    UserInfoComponent,
     DecisionsComponent,
     SelectRaComponent,
     ManageRaComponent,
