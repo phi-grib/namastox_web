@@ -1,1 +1,1 @@
-<a class="pl-3 btn btn-ets-do" (click)="logout()" href="/logout">Logout</a>
+<a class="pl-3 btn btn-ets-do" *ngIf="this.user.username" (click)="logout()" href="/logout">Logout</a>

@@ -3,6 +3,7 @@ import { SplitComponent } from 'angular-split';
 import { CommonFunctions } from './common.functions';
 import { CommonService } from './common.service';
 import { Global, RA, User } from './globals';
+import { KeycloackService } from './keycloak.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -15,9 +16,20 @@ export class AppComponent implements OnInit {
     public ra: RA,
     public user: User,
     private commonService: CommonService,
-    private func: CommonFunctions
+    private func: CommonFunctions,
+    private keycloackService:KeycloackService
   ) {}
   ngOnInit(): void {
+    console.log("keycloak function")
+      this.keycloackService.getSessionUser().subscribe({
+     
+        next: (result:any) => {
+          console.log("function get username")
+          console.log("result:",result['username'])
+          this.user.username = result['username']
+        }
+      })
+
     this.commonService.getRaList().subscribe({
       next: (result: any) => {
         this.ra.listRA = [...result];

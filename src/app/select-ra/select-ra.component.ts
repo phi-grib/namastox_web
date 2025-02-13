@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { SplitComponent } from 'angular-split';
 import { CommonFunctions } from '../common.functions';
 import { CommonService } from '../common.service';
-import { Global, PendingTasks, RA, Results } from '../globals';
+import { Global, PendingTasks, RA, Results, User } from '../globals';
 
 @Component({
   selector: 'app-select-ra',
@@ -13,6 +13,7 @@ export class SelectRaComponent {
   constructor(
     public global: Global,
     public ra: RA,
+    public user: User,
     private commonService: CommonService,
     private func: CommonFunctions,
     private pendingTasks: PendingTasks,

@@ -40,16 +40,32 @@ select {
   color: #ffffff;
 }
 
-span {
-  &:hover {
-    background-color: red !important;
-  }
-}
-
 #offcanvasExample {
   width: 150px;
   height: 150px;
   margin-top: 75px;
   background: transparent !important;
   border: 0px transparent;
+}
+
+.user-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 10px;
+  font-size: 15px;
+  span {
+    font-size: 20px;
+    background: linear-gradient(to right, $primary-color, #de6168);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block; 
+  }
+  i {
+    font-size: 20px;
+    background: linear-gradient(to right, $primary-color, #de6168);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block
+  }
 }
