@@ -1,4 +1,9 @@
+
+
+<div class="user-container" *ngIf="this.user.username">
+    <i class="fa-regular icon fa-user"></i>
+    <span>{{this.user.username}}</span>
 <a *ngIf="user.username" (click)="logout()" href="/logout">
     <i class="fa-solid icon fa-arrow-right-from-bracket"></i>
   </a>
-  
+</div>

@@ -1,12 +1,36 @@
 @import "../../assets/scss/buttons.scss";
 
-
-
-i {
-    color: $primary-color;
-    cursor: pointer;
-    &:hover {
-      color: $secondary-color;
+.user-container {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  display: flex;
+  margin-top: 5px;
+  padding: 5px;
+  gap: 8px;
+  font-size: 15px;
+  margin-right: 20px;
+  border-radius: 5px;
+  align-items: center;
+  height: 80%;
+  span {
+    font-size: 15px;
+    color: whitesmoke;
+  }
+  i:first-child {
+    opacity: 60%;
+    color: whitesmoke;
+    font-size: 16px;
+  }
+  a {
+    i {
+    opacity: 100%;
+      color: $primary-color;
+      cursor: pointer;
+      &:hover {
+        color: $secondary-color;
+      }
     }
   }
-
+}
