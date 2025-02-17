@@ -161,16 +161,53 @@
           />
         </div>
       </div>
+      <div class="row mb-3">
+        <label class="col-3 col-form-label" for="">
+          Permissions
+        </label>
+        <div class="col">
+          <div class="row">
+            <div class="col">
+              <div class="form-floating">
+                <textarea id="readPermission" name="readPermission" [(ngModel)]="readPermission"  class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                <label for="floatingTextarea2">  <i class="fa-brands icon fa-readme"></i>  Read</label>
+              </div>
+            </div>
+            <div class="col">
+
+              <div class="form-floating">
+                <textarea  id="writePermission" name="writePermission" [(ngModel)]="writePermission"  class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                <label for="floatingTextarea2">   <i class="fa-solid fa-pencil"></i> Write</label>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="col mb-3 d-flex justify-content-end">
         <div class="btn-group" role="group" aria-label="Basic example">
-          <button type="button" class="btn btn-ets-do" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <button
+          type="button"
+          class="btn btn-ets-do"
+          (click)="applyPermissions()"
+        >
+          Apply Permissions
+        </button>
+          <button
+            type="button"
+            class="btn btn-ets-do"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+          >
             Add Molecule
           </button>
           <button type="button" class="btn btn-ets-do">Import Table</button>
         </div>
       </div>
       <div class="containerMols">
-        <table *ngIf="this.ra.general_information.general.substances.length  > 0">
+        <table
+          *ngIf="this.ra.general_information.general.substances.length > 0"
+        >
           <thead class="thead">
             <tr>
               <th>Name</th>
@@ -180,14 +217,36 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let idx of objectKeys(this.ra.general_information.general.substances)">
-              <td>{{this.ra.general_information.general.substances[idx].name}}</td>
-              <td>{{this.ra.general_information.general.substances[idx].casrn}}</td>
-              <td><img id="canvas{{idx}}"></td>
+            <tr
+              *ngFor="
+                let idx of objectKeys(
+                  this.ra.general_information.general.substances
+                )
+              "
+            >
+              <td>
+                {{ this.ra.general_information.general.substances[idx].name }}
+              </td>
+              <td>
+                {{ this.ra.general_information.general.substances[idx].casrn }}
+              </td>
+              <td><img id="canvas{{ idx }}" /></td>
               <td>
                 <div class="btn-group" role="group" aria-label="Basic example">
-                  <button type="button" (click)="deleteMol(idx)" class="btn btn-ets-delete">Delete</button>
-                  <button type="button" (click)="editMol(idx)" class="btn btn-ets-do" data-bs-toggle="modal" data-bs-target="#editMolModal">
+                  <button
+                    type="button"
+                    (click)="deleteMol(idx)"
+                    class="btn btn-ets-delete"
+                  >
+                    Delete
+                  </button>
+                  <button
+                    type="button"
+                    (click)="editMol(idx)"
+                    class="btn btn-ets-do"
+                    data-bs-toggle="modal"
+                    data-bs-target="#editMolModal"
+                  >
                     Edit
                   </button>
                 </div>
@@ -195,26 +254,30 @@
             </tr>
           </tbody>
         </table>
-
       </div>
-      <button
-        type="submit"
-        class="btn btn-ets-do submit-button"
-      >
-        Submit
-      </button>
+      <button type="submit" class="btn btn-ets-do submit-button">Submit</button>
     </form>
   </div>
 </div>
 
-
 <!-- Modal add new Molecule -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="exampleModalLabel">Add Molecule</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
       <div class="modal-body">
         <div class="row mb-3">
@@ -272,7 +335,7 @@
                 />
               </div>
             </div>
-            <div  class="row mb-3">
+            <div class="row mb-3">
               <label for="inputPassword3" class="col-2 col-form-label"
                 >SMILES</label
               >
@@ -303,28 +366,52 @@
             </div>
             <div class="row mb-3">
               <div class="col text-end">
-        <button type="button" (click)="autocomplete()" class="btn btn-ets-do">Autocomplete</button>
-                
+                <button
+                  type="button"
+                  (click)="autocomplete()"
+                  class="btn btn-ets-do"
+                >
+                  Autocomplete
+                </button>
               </div>
             </div>
           </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" (click)="addMolecule(false)" class="btn btn-ets-do">Add </button>
-        <button type="button" class="btn btn-ets-bad" data-bs-dismiss="modal">Close</button>
+        <button
+          type="button"
+          (click)="addMolecule(false)"
+          class="btn btn-ets-do"
+        >
+          Add
+        </button>
+        <button type="button" class="btn btn-ets-bad" data-bs-dismiss="modal">
+          Close
+        </button>
       </div>
     </div>
   </div>
 </div>
 
 <!-- Modal edit Molecule -->
-<div class="modal fade" id="editMolModal" tabindex="-1" aria-labelledby="editMolModal" aria-hidden="true">
+<div
+  class="modal fade"
+  id="editMolModal"
+  tabindex="-1"
+  aria-labelledby="editMolModal"
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="editMolModal">Edit Molecule</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
       <div class="modal-body">
         <div class="col">
@@ -371,11 +458,18 @@
             </div>
           </div>
         </div>
-
       </div>
       <div class="modal-footer">
-        <button type="button" (click)="addMolecule(true)" class="btn btn-ets-do">Edit </button>
-        <button type="button" class="btn btn-ets-bad" data-bs-dismiss="modal">Close</button>
+        <button
+          type="button"
+          (click)="addMolecule(true)"
+          class="btn btn-ets-do"
+        >
+          Edit
+        </button>
+        <button type="button" class="btn btn-ets-bad" data-bs-dismiss="modal">
+          Close
+        </button>
       </div>
     </div>
   </div>

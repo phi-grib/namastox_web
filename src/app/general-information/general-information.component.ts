@@ -26,42 +26,47 @@ export class GeneralInformationComponent implements OnInit {
   idxMol = -1;
   workflow_custom: File | null = null;
   objectKeys = Object.keys;
-
+  readPermission: '*';
+  writePermission: '*';
   generalInformationForm = new FormGroup({});
   constructor(
     public ra: RA,
     private commonService: CommonService,
     private updateService: UpdateService,
     private func: CommonFunctions,
-    private toastr: ToastrService,
+    private toastr: ToastrService
   ) {}
   ngOnInit(): void {
     this.commonService.renderGeneralInfoCanvas$.subscribe((status) => {
-       setTimeout(() => {
-         if (status) this.drawMol();
-       }, 300);
+      setTimeout(() => {
+        if (status) this.drawMol();
+      }, 300);
     });
     this.commonService.generateForms$.subscribe(() => {
-      if(this.ra.status.step > 0){
-        this.substance_name = this.ra.general_information.general.substances[0]?.name;
-        this.substance_CASRN = this.ra.general_information.general.substances[0]?.casrn;
-        this.substance_id = this.ra.general_information.general.substances[0]?.id;
-        this.substance_SMILES =this.ra.general_information.general.substances[0]?.smiles;
-      }else{
+      if (this.ra.status.step > 0) {
+        this.substance_name =
+          this.ra.general_information.general.substances[0]?.name;
+        this.substance_CASRN =
+          this.ra.general_information.general.substances[0]?.casrn;
+        this.substance_id =
+          this.ra.general_information.general.substances[0]?.id;
+        this.substance_SMILES =
+          this.ra.general_information.general.substances[0]?.smiles;
+      } else {
         this.substance_name = '';
         this.substance_CASRN = '';
         this.substance_id = '';
         this.substance_SMILES = '';
       }
-        this.drawMol();
+      this.drawMol();
     });
   }
 
-  deleteMol(idx){
-    this.ra.general_information.general.substances.splice(idx,1);
+  deleteMol(idx) {
+    this.ra.general_information.general.substances.splice(idx, 1);
   }
-  
-  addMolecule(edit){
+
+  addMolecule(edit) {
     var substance = {};
     substance = {
       id: this.substance_id,
@@ -69,30 +74,30 @@ export class GeneralInformationComponent implements OnInit {
       casrn: this.substance_CASRN,
       smiles: this.substance_SMILES,
     };
-    if(edit){
-      this.ra.general_information.general.substances[this.idxMol] = substance
-      this.toastr.success(substance['name'],"Edited Successfully",{
-        timeOut:3000
+    if (edit) {
+      this.ra.general_information.general.substances[this.idxMol] = substance;
+      this.toastr.success(substance['name'], 'Edited Successfully', {
+        timeOut: 3000,
       });
-
-    }else{
-      this.ra.general_information.general.substances.push(substance)
-      this.toastr.success(substance['name'],"Added Successfully",{
-        timeOut:3000
+    } else {
+      this.ra.general_information.general.substances.push(substance);
+      this.toastr.success(substance['name'], 'Added Successfully', {
+        timeOut: 3000,
       });
-
     }
 
     setTimeout(() => {
       this.drawMol();
-        
-      }, 300);
+    }, 300);
   }
-  editMol(idx){
-    this.substance_SMILES =  this.ra.general_information.general.substances[idx].smiles
-    this.substance_id = this.ra.general_information.general.substances[idx].id
-    this.substance_name = this.ra.general_information.general.substances[idx].name
-    this.substance_CASRN =  this.ra.general_information.general.substances[idx].casrn
+  editMol(idx) {
+    this.substance_SMILES =
+      this.ra.general_information.general.substances[idx].smiles;
+    this.substance_id = this.ra.general_information.general.substances[idx].id;
+    this.substance_name =
+      this.ra.general_information.general.substances[idx].name;
+    this.substance_CASRN =
+      this.ra.general_information.general.substances[idx].casrn;
     this.idxMol = idx;
   }
 
@@ -104,35 +109,36 @@ export class GeneralInformationComponent implements OnInit {
         .uploadSubstances(this.substance_file)
         .subscribe((result) => {
           if (result['success']) {
-            console.log("Substances")
-            console.log(result["result"])
-            this.ra.general_information.general.substances = this.ra.general_information.general.substances.concat(result['result']);
+            console.log('Substances');
+            console.log(result['result']);
+            this.ra.general_information.general.substances =
+              this.ra.general_information.general.substances.concat(
+                result['result']
+              );
             this.substance_file = null;
           }
           setTimeout(() => {
-          this.drawMol();
-            
+            this.drawMol();
           }, 300);
         });
     }
   }
 
   drawMol() {
-
-    this.ra.general_information.general.substances.forEach((mol,idx) => {
-      let moleculeOptions = {width: 200, height: 150 };
+    this.ra.general_information.general.substances.forEach((mol, idx) => {
+      let moleculeOptions = { width: 200, height: 150 };
       let reactionOptions = {};
-      let sd = new SmilesDrawer.SmiDrawer(moleculeOptions,reactionOptions);
-      sd.draw(mol.smiles,'#canvas'+idx) 
+      let sd = new SmilesDrawer.SmiDrawer(moleculeOptions, reactionOptions);
+      sd.draw(mol.smiles, '#canvas' + idx);
     });
   }
 
-
-  uploadCustomWorkflow(event:any){
+  uploadCustomWorkflow(event: any) {
     const selectedFile = event.target.files[0];
-    if(selectedFile){
+    if (selectedFile) {
       this.workflow_custom = selectedFile;
-      this.ra.general_information.general['workflow_custom'] = selectedFile.name;
+      this.ra.general_information.general['workflow_custom'] =
+        selectedFile.name;
     }
   }
 
@@ -142,14 +148,10 @@ export class GeneralInformationComponent implements OnInit {
 
   autocomplete() {
     if (!this.substance_name && !this.substance_CASRN) {
-      this.toastr.warning(
-        'No input provided',
-        'WARNING',
-        {
-          timeOut: 5000,
-          positionClass: 'toast-top-right',
-        }
-      );
+      this.toastr.warning('No input provided', 'WARNING', {
+        timeOut: 5000,
+        positionClass: 'toast-top-right',
+      });
       return;
     }
 
@@ -196,19 +198,44 @@ export class GeneralInformationComponent implements OnInit {
         }
       })
       .catch((error) => {
-        this.toastr.warning(
-          error.error,
-          'WARNING',
-          {
-            timeOut: 5000,
-            positionClass: 'toast-top-right',
-          }
-        );
+        this.toastr.warning(error.error, 'WARNING', {
+          timeOut: 5000,
+          positionClass: 'toast-top-right',
+        });
         console.log('Error:', error);
       });
   }
 
+  applyPermissions() {
+    const permissions = {};
+    var listUsersReadPermission = this.readPermission.split('\n');
+    var listUsersWritePermision = this.writePermission.split('\n');
+    permissions['read'] = listUsersReadPermission;
+    permissions['write'] = listUsersWritePermision;
 
+    this.updateService
+      .updateUsersPermissions(this.ra.name, permissions)
+      .subscribe({
+        next: (result) => {
+          if(result['success']){
+
+            this.toastr.success(
+              'SUCCESSFULLY APPLIED','',
+              {
+                timeOut: 5000,
+                positionClass: 'toast-top-right',
+              }
+            );
+
+          }
+   
+  
+        },
+        error: (e) => {
+          console.log(e);
+        },
+      });
+  }
 
   onSubmit() {
     setTimeout(() => {
@@ -245,12 +272,14 @@ export class GeneralInformationComponent implements OnInit {
           },
           complete: () => {
             setTimeout(() => {
-            this.workflow_custom = null;
-            const fileInput = document.getElementById('workflow_custom') as HTMLInputElement;
-            if (fileInput) fileInput.value = null;
-            document.getElementById("pills-overview-tab").click()
+              this.workflow_custom = null;
+              const fileInput = document.getElementById(
+                'workflow_custom'
+              ) as HTMLInputElement;
+              if (fileInput) fileInput.value = null;
+              document.getElementById('pills-overview-tab').click();
             }, 100);
-          }
+          },
         });
       this.generalInformationForm.reset();
     }, 500);

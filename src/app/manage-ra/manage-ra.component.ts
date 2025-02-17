@@ -18,7 +18,6 @@ export class ManageRaComponent implements AfterViewInit {
   modelFile;
   isLoading: boolean = undefined;
   newRepo: string = '';
-
   constructor(
     private toastr: ToastrService,
     public global: Global,
