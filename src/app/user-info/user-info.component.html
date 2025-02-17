@@ -1,1 +1,4 @@
-<a class="pl-3 btn btn-ets-do" *ngIf="this.user.username" (click)="logout()" href="/logout">Logout</a>
+<a *ngIf="user.username" (click)="logout()" href="/logout">
+    <i class="fa-solid icon fa-arrow-right-from-bracket"></i>
+  </a>
+  
