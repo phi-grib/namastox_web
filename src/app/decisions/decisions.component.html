@@ -336,14 +336,14 @@
                   </div>
                 </div>
                 <div class="row">
-                  <button (click)="editDecision()" class="btn btn-ets-edit">
+                  <button [disabled]="!this.user.write " (click)="editDecision()" class="btn btn-ets-edit">
                     Edit
                   </button>
                 </div>
               </div>
             </div>
             <decisions-form
-              *ngIf="this.global.editModeDecisions"
+              *ngIf="this.global.editModeDecisions && this.user.write "
               [editMode]="true"
               [task]="this.results.decisionSelected"
             >

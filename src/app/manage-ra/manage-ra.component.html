@@ -9,12 +9,12 @@
     >
       New RA
     </button>
-    <button (click)="duplicateRA()" type="button" class="btn btn-ets-do">
+    <button [disabled]="!this.user.write" (click)="duplicateRA()" type="button" class="btn btn-ets-do">
       Duplicate RA
     </button>
     <button
       (click)="deleteRA()"
-      [disabled]="this.ra.listRA.length < 1"
+      [disabled]="this.ra.listRA.length < 1 || !this.user.write"
       type="button"
       class="btn btn-ets-delete"
     >
@@ -22,7 +22,7 @@
     </button>
     <button
       (click)="deleteStep()"
-      [disabled]="this.ra.listRA.length < 1 || this.ra.status.step <= 1"
+      [disabled]="this.ra.listRA.length < 1 || this.ra.status.step <= 1 || !this.user.write"
       type="button"
       class="btn btn-ets-delete"
     >

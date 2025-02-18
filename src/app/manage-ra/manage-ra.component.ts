@@ -2,7 +2,7 @@ import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { CommonFunctions } from '../common.functions';
 import { CommonService } from '../common.service';
-import { Global, PendingTasks, RA, Results } from '../globals';
+import { Global, PendingTasks, RA, Results, User } from '../globals';
 import { ManageRAsService } from '../manage-ras.service';
 import { UpdateService } from '../update.service';
 
@@ -22,6 +22,7 @@ export class ManageRaComponent implements AfterViewInit {
     private toastr: ToastrService,
     public global: Global,
     public ra: RA,
+    public user:User,
     private commonService: CommonService,
     private func: CommonFunctions,
     private manageRA: ManageRAsService,
@@ -72,6 +73,7 @@ export class ManageRaComponent implements AfterViewInit {
             this.ra.name = this.newRAname;
             this.func.refreshRA();
             this.nameRAinput.nativeElement.value = '';
+            this.user.write = true;
           });
           setTimeout(() => {
             document.getElementById('menubtn').click();

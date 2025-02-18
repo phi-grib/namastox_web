@@ -517,14 +517,14 @@
                   </div>
                 </div>
                 <div class="row">
-                  <button (click)="editTask()" class="btn btn-ets-edit">
+                  <button [disabled]="!this.user.write" (click)="editTask()" class="btn btn-ets-edit">
                     Edit
                   </button>
                 </div>
               </div>
             </div>
             <task-form
-              *ngIf="this.global.editModeTasks"
+              *ngIf="this.global.editModeTasks && this.user.write "
               [editMode]="true"
               [task]="this.results.resultSelected"
             ></task-form>

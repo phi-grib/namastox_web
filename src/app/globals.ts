@@ -44,6 +44,7 @@ export class Model {
 export class User {
   username: string;
   status: boolean = false;
+  write: boolean = true;
 }
 @Injectable()
 export class Method {

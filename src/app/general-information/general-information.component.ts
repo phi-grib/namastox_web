@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { CommonFunctions } from '../common.functions';
 import { CommonService } from '../common.service';
-import { RA } from '../globals';
+import { RA, User } from '../globals';
 import { UpdateService } from '../update.service';
 import { ToastrService } from 'ngx-toastr';
 import * as SmilesDrawer from 'smiles-drawer';
@@ -26,15 +26,16 @@ export class GeneralInformationComponent implements OnInit {
   idxMol = -1;
   workflow_custom: File | null = null;
   objectKeys = Object.keys;
-  readPermission: '*';
-  writePermission: '*';
+  readPermission:string =  '';
+  writePermission:string =  '';
   generalInformationForm = new FormGroup({});
   constructor(
     public ra: RA,
     private commonService: CommonService,
     private updateService: UpdateService,
     private func: CommonFunctions,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    public user: User
   ) {}
   ngOnInit(): void {
     this.commonService.renderGeneralInfoCanvas$.subscribe((status) => {
@@ -43,6 +44,16 @@ export class GeneralInformationComponent implements OnInit {
       }, 300);
     });
     this.commonService.generateForms$.subscribe(() => {
+      console.log("general information")
+      this.commonService.getPermissions(this.ra.name).subscribe({
+        next: (result) => {
+          this.setPermissions(result)
+          console.log(result)
+        },
+        error: (e) => {
+          console.log(e);
+        },
+      });
       if (this.ra.status.step > 0) {
         this.substance_name =
           this.ra.general_information.general.substances[0]?.name;
@@ -61,7 +72,18 @@ export class GeneralInformationComponent implements OnInit {
       this.drawMol();
     });
   }
+  /**
+   * function to convert array of users in format available to textarea
+   */
+  setPermissions(permissions){
+    console.log("set Permissions")
+    this.readPermission = permissions.read.join('\n')
+    this.writePermission = permissions.write.join('\n')
+    console.log(this.readPermission )
+    console.log(this.readPermission )
 
+
+  }
   deleteMol(idx) {
     this.ra.general_information.general.substances.splice(idx, 1);
   }
@@ -217,19 +239,12 @@ export class GeneralInformationComponent implements OnInit {
       .updateUsersPermissions(this.ra.name, permissions)
       .subscribe({
         next: (result) => {
-          if(result['success']){
-
-            this.toastr.success(
-              'SUCCESSFULLY APPLIED','',
-              {
-                timeOut: 5000,
-                positionClass: 'toast-top-right',
-              }
-            );
-
+          if (result['success']) {
+            this.toastr.success('SUCCESSFULLY APPLIED', '', {
+              timeOut: 5000,
+              positionClass: 'toast-top-right',
+            });
           }
-   
-  
         },
         error: (e) => {
           console.log(e);

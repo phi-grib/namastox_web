@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RA } from '../globals';
+import { RA, User } from '../globals';
 import { CommonService } from '../common.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -9,7 +9,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./notes.component.scss']
 })
 export class NotesComponent{
-  constructor(private toastr: ToastrService,public ra:RA,private commonService:CommonService){
+  constructor(private toastr: ToastrService,public ra:RA,private commonService:CommonService,  public user: User){
 
   }
   note = {};

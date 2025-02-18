@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CommonFunctions } from '../common.functions';
 import { CommonService } from '../common.service';
-import { PendingTasks, RA, Results, Global } from '../globals';
+import { PendingTasks, RA, Results, Global, User } from '../globals';
 import { FormGroup } from '@angular/forms';
 import { UpdateService } from '../update.service';
 import { saveAs } from 'file-saver';
@@ -42,7 +42,8 @@ export class DecisionsComponent implements OnInit {
     public pendingTasks: PendingTasks,
     public results: Results,
     private updateService: UpdateService,
-    public global: Global
+    public global: Global,
+    public user: User
   ) {}
   ngOnInit(): void {
     if (this.pendingTasks.decisions[0]) {

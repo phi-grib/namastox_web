@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CommonService } from '../common.service';
-import { PendingTasks, RA, Results, Global } from '../globals';
+import { PendingTasks, RA, Results, Global, User } from '../globals';
 import { saveAs } from 'file-saver';
 import * as SmilesDrawer from 'smiles-drawer';
 declare var $: any; 
@@ -33,6 +33,7 @@ export class TasksComponent implements OnInit {
     public pendingTasks: PendingTasks,
     public results: Results,
     public global: Global,
+    public user: User
   ) {}
 
   ngOnInit(): void {

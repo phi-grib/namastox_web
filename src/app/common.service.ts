@@ -12,7 +12,7 @@ export class CommonService {
 
   private generateForms = new Subject<String>();
   generateForms$ = this.generateForms.asObservable();
-  
+
   AutoGenerateForm(taskID?: string) {
     this.generateForms.next(taskID);
   }
@@ -29,10 +29,15 @@ export class CommonService {
     this.updateOverviewCanvas.next(status);
   }
   /*render canvas in General Information */
-  private renderGeneralInfoCanvas =  new Subject<boolean>();
+  private renderGeneralInfoCanvas = new Subject<boolean>();
   renderGeneralInfoCanvas$ = this.renderGeneralInfoCanvas.asObservable();
   drawGeneralInfoCanvas(status: boolean) {
     this.renderGeneralInfoCanvas.next(status);
+  }
+
+  getPermissions(ra_name: string) {
+    const url: string = environment.baseUrl + 'users/' + ra_name;
+    return this.http.get(url);
   }
 
   /**Get list of RAs */
@@ -117,40 +122,37 @@ export class CommonService {
       environment.baseUrl + 'upstream_tasks/' + ra_name + '/' + task_id;
     return this.http.get(url);
   }
-  exportToFile(ra_name:string,format:string): Observable<any> {
-    const url: string = environment.baseUrl + "report/" +ra_name+"/"+format;
-    
-    if(format == "word" || format == "excel"){
-      return this.http.get(url,{responseType: 'arraybuffer'})
-    }else{
-      return this.http.get(url,{responseType:'text'})
+  exportToFile(ra_name: string, format: string): Observable<any> {
+    const url: string =
+      environment.baseUrl + 'report/' + ra_name + '/' + format;
 
+    if (format == 'word' || format == 'excel') {
+      return this.http.get(url, { responseType: 'arraybuffer' });
+    } else {
+      return this.http.get(url, { responseType: 'text' });
     }
-
   }
   attachments(ra_name: string) {
     const url: string = environment.baseUrl + 'attachments/' + ra_name;
     return this.http.get(url, { responseType: 'blob' });
   }
 
-
-  getNotes(ra_name:string,step?:number){
-    const url:string = environment.baseUrl + "notes/"+ra_name
-    if(step){
-    const url:string = environment.baseUrl + "notes/"+ra_name+"/"+step
+  getNotes(ra_name: string, step?: number) {
+    const url: string = environment.baseUrl + 'notes/' + ra_name;
+    if (step) {
+      const url: string = environment.baseUrl + 'notes/' + ra_name + '/' + step;
     }
-    return this.http.get(url)
-
+    return this.http.get(url);
   }
-  saveNote(ra_name:string,title,text){
+  saveNote(ra_name: string, title, text) {
     const formData = new FormData();
-    formData.append('title',title);
-    formData.append('text',text);
-    const url: string = environment.baseUrl + "note/"+ra_name;
+    formData.append('title', title);
+    formData.append('text', text);
+    const url: string = environment.baseUrl + 'note/' + ra_name;
     return this.http.put(url, formData);
   }
-  deleteNote(ra_name:string,id:string){
-    const url:string = environment.baseUrl + "note/"+ra_name+"/"+id
-    return this.http.delete(url)
+  deleteNote(ra_name: string, id: string) {
+    const url: string = environment.baseUrl + 'note/' + ra_name + '/' + id;
+    return this.http.delete(url);
   }
 }

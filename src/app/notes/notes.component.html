@@ -43,6 +43,7 @@
                                 <td>{{ note.text | slice : 0 : 20 }}...</td>
                                  <td>
                                         <a
+                                        *ngIf="this.user.write "
                                   (click)="deleteNote(note)"
                                   class="btn ms-auto"
                                   role="button"
@@ -90,12 +91,10 @@
           </div>
         </div>
       </div>
-  
-
     </div>
     </div>
 <hr>
-    <div class="row">
+    <div *ngIf="this.user.write" class="row">
       <div class="container">
               <app-note-form>
               </app-note-form>
