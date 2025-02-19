@@ -4,6 +4,7 @@ import { CommonFunctions } from './common.functions';
 import { CommonService } from './common.service';
 import { Global, RA, User } from './globals';
 import { KeycloackService } from './keycloak.service';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -17,19 +18,18 @@ export class AppComponent implements OnInit {
     public user: User,
     private commonService: CommonService,
     private func: CommonFunctions,
-    private keycloackService:KeycloackService
+    private keycloackService: KeycloackService,
+    private toastr: ToastrService, 
   ) {}
   ngOnInit(): void {
-        this.keycloackService.getSessionUser().subscribe({
-          next: (result:any) => {
-            this.user.username = result['username']
-          }
-        })
+   this.keycloackService.getSessionUser().subscribe({
+     next: (result:any) => {
+       this.user.username = result['username']
+     }
+   })
 
-      //  DEVELOPMENT
-       // this.user.username = "test123"
-
-
+    //  DEVELOPMENT
+    // this.user.username = 'test123';
     this.commonService.getRaList().subscribe({
       next: (result: any) => {
         this.ra.listRA = [...result];
@@ -39,7 +39,26 @@ export class AppComponent implements OnInit {
           this.commonService.getGeneralInfo(this.ra.name).subscribe({
             next: (result) => {
               this.ra.general_information = result;
-              this.func.refreshRA();
+              this.commonService.getPermissions(this.ra.name).subscribe({
+                next: (permissions)=> {
+                  if(permissions["read"].includes(this.user.username) || permissions['read'][0] == "*"){
+                      this.func.refreshRA();
+                      this.user.write = permissions["write"].includes(this.user.username) || permissions['write'][0] == "*";
+                  }else{
+                    this.toastr.warning(
+                      '',`You don't have permission to view this RA`,
+                      {
+                        timeOut: 5000,
+                        positionClass: 'toast-top-right',
+                      }
+                    );
+                  }
+                },  
+                error: (e) => {
+                  console.log("error en load ra")
+                  console.log(e)
+                }
+              })
               setTimeout(() => {
                 this.global.interfaceVisible = true;
               }, 500);
@@ -55,7 +74,7 @@ export class AppComponent implements OnInit {
       },
     });
   }
-  loadGeneralInfoCanvas(){
+  loadGeneralInfoCanvas() {
     this.commonService.drawGeneralInfoCanvas(true);
   }
   loadOverviewCanvas() {
