@@ -54,3 +54,10 @@ select {
   margin-left: 5px;
   opacity: 0.6;
 }
+
+
+.icon {
+  &:hover {
+    color: $secondary-color;
+  }
+}
