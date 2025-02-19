@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { CommonService } from './common.service';
-import { PendingTasks, RA, Results } from './globals';
+import { PendingTasks, RA, Results, User,Global } from './globals';
 import { forkJoin } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 declare var $: any;
 @Injectable({
   providedIn: 'root',
@@ -11,10 +12,35 @@ export class CommonFunctions {
     private ra: RA,
     private pendingTasks: PendingTasks,
     private results: Results,
-    private commonService: CommonService
+    private commonService: CommonService,
+    private user: User,
+    private toastr:ToastrService,
+    private global:Global
   ) {}
 
   refreshRA() {
+    this.commonService.getPermissions(this.ra.name).subscribe({
+      next: (permissions)=> {
+        if(permissions["read"].includes(this.user.username) || permissions['read'][0] == "*"){
+            this.user.write = permissions["write"].includes(this.user.username) || permissions['write'][0] == "*";
+            this.global.permissions['read'] = permissions['read']
+            this.global.permissions['write'] = permissions['write']
+        }else{
+          this.toastr.warning(
+            '',`You don't have permission to view this RA`,
+            {
+              timeOut: 5000,
+              positionClass: 'toast-top-right',
+            }
+          );
+        }
+      },  
+      error: (e) => {
+        console.log("error en load ra")
+        console.log(e)
+      }
+    })
+  
     this.clearRA();
     let generalInfo$ = this.commonService.getGeneralInfo(this.ra.name);
     let pendingTasks$ = this.commonService.getPendingTasks(this.ra.name);
@@ -64,6 +90,7 @@ export class CommonFunctions {
   }
 
   clearRA() {
+    this.global.permissions = {}
     this.ra.pending_tasks = [];
     this.pendingTasks.results = [];
     this.pendingTasks.decisions = [];

@@ -32,6 +32,7 @@ export class Global {
   interfaceVisible: boolean = false;
   editModeTasks: boolean = false;
   editModeDecisions: boolean = false;
+  permissions = {}
 }
 
 export class Model {

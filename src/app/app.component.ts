@@ -22,11 +22,11 @@ export class AppComponent implements OnInit {
     private toastr: ToastrService, 
   ) {}
   ngOnInit(): void {
-   this.keycloackService.getSessionUser().subscribe({
-     next: (result:any) => {
-       this.user.username = result['username']
-     }
-   })
+    this.keycloackService.getSessionUser().subscribe({
+      next: (result:any) => {
+        this.user.username = result['username']
+      }
+    })
 
     //  DEVELOPMENT
     // this.user.username = 'test123';
@@ -39,26 +39,7 @@ export class AppComponent implements OnInit {
           this.commonService.getGeneralInfo(this.ra.name).subscribe({
             next: (result) => {
               this.ra.general_information = result;
-              this.commonService.getPermissions(this.ra.name).subscribe({
-                next: (permissions)=> {
-                  if(permissions["read"].includes(this.user.username) || permissions['read'][0] == "*"){
-                      this.func.refreshRA();
-                      this.user.write = permissions["write"].includes(this.user.username) || permissions['write'][0] == "*";
-                  }else{
-                    this.toastr.warning(
-                      '',`You don't have permission to view this RA`,
-                      {
-                        timeOut: 5000,
-                        positionClass: 'toast-top-right',
-                      }
-                    );
-                  }
-                },  
-                error: (e) => {
-                  console.log("error en load ra")
-                  console.log(e)
-                }
-              })
+              this.func.refreshRA();
               setTimeout(() => {
                 this.global.interfaceVisible = true;
               }, 500);

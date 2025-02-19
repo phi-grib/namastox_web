@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RA, Results } from '../globals';
+import { RA, Results,Global } from '../globals';
 import * as SmilesDrawer from 'smiles-drawer';
 import { CommonService } from '../common.service';
 
@@ -13,7 +13,8 @@ export class OverviewComponent implements OnInit {
   constructor(
     public ra: RA,
     private commonService: CommonService,
-    public results: Results
+    public results: Results,
+    public global:Global
   ) {}
   ngOnInit(): void {
     this.commonService.updateOverviewCanvas$.subscribe((status) => {
@@ -24,7 +25,6 @@ export class OverviewComponent implements OnInit {
   }
 
   drawMol() {
-
     this.ra.general_information.general.substances.forEach((mol,idx) => {
       let moleculeOptions = {width: 200, height: 150 };
       let reactionOptions = {};

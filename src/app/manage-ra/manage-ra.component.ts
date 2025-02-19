@@ -73,7 +73,6 @@ export class ManageRaComponent implements AfterViewInit {
             this.ra.name = this.newRAname;
             this.func.refreshRA();
             this.nameRAinput.nativeElement.value = '';
-            this.user.write = true;
           });
           setTimeout(() => {
             document.getElementById('menubtn').click();

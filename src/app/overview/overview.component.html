@@ -93,5 +93,22 @@
         </div>
       </div>
     </div>
+    <div class="row pt-1 pb-1 border-bottom">
+      <div class="col-3 text">Read Users</div>
+      <div class="col">
+        <div class="row">
+          {{ this.global?.permissions['read'] }}
+        </div>
+      </div>
+    </div>
+    <div class="row pt-1 pb-1 border-bottom">
+      <div class="col-3 text">Write Users</div>
+      <div class="col">
+        <div class="row">
+          {{ this.global?.permissions['write'] }}
+
+        </div>
+      </div>
+    </div>
   </div>
 </div>

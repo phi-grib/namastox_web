@@ -23,26 +23,7 @@ export class SelectRaComponent {
   ) {}
 
   loadRA() {
-    this.commonService.getPermissions(this.ra.name).subscribe({
-      next: (permissions)=> {
-        if(permissions["read"].includes(this.user.username) || permissions['read'][0] == "*"){
-            this.func.refreshRA();
-            this.user.write = permissions["write"].includes(this.user.username) || permissions['write'][0] == "*";
-        }else{
-          this.toastr.warning(
-            '',`You don't have permission to view this RA`,
-            {
-              timeOut: 5000,
-              positionClass: 'toast-top-right',
-            }
-          );
-        }
-      },  
-      error: (e) => {
-        console.log("error en load ra")
-        console.log(e)
-      }
-    })
+    this.func.refreshRA();
   }
 
   loadStep() {
