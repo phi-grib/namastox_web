@@ -21,7 +21,7 @@
 
 select {
   border: none;
-  background-color: whitesmoke !important;
+  background-color: white !important;
   color: $secondary-color;
 }
 
@@ -52,7 +52,9 @@ select {
 .read-only {
   font-size: 14px;
   margin-left: 5px;
-  opacity: 0.6;
+  margin-right: 5px;
+
+  opacity: 0.8;
 }
 
 
