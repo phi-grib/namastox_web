@@ -135,12 +135,13 @@
         </table>
     </div>
     <div
-      *ngIf="this.pending_task.result.result_type === 'text'"
+      *ngIf="this.pending_task.result.result_type === 'text'zz"
       class="row mb-3"
     >
       <label for="inputPassword3" class="col-2 col-form-label">Results*:</label>
       <div class="col-10">
         <textarea
+        [disabled]="!this.user.write"
           rows="4"
           required
           [placeholder]="this.pending_task['task description']['report']"
@@ -163,6 +164,7 @@
           <div class="row">
             <div class="col-5">
               <input
+              [disabled]="!this.user.write"
                 #DocumentFileInput
                 (change)="sendlink($event)"
                 placeholder=""
@@ -173,6 +175,7 @@
             <div class="col-auto d-flex flex-column ">
               <div class="d-flex flex-row justify-content-around">
                 <input
+                [disabled]="!this.user.write"
                   class="form-check-input"
                   type="checkbox"
                   name="inlineRadioOptions"
@@ -185,6 +188,7 @@
             </div>
             <div class="col-5">
               <input
+              [disabled]="!this.user.write"
                 type="text"
                 [(ngModel)]="this.labelFile"
                 name="labelFile"
@@ -210,6 +214,7 @@
           <div class="row">
             <div class="col-3">
               <input
+              [disabled]="!this.user.write"
                 type="text"
                 [value]="this.documents[idx].label"
                 readonly
@@ -240,6 +245,7 @@
       <label for="inputPassword3" class="col-2 col-form-label">Summary:</label>
       <div class="col-10">
         <textarea
+        [disabled]="!this.user.write"
           [placeholder]="this.pending_task['task description']['summary']"
           [(ngModel)]="this.model.summary"
           class="form-control"
@@ -252,6 +258,7 @@
     <div class="row">
       <div class="col-10">
         <button
+        [disabled]="!this.user.write"
           (click)="back()"
           *ngIf="this.editMode"
           type="submit"
@@ -262,7 +269,7 @@
       </div>
       <div class="col d-flex justify-content-end">
         <button
-          [disabled]="taskForm.invalid"
+          [disabled]="taskForm.invalid || !this.user.write"
           type="submit"
           class="btn btn-ets-do submit-button"
         >
@@ -322,6 +329,7 @@
                 >
                   <td>
                     <input
+                    [disabled]="!this.user.write"
                       class="form-check-input text-center"
                       type="checkbox"
                       (change)="onChange(model, $event)"
@@ -383,6 +391,7 @@
       </div>
       <div class="modal-body">
         <input
+        [disabled]="!this.user.write"
         (change)="importTable($event)"
         placeholder=""
         type="file"
@@ -443,6 +452,7 @@ aria-hidden="true"
             <div class="col">
               <label for="Parameter" class="form-label">Parameter*</label>
               <input
+              [disabled]="!this.user.write"
                 name="parameter"
                 placeholder=""
                 [(ngModel)]="this.parameter"
@@ -454,6 +464,7 @@ aria-hidden="true"
             <div class="col-3">
               <label for="value" class="form-label">Value*</label>
               <input
+              [disabled]="!this.user.write"
                 [placeholder]=""
                 [(ngModel)]="this.value"
                 type="text"
@@ -467,6 +478,7 @@ aria-hidden="true"
               <div class="row">
                 <div class="col">
                   <input
+                  [disabled]="!this.user.write"
                     placeholder=""
                     [(ngModel)]="this.unit"
                     type="text"
@@ -484,6 +496,7 @@ aria-hidden="true"
         <div class="col-5">
           <label for="Parameter" class="form-label">Uncertainty</label>
           <input
+          [disabled]="!this.user.write"
             name="uncertainty"
             [placeholder]="this.pending_task['task description'].uncertainty"
             [(ngModel)]="this.uncertainty"
@@ -496,7 +509,7 @@ aria-hidden="true"
           <label for="unit" class="form-label">Term</label>
           <div class="row">
             <div class="col-auto">
-              <input type="text" [(ngModel)]="uncertainty_term" class="form-control" id="uncertainty_term">
+              <input type="text" [disabled]="!this.user.write" [(ngModel)]="uncertainty_term" class="form-control" id="uncertainty_term">
             </div>
           </div>
         </div>
@@ -555,6 +568,7 @@ aria-hidden="true"
             <div class="col">
               <label for="name" class="form-label">Name*</label>
               <input
+              [disabled]="!this.user.write"
                 name="name"
                 placeholder=""
                 [(ngModel)]="this.method.name"
@@ -567,6 +581,7 @@ aria-hidden="true"
             <div class="col">
               <label for="description" class="form-label">Description</label>
               <input
+              [disabled]="!this.user.write"
                 [placeholder]=""
                 [(ngModel)]="this.method.description"
                 type="text"
@@ -578,6 +593,7 @@ aria-hidden="true"
             <div class="col">
               <label for="link" class="form-label">Link</label>
                   <input
+                  [disabled]="!this.user.write"
                     placeholder=""
                     [(ngModel)]="this.method.link"
                     type="text"
@@ -591,6 +607,7 @@ aria-hidden="true"
             <div class="col">
               <label for="sensitivity" class="form-label">Sensitivity</label>
               <input 
+              [disabled]="!this.user.write"
               type="number"
               min="0"
               max="1"
@@ -605,11 +622,11 @@ aria-hidden="true"
             <div class="col">
               <label for="sensitivity" class="form-label">Specificity</label>
               
-              <input #specificityInputRef="ngModel"  type="number" min="0" max="1" step="0.01"  class="form-control" id="specificity" name="specificity" [(ngModel)]="this.method.specificity">
+              <input [disabled]="!this.user.write" #specificityInputRef="ngModel"  type="number" min="0" max="1" step="0.01"  class="form-control" id="specificity" name="specificity" [(ngModel)]="this.method.specificity">
             </div>
             <div class="col">
               <label for="sd" class="form-label">SD</label>
-              <input type="string" class="form-control" id="sd" name="sd" [(ngModel)]="this.method.sd">
+              <input [disabled]="!this.user.write" type="string" class="form-control" id="sd" name="sd" [(ngModel)]="this.method.sd">
             </div>
           </div>
           <div   *ngIf="sensitivityInputRef.invalid || specificityInputRef.invalid " style="font-weight: bold !important;" class="text-warning  mt-2">
@@ -620,6 +637,7 @@ aria-hidden="true"
     </div>
      <div class="modal-footer">
       <button
+      [disabled]="!this.user.write"
         [disabled]="methodForm.invalid"
         (click)="addMethod()"
         class="btn btn-ets-do"
@@ -629,6 +647,7 @@ aria-hidden="true"
       
      </button>
        <button
+       [disabled]="!this.user.write"
         type="button"
         id="btncloseImportTableModal"
         class="btn btn-ets-bad"

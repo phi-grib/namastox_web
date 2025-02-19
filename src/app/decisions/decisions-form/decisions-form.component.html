@@ -11,7 +11,7 @@
       <div class="form-check form-check-inline">
         <input
           class="form-check-input"
-          [disabled]="this.editMode"
+          [disabled]="this.editMode || !this.user.write"
           type="radio"
           name="inlineRadioDecisionOptions"
           [(ngModel)]="this.model.decision"
@@ -23,7 +23,7 @@
       <div class="form-check form-check-inline">
         <input
           class="form-check-input"
-          [disabled]="this.editMode"
+          [disabled]="this.editMode || !this.user.write"
           type="radio"
           name="inlineRadioDecisionOptions"
           [(ngModel)]="this.model.decision"
@@ -51,6 +51,7 @@
     >
     <div class="col-10">
       <textarea
+        [disabled]="!this.user.write"
         required
         [placeholder]="this.pending_task['task description']['justification']"
         [(ngModel)]="this.model.justification"
@@ -70,6 +71,7 @@
       <div class="row">
         <div class="col-5">
           <input
+            [disabled]="!this.user.write"
             #DocumentFile
             (change)="sendlink($event)"
             placeholder=""
@@ -80,6 +82,7 @@
         <div class="col-auto d-flex flex-column">
           <div class="d-flex flex-row justify-content-around">
             <input
+              [disabled]="!this.user.write"
               class="form-check-input"
               [disabled]="this.editMode"
               type="checkbox"
@@ -90,10 +93,10 @@
             />
           </div>
           <span class="text-muted sm-text">Include</span>
-
         </div>
         <div class="col-5">
           <input
+            [disabled]="!this.user.write"
             type="text"
             [(ngModel)]="this.labelFile"
             name="labelFile"
@@ -101,9 +104,9 @@
             class="form-control"
           />
         </div>
-        <div style="margin-left: auto !important;" class="col-1 text-end">
+        <div style="margin-left: auto !important" class="col-1 text-end">
           <a
-          style="background: rgb(250,250,250)"
+            style="background: rgb(250, 250, 250)"
             (click)="addDocument()"
             class="addbtn btn ms-auto"
             role="button"
@@ -119,6 +122,7 @@
       <div class="row">
         <div class="col-3">
           <input
+            [disabled]="!this.user.write"
             type="text"
             [value]="this.documents[idx].label"
             readonly
@@ -126,10 +130,14 @@
           />
         </div>
         <div class="col-1">
-          <div style="text-align: center !important;;margin-top:7px;">
-            <i *ngIf="this.documents[idx].include" style="text-align: center;margin-right: 18px;" class="fa-solid fa-check-to-slot fa-lg"></i>
+          <div style="text-align: center !important; margin-top: 7px">
+            <i
+              *ngIf="this.documents[idx].include"
+              style="text-align: center; margin-right: 18px"
+              class="fa-solid fa-check-to-slot fa-lg"
+            ></i>
           </div>
-          </div>
+        </div>
         <div class="col-1">
           <a
             (click)="deleteFile(this.documents[idx].label)"
@@ -149,6 +157,7 @@
     <label for="inputPassword3" class="col-2 col-form-label">Summary:</label>
     <div class="col-10">
       <textarea
+        [disabled]="!this.user.write"
         [placeholder]="this.pending_task['task description']['summary']"
         [(ngModel)]="this.model.summary"
         class="form-control"
@@ -161,6 +170,7 @@
   <div class="row">
     <div class="col-10">
       <button
+        [disabled]="!this.user.write"
         (click)="back()"
         *ngIf="this.editMode"
         type="submit"
@@ -171,7 +181,7 @@
     </div>
     <div class="col d-flex justify-content-end">
       <button
-        [disabled]="decisionForm.invalid"
+        [disabled]="decisionForm.invalid || !this.user.write"
         type="submit"
         class="btn btn-ets-do submit-button"
       >
@@ -196,16 +206,17 @@
   aria-labelledby="supportModalLabel"
   aria-hidden="false"
 >
-  <div  class="modal-dialog modal-xl">
+  <div class="modal-dialog modal-xl">
     <div *ngIf="this.upstream_tasks" class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-2" id="supportModalLabel">
           {{ this.pending_task["task description"].name }}
-     <span class="text-muted fs-4 d-block">
-      {{this.pending_task['task description'].description}}
-     </span>
+          <span class="text-muted fs-4 d-block">
+            {{ this.pending_task["task description"].description }}
+          </span>
         </h1>
         <button
+          [disabled]="!this.user.write"
           id="closeBtnModal"
           type="button"
           class="btn-close"
@@ -220,7 +231,7 @@
         </div> -->
 
         <div class="row">
-          <table class="table" style="width: 100%;">
+          <table class="table" style="width: 100%">
             <thead class="">
               <tr>
                 <th>Upstream task</th>
@@ -231,39 +242,56 @@
               <tr *ngFor="let idx of objectKeys(this.upstream_tasks)">
                 <td>{{ this.upstream_tasks[idx].name }}</td>
                 <td
-                style="width: 700px !important;"
+                  style="width: 700px !important"
                   *ngIf="isReportOrParameters(this.upstream_tasks[idx].values)"
                 >
                   {{ this.upstream_tasks[idx].values }}
                 </td>
                 <td
-                style="padding: 0px !important;"
-                class="text-justify"
+                  style="padding: 0px !important"
+                  class="text-justify"
                   *ngIf="!isReportOrParameters(this.upstream_tasks[idx].values)"
                 >
-                  <table style="width: 100% !important;" class="table table-borderless">
+                  <table
+                    style="width: 100% !important"
+                    class="table table-borderless"
+                  >
                     <thead>
                       <tr>
-                        <th style="width: 10%;">Parameter</th>
-                        <th style="width: 10%;">Value</th>
-                        <th style="width: 10%;">Unit</th>
-                        <th style="width: 35%;">Uncertainty</th>
-                        <th style="width: 10%;">Method</th>
-                        <th style="width: 10%;">Specificity</th>
-                        <th style="width: 10%;">Sensitivity</th>
-                        <th style="width: 5%;">SD</th>
+                        <th style="width: 10%">Parameter</th>
+                        <th style="width: 10%">Value</th>
+                        <th style="width: 10%">Unit</th>
+                        <th style="width: 35%">Uncertainty</th>
+                        <th style="width: 10%">Method</th>
+                        <th style="width: 10%">Specificity</th>
+                        <th style="width: 10%">Sensitivity</th>
+                        <th style="width: 5%">SD</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr *ngFor="let value of this.upstream_tasks[idx].values;let i = index">
+                      <tr
+                        *ngFor="
+                          let value of this.upstream_tasks[idx].values;
+                          let i = index
+                        "
+                      >
                         <td>{{ this.value.parameter }}</td>
                         <td>{{ this.value.value | truncateDecimals }}</td>
                         <td>{{ this.value.unit }}</td>
-                        <td>{{ this.upstream_tasks[idx].uncertainties[i].uncertainty }}</td>
-                        <td>{{this.upstream_tasks[idx].methods[i]?.name}}</td>
-                        <td>{{this.upstream_tasks[idx].methods[i]?.specificity}}</td>
-                        <td>{{this.upstream_tasks[idx].methods[i]?.sensitivity}}</td>
-                        <td>{{this.upstream_tasks[idx].methods[i]?.sd}}</td>
+                        <td>
+                          {{
+                            this.upstream_tasks[idx].uncertainties[i]
+                              .uncertainty
+                          }}
+                        </td>
+                        <td>{{ this.upstream_tasks[idx].methods[i]?.name }}</td>
+                        <td>
+                          {{ this.upstream_tasks[idx].methods[i]?.specificity }}
+                        </td>
+                        <td>
+                          {{ this.upstream_tasks[idx].methods[i]?.sensitivity }}
+                        </td>
+                        <td>{{ this.upstream_tasks[idx].methods[i]?.sd }}</td>
                       </tr>
                     </tbody>
                   </table>

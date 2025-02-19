@@ -3,7 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 import { interval, takeUntil } from 'rxjs';
 import { CommonFunctions } from 'src/app/common.functions';
 import { CommonService } from 'src/app/common.service';
-import { PendingTasks, RA, Results, Global, Method } from 'src/app/globals';
+import { PendingTasks, RA, Results, Global, Method, User } from 'src/app/globals';
 import { ModelsService } from 'src/app/models.service';
 import { UpdateService } from 'src/app/update.service';
 
@@ -56,7 +56,8 @@ export class TaskFormComponent {
     private toastr: ToastrService,
     public global: Global,
     private modelsService: ModelsService,
-    public method: Method
+    public method: Method,
+    public user:User
   ) {}
 
   ngOnInit(): void {

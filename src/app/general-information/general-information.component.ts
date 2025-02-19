@@ -44,7 +44,6 @@ export class GeneralInformationComponent implements OnInit {
       }, 300);
     });
     this.commonService.generateForms$.subscribe(() => {
-      console.log("general information")
       this.commonService.getPermissions(this.ra.name).subscribe({
         next: (result) => {
           this.setPermissions(result)
@@ -76,13 +75,8 @@ export class GeneralInformationComponent implements OnInit {
    * function to convert array of users in format available to textarea
    */
   setPermissions(permissions){
-    console.log("set Permissions")
     this.readPermission = permissions.read.join('\n')
     this.writePermission = permissions.write.join('\n')
-    console.log(this.readPermission )
-    console.log(this.readPermission )
-
-
   }
   deleteMol(idx) {
     this.ra.general_information.general.substances.splice(idx, 1);

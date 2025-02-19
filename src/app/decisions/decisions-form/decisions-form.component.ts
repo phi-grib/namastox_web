@@ -9,7 +9,7 @@ import {
 import { ToastrService } from 'ngx-toastr';
 import { CommonFunctions } from 'src/app/common.functions';
 import { CommonService } from 'src/app/common.service';
-import { PendingTasks, RA, Global } from 'src/app/globals';
+import { PendingTasks, RA, Global, User } from 'src/app/globals';
 import { UpdateService } from 'src/app/update.service';
 
 @Component({
@@ -45,7 +45,8 @@ export class DecisionsFormComponent {
     private toastr: ToastrService,
     public pendingTasks: PendingTasks,
     private func: CommonFunctions,
-    public global: Global
+    public global: Global,
+    public user: User
   ) {}
 
   isReportOrParameters(value): boolean {
