@@ -2,9 +2,9 @@
 
 
 <app-manage-ra></app-manage-ra>
-
-<div style="display: flex" class="mb-2">
-  <div class="d-inline-block">
+<div style="background-color: whitesmoke;border-radius: 4px;padding: 3px;" class="d-inline-flex align-items-center flex-row mb-1 mt-1">
+  <div>
+    
     <a
       id="menubtn"
       class="btn"
@@ -15,14 +15,13 @@
       aria-label="Toggle navigation"
       role="button"
     >
-      <i class="fa-solid fa-bars"></i>
+      <i class="fa-solid fa-bars mt-2"></i>
     </a>
   </div>
   <div
     *ngIf="this.global.interfaceVisible"
-    class="form-inline d-inline-block position-relative"
+  
   >
-    <label for="ra1">RA </label>
     <select
       id="ra1"
       (change)="loadRA()"
@@ -31,11 +30,7 @@
     >
       <option *ngFor="let ra of this.ra.listRA" [value]="ra">{{ ra }}</option>
     </select>
-  </div>
-  <div *ngIf="this.global.interfaceVisible" class="m-2 d-inline-block"></div>
-  <div
-    *ngIf="this.global.interfaceVisible"
-    class="form-inline d-inline-block position-relative"
-  >
+    <span *ngIf="!this.user.write" class="read-only"><i class="fa-solid fa-eye"></i> Read only</span> 
   </div>
 </div>
+

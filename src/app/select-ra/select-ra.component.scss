@@ -20,8 +20,8 @@
 }
 
 select {
-  border: 0.5px solid whitesmoke;
-  background-color: white !important;
+  border: none;
+  background-color: whitesmoke !important;
   color: $secondary-color;
 }
 
@@ -48,3 +48,9 @@ select {
   border: 0px transparent;
 }
 
+
+.read-only {
+  font-size: 14px;
+  margin-left: 5px;
+  opacity: 0.6;
+}
