@@ -160,7 +160,7 @@ export class DecisionsComponent implements OnInit {
       },
       error: (e) => console.log(e),
     });
-    $('#tableCollapse').click();
-    $('#pastCollapse').click();
+    $('#tableCollapseDecisions').click();
+    $('#pastCollapseDecisions').click();
   }
 }
