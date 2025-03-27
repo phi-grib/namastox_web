@@ -3,14 +3,16 @@
 .nav {
   background: linear-gradient(to right, $primary-color, #de6168);
   &-link {
-    color: white;
+    color: whitesmoke;
     font-size: 1rem;
+    &:hover {
+      font-weight: bold;
+    }
     &.active {
       background: none;
       color: white;
       font-weight: bold;
       font-size: 1rem;
-      border-bottom: 6px solid $secondary-color;
       border-radius: 0;
     }
   }

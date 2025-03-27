@@ -43,6 +43,42 @@ export class ManageRaComponent implements AfterViewInit {
       }
     );
   }
+  modifyNameRA() {
+    this.updateService.updateNameRA(this.ra.name, this.newRAname).subscribe(
+      (result) => {
+        if (result['success']) {
+          this.commonService.getRaList().subscribe({
+            next: (result: any) => {
+              this.ra.listRA = [...result];
+              // if (this.ra.listRA.length > 0) {
+                this.ra.name = this.newRAname
+                /**Get general info ra */
+                 this.commonService.getGeneralInfo(this.newRAname).subscribe({
+                   next: (result) => {
+                     this.ra.general_information = result;
+                     this.func.refreshRA();
+                     setTimeout(() => {
+                       this.global.interfaceVisible = true;
+                     }, 500);
+                   },
+                   error: (e) => {
+                     console.log(e);
+                   },
+                 });
+              // }
+            },
+            error: (e) => {
+              console.error(e);
+            },
+          });
+          this.toastr.success("Successfully renamed","")
+        }
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
   selectModelFile(event) {
     this.modelFile = event.target.files[0];
   }

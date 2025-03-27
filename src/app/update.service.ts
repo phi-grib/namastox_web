@@ -30,6 +30,11 @@ export class UpdateService {
     return this.http.put(url, formData);
   }
 
+  updateNameRA(ra_name: string, newRAname: string) {
+    const url: string = environment.baseUrl + 'rename/' + ra_name +"/"+newRAname;
+    return this.http.put(url, null);
+  }
+
   updateLink(ra_name: string, file: any) {
     const formData = new FormData();
     formData.append('file', file);
