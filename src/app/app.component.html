@@ -109,7 +109,7 @@
         role="tabpanel"
         aria-labelledby="pills-overview-tab"
       >
-        <app-overview *ngIf="this.global.interfaceVisible"></app-overview>
+        <app-overview *ngIf="this.ra.name"></app-overview>
       </div>
       <div
         class="tab-pane fade mt-2"
@@ -118,7 +118,7 @@
         aria-labelledby="pills-gen-information-tab"
       >
         <app-general-information
-          *ngIf="this.global.interfaceVisible"
+          *ngIf="this.ra.name"
         ></app-general-information>
       </div>
       <div
@@ -127,7 +127,7 @@
         role="tabpanel"
         aria-labelledby="pills-tasks-tab"
       >
-        <app-tasks *ngIf="this.global.interfaceVisible"></app-tasks>
+        <app-tasks *ngIf="this.ra.name"></app-tasks>
       </div>
       <div
         class="tab-pane fade mt-2"
@@ -135,7 +135,7 @@
         role="tabpanel"
         aria-labelledby="pills-decisions-tab"
       >
-        <app-decisions *ngIf="this.global.interfaceVisible"></app-decisions>
+        <app-decisions *ngIf="this.ra.name"></app-decisions>
       </div>
       <div
         class="tab-pane fade mt-2"

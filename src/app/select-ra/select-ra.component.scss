@@ -10,6 +10,31 @@
   margin: 5px 10px 5px 0;
 }
 
+.selectionra {
+margin-left: 10px !important;
+  color: black !important;
+  border-radius: 4px;
+  
+padding-left: 5px;
+ 
+}
+#icon-arrow {
+  font-size: 20px;
+  margin-right: 10px;
+  animation: mover 3s ease-in-out infinite;
+}
+
+@keyframes mover {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(8px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
 /* Style the input fields */
 .form-inline inpselectut {
   vertical-align: middle;
@@ -23,6 +48,7 @@ select {
   border: none;
   background-color: white !important;
   color: $secondary-color;
+  cursor: pointer;
 }
 
 .btn-nam-good {

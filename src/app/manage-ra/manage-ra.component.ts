@@ -22,7 +22,7 @@ export class ManageRaComponent implements AfterViewInit {
     private toastr: ToastrService,
     public global: Global,
     public ra: RA,
-    public user:User,
+    public user: User,
     private commonService: CommonService,
     private func: CommonFunctions,
     private manageRA: ManageRAsService,
@@ -38,7 +38,7 @@ export class ManageRaComponent implements AfterViewInit {
         this.isLoading = false;
       },
       (error) => {
-        this.toastr.error(error.error.message,'')
+        this.toastr.error(error.error.message, '');
         this.isLoading = false;
       }
     );
@@ -47,19 +47,37 @@ export class ManageRaComponent implements AfterViewInit {
     this.modelFile = event.target.files[0];
   }
 
-  changeModelRepo(){
-    this.updateService.updateModelsRepo(this.newRepo).subscribe(result => {
-      if(result['success']){
-        this.toastr.success('Repository updated successfully','')
+  changeModelRepo() {
+    this.updateService.updateModelsRepo(this.newRepo).subscribe(
+      (result) => {
+        if (result['success']) {
+          this.toastr.success('Repository updated successfully', '');
+        }
+      },
+      (error) => {
+        console.log(error);
+        this.toastr.error(error.error, '');
       }
-    }, error => {
-      console.log(error)
-      this.toastr.error(error.error,'')
-    })
+    );
   }
 
   duplicateRA() {
-    console.log('duplicate RA');
+    this.manageRA.cloneRA(this.ra.name).subscribe({
+      next: (result) => {
+        if (result['success']) {
+          this.toastr.success('Cloned successfully', '');
+          this.commonService.getRaList().subscribe({
+            next: (result: any) => {
+              this.ra.listRA = [...result];
+            },
+          });
+        }
+      },
+      error: (e) => {
+        this.toastr.error('Failed', 'check the console for more information');
+        console.log(e);
+      },
+    });
   }
   showConfModal() {}
   ngAfterViewInit() {}
