@@ -18,6 +18,7 @@ export class GeneralInformationComponent implements OnInit {
   substance_CASRN: string = '';
   substance_SMILES: string = '';
   substance_id: string = '';
+  substance_characteristics : string = ""
   substance_file: File | null = null;
   form = new FormGroup({});
   model: any;
@@ -67,6 +68,7 @@ export class GeneralInformationComponent implements OnInit {
         this.substance_CASRN = '';
         this.substance_id = '';
         this.substance_SMILES = '';
+        this.substance_characteristics = '';
       }
       this.drawMol();
     });
@@ -89,6 +91,7 @@ export class GeneralInformationComponent implements OnInit {
       name: this.substance_name,
       casrn: this.substance_CASRN,
       smiles: this.substance_SMILES,
+      characteristics: this.substance_characteristics
     };
     if (edit) {
       this.ra.general_information.general.substances[this.idxMol] = substance;

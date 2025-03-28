@@ -25,7 +25,7 @@
         >
         <div class="col">
           <input
-          [disabled]="!this.user.write"
+            [disabled]="!this.user.write"
             name="general_description"
             [placeholder]="
               this.ra.general_information.placeholders['general_description']
@@ -45,7 +45,7 @@
         >
         <div class="col">
           <input
-          [disabled]="!this.user.write"
+            [disabled]="!this.user.write"
             name="background"
             [placeholder]="
               this.ra.general_information.placeholders['background']
@@ -64,7 +64,7 @@
         >
         <div class="col">
           <input
-          [disabled]="!this.user.write"
+            [disabled]="!this.user.write"
             name="endpoint"
             [placeholder]="this.ra.general_information.placeholders['endpoint']"
             [(ngModel)]="this.ra.general_information.general.endpoint"
@@ -81,7 +81,7 @@
         >
         <div class="col">
           <input
-          [disabled]="!this.user.write"
+            [disabled]="!this.user.write"
             name="administration_route"
             [placeholder]="
               this.ra.general_information.placeholders['administration_route']
@@ -102,7 +102,7 @@
         >
         <div class="col">
           <input
-          [disabled]="!this.user.write"
+            [disabled]="!this.user.write"
             name="regulatory_framework"
             [placeholder]="
               this.ra.general_information.placeholders['regulatory_framework']
@@ -123,7 +123,7 @@
         >
         <div class="col">
           <input
-          [disabled]="!this.user.write"
+            [disabled]="!this.user.write"
             name="species"
             [placeholder]="this.ra.general_information.placeholders['species']"
             [(ngModel)]="this.ra.general_information.general.species"
@@ -140,7 +140,7 @@
         >
         <div class="col">
           <input
-          [disabled]="!this.user.write"
+            [disabled]="!this.user.write"
             name="uncertainty"
             [placeholder]="
               this.ra.general_information.placeholders['uncertainty']
@@ -158,7 +158,7 @@
         >
         <div class="col">
           <input
-          [disabled]="!this.user.write"
+            [disabled]="!this.user.write"
             name="workflow_custom"
             [placeholder]="
               this.ra.general_information.placeholders['workflow_custom']
@@ -170,41 +170,10 @@
           />
         </div>
       </div>
-      <div class="row mb-3">
-        <label class="col-3 col-form-label" for="">
-          Permissions
-        </label>
-        <div class="col">
-          <div class="row">
-            <div class="col">
-              <div class="form-floating">
-                <textarea id="readPermission" [disabled]="!this.user.write" name="readPermission" [(ngModel)]="readPermission"  class="form-control" placeholder="Leave a comment here"  style="height: 100px"></textarea>
-                <label for="floatingTextarea2">  <i class="fa-brands icon fa-readme"></i>  Read</label>
-              </div>
-            </div>
-            <div class="col">
-
-              <div class="form-floating">
-                <textarea  id="writePermission" [disabled]="!this.user.write" name="writePermission" [(ngModel)]="writePermission"  class="form-control" placeholder="Leave a comment here"  style="height: 100px"></textarea>
-                <label for="floatingTextarea2">   <i class="fa-solid fa-pencil"></i> Write</label>
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </div>
       <div class="col mb-3 d-flex justify-content-end">
-        <div class="btn-group" role="group" aria-label="Basic example">
+        <div class="btn-group mt-3" role="group" aria-label="Basic example">
           <button
-          [disabled]="!this.user.write"
-          type="button"
-          class="btn btn-ets-do"
-          (click)="applyPermissions()"
-        >
-          Apply Permissions
-        </button>
-          <button
-          [disabled]="!this.user.write"
+            [disabled]="!this.user.write"
             type="button"
             class="btn btn-ets-do"
             data-bs-toggle="modal"
@@ -212,7 +181,6 @@
           >
             Add Molecule
           </button>
-          <button type="button" [disabled]="!this.user.write" class="btn btn-ets-do">Import Table</button>
         </div>
       </div>
       <div class="containerMols">
@@ -242,10 +210,10 @@
                 {{ this.ra.general_information.general.substances[idx].casrn }}
               </td>
               <td><img id="canvas{{ idx }}" /></td>
-              <td>
+              <td class="text-end">
                 <div class="btn-group" role="group" aria-label="Basic example">
                   <button
-                  [disabled]="!this.user.write"
+                    [disabled]="!this.user.write"
                     type="button"
                     (click)="deleteMol(idx)"
                     class="btn btn-ets-delete"
@@ -253,7 +221,7 @@
                     Delete
                   </button>
                   <button
-                  [disabled]="!this.user.write"
+                    [disabled]="!this.user.write"
                     type="button"
                     (click)="editMol(idx)"
                     class="btn btn-ets-do"
@@ -268,7 +236,67 @@
           </tbody>
         </table>
       </div>
-      <button type="submit" [disabled]="!this.user.write" class="btn btn-ets-do submit-button">Submit</button>
+
+      <hr />
+
+      <div class="row mb-3 mt-5">
+        <label class="col-3 col-form-label" for=""> Permissions </label>
+        <div class="col">
+          <div class="row">
+            <div class="col">
+              <div class="form-floating">
+                <textarea
+                  id="readPermission"
+                  [disabled]="!this.user.write"
+                  name="readPermission"
+                  [(ngModel)]="readPermission"
+                  class="form-control"
+                  placeholder="Leave a comment here"
+                  style="height: 100px"
+                ></textarea>
+                <label for="floatingTextarea2">
+                  <i class="fa-brands icon fa-readme"></i> Read</label
+                >
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-floating">
+                <textarea
+                  id="writePermission"
+                  [disabled]="!this.user.write"
+                  name="writePermission"
+                  [(ngModel)]="writePermission"
+                  class="form-control"
+                  placeholder="Leave a comment here"
+                  style="height: 100px"
+                ></textarea>
+                <label for="floatingTextarea2">
+                  <i class="fa-solid fa-pencil"></i> Write</label
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col mb-3 d-flex justify-content-end">
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <button
+            [disabled]="!this.user.write"
+            type="button"
+            class="btn btn-ets-do"
+            (click)="applyPermissions()"
+          >
+            Apply Permissions
+          </button>
+        </div>
+      </div>
+      <button
+        type="submit"
+        [disabled]="!this.user.write"
+        class="btn btn-ets-do submit-button"
+      >
+        Submit
+      </button>
     </form>
   </div>
 </div>
@@ -375,6 +403,24 @@
                   class="form-control text-start"
                   id="substance_file"
                 />
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="inputPassword3" class="col-2 col-form-label"></label>
+              <div class="col">
+                <div class="form-floating">
+                  <textarea
+                    id="substance_characteristics"
+                    name="substance_characteristics"
+                    [(ngModel)]="substance_characteristics"
+                    class="form-control"
+                    placeholder="Leave a comment here"
+                    style="height: 100px"
+                  ></textarea>
+                  <label for="floatingTextarea2">
+                    Define the characterization of the compound
+                  </label>
+                </div>
               </div>
             </div>
             <div class="row mb-3">

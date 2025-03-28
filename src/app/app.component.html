@@ -1,4 +1,4 @@
-<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+<ul class="nav nav-pills mb-3 align-items-center" id="pills-tab" role="tablist">
   <li class="nav-item" role="presentation">
     <button
       class="nav-link active"
@@ -71,11 +71,7 @@
       Notes
     </button>
   </li>
-  <li
-    style="margin-right: auto !important"
-    class="nav-item"
-    role="presentation"
-  >
+  <li class="nav-item" role="presentation">
     <button
       class="nav-link"
       id="pills-report-tab"
@@ -89,8 +85,13 @@
       Report
     </button>
   </li>
+  <div class="help-container" style="margin-right: auto !important">
+    <a href="https://landing-page-namastox.vercel.app/" target="_blank">
+      <i class="fa-solid fa-circle-question resource-icon"></i>
+    </a>
+  </div>
 
-    <app-user-info></app-user-info>
+  <app-user-info></app-user-info>
 
   <img style="height: 44px" [src]="'../../assets/img/aspis_logo.png'" alt="" />
   <img
@@ -99,7 +100,7 @@
     alt=""
   />
 </ul>
-<as-split  style="height: 93vh" class="" direction="horizontal">
+<as-split style="height: 93vh" class="" direction="horizontal">
   <as-split-area [size]="this.navbarleft">
     <div class="tab-content container-fluid" id="pills-tabContent">
       <app-select-ra></app-select-ra>
@@ -117,9 +118,7 @@
         role="tabpanel"
         aria-labelledby="pills-gen-information-tab"
       >
-        <app-general-information
-          *ngIf="this.ra.name"
-        ></app-general-information>
+        <app-general-information *ngIf="this.ra.name"></app-general-information>
       </div>
       <div
         class="tab-pane fade mt-2"
@@ -151,12 +150,11 @@
         role="tabpanel"
         aria-labelledby="pills-report-tab"
       >
-      <app-report></app-report>
+        <app-report></app-report>
       </div>
     </div>
   </as-split-area>
   <as-split-area [size]="this.navbarright">
     <app-workflow></app-workflow>
   </as-split-area>
-</as-split> 
-
+</as-split>
