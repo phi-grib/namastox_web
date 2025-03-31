@@ -7,7 +7,7 @@
   border-width: 0;
   font-family: "Barlow Semi Condensed", "Arial", "Helvetica";
   letter-spacing: 0.05em;
-  border-radius: 0;
+  border-radius: 4px;
 }
 
 .btn-ets-edit:hover,
@@ -64,4 +64,17 @@
 .btn-ets-bad.active {
   background-color: #9e9d9d;
   color: #ffffff;
+}
+
+
+.btn-start-group {
+  border-radius: 4px 0px 0px 4px !important;
+}
+
+.btn-end-group {
+  border-radius: 0px 4px 4px 0px !important;
+}
+
+.border-btn{
+  border-radius: 4px !important;
 }

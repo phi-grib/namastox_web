@@ -3,16 +3,16 @@
     <button
       (click)="focus()"
       type="button"
-      class="btn btn-ets-do"
+      class="btn btn-ets-do btn-start-group"
       data-bs-toggle="modal"
       data-bs-target="#newRA"
     >
-      New RA
+      New
     </button>
     <button
     [disabled]="!this.user.write"
       type="button"
-      class="btn btn-ets-do"
+      class="btn btn-ets-do "
       data-bs-toggle="modal"
       data-bs-target="#changeNameRA"
     >
@@ -22,9 +22,9 @@
       [disabled]="!this.user.write"
       (click)="duplicateRA()"
       type="button"
-      class="btn btn-ets-do"
+      class="btn btn-ets-do duplicate-btn"
     >
-      Duplicate RA
+      Duplicate
     </button>
     <button
       (click)="deleteRA()"
@@ -32,7 +32,7 @@
       type="button"
       class="btn btn-ets-delete"
     >
-      Delete RA
+      Delete
     </button>
     <button
       (click)="deleteStep()"
@@ -42,12 +42,12 @@
         !this.user.write
       "
       type="button"
-      class="btn btn-ets-delete"
+      class="btn btn-ets-delete delete-step-btn"
     >
       Delete Step
     </button>
     <button (click)="importRA()" type="button" class="btn btn-ets-bad">
-      Import RA
+      Import
     </button>
     <input
       type="file"
@@ -62,12 +62,12 @@
       type="button"
       class="btn btn-ets-bad"
     >
-      Export RA
+      Export
     </button>
     <button
       (click)="showConfModal()"
       type="button"
-      class="btn btn-ets-bad"
+      class="btn btn-ets-bad btn-end-group"
       data-bs-toggle="modal"
       data-bs-target="#confModal"
     >

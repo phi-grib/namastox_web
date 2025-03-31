@@ -7,7 +7,7 @@
   >
     <div class="d-flex justify-content-end">
 
-      <a  class="btn btn-ets-do mb-2"
+      <a  class="btn btn-ets-do mb-2 btn-start-group"
       *ngIf="this.pending_task.result.result_type === 'value'"
       role="button"
       (click)="openModalMethod(false)"
@@ -41,7 +41,7 @@
         data-bs-toggle="modal"
         data-bs-target="#predModal"
         role="button"
-        class="btn btn-ets-do mb-2"
+        class="btn btn-ets-do btn-end-group mb-2"
         >Predict</a
       >
     </div>
@@ -197,7 +197,7 @@
               />
             </div>
             <div class="col-1 text-center">
-              <a role="button" class="btn btn-ets-do " (click)="addDocument()">Save</a>
+              <a role="button" class="btn btn-ets-do border-btn" (click)="addDocument()">Save</a>
               <!-- <a
               style="background: rgb(250,250,250)"
                 (click)="addDocument()"
@@ -263,7 +263,7 @@
           (click)="back()"
           *ngIf="this.editMode"
           type="submit"
-          class="btn btn-ets-delete"
+          class="btn btn-ets-delete border-btn"
         >
           Back
         </button>
@@ -272,7 +272,7 @@
         <button
           [disabled]="taskForm.invalid || !this.user.write"
           type="submit"
-          class="btn btn-ets-do submit-button"
+          class="btn btn-ets-do submit-button border-btn"
         >
           Submit
         </button>

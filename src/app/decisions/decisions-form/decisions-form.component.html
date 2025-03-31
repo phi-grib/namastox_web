@@ -39,7 +39,7 @@
         data-bs-toggle="modal"
         (click)="openSupportModal()"
         data-bs-target="#supportModal"
-        class="btn ms-auto btn-ets-do"
+        class="btn ms-auto btn-ets-do border-btn"
         role="button"
         >support</a
       >
@@ -105,7 +105,7 @@
           />
         </div>
         <div class="col-1 ">
-          <a role="button" class="btn btn-ets-do " (click)="addDocument()">Save</a>
+          <a role="button" class="btn btn-ets-do border-btn" (click)="addDocument()">Save</a>
         </div>
       </div>
     </div>
@@ -168,7 +168,7 @@
         (click)="back()"
         *ngIf="this.editMode"
         type="submit"
-        class="btn btn-ets-delete"
+        class="btn btn-ets-delete border-btn"
       >
         Back
       </button>
@@ -177,7 +177,7 @@
       <button
         [disabled]="decisionForm.invalid || !this.user.write"
         type="submit"
-        class="btn btn-ets-do submit-button"
+        class="btn btn-ets-do submit-button border-btn"
       >
         Submit
       </button>
