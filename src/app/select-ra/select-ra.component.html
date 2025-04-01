@@ -17,13 +17,14 @@
       <i class="fa-solid fa-bars icon mt-2"></i>
     </a>
     <div
-    class="d-flex-inline"
+    class="d-flex-inline "
   >
     <select
       id="ra1"
       (change)="loadRA()"
       [(ngModel)]="this.ra.name"
       aria-label="Default select example"
+      class="selectorRA"
     >
       <option *ngFor="let ra of this.ra.listRA" [value]="ra">{{ ra }}</option>
     </select>

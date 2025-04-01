@@ -11,18 +11,25 @@
 }
 
 .selectionra {
-margin-left: 10px !important;
+  margin-left: 10px !important;
   color: black !important;
   border-radius: 4px;
-  
-padding-left: 5px;
- 
+
+  padding-left: 5px;
 }
+.selectorRA {
+  border: 1px solid whitesmoke;
+  border-radius: 4px;
+  outline: none;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+}
+
 #icon-arrow {
   font-size: 20px;
   margin-right: 10px;
   animation: mover 3s ease-in-out infinite;
 }
+
 
 @keyframes mover {
   0% {
@@ -74,7 +81,6 @@ select {
   border: 0px transparent;
 }
 
-
 .read-only {
   font-size: 14px;
   margin-left: 5px;
@@ -82,7 +88,6 @@ select {
 
   opacity: 0.8;
 }
-
 
 .icon {
   &:hover {
