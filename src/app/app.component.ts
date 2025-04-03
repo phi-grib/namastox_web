@@ -22,14 +22,16 @@ export class AppComponent implements OnInit {
     private toastr: ToastrService, 
   ) {}
   ngOnInit(): void {
-        this.keycloackService.getSessionUser().subscribe({
-          next: (result:any) => {
-            this.user.username = result['username']
-          }
-        })
+    
+        // this.keycloackService.getSessionUser().subscribe({
+        //   next: (result:any) => {
+        //     console.log("aqui")
+        //     this.user.username = result['username']
+        //   }
+        // })
 
     //  DEVELOPMENT
-  // this.user.username = 'test123';
+  this.user.username = 'test123';
     this.commonService.getRaList().subscribe({
       next: (result: any) => {
         this.ra.listRA = [...result];

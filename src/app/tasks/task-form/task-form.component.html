@@ -7,7 +7,7 @@
   >
     <div class="d-flex justify-content-end">
 
-      <a  class="btn btn-ets-do mb-2 btn-start-group"
+      <a  class="btn btn-ets-secondary-do mb-2 btn-start-group"
       *ngIf="this.pending_task.result.result_type === 'value'"
       role="button"
       (click)="openModalMethod(false)"
@@ -16,7 +16,7 @@
       >
       Add method
     </a>
-      <a  class="btn btn-ets-do mb-2"
+      <a  class="btn btn-ets-secondary-do mb-2"
       *ngIf="this.pending_task.result.result_type === 'value'"
       role="button"
       (click)="addParameterMode()"
@@ -31,7 +31,7 @@
       data-bs-toggle="modal"
       data-bs-target="#importTableModal"
       role="button"
-      class="btn btn-ets-do mb-2"
+      class="btn btn-ets-secondary-do btn-end-group mb-2"
       >Import Table</a>
       <a
         *ngIf="
@@ -197,7 +197,7 @@
               />
             </div>
             <div class="col-1 text-center">
-              <a role="button" class="btn btn-ets-do border-btn" (click)="addDocument()">Save</a>
+              <a role="button" class="btn btn-ets-secondary-do border-btn" (click)="addDocument()">Save</a>
               <!-- <a
               style="background: rgb(250,250,250)"
                 (click)="addDocument()"
@@ -522,7 +522,7 @@ aria-hidden="true"
      <div class="modal-footer">
       <a
         (click)="addNewParameter()"
-        class="btn btn-ets-do"
+        class="btn btn-ets-do border-btn"
         role="button"
         >
         {{ editParameterMode ? 'Update' : 'Add' }}
@@ -530,7 +530,7 @@ aria-hidden="true"
        <button
         type="button"
         id="btncloseImportTableModal"
-        class="btn btn-ets-bad"
+        class="btn btn-ets-bad border-btn"
         data-bs-dismiss="modal"
       >
       Close
@@ -641,7 +641,7 @@ aria-hidden="true"
       [disabled]="!this.user.write"
         [disabled]="methodForm.invalid"
         (click)="addMethod()"
-        class="btn btn-ets-do"
+        class="btn btn-ets-do border-btn"
         role="button"
         >
         {{ editMethodMode ? 'Update' : 'Add' }}

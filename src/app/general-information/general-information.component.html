@@ -175,7 +175,7 @@
           <button
             [disabled]="!this.user.write"
             type="button"
-            class="btn btn-ets-do"
+            class="btn btn-ets-secondary-do border-btn"
             data-bs-toggle="modal"
             data-bs-target="#exampleModal"
           >
@@ -283,20 +283,22 @@
           <button
             [disabled]="!this.user.write"
             type="button"
-            class="btn btn-ets-do"
+            class="btn btn-ets-secondary-do border-btn"
             (click)="applyPermissions()"
           >
             Apply Permissions
           </button>
+
+          <button
+          style="margin-left: 8px !important"
+          type="submit"
+          [disabled]="!this.user.write"
+          class="btn btn-ets-do submit-button border-btn"
+        >
+          Submit
+        </button>
         </div>
       </div>
-      <button
-        type="submit"
-        [disabled]="!this.user.write"
-        class="btn btn-ets-do submit-button"
-      >
-        Submit
-      </button>
     </form>
   </div>
 </div>

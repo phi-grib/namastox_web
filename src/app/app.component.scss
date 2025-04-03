@@ -9,14 +9,7 @@
   background-color: $tertiary-color;
 }
 
-.resource-icon {
-  color: white;
-  font-size: 20px;
-  &:hover {
-    color: whitesmoke;
-    cursor: pointer;
-  }
-}
+
 .help-container {
   background-color: transparent;
   transition: 0.3s;
@@ -29,12 +22,9 @@
 
   display: flex;
   margin-top: 5px;
-  padding: 5px;
+  margin-right: 5px;
   gap: 8px;
-
-  font-size: 15px;
-  margin-right: 20px;
-  border-radius: 5px;
+  border-radius: 5px 5px 0px 0px;
   align-items: center;
-  height: 80%;
+
 }
