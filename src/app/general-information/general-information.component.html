@@ -156,18 +156,35 @@
         <label for="inputPassword3" class="col-3 col-form-label"
           >Workflow custom:</label
         >
+
+
         <div class="col">
+          
+          <select
+          id="workflow_custom"
+          (change)="workflowOption()"
+          [(ngModel)]="optionWorkflow"
+          aria-label="Default select example"
+          class="mb-2 selector"
+          name="optionWorkflow"
+        >
+          <option *ngFor="let option of optionsWorkflowCustom" [value]="option">{{ option }}</option>
+        </select>
+    
           <input
-            [disabled]="!this.user.write"
-            name="workflow_custom"
-            [placeholder]="
-              this.ra.general_information.placeholders['workflow_custom']
-            "
-            type="file"
-            class="form-control"
-            id="workflow_custom"
-            (change)="uploadCustomWorkflow($event)"
-          />
+          *ngIf="optionWorkflow == 'custom' "
+          [disabled]="!this.user.write"
+          name="workflow_custom"
+          [placeholder]="
+            this.ra.general_information.placeholders['workflow_custom']
+          "
+          type="file"
+          class="form-control"
+          id="workflow_custom"
+          (change)="uploadCustomWorkflow($event)"
+        />
+
+    
         </div>
       </div>
       <div class="col mb-3 d-flex justify-content-end">
@@ -216,7 +233,7 @@
                     [disabled]="!this.user.write"
                     type="button"
                     (click)="deleteMol(idx)"
-                    class="btn btn-ets-delete"
+                    class="btn btn-ets-delete btn-start-group"
                   >
                     Delete
                   </button>
@@ -224,7 +241,7 @@
                     [disabled]="!this.user.write"
                     type="button"
                     (click)="editMol(idx)"
-                    class="btn btn-ets-do"
+                    class="btn btn-ets-do  btn-end-group"
                     data-bs-toggle="modal"
                     data-bs-target="#editMolModal"
                   >
@@ -430,7 +447,7 @@
                 <button
                   type="button"
                   (click)="autocomplete()"
-                  class="btn btn-ets-do"
+                  class="btn btn-ets-do border-btn"
                 >
                   Autocomplete
                 </button>
@@ -443,11 +460,11 @@
         <button
           type="button"
           (click)="addMolecule(false)"
-          class="btn btn-ets-do"
+          class="btn btn-ets-do border-btn"
         >
           Add
         </button>
-        <button type="button" class="btn btn-ets-bad" data-bs-dismiss="modal">
+        <button type="button" class="btn btn-ets-bad border-btn" data-bs-dismiss="modal">
           Close
         </button>
       </div>

@@ -1,0 +1,11 @@
+@import "./colors.scss";
+
+
+.selector {
+    border: 1px solid whitesmoke;
+    border-radius: 4px;
+    outline: none;
+    background-color: transparent;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+    color: $secondary-color;
+}
