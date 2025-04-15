@@ -18,14 +18,14 @@ export class GeneralInformationComponent implements OnInit {
   substance_CASRN: string = '';
   substance_SMILES: string = '';
   substance_id: string = '';
-  optionsWorkflowCustom = ["workflow 1","workflow 2","workflow 3","custom"]
+  optionsWorkflowCustom = ["ASPA 1.9","custom"]
   substance_characteristics : string = ""
   substance_file: File | null = null;
   form = new FormGroup({});
   model: any;
   complete: boolean = false;
   listMols = [];
-  optionWorkflow = ""
+  optionWorkflow = this.optionsWorkflowCustom[0]
   idxMol = -1;
   workflow_custom: File | null = null;
   objectKeys = Object.keys;

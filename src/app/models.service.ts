@@ -9,7 +9,7 @@ export class ModelsService {
   constructor(private http: HttpClient) {}
 
   getModels() {
-    const url: string = environment.baseUrl + 'models';
+    const url: string = environment.baseUrl + 'models/';
     return this.http.get(url);
   }
   getPrediction(ra_name: string, names, versions) {
