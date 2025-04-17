@@ -4,7 +4,7 @@ import { CommonService } from '../common.service';
 import { PendingTasks, RA, Results } from '../globals';
 import { PanZoomConfig, PanZoomAPI } from 'ngx-panzoom';
 import { Subscription } from 'rxjs';
-// import { toPng } from 'html-to-image';
+import { toPng } from 'html-to-image';
 
 @Component({
   selector: 'app-workflow',
@@ -28,19 +28,33 @@ export class WorkflowComponent implements AfterViewInit {
   ) {}
   @ViewChild('mermaidDiv', { static: false }) mermaidDiv: ElementRef;
 
-  flowchartRefresh() {
-    const element: any = this.mermaidDiv.nativeElement;
-    mermaid.render('graphDiv', this.ra.workflow, (svgCode, bindFunctions) => {
-      element.innerHTML = svgCode;
-      bindFunctions(element);
-      // if(this.ra.status.step >= 3){
-      //   const svgElement = this.elementRef.nativeElement.querySelector('#graphDiv');
-      //   this.renderer.removeAttribute(svgElement,'style');
-      //   this.renderer.setAttribute(svgElement,'width','730px');
-      // }
-    });
-    this.panZoomAPI.resetView();
+  async flowchartRefresh() {
+    const container: HTMLElement = this.mermaidDiv.nativeElement;
+    
+    (window as any).callback = (nodeId: string) => {
+      this.checkType(nodeId);
+    };
+  
+    try {
+   
+      const { svg, bindFunctions } = await mermaid.render('graphDiv', this.ra.workflow);
+      container.innerHTML = svg;
+      bindFunctions?.(container);
+      this.panZoomAPI.resetView();
+      const svgEl = container.querySelector('svg');
+      svgEl?.querySelectorAll('g.node').forEach((node: SVGGElement) => {
+        node.style.cursor = 'pointer';
+        node.addEventListener('click', () => { 
+          const match = node.id.match(/-(.*?)-/);
+          const nodeId = match[1]
+          if (nodeId) this.checkType(nodeId);
+        });
+      });
+    } catch (error) {
+      console.error('Error render Mermaid:', error);
+    }
   }
+  
 
    getElementsByTableID = (tableID) => {
     const elements:any = {
@@ -128,6 +142,7 @@ export class WorkflowComponent implements AfterViewInit {
 
   checkType(taskName) {
     this.controlWorkflow +=1;
+
     // RESULTS
     const pendingTaskResults = this.pendingTasks.results.find(
       (task) => task.id == taskName
@@ -168,31 +183,31 @@ export class WorkflowComponent implements AfterViewInit {
 	}
   ngAfterViewInit(): void {
     this.apiSubscription = this.panZoomConfig.api.subscribe(
-			(api: PanZoomAPI) => (this.panZoomAPI = api)
-		);
-    (window as any).onA = (nodeName) => {
-        this.checkType(nodeName);
-    };
+      (api) => (this.panZoomAPI = api)
+    );
+
+  
     mermaid.initialize({
+      startOnLoad: false,
       securityLevel: 'loose',
       flowchart: {
         useMaxWidth: true,
-        htmlLabels: true,
-      //  curve: 'stepAfter',
-      },
+        htmlLabels: true
+      }
     });
 
+ 
     this.commonService.refreshWorklfow$.subscribe(() => {
       this.flowchartRefresh();
     });
   }
 
-  // downloadWorkflow() {
-  //   toPng(document.getElementById('graphDiv'))
-  //     .then((dataUrl) => {
-  //       this.downloadFile(dataUrl, 'image/png', 'imagen.png');
-  //     });
-  // }
+   downloadWorkflow() {
+     toPng(document.getElementById('graphDiv'))
+       .then((dataUrl) => {
+         this.downloadFile(dataUrl, 'image/png', 'imagen.png');
+       });
+   }
 
   downloadFile(dataUrl: string, type: string, filename: string) {
     const link = document.createElement('a');
