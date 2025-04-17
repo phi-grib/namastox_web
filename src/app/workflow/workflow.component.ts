@@ -4,7 +4,7 @@ import { CommonService } from '../common.service';
 import { PendingTasks, RA, Results } from '../globals';
 import { PanZoomConfig, PanZoomAPI } from 'ngx-panzoom';
 import { Subscription } from 'rxjs';
-import { toPng } from 'html-to-image';
+// import { toPng } from 'html-to-image';
 
 @Component({
   selector: 'app-workflow',
@@ -36,25 +36,22 @@ export class WorkflowComponent implements AfterViewInit {
     };
   
     try {
-   
+  
       const { svg, bindFunctions } = await mermaid.render('graphDiv', this.ra.workflow);
       container.innerHTML = svg;
       bindFunctions?.(container);
       this.panZoomAPI.resetView();
       const svgEl = container.querySelector('svg');
       svgEl?.querySelectorAll('g.node').forEach((node: SVGGElement) => {
-        node.style.cursor = 'pointer';
         node.addEventListener('click', () => { 
           const match = node.id.match(/-(.*?)-/);
-          const nodeId = match[1]
-          if (nodeId) this.checkType(nodeId);
+          this.checkType(match[1]);
         });
       });
     } catch (error) {
       console.error('Error render Mermaid:', error);
     }
   }
-  
 
    getElementsByTableID = (tableID) => {
     const elements:any = {
@@ -141,20 +138,22 @@ export class WorkflowComponent implements AfterViewInit {
   }
 
   checkType(taskName) {
-    this.controlWorkflow +=1;
-
+    
     // RESULTS
+    // check if task is pending or past
     const pendingTaskResults = this.pendingTasks.results.find(
       (task) => task.id == taskName
     );
     const pastTaskResults = this.results.results.find(
       (task) => task.id == taskName
     );
-    if(this.controlWorkflow == 1){
+
     if (pastTaskResults) this.redirectToTask('results', false, taskName);
-    }
+    // or
     if (pendingTaskResults) this.redirectToTask('results', true, taskName);
+
     // DECISIONS
+    // check if decision is pending or past
     const pendingTaskDecisions = this.pendingTasks.decisions.find(
       (task) => task.id == taskName
     );
@@ -162,12 +161,11 @@ export class WorkflowComponent implements AfterViewInit {
       (task) => task.id == taskName
     );
     if (pendingTaskDecisions) this.redirectToTask('decisions', true, taskName);
-    if(this.controlWorkflow == 1){
+  
     if (pastTaskDecisions) this.redirectToTask('decisions', false, taskName);
-    }
-    if(this.controlWorkflow ==2){
-      this.controlWorkflow = 0;
-    }
+   
+  
+  
   }
 
 	zoomIn() {
@@ -186,7 +184,6 @@ export class WorkflowComponent implements AfterViewInit {
       (api) => (this.panZoomAPI = api)
     );
 
-  
     mermaid.initialize({
       startOnLoad: false,
       securityLevel: 'loose',
@@ -195,19 +192,17 @@ export class WorkflowComponent implements AfterViewInit {
         htmlLabels: true
       }
     });
-
- 
     this.commonService.refreshWorklfow$.subscribe(() => {
       this.flowchartRefresh();
     });
   }
 
-   downloadWorkflow() {
-     toPng(document.getElementById('graphDiv'))
-       .then((dataUrl) => {
-         this.downloadFile(dataUrl, 'image/png', 'imagen.png');
-       });
-   }
+  // downloadWorkflow() {
+  //   toPng(document.getElementById('graphDiv'))
+  //     .then((dataUrl) => {
+  //       this.downloadFile(dataUrl, 'image/png', 'imagen.png');
+  //     });
+  // }
 
   downloadFile(dataUrl: string, type: string, filename: string) {
     const link = document.createElement('a');
