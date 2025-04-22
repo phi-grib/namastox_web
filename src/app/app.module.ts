@@ -1,5 +1,5 @@
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { MarkdownModule, MarkedOptions, MarkedRenderer } from 'ngx-markdown';
+import { MarkdownModule, MARKED_OPTIONS, MarkedRenderer,MarkedOptions } from 'ngx-markdown';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
@@ -31,6 +31,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { FilterVersionPipe } from './filter-version.pipe';
 import { TruncateDecimalsPipe } from './truncate-decimals.pipe';
 import { UserInfoComponent } from './user-info/user-info.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,12 +67,12 @@ import { UserInfoComponent } from './user-info/user-info.component';
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     MarkdownModule.forRoot({
-      loader: HttpClient,
+      loader: HttpClient,  // solo si usas [src]
       markedOptions: {
-        provide: MarkedOptions,
-        useFactory: markedOptionsFactory,
+        provide: MARKED_OPTIONS,
+        useFactory: markedOptionsFactory
       },
-    })
+    }),
   ],
   providers: [CookieService,RA,Global,PendingTasks,Results,User,Method],
   bootstrap: [AppComponent]
@@ -93,7 +94,5 @@ export function markedOptionsFactory(): MarkedOptions {
     gfm: true,
     breaks: false,
     pedantic: false,
-    smartLists: true,
-    smartypants: false,
   };
 }
