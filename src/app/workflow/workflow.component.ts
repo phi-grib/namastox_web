@@ -12,7 +12,6 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./workflow.component.scss'],
 })
 export class WorkflowComponent implements AfterViewInit {
-  controlWorkflow: number = 0;
   panZoomConfig: PanZoomConfig = new PanZoomConfig(
      {freeMouseWheelFactor:0.001,zoomOnDoubleClick:false,dynamicContentDimensions:true,initialZoomLevel:3}
   );
