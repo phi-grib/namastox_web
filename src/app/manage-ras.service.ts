@@ -24,14 +24,14 @@ export class ManageRAsService {
   }
 
   exportRA(ra_name: string) {
-    const url: string = environment.baseUrl + 'export/' + ra_name;
+    const url: string = environment.baseUrl + 'export/' + ra_name+"/";
     return this.http.get(url, { responseType: 'blob' });
   }
 
   importRA(file) {
     const formData = new FormData();
     formData.append('file', file);
-    const url: string = environment.baseUrl + 'import';
+    const url: string = environment.baseUrl + 'import/';
     return this.http.post(url, formData);
   }
   cloneRA(ra_name:string){
