@@ -2,6 +2,6 @@
 export const environment = {
     production: false,
     // read_only: false,
-    baseUrl: 'http://localhost:5000/namastox/v1/',  
+    baseUrl: 'https://localhost:5000/namastox/v1/',  
   };
   
