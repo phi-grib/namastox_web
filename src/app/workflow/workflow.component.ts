@@ -28,28 +28,16 @@ export class WorkflowComponent implements AfterViewInit {
   @ViewChild('mermaidDiv', { static: false }) mermaidDiv: ElementRef;
 
   async flowchartRefresh() {
-    const container: HTMLElement = this.mermaidDiv.nativeElement;
-    
-    (window as any).callback = (nodeId: string) => {
-      this.checkType(nodeId);
-    };
-  
-    try {
-  
-      const { svg, bindFunctions } = await mermaid.render('graphDiv', this.ra.workflow);
-      container.innerHTML = svg;
-      bindFunctions?.(container);
-      this.panZoomAPI.resetView();
-      const svgEl = container.querySelector('svg');
-      svgEl?.querySelectorAll('g.node').forEach((node: SVGGElement) => {
-        node.addEventListener('click', () => { 
-          const match = node.id.match(/-(.*?)-/);
-          this.checkType(match[1]);
-        });
+    const container = this.mermaidDiv.nativeElement as HTMLElement;
+    const { svg } = await mermaid.render('graphDiv', this.ra.workflow);
+    container.innerHTML = svg;
+    this.panZoomAPI.resetView();
+    container.querySelectorAll<SVGGElement>('.node').forEach(node => {
+      node.addEventListener('click', () => {
+        const match = node.id.match(/-(.*?)-/);
+        this.checkType(match?.[1] ?? '');
       });
-    } catch (error) {
-      console.error('Error render Mermaid:', error);
-    }
+    });
   }
 
    getElementsByTableID = (tableID) => {

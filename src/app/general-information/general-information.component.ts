@@ -135,8 +135,6 @@ export class GeneralInformationComponent implements OnInit {
         .uploadSubstances(this.substance_file)
         .subscribe((result) => {
           if (result['success']) {
-            console.log('Substances');
-            console.log(result['result']);
             this.ra.general_information.general.substances =
               this.ra.general_information.general.substances.concat(
                 result['result']

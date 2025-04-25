@@ -21,8 +21,8 @@
                 <th style="width:40%">Structure</th>
               </tr>
             </thead>
-            <tbody>
-              <tr *ngFor="let idx of objectKeys(this.ra.general_information.general.substances)">
+            <tbody *ngIf="this.ra.general_information?.general?.substances">
+              <tr  *ngFor="let idx of objectKeys(this.ra.general_information.general.substances)">
                 <td>{{this.ra.general_information.general.substances[idx].name}}</td>
                 <td>{{this.ra.general_information.general.substances[idx].casrn}}</td>
                 <td>{{this.ra.general_information.general.substances[idx].characteristics}}</td>

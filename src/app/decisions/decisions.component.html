@@ -70,7 +70,7 @@
                 <div class="col-2 text">
                   <strong>Description</strong>
                 </div>
-                <div class="col-10" *ngIf="this.pending_task['task description'].description" [innerHTML]="this.pending_task['task description'].description | autolinkPipe">
+                <div class="col-10" *ngIf="this.pending_task['task description']?.description" [innerHTML]="this.pending_task['task description'].description | autolinkPipe">
                 </div>
               </div>
               <div class="row">

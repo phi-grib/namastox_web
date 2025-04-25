@@ -11,8 +11,8 @@
           <input
             name="title"
             [disabled]="!this.user.write"
-            [placeholder]="this.ra.general_information.placeholders['title']"
-            [(ngModel)]="this.ra.general_information.general.title"
+            [placeholder]="this.ra.general_information?.placeholders['title']"
+            [(ngModel)]="this.ra.general_information?.general.title"
             type="text"
             class="form-control"
             id="title"
@@ -28,10 +28,10 @@
             [disabled]="!this.user.write"
             name="general_description"
             [placeholder]="
-              this.ra.general_information.placeholders['general_description']
+              this.ra.general_information?.placeholders['general_description']
             "
             [(ngModel)]="
-              this.ra.general_information.general.general_description
+              this.ra.general_information?.general.general_description
             "
             type="text"
             class="form-control"
@@ -48,9 +48,9 @@
             [disabled]="!this.user.write"
             name="background"
             [placeholder]="
-              this.ra.general_information.placeholders['background']
+              this.ra.general_information?.placeholders['background']
             "
-            [(ngModel)]="this.ra.general_information.general.background"
+            [(ngModel)]="this.ra.general_information?.general.background"
             type="text"
             class="form-control"
             id="background"
@@ -66,8 +66,8 @@
           <input
             [disabled]="!this.user.write"
             name="endpoint"
-            [placeholder]="this.ra.general_information.placeholders['endpoint']"
-            [(ngModel)]="this.ra.general_information.general.endpoint"
+            [placeholder]="this.ra.general_information?.placeholders['endpoint']"
+            [(ngModel)]="this.ra.general_information?.general.endpoint"
             type="text"
             class="form-control"
             id="endpoint"
@@ -84,10 +84,10 @@
             [disabled]="!this.user.write"
             name="administration_route"
             [placeholder]="
-              this.ra.general_information.placeholders['administration_route']
+              this.ra.general_information?.placeholders['administration_route']
             "
             [(ngModel)]="
-              this.ra.general_information.general.administration_route
+              this.ra.general_information?.general.administration_route
             "
             type="text"
             class="form-control"
@@ -105,10 +105,10 @@
             [disabled]="!this.user.write"
             name="regulatory_framework"
             [placeholder]="
-              this.ra.general_information.placeholders['regulatory_framework']
+              this.ra.general_information?.placeholders['regulatory_framework']
             "
             [(ngModel)]="
-              this.ra.general_information.general.regulatory_framework
+              this.ra.general_information?.general.regulatory_framework
             "
             type="text"
             class="form-control"
@@ -125,8 +125,8 @@
           <input
             [disabled]="!this.user.write"
             name="species"
-            [placeholder]="this.ra.general_information.placeholders['species']"
-            [(ngModel)]="this.ra.general_information.general.species"
+            [placeholder]="this.ra.general_information?.placeholders['species']"
+            [(ngModel)]="this.ra.general_information?.general.species"
             type="text"
             class="form-control"
             id="species"
@@ -143,9 +143,9 @@
             [disabled]="!this.user.write"
             name="uncertainty"
             [placeholder]="
-              this.ra.general_information.placeholders['uncertainty']
+              this.ra.general_information?.placeholders['uncertainty']
             "
-            [(ngModel)]="this.ra.general_information.general.uncertainty"
+            [(ngModel)]="this.ra.general_information?.general.uncertainty"
             type="text"
             class="form-control"
             id="uncertainty"
@@ -176,7 +176,7 @@
           [disabled]="!this.user.write"
           name="workflow_custom"
           [placeholder]="
-            this.ra.general_information.placeholders['workflow_custom']
+            this.ra.general_information?.placeholders['workflow_custom']
           "
           type="file"
           class="form-control"
@@ -202,7 +202,7 @@
       </div>
       <div class="containerMols">
         <table
-          *ngIf="this.ra.general_information.general.substances.length > 0"
+          *ngIf="this.ra.general_information?.general.substances.length > 0"
         >
           <thead class="thead">
             <tr>
@@ -350,7 +350,7 @@
                 <input
                   name="substance_name"
                   [placeholder]="
-                    this.ra.general_information.placeholders['substances'].name
+                    this.ra.general_information?.placeholders['substances']?.name
                   "
                   [(ngModel)]="this.substance_name"
                   type="text"
@@ -367,7 +367,7 @@
                 <input
                   name="substance_id"
                   [placeholder]="
-                    this.ra.general_information.placeholders['substances'].id
+                    this.ra.general_information?.placeholders['substances']?.id
                   "
                   [(ngModel)]="this.substance_id"
                   type="text"
@@ -384,7 +384,7 @@
                 <input
                   name="substance_CASRN"
                   [placeholder]="
-                    this.ra.general_information.placeholders['substances'][
+                    this.ra.general_information?.placeholders['substances'][
                       'cas-rn'
                     ]
                   "
