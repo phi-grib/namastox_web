@@ -1,0 +1,21 @@
+@import "../../assets/scss/colors.scss";
+
+.nav {
+  position: fixed;
+  background: none;
+  font-size: 16px;
+  z-index: 1;
+  &-link {
+    color: $secondary-color !important;
+    font-size: 16px;
+    opacity: 0.45;
+    &.active {
+      background: none !important;
+      opacity: 1;
+      color: $secondary-color !important;
+      font-weight: bold !important;
+      font-size: 16px !important;
+      border-radius: 0 !important;
+    }
+  }
+}

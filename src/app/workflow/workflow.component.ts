@@ -7,13 +7,13 @@ import { Subscription } from 'rxjs';
 // import { toPng } from 'html-to-image';
 
 @Component({
-  selector: 'app-workflow',
+  selector: 'app-workflow-progress',
   templateUrl: './workflow.component.html',
   styleUrls: ['./workflow.component.scss'],
 })
 export class WorkflowComponent implements AfterViewInit {
   panZoomConfig: PanZoomConfig = new PanZoomConfig(
-     {freeMouseWheelFactor:0.001,zoomOnDoubleClick:false,dynamicContentDimensions:true,initialZoomLevel:3}
+     {freeMouseWheelFactor:0.001,zoomOnDoubleClick:false,dynamicContentDimensions:true,initialZoomLevel:3,zoomLevels: 50}
   );
 	private panZoomAPI: PanZoomAPI;
 	private apiSubscription: Subscription;

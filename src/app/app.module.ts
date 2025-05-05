@@ -31,12 +31,16 @@ import { CookieService } from 'ngx-cookie-service';
 import { FilterVersionPipe } from './filter-version.pipe';
 import { TruncateDecimalsPipe } from './truncate-decimals.pipe';
 import { UserInfoComponent } from './user-info/user-info.component';
+import { WorkflowOptionsComponent } from './workflow-options/workflow-options.component';
+import { WorkflowFullViewComponent } from './workflow-full-view/workflow-full-view.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     WorkflowComponent,
+    WorkflowOptionsComponent,
     NotesComponent,
+    WorkflowFullViewComponent,
     OverviewComponent,
     GeneralInformationComponent,
     TasksComponent,

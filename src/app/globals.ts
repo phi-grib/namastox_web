@@ -11,6 +11,7 @@ export class RA {
   results: any = undefined;
   pending_tasks: any = [];
   workflow: any = undefined;
+  workflow_full_view: any = undefined;
   notes: any = [];
   note: any = {}
 }
@@ -33,6 +34,7 @@ export class Global {
   editModeTasks: boolean = false;
   editModeDecisions: boolean = false;
   permissions = {}
+  progressTab = true;
 }
 
 export class Model {

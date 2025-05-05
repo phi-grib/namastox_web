@@ -155,4 +155,9 @@ export class CommonService {
     const url: string = environment.baseUrl + 'note/' + ra_name + '/' + id;
     return this.http.delete(url);
   }
+
+  getCatalogue(ra_name: string){
+    const url: string = environment.baseUrl + "catalogue/" + ra_name;
+    return this.http.get(url)
+  }
 }
