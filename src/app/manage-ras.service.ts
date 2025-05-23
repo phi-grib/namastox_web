@@ -28,6 +28,11 @@ export class ManageRAsService {
     return this.http.get(url, { responseType: 'blob' });
   }
 
+  updateRA(ra:string,user:string) {
+    const url: string = environment.baseUrl + "update_ra";
+    return this.http.post(url,{ra,user})
+  }
+
   importRA(file) {
     const formData = new FormData();
     formData.append('file', file);

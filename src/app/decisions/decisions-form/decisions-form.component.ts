@@ -10,6 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CommonFunctions } from 'src/app/common.functions';
 import { CommonService } from 'src/app/common.service';
 import { PendingTasks, RA, Global, User } from 'src/app/globals';
+import { ManageRAsService } from 'src/app/manage-ras.service';
 import { UpdateService } from 'src/app/update.service';
 
 @Component({
@@ -46,7 +47,8 @@ export class DecisionsFormComponent {
     public pendingTasks: PendingTasks,
     private func: CommonFunctions,
     public global: Global,
-    public user: User
+    public user: User,
+    private manageRA:ManageRAsService
   ) {}
 
   isReportOrParameters(value): boolean {
@@ -187,7 +189,7 @@ export class DecisionsFormComponent {
         next: (result) => {
           if (result['success']) {
             this.pendingTasks.results = [];
-            this.func.refreshRA(); // call next step in the workflow
+            this.manageRA.updateRA(this.ra.name,this.user.username).subscribe()
             if (!this.editMode) {
               setTimeout(() => {
                 if (this.pendingTasks.results.length) {

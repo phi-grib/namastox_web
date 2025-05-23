@@ -6,6 +6,7 @@ import { RA, User } from '../globals';
 import { UpdateService } from '../update.service';
 import { ToastrService } from 'ngx-toastr';
 import * as SmilesDrawer from 'smiles-drawer';
+import { ManageRAsService } from '../manage-ras.service';
 
 @Component({
   selector: 'app-general-information',
@@ -38,7 +39,8 @@ export class GeneralInformationComponent implements OnInit {
     private updateService: UpdateService,
     private func: CommonFunctions,
     private toastr: ToastrService,
-    public user: User
+    public user: User,
+    private manageRA: ManageRAsService
   ) {}
   ngOnInit(): void {
     this.commonService.renderGeneralInfoCanvas$.subscribe((status) => {
@@ -265,7 +267,8 @@ export class GeneralInformationComponent implements OnInit {
         .subscribe({
           next: (result) => {
             if (result['success']) {
-              this.func.refreshRA();
+              // this.func.refreshRA();
+              this.manageRA.updateRA(this.ra.name,this.user.username).subscribe()
               this.toastr.success(
                 'RA ' + this.ra.name,
                 'SUCCESSFULLY UPDATED',

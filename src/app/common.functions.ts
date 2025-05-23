@@ -3,6 +3,7 @@ import { CommonService } from './common.service';
 import { PendingTasks, RA, Results, User, Global } from './globals';
 import { forkJoin } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { ManageRAsService } from './manage-ras.service';
 declare var $: any;
 @Injectable({
   providedIn: 'root',
@@ -13,6 +14,7 @@ export class CommonFunctions {
     private pendingTasks: PendingTasks,
     private results: Results,
     private commonService: CommonService,
+    private manageRA: ManageRAsService,
     private user: User,
     private toastr: ToastrService,
     private global: Global
@@ -66,8 +68,6 @@ export class CommonFunctions {
       this.separatePastTasks();
       this.ra.workflow = values[3]['result'];
       this.ra.workflow_full_view = values[4]['result']
-      console.log("full workflow view")
-      console.log(this.ra.workflow_full_view)
       $('#dtNotes').DataTable().destroy();
       this.ra.notes = values[5];
       setTimeout(() => {
@@ -92,6 +92,9 @@ export class CommonFunctions {
         }
       }, 500);
     });
+
+    
+
   }
 
   clearRA() {

@@ -22,15 +22,36 @@ export class AppComponent implements OnInit {
     private toastr: ToastrService, 
   ) {}
   ngOnInit(): void {
-    
-        this.keycloackService.getSessionUser().subscribe({
-          next: (result:any) => {
-            this.user.username = result['username']
+    //
+    const source = new EventSource('http://localhost:5000/stream');
+    source.addEventListener('ra_updated', (event: any) => {
+      const data = JSON.parse(event.data);
+
+      if(this.ra.name === data.ra) this.func.refreshRA() // if other user is in the same ra
+
+      //toast message for other users
+      if(this.user.username !== data.user){
+       
+        this.toastr.success(
+          "Has been updated by the user: "+ data.user,
+          '',
+          {
+            timeOut: 5000,
+            positionClass: 'toast-top-right',
           }
-        })
+        );
+
+      }
+
+    });
+          this.keycloackService.getSessionUser().subscribe({
+            next: (result:any) => {
+              this.user.username = result['username']
+            }
+          })
 
     //  DEVELOPMENT
-  // this.user.username = 'test123';
+//  this.user.username = 'test123';
     this.commonService.getRaList().subscribe({
       next: (result: any) => {
         this.ra.listRA = [...result];
