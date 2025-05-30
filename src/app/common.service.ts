@@ -156,8 +156,8 @@ export class CommonService {
     return this.http.delete(url);
   }
 
-  getCatalogue(ra_name: string){
-    const url: string = environment.baseUrl + "catalogue/" + ra_name;
-    return this.http.get(url)
-  }
+  // getCatalogue(ra_name: string){
+  //   const url: string = environment.baseUrl + "catalogue/" + ra_name;
+  //   return this.http.get(url)
+  // }
 }

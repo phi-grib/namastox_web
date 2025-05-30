@@ -47,14 +47,13 @@ export class CommonFunctions {
     let status$ = this.commonService.getStatus(this.ra.name);
     let results$ = this.commonService.getResults(this.ra.name);
     let workflow$ = this.commonService.getWorkflow(this.ra.name);
-    let workflowFullView$ = this.commonService.getCatalogue(this.ra.name);
+    // let workflowFullView$ = this.commonService.getCatalogue(this.ra.name);
     let notes$ = this.commonService.getNotes(this.ra.name);
     let observables = [
       generalInfo$,
       status$,
       results$,
       workflow$,
-      workflowFullView$,
       notes$,
     ];
 
@@ -65,11 +64,11 @@ export class CommonFunctions {
       this.ra.results = values[2];
       this.separatePastTasks();
       this.ra.workflow = values[3]['result'];
-      this.ra.workflow_full_view = values[4]['result']
+      // this.ra.workflow_full_view = values[4]['result']
       console.log("full workflow view")
       console.log(this.ra.workflow_full_view)
       $('#dtNotes').DataTable().destroy();
-      this.ra.notes = values[5];
+      this.ra.notes = values[4];
       setTimeout(() => {
         $('#dtNotes').DataTable();
       }, 200);
