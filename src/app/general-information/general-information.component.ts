@@ -268,7 +268,7 @@ export class GeneralInformationComponent implements OnInit {
           next: (result) => {
             if (result['success']) {
               // this.func.refreshRA();
-              this.manageRA.updateRA(this.ra.name,this.user.username).subscribe()
+              if(this.user.system == "Linyx") this.manageRA.updateRA(this.ra.name,this.user.username).subscribe()
               this.toastr.success(
                 'RA ' + this.ra.name,
                 'SUCCESSFULLY UPDATED',

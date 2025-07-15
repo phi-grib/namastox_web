@@ -23,6 +23,12 @@ export class AppComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     //
+    this.commonService.getSystemInfo().subscribe({
+      next: (result:any) => {
+        this.user.system = result['result']
+      }
+    })
+
     const source = new EventSource('http://localhost:5000/stream');
     source.addEventListener('ra_updated', (event: any) => {
       const data = JSON.parse(event.data);
@@ -44,11 +50,11 @@ export class AppComponent implements OnInit {
       }
 
     });
-          this.keycloackService.getSessionUser().subscribe({
-            next: (result:any) => {
-              this.user.username = result['username']
-            }
-          })
+           this.keycloackService.getSessionUser().subscribe({
+             next: (result:any) => {
+               this.user.username = result['username']
+             }
+           })
 
     //  DEVELOPMENT
 //  this.user.username = 'test123';

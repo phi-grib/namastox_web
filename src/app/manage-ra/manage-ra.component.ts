@@ -56,7 +56,7 @@ export class ManageRaComponent implements AfterViewInit {
                  this.commonService.getGeneralInfo(this.newRAname).subscribe({
                    next: (result) => {
                      this.ra.general_information = result;
-                     this.manageRA.updateRA(this.ra.name,this.user.username).subscribe()
+                     if(this.user.system == "Linyx") this.manageRA.updateRA(this.ra.name,this.user.username).subscribe()
                      setTimeout(() => {
                        this.global.interfaceVisible = true;
                      }, 500);
@@ -168,7 +168,7 @@ export class ManageRaComponent implements AfterViewInit {
             }
           );
         }
-        this.manageRA.updateRA(this.ra.name,this.user.username).subscribe()
+        if(this.user.system == "Linyx") this.manageRA.updateRA(this.ra.name,this.user.username).subscribe()
         document.getElementById('menubtn').click();
       },
       error: (e) => console.log(e),
@@ -187,7 +187,7 @@ export class ManageRaComponent implements AfterViewInit {
           this.ra.listRA = [...result];
           if (this.ra.listRA.length > 0) {
             this.ra.name = this.ra.listRA[this.ra.listRA.length - 1];
-            this.manageRA.updateRA(this.ra.name,this.user.username).subscribe()
+            if(this.user.system == "Linyx") this.manageRA.updateRA(this.ra.name,this.user.username).subscribe()
             this.global.interfaceVisible = true;
           } else {
             this.ra.name = '';

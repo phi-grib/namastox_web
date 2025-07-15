@@ -160,4 +160,12 @@ export class CommonService {
     const url: string = environment.baseUrl + "catalogue/" + ra_name;
     return this.http.get(url)
   }
+
+  getSystemInfo(){
+    const url: string = environment.baseUrl + "system_info";
+    return this.http.get(url)
+
+  }
+
+
 }

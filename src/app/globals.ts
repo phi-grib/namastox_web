@@ -48,6 +48,7 @@ export class User {
   username: string;
   status: boolean = false;
   write: boolean = true;
+  system: string = "";
 }
 @Injectable()
 export class Method {
