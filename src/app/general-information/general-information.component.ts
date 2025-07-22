@@ -18,7 +18,7 @@ export class GeneralInformationComponent implements OnInit {
   substance_CASRN: string = '';
   substance_SMILES: string = '';
   substance_id: string = '';
-  optionsWorkflowCustom = ["ASPA 1.9","custom"]
+  optionsWorkflowCustom = ["ASPA 2.1 (workflow21.csv)","ASPA 1.9 (workflow19.csv)","custom"]
   substance_characteristics : string = ""
   substance_file: File | null = null;
   form = new FormGroup({});
