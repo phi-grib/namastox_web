@@ -70,82 +70,80 @@
                 <div class="col-2 text">
                   <strong>Description</strong>
                 </div>
-                <div class="col-10" *ngIf="this.pending_task['task description']?.description" [innerHTML]="this.pending_task['task description'].description | autolinkPipe">
-                </div>
+                <div
+                  class="col-10"
+                  *ngIf="this.pending_task['task description']?.description"
+                  [innerHTML]="
+                    this.pending_task['task description'].description
+                      | autolinkPipe
+                  "
+                ></div>
               </div>
-              <div *ngIf="this.pending_task['task description'].proposed_approach" class="row">
+              <div
+                *ngIf="this.pending_task['task description'].proposed_approach"
+                class="row"
+              >
                 <div class="col-2 text">
                   <strong>Proposed approach</strong>
                 </div>
-         <div class="col-10 position-relative">
+                <div class="col-10 position-relative">
                   <span
                     *ngIf="
                       pending_task['task description'].proposed_approach
                         .length > 300
                     "
-                  >
-                    {{
-                      pending_task["task description"].proposed_approach
-                        | slice : 0 : 301
-                    }}<span class="collapse" id="tasksCollapseProposedApproach">
-                      {{
-                        pending_task["task description"].proposed_approach
-                          | slice : 301
-                      }}
-                    </span>
+                  >{{pending_task["task description"].proposed_approach  | slice : 0 : 301 }}<span  *ngIf="this.collapseProposed">{{pending_task["task description"].proposed_approach  | slice : 301  }}</span>
                   </span>
 
                   <a
                     (click)="collapseProposedApproach()"
                     class="position-absolute top-0"
-                    data-bs-toggle="collapse"
                     style="left: -5px"
-                    href="#tasksCollapseProposedApproach"
-                    role="button"
-                    aria-expanded=this.collapseProposed
-                    aria-controls="tasksCollapseProposedApproach"
                   >
-                    <i *ngIf="!this.collapseProposed" class="fa-solid plus-icon fa-plus"></i>
+                    <i
+                      *ngIf="!this.collapseProposed"
+                      class="fa-solid plus-icon fa-plus"
+                    ></i>
 
-                    <i *ngIf="this.collapseProposed" class="fa-solid plus-icon fa-minus"></i>
+                    <i
+                      *ngIf="this.collapseProposed"
+                      class="fa-solid plus-icon fa-minus"
+                    ></i>
                   </a>
                 </div>
               </div>
 
-              <div *ngIf="this.pending_task['task description'].guidance" class="row">
+              <div
+                *ngIf="this.pending_task['task description'].guidance"
+                class="row"
+              >
                 <div class="col-2 text">
                   <strong>Guidance</strong>
                 </div>
-    <div class="col-10 position-relative">
+                <div class="col-10 position-relative">
                   <span
                     *ngIf="
-                      pending_task['task description'].guidance
-                        .length > 300
+                      pending_task['task description'].guidance.length > 300
                     "
-                  >
-                    {{
-                      pending_task["task description"].guidance
-                        | slice : 0 : 301
-                    }}<span class="collapse" id="tasksCollapseGuidance">{{pending_task["task description"].guidance| slice : 301}}</span>
+                  >{{pending_task["task description"].guidance | slice : 0 : 301}}<span *ngIf="this.collapseguidance">{{pending_task["task description"].guidance | slice : 301}}</span>
                   </span>
-
                   <a
                     (click)="collapseGuidance()"
                     class="position-absolute top-0"
-                    data-bs-toggle="collapse"
                     style="left: -5px"
-                    href="#tasksCollapseGuidance"
-                    role="button"
-                    aria-expanded=this.collapseGuidance
-                    aria-controls="tasksCollapseGuidance"
                   >
-                    <i *ngIf="!this.collapseguidance" class="fa-solid plus-icon fa-plus"></i>
+                    <i
+                      *ngIf="!this.collapseguidance"
+                      class="fa-solid plus-icon fa-plus"
+                    ></i>
 
-                    <i *ngIf="this.collapseguidance" class="fa-solid plus-icon fa-minus"></i>
+                    <i
+                      *ngIf="this.collapseguidance"
+                      class="fa-solid plus-icon fa-minus"
+                    ></i>
                   </a>
                 </div>
               </div>
-
             </div>
             <decisions-form
               *ngIf="this.pending_task"
@@ -208,7 +206,7 @@
                       <td>{{ decision.label }}</td>
                       <td>{{ decision.name }}</td>
                       <td>{{ decision.summary | slice : 0 : 150 }}...</td>
-                      <td>{{ decision.decision ? 'Yes' : 'No'  }}</td>
+                      <td>{{ decision.decision ? "Yes" : "No" }}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -268,20 +266,38 @@
                   <div class="col-2 text">
                     <strong>Description</strong>
                   </div>
-                  <div class="col-10" *ngIf="this.pending_task['task description'].description" [innerHTML]="this.results.decisionSelected['task description'].description | autolinkPipe">
-                  </div>
+                  <div
+                    class="col-10"
+                    *ngIf="this.pending_task['task description'].description"
+                    [innerHTML]="
+                      this.results.decisionSelected['task description']
+                        .description | autolinkPipe
+                    "
+                  ></div>
                 </div>
                 <div class="row">
                   <div class="col-2 text">
                     <strong>Method links</strong>
                   </div>
-                  <div *ngIf="this.pending_task['task description'].method_link[0] !== 'local_models'" class="col-10">
+                  <div
+                    *ngIf="
+                      this.pending_task['task description'].method_link[0] !==
+                      'local_models'
+                    "
+                    class="col-10"
+                  >
                     <div>
-                        <span *ngFor="let link of this.results.decisionSelected['task description'].method_link">
-                          <a target="_blank" [href]="link">{{link}}</a>
-                          <br>
-                        </span>
-                      </div>
+                      <span
+                        *ngFor="
+                          let link of this.results.decisionSelected[
+                            'task description'
+                          ].method_link
+                        "
+                      >
+                        <a target="_blank" [href]="link">{{ link }}</a>
+                        <br />
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -332,21 +348,25 @@
                 </div>
                 <div class="d-flex p-1 justify-content-around">
                   <div *ngFor="let image of this.listImages">
-                    <div class="card" style="width: 18rem;">
-                      <img [src]="image.link" width="288" height="288"  alt="">
+                    <div class="card" style="width: 18rem">
+                      <img [src]="image.link" width="288" height="288" alt="" />
                       <div class="card-body">
-                        <p class="card-text text">{{image.name}}</p>
+                        <p class="card-text text">{{ image.name }}</p>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="row pt-1 pb-1">
                   <div class="col-2 text border-bottom">Summary</div>
-                  <div class="col border-bottom formatted-text">{{ this.results.decisionSelected.result.summary }}</div>
+                  <div class="col border-bottom formatted-text">
+                    {{ this.results.decisionSelected.result.summary }}
+                  </div>
                 </div>
                 <div class="row pt-1 pb-1">
                   <div class="col-2 text border-bottom">Justification</div>
-                  <div class="col border-bottom formatted-text">{{ this.results.decisionSelected.result.justification }}</div>
+                  <div class="col border-bottom formatted-text">
+                    {{ this.results.decisionSelected.result.justification }}
+                  </div>
                 </div>
                 <div
                   class="row pt-1 pb-1"
@@ -396,14 +416,18 @@
                   </div>
                 </div>
                 <div class="row">
-                  <button [disabled]="!this.user.write " (click)="editDecision()" class="btn btn-ets-edit">
+                  <button
+                    [disabled]="!this.user.write"
+                    (click)="editDecision()"
+                    class="btn btn-ets-edit"
+                  >
                     Edit
                   </button>
                 </div>
               </div>
             </div>
             <decisions-form
-              *ngIf="this.global.editModeDecisions && this.user.write "
+              *ngIf="this.global.editModeDecisions && this.user.write"
               [editMode]="true"
               [task]="this.results.decisionSelected"
             >

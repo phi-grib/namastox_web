@@ -91,27 +91,12 @@
                       pending_task['task description'].proposed_approach
                         .length > 300
                     "
-                  >
-                    {{
-                      pending_task["task description"].proposed_approach
-                        | slice : 0 : 301
-                    }}<span class="collapse" id="tasksCollapseProposedApproach">
-                      {{
-                        pending_task["task description"].proposed_approach
-                          | slice : 301
-                      }}
-                    </span>
+                  >{{pending_task["task description"].proposed_approach  | slice : 0 : 301}}<span *ngIf="this.collapseProposed">{{pending_task["task description"].proposed_approach | slice : 301}}</span>
                   </span>
-
                   <a
                     (click)="collapseProposedApproach()"
                     class="position-absolute top-0"
-                    data-bs-toggle="collapse"
                     style="left: -5px"
-                    href="#tasksCollapseProposedApproach"
-                    role="button"
-                    aria-expanded=this.collapseProposed
-                    aria-controls="tasksCollapseProposedApproach"
                   >
                     <i *ngIf="!this.collapseProposed" class="fa-solid plus-icon fa-plus"></i>
 
@@ -137,18 +122,13 @@
                     {{
                       pending_task["task description"].guidance
                         | slice : 0 : 301
-                    }}<span class="collapse" id="tasksCollapseGuidance">{{pending_task["task description"].guidance| slice : 301}}</span>
+                    }}<span *ngIf="this.collapseguidance" >{{pending_task["task description"].guidance| slice : 301}}</span>
                   </span>
 
                   <a
                     (click)="collapseGuidance()"
                     class="position-absolute top-0"
-                    data-bs-toggle="collapse"
                     style="left: -5px"
-                    href="#tasksCollapseGuidance"
-                    role="button"
-                    aria-expanded=this.collapseguidance
-                    aria-controls="tasksCollapseGuidance"
                   >
                     <i *ngIf="!this.collapseguidance" class="fa-solid plus-icon fa-plus"></i>
 
