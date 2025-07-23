@@ -255,7 +255,10 @@ export class GeneralInformationComponent implements OnInit {
   }
 
   onSubmit() {
+    if(!this.ra.general_information.general['workflow_custom']){
     this.workflowOption()
+    }
+
     setTimeout(() => {
       this.updateService
         .updateGeneralInformation(
