@@ -92,7 +92,7 @@
                       pending_task['task description'].proposed_approach
                         .length > 300
                     "
-                  >{{pending_task["task description"].proposed_approach  | slice : 0 : 301 }}<span  *ngIf="this.collapseProposed">{{pending_task["task description"].proposed_approach  | slice : 301  }}</span>
+                  >{{pending_task["task description"].proposed_approach  | slice : 0 : 301 }}<span *ngIf="!this.collapseProposed">...</span><span  *ngIf="this.collapseProposed">{{pending_task["task description"].proposed_approach  | slice : 301  }}</span>
                   </span>
 
                   <a
@@ -125,7 +125,7 @@
                     *ngIf="
                       pending_task['task description'].guidance.length > 300
                     "
-                  >{{pending_task["task description"].guidance | slice : 0 : 301}}<span *ngIf="this.collapseguidance">{{pending_task["task description"].guidance | slice : 301}}</span>
+                  >{{pending_task["task description"].guidance | slice : 0 : 301}}<span *ngIf="!this.collapseguidance">...</span><span *ngIf="this.collapseguidance">{{pending_task["task description"].guidance | slice : 301}}</span>
                   </span>
                   <a
                     (click)="collapseGuidance()"
