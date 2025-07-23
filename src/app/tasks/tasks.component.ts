@@ -19,6 +19,8 @@ export class TasksComponent implements OnInit {
   parameter: string;
   parameters = [];
   files = [];
+  collapseProposed:boolean = false;
+  collapseguidance:boolean = false;
   labelFile = '';
   documents = [];
   report: string = '';
@@ -48,6 +50,13 @@ export class TasksComponent implements OnInit {
         this.getPendingTask();
       }
     });
+  }
+
+  collapseProposedApproach(){
+    this.collapseProposed = !this.collapseProposed
+  }
+  collapseGuidance(){
+     this.collapseguidance = !this.collapseguidance
   }
 
   isImage() {
@@ -143,6 +152,8 @@ export class TasksComponent implements OnInit {
       .subscribe({
         next: (result) => {
           this.pending_task = result;
+                   console.log("Tasks: pending task")
+          console.log(this.pending_task)
         },
         error: (e) => console.log(e),
       });

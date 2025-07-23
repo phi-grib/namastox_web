@@ -69,20 +69,91 @@
                 <div class="col-2 text">
                   <strong>Description</strong>
                 </div>
-                <div class="col-10" *ngIf="this.pending_task['task description'].description" [innerHTML]="this.pending_task['task description'].description | autolinkPipe">
+                <div
+                  class="col-10"
+                  *ngIf="this.pending_task['task description'].description"
+                  [innerHTML]="
+                    this.pending_task['task description'].description
+                      | autolinkPipe
+                  "
+                ></div>
+              </div>
+              <div
+                *ngIf="this.pending_task['task description'].proposed_approach"
+                class="row"
+              >
+                <div class="col-2 text">
+                  <strong>Proposed approach</strong>
+                </div>
+                <div class="col-10 position-relative">
+                  <span
+                    *ngIf="
+                      pending_task['task description'].proposed_approach
+                        .length > 300
+                    "
+                  >
+                    {{
+                      pending_task["task description"].proposed_approach
+                        | slice : 0 : 301
+                    }}<span class="collapse" id="tasksCollapseProposedApproach">
+                      {{
+                        pending_task["task description"].proposed_approach
+                          | slice : 301
+                      }}
+                    </span>
+                  </span>
+
+                  <a
+                    (click)="collapseProposedApproach()"
+                    class="position-absolute top-0"
+                    data-bs-toggle="collapse"
+                    style="left: -5px"
+                    href="#tasksCollapseProposedApproach"
+                    role="button"
+                    aria-expanded=this.collapseProposed
+                    aria-controls="tasksCollapseProposedApproach"
+                  >
+                    <i *ngIf="!this.collapseProposed" class="fa-solid plus-icon fa-plus"></i>
+
+                    <i *ngIf="this.collapseProposed" class="fa-solid plus-icon fa-minus"></i>
+                  </a>
                 </div>
               </div>
-              <div class="row">
+
+              <div
+                *ngIf="this.pending_task['task description'].guidance"
+                class="row mt-1"
+              >
                 <div class="col-2 text">
-                  <strong>Method links</strong>
+                  <strong>Guidance</strong>
                 </div>
-                <div *ngIf="this.pending_task['task description'].method_link[0] !== 'local_models'" class="col-10">
-                  <div>
-                      <span *ngFor="let link of this.pending_task['task description'].method_link">
-                        <a target="_blank" [href]="link">{{link}}</a>
-                        <br>
-                      </span>
-                    </div>
+    <div class="col-10 position-relative">
+                  <span
+                    *ngIf="
+                      pending_task['task description'].guidance
+                        .length > 300
+                    "
+                  >
+                    {{
+                      pending_task["task description"].guidance
+                        | slice : 0 : 301
+                    }}<span class="collapse" id="tasksCollapseGuidance">{{pending_task["task description"].guidance| slice : 301}}</span>
+                  </span>
+
+                  <a
+                    (click)="collapseGuidance()"
+                    class="position-absolute top-0"
+                    data-bs-toggle="collapse"
+                    style="left: -5px"
+                    href="#tasksCollapseGuidance"
+                    role="button"
+                    aria-expanded=this.collapseguidance
+                    aria-controls="tasksCollapseGuidance"
+                  >
+                    <i *ngIf="!this.collapseguidance" class="fa-solid plus-icon fa-plus"></i>
+
+                    <i *ngIf="this.collapseguidance" class="fa-solid plus-icon fa-minus"></i>
+                  </a>
                 </div>
               </div>
             </div>
@@ -145,12 +216,12 @@
                       *ngFor="let result of this.results.results"
                     >
                       <td>{{ result.date | formatDate }}</td>
-                      <td id="{{result.id}}">{{ result.label }}</td>
+                      <td id="{{ result.id }}">{{ result.label }}</td>
                       <td>{{ result.name }}</td>
                       <td>{{ result.summary | slice : 0 : 150 }}...</td>
                       <td *ngIf="isObject(result.values[0]); else reportTD">
                         {{ result.values[0].parameter }},{{
-                          result.values[0].value 
+                          result.values[0].value
                         }},{{ result.values[0].unit }}
                         <span *ngIf="result.values.length > 0">...</span>
                       </td>
@@ -217,21 +288,41 @@
                   <div class="col-2 text">
                     <strong>Description</strong>
                   </div>
-                  <div *ngIf="this.results.resultSelected['task description'].description" class="col-10" [innerHTML]="this.results.resultSelected['task description']
-                  .description | autolinkPipe">
-                  </div>
+                  <div
+                    *ngIf="
+                      this.results.resultSelected['task description']
+                        .description
+                    "
+                    class="col-10"
+                    [innerHTML]="
+                      this.results.resultSelected['task description']
+                        .description | autolinkPipe
+                    "
+                  ></div>
                 </div>
                 <div class="row">
                   <div class="col-2 text">
                     <strong>Method links</strong>
                   </div>
-                  <div *ngIf="this.results.resultSelected['task description'].method_link[0] !== 'local_models'" class="col-10">
+                  <div
+                    *ngIf="
+                      this.results.resultSelected['task description']
+                        .method_link[0] !== 'local_models'
+                    "
+                    class="col-10"
+                  >
                     <div>
-                        <span *ngFor="let link of this.results.resultSelected['task description'].method_link">
-                          <a target="_blank" [href]="link">{{link}}</a>
-                          <br>
-                        </span>
-                      </div>
+                      <span
+                        *ngFor="
+                          let link of this.results.resultSelected[
+                            'task description'
+                          ].method_link
+                        "
+                      >
+                        <a target="_blank" [href]="link">{{ link }}</a>
+                        <br />
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -246,41 +337,55 @@
                     Report
                   </div>
                   <div class="col border-bottom">
-                    <div    *ngIf="
-                    this.results.resultSelected.result.result_type != 'text'
-                  " class="table-header">
+                    <div
+                      *ngIf="
+                        this.results.resultSelected.result.result_type != 'text'
+                      "
+                      class="table-header"
+                    >
                       Methods
                     </div>
-                    <table *ngIf="
-                    this.results.resultSelected.result.result_type != 'text'
-                  " style="width: 100% !important;" class="table table-bordered">
+                    <table
+                      *ngIf="
+                        this.results.resultSelected.result.result_type != 'text'
+                      "
+                      style="width: 100% !important"
+                      class="table table-bordered"
+                    >
                       <thead class="text">
                         <tr>
-                          <th style="width: 10%;">Name</th>
-                          <th style="width: 30%;">Description</th>
-                          <th style="width: 10%;">Sensitivity</th>
-                          <th style="width: 10%;">Specificity</th>
-                          <th style="width: 10%;">SD</th>
-                          <th style="width: 10%;">Link</th>
+                          <th style="width: 10%">Name</th>
+                          <th style="width: 30%">Description</th>
+                          <th style="width: 10%">Sensitivity</th>
+                          <th style="width: 10%">Specificity</th>
+                          <th style="width: 10%">SD</th>
+                          <th style="width: 10%">Link</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr *ngFor="let method of this.results.resultSelected.result.methods">
+                        <tr
+                          *ngFor="
+                            let method of this.results.resultSelected.result
+                              .methods
+                          "
+                        >
                           <td>
-                            {{method.name}}
+                            {{ method.name }}
                           </td>
-                          <td>{{method.description}}</td>
-                          <td>{{method.sensitivity}}</td>
-                          <td>{{method.specificity}}</td>
-                          <td>{{method.sd}}</td>
-                          <td>{{method.link}}</td>
+                          <td>{{ method.description }}</td>
+                          <td>{{ method.sensitivity }}</td>
+                          <td>{{ method.specificity }}</td>
+                          <td>{{ method.sd }}</td>
+                          <td>{{ method.link }}</td>
                         </tr>
                       </tbody>
-
                     </table>
-                    <div   *ngIf="
-                    isObject(this.results.resultSelected.result.values[0])
-                  " class="table-header">
+                    <div
+                      *ngIf="
+                        isObject(this.results.resultSelected.result.values[0])
+                      "
+                      class="table-header"
+                    >
                       Values
                     </div>
                     <table
@@ -288,11 +393,11 @@
                         isObject(this.results.resultSelected.result.values[0])
                       "
                       class="table table-bordered"
-                      style="width:100% !important"
+                      style="width: 100% !important"
                     >
                       <thead class="text">
                         <tr>
-                          <th style="width: 15%;">Substance</th>
+                          <th style="width: 15%">Substance</th>
                           <th>Method</th>
                           <th>Parameter</th>
                           <th>Value</th>
@@ -310,14 +415,16 @@
                       >
                         <tr>
                           <td>
-                            {{this.results.resultSelected.result.values[idx].substance}}
+                            {{
+                              this.results.resultSelected.result.values[idx]
+                                .substance
+                            }}
                           </td>
                           <td>
                             {{
                               this.results.resultSelected.result.values[idx]
                                 .method
                             }}
-
                           </td>
                           <td>
                             {{
@@ -327,9 +434,8 @@
                           </td>
                           <td>
                             {{
-                              this.results.resultSelected.result.values[
-                                idx
-                              ].value | truncateDecimals
+                              this.results.resultSelected.result.values[idx]
+                                .value | truncateDecimals
                             }}
                           </td>
                           <td>
@@ -361,7 +467,9 @@
                         'text'
                       "
                       class="col formatted-text"
-                    >{{ this.results.resultSelected.result.values[0] }}</div>
+                    >
+                      {{ this.results.resultSelected.result.values[0] }}
+                    </div>
                   </div>
                 </div>
 
@@ -371,8 +479,18 @@
                   "
                   class="row pt-1 pb-1"
                 >
-                  <div *ngIf="this.results.resultSelected.result.result_type != 'text'" class="col-2 text border-bottom"></div>
-                  <div *ngIf="this.results.resultSelected.result.result_type != 'text'" class="col border-bottom">
+                  <div
+                    *ngIf="
+                      this.results.resultSelected.result.result_type != 'text'
+                    "
+                    class="col-2 text border-bottom"
+                  ></div>
+                  <div
+                    *ngIf="
+                      this.results.resultSelected.result.result_type != 'text'
+                    "
+                    class="col border-bottom"
+                  >
                     <table class="table table-borderless">
                       <thead class="text">
                         <th>Uncertainty</th>
@@ -448,17 +566,19 @@
 
                 <div class="d-flex p-1 justify-content-around">
                   <div *ngFor="let image of this.listImages">
-                    <div class="card" style="width: 18rem;">
-                      <img [src]="image.link" width="288" height="288"  alt="">
+                    <div class="card" style="width: 18rem">
+                      <img [src]="image.link" width="288" height="288" alt="" />
                       <div class="card-body">
-                        <p class="card-text text">{{image.name}}</p>
+                        <p class="card-text text">{{ image.name }}</p>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="row pt-1 pb-1">
                   <div class="col-2 text border-bottom">Summary</div>
-                  <div class="col border-bottom formatted-text">{{this.results.resultSelected.result.summary }}</div>
+                  <div class="col border-bottom formatted-text">
+                    {{ this.results.resultSelected.result.summary }}
+                  </div>
                 </div>
                 <div
                   *ngIf="
@@ -517,14 +637,18 @@
                   </div>
                 </div>
                 <div class="row">
-                  <button [disabled]="!this.user.write" (click)="editTask()" class="btn btn-ets-edit">
+                  <button
+                    [disabled]="!this.user.write"
+                    (click)="editTask()"
+                    class="btn btn-ets-edit"
+                  >
                     Edit
                   </button>
                 </div>
               </div>
             </div>
             <task-form
-              *ngIf="this.global.editModeTasks && this.user.write "
+              *ngIf="this.global.editModeTasks && this.user.write"
               [editMode]="true"
               [task]="this.results.resultSelected"
             ></task-form>

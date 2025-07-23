@@ -20,6 +20,8 @@ export class DecisionsComponent implements OnInit {
   pending_task: any;
   objectKeys = Object.keys;
   model: any;
+  collapseProposed:boolean = false;
+  collapseguidance:boolean = false;
   modelEdit: any;
   link: Blob;
   loadEditForm: boolean = false;
@@ -61,6 +63,12 @@ export class DecisionsComponent implements OnInit {
       }
     });
   }
+    collapseProposedApproach(){
+    this.collapseProposed = !this.collapseProposed
+  }
+  collapseGuidance () {
+ this.collapseguidance = !this.collapseguidance
+  }
   getPendingTask() {
     this.pending_task = false;
     this.commonService
@@ -68,6 +76,8 @@ export class DecisionsComponent implements OnInit {
       .subscribe({
         next: (result) => {
           this.pending_task = result;
+          console.log("Decisions: pending task")
+          console.log(this.pending_task)
         },
         error: (e) => console.log(e),
       });
