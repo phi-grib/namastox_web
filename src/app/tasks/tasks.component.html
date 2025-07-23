@@ -86,21 +86,35 @@
                   <strong>Proposed approach</strong>
                 </div>
                 <div class="col-10 position-relative">
-                  <span
+                  <div
                     *ngIf="
                       pending_task['task description'].proposed_approach
-                        .length > 300
+                        .length > 300 && !this.collapseProposed
                     "
-                  >{{pending_task["task description"].proposed_approach  | slice : 0 : 301}}<span *ngIf="!this.collapseProposed">...</span><span *ngIf="this.collapseProposed">{{pending_task["task description"].proposed_approach | slice : 301}}</span>
-                  </span>
+                  >
+                    {{
+                      pending_task["task description"].proposed_approach
+                        | slice : 0 : 301
+                    }}<span *ngIf="!this.collapseProposed">...</span>
+                  </div>
+
+                  <div *ngIf="this.collapseProposed || pending_task['task description'].proposed_approach.length < 300">
+                    {{ pending_task["task description"].proposed_approach }}
+                  </div>
                   <a
                     (click)="collapseProposedApproach()"
                     class="position-absolute top-0"
                     style="left: -5px"
                   >
-                    <i *ngIf="!this.collapseProposed" class="fa-solid plus-icon fa-plus"></i>
+                    <i
+                      *ngIf="!this.collapseProposed"
+                      class="fa-solid plus-icon fa-plus"
+                    ></i>
 
-                    <i *ngIf="this.collapseProposed" class="fa-solid plus-icon fa-minus"></i>
+                    <i
+                      *ngIf="this.collapseProposed"
+                      class="fa-solid plus-icon fa-minus"
+                    ></i>
                   </a>
                 </div>
               </div>
@@ -112,27 +126,36 @@
                 <div class="col-2 text">
                   <strong>Guidance</strong>
                 </div>
-    <div class="col-10 position-relative">
-                  <span
+                <div class="col-10 position-relative">
+                  <div
                     *ngIf="
-                      pending_task['task description'].guidance
-                        .length > 300
+                      pending_task['task description'].guidance.length > 300 &&
+                      !this.collapseguidance
                     "
                   >
                     {{
                       pending_task["task description"].guidance
                         | slice : 0 : 301
-                    }}<span *ngIf="!this.collapseguidance">...</span><span *ngIf="this.collapseguidance" >{{pending_task["task description"].guidance| slice : 301}}</span>
-                  </span>
+                    }}<span *ngIf="!this.collapseguidance">...</span>
+                  </div>
+                  <div *ngIf="this.collapseguidance || pending_task['task description'].guidance.length < 300">
+                    {{ pending_task["task description"].guidance }}
+                  </div>
 
                   <a
                     (click)="collapseGuidance()"
                     class="position-absolute top-0"
                     style="left: -5px"
                   >
-                    <i *ngIf="!this.collapseguidance" class="fa-solid plus-icon fa-plus"></i>
+                    <i
+                      *ngIf="!this.collapseguidance"
+                      class="fa-solid plus-icon fa-plus"
+                    ></i>
 
-                    <i *ngIf="this.collapseguidance" class="fa-solid plus-icon fa-minus"></i>
+                    <i
+                      *ngIf="this.collapseguidance"
+                      class="fa-solid plus-icon fa-minus"
+                    ></i>
                   </a>
                 </div>
               </div>
