@@ -18,7 +18,8 @@ export class GeneralInformationComponent implements OnInit {
   substance_CASRN: string = '';
   substance_SMILES: string = '';
   substance_id: string = '';
-  optionsWorkflowCustom = ["ASPA 2.1 (workflow21.csv)","ASPA 1.9 (workflow19.csv)","custom"]
+  optionsWorkflowCustom = ["ASPA 2.1","ASPA 1.9","custom"]
+  workflowsFiles = {"ASPA 2.1": "workflow21.csv","ASPA 1.9":"workflow19.csv"}
   substance_characteristics : string = ""
   substance_file: File | null = null;
   form = new FormGroup({});
@@ -50,7 +51,6 @@ export class GeneralInformationComponent implements OnInit {
       this.commonService.getPermissions(this.ra.name).subscribe({
         next: (result) => {
           this.setPermissions(result)
-          console.log(result)
         },
         error: (e) => {
           console.log(e);
@@ -84,7 +84,7 @@ export class GeneralInformationComponent implements OnInit {
   }
 
   workflowOption(){
-    console.log("to do")
+    this.ra.general_information.general['workflow_custom'] = this.workflowsFiles[this.optionWorkflow] 
   }
 
   deleteMol(idx) {
@@ -255,6 +255,7 @@ export class GeneralInformationComponent implements OnInit {
   }
 
   onSubmit() {
+    this.workflowOption()
     setTimeout(() => {
       this.updateService
         .updateGeneralInformation(
@@ -299,6 +300,7 @@ export class GeneralInformationComponent implements OnInit {
           },
         });
       this.generalInformationForm.reset();
+      this.optionWorkflow =  this.optionsWorkflowCustom[0]
     }, 500);
   }
   // TO DO
