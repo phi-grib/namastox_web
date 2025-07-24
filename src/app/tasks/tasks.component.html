@@ -98,8 +98,7 @@
                     }}<span *ngIf="!this.collapseProposed">...</span>
                   </div>
 
-                  <div *ngIf="this.collapseProposed || pending_task['task description'].proposed_approach.length < 300">
-                    {{ pending_task["task description"].proposed_approach }}
+                  <div *ngIf="this.collapseProposed || pending_task['task description'].proposed_approach.length < 300" [innerHTML]="pending_task['task description'].proposed_approach">
                   </div>
                   <a
                     (click)="collapseProposedApproach()"
@@ -138,8 +137,7 @@
                         | slice : 0 : 301
                     }}<span *ngIf="!this.collapseguidance">...</span>
                   </div>
-                  <div *ngIf="this.collapseguidance || pending_task['task description'].guidance.length < 300">
-                    {{ pending_task["task description"].guidance }}
+                  <div *ngIf="this.collapseguidance || pending_task['task description'].guidance.length < 300" [innerHTML]="pending_task['task description'].guidance">
                   </div>
 
                   <a

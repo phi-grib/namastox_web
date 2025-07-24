@@ -104,8 +104,8 @@
                       pending_task['task description'].proposed_approach
                         .length < 300
                     "
+                    [innerHTML]="pending_task['task description'].proposed_approach"
                   >
-                    {{ pending_task["task description"].proposed_approach }}
                   </div>
 
                   <a
@@ -150,8 +150,8 @@
                       this.collapseguidance ||
                       pending_task['task description'].guidance.length < 300
                     "
+                    [innerHTML]="pending_task['task description'].guidance"
                   >
-                    {{ pending_task["task description"].guidance }}
                   </div>
                   <a
                     (click)="collapseGuidance()"
