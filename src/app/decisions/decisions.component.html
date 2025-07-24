@@ -92,11 +92,12 @@
                       pending_task['task description'].proposed_approach
                         .length > 300
                     "
-                  >
-                    {{
-                      pending_task["task description"].proposed_approach
+                    [innerHTML]="
+                      pending_task['task description'].proposed_approach
                         | slice : 0 : 301
-                    }}<span *ngIf="!this.collapseProposed">...</span>
+                    "
+                  >
+                    <span *ngIf="!this.collapseProposed">...</span>
                   </div>
                   <div
                     *ngIf="
@@ -104,9 +105,10 @@
                       pending_task['task description'].proposed_approach
                         .length < 300
                     "
-                    [innerHTML]="pending_task['task description'].proposed_approach"
-                  >
-                  </div>
+                    [innerHTML]="
+                      pending_task['task description'].proposed_approach
+                    "
+                  ></div>
 
                   <a
                     (click)="collapseProposedApproach()"
@@ -139,11 +141,12 @@
                       pending_task['task description'].guidance.length > 300 &&
                       !this.collapseguidance
                     "
-                  >
-                    {{
-                      pending_task["task description"].guidance
+                    [innerHTML]="
+                      pending_task['task description'].guidance
                         | slice : 0 : 301
-                    }}<span *ngIf="!this.collapseguidance">...</span>
+                    "
+                  >
+                    <span *ngIf="!this.collapseguidance">...</span>
                   </div>
                   <div
                     *ngIf="
@@ -151,8 +154,7 @@
                       pending_task['task description'].guidance.length < 300
                     "
                     [innerHTML]="pending_task['task description'].guidance"
-                  >
-                  </div>
+                  ></div>
                   <a
                     (click)="collapseGuidance()"
                     class="position-absolute top-0"
