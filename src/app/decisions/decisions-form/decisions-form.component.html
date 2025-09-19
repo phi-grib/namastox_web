@@ -33,13 +33,23 @@
         <label class="form-check-label" for="inlineRadio2">No</label>
       </div>
     </div>
-    <div class="col-2 d-flex justify-content-end">
+    <div class=" d-flex justify-content-end">
+      <a
+        class="btn-ets-info  btn "
+        role="button"
+        target="_blank"
+        style="margin-right: 10px"
+        href="http://localhost:4321/?tab=assessment&node=A0001"
+      >
+        More information
+        <i style="font-size: 15px" class="fa-solid fa-circle-info"></i>
+      </a>
       <a
         id="infobutton"
         data-bs-toggle="modal"
         (click)="openSupportModal()"
         data-bs-target="#supportModal"
-        class="btn ms-auto btn-ets-secondary-do border-btn"
+        class="btn  btn-ets-info "
         role="button"
         >support</a
       >
@@ -104,8 +114,13 @@
             class="form-control"
           />
         </div>
-        <div class="col-1 ">
-          <a role="button" class="btn btn-ets-secondary-do border-btn" (click)="addDocument()">Save</a>
+        <div class="col-1">
+          <a
+            role="button"
+            class="btn btn-ets-secondary-do border-btn"
+            (click)="addDocument()"
+            >Save</a
+          >
         </div>
       </div>
     </div>

@@ -18,10 +18,21 @@
   color: black;
 }
 
+.btn-ets-info {
+  background-color: white;
+  color: #474286;
+  border-radius: 4px;
+  border: 1px solid #f1f4fc;
+  border-style: dashed;
+  &:hover {
+    background-color: whitesmoke;
+  }
+}
 
-.btn-ets-secondary-do{
+.btn-ets-secondary-do {
   background: #f1f4fc;
   color: #474286;
+
   border-width: 0;
   font-family: "Barlow Semi Condensed", "Arial", "Helvetica";
   letter-spacing: 0.05em;
@@ -79,7 +90,6 @@
   color: #ffffff;
 }
 
-
 .btn-start-group {
   border-radius: 4px 0px 0px 4px !important;
 }
@@ -88,6 +98,6 @@
   border-radius: 0px 4px 4px 0px !important;
 }
 
-.border-btn{
+.border-btn {
   border-radius: 4px !important;
 }

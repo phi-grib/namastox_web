@@ -5,37 +5,56 @@
     (ngSubmit)="onSubmit($event)"
     class="container-form mt-3"
   >
-    <div class="d-flex justify-content-end">
+    <div class="row ">
+      <div class="col-2">
+      </div>
+      <div class="col-4 ">
+            <a
+        class="btn-ets-info  btn "
+        role="button"
+        target="_blank"
+        style="margin-right: 10px"
+        href="http://localhost:4321/?tab=assessment&node=A0001"
+      >
+        More information
+        <i style="font-size: 15px" class="fa-solid fa-circle-info"></i>
+      </a>
+      </div>
 
-      <a  class="btn btn-ets-secondary-do mb-2 btn-start-group"
-      *ngIf="this.pending_task.result.result_type === 'value'"
-      role="button"
-      (click)="openModalMethod(false)"
-      data-bs-toggle="modal"
-      data-bs-target="#methodModal"
-      >
-      Add method
-    </a>
-      <a  class="btn btn-ets-secondary-do mb-2"
-      *ngIf="this.pending_task.result.result_type === 'value'"
-      role="button"
-      (click)="addParameterMode()"
-      data-bs-toggle="modal"
-      data-bs-target="#extraInformation"
-      [class.blink]="isBlinking"
-      >
-      Add value
-    </a>
+      <div class="col-6 d-flex justify-content-end">
       <a
-      *ngIf="this.pending_task.result.result_type === 'value'"
-      data-bs-toggle="modal"
-      data-bs-target="#importTableModal"
-      role="button"
-      class="btn btn-ets-secondary-do btn-end-group mb-2"
-      >Import Table</a>
+        class="btn btn-ets-secondary-do mb-2 btn-start-group"
+        *ngIf="this.pending_task.result.result_type === 'value'"
+        role="button"
+        (click)="openModalMethod(false)"
+        data-bs-toggle="modal"
+        data-bs-target="#methodModal"
+      >
+        Add method
+      </a>
+      <a
+        class="btn btn-ets-secondary-do mb-2"
+        *ngIf="this.pending_task.result.result_type === 'value'"
+        role="button"
+        (click)="addParameterMode()"
+        data-bs-toggle="modal"
+        data-bs-target="#extraInformation"
+        [class.blink]="isBlinking"
+      >
+        Add value
+      </a>
+      <a
+        *ngIf="this.pending_task.result.result_type === 'value'"
+        data-bs-toggle="modal"
+        data-bs-target="#importTableModal"
+        role="button"
+        class="btn btn-ets-secondary-do btn-end-group mb-2"
+        >Import Table</a
+      >
       <a
         *ngIf="
-          this.pending_task['task description'].method_link[0] === 'local_models'
+          this.pending_task['task description'].method_link[0] ===
+          'local_models'
         "
         (click)="openModal()"
         data-bs-toggle="modal"
@@ -44,104 +63,126 @@
         class="btn btn-ets-secondary-do btn-end-group mb-2"
         >Predict</a
       >
-    </div>
-    <div class="mt-1" *ngIf="this.pending_task?.result.result_type === 'value' && this.model.methods.length > 0">
-      <div class="table-header">
-        Methods
+
       </div>
-      <table class="table table-bordered" style="width: 100%;">
+
+    </div>
+    <div
+      class="mt-1"
+      *ngIf="
+        this.pending_task?.result.result_type === 'value' &&
+        this.model.methods.length > 0
+      "
+    >
+      <div class="table-header">Methods</div>
+      <table class="table table-bordered" style="width: 100%">
         <thead>
           <tr>
-            <th style="width: 10%;">Name</th>
-            <th style="width: 30%;">Description</th>
-            <th style="width: 10%;">Sensitivity</th>
-            <th style="width: 10%;">Specificity</th>
-            <th style="width: 10%;">SD</th>
-            <th style="width: 10%;">Link</th>
-            <th style="width: 5%;"></th>
+            <th style="width: 10%">Name</th>
+            <th style="width: 30%">Description</th>
+            <th style="width: 10%">Sensitivity</th>
+            <th style="width: 10%">Specificity</th>
+            <th style="width: 10%">SD</th>
+            <th style="width: 10%">Link</th>
+            <th style="width: 5%"></th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let method of this.model.methods;let i = index">
-            <td>{{method.name}}</td>
-            <td>{{method.description}}</td>
-            <td>{{method.sensitivity}}</td>
-            <td>{{method.specificity}}</td>
-            <td>{{method.sd}}</td>
-            <td>{{method.link}}</td>
+          <tr *ngFor="let method of this.model.methods; let i = index">
+            <td>{{ method.name }}</td>
+            <td>{{ method.description }}</td>
+            <td>{{ method.sensitivity }}</td>
+            <td>{{ method.specificity }}</td>
+            <td>{{ method.sd }}</td>
+            <td>{{ method.link }}</td>
             <td>
               <div class="d-flex">
-                <button *ngIf="!listEditableMethods[i]" (click)="deleteMethod(i)" class="btn btn-ets-delete" role="button"
+                <button
+                  *ngIf="!listEditableMethods[i]"
+                  (click)="deleteMethod(i)"
+                  class="btn btn-ets-delete"
+                  role="button"
                 >
-                Delete
-              </button>
-                <a  (click)="openModalMethod(true,i)"
-                data-bs-toggle="modal"
-                data-bs-target="#methodModal" *ngIf="!listEditableMethods[i]" class="btn btn-ets-do pr-4"
+                  Delete
+                </button>
+                <a
+                  (click)="openModalMethod(true, i)"
+                  data-bs-toggle="modal"
+                  data-bs-target="#methodModal"
+                  *ngIf="!listEditableMethods[i]"
+                  class="btn btn-ets-do pr-4"
                 >
-                Edit
-            </a>
+                  Edit
+                </a>
               </div>
-          </td>
+            </td>
           </tr>
         </tbody>
       </table>
     </div>
-    <div *ngIf="this.pending_task?.result.result_type === 'value' && this.model.values.length > 0" class="mb-2">
-      <div class="table-header">
-        Values
-      </div>
-        <table class="table table-bordered" style="width: 100%;"  >
-          <thead>
-            <tr>
-              <th style="width: 10%;">Substance</th>
-              <th style="width: 10%;">Method</th>
-              <th style="width: 10%;">Parameter</th>
-              <th style="width: 10%;">Value</th>
-              <th  style="width: 5%;">Unit</th>
-              <th  style="width: 25%;">Uncertainty</th>
-              <th style="width: 10%;">Term</th>
-              <th  style="width: 5%;"></th> 
-            </tr>
-          </thead>
-          <tbody>
-            <tr
-            *ngFor="let value of this.model.values; let i = index"
-          >
-          <td>{{value?.substance}}</td>
-            <td >{{ value?.method}}</td>
-            <td >{{ value?.parameter}}</td>
-            <td>{{ value?.value.toString()}}</td>
+    <div
+      *ngIf="
+        this.pending_task?.result.result_type === 'value' &&
+        this.model.values.length > 0
+      "
+      class="mb-2"
+    >
+      <div class="table-header">Values</div>
+      <table class="table table-bordered" style="width: 100%">
+        <thead>
+          <tr>
+            <th style="width: 10%">Substance</th>
+            <th style="width: 10%">Method</th>
+            <th style="width: 10%">Parameter</th>
+            <th style="width: 10%">Value</th>
+            <th style="width: 5%">Unit</th>
+            <th style="width: 25%">Uncertainty</th>
+            <th style="width: 10%">Term</th>
+            <th style="width: 5%"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let value of this.model.values; let i = index">
+            <td>{{ value?.substance }}</td>
+            <td>{{ value?.method }}</td>
+            <td>{{ value?.parameter }}</td>
+            <td>{{ value?.value.toString() }}</td>
             <!-- <td>{{ value?.value.toString() | slice : 0 : 6 }}</td> -->
             <td>{{ value?.unit }}</td>
             <td>{{ this.model?.uncertainties[i]?.uncertainty }}</td>
             <td>{{ this.model?.uncertainties[i]?.term }}</td>
             <td>
               <div class="d-flex">
-                <a (click)="deleteParameter(i)" class="btn btn-ets-delete" role="button"
+                <a
+                  (click)="deleteParameter(i)"
+                  class="btn btn-ets-delete"
+                  role="button"
                 >
-                Delete
-              </a>
-                <a (click)="editFormParam(i)" class="btn btn-ets-do pr-4" role="button"
-                data-bs-toggle="modal"
-                data-bs-target="#extraInformation"
+                  Delete
+                </a>
+                <a
+                  (click)="editFormParam(i)"
+                  class="btn btn-ets-do pr-4"
+                  role="button"
+                  data-bs-toggle="modal"
+                  data-bs-target="#extraInformation"
                 >
-                Edit
+                  Edit
                 </a>
               </div>
-          </td>
+            </td>
           </tr>
-          </tbody>
-        </table>
+        </tbody>
+      </table>
     </div>
     <div
-      *ngIf="this.pending_task.result.result_type === 'text'zz"
+      *ngIf="this.pending_task.result.result_type === 'text'; zz"
       class="row mb-3"
     >
       <label for="inputPassword3" class="col-2 col-form-label">Results*:</label>
       <div class="col-10">
         <textarea
-        [disabled]="!this.user.write"
+          [disabled]="!this.user.write"
           rows="4"
           required
           [placeholder]="this.pending_task['task description']['report']"
@@ -164,7 +205,7 @@
           <div class="row">
             <div class="col-5">
               <input
-              [disabled]="!this.user.write"
+                [disabled]="!this.user.write"
                 #DocumentFileInput
                 (change)="sendlink($event)"
                 placeholder=""
@@ -172,10 +213,10 @@
                 class="form-control"
               />
             </div>
-            <div class="col-auto d-flex flex-column ">
+            <div class="col-auto d-flex flex-column">
               <div class="d-flex flex-row justify-content-around">
                 <input
-                [disabled]="!this.user.write"
+                  [disabled]="!this.user.write"
                   class="form-check-input"
                   type="checkbox"
                   name="inlineRadioOptions"
@@ -188,7 +229,7 @@
             </div>
             <div class="col-5">
               <input
-              [disabled]="!this.user.write"
+                [disabled]="!this.user.write"
                 type="text"
                 [(ngModel)]="this.labelFile"
                 name="labelFile"
@@ -197,7 +238,12 @@
               />
             </div>
             <div class="col-1 text-center">
-              <a role="button" class="btn btn-ets-secondary-do border-btn" (click)="addDocument()">Save</a>
+              <a
+                role="button"
+                class="btn btn-ets-secondary-do border-btn"
+                (click)="addDocument()"
+                >Save</a
+              >
               <!-- <a
               style="background: rgb(250,250,250)"
                 (click)="addDocument()"
@@ -215,7 +261,7 @@
           <div class="row">
             <div class="col-3">
               <input
-              [disabled]="!this.user.write"
+                [disabled]="!this.user.write"
                 type="text"
                 [value]="this.documents[idx].label"
                 readonly
@@ -223,9 +269,13 @@
               />
             </div>
             <div class="col-1">
-            <div style="text-align: center !important;margin-top:7px;">
-              <i *ngIf="this.documents[idx].include" style="text-align: center;" class="fa-solid fa-check-to-slot fa-lg"></i>
-            </div>
+              <div style="text-align: center !important; margin-top: 7px">
+                <i
+                  *ngIf="this.documents[idx].include"
+                  style="text-align: center"
+                  class="fa-solid fa-check-to-slot fa-lg"
+                ></i>
+              </div>
             </div>
             <div class="col-1">
               <a
@@ -246,7 +296,7 @@
       <label for="inputPassword3" class="col-2 col-form-label">Summary:</label>
       <div class="col-10">
         <textarea
-        [disabled]="!this.user.write"
+          [disabled]="!this.user.write"
           [placeholder]="this.pending_task['task description']['summary']"
           [(ngModel)]="this.model.summary"
           class="form-control"
@@ -259,7 +309,7 @@
     <div class="row">
       <div class="col-10">
         <button
-        [disabled]="!this.user.write"
+          [disabled]="!this.user.write"
           (click)="back()"
           *ngIf="this.editMode"
           type="submit"
@@ -290,9 +340,7 @@
     <div class="modal-dialog modal-xl">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="predModalLabel">
-            Select Models
-          </h5>
+          <h5 class="modal-title" id="predModalLabel">Select Models</h5>
           <button
             type="button"
             class="btn-close"
@@ -302,15 +350,24 @@
         </div>
         <div class="modal-body row">
           <div *ngIf="isLoading" class="loading-overlay">
-            <div class="spinner-border"  style="width: 10rem; height: 10rem;" role="status">
+            <div
+              class="spinner-border"
+              style="width: 10rem; height: 10rem"
+              role="status"
+            >
               <span class="visually-hidden">Loading...</span>
             </div>
           </div>
-          <div *ngIf="!this.listAllModels" class="alert p-2 alert-warning" role="alert">
+          <div
+            *ngIf="!this.listAllModels"
+            class="alert p-2 alert-warning"
+            role="alert"
+          >
             No models available
           </div>
           <div class="col-4">
-            <table *ngIf="this.listAllModels"
+            <table
+              *ngIf="this.listAllModels"
               style="width: 100% !important"
               id="modelsTable"
               class="table display compact"
@@ -325,12 +382,12 @@
               <tbody>
                 <tr
                   [ngClass]="{ 'selected-row': model === selectedModel }"
-                  *ngFor="let model of this.listAllModels | filterVersion: 0"
+                  *ngFor="let model of this.listAllModels | filterVersion : 0"
                   (click)="getModelDocumentation(model)"
                 >
                   <td>
                     <input
-                    [disabled]="!this.user.write"
+                      [disabled]="!this.user.write"
                       class="form-check-input text-center"
                       type="checkbox"
                       (change)="onChange(model, $event)"
@@ -371,296 +428,333 @@
   </div>
   <!-- Modal Import List -->
   <div
-  class="modal fade"
-  id="importTableModal"
-  tabindex="-1"
-  aria-labelledby="importTableModal"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-xs">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="importTableModalLabel">
-          Import Table
-        </h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="modal-body">
-        <input
-        [disabled]="!this.user.write"
-        (change)="importTable($event)"
-        placeholder=""
-        type="file"
-        class="form-control"
-      />
-       <span class="info-import-table">Use an excel format file with the same columns that are shown in the form</span> 
-      </div>
-      <div class="modal-footer">
-        <button
-          type="button"
-          id="btncloseImportTableModal"
-          class="btn btn-secondary"
-          data-bs-dismiss="modal"
-        >
-          Cancel
-        </button>
+    class="modal fade"
+    id="importTableModal"
+    tabindex="-1"
+    aria-labelledby="importTableModal"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-xs">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="importTableModalLabel">Import Table</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <input
+            [disabled]="!this.user.write"
+            (change)="importTable($event)"
+            placeholder=""
+            type="file"
+            class="form-control"
+          />
+          <span class="info-import-table"
+            >Use an excel format file with the same columns that are shown in
+            the form</span
+          >
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            id="btncloseImportTableModal"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Cancel
+          </button>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<!-- Modal add parameter -->
-<div
-class="modal fade"
-id="extraInformation"
-tabindex="-1"
-aria-labelledby="extraInformation"
-aria-hidden="true"
->
-<div class="modal-dialog modal-xl">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h5 class="modal-title fw-bold" id="extraInformationLabel">
-        Add new Value
-      </h5>
-      <button
-        type="button"
-        class="btn-close"
-        data-bs-dismiss="modal"
-        aria-label="Close"
-      ></button>
-    </div>
-    <div class="modal-body">
-      <div class="row">
-        <div class="col  pb-3">
-          <h6>Select method</h6>
-          <select
-          class="form-select"
-          id="method"
-          [(ngModel)]="method"
-        >
-          <option *ngFor="let method of this.model.methods"  [ngValue]="method" >{{ method.name }}</option>
-        </select>
+  <!-- Modal add parameter -->
+  <div
+    class="modal fade"
+    id="extraInformation"
+    tabindex="-1"
+    aria-labelledby="extraInformation"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title fw-bold" id="extraInformationLabel">
+            Add new Value
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
         </div>
-      </div>
-      <div class="row">
-        <div class="col">
+        <div class="modal-body">
+          <div class="row">
+            <div class="col pb-3">
+              <h6>Select method</h6>
+              <select class="form-select" id="method" [(ngModel)]="method">
+                <option
+                  *ngFor="let method of this.model.methods"
+                  [ngValue]="method"
+                >
+                  {{ method.name }}
+                </option>
+              </select>
+            </div>
+          </div>
           <div class="row">
             <div class="col">
-              <label for="Parameter" class="form-label">Parameter*</label>
-              <input
-              [disabled]="!this.user.write"
-                name="parameter"
-                placeholder=""
-                [(ngModel)]="this.parameter"
-                type="text"
-                class="form-control"
-                id="parameter"
-              />
-            </div>
-            <div class="col-3">
-              <label for="value" class="form-label">Value*</label>
-              <input
-              [disabled]="!this.user.write"
-                [placeholder]=""
-                [(ngModel)]="this.value"
-                type="text"
-                class="form-control"
-                name="value"
-                id="value"
-              />
-            </div>
-            <div class="col-1">
-              <label for="unit" class="form-label">Unit</label>
               <div class="row">
                 <div class="col">
+                  <label for="Parameter" class="form-label">Parameter*</label>
                   <input
-                  [disabled]="!this.user.write"
+                    [disabled]="!this.user.write"
+                    name="parameter"
                     placeholder=""
-                    [(ngModel)]="this.unit"
+                    [(ngModel)]="this.parameter"
                     type="text"
                     class="form-control"
-                    name="unit"
-                    id="unit"
+                    id="parameter"
+                  />
+                </div>
+                <div class="col-3">
+                  <label for="value" class="form-label">Value*</label>
+                  <input
+                    [disabled]="!this.user.write"
+                    [placeholder]=""
+                    [(ngModel)]="this.value"
+                    type="text"
+                    class="form-control"
+                    name="value"
+                    id="value"
+                  />
+                </div>
+                <div class="col-1">
+                  <label for="unit" class="form-label">Unit</label>
+                  <div class="row">
+                    <div class="col">
+                      <input
+                        [disabled]="!this.user.write"
+                        placeholder=""
+                        [(ngModel)]="this.unit"
+                        type="text"
+                        class="form-control"
+                        name="unit"
+                        id="unit"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-5">
+              <label for="Parameter" class="form-label">Uncertainty</label>
+              <input
+                [disabled]="!this.user.write"
+                name="uncertainty"
+                [placeholder]="
+                  this.pending_task['task description'].uncertainty
+                "
+                [(ngModel)]="this.uncertainty"
+                type="text"
+                class="form-control"
+                id="uncertainty"
+              />
+            </div>
+            <div class="col-auto">
+              <label for="unit" class="form-label">Term</label>
+              <div class="row">
+                <div class="col-auto">
+                  <input
+                    type="text"
+                    [disabled]="!this.user.write"
+                    [(ngModel)]="uncertainty_term"
+                    class="form-control"
+                    id="uncertainty_term"
                   />
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="row mt-2">
-        <div class="col-5">
-          <label for="Parameter" class="form-label">Uncertainty</label>
-          <input
-          [disabled]="!this.user.write"
-            name="uncertainty"
-            [placeholder]="this.pending_task['task description'].uncertainty"
-            [(ngModel)]="this.uncertainty"
-            type="text"
-            class="form-control"
-            id="uncertainty"
-          />
-        </div>
-        <div class="col-auto">
-          <label for="unit" class="form-label">Term</label>
-          <div class="row">
-            <div class="col-auto">
-              <input type="text" [disabled]="!this.user.write" [(ngModel)]="uncertainty_term" class="form-control" id="uncertainty_term">
-            </div>
+          <div *ngIf="!parameterInserted" class="text-danger mt-2">
+            There are missing required fields to fill out
           </div>
         </div>
-      </div>
-      <div *ngIf="!parameterInserted" class="text-danger mt-2">
-        There are missing required fields to fill out
+        <div class="modal-footer">
+          <a
+            (click)="addNewParameter()"
+            class="btn btn-ets-do border-btn"
+            role="button"
+          >
+            {{ editParameterMode ? "Update" : "Add" }}
+          </a>
+          <button
+            type="button"
+            id="btncloseImportTableModal"
+            class="btn btn-ets-bad border-btn"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+        </div>
       </div>
     </div>
-     <div class="modal-footer">
-      <a
-        (click)="addNewParameter()"
-        class="btn btn-ets-do border-btn"
-        role="button"
-        >
-        {{ editParameterMode ? 'Update' : 'Add' }}
-      </a>
-       <button
-        type="button"
-        id="btncloseImportTableModal"
-        class="btn btn-ets-bad border-btn"
-        data-bs-dismiss="modal"
-      >
-      Close
-      </button> 
-    </div> 
+  </div>
+
+  <!-- add method modal -->
+  <div
+    class="modal fade"
+    id="methodModal"
+    tabindex="-1"
+    aria-labelledby="methodModal"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title fw-bold" id="methodModaLabel">
+            {{ editMethodMode ? "Edit Method" : "Add new Method" }}
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <form #methodForm="ngForm">
+          <div class="modal-body">
+            <div class="row">
+              <div class="col">
+                <div class="row">
+                  <div class="col">
+                    <label for="name" class="form-label">Name*</label>
+                    <input
+                      [disabled]="!this.user.write"
+                      name="name"
+                      placeholder=""
+                      [(ngModel)]="this.method.name"
+                      type="text"
+                      class="form-control"
+                      id="name"
+                      required
+                    />
+                  </div>
+                  <div class="col">
+                    <label for="description" class="form-label"
+                      >Description
+                    </label>
+                    <input
+                      [disabled]="!this.user.write"
+                      [placeholder]=""
+                      [(ngModel)]="this.method.description"
+                      type="text"
+                      class="form-control"
+                      name="description"
+                      id="description"
+                    />
+                  </div>
+                  <div class="col">
+                    <label for="link" class="form-label">Link</label>
+                    <input
+                      [disabled]="!this.user.write"
+                      placeholder=""
+                      [(ngModel)]="this.method.link"
+                      type="text"
+                      class="form-control"
+                      name="link"
+                      id="link"
+                    />
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <label for="sensitivity" class="form-label"
+                      >Sensitivity</label
+                    >
+                    <input
+                      [disabled]="!this.user.write"
+                      type="number"
+                      min="0"
+                      max="1"
+                      step="0.01"
+                      name="sensitivity"
+                      id="sensitivity"
+                      [(ngModel)]="method.sensitivity"
+                      class="form-control"
+                      #sensitivityInputRef="ngModel"
+                    />
+                  </div>
+                  <div class="col">
+                    <label for="sensitivity" class="form-label"
+                      >Specificity</label
+                    >
+
+                    <input
+                      [disabled]="!this.user.write"
+                      #specificityInputRef="ngModel"
+                      type="number"
+                      min="0"
+                      max="1"
+                      step="0.01"
+                      class="form-control"
+                      id="specificity"
+                      name="specificity"
+                      [(ngModel)]="this.method.specificity"
+                    />
+                  </div>
+                  <div class="col">
+                    <label for="sd" class="form-label">SD</label>
+                    <input
+                      [disabled]="!this.user.write"
+                      type="string"
+                      class="form-control"
+                      id="sd"
+                      name="sd"
+                      [(ngModel)]="this.method.sd"
+                    />
+                  </div>
+                </div>
+                <div
+                  *ngIf="
+                    sensitivityInputRef.invalid || specificityInputRef.invalid
+                  "
+                  style="font-weight: bold !important"
+                  class="text-warning mt-2"
+                >
+                  Sensitivity and Specificity must be between 0 and 1.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              [disabled]="!this.user.write"
+              [disabled]="methodForm.invalid"
+              (click)="addMethod()"
+              class="btn btn-ets-do border-btn"
+              role="button"
+            >
+              {{ editMethodMode ? "Update" : "Add" }}
+            </button>
+            <button
+              [disabled]="!this.user.write"
+              type="button"
+              id="btncloseImportTableModal"
+              class="btn btn-ets-bad"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
 </div>
-</div>
-
-<!-- add method modal -->
-<div
-class="modal fade"
-id="methodModal"
-tabindex="-1"
-aria-labelledby="methodModal"
-aria-hidden="true"
->
-<div class="modal-dialog modal-xl">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h5 class="modal-title fw-bold" id="methodModaLabel">
-        {{ editMethodMode ? 'Edit Method' : 'Add new Method' }}
-      </h5>
-      <button
-        type="button"
-        class="btn-close"
-        data-bs-dismiss="modal"
-        aria-label="Close"
-      ></button>
-    </div>
-    <form #methodForm="ngForm">
-    <div class="modal-body">
-      <div class="row">
-        <div class="col">
-          <div class="row">
-            <div class="col">
-              <label for="name" class="form-label">Name*</label>
-              <input
-              [disabled]="!this.user.write"
-                name="name"
-                placeholder=""
-                [(ngModel)]="this.method.name"
-                type="text"
-                class="form-control"
-                id="name"
-                required
-              />
-            </div>
-            <div class="col">
-              <label for="description" class="form-label">Description</label>
-              <input
-              [disabled]="!this.user.write"
-                [placeholder]=""
-                [(ngModel)]="this.method.description"
-                type="text"
-                class="form-control"
-                name="description"
-                id="description"
-              />
-            </div>
-            <div class="col">
-              <label for="link" class="form-label">Link</label>
-                  <input
-                  [disabled]="!this.user.write"
-                    placeholder=""
-                    [(ngModel)]="this.method.link"
-                    type="text"
-                    class="form-control"
-                    name="link"
-                    id="link"
-                  />
-            </div>
-          </div>
-          <div class="row">
-            <div class="col">
-              <label for="sensitivity" class="form-label">Sensitivity</label>
-              <input 
-              [disabled]="!this.user.write"
-              type="number"
-              min="0"
-              max="1"
-              step="0.01"
-              name="sensitivity"
-              id="sensitivity"
-              [(ngModel)]="method.sensitivity"
-              class="form-control"
-              #sensitivityInputRef="ngModel"
-              />
-            </div>
-            <div class="col">
-              <label for="sensitivity" class="form-label">Specificity</label>
-              
-              <input [disabled]="!this.user.write" #specificityInputRef="ngModel"  type="number" min="0" max="1" step="0.01"  class="form-control" id="specificity" name="specificity" [(ngModel)]="this.method.specificity">
-            </div>
-            <div class="col">
-              <label for="sd" class="form-label">SD</label>
-              <input [disabled]="!this.user.write" type="string" class="form-control" id="sd" name="sd" [(ngModel)]="this.method.sd">
-            </div>
-          </div>
-          <div   *ngIf="sensitivityInputRef.invalid || specificityInputRef.invalid " style="font-weight: bold !important;" class="text-warning  mt-2">
-            Sensitivity and Specificity must be between 0 and 1.
-          </div>
-        </div>
-      </div>
-    </div>
-     <div class="modal-footer">
-      <button
-      [disabled]="!this.user.write"
-        [disabled]="methodForm.invalid"
-        (click)="addMethod()"
-        class="btn btn-ets-do border-btn"
-        role="button"
-        >
-        {{ editMethodMode ? 'Update' : 'Add' }}
-      
-     </button>
-       <button
-       [disabled]="!this.user.write"
-        type="button"
-        id="btncloseImportTableModal"
-        class="btn btn-ets-bad"
-        data-bs-dismiss="modal"
-      >
-      Close
-      </button> 
-    </div>
-  </form> 
-  </div>
-</div>
-</div>
-
-</div>
-
