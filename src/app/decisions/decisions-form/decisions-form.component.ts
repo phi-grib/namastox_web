@@ -37,6 +37,14 @@ export class DecisionsFormComponent {
 
   @Input() task: any;
   @Input() editMode: any;
+  
+  node_catalogue = {
+        'A': "assessment",
+        'X': "assessment",
+        'B': "adme",
+        'E': "exposure",
+        'H': "hazard",
+    }
 
   constructor(
     private commonService: CommonService,

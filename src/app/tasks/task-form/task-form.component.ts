@@ -26,7 +26,6 @@ export class TaskFormComponent {
   value: string | number;
   editParameterMode = false;
   listEditableMethods = [];
-
   loadForm: boolean = false;
   pending_task: any;
   parameter: string;
@@ -40,6 +39,13 @@ export class TaskFormComponent {
   listModelsSelected: any = [];
   parameterInserted: boolean = true;
   editMethodMode:boolean = false;
+  node_catalogue = {
+        'A': "assessment",
+        'X': "assessment",
+        'B': "adme",
+        'E': "exposure",
+        'H': "hazard",
+    }
 
   @Input() task: any;
   @Input() editMode: any;
@@ -147,6 +153,8 @@ export class TaskFormComponent {
 
 
   }
+
+
 
   executePredict() {
     this.isLoading = true;
