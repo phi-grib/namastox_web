@@ -1,4 +1,10 @@
-import { AfterViewInit,Component, ViewChild,ElementRef,Renderer2 } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ViewChild,
+  ElementRef,
+  Renderer2,
+} from '@angular/core';
 import mermaid from 'mermaid';
 import { CommonService } from '../common.service';
 import { PendingTasks, RA, Results } from '../globals';
@@ -12,18 +18,22 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./workflow.component.scss'],
 })
 export class WorkflowComponent implements AfterViewInit {
-  panZoomConfig: PanZoomConfig = new PanZoomConfig(
-     {freeMouseWheelFactor:0.001,zoomOnDoubleClick:false,dynamicContentDimensions:true,initialZoomLevel:3,zoomLevels: 50}
-  );
-	private panZoomAPI: PanZoomAPI;
-	private apiSubscription: Subscription;
+  panZoomConfig: PanZoomConfig = new PanZoomConfig({
+    freeMouseWheelFactor: 0.001,
+    zoomOnDoubleClick: false,
+    dynamicContentDimensions: true,
+    initialZoomLevel: 3,
+    zoomLevels: 50,
+  });
+  private panZoomAPI: PanZoomAPI;
+  private apiSubscription: Subscription;
   constructor(
     public ra: RA,
     private commonService: CommonService,
     private pendingTasks: PendingTasks,
     private results: Results,
-    private elementRef:ElementRef,
-    private renderer:Renderer2
+    private elementRef: ElementRef,
+    private renderer: Renderer2
   ) {}
   @ViewChild('mermaidDiv', { static: false }) mermaidDiv: ElementRef;
 
@@ -32,7 +42,7 @@ export class WorkflowComponent implements AfterViewInit {
     const { svg } = await mermaid.render('graphDiv', this.ra.workflow);
     container.innerHTML = svg;
     this.panZoomAPI.resetView();
-    container.querySelectorAll<SVGGElement>('.node').forEach(node => {
+    container.querySelectorAll<SVGGElement>('.node').forEach((node) => {
       node.addEventListener('click', () => {
         const match = node.id.match(/-(.*?)-/);
         this.checkType(match?.[1] ?? '');
@@ -40,47 +50,68 @@ export class WorkflowComponent implements AfterViewInit {
     });
   }
 
-   getElementsByTableID = (tableID) => {
-    const elements:any = {
-        btnTask: document.querySelector('#pastCollapseTasks'),
-        btnSelectTask: document.querySelector('#tableCollapseTasks'),
-        accordionbodySelector: document.querySelector('#flush-collapseOneTasks'),
-        accordionbodyTask: document.querySelector('#flush-collapseTwoTasks')
+  getElementsByTableID = (tableID) => {
+    const elements: any = {
+      btnTask: document.querySelector('#pastCollapseTasks'),
+      btnSelectTask: document.querySelector('#tableCollapseTasks'),
+      accordionbodySelector: document.querySelector('#flush-collapseOneTasks'),
+      accordionbodyTask: document.querySelector('#flush-collapseTwoTasks'),
     };
 
-    if (tableID === "#dtDecisions") {
-        elements.btnTask = document.querySelector('#pastCollapseDecisions');
-        elements.btnSelectTask = document.querySelector('#tableCollapseDecisions');
-        elements.accordionbodySelector = document.querySelector('#flush-collapseOneDecisions');
-        elements.accordionbodyTask = document.querySelector('#flush-collapseTwoDecisions');
+    if (tableID === '#dtDecisions') {
+      elements.btnTask = document.querySelector('#pastCollapseDecisions');
+      elements.btnSelectTask = document.querySelector(
+        '#tableCollapseDecisions'
+      );
+      elements.accordionbodySelector = document.querySelector(
+        '#flush-collapseOneDecisions'
+      );
+      elements.accordionbodyTask = document.querySelector(
+        '#flush-collapseTwoDecisions'
+      );
     }
 
     return elements;
-};
-
+  };
 
   selectTableRowByValue(tableID: string, column: number, value: string) {
-    const { btnTask, btnSelectTask, accordionbodySelector, accordionbodyTask } = this.getElementsByTableID(tableID);
-    
+    const { btnTask, btnSelectTask, accordionbodySelector, accordionbodyTask } =
+      this.getElementsByTableID(tableID);
+
     if (accordionbodySelector.classList.contains('collapse')) {
       btnSelectTask.click();
     }
 
     setTimeout(() => {
+      var idxPage = 0;
+      $(tableID).DataTable().page(idxPage).draw('page'); // start search in page 1
       const table = document.querySelector(tableID);
-      table.querySelectorAll('tr').forEach((row) => {
-        const cells = row.querySelectorAll('td');
-        if (cells[column] != undefined && cells[column].textContent === value) {
-          row.click();
-          setTimeout(() => {
-            if (accordionbodyTask.classList.contains('collapse')) {
-              btnTask.click();
-            }
-          }, 100);
+      var found = undefined;
+      while (found != true) {
+        table.querySelectorAll('tr').forEach((row) => {
+          const cells = row.querySelectorAll('td');
+          if (
+            cells[column] != undefined &&
+            cells[column].textContent === value
+          ) {
+            row.click();
+            found = true;
+            setTimeout(() => {
+              if (accordionbodyTask.classList.contains('collapse')) {
+                btnTask.click();
+              }
+            }, 100);
+          }
+        });
+        // if not found , pass next page of table 
+        if (found != true) {
+          idxPage += 1;
+          $(tableID).DataTable().page(idxPage).draw('page');
         }
-      });
+      }
     }, 300);
   }
+
   selectOptionBytaskID(selectorID, taskID) {
     const selector = document.getElementById(selectorID);
     selector.querySelectorAll('option').forEach((option) => {
@@ -96,8 +127,8 @@ export class WorkflowComponent implements AfterViewInit {
     this.selectOptionBytaskID(selectorID, taskID);
   }
   selectPastTask(typeTask, taskLabel) {
-    taskLabel = this.results[typeTask].find(task => task.id == taskLabel)
-    taskLabel = taskLabel.label
+    taskLabel = this.results[typeTask].find((task) => task.id == taskLabel);
+    taskLabel = taskLabel.label;
     const tableID = typeTask === 'results' ? '#dtTasks' : '#dtDecisions';
     this.selectTableRowByValue(tableID, 1, taskLabel);
   }
@@ -125,7 +156,6 @@ export class WorkflowComponent implements AfterViewInit {
   }
 
   checkType(taskName) {
-    
     // RESULTS
     // check if task is pending or past
     const pendingTaskResults = this.pendingTasks.results.find(
@@ -148,24 +178,21 @@ export class WorkflowComponent implements AfterViewInit {
       (task) => task.id == taskName
     );
     if (pendingTaskDecisions) this.redirectToTask('decisions', true, taskName);
-  
+
     if (pastTaskDecisions) this.redirectToTask('decisions', false, taskName);
-   
-  
-  
   }
 
-	zoomIn() {
-		this.panZoomAPI.zoomIn();
-	}
+  zoomIn() {
+    this.panZoomAPI.zoomIn();
+  }
 
-	zoomOut() {
-		this.panZoomAPI.zoomOut();
-	}
+  zoomOut() {
+    this.panZoomAPI.zoomOut();
+  }
 
-	reset() {
-		this.panZoomAPI.resetView();
-	}
+  reset() {
+    this.panZoomAPI.resetView();
+  }
   ngAfterViewInit(): void {
     this.apiSubscription = this.panZoomConfig.api.subscribe(
       (api) => (this.panZoomAPI = api)
@@ -176,8 +203,8 @@ export class WorkflowComponent implements AfterViewInit {
       securityLevel: 'loose',
       flowchart: {
         useMaxWidth: true,
-        htmlLabels: true
-      }
+        htmlLabels: true,
+      },
     });
     this.commonService.refreshWorklfow$.subscribe(() => {
       this.flowchartRefresh();
