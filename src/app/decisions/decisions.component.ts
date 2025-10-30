@@ -76,8 +76,6 @@ export class DecisionsComponent implements OnInit {
       .subscribe({
         next: (result) => {
           this.pending_task = result;
-          console.log("Decisions: pending task")
-          console.log(this.pending_task)
         },
         error: (e) => console.log(e),
       });
