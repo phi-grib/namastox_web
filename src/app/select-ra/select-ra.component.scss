@@ -45,12 +45,37 @@
   background-color: #fff;
   border: 1px solid #ddd;
 }
-
-select {
+select,
+::picker(select) {
+  appearance: base-select;
+  min-width: 100px;
   border: none;
-  background-color: white !important;
-  color: $secondary-color;
-  cursor: pointer;
+}
+select::picker-icon {
+  transition: 0.4s rotate;
+}
+select:open::picker-icon {
+  rotate: 180deg;
+}
+option:checked {
+  background-color: whitesmoke;
+  color: $primary-color;
+  font-weight: 600;
+
+}
+option::checkmark {
+  order: 1;
+  margin-left: auto;
+  content: "";
+}
+::picker(select) {
+  border: 1px solid whitesmoke;
+  border-radius: 4px;
+  margin-top: 5px;
+  box-shadow: 0 3px 10px rgb(0,0,0,0.2);
+}
+option:hover {
+  background-color: whitesmoke;
 }
 
 .btn-nam-good {
