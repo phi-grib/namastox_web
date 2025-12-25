@@ -73,7 +73,18 @@ option::checkmark {
   border-radius: 4px;
   margin-top: 5px;
   box-shadow: 0 3px 10px rgb(0,0,0,0.2);
+    opacity: 0;
+  transition: all 0.4s allow-discrete;
 }
+::picker(select):popover-open {
+  opacity: 1;
+}
+@starting-style {
+  ::picker(select):popover-open {
+    opacity: 0;
+  }
+}
+
 option:hover {
   background-color: whitesmoke;
 }
