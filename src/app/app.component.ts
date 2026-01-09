@@ -1,10 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { SplitComponent } from 'angular-split';
-import { CommonFunctions } from './common.functions';
 import { CommonService } from './common.service';
 import { Global, RA, User } from './globals';
 import { KeycloackService } from './keycloak.service';
-import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -17,12 +15,9 @@ export class AppComponent implements OnInit {
     public ra: RA,
     public user: User,
     private commonService: CommonService,
-    private func: CommonFunctions,
     private keycloackService: KeycloackService,
-    private toastr: ToastrService, 
   ) {}
   ngOnInit(): void {
-    
         this.keycloackService.getSessionUser().subscribe({
           next: (result:any) => {
             this.user.username = result['username']
@@ -56,12 +51,7 @@ export class AppComponent implements OnInit {
       },
     });
   }
-  loadGeneralInfoCanvas() {
-    this.commonService.drawGeneralInfoCanvas(true);
-  }
-  loadOverviewCanvas() {
-    this.commonService.drawOverviewCanvas(false);
-  }
+
   navbarleft = 60;
   navbarright = 40;
 

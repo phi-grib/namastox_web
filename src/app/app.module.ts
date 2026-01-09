@@ -35,6 +35,8 @@ import { WorkflowOptionsComponent } from './workflow-options/workflow-options.co
 import { WorkflowFullViewComponent } from './workflow-full-view/workflow-full-view.component';
 import { AboutSoftwareComponent } from './about-software/about-software.component';
 import { LogosComponent } from './logos/logos.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { ComponentsComponent } from './components/components.component';
 
 @NgModule({
   declarations: [
@@ -46,11 +48,13 @@ import { LogosComponent } from './logos/logos.component';
     OverviewComponent,
     GeneralInformationComponent,
     TasksComponent,
+    NavbarComponent,
     UserInfoComponent,
     AboutSoftwareComponent,
     LogosComponent,
     DecisionsComponent,
     SelectRaComponent,
+    ComponentsComponent,
     ManageRaComponent,
     TaskFormComponent,
     formatDatePipe,

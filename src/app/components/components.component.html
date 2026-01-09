@@ -1,0 +1,51 @@
+    <div class="tab-content container-fluid" id="pills-tabContent">
+      <app-select-ra></app-select-ra>
+      <div
+        class="tab-pane fade show active mt-2"
+        id="pills-overview"
+        role="tabpanel"
+        aria-labelledby="pills-overview-tab"
+      >
+        <app-overview *ngIf="this.ra.name"></app-overview>
+      </div>
+      <div
+        class="tab-pane fade mt-2"
+        id="pills-gen-information"
+        role="tabpanel"
+        aria-labelledby="pills-gen-information-tab"
+      >
+        <app-general-information *ngIf="this.ra.name"></app-general-information>
+      </div>
+      <div
+        class="tab-pane fade mt-2"
+        id="pills-tasks"
+        role="tabpanel"
+        aria-labelledby="pills-tasks-tab"
+      >
+        <app-tasks *ngIf="this.ra.name"></app-tasks>
+      </div>
+      <div
+        class="tab-pane fade mt-2"
+        id="pills-decisions"
+        role="tabpanel"
+        aria-labelledby="pills-decisions-tab"
+      >
+        <app-decisions *ngIf="this.ra.name"></app-decisions>
+      </div>
+      <div
+        class="tab-pane fade mt-2"
+        id="pills-notes"
+        role="tabpanel"
+        aria-labelledby="pills-notes-tab"
+      >
+        <app-notes></app-notes>
+      </div>
+      <div
+        class="tab-pane fade mt-2"
+        id="pills-report"
+        role="tabpanel"
+        aria-labelledby="pills-report-tab"
+      >
+        <app-report></app-report>
+      </div>
+    </div>
