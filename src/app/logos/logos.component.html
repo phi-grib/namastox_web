@@ -1,0 +1,31 @@
+  <img
+    style="height: 44px;"
+    [src]="'../../assets/img/aspis_logo.avif'"
+    alt="logo aspis "
+  />
+
+
+  <img
+    *ngIf="!this.whiteR3HRlogo"
+    style="height: 30px; margin-top: 8px; margin-right: 7px;"
+    [src]="'../../assets/img/riskhunterlogo.webp'"
+    alt="logo risk hunter"
+  />
+
+  <img
+  *ngIf="this.whiteR3HRlogo"
+    style="height: 30px; margin-top: 8px; margin-right: 7px;"
+    [src]="'../../assets/img/riskhunterlogowhite.avif'"
+    alt="logo risk hunter"
+  />
+  <img
+    [src]="'../../assets/img/eu-flag.avif'"
+    style="
+      height: 40px;
+      margin-top: 3px;
+      margin-right: 2px;
+      border-radius: 2px;
+      opacity: 0.9;
+    "
+    alt="logo europe union"
+  />
