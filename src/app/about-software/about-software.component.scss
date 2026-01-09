@@ -22,3 +22,11 @@
   padding: 16px;
   border-top: 1px solid whitesmoke;
 }
+
+a {
+  text-decoration: none;
+  color: $tertiary-color;
+  &:hover {
+    font-weight: bold;
+  }
+}
