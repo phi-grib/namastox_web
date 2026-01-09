@@ -1,0 +1,69 @@
+<li class="nav-item help-container" style="margin-right: auto !important">
+  <!-- button trigger modal -->
+  <button
+    class="nav-link"
+    data-bs-toggle="modal"
+    data-bs-target="#aboutSoftwareModal"
+    type="button"
+  >
+    About
+  </button>
+</li>
+<!-- Modal -->
+<div
+  class="modal modal-lg fade"
+  id="aboutSoftwareModal"
+  tabindex="-1"
+  aria-labelledby="aboutSoftwareModal"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header" style="border-color: whitesmoke">
+        <h1 class="modal-title fs-3" id="aboutSoftwareModal">
+         Namastox version 0.5.1
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <p>
+          NAMASTOX has been developed for the project <a
+            target="_blank"
+            href="https://www.risk-hunt3r.eu/"
+            >RISKHUNT3R</a
+          >
+        </p>
+        <p>
+          This work was supported by the project RISK-HUNT3R: RISK assessment of
+          chemicals integrating HUman centric Next generation Testing strategies
+          promoting the 3Rs. RISK-HUNT3R has received funding from the European
+          Union's Horizon 2020 research and innovation programme under grant
+          agreement No 964537 and is part of the ASPIS cluster. This work
+          reflects only the authors’ views, and the European Commission is not
+          responsible for any use that may be made of the information it
+          contains.
+        </p>
+          <app-logos [whiteR3HRlogo]="false"></app-logos>
+      </div>
+      <div class="footer">
+        <p class="text-start">
+          Developed by Pharmacoinformatics group of
+          <a href="https://phi.upf.edu/phi/" target="_blank">UPF</a> (
+          <a href="https://github.com/manuelpastor" target="_blank"
+            >Manuel Pastor</a
+          >
+          and
+          <a href="https://github.com/AdrianCabreraPhi" target="_blank"
+            >Adrian Cabrera</a
+          >
+          )
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
