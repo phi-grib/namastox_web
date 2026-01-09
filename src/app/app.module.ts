@@ -33,6 +33,8 @@ import { TruncateDecimalsPipe } from './truncate-decimals.pipe';
 import { UserInfoComponent } from './user-info/user-info.component';
 import { WorkflowOptionsComponent } from './workflow-options/workflow-options.component';
 import { WorkflowFullViewComponent } from './workflow-full-view/workflow-full-view.component';
+import { AboutSoftwareComponent } from './about-software/about-software.component';
+import { LogosComponent } from './logos/logos.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,8 @@ import { WorkflowFullViewComponent } from './workflow-full-view/workflow-full-vi
     GeneralInformationComponent,
     TasksComponent,
     UserInfoComponent,
+    AboutSoftwareComponent,
+    LogosComponent,
     DecisionsComponent,
     SelectRaComponent,
     ManageRaComponent,
