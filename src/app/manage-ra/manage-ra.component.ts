@@ -5,6 +5,7 @@ import { CommonService } from '../common.service';
 import { Global, PendingTasks, RA, Results, User } from '../globals';
 import { ManageRAsService } from '../manage-ras.service';
 import { UpdateService } from '../update.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-manage-ra',
@@ -12,6 +13,7 @@ import { UpdateService } from '../update.service';
   styleUrls: ['./manage-ra.component.scss'],
 })
 export class ManageRaComponent implements AfterViewInit {
+  appVersion = environment.appVersion;
   newRAname: string = '';
   @ViewChild('nameRAinput') nameRAinput: ElementRef;
   @ViewChild('fileInput') fileInput;
