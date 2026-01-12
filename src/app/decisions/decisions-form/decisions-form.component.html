@@ -1,5 +1,6 @@
+<!-- decision form -->
+@if(pending_task) {
 <form
-  *ngIf="this.pending_task"
   id="decisionForm"
   #decisionForm="ngForm"
   (ngSubmit)="onSubmit()"
@@ -11,10 +12,10 @@
       <div class="form-check form-check-inline">
         <input
           class="form-check-input"
-          [disabled]="this.editMode || !this.user.write"
+          [disabled]="editMode || !user.write"
           type="radio"
           name="inlineRadioDecisionOptions"
-          [(ngModel)]="this.model.decision"
+          [(ngModel)]="model.decision"
           id="inlineRadioDecision1"
           [value]="true"
         />
@@ -23,23 +24,25 @@
       <div class="form-check form-check-inline">
         <input
           class="form-check-input"
-          [disabled]="this.editMode || !this.user.write"
+          [disabled]="editMode || !user.write"
           type="radio"
           name="inlineRadioDecisionOptions"
-          [(ngModel)]="this.model.decision"
+          [(ngModel)]="model.decision"
           id="inlineRadioDecision2"
           [value]="false"
         />
         <label class="form-check-label" for="inlineRadio2">No</label>
       </div>
     </div>
-    <div class=" d-flex justify-content-end">
+    <div class="d-flex justify-content-end">
       <a
-        class="btn-ets-info  btn "
+        class="btn-ets-info btn"
         role="button"
         target="_blank"
         style="margin-right: 10px"
-          href="https://namastox.upf.edu/handbook/?tab={{this.node_catalogue[this.pending_task.result.id[0]]}}&node={{this.pending_task.result.id}}"
+        href="https://namastox.upf.edu/handbook/?tab={{
+          node_catalogue[pending_task.result.id[0]]
+        }}&node={{ pending_task.result.id }}"
       >
         More information
         <i style="font-size: 15px" class="fa-solid fa-circle-info"></i>
@@ -49,7 +52,7 @@
         data-bs-toggle="modal"
         (click)="openSupportModal()"
         data-bs-target="#supportModal"
-        class="btn  btn-ets-info "
+        class="btn btn-ets-info"
         role="button"
         >support</a
       >
@@ -61,10 +64,10 @@
     >
     <div class="col-10">
       <textarea
-        [disabled]="!this.user.write"
+        [disabled]="!user.write"
         required
-        [placeholder]="this.pending_task['task description']['justification']"
-        [(ngModel)]="this.model.justification"
+        [placeholder]="pending_task['task description']['justification']"
+        [(ngModel)]="model.justification"
         class="form-control"
         name="justification"
         id="justification"
@@ -81,7 +84,7 @@
       <div class="row">
         <div class="col-5">
           <input
-            [disabled]="!this.user.write"
+            [disabled]="!user.write"
             #DocumentFile
             (change)="sendlink($event)"
             placeholder=""
@@ -92,9 +95,9 @@
         <div class="col-auto d-flex flex-column">
           <div class="d-flex flex-row justify-content-around">
             <input
-              [disabled]="!this.user.write"
+              [disabled]="!user.write"
               class="form-check-input"
-              [disabled]="this.editMode"
+              [disabled]="editMode"
               type="checkbox"
               name="inlineRadioOptions"
               [(ngModel)]="includeDoc"
@@ -106,9 +109,9 @@
         </div>
         <div class="col-5">
           <input
-            [disabled]="!this.user.write"
+            [disabled]="!user.write"
             type="text"
-            [(ngModel)]="this.labelFile"
+            [(ngModel)]="labelFile"
             name="labelFile"
             placeholder="label"
             class="form-control"
@@ -125,31 +128,33 @@
       </div>
     </div>
   </div>
-  <div *ngFor="let idx of objectKeys(this.documents)" class="row mt-2 mb-3">
+  @for (document of documents; track $index) {
+  <div class="row mt-2 mb-3">
     <label for="inputPassword3" class="col-2 col-form-label"></label>
     <div class="col-10">
       <div class="row">
         <div class="col-3">
           <input
-            [disabled]="!this.user.write"
+            [disabled]="!user.write"
             type="text"
-            [value]="this.documents[idx].label"
+            [value]="document.label"
             readonly
             class="form-control-plaintext text-center"
           />
         </div>
         <div class="col-1">
           <div style="text-align: center !important; margin-top: 7px">
+            @if(document.include) {
             <i
-              *ngIf="this.documents[idx].include"
               style="text-align: center; margin-right: 18px"
               class="fa-solid fa-check-to-slot fa-lg"
             ></i>
+            }
           </div>
         </div>
         <div class="col-1">
           <a
-            (click)="deleteFile(this.documents[idx].label)"
+            (click)="deleteFile(document.label)"
             class="btn ms-auto"
             role="button"
             ><i
@@ -161,14 +166,15 @@
       </div>
     </div>
   </div>
+  }
 
   <div class="row mb-3">
     <label for="inputPassword3" class="col-2 col-form-label">Summary:</label>
     <div class="col-10">
       <textarea
-        [disabled]="!this.user.write"
-        [placeholder]="this.pending_task['task description']['summary']"
-        [(ngModel)]="this.model.summary"
+        [disabled]="!user.write"
+        [placeholder]="pending_task['task description']['summary']"
+        [(ngModel)]="model.summary"
         class="form-control"
         name="summary"
         id="summary"
@@ -178,19 +184,21 @@
   </div>
   <div class="row">
     <div class="col-10">
+      @if (editMode) {
       <button
-        [disabled]="!this.user.write"
+        [disabled]="!user.write"
         (click)="back()"
-        *ngIf="this.editMode"
         type="submit"
         class="btn btn-ets-delete border-btn"
       >
         Back
       </button>
+
+      }
     </div>
     <div class="col d-flex justify-content-end">
       <button
-        [disabled]="decisionForm.invalid || !this.user.write"
+        [disabled]="decisionForm.invalid || !user.write"
         type="submit"
         class="btn btn-ets-do submit-button border-btn"
       >
@@ -199,122 +207,9 @@
     </div>
   </div>
 </form>
+<!-- end decision form -->
+<!-- modal support information   -->
+<app-support-modal-information [pending_task]="pending_task" [upstream_tasks]="upstream_tasks" />
+}
 
-<div
-  class="modal fade"
-  data-bs-focus="false"
-  show="false"
-  (mousedown)="onDragStart($event)"
-  (mousemove)="onDrag($event)"
-  [style.left.px]="popupX"
-  [style.top.px]="popupY"
-  id="supportModal"
-  tabindex="-1"
-  data-bs-keyboard="false"
-  data-bs-backdrop="false"
-  aria-labelledby="supportModalLabel"
-  aria-hidden="false"
->
-  <div class="modal-dialog modal-xl">
-    <div *ngIf="this.upstream_tasks" class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-2" id="supportModalLabel">
-          {{ this.pending_task["task description"].name }}
-          <span class="text-muted fs-4 d-block">
-            {{ this.pending_task["task description"].description }}
-          </span>
-        </h1>
-        <button
-          [disabled]="!this.user.write"
-          id="closeBtnModal"
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="modal-body">
-        <!-- <div class="row align-items-center mb-4">
-          <div class="col-auto fs-4">
-          </div>
-        </div> -->
 
-        <div class="row">
-          <table class="table" style="width: 100%">
-            <thead class="">
-              <tr>
-                <th>Upstream task</th>
-                <th>Result</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let idx of objectKeys(this.upstream_tasks)">
-                <td>{{ this.upstream_tasks[idx].name }}</td>
-                <td
-                  style="width: 700px !important"
-                  *ngIf="isReportOrParameters(this.upstream_tasks[idx].values)"
-                >
-                  {{ this.upstream_tasks[idx].values }}
-                </td>
-                <td
-                  style="padding: 0px !important"
-                  class="text-justify"
-                  *ngIf="!isReportOrParameters(this.upstream_tasks[idx].values)"
-                >
-                  <table
-                    style="width: 100% !important"
-                    class="table table-borderless"
-                  >
-                    <thead>
-                      <tr>
-                        <th style="width: 10%">Parameter</th>
-                        <th style="width: 10%">Value</th>
-                        <th style="width: 10%">Unit</th>
-                        <th style="width: 35%">Uncertainty</th>
-                        <th style="width: 10%">Method</th>
-                        <th style="width: 10%">Specificity</th>
-                        <th style="width: 10%">Sensitivity</th>
-                        <th style="width: 5%">SD</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr
-                        *ngFor="
-                          let value of this.upstream_tasks[idx].values;
-                          let i = index
-                        "
-                      >
-                        <td>{{ this.value.parameter }}</td>
-                        <td>{{ this.value.value | truncateDecimals }}</td>
-                        <td>{{ this.value.unit }}</td>
-                        <td>
-                          {{
-                            this.upstream_tasks[idx].uncertainties[i]
-                              .uncertainty
-                          }}
-                        </td>
-                        <td>{{ this.upstream_tasks[idx].methods[i]?.name }}</td>
-                        <td>
-                          {{ this.upstream_tasks[idx].methods[i]?.specificity }}
-                        </td>
-                        <td>
-                          {{ this.upstream_tasks[idx].methods[i]?.sensitivity }}
-                        </td>
-                        <td>{{ this.upstream_tasks[idx].methods[i]?.sd }}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          Close
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
