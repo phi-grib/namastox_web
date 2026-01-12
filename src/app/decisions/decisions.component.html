@@ -1,190 +1,145 @@
-<ul class="nav nav-pills" id="results-tab" role="tablist">
-  <li class="nav-item" role="presentation">
-    <button
-      class="nav-link active"
-      id="pills-pendingdecisions-tab"
-      data-bs-toggle="pill"
-      data-bs-target="#pills-pendingdecisions"
-      type="button"
-      role="tab"
-      aria-controls="pills-pendingdecisions"
-      aria-selected="True"
-    >
-      Pending
-    </button>
-  </li>
-  <li class="nav-item" role="presentation">
-    <button
-      class="nav-link"
-      id="pills-pastdecisions-tab"
-      data-bs-toggle="pill"
-      data-bs-target="#pills-pastdecisions"
-      type="button"
-      role="tab"
-      aria-controls="pills-pastdecisions"
-      aria-selected="false"
-    >
-      Completed
-    </button>
-  </li>
-</ul>
+<!-- navbar decisions -->
+<app-nav-decisions/>
+
 
 <div class="tab-content container-fluid" id="pills-tabContent">
+  <!-- pending decisions  -->
   <div
     class="tab-pane fade show active mt-2"
     id="pills-pendingdecisions"
     role="tabpanel"
     aria-labelledby="pills-pendingdecisions-tab"
   >
-    <div *ngIf="this.pendingTasks.decisions.length > 0; else noDecisions">
+    @if (pendingTasks.decisions.length > 0){
+    <div>
       <div class="row">
         <div class="col">
           <select
             (change)="getPendingTask()"
             id="selectPendingDecision"
-            [(ngModel)]="this.pending_task_selected"
+            [(ngModel)]="pending_task_selected"
             class="form-select"
             aria-label="Default select example"
           >
-            <option
-              *ngFor="let idx of objectKeys(this.pendingTasks.decisions)"
-              [value]="this.pendingTasks.decisions[idx].id"
-            >
-              {{ this.pendingTasks.decisions[idx].label }}
-            </option>
+            @for(decision of pendingTasks.decisions; track decision.id){
+            <option [value]="decision.id">{{ decision.label }}</option>
+            }
           </select>
-          <div
-            *ngIf="this.pending_task?.result"
-            class="container-information mt-2"
-          >
+          @if(pending_task?.result){
+          <div class="container-information mt-2">
             <div class="card-body">
               <div class="row">
                 <div class="col-2 text">
                   <strong>Name</strong>
                 </div>
                 <div class="col-10">
-                  {{ this.pending_task["task description"].name }}
+                  {{pending_task["task description"].name }}
                 </div>
               </div>
               <div class="row">
                 <div class="col-2 text">
                   <strong>Description</strong>
                 </div>
+                @if(pending_task['task description']?.description) {
                 <div
                   class="col-10"
-                  *ngIf="this.pending_task['task description']?.description"
                   [innerHTML]="
-                    this.pending_task['task description'].description
-                      | autolinkPipe
+                    pending_task['task description'].description | autolinkPipe
                   "
                 ></div>
+                }
               </div>
-              <div
-                *ngIf="this.pending_task['task description'].proposed_approach"
-                class="row"
-              >
+              @if(pending_task['task description'].proposed_approach){
+              <div class="row">
                 <div class="col-2 text">
                   <strong>Proposed approach</strong>
                 </div>
                 <div class="col-10 position-relative">
+                  @if(pending_task['task description'].proposed_approach.length > 300) {
                   <div
-                    *ngIf="
-                      pending_task['task description'].proposed_approach
-                        .length > 300
-                    "
                     [innerHTML]="
                       pending_task['task description'].proposed_approach
                         | slice : 0 : 301
                     "
                   >
-                    <span *ngIf="!this.collapseProposed">...</span>
+                    @if(collapseProposed) {
+                    <span>...</span>
+                    }
                   </div>
+                  } @if(collapseProposed || pending_task['task description'].proposed_approach .length < 300){
                   <div
-                    *ngIf="
-                      this.collapseProposed ||
-                      pending_task['task description'].proposed_approach
-                        .length < 300
-                    "
                     [innerHTML]="
                       pending_task['task description'].proposed_approach
                     "
                   ></div>
+                  }
 
                   <a
                     (click)="collapseProposedApproach()"
                     class="position-absolute top-0"
                     style="left: -5px"
                   >
-                    <i
-                      *ngIf="!this.collapseProposed"
-                      class="fa-solid plus-icon fa-plus"
-                    ></i>
-
-                    <i
-                      *ngIf="this.collapseProposed"
-                      class="fa-solid plus-icon fa-minus"
-                    ></i>
+                    @if(collapseProposed) {
+                    <i class="fa-solid plus-icon fa-minus"></i>
+                    }@else {
+                    <i class="fa-solid plus-icon fa-plus"></i>
+                    }
                   </a>
                 </div>
               </div>
-
-              <div
-                *ngIf="this.pending_task['task description'].guidance"
-                class="row"
-              >
+              } @if(pending_task['task description'].guidance) {
+              <div class="row">
                 <div class="col-2 text">
                   <strong>Guidance</strong>
                 </div>
                 <div class="col-10 position-relative">
+                  @if(pending_task['task description'].guidance.length > 300 &&
+                  !this.collapseguidance) {
                   <div
-                    *ngIf="
-                      pending_task['task description'].guidance.length > 300 &&
-                      !this.collapseguidance
-                    "
                     [innerHTML]="
                       pending_task['task description'].guidance
                         | slice : 0 : 301
                     "
                   >
-                    <span *ngIf="!this.collapseguidance">...</span>
+                    @if(!collapseguidance){
+                    <span>...</span>
+                    }
                   </div>
+                  } @if(collapseguidance ||pending_task['task description'].guidance.length < 300) {
                   <div
-                    *ngIf="
-                      this.collapseguidance ||
-                      pending_task['task description'].guidance.length < 300
-                    "
                     [innerHTML]="pending_task['task description'].guidance"
                   ></div>
+                  }
+
                   <a
                     (click)="collapseGuidance()"
                     class="position-absolute top-0"
                     style="left: -5px"
                   >
-                    <i
-                      *ngIf="!this.collapseguidance"
-                      class="fa-solid plus-icon fa-plus"
-                    ></i>
-
-                    <i
-                      *ngIf="this.collapseguidance"
-                      class="fa-solid plus-icon fa-minus"
-                    ></i>
+                    @if(collapseguidance){
+                    <i class="fa-solid plus-icon fa-minus"></i>
+                    } @else {
+                    <i class="fa-solid plus-icon fa-plus"></i>
+                    }
                   </a>
                 </div>
               </div>
+              }
             </div>
-            <decisions-form
-              *ngIf="this.pending_task"
-              [editMode]="false"
-              [task]="this.pending_task"
-            >
-            </decisions-form>
+            @if(pending_task){
+            <decisions-form [editMode]="false" [task]="pending_task" />
+            }
           </div>
+          }
         </div>
       </div>
     </div>
-    <ng-template #noDecisions>No pending decisions</ng-template>
+    } @else {
+    <div>No pending decisions</div>
+    }
   </div>
+    <!-- end pending decisions  -->
+     <!-- completed decisions -->
   <div
     class="tab-pane fade"
     id="pills-pastdecisions"
@@ -226,16 +181,15 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr
-                      (click)="selectDecision(decision.id)"
-                      *ngFor="let decision of this.results.decisions"
-                    >
+                    @for (decision of results.decisions; track decision.id) {
+                    <tr (click)="selectDecision(decision.id)">
                       <td>{{ decision.date | formatDate }}</td>
                       <td>{{ decision.label }}</td>
                       <td>{{ decision.name }}</td>
                       <td>{{ decision.summary | slice : 0 : 150 }}...</td>
                       <td>{{ decision.decision ? "Yes" : "No" }}</td>
                     </tr>
+                    }
                   </tbody>
                 </table>
               </div>
@@ -256,7 +210,7 @@
             aria-expanded="true"
             aria-controls="flush-collapseTwoDecisions"
           >
-            {{ this.results?.decisionSelected["task description"]?.label }}
+            {{ results?.decisionSelected["task description"]?.label }}
           </button>
         </h2>
         <div
@@ -266,12 +220,8 @@
           data-bs-parent="#accordionFlushExample"
         >
           <div class="accordion-body">
-            <div
-              class="mt-2"
-              *ngIf="
-                this.results.decisionSelected && !this.global.editModeDecisions
-              "
-            >
+            @if(results.decisionSelected && !global.editModeDecisions){
+            <div class="mt-2">
               <hr />
               <div class="card-body mb-3">
                 <div class="row">
@@ -279,7 +229,7 @@
                     <strong>Date</strong>
                   </div>
                   <div class="col-10">
-                    {{ this.results.decisionSelected["task description"].date }}
+                    {{ results.decisionSelected.result.date }}
                   </div>
                 </div>
                 <div class="row">
@@ -287,61 +237,49 @@
                     <strong>Name</strong>
                   </div>
                   <div class="col-10">
-                    {{ this.results.decisionSelected["task description"].name }}
+                    {{ results.decisionSelected["task description"].name }}
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-2 text">
                     <strong>Description</strong>
                   </div>
+                  @if(results.decisionSelected['task description']?.description) {
                   <div
                     class="col-10"
-                    *ngIf="this.pending_task['task description'].description"
-                    [innerHTML]="
-                      this.results.decisionSelected['task description']
-                        .description | autolinkPipe
-                    "
+                    [innerHTML]="results.decisionSelected['task description'].description | autolinkPipe"
                   ></div>
+
+                  }
                 </div>
                 <div class="row">
                   <div class="col-2 text">
                     <strong>Method links</strong>
                   </div>
-                  <div
-                    *ngIf="
-                      this.pending_task['task description'].method_link[0] !==
-                      'local_models'
-                    "
-                    class="col-10"
-                  >
+                  @if(pending_task?.['task description']?.method_link[0] !== 'local_models') {
+                  <div class="col-10">
                     <div>
-                      <span
-                        *ngFor="
-                          let link of this.results.decisionSelected[
-                            'task description'
-                          ].method_link
-                        "
-                      >
+                      @for (link of results.decisionSelected['task description'].method_link; track $index) {
+                      <span>
                         <a target="_blank" [href]="link">{{ link }}</a>
                         <br />
                       </span>
+
+                      }
                     </div>
                   </div>
+                  }
                 </div>
               </div>
               <div class="card-body">
                 <div class="row pt-1 pb-1">
                   <div class="col-2 text border-bottom">Decision</div>
                   <div class="col border-bottom">
-                    <span
-                      *ngIf="
-                        this.results.decisionSelected.result.decision;
-                        else elseBlock
-                      "
-                    >
-                      Yes
-                    </span>
-                    <ng-template #elseBlock> No </ng-template>
+                    @if(results.decisionSelected.result.decision) {
+                    <span>Yes</span>
+                    }@else {
+                    <span>No</span>
+                    }
                   </div>
                 </div>
                 <div class="row pt-1 pb-1">
@@ -351,31 +289,21 @@
                     Documentation
                   </div>
                   <div class="col border-bottom">
-                    <div
-                      class="d-inline mx-1"
-                      *ngFor="
-                        let idx of objectKeys(
-                          this.results.decisionSelected.result.links
-                        )
-                      "
-                    >
+                    @for (link of results.decisionSelected.result.links; track $index) {
+                    <div class="d-inline mx-1">
                       <button
-                        (click)="
-                          downloadFile(
-                            this.results.decisionSelected.result.links[idx].File
-                          )
-                        "
+                        (click)="downloadFile(link.File)"
                         class="btn btn-outline-success mt-2 mb-2"
                       >
-                        {{
-                          this.results.decisionSelected.result.links[idx].label
-                        }}
+                        {{ link.label }}
                       </button>
                     </div>
+                    }
                   </div>
                 </div>
                 <div class="d-flex p-1 justify-content-around">
-                  <div *ngFor="let image of this.listImages">
+                  @for (image of listImages; track $index) {
+                  <div>
                     <div class="card" style="width: 18rem">
                       <img [src]="image.link" width="288" height="288" alt="" />
                       <div class="card-body">
@@ -383,23 +311,22 @@
                       </div>
                     </div>
                   </div>
+                  }
                 </div>
                 <div class="row pt-1 pb-1">
                   <div class="col-2 text border-bottom">Summary</div>
                   <div class="col border-bottom formatted-text">
-                    {{ this.results.decisionSelected.result.summary }}
+                    {{ results.decisionSelected.result.summary }}
                   </div>
                 </div>
                 <div class="row pt-1 pb-1">
                   <div class="col-2 text border-bottom">Justification</div>
                   <div class="col border-bottom formatted-text">
-                    {{ this.results.decisionSelected.result.justification }}
+                    {{ results.decisionSelected.result.justification }}
                   </div>
                 </div>
-                <div
-                  class="row pt-1 pb-1"
-                  *ngIf="this.results.decisionSelected.substance"
-                >
+                @if(results.decisionSelected.substance){
+                <div class="row pt-1 pb-1">
                   <div class="col-2 text">Substance</div>
                   <div class="col">
                     <table
@@ -414,38 +341,32 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr
-                          *ngFor="
-                            let idx of objectKeys(
-                              this.results.decisionSelected.substance
-                            )
-                          "
-                        >
+                        @for (idx of objectKeys(results.decisionSelected.substance); track idx) {
+                        <tr>
                           <td
                             style="vertical-align: middle; text-align: center"
                           >
-                            {{
-                              this.results.decisionSelected.substance[idx].name
-                            }}
+                            {{ results.decisionSelected.substance[idx].name }}
                           </td>
                           <td
                             style="vertical-align: middle; text-align: center"
                           >
-                            {{
-                              this.results.decisionSelected.substance[idx].CASRN
-                            }}
+                            {{ results.decisionSelected.substance[idx].CASRN }}
                           </td>
                           <td style="text-align: center">
                             <canvas [id]="'decisionCanvas' + idx"></canvas>
                           </td>
                         </tr>
+                        }
                       </tbody>
                     </table>
                   </div>
                 </div>
+                }
+
                 <div class="row">
                   <button
-                    [disabled]="!this.user.write"
+                    [disabled]="!user.write"
                     (click)="editDecision()"
                     class="btn btn-ets-edit"
                   >
@@ -454,15 +375,16 @@
                 </div>
               </div>
             </div>
+            } @if(global.editModeDecisions && user.write){
             <decisions-form
-              *ngIf="this.global.editModeDecisions && this.user.write"
               [editMode]="true"
-              [task]="this.results.decisionSelected"
-            >
-            </decisions-form>
+              [task]="results.decisionSelected"
+            />
+            }
           </div>
         </div>
       </div>
     </div>
   </div>
+  <!-- end completed decisions -->
 </div>

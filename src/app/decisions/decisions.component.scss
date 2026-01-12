@@ -1,6 +1,5 @@
 @import "../../assets/scss/title.scss";
 @import "../../assets/scss/buttons.scss";
-@import "../../assets/scss/submenu.scss";
 
 #dtDecisions {
   padding-top: 10px;
@@ -90,9 +89,7 @@ hr {
   background-color: rgb(248, 246, 246) !important;
   color: $secondary-color !important;
 }
-li {
-  padding-left: 2px;
-}
+
 
 .formatted-text {
   white-space: pre-wrap !important;
