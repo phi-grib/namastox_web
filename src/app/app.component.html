@@ -1,10 +1,10 @@
 <!-- navbar component -->
 <app-navbar/>
 <as-split style="height: 93vh" class="" direction="horizontal">
-  <as-split-area [size]="this.leftSide">
+  <as-split-area [size]="leftSide">
     <app-components/>
   </as-split-area>
-  <as-split-area [size]="this.rightSide">
+  <as-split-area [size]="rightSide">
     <!-- component select workflow progress or view full -->
     <app-workflow-options />
     <app-workflow-full-view [hidden]="this.global.progressTab" />
