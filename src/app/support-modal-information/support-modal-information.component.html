@@ -1,0 +1,114 @@
+<div
+  class="modal fade"
+  data-bs-focus="false"
+  show="false"
+  (mousedown)="onDragStart($event)"
+  (mousemove)="onDrag($event)"
+  [style.left.px]="popupX"
+  [style.top.px]="popupY"
+  id="supportModal"
+  tabindex="-1"
+  data-bs-keyboard="false"
+  data-bs-backdrop="false"
+  aria-labelledby="supportModalLabel"
+  aria-hidden="false"
+>
+  <div class="modal-dialog modal-xl">
+    @if(upstream_tasks) {
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-2" id="supportModalLabel">
+          {{ pending_task["task description"].name }}
+          <span class="text-muted fs-4 d-block">
+            {{ pending_task["task description"].description }}
+          </span>
+        </h1>
+        <button
+          id="closeBtnModal"
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <!-- <div class="row align-items-center mb-4">
+          <div class="col-auto fs-4">
+          </div>
+        </div> -->
+
+        <div class="row">
+          <table class="table" style="width: 100%">
+            <thead class="">
+              <tr>
+                <th>Upstream task</th>
+                <th>Result</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (upstreamTask of upstream_tasks; track upstreamTask.id) {
+              <tr>
+                <td>{{ upstreamTask.name }}</td>
+                @if (isReportOrParameters(upstreamTask.values)) {
+                <td style="width: 700px !important">
+                  {{ upstreamTask.values }}
+                </td>
+                } @if (!isReportOrParameters(upstreamTask.values)) {
+                <td style="padding: 0px !important" class="text-justify">
+                  <table
+                    style="width: 100% !important"
+                    class="table table-borderless"
+                  >
+                    <thead>
+                      <tr>
+                        <th style="width: 10%">Parameter</th>
+                        <th style="width: 10%">Value</th>
+                        <th style="width: 10%">Unit</th>
+                        <th style="width: 35%">Uncertainty</th>
+                        <th style="width: 10%">Method</th>
+                        <th style="width: 10%">Specificity</th>
+                        <th style="width: 10%">Sensitivity</th>
+                        <th style="width: 5%">SD</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      @for (value of upstreamTask.values; track value;let i = $index) {
+                      <tr
+                      >
+                        <td>{{ value.parameter }}</td>
+                        <td>{{ value.value | truncateDecimals }}</td>
+                        <td>{{ value.unit }}</td>
+                        <td>
+                          {{
+                            upstreamTask.uncertainties[i].uncertainty
+                          }}
+                        </td>
+                        <td>{{ upstreamTask.methods[i]?.name }}</td>
+                        <td>
+                          {{ upstreamTask.methods[i]?.specificity }}
+                        </td>
+                        <td>
+                          {{ upstreamTask.methods[i]?.sensitivity }}
+                        </td>
+                        <td>{{ upstreamTask.methods[i]?.sd }}</td>
+                      </tr>
+                      }
+                    </tbody>
+                  </table>
+                </td>
+                }
+              </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+    }
+  </div>
+</div>

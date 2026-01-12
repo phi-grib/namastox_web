@@ -38,6 +38,7 @@ import { LogosComponent } from './logos/logos.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ComponentsComponent } from './components/components.component';
 import { NavDecisionsComponent } from './nav-decisions/nav-decisions.component';
+import { SupportModalInformationComponent } from './support-modal-information/support-modal-information.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { NavDecisionsComponent } from './nav-decisions/nav-decisions.component';
     DecisionsComponent,
     SelectRaComponent,
     ComponentsComponent,
+    SupportModalInformationComponent,
     ManageRaComponent,
     NavDecisionsComponent,
     TaskFormComponent,
