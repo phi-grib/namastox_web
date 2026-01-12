@@ -1,9 +1,7 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { CommonFunctions } from '../common.functions';
+import { Component,  OnInit  } from '@angular/core';
 import { CommonService } from '../common.service';
 import { PendingTasks, RA, Results, Global, User } from '../globals';
 import { FormGroup } from '@angular/forms';
-import { UpdateService } from '../update.service';
 import { saveAs } from 'file-saver';
 import * as SmilesDrawer from 'smiles-drawer';
 declare var $: any;
@@ -40,10 +38,8 @@ export class DecisionsComponent implements OnInit {
   constructor(
     public ra: RA,
     private commonService: CommonService,
-    private func: CommonFunctions,
     public pendingTasks: PendingTasks,
     public results: Results,
-    private updateService: UpdateService,
     public global: Global,
     public user: User
   ) {}
@@ -114,7 +110,6 @@ export class DecisionsComponent implements OnInit {
             error: (e) => console.log(e),
           });
         }
-          console.log(this.listImages)
       });
   }
 
