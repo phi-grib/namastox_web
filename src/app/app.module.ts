@@ -37,6 +37,7 @@ import { AboutSoftwareComponent } from './about-software/about-software.componen
 import { LogosComponent } from './logos/logos.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ComponentsComponent } from './components/components.component';
+import { NavDecisionsComponent } from './nav-decisions/nav-decisions.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { ComponentsComponent } from './components/components.component';
     SelectRaComponent,
     ComponentsComponent,
     ManageRaComponent,
+    NavDecisionsComponent,
     TaskFormComponent,
     formatDatePipe,
     DecisionsFormComponent,
