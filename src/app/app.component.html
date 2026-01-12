@@ -1,16 +1,13 @@
 <!-- navbar component -->
-<app-navbar></app-navbar>
+<app-navbar/>
 <as-split style="height: 93vh" class="" direction="horizontal">
-  <as-split-area [size]="this.navbarleft">
-    <app-components></app-components>
+  <as-split-area [size]="this.leftSide">
+    <app-components/>
   </as-split-area>
-  <as-split-area [size]="this.navbarright">
+  <as-split-area [size]="this.rightSide">
     <!-- component select workflow progress or view full -->
-    <app-workflow-options></app-workflow-options>
-    <app-workflow-full-view [hidden]="this.global.progressTab">
-    </app-workflow-full-view>
-    <app-workflow-progress
-      [hidden]="!this.global.progressTab"
-    ></app-workflow-progress>
+    <app-workflow-options />
+    <app-workflow-full-view [hidden]="this.global.progressTab" />
+    <app-workflow-progress [hidden]="!this.global.progressTab" />
   </as-split-area>
 </as-split>

@@ -51,9 +51,9 @@ export class AppComponent implements OnInit {
       },
     });
   }
-
-  navbarleft = 60;
-  navbarright = 40;
+  // default  size of each side of screen
+  leftSide = 60;
+  rightSide = 40;
 
   @ViewChild('mySplit')
   mySplitEl!: SplitComponent;
