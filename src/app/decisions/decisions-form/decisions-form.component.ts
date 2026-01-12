@@ -27,14 +27,7 @@ export class DecisionsFormComponent {
   labelFile = '';
   objectKeys = Object.keys;
   upstream_tasks: any;
-  popupX = 300;
-  popupY = 450;
   includeDoc: boolean = true;
-
-  isDragging = false;
-  dragOffsetX = 0;
-  dragOffsetY = 0;
-
   @Input() task: any;
   @Input() editMode: any;
   
@@ -57,33 +50,19 @@ export class DecisionsFormComponent {
     public user: User
   ) {}
 
-  isReportOrParameters(value): boolean {
-    if (value.length > 0) {
-      return typeof value[0] === 'string';
-    }
-    return false;
-  }
-
   ngOnInit(): void {
     setTimeout(() => {
       this.pending_task = this.task;
       this.model = this.task.result;
-      // if(this.editMode && this.pending_task.result['result_type'] == 'text'){
-      //    this.report = this.model.values[0];
-      // }
       this.documents = this.model['links'];
     }, 100);
   }
 
   openSupportModal() {
-    console.log("values:")
     this.commonService
       .getUpstreamTasks(this.ra.name, this.pending_task.result.id)
       .subscribe({
         next: (result) => {
-  
-          console.log("support modal endpoint")
-          console.log(result)
           this.upstream_tasks = result;
         },
         error: (e) => {
@@ -91,30 +70,8 @@ export class DecisionsFormComponent {
         },
       });
   }
-  onDrag(event: MouseEvent) {
-    if (this.isDragging) {
-      this.popupX = event.clientX - this.dragOffsetX;
-      this.popupY = event.clientY - this.dragOffsetY;
-    }
-  }
-  onDragStart(event: MouseEvent) {
-    this.isDragging = true;
-    this.dragOffsetX = event.clientX - this.popupX;
-    this.dragOffsetY = event.clientY - this.popupY;
-  }
+  
 
-  @HostListener('document:mousemove', ['$event'])
-  onMouseMove(event: MouseEvent) {
-    if (this.isDragging) {
-      this.popupX = event.clientX - this.dragOffsetX;
-      this.popupY = event.clientY - this.dragOffsetY;
-    }
-  }
-
-  @HostListener('document:mouseup')
-  onMouseUp() {
-    this.isDragging = false;
-  }
   setLabelDocumentName(documentName){
     let docNameWithoutExtension = documentName.split('.').slice(0, -1).join('.');
     return docNameWithoutExtension;

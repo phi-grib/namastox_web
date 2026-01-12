@@ -7,37 +7,16 @@
   color: $tertiary-color;
 }
 
-//  .modal-content {
-//      border: 0.2px solid  $primary-color !important;
-//  }
 .sm-text{
   font-size: 13.5px !important;
 }
 
-.modal-dialog {
-  position: absolute;
-  cursor: move;
-}
 #suppIDText {
   color: rosybrown;
   font-size: smaller;
   margin-left: 5px !important;
 }
-#supportModalLabel {
-  color: $primary-color;
-}
-.primary-color {
-  color: $primary-color;
-}
-.secondary-color {
-  color: $secondary-color;
-}
-table {
-  thead {
-    color: $secondary-color;
-  }
-}
 
-.modal-footer {
-  border: none;
-}
+
+
+
