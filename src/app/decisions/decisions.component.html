@@ -93,8 +93,7 @@
                   <strong>Guidance</strong>
                 </div>
                 <div class="col-10 position-relative">
-                  @if(pending_task['task description'].guidance.length > 300 &&
-                  !this.collapseguidance) {
+                  @if(pending_task['task description'].guidance.length > 300 && !collapseguidance) {
                   <div
                     [innerHTML]="
                       pending_task['task description'].guidance
