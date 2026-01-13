@@ -1,4 +1,5 @@
-<div class="container-fluid" *ngIf="this.ra.name">
+@if (ra.name) {
+<div class="container-fluid">
   <div class="container-form p-3">
     <form
       id="generalInformationForm"
@@ -66,7 +67,9 @@
           <input
             [disabled]="!this.user.write"
             name="endpoint"
-            [placeholder]="this.ra.general_information?.placeholders['endpoint']"
+            [placeholder]="
+              this.ra.general_information?.placeholders['endpoint']
+            "
             [(ngModel)]="this.ra.general_information?.general.endpoint"
             type="text"
             class="form-control"
@@ -157,33 +160,34 @@
           >Workflow:</label
         >
 
-
         <div class="col">
-          
           <select
-          id="workflow_custom"
-          [(ngModel)]="optionWorkflow"
-          aria-label="Default select example"
-          class="mb-2 selector"
-          name="optionWorkflow"
-        >
-          <option *ngFor="let option of optionsWorkflowCustom" [value]="option">{{ option }}</option>
-        </select>
-    
-          <input
-          *ngIf="optionWorkflow == 'custom' "
-          [disabled]="!this.user.write"
-          name="workflow_custom"
-          [placeholder]="
-            this.ra.general_information?.placeholders['workflow_custom']
-          "
-          type="file"
-          class="form-control"
-          id="workflow_custom"
-          (change)="uploadCustomWorkflow($event)"
-        />
+            id="workflow_custom"
+            [(ngModel)]="optionWorkflow"
+            aria-label="Default select example"
+            class="mb-2 selector"
+            name="optionWorkflow"
+          >
+            <option
+              *ngFor="let option of optionsWorkflowCustom"
+              [value]="option"
+            >
+              {{ option }}
+            </option>
+          </select>
 
-    
+          <input
+            *ngIf="optionWorkflow == 'custom'"
+            [disabled]="!this.user.write"
+            name="workflow_custom"
+            [placeholder]="
+              this.ra.general_information?.placeholders['workflow_custom']
+            "
+            type="file"
+            class="form-control"
+            id="workflow_custom"
+            (change)="uploadCustomWorkflow($event)"
+          />
         </div>
       </div>
       <div class="col mb-3 d-flex justify-content-end">
@@ -240,7 +244,7 @@
                     [disabled]="!this.user.write"
                     type="button"
                     (click)="editMol(idx)"
-                    class="btn btn-ets-do  btn-end-group"
+                    class="btn btn-ets-do btn-end-group"
                     data-bs-toggle="modal"
                     data-bs-target="#editMolModal"
                   >
@@ -306,248 +310,25 @@
           </button>
 
           <button
-          style="margin-left: 8px !important"
-          type="submit"
-          [disabled]="!this.user.write"
-          class="btn btn-ets-do submit-button border-btn"
-        >
-          Submit
-        </button>
+            style="margin-left: 8px !important"
+            type="submit"
+            [disabled]="!this.user.write"
+            class="btn btn-ets-do submit-button border-btn"
+          >
+            Submit
+          </button>
         </div>
       </div>
     </form>
   </div>
 </div>
+}
 
 <!-- Modal add new Molecule -->
-<div
-  class="modal fade"
-  id="exampleModal"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-xl">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Add Molecule</h1>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="modal-body">
-        <div class="row mb-3">
-          <div class="col">
-            <div class="row mb-3">
-              <label for="inputPassword3" class="col-2 col-form-label"
-                >Name(s)</label
-              >
-              <div class="col">
-                <input
-                  name="substance_name"
-                  [placeholder]="
-                    this.ra.general_information?.placeholders['substances']?.name
-                  "
-                  [(ngModel)]="this.substance_name"
-                  type="text"
-                  class="form-control"
-                  id="substance_name"
-                />
-              </div>
-            </div>
-            <div class="row mb-3">
-              <label for="inputPassword3" class="col-2 col-form-label"
-                >ID(s)</label
-              >
-              <div class="col">
-                <input
-                  name="substance_id"
-                  [placeholder]="
-                    this.ra.general_information?.placeholders['substances']?.id
-                  "
-                  [(ngModel)]="this.substance_id"
-                  type="text"
-                  class="form-control"
-                  id="substance_id"
-                />
-              </div>
-            </div>
-            <div class="row mb-3">
-              <label for="inputPassword3" class="col-2 col-form-label"
-                >CAS-RN(s)</label
-              >
-              <div class="col">
-                <input
-                  name="substance_CASRN"
-                  [placeholder]="
-                    this.ra.general_information?.placeholders['substances'][
-                      'cas-rn'
-                    ]
-                  "
-                  [(ngModel)]="this.substance_CASRN"
-                  type="text"
-                  class="form-control"
-                  id="substance_CASRN"
-                />
-              </div>
-            </div>
-            <div class="row mb-3">
-              <label for="inputPassword3" class="col-2 col-form-label"
-                >SMILES</label
-              >
-              <div class="col">
-                <input
-                  [(ngModel)]="this.substance_SMILES"
-                  name="substance_SMILES"
-                  id="substance_SMILES"
-                  type="text"
-                  class="form-control"
-                />
-              </div>
-            </div>
-            <div class="row mb-3">
-              <label for="inputPassword3" class="col-2 col-form-label"
-                >Structure</label
-              >
-              <div class="col">
-                <input
-                  name="substance_file"
-                  placeholder=""
-                  (change)="uploadSubstance($event)"
-                  type="file"
-                  class="form-control text-start"
-                  id="substance_file"
-                />
-              </div>
-            </div>
-            <div class="row mb-3">
-              <label for="inputPassword3" class="col-2 col-form-label"></label>
-              <div class="col">
-                <div class="form-floating">
-                  <textarea
-                    id="substance_characteristics"
-                    name="substance_characteristics"
-                    [(ngModel)]="substance_characteristics"
-                    class="form-control"
-                    placeholder="Leave a comment here"
-                    style="height: 100px"
-                  ></textarea>
-                  <label for="floatingTextarea2">
-                    Define the characterization of the compound
-                  </label>
-                </div>
-              </div>
-            </div>
-            <div class="row mb-3">
-              <div class="col text-end">
-                <button
-                  type="button"
-                  (click)="autocomplete()"
-                  class="btn btn-ets-do border-btn"
-                >
-                  Autocomplete
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button
-          type="button"
-          (click)="addMolecule(false)"
-          class="btn btn-ets-do border-btn"
-        >
-          Add
-        </button>
-        <button type="button" class="btn btn-ets-bad border-btn" data-bs-dismiss="modal">
-          Close
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
+<app-modal-add-new-molecule />
 
 <!-- Modal edit Molecule -->
-<div
-  class="modal fade"
-  id="editMolModal"
-  tabindex="-1"
-  aria-labelledby="editMolModal"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-xl">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="editMolModal">Edit Molecule</h1>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="modal-body">
-        <div class="col">
-          <div class="row mb-3">
-            <label for="inputPassword3" class="col-2 col-form-label"
-              >Name</label
-            >
-            <div class="col">
-              <input
-                name="substance_name"
-                [(ngModel)]="this.substance_name"
-                type="text"
-                class="form-control"
-                id="substance_name"
-              />
-            </div>
-          </div>
-          <div class="row mb-3">
-            <label for="inputPassword3" class="col-2 col-form-label"
-              >CAS-RN</label
-            >
-            <div class="col">
-              <input
-                name="substance_CASRN"
-                [(ngModel)]="this.substance_CASRN"
-                type="text"
-                class="form-control"
-                id="substance_CASRN"
-              />
-            </div>
-          </div>
-          <div class="row mb-3">
-            <label for="inputPassword3" class="col-2 col-form-label"
-              >SMILES</label
-            >
-            <div class="col">
-              <input
-                name="substance_SMILES"
-                [(ngModel)]="this.substance_SMILES"
-                type="text"
-                class="form-control"
-                id="substance_SMILES"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button
-          type="button"
-          (click)="addMolecule(true)"
-          class="btn btn-ets-do"
-        >
-          Edit
-        </button>
-        <button type="button" class="btn btn-ets-bad" data-bs-dismiss="modal">
-          Close
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
+@if (substance) {
+<app-modal-edit-molecule [substance]="substance" [idxMol]="idxMol" />
+
+}

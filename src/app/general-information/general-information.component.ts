@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { CommonFunctions } from '../common.functions';
 import { CommonService } from '../common.service';
-import { RA, User } from '../globals';
+import { RA, User,Substance } from '../globals';
 import { UpdateService } from '../update.service';
 import { ToastrService } from 'ngx-toastr';
 import * as SmilesDrawer from 'smiles-drawer';
@@ -13,19 +13,9 @@ import * as SmilesDrawer from 'smiles-drawer';
   styleUrls: ['./general-information.component.scss'],
 })
 export class GeneralInformationComponent implements OnInit {
-  loadForm: boolean = false;
-  substance_name: string = '';
-  substance_CASRN: string = '';
-  substance_SMILES: string = '';
-  substance_id: string = '';
+  substance: Substance | null = null;
   optionsWorkflowCustom = ["ASPA 3.0","ASPA 2.1","ASPA 1.9","custom"]
   workflowsFiles = {"ASPA 3.0": "workflow30.tsv","ASPA 2.1": "workflow21.tsv","ASPA 1.9":"workflow19.tsv"}
-  substance_characteristics : string = ""
-  substance_file: File | null = null;
-  form = new FormGroup({});
-  model: any;
-  complete: boolean = false;
-  listMols = [];
   optionWorkflow = this.optionsWorkflowCustom[0]
   idxMol = -1;
   workflow_custom: File | null = null;
@@ -33,6 +23,7 @@ export class GeneralInformationComponent implements OnInit {
   readPermission:string =  '';
   writePermission:string =  '';
   generalInformationForm = new FormGroup({});
+  
   constructor(
     public ra: RA,
     private commonService: CommonService,
@@ -56,21 +47,10 @@ export class GeneralInformationComponent implements OnInit {
           console.log(e);
         },
       });
-      if (this.ra.status.step > 0) {
-        this.substance_name =
-          this.ra.general_information.general.substances[0]?.name;
-        this.substance_CASRN =
-          this.ra.general_information.general.substances[0]?.casrn;
-        this.substance_id =
-          this.ra.general_information.general.substances[0]?.id;
-        this.substance_SMILES =
-          this.ra.general_information.general.substances[0]?.smiles;
+      if (this.ra.status.step > 0 && this.ra.general_information.general.substances.length > 0) {
+        this.substance = { ...this.ra.general_information.general.substances[0] };
       } else {
-        this.substance_name = '';
-        this.substance_CASRN = '';
-        this.substance_id = '';
-        this.substance_SMILES = '';
-        this.substance_characteristics = '';
+        this.substance = null;
       }
       this.drawMol();
     });
@@ -90,63 +70,13 @@ export class GeneralInformationComponent implements OnInit {
   deleteMol(idx) {
     this.ra.general_information.general.substances.splice(idx, 1);
   }
-
-  addMolecule(edit) {
-    var substance = {};
-    substance = {
-      id: this.substance_id,
-      name: this.substance_name,
-      casrn: this.substance_CASRN,
-      smiles: this.substance_SMILES,
-      characteristics: this.substance_characteristics
-    };
-    if (edit) {
-      this.ra.general_information.general.substances[this.idxMol] = substance;
-      this.toastr.success(substance['name'], 'Edited Successfully', {
-        timeOut: 3000,
-      });
-    } else {
-      this.ra.general_information.general.substances.push(substance);
-      this.toastr.success(substance['name'], 'Added Successfully', {
-        timeOut: 3000,
-      });
-    }
-
-    setTimeout(() => {
-      this.drawMol();
-    }, 300);
-  }
+  
   editMol(idx) {
-    this.substance_SMILES =
-      this.ra.general_information.general.substances[idx].smiles;
-    this.substance_id = this.ra.general_information.general.substances[idx].id;
-    this.substance_name =
-      this.ra.general_information.general.substances[idx].name;
-    this.substance_CASRN =
-      this.ra.general_information.general.substances[idx].casrn;
+    const _substance  = this.ra.general_information.general.substances[idx] // evitar referencia de objeto 
+    this.substance =  {..._substance};
     this.idxMol = idx;
   }
 
-  uploadSubstance(event: any) {
-    const selectedFile = event.target.files[0];
-    if (selectedFile) {
-      this.substance_file = selectedFile;
-      this.updateService
-        .uploadSubstances(this.substance_file)
-        .subscribe((result) => {
-          if (result['success']) {
-            this.ra.general_information.general.substances =
-              this.ra.general_information.general.substances.concat(
-                result['result']
-              );
-            this.substance_file = null;
-          }
-          setTimeout(() => {
-            this.drawMol();
-          }, 300);
-        });
-    }
-  }
 
   drawMol() {
     this.ra.general_information.general.substances.forEach((mol, idx) => {
@@ -170,65 +100,7 @@ export class GeneralInformationComponent implements OnInit {
     return typeof value === 'object';
   }
 
-  autocomplete() {
-    if (!this.substance_name && !this.substance_CASRN) {
-      this.toastr.warning('No input provided', 'WARNING', {
-        timeOut: 5000,
-        positionClass: 'toast-top-right',
-      });
-      return;
-    }
 
-    let promise;
-
-    if (this.substance_name) {
-      promise = this.commonService
-        .getInformBySubstanceName(this.substance_name)
-        .toPromise();
-    } else {
-      promise = this.commonService
-        .getInformByCASRN(this.substance_CASRN)
-        .toPromise();
-    }
-
-    promise
-      .then((result) => {
-        if (result && result.length > 0) {
-          const substanceData = result[0];
-          const ids = `dtxcid:${substanceData['dtxcid']},dtxsid:${substanceData['dtxsid']},pubchemcid:${substanceData['pubchemCid']}`;
-
-          if (this.substance_name) {
-            this.substance_CASRN = substanceData['casrn'];
-            this.toastr.success(
-              'Name ' + this.substance_name,
-              'AUTOCOMPLETE SUCCESSFULLY',
-              {
-                timeOut: 3000,
-                positionClass: 'toast-top-right',
-              }
-            );
-          } else {
-            this.toastr.success(
-              'CASRN ' + this.substance_CASRN,
-              'AUTOCOMPLETE SUCCESSFULLY',
-              {
-                timeOut: 3000,
-                positionClass: 'toast-top-right',
-              }
-            );
-          }
-          this.substance_id = ids;
-          this.substance_SMILES = substanceData['smiles'];
-        }
-      })
-      .catch((error) => {
-        this.toastr.warning(error.error, 'WARNING', {
-          timeOut: 5000,
-          positionClass: 'toast-top-right',
-        });
-        console.log('Error:', error);
-      });
-  }
 
   applyPermissions() {
     const permissions = {};

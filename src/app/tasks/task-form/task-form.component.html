@@ -52,10 +52,7 @@
         >Import Table</a
       >
       <a
-        *ngIf="
-          this.pending_task['task description'].method_link[0] ===
-          'local_models'
-        "
+        *ngIf="this.pending_task['task description'].method_link[0] === 'local_models'"
         (click)="openModal()"
         data-bs-toggle="modal"
         data-bs-target="#predModal"
