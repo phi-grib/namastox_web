@@ -1,0 +1,38 @@
+            <div class="accordion-body">
+              <div class="row">
+                <div class="col">
+                  <table id="dtNotes" class="display compact">
+                    <thead>
+                      <tr>
+                        <th>Title</th>
+                        <th>Date</th>
+                        <th></th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      @for (note of ra.notes; track $index) {
+                      <tr (click)="selectNote(note.id)">
+                        <td>{{ note.title }}</td>
+                        <td>{{ note.date }}</td>
+                        <td>{{ note.text | slice : 0 : 20 }}...</td>
+                        <td>
+                          @if (user.write) {
+                          <a
+                            (click)="deleteNote(note)"
+                            class="btn ms-auto"
+                            role="button"
+                            ><i
+                              class="fa-solid fa-circle-minus fa-lg"
+                              style="color: #e01b24"
+                            ></i
+                          ></a>
+                          }
+                        </td>
+                      </tr>
+                      }
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>

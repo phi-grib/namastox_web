@@ -1,0 +1,28 @@
+@import "../../assets/scss/colors.scss";
+
+#dtNotes {
+    padding-top: 10px;
+    thead {
+      background-color: $primary-color;
+      color: white;
+      tr {
+        th:nth-child(1) {
+          width: 20% !important;
+        }
+        th:nth-child(2) {
+          width: 10% !important;
+        }
+        th:nth-child(3) {
+          width: 30% !important;
+        }
+        th:nth-child(4) {
+          width: 60% !important;
+        }
+      }
+    }
+    td {
+      vertical-align: top;
+      text-align: left;
+      padding: 0px 10px !important;
+    }
+  }

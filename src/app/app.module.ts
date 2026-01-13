@@ -41,6 +41,7 @@ import { NavDecisionsComponent } from './nav-decisions/nav-decisions.component';
 import { SupportModalInformationComponent } from './support-modal-information/support-modal-information.component';
 import { ModalAddNewMoleculeComponent } from './modal-add-new-molecule/modal-add-new-molecule.component';
 import { ModalEditMoleculeComponent } from './modal-edit-molecule/modal-edit-molecule.component';
+import { ListNotesComponent } from './list-notes/list-notes.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { ModalEditMoleculeComponent } from './modal-edit-molecule/modal-edit-mol
     LogosComponent,
     DecisionsComponent,
     SelectRaComponent,
+    ListNotesComponent,
     ComponentsComponent,
     SupportModalInformationComponent,
     ManageRaComponent,
