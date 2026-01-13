@@ -39,6 +39,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { ComponentsComponent } from './components/components.component';
 import { NavDecisionsComponent } from './nav-decisions/nav-decisions.component';
 import { SupportModalInformationComponent } from './support-modal-information/support-modal-information.component';
+import { ModalAddNewMoleculeComponent } from './modal-add-new-molecule/modal-add-new-molecule.component';
+import { ModalEditMoleculeComponent } from './modal-edit-molecule/modal-edit-molecule.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +61,9 @@ import { SupportModalInformationComponent } from './support-modal-information/su
     ComponentsComponent,
     SupportModalInformationComponent,
     ManageRaComponent,
+    ModalEditMoleculeComponent,
     NavDecisionsComponent,
+    ModalAddNewMoleculeComponent,
     TaskFormComponent,
     formatDatePipe,
     DecisionsFormComponent,

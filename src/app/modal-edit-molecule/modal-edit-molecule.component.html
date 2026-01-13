@@ -1,0 +1,80 @@
+<div
+  class="modal fade"
+  id="editMolModal"
+  tabindex="-1"
+  aria-labelledby="editMolModal"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="editMolModal">Edit Molecule</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="col">
+          <div class="row mb-3">
+            <label for="inputPassword3" class="col-2 col-form-label"
+              >Name</label
+            >
+            <div class="col">
+              <input
+                name="name"
+                [(ngModel)]="substance.name"
+                type="text"
+                class="form-control"
+                id="substance_name"
+              />
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="inputPassword3" class="col-2 col-form-label"
+              >CAS-RN</label
+            >
+            <div class="col">
+              <input
+                name="casrn"
+                [(ngModel)]="substance.casrn"
+                type="text"
+                class="form-control"
+                id="substance_CASRN"
+              />
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="inputPassword3" class="col-2 col-form-label"
+              >SMILES</label
+            >
+            <div class="col">
+              <input
+                name="SMILES"
+                [(ngModel)]="substance.smiles"
+                type="text"
+                class="form-control"
+                id="substance_SMILES"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          [disabled]="!substance.name"
+          type="button"
+          (click)="editMolecule()"
+          class="btn btn-ets-do"
+        >
+          Edit
+        </button>
+        <button type="button" class="btn btn-ets-bad" data-bs-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
