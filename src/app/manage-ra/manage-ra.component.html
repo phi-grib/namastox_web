@@ -10,16 +10,16 @@
       New
     </button>
     <button
-    [disabled]="!this.user.write"
+      [disabled]="!user.write"
       type="button"
-      class="btn btn-ets-do "
+      class="btn btn-ets-do"
       data-bs-toggle="modal"
       data-bs-target="#changeNameRA"
     >
       Rename
     </button>
     <button
-      [disabled]="!this.user.write"
+      [disabled]="!user.write"
       (click)="duplicateRA()"
       type="button"
       class="btn btn-ets-do duplicate-btn"
@@ -28,7 +28,7 @@
     </button>
     <button
       (click)="deleteRA()"
-      [disabled]="this.ra.listRA.length < 1 || !this.user.write"
+      [disabled]="ra.listRA.length < 1 || !user.write"
       type="button"
       class="btn btn-ets-delete"
     >
@@ -37,9 +37,9 @@
     <button
       (click)="deleteStep()"
       [disabled]="
-        this.ra.listRA.length < 1 ||
-        this.ra.status.step <= 1 ||
-        !this.user.write
+        ra.listRA.length < 1 ||
+        ra.status.step <= 1 ||
+        !user.write
       "
       type="button"
       class="btn btn-ets-delete delete-step-btn"
@@ -58,7 +58,7 @@
     />
     <button
       (click)="exportRA()"
-      [disabled]="this.ra.listRA.length < 1"
+      [disabled]="ra.listRA.length < 1"
       type="button"
       class="btn btn-ets-bad"
     >
@@ -74,7 +74,7 @@
       Configure
     </button>
   </div>
-  <span class="version-text"> {{appVersion}}</span>
+  <span class="version-text"> {{ appVersion }}</span>
 </div>
 <!-- new ra modal -->
 <div
@@ -109,7 +109,7 @@
               #nameRAinput
               type="text"
               class="form-control ml-2"
-              [(ngModel)]="this.newRAname"
+              [(ngModel)]="newRAname"
               placeholder="name"
             />
           </div>
@@ -121,7 +121,7 @@
         </button>
         <button
           type="button"
-          [disabled]="!this.newRAname"
+          [disabled]="!newRAname"
           class="btn btn-ets-do"
           data-bs-dismiss="modal"
           (click)="newRA()"
@@ -136,7 +136,8 @@
 <!-- rename ra  modal -->
 <div
   class="modal fade"
-  id="changeNameRA"pepitico
+  id="changeNameRA"
+  pepitico
   aria-labelledby="newModalLabel"
   aria-hidden="false"
 >
@@ -164,7 +165,7 @@
               #nameRAinput
               type="text"
               class="form-control ml-2"
-              [(ngModel)]="this.newRAname"
+              [(ngModel)]="newRAname"
               placeholder="name"
             />
           </div>
@@ -176,7 +177,7 @@
         </button>
         <button
           type="button"
-          [disabled]="!this.newRAname"
+          [disabled]="!newRAname"
           class="btn btn-ets-do"
           data-bs-dismiss="modal"
           (click)="modifyNameRA()"
@@ -234,7 +235,8 @@
           />
         </div>
 
-        <div *ngIf="isLoading" class="loading-overlay">
+        @if(isLoading){
+        <div class="loading-overlay">
           <div
             class="spinner-border"
             style="width: 10rem; height: 10rem"
@@ -243,6 +245,8 @@
             <span class="visually-hidden">Loading...</span>
           </div>
         </div>
+
+        }
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-nam-bad" data-bs-dismiss="modal">
