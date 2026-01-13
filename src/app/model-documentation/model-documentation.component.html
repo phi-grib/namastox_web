@@ -56,22 +56,22 @@
         <div class="col-3 p-1">
           {{ value.replaceAll("_", " ") }}
         </div>
-        @if (!isObject(this.documentation[value]) && this.documentation[value]
+        @if (!isObject(documentation[value]) && documentation[value]
         !== 'None') {
         <div class="col text-dark">
-          {{ this.documentation[value] }}
+          {{ documentation[value] }}
         </div>
-        } @if (isObject(this.documentation[value])) {
+        } @if (isObject(documentation[value])) {
         <div class="col">
        
           <div
             class="row"
-            *ngFor="let idx of objectKeys(this.documentation[value])"
+            *ngFor="let idx of objectKeys(documentation[value])"
           >
             <div class="col">{{ idx.replaceAll("_", " ") }}</div>
-            @if (this.documentation[value][idx] !== 'None'){
+            @if (documentation[value][idx] !== 'None'){
             <div class="col text-dark">
-              {{ this.documentation[value][idx] }}
+              {{ documentation[value][idx] }}
             </div>
             }
           </div>
@@ -93,23 +93,23 @@
         <div class="col-3 p-1">
           {{ value.replaceAll("_", " ") }}
         </div>
-        @if (!isObject(this.documentation[value]) && this.documentation[value]
+        @if (!isObject(documentation[value]) && documentation[value]
         !== 'None') {
 
         <div class="col text-dark">
-          {{ this.documentation[value] }}
+          {{ documentation[value] }}
         </div>
 
-        } @if(isObject(this.documentation[value])) {
+        } @if(isObject(documentation[value])) {
         <div class="col">
           <div
             class="row"
-            *ngFor="let idx of objectKeys(this.documentation[value])"
+            *ngFor="let idx of objectKeys(documentation[value])"
           >
             <div class="col">{{ idx.replaceAll("_", " ") }}</div>
-            @if (this.documentation[value][idx] !== 'None') {
+            @if (documentation[value][idx] !== 'None') {
             <div class="col text-dark">
-              {{ this.documentation[value][idx] }}
+              {{ documentation[value][idx] }}
             </div>
 
             }
@@ -135,21 +135,21 @@
         <div class="col-4 p-1">
           {{ value.replaceAll("_", " ") }}
         </div>
-        @if ( !isObject(this.documentation[value]) && this.documentation[value]
+        @if ( !isObject(documentation[value]) && documentation[value]
         !== 'None') {
         <div class="col text-dark">
-          {{ this.documentation[value] }}
+          {{ documentation[value] }}
         </div>
-        } @if (isObject(this.documentation[value])) {
+        } @if (isObject(documentation[value])) {
         <div class="col">
           <div
             class="row"
-            *ngFor="let idx of objectKeys(this.documentation[value])"
+            *ngFor="let idx of objectKeys(documentation[value])"
           >
             <div class="col">{{ idx.replaceAll("_", " ") }}</div>
-            @if (this.documentation[value][idx] !== 'None') {
+            @if (documentation[value][idx] !== 'None') {
             <div class="col text-dark">
-              {{ this.documentation[value][idx] }}
+              {{ documentation[value][idx] }}
             </div>
             }
           </div>
