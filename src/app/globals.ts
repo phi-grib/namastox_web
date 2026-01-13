@@ -58,3 +58,11 @@ export class Method {
   specificity:number;
   sd:string;
 }
+
+export interface Substance {
+  name: string;
+  id: string; 
+  smiles: string;
+  characteristics: string; 
+  casrn: string;
+}
