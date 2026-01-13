@@ -1,106 +1,75 @@
-
 <div class="container">
   <div class="col">
-
     <div class="row">
       <div class="accordion accordion-flush" id="accordionFlushExample">
         <div class="accordion-item">
-            <h2 class="accordion-header" id="flush-headingOne">
-              <button
-                id="tableCollapse"
-                class="accordion-button collapsed"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#flush-collapseOne"
-                aria-expanded="false"
-                aria-controls="flush-collapseOne"
-              >
-                List
-              </button>
-            </h2>
-            <div
-              id="flush-collapseOne"
-              class="accordion-collapse collapse show"
-              aria-labelledby="flush-headingOne"
-              data-bs-parent="#accordionFlushExample"
+          <h2 class="accordion-header" id="flush-headingOne">
+            <button
+              id="tableCollapse"
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#flush-collapseOne"
+              aria-expanded="false"
+              aria-controls="flush-collapseOne"
             >
-              <div class="accordion-body">
-                <div class="row">
-                  <div  class="col">
-                    <table   id="dtNotes" class="display compact">
-                        <thead>
-                            <tr>
-                                <th>Title</th>
-                                <th>Date</th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr (click)="selectNote(note.id)" *ngFor="let note of this.ra.notes" >
-                                <td>{{note.title}}</td>
-                                <td>{{note.date}}</td>
-                                <td>{{ note.text | slice : 0 : 20 }}...</td>
-                                 <td>
-                                        <a
-                                        *ngIf="this.user.write "
-                                  (click)="deleteNote(note)"
-                                  class="btn ms-auto"
-                                  role="button"
-                                  ><i
-                                    class="fa-solid fa-circle-minus fa-lg"
-                                    style="color: #e01b24"
-                                  ></i
-                                ></a>
-                              </td> 
-                            </tr>
-                        </tbody>
-                    </table>
-                  </div>
+              List
+            </button>
+          </h2>
+
+          <!-- list notes component -->
+          <div
+            id="flush-collapseOne"
+            class="accordion-collapse collapse show"
+            aria-labelledby="flush-headingOne"
+            data-bs-parent="#accordionFlushExample"
+          >
+            <app-list-notes />
+          </div>
+        </div>
+        <!-- end list notes component -->
+
+        <!-- note selected cossmponent -->
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="flush-headingTwo">
+            <button
+              id="pastCollapse"
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#flush-collapseTwo"
+              aria-expanded="true"
+              aria-controls="flush-collapseTwo"
+            >
+              {{ ra.note["id"] }}
+            </button>
+          </h2>
+          <div
+            id="flush-collapseTwo"
+            class="accordion-collapse collapse"
+            aria-labelledby="flush-headingTwo"
+            data-bs-parent="#accordionFlushExample"
+          >
+            <div class="accordion-body">
+              <div class="row">
+                <div class="col-auto">
+                  {{ ra.note["text"] }}
                 </div>
               </div>
             </div>
           </div>
-
-    <div class="accordion-item">
-        <h2 class="accordion-header" id="flush-headingTwo">
-          <button
-            id="pastCollapse"
-            class="accordion-button collapsed"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#flush-collapseTwo"
-            aria-expanded="true"
-            aria-controls="flush-collapseTwo"
-          >
-            {{this.ra.note['id']}}
-          </button>
-        </h2>
-        <div
-          id="flush-collapseTwo"
-          class="accordion-collapse collapse"
-          aria-labelledby="flush-headingTwo"
-          data-bs-parent="#accordionFlushExample"
-        >
-          <div class="accordion-body">
-            <div class="row">
-                <div class="col-auto">
-                 {{this.ra.note['text']}}
-                </div>
-            </div>
-          </div>
         </div>
+        <!-- note selected component -->
+
       </div>
     </div>
-    </div>
-<hr>
-    <div *ngIf="this.user.write" class="row">
+    <hr />
+    @if (user.write) {
+    <div class="row">
       <div class="container">
-              <app-note-form>
-              </app-note-form>
+        <app-note-form />
       </div>
     </div>
+    }
   </div>
-
 </div>
-
