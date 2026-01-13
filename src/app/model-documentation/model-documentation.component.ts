@@ -58,8 +58,6 @@ export class ModelDocumentationComponent {
     'Descriptor_selection',
   ];
 
-  ngOnInit(): void {}
-
   isObject(value): boolean {
     return typeof value === 'object';
   }

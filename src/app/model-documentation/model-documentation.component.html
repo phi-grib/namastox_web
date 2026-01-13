@@ -51,39 +51,34 @@
     aria-labelledby="pills-gen-informationmodel-tab"
   >
     <div class="card-body">
-      <div
-        *ngFor="let value of genInformationKeys"
-        class="row border-bottom"
-        id="headerOverview"
-      >
+      @for (value of genInformationKeys;track $index) {
+      <div class="row border-bottom" id="headerOverview">
         <div class="col-3 p-1">
           {{ value.replaceAll("_", " ") }}
         </div>
-
-        <div
-          *ngIf="
-            !isObject(this.documentation[value]) &&
-            this.documentation[value] !== 'None'
-          "
-          class="col text-dark"
-        >
+        @if (!isObject(this.documentation[value]) && this.documentation[value]
+        !== 'None') {
+        <div class="col text-dark">
           {{ this.documentation[value] }}
         </div>
-        <div class="col" *ngIf="isObject(this.documentation[value])">
+        } @if (isObject(this.documentation[value])) {
+        <div class="col">
+       
           <div
             class="row"
             *ngFor="let idx of objectKeys(this.documentation[value])"
           >
             <div class="col">{{ idx.replaceAll("_", " ") }}</div>
-            <div
-              *ngIf="this.documentation[value][idx] !== 'None'"
-              class="col text-dark"
-            >
+            @if (this.documentation[value][idx] !== 'None'){
+            <div class="col text-dark">
               {{ this.documentation[value][idx] }}
             </div>
+            }
           </div>
         </div>
+        }
       </div>
+      }
     </div>
   </div>
   <div
@@ -93,38 +88,36 @@
     aria-labelledby="pills-algorithm-tab"
   >
     <div class="card-body">
-      <div
-        *ngFor="let value of algorithmKeys"
-        class="row border-bottom"
-        id="headerOverview"
-      >
+      @for (value of algorithmKeys; track $index) {
+      <div class="row border-bottom" id="headerOverview">
         <div class="col-3 p-1">
           {{ value.replaceAll("_", " ") }}
         </div>
-        <div
-          *ngIf="
-            !isObject(this.documentation[value]) &&
-            this.documentation[value] !== 'None'
-          "
-          class="col text-dark"
-        >
+        @if (!isObject(this.documentation[value]) && this.documentation[value]
+        !== 'None') {
+
+        <div class="col text-dark">
           {{ this.documentation[value] }}
         </div>
-        <div class="col" *ngIf="isObject(this.documentation[value])">
+
+        } @if(isObject(this.documentation[value])) {
+        <div class="col">
           <div
             class="row"
             *ngFor="let idx of objectKeys(this.documentation[value])"
           >
             <div class="col">{{ idx.replaceAll("_", " ") }}</div>
-            <div
-              *ngIf="this.documentation[value][idx] !== 'None'"
-              class="col text-dark"
-            >
+            @if (this.documentation[value][idx] !== 'None') {
+            <div class="col text-dark">
               {{ this.documentation[value][idx] }}
             </div>
+
+            }
           </div>
         </div>
+        }
       </div>
+      }
     </div>
   </div>
   <div
@@ -134,38 +127,37 @@
     aria-labelledby="pills-other_information-tab"
   >
     <div class="card-body">
-      <div
-        *ngFor="let value of otherInformationKeys"
+      @for (value of otherInformationKeys;track $index) {
+    <div
         class="row border-bottom"
         id="headerOverview"
       >
         <div class="col-4 p-1">
           {{ value.replaceAll("_", " ") }}
         </div>
-        <div
-          *ngIf="
-            !isObject(this.documentation[value]) &&
-            this.documentation[value] !== 'None'
-          "
-          class="col text-dark"
-        >
+        @if ( !isObject(this.documentation[value]) && this.documentation[value]
+        !== 'None') {
+        <div class="col text-dark">
           {{ this.documentation[value] }}
         </div>
-        <div class="col" *ngIf="isObject(this.documentation[value])">
+        } @if (isObject(this.documentation[value])) {
+        <div class="col">
           <div
             class="row"
             *ngFor="let idx of objectKeys(this.documentation[value])"
           >
             <div class="col">{{ idx.replaceAll("_", " ") }}</div>
-            <div
-              *ngIf="this.documentation[value][idx] !== 'None'"
-              class="col text-dark"
-            >
+            @if (this.documentation[value][idx] !== 'None') {
+            <div class="col text-dark">
               {{ this.documentation[value][idx] }}
             </div>
+            }
           </div>
         </div>
+        }
       </div>
+      }
+  
     </div>
   </div>
 </div>
