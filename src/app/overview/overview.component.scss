@@ -41,7 +41,17 @@ table {
   max-height: 300px;
   overflow: auto;
   color: $secondary-color;
+  scrollbar-width: thin;
+  scrollbar-color: whitesmoke white;
+  &:hover {
+    scrollbar-color: $tertiary-color white;
+  }
+ 
 }
+
+
+
+
 thead tr th {
   position: sticky;
   top: 0;

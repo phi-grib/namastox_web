@@ -9,5 +9,8 @@
   background-color: $tertiary-color;
 }
 
+* {
+  scrollbar-width: thin;
+  scrollbar-color: $tertiary-color white;
 
-
+}

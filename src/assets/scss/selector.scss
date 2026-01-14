@@ -1,19 +1,20 @@
 @import "./colors.scss";
 
-
 .selector {
-    border: 1px solid whitesmoke;
-    border-radius: 4px;
-    outline: none;
-    background-color: transparent;
-    box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
-    color: $primary-color;
-    height: 28px;
-    display: flex;
-    justify-items: center;
-    align-items: center;
-    cursor: pointer;
-    &:hover {
-        background-color: whitesmoke;
-    }
+  border: 1px solid whitesmoke;
+  border-radius: 4px;
+  outline: none;
+  background-color: transparent;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+  color: $primary-color;
+  height: 28px;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  cursor: pointer;
+  &:hover {
+    background-color: whitesmoke;
+  }
+  scrollbar-width:thin !important;
+  scrollbar-color: $primary-color white !important;
 }
