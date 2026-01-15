@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonService } from '../common.service';
 import { PendingTasks, RA, Results, Global, User } from '../globals';
 import { saveAs } from 'file-saver';
