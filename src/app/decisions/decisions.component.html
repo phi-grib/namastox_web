@@ -302,14 +302,7 @@
                 </div>
                 <div class="d-flex p-1 justify-content-around">
                   @for (image of listImages; track $index) {
-                  <div>
-                    <div class="card" style="width: 18rem">
-                      <img [src]="image.link" width="288" height="288" alt="" />
-                      <div class="card-body">
-                        <p class="card-text text">{{ image.name }}</p>
-                      </div>
-                    </div>
-                  </div>
+                    <app-card-image [image]="image" />     
                   }
                 </div>
                 <div class="row pt-1 pb-1">
