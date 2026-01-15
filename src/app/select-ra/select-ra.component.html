@@ -1,9 +1,8 @@
-<!-- options ra delete | new  -->
 
-
-<app-manage-ra></app-manage-ra>
-<div class="d-flex align-items-center  justify-content-between flex-row mb-1 mt-1">
-  <div  class="d-flex align-items-center">
+<div
+  class="d-flex align-items-center justify-content-between flex-row mb-1 mt-1"
+>
+  <div class="d-flex align-items-center">
     <a
       id="menubtn"
       class="btn"
@@ -16,26 +15,33 @@
     >
       <i class="fa-solid fa-bars icon mt-2"></i>
     </a>
-    <div
-    class="d-flex-inline select"
-  >
-  
-    <select
-      id="ra1"
-      (change)="loadRA()"
-      [(ngModel)]="this.ra.name"
-      aria-label="Default select example"
-      class="selector"
-    >
-      <option *ngFor="let ra of this.ra.listRA" [value]="ra">{{ ra }}</option>
-    </select>
+    <div class="d-flex-inline select">
+      <select
+        id="ra1"
+        (change)="loadRA()"
+        [(ngModel)]="ra.name"
+        aria-label="Default select example"
+        class="selector"
+      >
+        @for(ra of ra.listRA; track ra) {
+        <option [value]="ra">{{ ra }}</option>
+        }
+      </select>
+    </div>
+    @if(!ra.name){
+    <div class="selectionra">
+      <i
+        style="color: #474286"
+        id="icon-arrow"
+        class="fa-solid fa-arrow-left"
+      ></i>
+      Select RA
+    </div>
+    }
   </div>
-  <div class="selectionra" *ngIf="!this.ra.name">
-    <i style="color:#474286" id="icon-arrow" class="fa-solid fa-arrow-left"></i>  Select RA
+  @if(!user.write) {
+  <div style="background-color: whitesmoke; border-radius: 4px; padding: 3px">
+    <span class="read-only"><i class="fa-solid fa-eye"></i> Read only</span>
   </div>
-  </div>
-  <div *ngIf="!this.user.write" style="background-color: whitesmoke;border-radius: 4px;padding: 3px;">
-    <span  class="read-only"><i class="fa-solid fa-eye "></i> Read only</span> 
-  </div>
+  }
 </div>
-

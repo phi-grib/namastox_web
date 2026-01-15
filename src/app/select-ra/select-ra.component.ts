@@ -1,9 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { SplitComponent } from 'angular-split';
 import { CommonFunctions } from '../common.functions';
 import { CommonService } from '../common.service';
-import { Global, PendingTasks, RA, Results, User } from '../globals';
-import { ToastrService } from 'ngx-toastr';
+import { Global, RA, Results, User } from '../globals';
 
 @Component({
   selector: 'app-select-ra',
@@ -17,11 +16,9 @@ export class SelectRaComponent {
     public user: User,
     private commonService: CommonService,
     private func: CommonFunctions,
-    private pendingTasks: PendingTasks,
     private results: Results,
-    private toastr: ToastrService,
   ) {}
-
+  
   loadRA() {
     this.func.refreshRA();
   }
