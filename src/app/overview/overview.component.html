@@ -1,11 +1,11 @@
 <div  class="container-fluid">
   <div class="card-body">
     <div class="row border-bottom" id="headerOverview">
-      <div class="col">{{ this.ra?.name }} ({{ this.ra?.status?.ID }})</div>
+      <div class="col">{{ ra?.name }} ({{ ra?.status?.ID }})</div>
     </div>
     <div class="row border-bottom">
       <div class="col text">
-        <h6 class="mt-2">{{ this.ra?.general_information?.general.title }}</h6>
+        <h6 class="mt-2">{{ ra?.general_information?.general.title }}</h6>
       </div>
     </div>
     <div class="row pt-1 pb-1 border-bottom">
@@ -21,14 +21,18 @@
                 <th style="width:40%">Structure</th>
               </tr>
             </thead>
-            <tbody *ngIf="this.ra.general_information?.general?.substances">
-              <tr  *ngFor="let idx of objectKeys(this.ra.general_information.general.substances)">
-                <td>{{this.ra.general_information.general.substances[idx].name}}</td>
-                <td>{{this.ra.general_information.general.substances[idx].casrn}}</td>
-                <td>{{this.ra.general_information.general.substances[idx].characteristics}}</td>
+            @if(ra.general_information?.general?.substances) {
+            <tbody>
+              @for (substance of ra.general_information.general.substances;track substance; let idx = $index) {
+              <tr>
+                <td>{{substance.name}}</td>
+                <td>{{substance.casrn}}</td>
+                <td>{{substance.characteristics}}</td>
                 <td><img id="overviewCanvas{{idx}}"></td>
               </tr>
+              }
             </tbody>
+            }
           </table>
         </div>
       </div>
@@ -37,7 +41,7 @@
       <div class="col-3 text">Endpoint</div>
       <div class="col-3">
         <div class="row">
-          {{ this.ra?.general_information?.general?.endpoint }}
+          {{ ra?.general_information?.general?.endpoint }}
         </div>
       </div>
     </div>
@@ -45,7 +49,7 @@
       <div class="col-3 text">AR</div>
       <div class="col">
         <div class="row">
-          {{ this.ra?.general_information?.general?.administration_route }}
+          {{ ra?.general_information?.general?.administration_route }}
         </div>
       </div>
     </div>
@@ -53,7 +57,7 @@
       <div class="col-3 text">Species</div>
       <div class="col">
         <div class="row">
-          {{ this.ra?.general_information?.general?.species }}
+          {{ ra?.general_information?.general?.species }}
         </div>
       </div>
     </div>
@@ -61,7 +65,7 @@
       <div class="col-3 text">Framework</div>
       <div class="col">
         <div class="row">
-          {{ this.ra?.general_information?.general?.regulatory_framework }}
+          {{ ra?.general_information?.general?.regulatory_framework }}
         </div>
       </div>
     </div>
@@ -69,7 +73,7 @@
       <div class="col-3 text">Summary</div>
       <div class="col">
         <div class="row">
-          {{ this.ra?.general_information?.general?.general_description }}
+          {{ ra?.general_information?.general?.general_description }}
         </div>
       </div>
     </div>
@@ -83,23 +87,25 @@
       <div class="col">
         <div class="row">
           <span style="text-align: center">{{
-            this.ra?.status?.workflow_name
+            ra?.status?.workflow_name
           }}</span>
         </div>
         <div class="row">
-          <span style="text-align: center">{{ this.ra?.status?.step }}</span>
+          <span style="text-align: center">{{ ra?.status?.step }}</span>
         </div>
-        <div *ngFor="let task of this.ra.pending_tasks" class="row mb-1">
+        @for (task of ra.pending_tasks;track task.id) {
+        <div class="row mb-1">
           <div class="col-2 text">{{ task.label }}</div>
           <div class="col-10" [innerHTML]="task.name | autolinkPipe"></div>
         </div>
+        }
       </div>
     </div>
     <div class="row pt-1 pb-1 border-bottom">
       <div class="col-3 text">Read Users</div>
       <div class="col">
         <div class="row">
-          {{ this.global?.permissions['read'] }}
+          {{ global?.permissions['read'] }}
         </div>
       </div>
     </div>
@@ -107,7 +113,7 @@
       <div class="col-3 text">Write Users</div>
       <div class="col">
         <div class="row">
-          {{ this.global?.permissions['write'] }}
+          {{ global?.permissions['write'] }}
 
         </div>
       </div>
