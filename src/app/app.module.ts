@@ -42,6 +42,8 @@ import { SupportModalInformationComponent } from './support-modal-information/su
 import { ModalAddNewMoleculeComponent } from './modal-add-new-molecule/modal-add-new-molecule.component';
 import { ModalEditMoleculeComponent } from './modal-edit-molecule/modal-edit-molecule.component';
 import { ListNotesComponent } from './list-notes/list-notes.component';
+import { NavTasksComponent } from './nav-tasks/nav-tasks.component';
+import { CardImageComponent } from './card-image/card-image.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,9 @@ import { ListNotesComponent } from './list-notes/list-notes.component';
     OverviewComponent,
     GeneralInformationComponent,
     TasksComponent,
+    NavTasksComponent,
     NavbarComponent,
+    CardImageComponent,
     UserInfoComponent,
     AboutSoftwareComponent,
     LogosComponent,
