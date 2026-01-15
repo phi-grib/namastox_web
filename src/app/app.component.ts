@@ -29,22 +29,6 @@ export class AppComponent implements OnInit {
     this.commonService.getRaList().subscribe({
       next: (result: any) => {
         this.ra.listRA = [...result];
-        // if (this.ra.listRA.length > 0) {
-          // this.ra.name = this.ra.listRA[this.ra.listRA.length - 1];
-          /**Get general info ra */
-          // this.commonService.getGeneralInfo(this.ra.name).subscribe({
-          //   next: (result) => {
-          //     this.ra.general_information = result;
-          //     this.func.refreshRA();
-          //     setTimeout(() => {
-          //       this.global.interfaceVisible = true;
-          //     }, 500);
-          //   },
-          //   error: (e) => {
-          //     console.log(e);
-          //   },
-          // });
-        // }
       },
       error: (e) => {
         console.error(e);
