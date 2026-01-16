@@ -4,9 +4,9 @@
 
 
 @keyframes blink {
-  0% { background-color: $primary-color; }
-  50% { background-color: rgb(236,130,41); }
-  100% { background-color: $primary-color; }
+  0% { background-color: #f1f4fc; }
+  50% { background-color: rgb(236,130,41); color: white; }
+  100% { background-color: #f1f4fc; }
 }
 
 .blink {
