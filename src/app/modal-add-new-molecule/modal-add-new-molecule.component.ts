@@ -33,8 +33,6 @@ export class ModalAddNewMoleculeComponent {
       smiles: this.substance_SMILES,
       characteristics: this.substance_characteristics
     };
-    console.log("molecula")
-    console.log(substance)
       this.ra.general_information.general.substances.push(substance);
       this.toastr.success(substance['name'], 'Added Successfully', {
         timeOut: 3000,

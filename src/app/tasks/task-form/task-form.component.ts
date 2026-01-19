@@ -264,7 +264,6 @@ export class TaskFormComponent {
   onSubmit(event) {
     this.loadForm = false;
     if (this.report) this.model.values[0] = this.report;
-      console.log("model values:",this.model.values)
     if (this.model.values.length > 0) {
       setTimeout(() => {
         this.updateService.updateResult(this.ra.name, this.model).subscribe({
@@ -310,7 +309,6 @@ export class TaskFormComponent {
         //  this.report = '';
       }, 300);
     } else {
-      console.log("el valor es requerido")
       this.alertUserAction();
       this.toastr.warning('', 'value is required', {
         timeOut: 5000,
@@ -450,8 +448,6 @@ export class TaskFormComponent {
       .updateTable(this.ra.name, this.model['input_file'])
       .subscribe({
         next: (result) => {
-          console.log('result:');
-          console.log(result);
           if (result['success']) {
             this.model.values = result['values'];
             this.model.uncertainties = result['uncertainties'];
