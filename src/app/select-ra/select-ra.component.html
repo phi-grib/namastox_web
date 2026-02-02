@@ -1,47 +1,46 @@
-
 <div
-  class="d-flex align-items-center justify-content-between flex-row mb-1 mt-1"
+  class="offcanvas sidebar-sm offcanvas-start"
+  tabindex="-1"
+  data-bs-backdrop="true"
+  id="offcanvasExample"
+  aria-labelledby="offcanvasExampleLabel"
 >
-  <div class="d-flex align-items-center">
-    <a
-      id="menubtn"
-      class="btn"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarToggleExternalContent"
-      aria-controls="navbarToggleExternalContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-      role="button"
-    >
-      <i class="fa-solid fa-bars icon mt-2"></i>
-    </a>
-    <div class="d-flex-inline select">
-      <select
-        id="ra1"
-        (change)="loadRA()"
-        [(ngModel)]="ra.name"
-        aria-label="Default select example"
-        class="selector"
-      >
-        @for(ra of ra.listRA; track ra) {
-        <option [value]="ra">{{ ra }}</option>
-        }
-      </select>
-    </div>
-    @if(!ra.name){
-    <div class="selectionra">
-      <i
-        style="color: #474286"
-        id="icon-arrow"
-        class="fa-solid fa-arrow-left"
-      ></i>
-      Select RA
-    </div>
-    }
+   <div class="header-canvas">
+    <i  data-bs-dismiss="offcanvas" aria-label="Close" class="fa-solid btn-close-sidebar fa-xmark"></i>
   </div>
-  @if(!user.write) {
-  <div style="background-color: whitesmoke; border-radius: 4px; padding: 3px">
-    <span class="read-only"><i class="fa-solid fa-eye"></i> Read only</span>
+
+  <div class="offcanvas-body">
+    <ul class="list-unstyled ps-0">
+      <li class="mb-1  ">
+        <button class="btn btn-toggle align-items-center mb-1 rounded" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
+           <i class="fa-regular plus-icon folder-normal fa-folder"></i> 
+           <i class="fa-regular folder-open fa-folder-open"></i>    
+           Public
+        </button>
+        <div class="collapse show"  id="home-collapse">
+          <ul  class="btn-toggle-nav rounded list-items list-unstyled fw-normal pb-1 small">
+             @for(item of ra.listRA; track item) {
+          <li  (click)="loadRA(item)" 
+              class="item" 
+            [class.active]="ra.name === item" [value]="item">{{ item }}</li>
+              }
+          </ul>
+        </div>
+      </li>
+      <li class="mb-1">
+        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
+           <i class="fa-regular plus-icon folder-normal fa-folder"></i> 
+           <i class="fa-regular folder-open fa-folder-open"></i>  
+          Shared
+        </button>
+        <div class="collapse" id="dashboard-collapse">
+          <ul class="btn-toggle-nav list-items list-unstyled fw-normal pb-1 small">
+            <li   class="item" > Ejemplo 1</li>
+            <li   class="item" > Ejemplo 2</li>
+          </ul>
+        </div>
+      </li>
+    </ul>
   </div>
-  }
+    <app-user-info />
 </div>

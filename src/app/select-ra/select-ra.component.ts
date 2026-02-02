@@ -1,5 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
-import { SplitComponent } from 'angular-split';
+import { Component } from '@angular/core';
 import { CommonFunctions } from '../common.functions';
 import { CommonService } from '../common.service';
 import { Global, RA, Results, User } from '../globals';
@@ -19,7 +18,9 @@ export class SelectRaComponent {
     private results: Results,
   ) {}
   
-  loadRA() {
+  loadRA(name:string) {
+    this.ra.name = name
+    console.log("cargando el ra seleccionado")
     this.func.refreshRA();
   }
 
@@ -49,35 +50,5 @@ export class SelectRaComponent {
           this.commonService.updateWorkflow();
         },
       });
-  }
-  // angular-split function
-  @ViewChild('mySplit') mySplitEl: SplitComponent;
-  // area size
-  _size1 = 0;
-  _size2 = 100;
-  get size1() {
-    return this._size1;
-  }
-
-  set size1(value) {
-    this._size1 = value;
-  }
-  get size2() {
-    return this._size2;
-  }
-
-  set size2(value) {
-    this._size2 = value;
-  }
-  gutterClick(e) {
-    if (e.gutterNum === 1) {
-      if (e.sizes[0] == 0) {
-        this.size1 = 30;
-        this.size2 = 70;
-      } else {
-        this.size2 = 100;
-        this.size1 = 0;
-      }
-    }
   }
 }

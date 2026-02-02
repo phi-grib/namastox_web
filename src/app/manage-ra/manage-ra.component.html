@@ -1,5 +1,16 @@
-<div class="collapse" id="navbarToggleExternalContent">
+
+<div class="d-flex justify-content-between">
   <div class="btn-group" role="group" aria-label="Basic example">
+    <a
+      class="sidebarbtn"
+      data-bs-toggle="offcanvas"
+      href="#offcanvasExample"
+      role="button"
+      aria-controls="offcanvasExample"
+    >
+  <i class="fa-solid fa-bars icon mt-2"></i>
+    </a>
+    
     <button
       (click)="focus()"
       type="button"
@@ -36,11 +47,7 @@
     </button>
     <button
       (click)="deleteStep()"
-      [disabled]="
-        ra.listRA.length < 1 ||
-        ra.status.step <= 1 ||
-        !user.write
-      "
+      [disabled]="ra.listRA.length < 1 || ra.status.step <= 1 || !user.write"
       type="button"
       class="btn btn-ets-delete delete-step-btn"
     >
@@ -73,8 +80,16 @@
     >
       Configure
     </button>
+    <span class="version-text mt-auto"> {{ appVersion }}</span>
   </div>
-  <span class="version-text"> {{ appVersion }}</span>
+  @if (!user.write) {
+    <div
+      class="align-self-end"
+      style="background-color: whitesmoke; border-radius: 4px; padding: 3px"
+    >
+      <span class="read-only"><i class="fa-solid fa-eye"></i> Read only</span>
+    </div>
+  }
 </div>
 <!-- new ra modal -->
 <div
@@ -235,17 +250,16 @@
           />
         </div>
 
-        @if(isLoading){
-        <div class="loading-overlay">
-          <div
-            class="spinner-border"
-            style="width: 10rem; height: 10rem"
-            role="status"
-          >
-            <span class="visually-hidden">Loading...</span>
+        @if (isLoading) {
+          <div class="loading-overlay">
+            <div
+              class="spinner-border"
+              style="width: 10rem; height: 10rem"
+              role="status"
+            >
+              <span class="visually-hidden">Loading...</span>
+            </div>
           </div>
-        </div>
-
         }
       </div>
       <div class="modal-footer">
