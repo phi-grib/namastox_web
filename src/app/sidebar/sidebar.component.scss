@@ -7,36 +7,16 @@
     min-width: 20px;
     display: flex;
     flex-direction: column;
-    border-right: 1px solid whitesmoke;
+    border-right: 1px solid whitesmoke;   
 }
 
 .sidebarbtn {
-    text-decoration: none;
-       color: $primary-color;
+    text-decoration: none;   
+    color: $primary-color;
     margin-right: 3px;
     margin-left: auto ;
 }
 
 .sidebar-body {
-    width: 150px;
-}
-
-.sidebarbtn[aria-expanded="true"]{
-    .icon-open {
-        display: none;
-    }
-    .icon-close {
-        display: block;
-    }
-
-}
-
-.sidebarbtn[aria-expanded="false"]{
-    .icon-open {
-        display: block;
-    }
-    .icon-close {
-        display: none;
-    }
-
+    width: 150px;  
 }
