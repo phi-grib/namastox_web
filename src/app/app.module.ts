@@ -44,6 +44,7 @@ import { ModalEditMoleculeComponent } from './modal-edit-molecule/modal-edit-mol
 import { ListNotesComponent } from './list-notes/list-notes.component';
 import { NavTasksComponent } from './nav-tasks/nav-tasks.component';
 import { CardImageComponent } from './card-image/card-image.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { CardImageComponent } from './card-image/card-image.component';
     NavTasksComponent,
     NavbarComponent,
     CardImageComponent,
+    SidebarComponent,
     UserInfoComponent,
     AboutSoftwareComponent,
     LogosComponent,
