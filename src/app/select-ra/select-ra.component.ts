@@ -16,6 +16,8 @@ import { UpdateService } from '../update.service';
 
 declare var bootstrap: any;
 
+
+
 @Component({
   selector: 'app-select-ra',
   templateUrl: './select-ra.component.html',
@@ -28,11 +30,15 @@ export class SelectRaComponent {
   private renameModalInst: any;
   private newRaModalInst: any;
 
+  @ViewChild('fileInput') fileInput;
+
   @ViewChild('nameRAinput') nameRAinput: ElementRef;
 
   @ViewChild('contextMenu') menu: TemplateRef<any>;
   private overlayRef: OverlayRef | null = null;
 
+  isLoading: boolean = undefined;
+   newRepo: string = '';
   constructor(
     private viewContainerRef: ViewContainerRef,
     public overlay: Overlay,
@@ -48,12 +54,18 @@ export class SelectRaComponent {
   ) {}
   newRAname: string = '';
   options = undefined;
+    modelFile;
   optionsRA = [{
       label: 'Duplicate',
       icon: 'fa-regular fa-clone',
       action: 'duplicate',
     },
     { label: 'Rename', icon: 'fa-regular fa-pen-to-square', action: 'rename' },
+    {
+      label:"Export",
+      icon: "fa-solid fa-download",
+      action:"export"
+    },
     {
       label: 'Delete',
       icon: 'fa-regular text-danger fa-trash-can',
@@ -65,6 +77,11 @@ export class SelectRaComponent {
       label: 'New RA',
       icon: 'fa-solid fa-plus ',
       action: 'newRA',
+    },
+             {
+      label: 'Import RA',
+      icon: 'fa-solid fa-upload',
+      action: 'importRA',
     },
      {
       label: 'Delete Folder',
@@ -84,12 +101,103 @@ export class SelectRaComponent {
       case 'duplicate':
         this.duplicateRA();
         break;
+      case 'export':
+        this.exportRA();
+        break;
+      case 'importRA':
+        this.importRA();
+        break;
       case "newRA":
       this.openNewRaModal();
         break;
       default:
         console.warn('Acción desconocida');
     }
+  }
+
+    confirmImportModel() {
+    this.isLoading = true;
+    this.updateService.importModel(this.modelFile).subscribe(
+      (result) => {
+        if (result['success']) {
+          this.toastr.success(result['message'], '');
+        }
+        this.isLoading = false;
+      },
+      (error) => {
+        this.toastr.error(error.error.message, '');
+        this.isLoading = false;
+      }
+    );
+  }
+  changeModelRepo() {
+    this.updateService.updateModelsRepo(this.newRepo).subscribe(
+      (result) => {
+        if (result['success']) {
+          this.toastr.success('Repository updated successfully', '');
+        }
+      },
+      (error) => {
+        console.log(error);
+        this.toastr.error(error.error, '');
+      }
+    );
+  }
+    selectModelFile(event) {
+    this.modelFile = event.target.files[0];
+  }
+
+    importRA() {
+    document.getElementById('fileinput').click();
+  }
+
+  handleFile($event) {
+    console.log();
+    const file = $event.target.files[0];
+    const ra_name = file.name.split('.')[0];
+    this.manageRA.importRA(file).subscribe(
+      (result) => {
+        if (result['success']) {
+          this.commonService.getRaList().subscribe({
+            next: (result: any) => {
+              this.ra.listRA = [...result];
+            },
+          });
+          this.toastr.success(
+            "RA '" + ra_name + "' imported",
+            'IMPORTED SUCCESFULLY',
+            {
+              timeOut: 5000,
+              positionClass: 'toast-top-right',
+            }
+          );
+        }
+        this.resetFileInput();
+      },
+      (error) => {
+        console.log('Error while importing:');
+        console.log(error);
+        this.resetFileInput();
+      }
+    );
+  }
+  resetFileInput() {
+    if (this.fileInput && this.fileInput.nativeElement) {
+      this.fileInput.nativeElement.value = '';
+    }
+  }
+  exportRA(){
+    this.manageRA.exportRA(this.ra.name).subscribe((result) => {
+      const url = window.URL.createObjectURL(result);
+      // Create download link
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = this.ra.name + '.tgz';
+      // Simulates a click on the link to start the download
+      link.click();
+      // Releases the resources used by the URL object
+      window.URL.revokeObjectURL(url);
+    });
   }
 
   openNewRaModal(){

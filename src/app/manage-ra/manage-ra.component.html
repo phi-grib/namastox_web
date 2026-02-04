@@ -5,12 +5,9 @@
       (click)="deleteStep()"
       [disabled]="ra.listRA.length < 1 || ra.status.step <= 1 || !user.write"
       type="button"
-      class="btn btn-ets-delete delete-step-btn"
+      class="btn btn-start-group btn-ets-delete delete-step-btn"
     >
-      Delete Step
-    </button>
-    <button (click)="importRA()" type="button" class="btn btn-ets-bad">
-      Import
+   <i class="fa-solid fa-rotate-left"></i>
     </button>
     <input
       type="file"
@@ -20,21 +17,13 @@
       #fileInput
     />
     <button
-      (click)="exportRA()"
-      [disabled]="ra.listRA.length < 1"
-      type="button"
-      class="btn btn-ets-bad"
-    >
-      Export
-    </button>
-    <button
       (click)="showConfModal()"
       type="button"
       class="btn btn-ets-bad btn-end-group"
       data-bs-toggle="modal"
       data-bs-target="#confModal"
     >
-      Configure
+  <i class="fa-solid fa-gear"></i>
     </button>
     <span class="version-text mt-auto"> {{ appVersion }}</span>
   </div>

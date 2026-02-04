@@ -1,17 +1,30 @@
 <div class="sidebar-container">
-  <a
-    data-bs-toggle="collapse"
-    data-bs-target="#collapseWidthExample"
-    aria-expanded="false"
-    aria-controls="collapseWidthExample"
-    class="sidebarbtn"
-    role="button"
-  >
-    <i class="fa-solid fa-bars icon mt-2"></i>
+  <div class="sidebar-header">
+    <a
+      data-bs-toggle="collapse"
+      data-bs-target="#collapseWidthExample"
+      aria-expanded="false"
+      aria-controls="collapseWidthExample"
+      class="sidebarbtn"
+      role="button"
+    >
+      <i class="fa-solid fa-bars icon mt-2"></i>
+    </a>
+
+    <a
+      class="btn-configure"
+      role="button"
+      data-bs-toggle="modal"
+      data-bs-target="#confModal"
+    >
+      <i class="fa-solid fa-gear"></i>
   </a>
+  </div>
+
+  <div></div>
   <div class="collapse collapse-horizontal" id="collapseWidthExample">
     <div class="sidebar-body">
-        <app-select-ra/>
+      <app-select-ra />
     </div>
   </div>
 </div>

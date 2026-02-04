@@ -1,22 +1,46 @@
 @import "../../assets/scss/colors.scss";
 
 .sidebar-container {
-    border-radius: 4px;
-    padding-left: 10px;
-    height: 100%;
-    min-width: 20px;
-    display: flex;
-    flex-direction: column;
-    border-right: 1px solid whitesmoke;   
+  border-radius: 4px;
+  padding-left: 10px;
+  height: 100%;
+  min-width: 20px;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid whitesmoke;
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.btn-configure {
+    margin-right: 3px;
+    color: $primary-color;
+    opacity:70%;
+    &:hover{
+        opacity: 100%;
+    }
 }
 
 .sidebarbtn {
-    text-decoration: none;   
-    color: $primary-color;
-    margin-right: 3px;
-    margin-left: auto ;
+  text-decoration: none;
+  color: $primary-color;
+  margin-left: 3px;
+  margin-right: 3px;
+  &[aria-expanded="true"] {
+    ~ .btn-configure {
+      display: block;
+    }
+  }
+  &[aria-expanded="false"] {
+    ~ .btn-configure {
+      display: none;
+    }
+  }
 }
 
 .sidebar-body {
-    width: 150px;  
+  width: 150px;
 }
