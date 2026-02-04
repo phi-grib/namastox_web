@@ -3,12 +3,13 @@
 .user-container {
   display: flex;
   padding: 10px 10px 10px 1rem;
+
 }
 
 .user-details {
   display: flex;
   align-items: end;
-  color: white;
+  color: black;
   display: flex;
 
   gap: 5px;
@@ -19,7 +20,7 @@
 .logout-btn {
   i {
    opacity: 80%;
-     color: white;
+     color: black;
      cursor: pointer;
      &:hover {
       opacity: 100%;

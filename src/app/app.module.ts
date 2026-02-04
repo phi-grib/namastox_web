@@ -45,7 +45,7 @@ import { ListNotesComponent } from './list-notes/list-notes.component';
 import { NavTasksComponent } from './nav-tasks/nav-tasks.component';
 import { CardImageComponent } from './card-image/card-image.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
-
+import { OverlayModule } from '@angular/cdk/overlay';
 @NgModule({
   declarations: [
     AppComponent,
@@ -90,6 +90,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     HttpClientModule,
     ReactiveFormsModule,
     ReactiveFormsModule,
+    OverlayModule,
     FormsModule,
     NgxPanZoomModule,
     BrowserAnimationsModule,

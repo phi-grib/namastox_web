@@ -1,7 +1,17 @@
 
-    <ul class="list-unstyled ps-0">
+   
+<ng-template #contextMenu>
+<div class="container-menu">
+    @for (option of options; track option.label) {
+     
+  <button  class="btnOptionContextMenu" [disabled]="!user.write" (click)="handleMenuAction(option.action); closeMenu();">  <i [class]="option.icon" ></i> {{ option.label }}</button> 
+    }
+</div>
+   </ng-template>
+
+   <ul class="list-unstyled ps-0">
       <li class="mb-1  ">
-        <button class="btn btn-toggle align-items-center mb-1 rounded" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
+        <button (contextmenu)="onRightClick($event, ra,'folder')" class="btn btn-toggle align-items-center mb-1 rounded" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
            <i class="fa-regular plus-icon folder-normal fa-folder"></i> 
            <i class="fa-regular folder-open fa-folder-open"></i>    
            Public ({{ra.listRA.length}})
@@ -9,7 +19,7 @@
         <div class="collapse show"  id="home-collapse">
           <ul  class="btn-toggle-nav rounded list-items list-unstyled fw-normal pb-1 small">
              @for(item of ra.listRA; track item) {
-          <li  (click)="loadRA(item)" 
+          <li (contextmenu)="onRightClick($event,item,'file')" (click)="loadRA(item)" 
               class="item" 
             [class.active]="ra.name === item" [value]="item">{{ item }}</li>
               }
@@ -31,5 +41,117 @@
       </li>
     </ul>
 
-    <app-user-info />
 
+
+<!-- rename ra  modal -->
+<div
+  #renameModal
+  class="modal fade"
+  id="changeNameRA"
+  aria-labelledby="newModalLabel"
+  aria-hidden="false"
+>
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="newModalLabel">Modify name RA</h5>
+        <button
+          class="btn btn-danger btn-sm"
+          data-bs-dismiss="modal"
+          aria-label="Cancel"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row g-3 align-items-center">
+          <div class="col-auto">
+            <label for="model_name" class="col-form-label label_name"
+              >RA name:</label
+            >
+          </div>
+          <div class="col-auto">
+            <input
+              #nameRAinput
+              type="text"
+              class="form-control ml-2"
+              [(ngModel)]="newRAname"
+              placeholder="name"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-nam-bad" data-bs-dismiss="modal">
+          Cancel
+        </button>
+        <button
+          type="button"
+          [disabled]="!newRAname"
+          class="btn btn-ets-do"
+          data-bs-dismiss="modal"
+          (click)="renameRA()"
+        >
+          Modify
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+#newRaModal
+  class="modal fade"
+  id="newRA"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="newModalLabel"
+  aria-hidden="false"
+>
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="newModalLabel">New RA</h5>
+        <button
+          class="btn btn-danger btn-sm"
+          data-bs-dismiss="modal"
+          aria-label="Cancel"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row g-3 align-items-center">
+          <div class="col-auto">
+            <label for="model_name" class="col-form-label label_name"
+              >RA name:</label
+            >
+          </div>
+          <div class="col-auto">
+            <input
+              #nameRAinput
+              type="text"
+              class="form-control ml-2"
+              [(ngModel)]="newRAname"
+              placeholder="name"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-nam-bad" data-bs-dismiss="modal">
+          Cancel
+        </button>
+        <button
+          type="button"
+          [disabled]="!newRAname"
+          class="btn btn-ets-do"
+          data-bs-dismiss="modal"
+          (click)="newRA()"
+        >
+          Create
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
