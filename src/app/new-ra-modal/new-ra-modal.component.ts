@@ -14,7 +14,7 @@ export class NewRaModalComponent {
   @ViewChild('modal') modal: ElementRef;
   private newRaModalInst: any;
   newRAname = '';
-  @ViewChild('nameRAinput') nameRAinput: ElementRef;
+  @ViewChild('input') input: ElementRef;
   constructor(
     private manageRA: ManageRAsService,
     private commonService: CommonService,
@@ -27,6 +27,9 @@ export class NewRaModalComponent {
   open() {
     if (!this.newRaModalInst) {
       this.newRaModalInst = new bootstrap.Modal(this.modal.nativeElement);
+      this.modal.nativeElement.addEventListener('shown.bs.modal', () => {
+        this.input.nativeElement.focus();
+      });
     }
     this.newRaModalInst.show();
   }
@@ -40,7 +43,7 @@ export class NewRaModalComponent {
             this.ra.listRA = [...result];
             this.ra.name = this.newRAname;
             this.func.refreshRA();
-            this.nameRAinput.nativeElement.value = '';
+            this.input.nativeElement.value = '';
           });
           setTimeout(() => {
             document.getElementById('menubtn').click();

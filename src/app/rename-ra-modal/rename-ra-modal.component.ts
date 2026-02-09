@@ -12,6 +12,7 @@ declare var bootstrap: any;
 })
 export class RenameRaModalComponent {
   @ViewChild('modal') modal: ElementRef;
+  @ViewChild('input') input: ElementRef;
   newRAname: string = '';
   private renameModalInst: any;
   constructor(
@@ -26,6 +27,9 @@ export class RenameRaModalComponent {
   open() {
     if (!this.renameModalInst) {
       this.renameModalInst = new bootstrap.Modal(this.modal.nativeElement);
+      this.modal.nativeElement.addEventListener('shown.bs.modal', () => {
+        this.input.nativeElement.focus();
+      });
     }
     this.renameModalInst.show();
   }
