@@ -1,6 +1,5 @@
 import {
   Component,
-  ElementRef,
   TemplateRef,
   ViewChild,
   ViewContainerRef,
@@ -10,12 +9,10 @@ import { CommonService } from '../common.service';
 import { Global, RA, Results, User } from '../globals';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
-import { ManageRAsService } from '../manage-ras.service';
-import { ToastrService } from 'ngx-toastr';
-import { UpdateService } from '../update.service';
 import { RenameRaModalComponent } from '../rename-ra-modal/rename-ra-modal.component';
 import { NewRaModalComponent } from '../new-ra-modal/new-ra-modal.component';
 import { ImportRaComponent } from '../import-ra/import-ra.component';
+import { optionsRA,optionsFolder } from './options-menu-context';
 
 @Component({
   selector: 'app-select-ra',
@@ -45,41 +42,6 @@ export class SelectRaComponent {
   ) {}
   options = undefined;
     
-  optionsRA = [{
-      label: 'Duplicate',
-      icon: 'fa-regular fa-clone',
-      action: 'duplicate',
-    },
-    { label: 'Rename', icon: 'fa-regular fa-pen-to-square', action: 'rename' },
-    {
-      label:"Export",
-      icon: "fa-solid fa-download",
-      action:"export"
-    },
-    {
-      label: 'Delete',
-      icon: 'fa-regular text-danger fa-trash-can',
-      action: 'delete',
-    },]
-
-  optionsFolder = [
-         {
-      label: 'New RA',
-      icon: 'fa-solid fa-plus ',
-      action: 'newRA',
-    },
-             {
-      label: 'Import RA',
-      icon: 'fa-solid fa-upload',
-      action: 'importRA',
-    },
-     {
-      label: 'Delete Folder',
-      icon: 'fa-regular text-danger fa-trash-can',
-      action: 'deleteFolder',
-    },
-  ];
-
   handleMenuAction(action: string) {
     switch (action) {
       case 'rename':
@@ -108,9 +70,9 @@ export class SelectRaComponent {
   onRightClick(event: MouseEvent, item: any, type: string) {
     event.preventDefault();
     if(type == "folder") {
-      this.options = this.optionsFolder 
+      this.options = optionsFolder 
     }else{
-      this.options = this.optionsRA
+      this.options = optionsRA
     }
 
     if (type === 'file' && this.ra.name != item) {
