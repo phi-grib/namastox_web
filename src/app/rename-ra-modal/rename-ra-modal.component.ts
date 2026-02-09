@@ -20,15 +20,12 @@ export class RenameRaModalComponent {
     private commonService: CommonService,
     private global: Global,
     private func: CommonFunctions,
-    private toastr:ToastrService
+    private toastr: ToastrService,
   ) {}
 
-
-    openRenameRaModal() {
+  open() {
     if (!this.renameModalInst) {
-      this.renameModalInst = new bootstrap.Modal(
-        this.modal.nativeElement,
-      );
+      this.renameModalInst = new bootstrap.Modal(this.modal.nativeElement);
     }
     this.renameModalInst.show();
   }

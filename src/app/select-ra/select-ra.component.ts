@@ -14,10 +14,7 @@ import { ManageRAsService } from '../manage-ras.service';
 import { ToastrService } from 'ngx-toastr';
 import { UpdateService } from '../update.service';
 import { RenameRaModalComponent } from '../rename-ra-modal/rename-ra-modal.component';
-
-declare var bootstrap: any;
-
-
+import { NewRaModalComponent } from '../new-ra-modal/new-ra-modal.component';
 
 @Component({
   selector: 'app-select-ra',
@@ -26,16 +23,11 @@ declare var bootstrap: any;
 })
 export class SelectRaComponent {
   @ViewChild('renameModal') renameRaModalComponent: RenameRaModalComponent
-  @ViewChild('newRaModal') newRaModalElement!: ElementRef;
-
-  
-  private newRaModalInst: any;
+  @ViewChild('newRaModal') newRaModalComponent: NewRaModalComponent;
 
   @ViewChild('fileInput') fileInput;
-
-  @ViewChild('nameRAinput') nameRAinput: ElementRef;
-
   @ViewChild('contextMenu') menu: TemplateRef<any>;
+  
   private overlayRef: OverlayRef | null = null;
 
   isLoading: boolean = undefined;
@@ -53,7 +45,6 @@ export class SelectRaComponent {
     private toastr: ToastrService,
     private updateService: UpdateService,
   ) {}
-  newRAname: string = '';
   options = undefined;
     modelFile;
   optionsRA = [{
@@ -94,7 +85,7 @@ export class SelectRaComponent {
   handleMenuAction(action: string) {
     switch (action) {
       case 'rename':
-       this.renameRaModalComponent.openRenameRaModal();
+       this.renameRaModalComponent.open();
         break;
       case 'delete':
         this.deleteItem();
@@ -109,7 +100,7 @@ export class SelectRaComponent {
         this.importRA();
         break;
       case "newRA":
-      this.openNewRaModal();
+      this.newRaModalComponent.open();
         break;
       default:
         console.warn('Acción desconocida');
@@ -201,45 +192,8 @@ export class SelectRaComponent {
     });
   }
 
-  openNewRaModal(){
-    if (!this.newRaModalInst) {
-      this.newRaModalInst = new bootstrap.Modal(
-        this.newRaModalElement.nativeElement,
-      );
-    }
-    this.newRaModalInst.show();
-  }
-  newRA() {
-    this.manageRA.createRA(this.newRAname).subscribe({
-      next: (result) => {
-        if (result['success']) {
-          $('#pills-gen-information-tab').click();
-          this.commonService.getRaList().subscribe((result: any) => {
-            this.ra.listRA = [...result];
-            this.ra.name = this.newRAname;
-            this.func.refreshRA();
-            this.nameRAinput.nativeElement.value = '';
-          });
-          setTimeout(() => {
-            document.getElementById('menubtn').click();
-            this.global.interfaceVisible = true;
-          }, 500);
-        }
-      },
-      error: (e) => {
-        console.log(e);
-        this.toastr.error(
-          e.error,
-          e.statusText,
 
-          {
-            timeOut: 5000,
-            positionClass: 'toast-top-right',
-          }
-        );
-      },
-    });
-  }
+
 
 
 

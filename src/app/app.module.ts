@@ -47,6 +47,7 @@ import { CardImageComponent } from './card-image/card-image.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { RenameRaModalComponent } from './rename-ra-modal/rename-ra-modal.component';
+import { NewRaModalComponent } from './new-ra-modal/new-ra-modal.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,6 +61,7 @@ import { RenameRaModalComponent } from './rename-ra-modal/rename-ra-modal.compon
     NavTasksComponent,
     NavbarComponent,
     CardImageComponent,
+    NewRaModalComponent,
     SidebarComponent,
     UserInfoComponent,
     AboutSoftwareComponent,
