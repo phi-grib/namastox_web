@@ -6,7 +6,7 @@
   display: flex;
   background-color: white;
   width: 200px;
-  font-size: 13px;
+  font-size: 15px;
   flex-direction: column;
   gap: 5px;
 }
@@ -14,7 +14,7 @@
 .btnOptionContextMenu {
   all: unset;
   cursor: pointer;
-  padding: 10px;
+  padding: 3px 10px;
   i {
     margin-right: 10px;
   }
