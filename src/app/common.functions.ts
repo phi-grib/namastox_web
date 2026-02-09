@@ -101,6 +101,56 @@ export class CommonFunctions {
     });
   }
 
+  
+
+  deleteRA() {
+    this.manageRA.deleteRA(this.ra.name).subscribe(
+      (result) => {
+        if (result['success']) {
+          this.toastr.success('RA ' + this.ra.name, 'SUCCESSFULLY DELETED', {
+            timeOut: 5000,
+            positionClass: 'toast-top-right',
+          });
+        }
+        this.commonService.getRaList().subscribe((result: any) => {
+          this.ra.listRA = [...result];
+          if (this.ra.listRA.length > 0) {
+            this.ra.name = this.ra.listRA[this.ra.listRA.length - 1];
+            this.refreshRA();
+            this.global.interfaceVisible = true;
+          } else {
+            this.ra.name = '';
+            this.global.interfaceVisible = false;
+          }
+          document.getElementById('menubtn').click();
+          document.getElementById('pills-overview-tab').click();
+        });
+      },
+      (error) => {
+        console.log(error);
+      },
+    );
+  }
+    duplicateRA() {
+    this.manageRA.cloneRA(this.ra.name).subscribe({
+      next: (result) => {
+        if (result['success']) {
+          this.toastr.success('Cloned successfully', '');
+          this.commonService.getRaList().subscribe({
+            next: (result: any) => {
+              this.ra.listRA = [...result];
+            },
+          });
+        }
+      },
+      error: (e) => {
+        this.toastr.error('Failed', 'check the console for more information');
+        console.log(e);
+      },
+    });
+
+  }
+
   clearRA() {
     this.global.permissions = {};
     this.ra.pending_tasks = [];
@@ -160,15 +210,5 @@ export class CommonFunctions {
     }, 500);
   }
 
-  // formatSubstancesData(): any[]{
-  //   var arraySubstances = []
-  //   var substanceFormated  = {};
-  //   this.ra.general_information.general.substances.forEach(substance => {
-  //     substanceFormated = {'label':substance['name'],'value':substance}
-  //     arraySubstances.push(substanceFormated)
-  //   });
-  // substanceFormated = {'label':'All substances','value':this.ra.general_information.general.substances}
-  // arraySubstances.push(substanceFormated)
-  // return arraySubstances;
-  // }
+
 }

@@ -42,8 +42,6 @@ export class SelectRaComponent {
     private commonService: CommonService,
     private func: CommonFunctions,
     private results: Results,
-    private manageRA: ManageRAsService,
-    private toastr: ToastrService,
   ) {}
   options = undefined;
     
@@ -88,10 +86,10 @@ export class SelectRaComponent {
        this.renameRaModalComponent.open();
         break;
       case 'delete':
-        this.deleteItem();
+        this.func.deleteRA();
         break;
       case 'duplicate':
-        this.duplicateRA();
+        this.func.duplicateRA();
         break;
       case 'export':
         this.func.exportRA();
@@ -106,66 +104,6 @@ export class SelectRaComponent {
         console.warn('Acción desconocida');
     }
   }
-
-
-
-
-
-
-
-
-
-
-  duplicateRA() {
-    this.manageRA.cloneRA(this.ra.name).subscribe({
-      next: (result) => {
-        if (result['success']) {
-          this.toastr.success('Cloned successfully', '');
-          this.commonService.getRaList().subscribe({
-            next: (result: any) => {
-              this.ra.listRA = [...result];
-            },
-          });
-        }
-      },
-      error: (e) => {
-        this.toastr.error('Failed', 'check the console for more information');
-        console.log(e);
-      },
-    });
-
-  }
-
-  deleteItem() {
-    this.manageRA.deleteRA(this.ra.name).subscribe(
-      (result) => {
-        if (result['success']) {
-          this.toastr.success('RA ' + this.ra.name, 'SUCCESSFULLY DELETED', {
-            timeOut: 5000,
-            positionClass: 'toast-top-right',
-          });
-        }
-        this.commonService.getRaList().subscribe((result: any) => {
-          this.ra.listRA = [...result];
-          if (this.ra.listRA.length > 0) {
-            this.ra.name = this.ra.listRA[this.ra.listRA.length - 1];
-            this.func.refreshRA();
-            this.global.interfaceVisible = true;
-          } else {
-            this.ra.name = '';
-            this.global.interfaceVisible = false;
-          }
-          document.getElementById('menubtn').click();
-          document.getElementById('pills-overview-tab').click();
-        });
-      },
-      (error) => {
-        console.log(error);
-      },
-    );
-  }
-
-
 
   onRightClick(event: MouseEvent, item: any, type: string) {
     event.preventDefault();
@@ -221,7 +159,6 @@ export class SelectRaComponent {
 
   loadRA(name: string) {
     this.ra.name = name;
-    console.log('cargando el ra seleccionado');
     this.func.refreshRA();
   }
 
