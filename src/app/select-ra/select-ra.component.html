@@ -14,7 +14,7 @@
         <button (contextmenu)="onRightClick($event, ra,'folder')" class="btn btn-toggle align-items-center mb-1 rounded" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
            <i class="fa-regular plus-icon folder-normal fa-folder"></i> 
            <i class="fa-regular folder-open fa-folder-open"></i>    
-           Public ({{ra.listRA.length}})
+           Private ({{ra.listRA.length}})
         </button>
         <div class="collapse show"  id="home-collapse">
           <ul  class="btn-toggle-nav rounded list-items list-unstyled fw-normal pb-1 small">
@@ -40,17 +40,10 @@
         </div>
       </li>
     </ul>
-    
-    <input
-      type="file"
-      id="fileinput"
-      style="display: none"
-      (change)="handleFile($event)"
-      #fileInput
-    />
 
+<!-- import ra -->
+<app-import-ra #importRa />
 <!-- rename ra  modal -->
 <app-rename-ra-modal #renameModal />
 <!-- new ra modal-->
 <app-new-ra-modal #newRaModal />
-<!-- conf models modal -->

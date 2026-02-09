@@ -15,6 +15,7 @@ import { ToastrService } from 'ngx-toastr';
 import { UpdateService } from '../update.service';
 import { RenameRaModalComponent } from '../rename-ra-modal/rename-ra-modal.component';
 import { NewRaModalComponent } from '../new-ra-modal/new-ra-modal.component';
+import { ImportRaComponent } from '../import-ra/import-ra.component';
 
 @Component({
   selector: 'app-select-ra',
@@ -24,14 +25,14 @@ import { NewRaModalComponent } from '../new-ra-modal/new-ra-modal.component';
 export class SelectRaComponent {
   @ViewChild('renameModal') renameRaModalComponent: RenameRaModalComponent
   @ViewChild('newRaModal') newRaModalComponent: NewRaModalComponent;
+  @ViewChild('importRA') importRa: ImportRaComponent;
 
-  @ViewChild('fileInput') fileInput;
+
+  
   @ViewChild('contextMenu') menu: TemplateRef<any>;
   
   private overlayRef: OverlayRef | null = null;
 
-  
-   
   constructor(
     private viewContainerRef: ViewContainerRef,
     public overlay: Overlay,
@@ -43,7 +44,6 @@ export class SelectRaComponent {
     private results: Results,
     private manageRA: ManageRAsService,
     private toastr: ToastrService,
-    private updateService: UpdateService,
   ) {}
   options = undefined;
     
@@ -97,7 +97,7 @@ export class SelectRaComponent {
         this.exportRA();
         break;
       case 'importRA':
-        this.importRA();
+        this.importRa.open();
         break;
       case "newRA":
       this.newRaModalComponent.open();
@@ -109,46 +109,6 @@ export class SelectRaComponent {
 
 
 
-
-    importRA() {
-    document.getElementById('fileinput').click();
-  }
-
-  handleFile($event) {
-    console.log();
-    const file = $event.target.files[0];
-    const ra_name = file.name.split('.')[0];
-    this.manageRA.importRA(file).subscribe(
-      (result) => {
-        if (result['success']) {
-          this.commonService.getRaList().subscribe({
-            next: (result: any) => {
-              this.ra.listRA = [...result];
-            },
-          });
-          this.toastr.success(
-            "RA '" + ra_name + "' imported",
-            'IMPORTED SUCCESFULLY',
-            {
-              timeOut: 5000,
-              positionClass: 'toast-top-right',
-            }
-          );
-        }
-        this.resetFileInput();
-      },
-      (error) => {
-        console.log('Error while importing:');
-        console.log(error);
-        this.resetFileInput();
-      }
-    );
-  }
-  resetFileInput() {
-    if (this.fileInput && this.fileInput.nativeElement) {
-      this.fileInput.nativeElement.value = '';
-    }
-  }
   exportRA(){
     this.manageRA.exportRA(this.ra.name).subscribe((result) => {
       const url = window.URL.createObjectURL(result);
