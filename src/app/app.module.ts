@@ -17,7 +17,6 @@ import { DecisionsComponent } from './decisions/decisions.component';
 import { SelectRaComponent } from './select-ra/select-ra.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ManageRaComponent } from './manage-ra/manage-ra.component';
 import { TaskFormComponent } from './tasks/task-form/task-form.component';
 import { formatDatePipe } from './formatDatePipe';
 import { DecisionsFormComponent } from './decisions/decisions-form/decisions-form.component';
@@ -76,7 +75,6 @@ import { ImportRaComponent } from './import-ra/import-ra.component';
     ComponentsComponent,
     RenameRaModalComponent,
     SupportModalInformationComponent,
-    ManageRaComponent,
     ModalEditMoleculeComponent,
     NavDecisionsComponent,
     ModalAddNewMoleculeComponent,
