@@ -20,7 +20,7 @@ export class ImportRaComponent {
   ) {}
 
   open() {
-    this.fileInput.click();
+    this.fileInput.nativeElement.click();
   }
 
   handleFile($event) {
