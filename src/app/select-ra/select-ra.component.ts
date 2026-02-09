@@ -13,6 +13,7 @@ import { TemplatePortal } from '@angular/cdk/portal';
 import { ManageRAsService } from '../manage-ras.service';
 import { ToastrService } from 'ngx-toastr';
 import { UpdateService } from '../update.service';
+import { RenameRaModalComponent } from '../rename-ra-modal/rename-ra-modal.component';
 
 declare var bootstrap: any;
 
@@ -24,10 +25,10 @@ declare var bootstrap: any;
   styleUrls: ['./select-ra.component.scss'],
 })
 export class SelectRaComponent {
-  @ViewChild('renameModal') renameModalElement!: ElementRef;
+  @ViewChild('renameModal') renameRaModalComponent: RenameRaModalComponent
   @ViewChild('newRaModal') newRaModalElement!: ElementRef;
 
-  private renameModalInst: any;
+  
   private newRaModalInst: any;
 
   @ViewChild('fileInput') fileInput;
@@ -93,7 +94,7 @@ export class SelectRaComponent {
   handleMenuAction(action: string) {
     switch (action) {
       case 'rename':
-        this.openRenameRaModal();
+       this.renameRaModalComponent.openRenameRaModal();
         break;
       case 'delete':
         this.deleteItem();
@@ -240,14 +241,7 @@ export class SelectRaComponent {
     });
   }
 
-  openRenameRaModal() {
-    if (!this.renameModalInst) {
-      this.renameModalInst = new bootstrap.Modal(
-        this.renameModalElement.nativeElement,
-      );
-    }
-    this.renameModalInst.show();
-  }
+
 
   duplicateRA() {
     this.manageRA.cloneRA(this.ra.name).subscribe({
@@ -298,43 +292,7 @@ export class SelectRaComponent {
     );
   }
 
-  renameRA() {
-    this.updateService.updateNameRA(this.ra.name, this.newRAname).subscribe(
-      (result) => {
-        if (result['success']) {
-          this.commonService.getRaList().subscribe({
-            next: (result: any) => {
-              this.ra.listRA = [...result];
-              // if (this.ra.listRA.length > 0) {
-              this.ra.name = this.newRAname;
-              /**Get general info ra */
-              this.commonService.getGeneralInfo(this.newRAname).subscribe({
-                next: (result) => {
-                  this.ra.general_information = result;
-                  this.func.refreshRA();
-                  setTimeout(() => {
-                    this.global.interfaceVisible = true;
-                    this.newRAname = '';
-                  }, 500);
-                },
-                error: (e) => {
-                  console.log(e);
-                },
-              });
-              // }
-            },
-            error: (e) => {
-              console.error(e);
-            },
-          });
-          this.toastr.success('Successfully renamed', '');
-        }
-      },
-      (error) => {
-        console.log(error);
-      },
-    );
-  }
+
 
   onRightClick(event: MouseEvent, item: any, type: string) {
     event.preventDefault();
