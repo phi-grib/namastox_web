@@ -30,8 +30,8 @@ export class SelectRaComponent {
   
   private overlayRef: OverlayRef | null = null;
 
-  isLoading: boolean = undefined;
-   newRepo: string = '';
+  
+   
   constructor(
     private viewContainerRef: ViewContainerRef,
     public overlay: Overlay,
@@ -46,7 +46,7 @@ export class SelectRaComponent {
     private updateService: UpdateService,
   ) {}
   options = undefined;
-    modelFile;
+    
   optionsRA = [{
       label: 'Duplicate',
       icon: 'fa-regular fa-clone',
@@ -107,37 +107,8 @@ export class SelectRaComponent {
     }
   }
 
-    confirmImportModel() {
-    this.isLoading = true;
-    this.updateService.importModel(this.modelFile).subscribe(
-      (result) => {
-        if (result['success']) {
-          this.toastr.success(result['message'], '');
-        }
-        this.isLoading = false;
-      },
-      (error) => {
-        this.toastr.error(error.error.message, '');
-        this.isLoading = false;
-      }
-    );
-  }
-  changeModelRepo() {
-    this.updateService.updateModelsRepo(this.newRepo).subscribe(
-      (result) => {
-        if (result['success']) {
-          this.toastr.success('Repository updated successfully', '');
-        }
-      },
-      (error) => {
-        console.log(error);
-        this.toastr.error(error.error, '');
-      }
-    );
-  }
-    selectModelFile(event) {
-    this.modelFile = event.target.files[0];
-  }
+
+
 
     importRA() {
     document.getElementById('fileinput').click();

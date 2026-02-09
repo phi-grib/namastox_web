@@ -48,6 +48,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { RenameRaModalComponent } from './rename-ra-modal/rename-ra-modal.component';
 import { NewRaModalComponent } from './new-ra-modal/new-ra-modal.component';
+import { ConfigureModalComponent } from './configure-modal/configure-modal.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,6 +59,7 @@ import { NewRaModalComponent } from './new-ra-modal/new-ra-modal.component';
     OverviewComponent,
     GeneralInformationComponent,
     TasksComponent,
+    ConfigureModalComponent,
     NavTasksComponent,
     NavbarComponent,
     CardImageComponent,

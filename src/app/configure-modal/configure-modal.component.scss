@@ -1,0 +1,15 @@
+@import "../../assets/scss/buttons.scss";
+
+.btn-configure {
+    margin-right: 3px;
+    color: $primary-color;
+    opacity:70%;
+    &:hover{
+        opacity: 100%;
+    }
+}
+
+.modal-title,
+.label_name {
+  color: $secondary-color;
+}
