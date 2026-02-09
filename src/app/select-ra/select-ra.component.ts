@@ -5,8 +5,7 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 import { CommonFunctions } from '../common.functions';
-import { CommonService } from '../common.service';
-import { Global, RA, Results, User } from '../globals';
+import { Global, RA, User } from '../globals';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
 import { RenameRaModalComponent } from '../rename-ra-modal/rename-ra-modal.component';
@@ -36,10 +35,9 @@ export class SelectRaComponent {
     public global: Global,
     public ra: RA,
     public user: User,
-    private commonService: CommonService,
     private func: CommonFunctions,
-    private results: Results,
   ) {}
+
   options = undefined;
     
   handleMenuAction(action: string) {
@@ -122,33 +120,5 @@ export class SelectRaComponent {
   loadRA(name: string) {
     this.ra.name = name;
     this.func.refreshRA();
-  }
-
-  loadStep() {
-    this.results.resultSelected = '';
-    this.results.decisionSelected = '';
-    this.commonService
-      .getStatusWithStep(this.ra.name, this.ra.status.step)
-      .subscribe({
-        next: (result) => (this.ra.status = result.ra),
-        error: (e) => console.log(e),
-      });
-    this.commonService
-      .getResultsWithStep(this.ra.name, this.ra.status.step)
-      .subscribe({
-        next: (result) => {
-          this.ra.results = result;
-          this.func.separatePastTasks();
-        },
-        error: (e) => console.log(e),
-      });
-    this.commonService
-      .getWorkflowByStep(this.ra.name, this.ra.status.step)
-      .subscribe({
-        next: (result) => {
-          this.ra.workflow = result['result'];
-          this.commonService.updateWorkflow();
-        },
-      });
   }
 }
