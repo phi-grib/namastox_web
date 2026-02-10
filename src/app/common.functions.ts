@@ -117,10 +117,8 @@ export class CommonFunctions {
           if (this.ra.listRA.length > 0) {
             this.ra.name = this.ra.listRA[this.ra.listRA.length - 1];
             this.refreshRA();
-            this.global.interfaceVisible = true;
           } else {
             this.ra.name = '';
-            this.global.interfaceVisible = false;
           }
           document.getElementById('menubtn').click();
           document.getElementById('pills-overview-tab').click();

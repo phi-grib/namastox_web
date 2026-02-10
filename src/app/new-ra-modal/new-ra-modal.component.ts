@@ -20,7 +20,6 @@ export class NewRaModalComponent {
     private commonService: CommonService,
     private ra: RA,
     private func: CommonFunctions,
-    private global: Global,
     private toastr: ToastrService,
   ) {}
 
@@ -45,10 +44,6 @@ export class NewRaModalComponent {
             this.func.refreshRA();
             this.input.nativeElement.value = '';
           });
-          setTimeout(() => {
-            document.getElementById('menubtn').click();
-            this.global.interfaceVisible = true;
-          }, 500);
         }
       },
       error: (e) => {

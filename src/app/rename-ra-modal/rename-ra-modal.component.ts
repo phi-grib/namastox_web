@@ -41,21 +41,17 @@ export class RenameRaModalComponent {
           this.commonService.getRaList().subscribe({
             next: (result: any) => {
               this.ra.listRA = [...result];
-              // if (this.ra.listRA.length > 0) {
               this.ra.name = this.newRAname;
               /**Get general info ra */
               this.commonService.getGeneralInfo(this.newRAname).subscribe({
                 next: (result) => {
                   this.ra.general_information = result;
                   this.func.refreshRA();
-                  setTimeout(() => {
-                    this.global.interfaceVisible = true;
-                    this.newRAname = '';
-                  }, 500);
                 },
                 error: (e) => {
                   console.log(e);
                 },
+                complete: () => this.newRAname = ''
               });
               // }
             },
