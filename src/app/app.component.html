@@ -8,9 +8,8 @@
   </as-split-area>
   <as-split-area [size]="rightSide">
     <!-- component select workflow progress or view full -->
-    @if (ra.isLoadWorkflow) {
-      <app-spinner />
-    }
+    <app-spinner [isLoading]="ra.isLoadWorkflow" />
+    
     <app-workflow-options />
     <app-workflow-full-view [hidden]="this.global.progressTab" />
     <app-workflow-progress [hidden]="!this.global.progressTab" />

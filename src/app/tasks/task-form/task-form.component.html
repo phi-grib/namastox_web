@@ -341,9 +341,9 @@
           ></button>
         </div>
         <div class="modal-body row">
-          @if(isLoading){
-            <app-spinner/>
-          }
+        
+          <app-spinner [isLoading]="isLoading" />
+      
           
           @if(!listAllModels){
           <div class="alert p-2 alert-warning" role="alert">
