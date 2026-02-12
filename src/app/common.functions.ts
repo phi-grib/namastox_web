@@ -21,6 +21,7 @@ export class CommonFunctions {
   ) {}
 
   refreshRA() {
+    this.ra.isLoadWorkflow = true;
     this.commonService.getPermissions(this.ra.name).subscribe({
       next: (permissions) => {
         if (

@@ -12,6 +12,7 @@ export class RA {
   pending_tasks: any = [];
   workflow: any = undefined;
   workflow_full_view: any = undefined;
+  isLoadWorkflow = undefined;
   notes: any = [];
   note: any = {}
 }

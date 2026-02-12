@@ -49,6 +49,7 @@ import { RenameRaModalComponent } from './rename-ra-modal/rename-ra-modal.compon
 import { NewRaModalComponent } from './new-ra-modal/new-ra-modal.component';
 import { ConfigureModalComponent } from './configure-modal/configure-modal.component';
 import { ImportRaComponent } from './import-ra/import-ra.component';
+import { SpinnerComponent } from './spinner/spinner.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,6 +64,7 @@ import { ImportRaComponent } from './import-ra/import-ra.component';
     NavTasksComponent,
     NavbarComponent,
     CardImageComponent,
+    SpinnerComponent,
     NewRaModalComponent,
     SidebarComponent,
     UserInfoComponent,

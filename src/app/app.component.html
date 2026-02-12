@@ -1,13 +1,16 @@
 <!-- navbar component -->
-<app-navbar/>
+<app-navbar />
 
 <as-split style="height: 93vh" class="" direction="horizontal">
-  <app-sidebar/>
+  <app-sidebar />
   <as-split-area [size]="leftSide">
-    <app-components/>
+    <app-components />
   </as-split-area>
   <as-split-area [size]="rightSide">
     <!-- component select workflow progress or view full -->
+    @if (ra.isLoadWorkflow) {
+      <app-spinner />
+    }
     <app-workflow-options />
     <app-workflow-full-view [hidden]="this.global.progressTab" />
     <app-workflow-progress [hidden]="!this.global.progressTab" />
