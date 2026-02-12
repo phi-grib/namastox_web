@@ -161,11 +161,5 @@ export class CommonService {
     return this.http.get(url)
   }
 
-  getSystemInfo(){
-    const url: string = environment.baseUrl + "system_info";
-    return this.http.get(url)
-
-  }
-
 
 }

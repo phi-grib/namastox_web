@@ -22,13 +22,7 @@ export class AppComponent implements OnInit {
     private toastr: ToastrService, 
   ) {}
   ngOnInit(): void {
-    //
-    this.commonService.getSystemInfo().subscribe({
-      next: (result:any) => {
-        this.user.system = result['result']
-      }
-    })
-
+    
     const source = new EventSource('http://localhost:5000/stream');
     source.addEventListener('ra_updated', (event: any) => {
       const data = JSON.parse(event.data);

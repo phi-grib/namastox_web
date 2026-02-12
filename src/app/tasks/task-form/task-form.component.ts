@@ -265,7 +265,7 @@ export class TaskFormComponent {
           next: (result) => {
             if (result['success']) {
               this.pendingTasks.results = [];
-              if(this.user.system == "Linyx") this.manageRA.updateRA(this.ra.name,this.user.username).subscribe()
+              this.manageRA.updateRA(this.ra.name,this.user.username).subscribe()
               if (!this.editMode) {
                 setTimeout(() => {
                   if (this.pendingTasks.results.length) {
