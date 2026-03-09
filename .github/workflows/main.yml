@@ -1,0 +1,15 @@
+name: Run Tests E2E
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  notificar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send signal to test repository
+        run: |
+          curl -X POST https://api.github.com/repos/AdrianCabreraPhi/script_test_interface_namastox_workflow/dispatches \
+          -H "Accept: application/vnd.github.v3+json" \
+          -H "Authorization: token ${{ secrets.PAT_PRUEBAS }}" \
+          -d '{"event_type": "update-frontend"}'
