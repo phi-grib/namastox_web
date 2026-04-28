@@ -31,7 +31,7 @@ export class ImportRaComponent {
         if (result['success']) {
           this.commonService.getRaList().subscribe({
             next: (result: any) => {
-              this.ra.listRA = [...result];
+              this.ra.listRA = result;
             },
           });
           this.toastr.success(

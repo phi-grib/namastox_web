@@ -14,11 +14,11 @@
         <button (contextmenu)="onRightClick($event, ra,'folder')" class="btn btn-toggle align-items-center mb-1 rounded" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
            <i class="fa-regular plus-icon folder-normal fa-folder"></i> 
            <i class="fa-regular folder-open fa-folder-open"></i>    
-           Private ({{ra.listRA.length}})
+           Private ({{ra.listRA['generic']?.length}})
         </button>
         <div class="collapse show"  id="home-collapse">
           <ul  class="btn-toggle-nav rounded list-items list-unstyled fw-normal pb-1 small">
-             @for(item of ra.listRA; track item) {
+             @for(item of ra.listRA['generic']; track item) {
           <li (contextmenu)="onRightClick($event,item,'file')" (click)="loadRA(item)" 
               class="item" 
             [class.active]="ra.name === item" [value]="item">{{ item }}</li>
@@ -30,17 +30,19 @@
         <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
            <i class="fa-regular plus-icon folder-normal fa-folder"></i> 
            <i class="fa-regular folder-open fa-folder-open"></i>  
-          Shared (2)
+          Shared ({{ra.listRA['shared']?.length}})
         </button>
         <div class="collapse" id="dashboard-collapse">
-          <ul class="btn-toggle-nav list-items list-unstyled fw-normal pb-1 small">
-            <li   class="item" > Ejemplo 1</li>
-            <li   class="item" > Ejemplo 2</li>
+        <ul  class="btn-toggle-nav rounded list-items list-unstyled fw-normal pb-1 small">
+             @for(item of ra.listRA['shared']; track item) {
+          <li (contextmenu)="onRightClick($event,item,'file')" (click)="loadRA(item)" 
+              class="item" 
+            [class.active]="ra.name === item" [value]="item">{{ item }}</li>
+              }
           </ul>
         </div>
       </li>
     </ul>
-
 <!-- import ra -->
 <app-import-ra #importRA />
 <!-- rename ra  modal -->

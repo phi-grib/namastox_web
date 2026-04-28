@@ -39,7 +39,7 @@ export class NewRaModalComponent {
         if (result['success']) {
           $('#pills-gen-information-tab').click();
           this.commonService.getRaList().subscribe((result: any) => {
-            this.ra.listRA = [...result];
+            this.ra.listRA = result;
             this.ra.name = this.newRAname;
             this.func.refreshRA();
             this.input.nativeElement.value = '';

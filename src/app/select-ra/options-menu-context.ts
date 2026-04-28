@@ -28,9 +28,4 @@ export var optionsFolder = [
     icon: 'fa-solid fa-upload',
     action: 'importRA',
   },
-  {
-    label: 'Delete Folder',
-    icon: 'fa-regular text-danger fa-trash-can',
-    action: 'deleteFolder',
-  },
 ];

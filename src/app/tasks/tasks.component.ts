@@ -151,7 +151,9 @@ export class TasksComponent implements OnInit {
         next: (result) => {
           this.pending_task = result;
         },
-        error: (e) => console.log(e),
+        error: (e) => {
+          console.log(e)
+        },
       });
   }
 }

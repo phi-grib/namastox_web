@@ -40,7 +40,7 @@ export class RenameRaModalComponent {
         if (result['success']) {
           this.commonService.getRaList().subscribe({
             next: (result: any) => {
-              this.ra.listRA = [...result];
+              this.ra.listRA = result;
               this.ra.name = this.newRAname;
               /**Get general info ra */
               this.commonService.getGeneralInfo(this.newRAname).subscribe({

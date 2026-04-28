@@ -114,14 +114,13 @@ export class CommonFunctions {
           });
         }
         this.commonService.getRaList().subscribe((result: any) => {
-          this.ra.listRA = [...result];
-          if (this.ra.listRA.length > 0) {
-            this.ra.name = this.ra.listRA[this.ra.listRA.length - 1];
+          this.ra.listRA = result;
+          if (this.ra.listRA['generic'].length > 0) {
+            this.ra.name = this.ra.listRA['generic'][0];
             this.refreshRA();
           } else {
             this.ra.name = '';
           }
-          document.getElementById('menubtn').click();
           document.getElementById('pills-overview-tab').click();
         });
       },
@@ -137,7 +136,7 @@ export class CommonFunctions {
           this.toastr.success('Cloned successfully', '');
           this.commonService.getRaList().subscribe({
             next: (result: any) => {
-              this.ra.listRA = [...result];
+              this.ra.listRA = result;
             },
           });
         }
