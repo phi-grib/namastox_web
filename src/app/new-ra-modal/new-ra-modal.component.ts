@@ -15,6 +15,8 @@ export class NewRaModalComponent {
   private newRaModalInst: any;
   newRAname = '';
   @ViewChild('input') input: ElementRef;
+  isSharedFolder: boolean = false;
+
   constructor(
     private manageRA: ManageRAsService,
     private commonService: CommonService,
@@ -23,7 +25,9 @@ export class NewRaModalComponent {
     private toastr: ToastrService,
   ) {}
 
-  open() {
+  open(isShared: boolean) {
+    this.isSharedFolder = isShared;
+
     if (!this.newRaModalInst) {
       this.newRaModalInst = new bootstrap.Modal(this.modal.nativeElement);
       this.modal.nativeElement.addEventListener('shown.bs.modal', () => {
@@ -34,7 +38,8 @@ export class NewRaModalComponent {
   }
 
   newRA() {
-    this.manageRA.createRA(this.newRAname).subscribe({
+    console.log("shared;",this.isSharedFolder)
+    this.manageRA.createRA(this.newRAname,this.isSharedFolder).subscribe({
       next: (result) => {
         if (result['success']) {
           $('#pills-gen-information-tab').click();

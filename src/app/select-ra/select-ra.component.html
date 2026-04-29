@@ -11,14 +11,14 @@
 
    <ul class="list-unstyled ps-0">
       <li class="mb-1  ">
-        <button (contextmenu)="onRightClick($event, ra,'folder')" class="btn btn-toggle align-items-center mb-1 rounded" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
+        <button (contextmenu)="onRightClick($event, ra,'folder',false)" class="btn btn-toggle align-items-center mb-1 rounded" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
            <i class="fa-regular plus-icon folder-normal fa-folder"></i> 
            <i class="fa-regular folder-open fa-folder-open"></i>    
-           Private ({{ra.listRA['generic']?.length}})
+           Private ({{ra.listRA[user.username]?.length}})
         </button>
         <div class="collapse show"  id="home-collapse">
           <ul  class="btn-toggle-nav rounded list-items list-unstyled fw-normal pb-1 small">
-             @for(item of ra.listRA['generic']; track item) {
+             @for(item of ra.listRA[user.username]; track item) {
           <li (contextmenu)="onRightClick($event,item,'file')" (click)="loadRA(item)" 
               class="item" 
             [class.active]="ra.name === item" [value]="item">{{ item }}</li>
@@ -27,7 +27,7 @@
         </div>
       </li>
       <li class="mb-1">
-        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
+        <button (contextmenu)="onRightClick($event, ra,'folder',true)" class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
            <i class="fa-regular plus-icon folder-normal fa-folder"></i> 
            <i class="fa-regular folder-open fa-folder-open"></i>  
           Shared ({{ra.listRA['shared']?.length}})

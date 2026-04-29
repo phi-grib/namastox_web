@@ -26,7 +26,7 @@ export class SelectRaComponent {
   @ViewChild('contextMenu') menu: TemplateRef<any>;
 
   private overlayRef: OverlayRef | null = null;
-
+  currentContextIsShared: boolean = false;
   constructor(
     private viewContainerRef: ViewContainerRef,
     public overlay: Overlay,
@@ -56,15 +56,17 @@ export class SelectRaComponent {
         this.importRa.open();
         break;
       case 'newRA':
-        this.newRaModalComponent.open();
+        this.newRaModalComponent.open(this.currentContextIsShared);
         break;
       default:
         console.warn('Acción desconocida');
     }
   }
 
-  onRightClick(event: MouseEvent, item: any, type: string) {
+  onRightClick(event: MouseEvent, item: any, type: string,isShared: boolean = false) {
     event.preventDefault();
+    this.currentContextIsShared = isShared;
+
     if (type == 'folder') {
       this.options = optionsFolder;
     } else {

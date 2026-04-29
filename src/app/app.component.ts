@@ -25,10 +25,11 @@ export class AppComponent implements OnInit {
         // })
 
     //  DEVELOPMENT
-  this.user.username = 'admin';
+    this.user.username = 'admin';
     this.commonService.getRaList().subscribe({
       next: (result: any) => {
         this.ra.listRA = result;
+        console.log(this.ra.listRA)
       },
       error: (e) => {
         console.error(e);
