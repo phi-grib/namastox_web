@@ -45,7 +45,7 @@ export class NewRaModalComponent {
           this.commonService.getRaList().subscribe((result: any) => {
             this.ra.listRA = result;
             this.ra.name = this.newRAname;
-            this.func.refreshRA();
+            this.func.refreshRA(this.isSharedFolder);
             this.input.nativeElement.value = '';
           });
         }

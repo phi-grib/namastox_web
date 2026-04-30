@@ -20,12 +20,11 @@ export class CommonFunctions {
     private global: Global
   ) {}
 
-  refreshRA() {
+  refreshRA(isShared:boolean = false) {
     this.ra.isLoadWorkflow = true;
-    console.log("entra en refresra")
+    if(isShared) this.ra.name = "+"+this.ra.name
     this.commonService.getPermissions(this.ra.name).subscribe({
       next: (permissions) => {
-        console.log("obtuvo los permisos")
         if (
           permissions['read'].includes(this.user.username) ||
           permissions['read'][0] == '*'
