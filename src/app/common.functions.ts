@@ -22,8 +22,10 @@ export class CommonFunctions {
 
   refreshRA() {
     this.ra.isLoadWorkflow = true;
+    console.log("entra en refresra")
     this.commonService.getPermissions(this.ra.name).subscribe({
       next: (permissions) => {
+        console.log("obtuvo los permisos")
         if (
           permissions['read'].includes(this.user.username) ||
           permissions['read'][0] == '*'

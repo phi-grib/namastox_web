@@ -37,7 +37,7 @@
              @for(item of ra.listRA['shared']; track item) {
           <li (contextmenu)="onRightClick($event,item,'file')" (click)="loadRA(item)" 
               class="item" 
-            [class.active]="ra.name === item" [value]="item">{{ item }}</li>
+            [class.active]="ra.name === item" [value]="item">{{ item | slice:1 }}</li>
               }
           </ul>
         </div>

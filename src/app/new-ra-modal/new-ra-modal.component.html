@@ -43,7 +43,7 @@
         </button>
         <button
           type="button"
-          [disabled]="!newRAname"
+         [disabled]="!newRAname || newRAname.startsWith('+')"
           class="btn btn-ets-do"
           data-bs-dismiss="modal"
           (click)="newRA()"

@@ -38,7 +38,6 @@ export class NewRaModalComponent {
   }
 
   newRA() {
-    console.log("shared;",this.isSharedFolder)
     this.manageRA.createRA(this.newRAname,this.isSharedFolder).subscribe({
       next: (result) => {
         if (result['success']) {

@@ -1,7 +1,7 @@
 <div  class="container-fluid">
   <div class="card-body">
     <div class="row border-bottom" id="headerOverview">
-      <div class="col">{{ ra?.name }} ({{ ra?.status?.ID }})</div>
+      <div class="col">{{ ra?.name.startsWith('+') ? ra?.name.substring(1) : ra?.name}} ({{ ra?.status?.ID }})</div>
     </div>
     <div class="row border-bottom">
       <div class="col text">
