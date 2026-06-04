@@ -12,7 +12,7 @@ export var optionsRA = [
   },
   {
     label: 'Delete last step',
-    icon: 'fa-regular fa-backward',
+    icon: 'fa-solid fa-backward',
     action: 'backward',
   },
   {

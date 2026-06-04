@@ -5,7 +5,6 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 import { CommonFunctions } from '../common.functions';
-import { ManageRAsService } from '../manage-ras.service';
 import { Global, RA, User } from '../globals';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
@@ -35,7 +34,6 @@ export class SelectRaComponent {
     public ra: RA,
     public user: User,
     private func: CommonFunctions,
-    private func2: ManageRAsService
   ) {}
 
   options = undefined;
@@ -49,7 +47,7 @@ export class SelectRaComponent {
         this.func.deleteRA();
         break;
       case 'backward':
-        this.func2.deleteStep('AAA',0);
+        this.func.deleteStep();
         break;
       case 'duplicate':
         this.func.duplicateRA();

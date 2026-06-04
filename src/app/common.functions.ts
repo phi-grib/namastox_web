@@ -114,6 +114,7 @@ export class CommonFunctions {
             positionClass: 'toast-top-right',
           });
         }
+
         this.commonService.getRaList().subscribe((result: any) => {
           this.ra.listRA = result;
           if (this.ra.listRA['generic'].length > 0) {
@@ -130,6 +131,30 @@ export class CommonFunctions {
       },
     );
   }
+
+  deleteStep() {
+    this.manageRA.deleteStep(this.ra.name,0).subscribe(
+      (result) => {
+        if (result['success']) {
+          this.toastr.success('Last step of RA ' + this.ra.name, 'SUCCESSFULLY DELETED', {
+            timeOut: 5000,
+            positionClass: 'toast-top-right',
+          });
+        }
+        this.refreshRA();
+      },
+      (error) => {
+        this.toastr.error('ERROR', error.error, {
+            timeOut: 5000,
+            positionClass: 'toast-top-right',
+          });
+        console.log(error.error);
+      },
+    );
+  }
+
+
+
     duplicateRA() {
     this.manageRA.cloneRA(this.ra.name).subscribe({
       next: (result) => {
