@@ -17,6 +17,7 @@ export class ManageRAsService {
     const url: string = environment.baseUrl + 'delete/' + ra_name;
     return this.http.put(url, null);
   }
+
   // delete Step
   deleteStep(ra_name: string, step: number) {
     const url: string = environment.baseUrl + 'delete/' + ra_name + '/' + step;
@@ -34,6 +35,7 @@ export class ManageRAsService {
     const url: string = environment.baseUrl + 'import/';
     return this.http.post(url, formData);
   }
+  
   cloneRA(ra_name:string){
     const url: string = environment.baseUrl + "clone/"+ ra_name;
     return this.http.put(url, null);

@@ -11,6 +11,11 @@ export var optionsRA = [
     action: 'export',
   },
   {
+    label: 'Delete last step',
+    icon: 'fa-regular fa-backward',
+    action: 'backward',
+  },
+  {
     label: 'Delete',
     icon: 'fa-regular text-danger fa-trash-can',
     action: 'delete',
