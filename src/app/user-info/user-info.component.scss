@@ -1,29 +1,23 @@
 @import "../../assets/scss/buttons.scss";
 
 .user-container {
+  background: rgba(255, 255, 255, 0.2);
   display: flex;
-  padding: 10px 10px 10px 1rem;
-
-}
-
-.user-details {
-  display: flex;
-  align-items: end;
-  color: black;
-  display: flex;
-
-  gap: 5px;
+  margin-top: 5px;
+  padding: 5px;
+  gap: 8px;
+  font-size: 15px;
+  margin-right: 20px;
+  border-radius: 5px;
+  align-items: center;
+  height: 80%;
   span {
+    font-size: 15px;
+    color: whitesmoke;
+  }
+  i:first-child {
+    color: whitesmoke;
     font-size: 16px;
   }
 }
-.logout-btn {
-  i {
-   opacity: 80%;
-     color: black;
-     cursor: pointer;
-     &:hover {
-      opacity: 100%;
-     }
-    }
-}
+
