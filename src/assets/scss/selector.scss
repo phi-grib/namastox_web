@@ -18,3 +18,47 @@
   scrollbar-width:thin !important;
   scrollbar-color: $primary-color white !important;
 }
+
+select,
+::picker(select) {
+  appearance: base-select;
+  min-width: 100px;
+  border: none;
+}
+select::picker-icon {
+  transition: 0.4s rotate;
+}
+select:open::picker-icon {
+  rotate: 180deg;
+}
+option:checked {
+  background-color: whitesmoke;
+  color: $primary-color;
+  font-weight: 600;
+
+}
+option::checkmark {
+  order: 1;
+  margin-left: auto;
+  content: "";
+}
+::picker(select) {
+  border: 1px solid whitesmoke;
+  border-radius: 4px;
+  margin-top: 5px;
+  box-shadow: 0 3px 10px rgb(0,0,0,0.2);
+    opacity: 0;
+  transition: all 0.4s allow-discrete;
+}
+::picker(select):popover-open {
+  opacity: 1;
+}
+@starting-style {
+  ::picker(select):popover-open {
+    opacity: 0;
+  }
+}
+
+option:hover {
+  background-color: whitesmoke;
+}
