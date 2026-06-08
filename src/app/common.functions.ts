@@ -20,7 +20,9 @@ export class CommonFunctions {
     private global: Global
   ) {}
 
-  refreshRA() {
+  refreshRA(isShared:boolean = false) {
+    this.ra.isLoadWorkflow = true;
+    if(isShared) this.ra.name = "+"+this.ra.name
     this.commonService.getPermissions(this.ra.name).subscribe({
       next: (permissions) => {
         if (
@@ -101,6 +103,78 @@ export class CommonFunctions {
     });
   }
 
+  
+
+  deleteRA() {
+    this.manageRA.deleteRA(this.ra.name).subscribe(
+      (result) => {
+        if (result['success']) {
+          this.toastr.success('RA ' + this.ra.name, 'SUCCESSFULLY DELETED', {
+            timeOut: 5000,
+            positionClass: 'toast-top-right',
+          });
+        }
+
+        this.commonService.getRaList().subscribe((result: any) => {
+          this.ra.listRA = result;
+          if (this.ra.listRA['generic'].length > 0) {
+            this.ra.name = this.ra.listRA['generic'][0];
+            this.refreshRA();
+          } else {
+            this.ra.name = '';
+          }
+          document.getElementById('pills-overview-tab').click();
+        });
+      },
+      (error) => {
+        console.log(error);
+      },
+    );
+  }
+
+  deleteStep() {
+    this.manageRA.deleteStep(this.ra.name,0).subscribe(
+      (result) => {
+        if (result['success']) {
+          this.toastr.success('Last step of RA ' + this.ra.name, 'SUCCESSFULLY DELETED', {
+            timeOut: 5000,
+            positionClass: 'toast-top-right',
+          });
+        }
+        this.refreshRA();
+      },
+      (error) => {
+        this.toastr.error('ERROR', error.error, {
+            timeOut: 5000,
+            positionClass: 'toast-top-right',
+          });
+        console.log(error.error);
+      },
+    );
+  }
+
+
+
+    duplicateRA() {
+    this.manageRA.cloneRA(this.ra.name).subscribe({
+      next: (result) => {
+        if (result['success']) {
+          this.toastr.success('Cloned successfully', '');
+          this.commonService.getRaList().subscribe({
+            next: (result: any) => {
+              this.ra.listRA = result;
+            },
+          });
+        }
+      },
+      error: (e) => {
+        this.toastr.error('Failed', 'check the console for more information');
+        console.log(e);
+      },
+    });
+
+  }
+
   clearRA() {
     this.global.permissions = {};
     this.ra.pending_tasks = [];
@@ -113,6 +187,22 @@ export class CommonFunctions {
       this.ra.general_information.general.substances = [];
     }
   }
+
+    exportRA(){
+    this.manageRA.exportRA(this.ra.name).subscribe((result) => {
+      const url = window.URL.createObjectURL(result);
+      // Create download link
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = this.ra.name + '.tgz';
+      // Simulates a click on the link to start the download
+      link.click();
+      // Releases the resources used by the URL object
+      window.URL.revokeObjectURL(url);
+    });
+  }
+
+
   /**separates tasks into different lists  */
   separatePendingTasks() {
     this.pendingTasks.results = [];
@@ -144,15 +234,5 @@ export class CommonFunctions {
     }, 500);
   }
 
-  // formatSubstancesData(): any[]{
-  //   var arraySubstances = []
-  //   var substanceFormated  = {};
-  //   this.ra.general_information.general.substances.forEach(substance => {
-  //     substanceFormated = {'label':substance['name'],'value':substance}
-  //     arraySubstances.push(substanceFormated)
-  //   });
-  // substanceFormated = {'label':'All substances','value':this.ra.general_information.general.substances}
-  // arraySubstances.push(substanceFormated)
-  // return arraySubstances;
-  // }
+
 }

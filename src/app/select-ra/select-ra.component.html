@@ -1,47 +1,51 @@
 
-<div
-  class="d-flex align-items-center justify-content-between flex-row mb-1 mt-1"
->
-  <div class="d-flex align-items-center">
-    <a
-      id="menubtn"
-      class="btn"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarToggleExternalContent"
-      aria-controls="navbarToggleExternalContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-      role="button"
-    >
-      <i class="fa-solid fa-bars icon mt-2"></i>
-    </a>
-    <div class="d-flex-inline select">
-      <select
-        id="ra1"
-        (change)="loadRA()"
-        [(ngModel)]="ra.name"
-        aria-label="Default select example"
-        class="selector"
-      >
-        @for(ra of ra.listRA; track ra) {
-        <option [value]="ra">{{ ra }}</option>
-        }
-      </select>
-    </div>
-    @if(!ra.name){
-    <div class="selectionra">
-      <i
-        style="color: #474286"
-        id="icon-arrow"
-        class="fa-solid fa-arrow-left"
-      ></i>
-      Select RA
-    </div>
+   
+<ng-template #contextMenu>
+<div class="container-menu">
+    @for (option of options; track option.label) {
+     
+  <button  class="btnOptionContextMenu" [disabled]="!user.write" (click)="handleMenuAction(option.action); closeMenu();">  <i [class]="option.icon" ></i> {{ option.label }}</button> 
     }
-  </div>
-  @if(!user.write) {
-  <div style="background-color: whitesmoke; border-radius: 4px; padding: 3px">
-    <span class="read-only"><i class="fa-solid fa-eye"></i> Read only</span>
-  </div>
-  }
 </div>
+   </ng-template>
+
+   <ul class="list-unstyled ps-0">
+      <li class="mb-1  ">
+        <button (contextmenu)="onRightClick($event, ra,'folder',false)" class="btn btn-toggle align-items-center mb-1 rounded" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
+           <i class="fa-regular plus-icon folder-normal fa-folder"></i> 
+           <i class="fa-regular folder-open fa-folder-open"></i>    
+           Private ({{ra.listRA[user.username]?.length}})
+        </button>
+        <div class="collapse show"  id="home-collapse">
+          <ul  class="btn-toggle-nav rounded list-items list-unstyled fw-normal pb-1 small">
+             @for(item of ra.listRA[user.username]; track item) {
+          <li (contextmenu)="onRightClick($event,item,'file')" (click)="loadRA(item)" 
+              class="item" 
+            [class.active]="ra.name === item" [value]="item">{{ item }}</li>
+              }
+          </ul>
+        </div>
+      </li>
+      <li class="mb-1">
+        <button (contextmenu)="onRightClick($event, ra,'folder',true)" class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
+           <i class="fa-regular plus-icon folder-normal fa-folder"></i> 
+           <i class="fa-regular folder-open fa-folder-open"></i>  
+          Shared ({{ra.listRA['shared']?.length}})
+        </button>
+        <div class="collapse" id="dashboard-collapse">
+        <ul  class="btn-toggle-nav rounded list-items list-unstyled fw-normal pb-1 small">
+             @for(item of ra.listRA['shared']; track item) {
+          <li (contextmenu)="onRightClick($event,item,'file')" (click)="loadRA(item)" 
+              class="item" 
+            [class.active]="ra.name === item" [value]="item">{{ item | slice:1 }}</li>
+              }
+          </ul>
+        </div>
+      </li>
+    </ul>
+<!-- import ra -->
+<app-import-ra #importRA />
+<!-- rename ra  modal -->
+<app-rename-ra-modal #renameModal />
+<!-- new ra modal-->
+<app-new-ra-modal #newRaModal />

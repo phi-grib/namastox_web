@@ -33,9 +33,27 @@ export class WorkflowComponent implements AfterViewInit {
     private pendingTasks: PendingTasks,
     private results: Results,
     private elementRef: ElementRef,
-    private renderer: Renderer2
+    private renderer: Renderer2,
   ) {}
   @ViewChild('mermaidDiv', { static: false }) mermaidDiv: ElementRef;
+
+  ngAfterViewInit(): void {
+    this.apiSubscription = this.panZoomConfig.api.subscribe(
+      (api) => (this.panZoomAPI = api),
+    );
+
+    mermaid.initialize({
+      startOnLoad: false,
+      securityLevel: 'loose',
+      flowchart: {
+        useMaxWidth: true,
+        htmlLabels: true,
+      },
+    });
+    this.commonService.refreshWorklfow$.subscribe(() => {
+      this.flowchartRefresh();
+    });
+  }
 
   async flowchartRefresh() {
     const container = this.mermaidDiv.nativeElement as HTMLElement;
@@ -48,6 +66,7 @@ export class WorkflowComponent implements AfterViewInit {
         this.checkType(match?.[1] ?? '');
       });
     });
+    this.ra.isLoadWorkflow = false;
   }
 
   getElementsByTableID = (tableID) => {
@@ -61,13 +80,13 @@ export class WorkflowComponent implements AfterViewInit {
     if (tableID === '#dtDecisions') {
       elements.btnTask = document.querySelector('#pastCollapseDecisions');
       elements.btnSelectTask = document.querySelector(
-        '#tableCollapseDecisions'
+        '#tableCollapseDecisions',
       );
       elements.accordionbodySelector = document.querySelector(
-        '#flush-collapseOneDecisions'
+        '#flush-collapseOneDecisions',
       );
       elements.accordionbodyTask = document.querySelector(
-        '#flush-collapseTwoDecisions'
+        '#flush-collapseTwoDecisions',
       );
     }
 
@@ -103,7 +122,7 @@ export class WorkflowComponent implements AfterViewInit {
             }, 100);
           }
         });
-        // if not found , pass next page of table 
+        // if not found , pass next page of table
         if (found != true) {
           idxPage += 1;
           $(tableID).DataTable().page(idxPage).draw('page');
@@ -159,10 +178,10 @@ export class WorkflowComponent implements AfterViewInit {
     // RESULTS
     // check if task is pending or past
     const pendingTaskResults = this.pendingTasks.results.find(
-      (task) => task.id == taskName
+      (task) => task.id == taskName,
     );
     const pastTaskResults = this.results.results.find(
-      (task) => task.id == taskName
+      (task) => task.id == taskName,
     );
 
     if (pastTaskResults) this.redirectToTask('results', false, taskName);
@@ -172,10 +191,10 @@ export class WorkflowComponent implements AfterViewInit {
     // DECISIONS
     // check if decision is pending or past
     const pendingTaskDecisions = this.pendingTasks.decisions.find(
-      (task) => task.id == taskName
+      (task) => task.id == taskName,
     );
     const pastTaskDecisions = this.results.decisions.find(
-      (task) => task.id == taskName
+      (task) => task.id == taskName,
     );
     if (pendingTaskDecisions) this.redirectToTask('decisions', true, taskName);
 
@@ -192,23 +211,6 @@ export class WorkflowComponent implements AfterViewInit {
 
   reset() {
     this.panZoomAPI.resetView();
-  }
-  ngAfterViewInit(): void {
-    this.apiSubscription = this.panZoomConfig.api.subscribe(
-      (api) => (this.panZoomAPI = api)
-    );
-
-    mermaid.initialize({
-      startOnLoad: false,
-      securityLevel: 'loose',
-      flowchart: {
-        useMaxWidth: true,
-        htmlLabels: true,
-      },
-    });
-    this.commonService.refreshWorklfow$.subscribe(() => {
-      this.flowchartRefresh();
-    });
   }
 
   // downloadWorkflow() {

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ManageRaComponent } from './manage-ra.component';
+import { ContextMenuComponent } from './context-menu.component';
 
-describe('ManageRaComponent', () => {
-  let component: ManageRaComponent;
-  let fixture: ComponentFixture<ManageRaComponent>;
+describe('ContextMenuComponent', () => {
+  let component: ContextMenuComponent;
+  let fixture: ComponentFixture<ContextMenuComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ManageRaComponent ]
+      imports: [ContextMenuComponent]
     })
     .compileComponents();
-
-    fixture = TestBed.createComponent(ManageRaComponent);
+    
+    fixture = TestBed.createComponent(ContextMenuComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

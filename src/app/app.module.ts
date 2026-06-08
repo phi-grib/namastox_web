@@ -17,7 +17,6 @@ import { DecisionsComponent } from './decisions/decisions.component';
 import { SelectRaComponent } from './select-ra/select-ra.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ManageRaComponent } from './manage-ra/manage-ra.component';
 import { TaskFormComponent } from './tasks/task-form/task-form.component';
 import { formatDatePipe } from './formatDatePipe';
 import { DecisionsFormComponent } from './decisions/decisions-form/decisions-form.component';
@@ -44,7 +43,13 @@ import { ModalEditMoleculeComponent } from './modal-edit-molecule/modal-edit-mol
 import { ListNotesComponent } from './list-notes/list-notes.component';
 import { NavTasksComponent } from './nav-tasks/nav-tasks.component';
 import { CardImageComponent } from './card-image/card-image.component';
-
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { RenameRaModalComponent } from './rename-ra-modal/rename-ra-modal.component';
+import { NewRaModalComponent } from './new-ra-modal/new-ra-modal.component';
+import { ConfigureModalComponent } from './configure-modal/configure-modal.component';
+import { ImportRaComponent } from './import-ra/import-ra.component';
+import { SpinnerComponent } from './spinner/spinner.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,18 +60,23 @@ import { CardImageComponent } from './card-image/card-image.component';
     OverviewComponent,
     GeneralInformationComponent,
     TasksComponent,
+    ConfigureModalComponent,
     NavTasksComponent,
     NavbarComponent,
     CardImageComponent,
+    SpinnerComponent,
+    NewRaModalComponent,
+    SidebarComponent,
     UserInfoComponent,
     AboutSoftwareComponent,
+    ImportRaComponent,
     LogosComponent,
     DecisionsComponent,
     SelectRaComponent,
     ListNotesComponent,
     ComponentsComponent,
+    RenameRaModalComponent,
     SupportModalInformationComponent,
-    ManageRaComponent,
     ModalEditMoleculeComponent,
     NavDecisionsComponent,
     ModalAddNewMoleculeComponent,
@@ -88,6 +98,7 @@ import { CardImageComponent } from './card-image/card-image.component';
     HttpClientModule,
     ReactiveFormsModule,
     ReactiveFormsModule,
+    OverlayModule,
     FormsModule,
     NgxPanZoomModule,
     BrowserAnimationsModule,

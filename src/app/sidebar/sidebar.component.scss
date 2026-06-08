@@ -1,0 +1,40 @@
+@import "../../assets/scss/colors.scss";
+
+.sidebar-container {
+  border-radius: 4px;
+  padding-left: 10px;
+  height: 100%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid whitesmoke;
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+
+.sidebarbtn {
+  text-decoration: none;
+  color: $primary-color;
+  margin-left: 3px;
+  margin-right: 3px;
+  &[aria-expanded="true"] {
+    ~ .btn-configure {
+      display: block;
+    }
+  }
+  &[aria-expanded="false"] {
+    ~ .btn-configure {
+      display: none;
+    }
+  }
+}
+
+.sidebar-body {
+  width: 300px;
+  overflow-wrap:break-word;
+}

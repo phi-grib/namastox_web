@@ -1,0 +1,23 @@
+<div class="sidebar-container">
+  <div class="sidebar-header">
+    <a
+      (click)="isExpanded = !isExpanded"
+      data-bs-toggle="collapse"
+      data-bs-target="#collapseWidthExample"
+      aria-expanded="false"
+      aria-controls="collapseWidthExample"
+      class="sidebarbtn"
+      role="button"
+    >
+      <i class="fa-solid fa-bars icon mt-2"></i>
+    </a>
+
+    <app-configure-modal [isExpanded]="isExpanded" />
+  </div>
+  
+  <div class="collapse collapse-horizontal" id="collapseWidthExample">
+    <div class="sidebar-body">
+      <app-select-ra />
+    </div>
+  </div>
+</div>

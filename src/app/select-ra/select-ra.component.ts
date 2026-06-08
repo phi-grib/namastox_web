@@ -1,8 +1,17 @@
-import { Component, ViewChild } from '@angular/core';
-import { SplitComponent } from 'angular-split';
+import {
+  Component,
+  TemplateRef,
+  ViewChild,
+  ViewContainerRef,
+} from '@angular/core';
 import { CommonFunctions } from '../common.functions';
-import { CommonService } from '../common.service';
-import { Global, RA, Results, User } from '../globals';
+import { Global, RA, User } from '../globals';
+import { Overlay, OverlayRef } from '@angular/cdk/overlay';
+import { TemplatePortal } from '@angular/cdk/portal';
+import { RenameRaModalComponent } from '../rename-ra-modal/rename-ra-modal.component';
+import { NewRaModalComponent } from '../new-ra-modal/new-ra-modal.component';
+import { ImportRaComponent } from '../import-ra/import-ra.component';
+import { optionsRA, optionsFolder } from './options-menu-context';
 
 @Component({
   selector: 'app-select-ra',
@@ -10,74 +19,105 @@ import { Global, RA, Results, User } from '../globals';
   styleUrls: ['./select-ra.component.scss'],
 })
 export class SelectRaComponent {
+  @ViewChild('renameModal') renameRaModalComponent: RenameRaModalComponent;
+  @ViewChild('newRaModal') newRaModalComponent: NewRaModalComponent;
+  @ViewChild('importRA') importRa: ImportRaComponent;
+
+  @ViewChild('contextMenu') menu: TemplateRef<any>;
+
+  private overlayRef: OverlayRef | null = null;
+  currentContextIsShared: boolean = false;
   constructor(
+    private viewContainerRef: ViewContainerRef,
+    public overlay: Overlay,
     public global: Global,
     public ra: RA,
     public user: User,
-    private commonService: CommonService,
     private func: CommonFunctions,
-    private results: Results,
   ) {}
-  
-  loadRA() {
-    this.func.refreshRA();
+
+  options = undefined;
+
+  handleMenuAction(action: string) {
+    switch (action) {
+      case 'rename':
+        this.renameRaModalComponent.open();
+        break;
+      case 'delete':
+        this.func.deleteRA();
+        break;
+      case 'backward':
+        this.func.deleteStep();
+        break;
+      case 'duplicate':
+        this.func.duplicateRA();
+        break;
+      case 'export':
+        this.func.exportRA();
+        break;
+      case 'importRA':
+        this.importRa.open();
+        break;
+      case 'newRA':
+        this.newRaModalComponent.open(this.currentContextIsShared);
+        break;
+      default:
+        console.warn('Acción desconocida');
+    }
   }
 
-  loadStep() {
-    this.results.resultSelected = '';
-    this.results.decisionSelected = '';
-    this.commonService
-      .getStatusWithStep(this.ra.name, this.ra.status.step)
-      .subscribe({
-        next: (result) => (this.ra.status = result.ra),
-        error: (e) => console.log(e),
-      });
-    this.commonService
-      .getResultsWithStep(this.ra.name, this.ra.status.step)
-      .subscribe({
-        next: (result) => {
-          this.ra.results = result;
-          this.func.separatePastTasks();
-        },
-        error: (e) => console.log(e),
-      });
-    this.commonService
-      .getWorkflowByStep(this.ra.name, this.ra.status.step)
-      .subscribe({
-        next: (result) => {
-          this.ra.workflow = result['result'];
-          this.commonService.updateWorkflow();
-        },
-      });
-  }
-  // angular-split function
-  @ViewChild('mySplit') mySplitEl: SplitComponent;
-  // area size
-  _size1 = 0;
-  _size2 = 100;
-  get size1() {
-    return this._size1;
-  }
+  onRightClick(event: MouseEvent, item: any, type: string,isShared: boolean = false) {
+    event.preventDefault();
+    this.currentContextIsShared = isShared;
 
-  set size1(value) {
-    this._size1 = value;
-  }
-  get size2() {
-    return this._size2;
-  }
+    if (type == 'folder') {
+      this.options = optionsFolder;
+    } else {
+      this.options = optionsRA;
+    }
 
-  set size2(value) {
-    this._size2 = value;
-  }
-  gutterClick(e) {
-    if (e.gutterNum === 1) {
-      if (e.sizes[0] == 0) {
-        this.size1 = 30;
-        this.size2 = 70;
-      } else {
-        this.size2 = 100;
-        this.size1 = 0;
+    this.closeMenu();
+
+    const x = event.clientX;
+    const y = event.clientY;
+
+    const positionStrategy = this.overlay
+      .position()
+      .global()
+      .left(x + 'px')
+      .top(y + 'px');
+
+    this.overlayRef = this.overlay.create({
+      positionStrategy,
+      hasBackdrop: false,
+    });
+
+    const portal = new TemplatePortal(this.menu, this.viewContainerRef);
+    this.overlayRef.attach(portal);
+
+    setTimeout(() => {
+      if (this.overlayRef) {
+        this.overlayRef.outsidePointerEvents().subscribe((evt: any) => {
+          if (evt.type === 'contextmenu' || evt.button === 2) {
+            return;
+          }
+          this.closeMenu();
+        });
       }
+    }, 0);
+  }
+
+  closeMenu() {
+    if (this.overlayRef) {
+      this.overlayRef.dispose();
+      this.overlayRef = null;
+    }
+  }
+  
+  loadRA(name: string) {
+    if (this.ra.name != name) {
+      this.ra.name = name;
+      this.func.refreshRA();
     }
   }
 }

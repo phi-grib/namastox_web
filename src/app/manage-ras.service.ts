@@ -8,15 +8,16 @@ import { environment } from '../environments/environment';
 export class ManageRAsService {
   constructor(private http: HttpClient) {}
   // create new RA
-  createRA(ra_name: string) {
+  createRA(ra_name: string,shared:boolean) {
     const url: string = environment.baseUrl + 'new/' + ra_name;
-    return this.http.put(url, null);
+    return this.http.put(url, {shared:shared});
   }
   // delete RA
   deleteRA(ra_name: string) {
     const url: string = environment.baseUrl + 'delete/' + ra_name;
     return this.http.put(url, null);
   }
+
   // delete Step
   deleteStep(ra_name: string, step: number) {
     const url: string = environment.baseUrl + 'delete/' + ra_name + '/' + step;
@@ -34,6 +35,7 @@ export class ManageRAsService {
     const url: string = environment.baseUrl + 'import/';
     return this.http.post(url, formData);
   }
+  
   cloneRA(ra_name:string){
     const url: string = environment.baseUrl + "clone/"+ ra_name;
     return this.http.put(url, null);

@@ -1,17 +1,4 @@
 @import "../../assets/scss/colors.scss";
-@import "../../assets/scss/buttons.scss";
-
-.modal-title,
-.label_name {
-  color: $secondary-color;
-}
-.version-text{
-  vertical-align: bottom; 
-  margin-left: 10px;
-  color: gray;
-  line-height: 1;
-}
-
 
 .loading-overlay {
   position: fixed;
@@ -22,6 +9,7 @@
   background-color: rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
+  gap: 5px;
   justify-content: center;
   z-index: 1000; 
   pointer-events: none; 
@@ -31,8 +19,5 @@
   width: 3rem;
   height: 3rem;
   pointer-events: auto;
-}
-
-.duplicate-btn,.delete-step-btn {
-  margin-right: 10px !important;
+  color: $primary-color;
 }
