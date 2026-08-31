@@ -9,9 +9,12 @@ import { Global, RA, User } from '../globals';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
 import { RenameRaModalComponent } from '../rename-ra-modal/rename-ra-modal.component';
+import { RenameFolderModalComponent } from '../rename-folder-modal/rename-folder-modal.component';
 import { NewRaModalComponent } from '../new-ra-modal/new-ra-modal.component';
+import { NewFolderModalComponent } from '../new-folder-modal/new-folder-modal.component';
+import { DeleteFolderModalComponent } from '../delete-folder-modal/delete-folder-modal.component';
 import { ImportRaComponent } from '../import-ra/import-ra.component';
-import { optionsRA, optionsFolder } from './options-menu-context';
+import { optionsRA, optionsFolder, optionsSecundaryFolder } from './options-menu-context';
 
 @Component({
   selector: 'app-select-ra',
@@ -20,13 +23,16 @@ import { optionsRA, optionsFolder } from './options-menu-context';
 })
 export class SelectRaComponent {
   @ViewChild('renameModal') renameRaModalComponent: RenameRaModalComponent;
+  @ViewChild('renameFolderModal') renameFolderModalComponent: RenameFolderModalComponent;
   @ViewChild('newRaModal') newRaModalComponent: NewRaModalComponent;
+  @ViewChild('newFolderModal') newFolderModalComponent: NewFolderModalComponent;
   @ViewChild('importRA') importRa: ImportRaComponent;
-
+  @ViewChild('deleteFolderModal') deleteFolderModalComponent: DeleteFolderModalComponent;
   @ViewChild('contextMenu') menu: TemplateRef<any>;
 
   private overlayRef: OverlayRef | null = null;
   currentContextIsShared: boolean = false;
+  currentContextItem: any;
   constructor(
     private viewContainerRef: ViewContainerRef,
     public overlay: Overlay,
@@ -43,8 +49,14 @@ export class SelectRaComponent {
       case 'rename':
         this.renameRaModalComponent.open();
         break;
+      case 'renameFolder':
+        this.renameFolderModalComponent.open(this.currentContextItem);
+        break;
       case 'delete':
-        this.func.deleteRA();
+        this.func.deleteRA(this.currentContextItem);
+        break;
+      case 'deletefolder':
+        this.deleteFolderModalComponent.open(this.currentContextItem);
         break;
       case 'backward':
         this.func.deleteStep();
@@ -59,7 +71,10 @@ export class SelectRaComponent {
         this.importRa.open();
         break;
       case 'newRA':
-        this.newRaModalComponent.open(this.currentContextIsShared);
+        this.newRaModalComponent.open(this.currentContextIsShared, this.currentContextItem);
+        break;
+      case 'newFolder':
+        this.newFolderModalComponent.open(this.currentContextIsShared);
         break;
       default:
         console.warn('Acción desconocida');
@@ -69,11 +84,16 @@ export class SelectRaComponent {
   onRightClick(event: MouseEvent, item: any, type: string,isShared: boolean = false) {
     event.preventDefault();
     this.currentContextIsShared = isShared;
+    this.currentContextItem = item;
 
     if (type == 'folder') {
       this.options = optionsFolder;
     } else {
-      this.options = optionsRA;
+      if (item.includes('_folder_')) {
+        this.options = optionsSecundaryFolder;
+      } else {
+        this.options = optionsRA;
+      }
     }
 
     this.closeMenu();
@@ -114,10 +134,17 @@ export class SelectRaComponent {
     }
   }
   
-  loadRA(name: string) {
+  loadRA(name: string, canLoad: boolean = false) {
+    if (name.includes('_folder_')  && !canLoad) {
+      return;
+    }
     if (this.ra.name != name) {
       this.ra.name = name;
       this.func.refreshRA();
     }
+  }
+
+  isFolder(item: any): boolean {
+    return item && typeof item === 'object' && 'folder' in item;
   }
 }

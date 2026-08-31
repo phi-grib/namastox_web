@@ -6,17 +6,16 @@ import { CommonFunctions } from '../common.functions';
 import { ToastrService } from 'ngx-toastr';
 declare var bootstrap: any;
 @Component({
-  selector: 'app-new-ra-modal',
-  templateUrl: './new-ra-modal.component.html',
-  styleUrl: './new-ra-modal.component.scss',
+  selector: 'app-new-folder-modal',
+  templateUrl: './new-folder-modal.component.html',
+  styleUrl: './new-folder-modal.component.scss',
 })
-export class NewRaModalComponent {
+export class NewFolderModalComponent {
   @ViewChild('modal') modal: ElementRef;
-  private newRaModalInst: any;
-  newRAname = '';
+  private newFolderModalInst: any;
+  newFolderName = '';
   @ViewChild('input') input: ElementRef;
   isSharedFolder: boolean = false;
-  currentContextItem: string = '';
 
   constructor(
     private manageRA: ManageRAsService,
@@ -26,33 +25,28 @@ export class NewRaModalComponent {
     private toastr: ToastrService,
   ) {}
 
-  open(isShared: boolean, currentContextItem: string) {
+  open(isShared: boolean) {
     this.isSharedFolder = isShared;
-    this.currentContextItem = currentContextItem || '';
 
-    if (!this.newRaModalInst) {
-      this.newRaModalInst = new bootstrap.Modal(this.modal.nativeElement);
+    if (!this.newFolderModalInst) {
+      this.newFolderModalInst = new bootstrap.Modal(this.modal.nativeElement);
       this.modal.nativeElement.addEventListener('shown.bs.modal', () => {
         this.input.nativeElement.focus();
       });
     }
-    this.newRaModalInst.show();
+    this.newFolderModalInst.show();
   }
 
-  newRA() {
-    this.manageRA.createRA(this.newRAname,this.isSharedFolder, this.currentContextItem).subscribe({
+  newFolder() {
+    this.manageRA.createFolder(this.newFolderName, this.isSharedFolder).subscribe({
       next: (result) => {
         if (result['success']) {
+          console.log('Folder created successfully');
           $('#pills-gen-information-tab').click();
           this.commonService.getRaList().subscribe((result: any) => {
             this.ra.listRA = result;
-            if (this.currentContextItem?.includes("_folder_")) { 
-              this.ra.name = this.currentContextItem + "/" + this.newRAname;
-            } else {
-              this.ra.name = this.newRAname;
-            }
-            this.func.refreshRA(this.isSharedFolder);
-            this.input.nativeElement.value = '';
+            // this.func.refreshRA(this.isSharedFolder);
+            // this.input.nativeElement.value = '';
           });
         }
       },

@@ -22,7 +22,14 @@ export class CommonFunctions {
 
   refreshRA(isShared:boolean = false) {
     this.ra.isLoadWorkflow = true;
-    if(isShared) this.ra.name = "+"+this.ra.name
+    if(isShared) {
+      if(!this.ra.name.startsWith('+')) {
+        this.ra.name = '+' + this.ra.name;
+      }
+      if(!this.ra.name.includes('/+')) {
+        this.ra.name = this.ra.name.replace('/','/+');
+      }
+    }
     this.commonService.getPermissions(this.ra.name).subscribe({
       next: (permissions) => {
         if (
@@ -30,7 +37,7 @@ export class CommonFunctions {
           permissions['read'][0] == '*'
         ) {
           this.user.write =
-            permissions['write'].includes(this.user.username) ||
+            permissions['write'].includes(this.user.username) ||  
             permissions['write'][0] == '*';
           this.global.permissions['read'] = permissions['read'];
           this.global.permissions['write'] = permissions['write'];
@@ -105,11 +112,14 @@ export class CommonFunctions {
 
   
 
-  deleteRA() {
+  deleteRA(currentContextItem: string) {
+    if (currentContextItem?.includes("_folder_")) {
+      this.ra.name = currentContextItem + '/' + this.ra.name;
+    }
     this.manageRA.deleteRA(this.ra.name).subscribe(
       (result) => {
         if (result['success']) {
-          this.toastr.success('RA ' + this.ra.name, 'SUCCESSFULLY DELETED', {
+          this.toastr.success('RA ' + this.ra.name.replace('_folder_', ''), 'SUCCESSFULLY DELETED', {
             timeOut: 5000,
             positionClass: 'toast-top-right',
           });
