@@ -45,9 +45,8 @@ export class NewFolderModalComponent {
           $('#pills-gen-information-tab').click();
           this.commonService.getRaList().subscribe((result: any) => {
             this.ra.listRA = result;
-            // this.func.refreshRA(this.isSharedFolder);
-            // this.input.nativeElement.value = '';
           });
+          this.toastr.success('Folder created successfully', '');
         }
       },
       error: (e) => {

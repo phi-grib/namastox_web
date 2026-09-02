@@ -19,17 +19,15 @@
     </button>
     <div class="collapse show" id="home-collapse">
       <ul class="btn-toggle-nav rounded list-items list-unstyled fw-normal pb-1 small">
-        <!-- item can be a ra or a folder that contains ra's -->
         @for (item of ra.listRA[user.username]; track item) {
           @if (isFolder(item)) {
-            <li (contextmenu)="onRightClick($event, item.folder, 'file')" class="item folder-item" [value]="item.folder">
+            <li (contextmenu)="onRightClick($event, item.folder, 'subfolder')" class="item folder-item" [value]="item.folder">
               <button type="button" class="btn btn-toggle align-items-center rounded p-0" data-bs-toggle="collapse"
                 [attr.data-bs-target]="'#folder-' + item.folder" aria-expanded="true">
                 <i class="fa-regular plus-icon folder-normal fa-folder"></i>
                 <i class="fa-regular folder-open fa-folder-open"></i>
                 {{ item.folder.replace('_folder_', '') }}
               </button>
-
             </li>
             <div class="collapse show" [id]="'folder-' + item.folder">
               <ul class="list-unstyled ms-3">
@@ -48,7 +46,6 @@
           </li>
           }
         }
-
       </ul>
     </div>
   </li>
@@ -63,36 +60,34 @@
     <div class="collapse" id="dashboard-collapse">
       <ul class="btn-toggle-nav rounded list-items list-unstyled fw-normal pb-1 small">
         @for(item of ra.listRA['shared']; track item) {
-        <!-- <li (contextmenu)="onRightClick($event,item,'file')" (click)="loadRA(item)" class="item"
-          [class.active]="ra.name === item" [value]="item">{{ item.slice(1).replace('_folder_', '') }}</li> -->
-        @if (isFolder(item)) {
-          <li (contextmenu)="onRightClick($event, item.folder, 'file', true)" class="item folder-item"
-            [value]="item.folder">
-            <button type="button" class="btn btn-toggle align-items-center rounded p-0" data-bs-toggle="collapse"
-              [attr.data-bs-target]="'#folder-' + item.folder.replace('+_folder_', '')" aria-expanded="true">
+          @if (isFolder(item)) {
+            <li (contextmenu)="onRightClick($event, item.folder, 'subfolder', true)" class="item folder-item"
+              [value]="item.folder">
+              <button type="button" class="btn btn-toggle align-items-center rounded p-0" data-bs-toggle="collapse"
+                [attr.data-bs-target]="'#folder-' + item.folder.replace('+_folder_', '')" aria-expanded="true">
 
-              <i class="fa-regular plus-icon folder-normal fa-folder"></i>
-              <i class="fa-regular folder-open fa-folder-open"></i>
+                <i class="fa-regular plus-icon folder-normal fa-folder"></i>
+                <i class="fa-regular folder-open fa-folder-open"></i>
 
-              {{ item.folder.replace('+_folder_', '') }}
-            </button>
+                {{ item.folder.replace('+_folder_', '') }}
+              </button>
+            </li>
+            <div class="collapse show" [id]="'folder-' + item.folder.replace('+_folder_', '')">
+              <ul class="list-unstyled ms-3">
+                @for (ra of item.items; track ra) {
+                <li (contextmenu)="onRightClick($event, ra, 'file')" (click)="loadRA(item.folder + '/' + ra, true)"
+                  class="item" [class.active]="this.ra.name === item.folder + '/' + ra" [value]="ra">
+                  {{ ra.slice(1) }}
+                </li>
+                }
+              </ul>
+            </div>
+          } @else {
+          <li (contextmenu)="onRightClick($event, item, 'file',true)" (click)="loadRA(item)" class="item"
+            [class.active]="ra.name === item" [value]="item">
+            {{ item.slice(1)}}
           </li>
-          <div class="collapse show" [id]="'folder-' + item.folder.replace('+_folder_', '')">
-            <ul class="list-unstyled ms-3">
-              @for (ra of item.items; track ra) {
-              <li (contextmenu)="onRightClick($event, ra, 'file')" (click)="loadRA(item.folder + '/' + ra, true)"
-                class="item" [class.active]="this.ra.name === item.folder + '/' + ra" [value]="ra">
-                {{ ra.slice(1) }}
-              </li>
-              }
-            </ul>
-          </div>
-        } @else {
-        <li (contextmenu)="onRightClick($event, item, 'file',true)" (click)="loadRA(item)" class="item"
-          [class.active]="ra.name === item" [value]="item">
-          {{ item.slice(1)}}
-        </li>
-        }
+          }
         }
       </ul>
     </div>

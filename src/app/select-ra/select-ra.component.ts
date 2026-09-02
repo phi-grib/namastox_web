@@ -81,20 +81,20 @@ export class SelectRaComponent {
     }
   }
 
-  onRightClick(event: MouseEvent, item: any, type: string,isShared: boolean = false) {
+  onRightClick(event: MouseEvent, item: any, type: string, isShared: boolean = false) {
     event.preventDefault();
+    console.log(item, type, isShared);
     this.currentContextIsShared = isShared;
     this.currentContextItem = item;
 
     if (type == 'folder') {
       this.options = optionsFolder;
+    } else if (type == 'subfolder') {
+      this.options = optionsSecundaryFolder;
     } else {
-      if (item.includes('_folder_')) {
-        this.options = optionsSecundaryFolder;
-      } else {
-        this.options = optionsRA;
-      }
+      this.options = optionsRA;
     }
+    
 
     this.closeMenu();
 
