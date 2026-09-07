@@ -41,7 +41,6 @@ export class NewFolderModalComponent {
     this.manageRA.createFolder(this.newFolderName, this.isSharedFolder).subscribe({
       next: (result) => {
         if (result['success']) {
-          console.log('Folder created successfully');
           $('#pills-gen-information-tab').click();
           this.commonService.getRaList().subscribe((result: any) => {
             this.ra.listRA = result;

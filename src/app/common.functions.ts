@@ -112,14 +112,11 @@ export class CommonFunctions {
 
   
 
-  deleteRA(currentContextItem: string) {
-    if (currentContextItem?.includes("_folder_")) {
-      this.ra.name = currentContextItem + '/' + this.ra.name;
-    }
+  deleteRA() {
     this.manageRA.deleteRA(this.ra.name).subscribe(
       (result) => {
         if (result['success']) {
-          this.toastr.success('RA ' + this.ra.name.replace('_folder_', ''), 'SUCCESSFULLY DELETED', {
+          this.toastr.success('RA ' + this.ra.name.replace('_folder_', '').replace(/\+/g, ''), 'SUCCESSFULLY DELETED', {
             timeOut: 5000,
             positionClass: 'toast-top-right',
           });
@@ -127,7 +124,7 @@ export class CommonFunctions {
 
         this.commonService.getRaList().subscribe((result: any) => {
           this.ra.listRA = result;
-          if (this.ra.listRA['generic'].length > 0) {
+          if (this.ra.listRA['generic']?.length > 0) {
             this.ra.name = this.ra.listRA['generic'][0];
             this.refreshRA();
           } else {
@@ -165,7 +162,7 @@ export class CommonFunctions {
 
 
 
-    duplicateRA() {
+  duplicateRA() {
     this.manageRA.cloneRA(this.ra.name).subscribe({
       next: (result) => {
         if (result['success']) {

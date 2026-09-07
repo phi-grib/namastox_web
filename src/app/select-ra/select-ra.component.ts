@@ -47,13 +47,13 @@ export class SelectRaComponent {
   handleMenuAction(action: string) {
     switch (action) {
       case 'rename':
-        this.renameRaModalComponent.open();
+        this.renameRaModalComponent.open(this.currentContextItem);
         break;
       case 'renameFolder':
         this.renameFolderModalComponent.open(this.currentContextItem);
         break;
       case 'delete':
-        this.func.deleteRA(this.currentContextItem);
+        this.func.deleteRA();
         break;
       case 'deletefolder':
         this.deleteFolderModalComponent.open(this.currentContextItem);
@@ -83,10 +83,13 @@ export class SelectRaComponent {
 
   onRightClick(event: MouseEvent, item: any, type: string, isShared: boolean = false) {
     event.preventDefault();
-    console.log(item, type, isShared);
     this.currentContextIsShared = isShared;
     this.currentContextItem = item;
 
+    if (this.ra.name != item && type == 'file') {
+      this.ra.name = item;
+      this.func.refreshRA();
+    }
     if (type == 'folder') {
       this.options = optionsFolder;
     } else if (type == 'subfolder') {
@@ -146,5 +149,21 @@ export class SelectRaComponent {
 
   isFolder(item: any): boolean {
     return item && typeof item === 'object' && 'folder' in item;
+  }
+
+  getItemsCount(list: any[]): number {
+    if (!list) return 0;
+
+    return list.reduce((total, item) => {
+      if (typeof item === 'string') {
+        return total + 1;
+      }
+
+      if (this.isFolder(item)) {
+        return total + (item.items?.length ?? 0);
+      }
+
+      return total;
+    }, 0);
   }
 }

@@ -14,6 +14,7 @@ export class RenameRaModalComponent {
   @ViewChild('modal') modal: ElementRef;
   @ViewChild('input') input: ElementRef;
   newRAname: string = '';
+  contextItem: string = '';
   private renameModalInst: any;
   constructor(
     private updateService: UpdateService,
@@ -24,7 +25,8 @@ export class RenameRaModalComponent {
     private toastr: ToastrService,
   ) {}
 
-  open() {
+  open(contextItem: string) {
+    this.contextItem = contextItem;
     if (!this.renameModalInst) {
       this.renameModalInst = new bootstrap.Modal(this.modal.nativeElement);
       this.modal.nativeElement.addEventListener('shown.bs.modal', () => {
@@ -41,6 +43,10 @@ export class RenameRaModalComponent {
           this.commonService.getRaList().subscribe({
             next: (result: any) => {
               this.ra.listRA = result;
+              if(this.contextItem?.includes("_folder_")) {
+                const result = this.contextItem.split('/')[0];
+                this.newRAname = result + '/' + '+' + this.newRAname;
+              }
               this.ra.name = this.newRAname;
               /**Get general info ra */
               this.commonService.getGeneralInfo(this.newRAname).subscribe({

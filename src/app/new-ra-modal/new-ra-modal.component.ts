@@ -54,6 +54,7 @@ export class NewRaModalComponent {
             this.func.refreshRA(this.isSharedFolder);
             this.input.nativeElement.value = '';
           });
+          this.toastr.success('RA created successfully', '');
         }
       },
       error: (e) => {

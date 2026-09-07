@@ -15,7 +15,7 @@
       aria-expanded="true">
       <i class="fa-regular plus-icon folder-normal fa-folder"></i>
       <i class="fa-regular folder-open fa-folder-open"></i>
-      Private ({{ra.listRA[user.username]?.length}})
+      Private ({{ getItemsCount(ra.listRA[user.username]) }})
     </button>
     <div class="collapse show" id="home-collapse">
       <ul class="btn-toggle-nav rounded list-items list-unstyled fw-normal pb-1 small">
@@ -26,13 +26,13 @@
                 [attr.data-bs-target]="'#folder-' + item.folder" aria-expanded="true">
                 <i class="fa-regular plus-icon folder-normal fa-folder"></i>
                 <i class="fa-regular folder-open fa-folder-open"></i>
-                {{ item.folder.replace('_folder_', '') }}
+                {{ item.folder.replace('_folder_', '') }} ({{ item.items.length }})
               </button>
             </li>
             <div class="collapse show" [id]="'folder-' + item.folder">
               <ul class="list-unstyled ms-3">
                 @for (ra of item.items; track ra) {
-                <li (contextmenu)="onRightClick($event, ra, 'file')" (click)="loadRA(item.folder + '/' + ra, true)"
+                <li (contextmenu)="onRightClick($event, item.folder + '/' + ra, 'file')" (click)="loadRA(item.folder + '/' + ra, true)"
                   class="item" [class.active]="this.ra.name === item.folder + '/' + ra" [value]="ra">
                   {{ ra }}
                 </li>
@@ -55,7 +55,7 @@
       data-bs-target="#dashboard-collapse" aria-expanded="false">
       <i class="fa-regular plus-icon folder-normal fa-folder"></i>
       <i class="fa-regular folder-open fa-folder-open"></i>
-      Shared ({{ra.listRA['shared']?.length}})
+      Shared ({{ getItemsCount(ra.listRA['shared']) }})
     </button>
     <div class="collapse" id="dashboard-collapse">
       <ul class="btn-toggle-nav rounded list-items list-unstyled fw-normal pb-1 small">
@@ -69,13 +69,13 @@
                 <i class="fa-regular plus-icon folder-normal fa-folder"></i>
                 <i class="fa-regular folder-open fa-folder-open"></i>
 
-                {{ item.folder.replace('+_folder_', '') }}
+                {{ item.folder.replace('+_folder_', '') }} ({{ item.items.length }})
               </button>
             </li>
             <div class="collapse show" [id]="'folder-' + item.folder.replace('+_folder_', '')">
               <ul class="list-unstyled ms-3">
                 @for (ra of item.items; track ra) {
-                <li (contextmenu)="onRightClick($event, ra, 'file')" (click)="loadRA(item.folder + '/' + ra, true)"
+                <li (contextmenu)="onRightClick($event, item.folder + '/' + ra, 'file')" (click)="loadRA(item.folder + '/' + ra, true)"
                   class="item" [class.active]="this.ra.name === item.folder + '/' + ra" [value]="ra">
                   {{ ra.slice(1) }}
                 </li>
