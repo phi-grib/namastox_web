@@ -33,7 +33,8 @@ export class ReportComponent {
         let blob = new Blob([result], {
           type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
         });
-        saveAs(blob, this.ra.name + '.xlsx');
+        const name = this.ra.name.includes('/')  ? this.ra.name.split('/').pop()  : this.ra.name;
+        saveAs(blob, name + '.xlsx');
       },
       (error) => {
         alert('Error downloading documentation in EXCEL format');
@@ -68,7 +69,8 @@ export class ReportComponent {
     this.commonService.exportToFile(this.ra.name, 'yaml').subscribe(
       (result) => {
         let blob = new Blob([result], { type: 'text/plain;charset=utf-8' });
-        saveAs(blob, this.ra.name + '.yaml');
+        const name = this.ra.name.includes('/')  ? this.ra.name.split('/').pop()  : this.ra.name;
+        saveAs(blob, name + '.yaml');
       },
       (error) => {
         alert('Error downloading documentation in YAML format');
