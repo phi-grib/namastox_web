@@ -73,9 +73,9 @@ export class CommonFunctions {
       this.ra.workflow = values[3]['result'];
       $('#dtNotes').DataTable().destroy();
       this.ra.notes = values[4];
-      setTimeout(() => {
-        $('#dtNotes').DataTable();
-      }, 200);
+      // setTimeout(() => {
+      //   $('#dtNotes').DataTable();
+      // }, 200);
 
       setTimeout(() => {
         if (this.ra.status.step > 0) {

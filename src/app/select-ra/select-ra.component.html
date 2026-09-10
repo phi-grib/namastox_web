@@ -31,10 +31,10 @@
             </li>
             <div class="collapse show" [id]="'folder-' + item.folder">
               <ul class="list-unstyled ms-3">
-                @for (ra of item.items; track ra) {
-                <li (contextmenu)="onRightClick($event, item.folder + '/' + ra, 'file')" (click)="loadRA(item.folder + '/' + ra, true)"
-                  class="item" [class.active]="this.ra.name === item.folder + '/' + ra" [value]="ra">
-                  {{ ra }}
+                @for (raName of item.items; track raName) {
+                <li (contextmenu)="onRightClick($event, item.folder + '/' + raName, 'file')" (click)="loadRA(item.folder + '/' + raName, true)"
+                  class="item" [class.active]="this.ra.name === item.folder + '/' + raName" [value]="raName">
+                  {{ raName }}
                 </li>
                 }
               </ul>
@@ -74,10 +74,10 @@
             </li>
             <div class="collapse show" [id]="'folder-' + item.folder.replace('+_folder_', '')">
               <ul class="list-unstyled ms-3">
-                @for (ra of item.items; track ra) {
-                <li (contextmenu)="onRightClick($event, item.folder + '/' + ra, 'file')" (click)="loadRA(item.folder + '/' + ra, true)"
-                  class="item" [class.active]="this.ra.name === item.folder + '/' + ra" [value]="ra">
-                  {{ ra.slice(1) }}
+                @for (raName of item.items; track raName) {
+                <li (contextmenu)="onRightClick($event, item.folder + '/' + raName, 'file')" (click)="loadRA(item.folder + '/' + raName, true)"
+                  class="item" [class.active]="this.ra.name === item.folder + '/' + raName" [value]="raName">
+                  {{ raName.slice(1) }}
                 </li>
                 }
               </ul>

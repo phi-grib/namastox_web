@@ -46,7 +46,8 @@ export class ReportComponent {
         let blob = new Blob([result], {
           type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
         });
-        saveAs(blob, this.ra.name + '.docx');
+        const name = this.ra.name.includes('/')  ? this.ra.name.split('/').pop()  : this.ra.name;
+        saveAs(blob, name + '.docx');
       },
       (error) => {
         alert('Error downloading documentation in WORD format');

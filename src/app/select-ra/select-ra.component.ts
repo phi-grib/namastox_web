@@ -80,7 +80,7 @@ export class SelectRaComponent {
         console.warn('Acción desconocida');
     }
   }
-
+  
   onRightClick(event: MouseEvent, item: any, type: string, isShared: boolean = false) {
     event.preventDefault();
     this.currentContextIsShared = isShared;
