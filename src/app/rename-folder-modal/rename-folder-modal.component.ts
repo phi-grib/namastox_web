@@ -63,6 +63,7 @@ export class RenameFolderModalComponent {
             },
           });
           this.toastr.success('Successfully renamed', '');
+          this.newFolderName = '';
         }
       },
       (error) => {

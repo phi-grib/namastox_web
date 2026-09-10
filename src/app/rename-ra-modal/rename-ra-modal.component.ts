@@ -66,6 +66,8 @@ export class RenameRaModalComponent {
             },
           });
           this.toastr.success('Successfully renamed', '');
+          this.newRAname = '';
+          this.contextItem = '';
         }
       },
       (error) => {
