@@ -143,7 +143,7 @@ export class CommonFunctions {
     this.manageRA.deleteStep(this.ra.name,0).subscribe(
       (result) => {
         if (result['success']) {
-          this.toastr.success('Last step of RA ' + this.ra.name, 'SUCCESSFULLY DELETED', {
+          this.toastr.success('Last step of RA ' + this.ra.name.replace('_folder_', '').replace(/\+/g, ' '), 'SUCCESSFULLY DELETED', {
             timeOut: 5000,
             positionClass: 'toast-top-right',
           });
@@ -201,7 +201,7 @@ export class CommonFunctions {
       // Create download link
       const link = document.createElement('a');
       link.href = url;
-      link.download = this.ra.name + '.tgz';
+      link.download = this.ra.name.split('/').pop() + '.tgz';
       // Simulates a click on the link to start the download
       link.click();
       // Releases the resources used by the URL object

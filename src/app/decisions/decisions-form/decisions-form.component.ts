@@ -164,7 +164,7 @@ export class DecisionsFormComponent {
             } else {
               this.global.editModeDecisions = false;
             }
-            this.toastr.success('RA ' + this.ra.name, 'SUCCESSFULLY UPDATED', {
+            this.toastr.success('RA ' + this.ra.name.replace('_folder_', '').replace(/\+/g, ' '), 'SUCCESSFULLY UPDATED', {
               timeOut: 5000,
               positionClass: 'toast-top-right',
             });

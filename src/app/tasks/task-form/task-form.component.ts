@@ -283,7 +283,7 @@ export class TaskFormComponent {
                 this.global.editModeTasks = false;
               }
               this.toastr.success(
-                'RA ' + this.ra.name,
+                'RA ' + this.ra.name.replace('_folder_', '').replace(/\+/g, ' '),
                 'SUCCESSFULLY UPDATED',
                 {
                   timeOut: 5000,
