@@ -11,7 +11,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      @for (note of ra.notes; track $index) {
+                      @for (note of ra.notes; track note.id) {
                       <tr (click)="selectNote(note.id)">
                         <td>{{ note.title }}</td>
                         <td>{{ note.date }}</td>

@@ -166,4 +166,7 @@ export class SelectRaComponent {
       return total;
     }, 0);
   }
+  getFolderId(folder: string): string {
+    return 'folder-' + folder.replace(/[^a-zA-Z0-9_-]/g, '-');
+  }
 }

@@ -10,26 +10,26 @@
 
 <ul class="list-unstyled ps-0">
   <li class="mb-1  ">
-    <button (contextmenu)="onRightClick($event, ra,'folder',false)"
-      class="btn btn-toggle align-items-center mb-1 rounded" data-bs-toggle="collapse" data-bs-target="#home-collapse"
-      aria-expanded="true">
+    <button  (contextmenu)="onRightClick($event, ra, 'folder', false)"
+      class="btn btn-toggle align-items-center mb-1 rounded collapsed"
+      data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="false">
       <i class="fa-regular plus-icon folder-normal fa-folder"></i>
       <i class="fa-regular folder-open fa-folder-open"></i>
       Private ({{ getItemsCount(ra.listRA[user.username]) }})
     </button>
-    <div class="collapse show" id="home-collapse">
+    <div class="collapse" id="home-collapse">
       <ul class="btn-toggle-nav rounded list-items list-unstyled fw-normal pb-1 small">
         @for (item of ra.listRA[user.username]; track item) {
           @if (isFolder(item)) {
             <li (contextmenu)="onRightClick($event, item.folder, 'subfolder')" class="item folder-item" [value]="item.folder">
               <button type="button" class="btn btn-toggle align-items-center rounded p-0" data-bs-toggle="collapse"
-                [attr.data-bs-target]="'#folder-' + item.folder" aria-expanded="true">
+                [attr.data-bs-target]="'#private-' + getFolderId(item.folder)" aria-expanded="false">
                 <i class="fa-regular plus-icon folder-normal fa-folder"></i>
                 <i class="fa-regular folder-open fa-folder-open"></i>
                 {{ item.folder.replace('_folder_', '') }} ({{ item.items.length }})
               </button>
             </li>
-            <div class="collapse show" [id]="'folder-' + item.folder">
+            <div class="collapse" [id]="'private-' + getFolderId(item.folder)">
               <ul class="list-unstyled ms-3">
                 @for (raName of item.items; track raName) {
                 <li (contextmenu)="onRightClick($event, item.folder + '/' + raName, 'file')" (click)="loadRA(item.folder + '/' + raName, true)"
@@ -64,7 +64,7 @@
             <li (contextmenu)="onRightClick($event, item.folder, 'subfolder', true)" class="item folder-item"
               [value]="item.folder">
               <button type="button" class="btn btn-toggle align-items-center rounded p-0" data-bs-toggle="collapse"
-                [attr.data-bs-target]="'#folder-' + item.folder.replace('+_folder_', '')" aria-expanded="true">
+                [attr.data-bs-target]="'#shared-' + getFolderId(item.folder)" aria-expanded="false">
 
                 <i class="fa-regular plus-icon folder-normal fa-folder"></i>
                 <i class="fa-regular folder-open fa-folder-open"></i>
@@ -72,7 +72,7 @@
                 {{ item.folder.replace('+_folder_', '') }} ({{ item.items.length }})
               </button>
             </li>
-            <div class="collapse show" [id]="'folder-' + item.folder.replace('+_folder_', '')">
+            <div class="collapse" [id]="'shared-' + getFolderId(item.folder)">
               <ul class="list-unstyled ms-3">
                 @for (raName of item.items; track raName) {
                 <li (contextmenu)="onRightClick($event, item.folder + '/' + raName, 'file')" (click)="loadRA(item.folder + '/' + raName, true)"

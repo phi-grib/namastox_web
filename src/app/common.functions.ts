@@ -71,12 +71,11 @@ export class CommonFunctions {
       this.ra.results = values[2];
       this.separatePastTasks();
       this.ra.workflow = values[3]['result'];
-      $('#dtNotes').DataTable().destroy();
+      $('#dtNotes').DataTable().clear();
       this.ra.notes = values[4];
-      // setTimeout(() => {
-      //   $('#dtNotes').DataTable();
-      // }, 200);
-
+      setTimeout(() => {
+        $('#dtNotes').DataTable();
+      });
       setTimeout(() => {
         if (this.ra.status.step > 0) {
           workflowFullView$.subscribe({
