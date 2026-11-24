@@ -24,6 +24,12 @@ export var optionsRA = [
 
 export var optionsFolder = [
   {
+    label: 'New Folder',
+    icon: 'fa-solid fa-plus ',
+    action: 'newFolder',
+  },
+  
+  {
     label: 'New RA',
     icon: 'fa-solid fa-plus ',
     action: 'newRA',
@@ -33,4 +39,25 @@ export var optionsFolder = [
     icon: 'fa-solid fa-upload',
     action: 'importRA',
   },
+];
+
+export var optionsSecundaryFolder = [
+  {
+    label: 'New RA',
+    icon: 'fa-solid fa-plus ',
+    action: 'newRA',
+  },
+  {
+    label: 'Import RA',
+    icon: 'fa-solid fa-upload',
+    action: 'importRA',
+  },
+  { label: 'Rename',
+    icon: 'fa-regular fa-pen-to-square',
+    action: 'renameFolder' },
+  {
+    label: 'Delete Folder',
+    icon: 'fa-regular text-danger fa-trash-can',
+    action: 'deletefolder',
+  }
 ];

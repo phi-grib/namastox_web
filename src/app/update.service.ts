@@ -35,6 +35,12 @@ export class UpdateService {
     return this.http.put(url, null);
   }
 
+  updateNameFolder(oldFolderName: string, newFolderName: string) {
+    const url: string = environment.baseUrl + 'renameFolder/' + oldFolderName +"/"+newFolderName;
+    return this.http.put(url, null);
+  }
+
+
   updateLink(ra_name: string, file: any) {
     const formData = new FormData();
     formData.append('file', file);

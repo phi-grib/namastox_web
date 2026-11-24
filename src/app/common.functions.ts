@@ -22,7 +22,14 @@ export class CommonFunctions {
 
   refreshRA(isShared:boolean = false) {
     this.ra.isLoadWorkflow = true;
-    if(isShared) this.ra.name = "+"+this.ra.name
+    if(isShared) {
+      if(!this.ra.name.startsWith('+')) {
+        this.ra.name = '+' + this.ra.name;
+      }
+      if(!this.ra.name.includes('/+')) {
+        this.ra.name = this.ra.name.replace('/','/+');
+      }
+    }
     this.commonService.getPermissions(this.ra.name).subscribe({
       next: (permissions) => {
         if (
@@ -30,7 +37,7 @@ export class CommonFunctions {
           permissions['read'][0] == '*'
         ) {
           this.user.write =
-            permissions['write'].includes(this.user.username) ||
+            permissions['write'].includes(this.user.username) ||  
             permissions['write'][0] == '*';
           this.global.permissions['read'] = permissions['read'];
           this.global.permissions['write'] = permissions['write'];
@@ -64,12 +71,11 @@ export class CommonFunctions {
       this.ra.results = values[2];
       this.separatePastTasks();
       this.ra.workflow = values[3]['result'];
-      $('#dtNotes').DataTable().destroy();
+      $('#dtNotes').DataTable().clear();
       this.ra.notes = values[4];
       setTimeout(() => {
         $('#dtNotes').DataTable();
-      }, 200);
-
+      });
       setTimeout(() => {
         if (this.ra.status.step > 0) {
           workflowFullView$.subscribe({
@@ -109,7 +115,7 @@ export class CommonFunctions {
     this.manageRA.deleteRA(this.ra.name).subscribe(
       (result) => {
         if (result['success']) {
-          this.toastr.success('RA ' + this.ra.name, 'SUCCESSFULLY DELETED', {
+          this.toastr.success('RA ' + this.ra.name.replace('_folder_', '').replace(/\+/g, ''), 'SUCCESSFULLY DELETED', {
             timeOut: 5000,
             positionClass: 'toast-top-right',
           });
@@ -117,7 +123,7 @@ export class CommonFunctions {
 
         this.commonService.getRaList().subscribe((result: any) => {
           this.ra.listRA = result;
-          if (this.ra.listRA['generic'].length > 0) {
+          if (this.ra.listRA['generic']?.length > 0) {
             this.ra.name = this.ra.listRA['generic'][0];
             this.refreshRA();
           } else {
@@ -136,7 +142,7 @@ export class CommonFunctions {
     this.manageRA.deleteStep(this.ra.name,0).subscribe(
       (result) => {
         if (result['success']) {
-          this.toastr.success('Last step of RA ' + this.ra.name, 'SUCCESSFULLY DELETED', {
+          this.toastr.success('Last step of RA ' + this.ra.name.replace('_folder_', '').replace(/\+/g, ' '), 'SUCCESSFULLY DELETED', {
             timeOut: 5000,
             positionClass: 'toast-top-right',
           });
@@ -155,7 +161,7 @@ export class CommonFunctions {
 
 
 
-    duplicateRA() {
+  duplicateRA() {
     this.manageRA.cloneRA(this.ra.name).subscribe({
       next: (result) => {
         if (result['success']) {
@@ -194,7 +200,7 @@ export class CommonFunctions {
       // Create download link
       const link = document.createElement('a');
       link.href = url;
-      link.download = this.ra.name + '.tgz';
+      link.download = this.ra.name.split('/').pop() + '.tgz';
       // Simulates a click on the link to start the download
       link.click();
       // Releases the resources used by the URL object

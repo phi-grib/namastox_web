@@ -36,7 +36,7 @@ export class CommonService {
   }
 
   getPermissions(ra_name: string) {
-    const url: string = environment.baseUrl + 'users/' + ra_name;
+    const url: string = environment.baseUrl + 'users/' + encodeURIComponent(ra_name);
     return this.http.get(url);
   }
 
@@ -47,23 +47,23 @@ export class CommonService {
   }
   /**Get steps of ra */
   getSteps(ra_name: string) {
-    const url: string = environment.baseUrl + 'steps/' + ra_name;
+    const url: string = environment.baseUrl + 'steps/' + encodeURIComponent(ra_name);
     return this.http.get(url);
   }
   /**Get General Information RA */
   getGeneralInfo(ra_name: string) {
-    const url: string = environment.baseUrl + 'general_info/' + ra_name;
+    const url: string = environment.baseUrl + 'general_info/' + encodeURIComponent(ra_name);
     return this.http.get(url);
   }
   /**Get Status of RA */
   getStatus(ra_name: string) {
-    const url: string = environment.baseUrl + 'status/' + ra_name;
+    const url: string = environment.baseUrl + 'status/' + encodeURIComponent(ra_name);
     /**change any type to correct interface, good practice  */
     return this.http.get<any>(url);
   }
   /**Get status with  specific step of RA */
   getStatusWithStep(ra_name: string, step: number) {
-    const url: string = environment.baseUrl + 'status/' + ra_name + '/' + step;
+    const url: string = environment.baseUrl + 'status/' + encodeURIComponent(ra_name) + '/' + step;
     return this.http.get<any>(url);
   }
   /**get results */

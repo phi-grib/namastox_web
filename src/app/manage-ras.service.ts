@@ -8,13 +8,24 @@ import { environment } from '../environments/environment';
 export class ManageRAsService {
   constructor(private http: HttpClient) {}
   // create new RA
-  createRA(ra_name: string,shared:boolean) {
+  createRA(ra_name: string,shared:boolean, currentContextItem: string) {
     const url: string = environment.baseUrl + 'new/' + ra_name;
-    return this.http.put(url, {shared:shared});
+    return this.http.put(url, {shared:shared, currentContextItem: currentContextItem});
+  }
+  // create new Folder
+  createFolder(folder_name: string, shared: boolean) {
+    const url: string = environment.baseUrl + 'newFolder/' + folder_name;
+    return this.http.put(url, { shared: shared });
   }
   // delete RA
   deleteRA(ra_name: string) {
     const url: string = environment.baseUrl + 'delete/' + ra_name;
+    return this.http.put(url, null);
+  }
+
+  // delete Folder
+  deleteFolder(folder_name: string) {
+    const url: string = environment.baseUrl + 'deleteFolder/' + folder_name;
     return this.http.put(url, null);
   }
 

@@ -50,6 +50,9 @@ import { NewRaModalComponent } from './new-ra-modal/new-ra-modal.component';
 import { ConfigureModalComponent } from './configure-modal/configure-modal.component';
 import { ImportRaComponent } from './import-ra/import-ra.component';
 import { SpinnerComponent } from './spinner/spinner.component';
+import { NewFolderModalComponent } from './new-folder-modal/new-folder-modal.component';
+import { RenameFolderModalComponent } from './rename-folder-modal/rename-folder-modal.component';
+import { DeleteFolderModalComponent } from './delete-folder-modal/delete-folder-modal.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -70,6 +73,9 @@ import { SpinnerComponent } from './spinner/spinner.component';
     UserInfoComponent,
     AboutSoftwareComponent,
     ImportRaComponent,
+    NewFolderModalComponent,
+    RenameFolderModalComponent,
+    DeleteFolderModalComponent,
     LogosComponent,
     DecisionsComponent,
     SelectRaComponent,

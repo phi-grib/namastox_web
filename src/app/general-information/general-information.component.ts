@@ -145,7 +145,7 @@ export class GeneralInformationComponent implements OnInit {
             if (result['success']) {
               this.func.refreshRA();
               this.toastr.success(
-                'RA ' + this.ra.name,
+                'RA ' + this.ra.name.replace('_folder_', '').replace(/\+/g, ' '),
                 'SUCCESSFULLY UPDATED',
                 {
                   timeOut: 5000,

@@ -16,6 +16,7 @@ export class NewRaModalComponent {
   newRAname = '';
   @ViewChild('input') input: ElementRef;
   isSharedFolder: boolean = false;
+  currentContextItem: string = '';
 
   constructor(
     private manageRA: ManageRAsService,
@@ -25,8 +26,9 @@ export class NewRaModalComponent {
     private toastr: ToastrService,
   ) {}
 
-  open(isShared: boolean) {
+  open(isShared: boolean, currentContextItem: string) {
     this.isSharedFolder = isShared;
+    this.currentContextItem = currentContextItem || '';
 
     if (!this.newRaModalInst) {
       this.newRaModalInst = new bootstrap.Modal(this.modal.nativeElement);
@@ -38,16 +40,21 @@ export class NewRaModalComponent {
   }
 
   newRA() {
-    this.manageRA.createRA(this.newRAname,this.isSharedFolder).subscribe({
+    this.manageRA.createRA(this.newRAname,this.isSharedFolder, this.currentContextItem).subscribe({
       next: (result) => {
         if (result['success']) {
           $('#pills-gen-information-tab').click();
           this.commonService.getRaList().subscribe((result: any) => {
             this.ra.listRA = result;
-            this.ra.name = this.newRAname;
+            if (this.currentContextItem?.includes("_folder_")) { 
+              this.ra.name = this.currentContextItem + "/" + this.newRAname;
+            } else {
+              this.ra.name = this.newRAname;
+            }
             this.func.refreshRA(this.isSharedFolder);
             this.input.nativeElement.value = '';
           });
+          this.toastr.success('RA created successfully', '');
         }
       },
       error: (e) => {
